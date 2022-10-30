@@ -1,4 +1,4 @@
-drop table if exists libreria_collezioni;
+drop table if exists libreria_collezione;
 drop table if exists libreria_film;
 drop table if exists collezione_film;
 drop table if exists collezione_media;
@@ -9,8 +9,8 @@ drop table if exists utente;
 drop table if exists casting;
 drop table if exists ruolo;
 drop table if exists persone;
-drop table if exists film_tipologia;
-drop table if exists tipologia;
+drop table if exists film_genere;
+drop table if exists genere;
 drop table if exists film_keyword;
 drop table if exists keyword;
 drop table if exists film;
@@ -67,18 +67,18 @@ create table film_keyword (
 	foreign key (keyword) references keyword(id)
 );
 
-create table tipologia (
+create table genere (
 	id serial,
 	nome varchar(30),
 	primary key (id)
 );
 
-create table film_tipologia (
+create table film_genere (
 	film int,
-	tipologia int,
-	primary key (film, tipologia),
+	genere int,
+	primary key (film, genere),
 	foreign key (film) references film(id),
-	foreign key (tipologia) references tipologia(id)
+	foreign key (genere) references genere(id)
 );
 
 create table persone (
@@ -173,7 +173,7 @@ create table libreria_film (
 	foreign key (film) references film(id)
 );
 
-create table libreria_collezioni (
+create table libreria_collezione (
 	utente int,
 	collezione int,
 	primary key (utente, collezione),
