@@ -1,0 +1,23 @@
+# This workflow will use Muffet to check for broken links.
+# It will run on dispatch, when Action is updated or once a day at midnight.
+
+name: Broken links
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/check-broken-links.yml
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  broken-link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check links
+        uses: ruzickap/action-my-broken-link-checker@v2
+        with:
+          url: https://${{ secrets.WEBSITE_TLD }}
+          cmd_params: '--ignore-fragments --max-connections=10 --skip-tls-verification --verbose --color=always --timeout=20'
+          debug: true
