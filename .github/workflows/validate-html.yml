@@ -1,6 +1,7 @@
 name: HTML5 validator
 
 on:
+  workflow_dispatch:
   push:
   
 jobs:
