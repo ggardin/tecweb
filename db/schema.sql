@@ -11,8 +11,6 @@ drop table if exists ruolo;
 drop table if exists persone;
 drop table if exists film_genere;
 drop table if exists genere;
-drop table if exists film_keyword;
-drop table if exists keyword;
 drop table if exists film;
 drop table if exists compagnia;
 drop table if exists paese;
@@ -47,29 +45,16 @@ create table film (
 	guadagno int,
 	durata int,
 	is_episodio boolean not null,
-	copertina varchar(150),
+	copertina varchar(500),
+	keywords varchar(1000),
 	primary key (id),
 	foreign key (paese_produzione) references paese(iso),
 	foreign key (produttore) references compagnia(id)
 );
 
-create table keyword (
-	id serial,
-	nome varchar(30),
-	primary key (id)
-);
-
-create table film_keyword (
-	film int,
-	keyword int,
-	primary key (film, keyword),
-	foreign key (film) references film(id),
-	foreign key (keyword) references keyword(id)
-);
-
 create table genere (
 	id serial,
-	nome varchar(30),
+	nome varchar(50),
 	primary key (id)
 );
 
@@ -131,7 +116,7 @@ create table votazione (
 
 create table film_media (
 	film int,
-	percorso varchar(150),
+	percorso varchar(500),
 	descrizione varchar(300),
 	ordine smallint not null,
 	primary key (film, percorso),
@@ -142,14 +127,14 @@ create table collezione (
 	id serial,
 	nome varchar(150),
 	descrizione varchar(1000),
-	copertina varchar(150),
+	copertina varchar(500),
 	exs varchar(50), -- lista con il numero di episodi per stagione
 	primary key (id)
 );
 
 create table collezione_media (
 	collezione int,
-	percorso varchar(150),
+	percorso varchar(500),
 	descrizione varchar(300),
 	ordine smallint not null,
 	primary key (collezione, percorso),
