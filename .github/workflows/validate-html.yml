@@ -1,0 +1,16 @@
+name: HTML5 validator
+
+on:
+  push:
+  
+jobs:
+  validator:
+    runs-on: ubuntu-latest
+    env:
+      HTML5_ACTION_DEBUG: true
+    steps:
+    - name: Validator
+      uses: Cyb3r-Jak3/html5validator-action@7.1.1
+      with:
+        root: ./
+        blacklist: invalid
