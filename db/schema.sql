@@ -7,9 +7,8 @@ drop table if exists film_media;
 drop table if exists votazione;
 drop table if exists utente;
 drop table if exists casting;
-drop table if exists mestiere;
+drop table if exists ruolo;
 drop table if exists persone;
-drop table if exists genere;
 drop table if exists film_tipologia;
 drop table if exists tipologia;
 drop table if exists film_keyword;
@@ -82,25 +81,18 @@ create table film_tipologia (
 	foreign key (tipologia) references tipologia(id)
 );
 
-create table genere (
-	id smallserial,
-	nome varchar(30) unique not null,
-	primary key (id)
-);
-
 create table persone (
 	id serial,
 	nome varchar(30) not null,
 	descrizione varchar(1000),
 	data_nascita date,
 	paese_nascita varchar(30),
-	genere smallint,
+	genere varchar(30),
 	primary key (id),
-	foreign key (paese_nascita) references paese(iso),
-	foreign key (genere) references genere(id)
+	foreign key (paese_nascita) references paese(iso)
 );
 
-create table mestiere (
+create table ruolo (
 	id serial,
 	nome varchar(30) unique not null,
 	primary key (id)
@@ -109,24 +101,23 @@ create table mestiere (
 create table casting (
 	film int,
 	persone int,
-	mestiere int,
+	ruolo int,
 	interpretazione varchar(30),
-	primary key (film, persone, mestiere),
+	primary key (film, persone, ruolo),
 	foreign key (film) references film(id),
 	foreign key (persone) references persone(id),
-	foreign key (mestiere) references mestiere(id)
+	foreign key (ruolo) references ruolo(id)
 );
 
 create table utente (
 	id serial,
 	mail varchar(50) unique not null,
 	nome varchar(50),
-	genere smallint,
+	genere varchar(30),
 	salt varchar(16) not null,
 	password varchar(64) not null,
 	is_admin boolean not null,
-	primary key (id),
-	foreign key (genere) references genere(id)
+	primary key (id)
 );
 
 create table votazione (
@@ -152,7 +143,7 @@ create table collezione (
 	nome varchar(150),
 	descrizione varchar(1000),
 	copertina varchar(150),
-	exs char(50), -- lista con il numero di episodi per stagione
+	exs varchar(50), -- lista con il numero di episodi per stagione
 	primary key (id)
 );
 
