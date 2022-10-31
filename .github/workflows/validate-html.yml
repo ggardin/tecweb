@@ -11,7 +11,7 @@ jobs:
       HTML5_ACTION_DEBUG: true
     steps:
     - name: Validator
-      uses: Cyb3r-Jak3/html5validator-action@7.1.1
+      uses: Cyb3r-Jak3/html5validator-action@v7.1.1
       with:
         root: ./
         blacklist: invalid
