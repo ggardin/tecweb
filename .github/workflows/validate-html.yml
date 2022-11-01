@@ -1,3 +1,7 @@
+# This workflow will validate HTML and CSS.
+# It will run on dispatch, on push.
+# See: https://github.com/Cyb3r-Jak3/html5validator-action
+
 name: HTML5 validator
 
 on:
@@ -14,4 +18,11 @@ jobs:
       uses: Cyb3r-Jak3/html5validator-action@v7.2.0
       with:
         root: ./
-        blacklist: invalid
+        css: true
+        log_level: WARNING
+        format: text
+    - name: Upload log
+      uses: actions/upload-artifact@v3
+      with:
+        name: validation_results
+        path: validation_results.log
