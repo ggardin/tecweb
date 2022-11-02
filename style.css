@@ -7,12 +7,13 @@
 	--bgcolor: #E4DCD7;
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
+	--tetriaryColor: #12322D;
 
 }
 
 @font-face {
 	font-family: "Sora";
-	src: url('fonts/Sora-VariableFont') format('truetype');
+url("fonts/Sora-VariableFont") format("truetype");
 }
 
 #footer h6{
@@ -30,6 +31,10 @@ html, body{
 	font-family: "Sora", sans-serif;
 	line-height: 1;
 	margin: auto;
+}
+
+body h1,h2{
+	text-align: center;
 }
 
 a{
