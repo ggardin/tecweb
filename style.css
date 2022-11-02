@@ -13,7 +13,7 @@
 
 @font-face {
 	font-family: "Sora";
-url("fonts/Sora-VariableFont") format("truetype");
+	src: url("fonts/Sora-VariableFont.ttf") format("truetype");
 }
 
 #footer h6{
