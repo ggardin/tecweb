@@ -1,5 +1,6 @@
-# This workflow will use Muffet to check for broken links.
-# It will run on dispatch, when Action is updated or once a day at midnight.
+# This workflow will use Lychee for broken links checking.
+# It will run on dispatch, on push (main + dev).
+# See: https://github.com/lycheeverse/lychee-action
 
 name: Broken links
 
@@ -24,5 +25,6 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.5.1
         with:
-          args: --verbose --no-progress './**/*.html'
+          args: --verbose --no-progress './**/*.html' # can be an URL
           fail: true # Fail action on broken links
+

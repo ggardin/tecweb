@@ -1,6 +1,7 @@
 # This workflow will use PageSpeed Insights to check the site's performance.
 # It will run on dispatch, when Action is updated or once a day.
 # Checks are perfomed on both mobile and desktop. Thresholds are set separately.
+# See: https://github.com/JakePartusch/psi-action
 
 name: Site performance
 
@@ -17,7 +18,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  build:
+  performanceChecker:
     runs-on: ubuntu-latest
     steps:
       - name: Running PageSpeed Insights (Mobile)
@@ -36,3 +37,4 @@ jobs:
           threshold: 70
           strategy: desktop
           key: ${{ secrets.APIKEY }}
+
