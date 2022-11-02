@@ -7,24 +7,30 @@ name: HTML5 validator
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+      - dev
+  # push:
+  #   paths:
+  #     - .github/workflows/validate-html.yml
+  # schedule:
+  #   - cron: '0 0 * * *'
 
 jobs:
   validator:
     runs-on: ubuntu-latest
-    env:
-      HTML5_ACTION_DEBUG: true
     steps:
-    - name: Checkout v2
-      uses: actions/checkout@v2
-    - name: Validator
-      uses: Cyb3r-Jak3/html5validator-action@v7.2.0
-      with:
-        root: ./
-        css: true
-        log_level: WARNING
-        format: text
-    - name: Upload log
-      uses: actions/upload-artifact@v3
-      with:
-        name: validation_results
-        path: validation_results.log
+      - name: Checkout to v2
+        uses: actions/checkout@v2
+      - name: Validator
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: ./
+          css: true
+          log_level: WARNING
+          format: text
+      - name: Upload log
+        uses: actions/upload-artifact@v3
+        with:
+          name: validation_results
+          path: validation_results.log

@@ -6,13 +6,16 @@ name: Site performance
 
 on:
   workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+  #     - dev
   push:
-    branches:
-      - main
     paths:
       - .github/workflows/check-pagespeed-performance.yml
   schedule:
     - cron: '0 0 * * *'
+
 jobs:
   build:
     runs-on: ubuntu-latest
