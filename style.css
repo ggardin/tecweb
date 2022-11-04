@@ -1,6 +1,6 @@
 *{
-	padding: 0;
-	margin: 0.5em;
+	font-family: "Sora", sans-serif;
+
 }
 
 :root{
@@ -8,7 +8,6 @@
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
 	--tetriaryColor: #12322D;
-
 }
 
 @font-face {
@@ -16,27 +15,89 @@
 	src: url("fonts/Sora-VariableFont.ttf") format("truetype");
 }
 
-#footer h6{
-	font-weight: normal;
-}
-
 body{
-	max-width: 1024px;
+	margin: 0.5em;
+	background-color: var(--bgcolor);
 }
 
-html, body{
+main{
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
-	max-width: 1024px;
-	font-family: "Sora", sans-serif;
 	line-height: 1;
+	max-width: 1024px;
 	margin: auto;
+}
+
+button{
+	background-color: transparent;
+	border: transparent;
 }
 
 body h1,h2{
 	text-align: center;
 }
 
+footer{
+	background-color: var(--secondaryColor);
+	padding: 1em;
+}
+
+#sections>dt{
+	font-weight: bold;
+}
+
 a{
 	color: red;
 }
+
+ul{
+	list-style-type:none;
+	display:flex;
+	justify-content: center;
+	max-width: 100%;
+	background-color: var(--secondaryColor);
+	padding: 0.7em;
+}
+
+li{
+
+}
+
+li a{
+	display: block;
+	color: var(--txtcolor);
+	text-align: center;
+	padding: 10px 12px;
+	text-decoration: none;
+}
+
+li a:hover:not(.active) {
+	border-bottom: 3px solid gray;
+}
+
+.active {
+	border-bottom: 3px solid var(--txtcolor);
+}
+
+.search {
+	position: relative;
+	display: flex;
+}
+
+.searchTerm {
+	width: 105%;
+	border: transparent;
+	padding: 9px;
+	border-radius: 7px 0 0 7px;
+}
+
+
+.searchButton {
+	padding: 0.6em;
+	background: var(--tetriaryColor);
+	align-content: center;
+	border-radius: 0 7px 7px 0;
+	cursor: pointer;
+}
+
+

@@ -11,22 +11,22 @@
 </head>
 
 <body>
-<header>
-	<img src="img/logo.svg" alt="Nome Servizio" width="60" height="40">
+<header id="header">
+	<ul>
+<!--		<li><img src="img/logo.svg" alt="Nome Servizio" width="60" height="40"></li>-->
+		<li><a class="active" href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#home">Home</a></li>
+		<li><a href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#news">News</a></li>
+		<li><a href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#contact">Contact</a></li>
+		<li><a href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#about">About</a></li>
+		<!--<li>
+			<button type="button" id="accountButton">
+				<img src="img/account.svg" alt="Accedi al tuo account" width="44" height="44">
+			</button>
+		</li>-->
+	</ul>
 
-	<a href="link1.html">Lorem</a>
-	<a href="link2.html">Ipsum</a>
-	<a href="link3.html">ciao <span lang="en">world</span></a>
-
-	<button type="button" id="accountButton">
-		<img src="img/account.svg" alt="Accedi al tuo account" width="44" height="44">
-		<!--            Account-->
-	</button>
-
-	<!--        <a href="https://www.example.com/">-->
-	<!--            <img src="img/account.svg" alt="Entra nel tuo account" width="40" height="40">-->
-	<!--        </a>-->
 </header>
+
 <main>
 	<h1>Nome</h1>
 	<h2>Sottotitolo</h2>
@@ -34,44 +34,56 @@
 		<label for="query"></label><input type="search" id="query" name="q" placeholder="Search">
 		<button>Search</button>
 	</form>-->
-
-	<form id="search" role="search">
+	<!--<form id="search" role="search">
 		<label for="search-input">Cerca un film o serie</label>
 		<input type="search" id="search-input" name="search" spellcheck="false" placeholder="Cerca">
 		<input value="Cerca" type="submit">
+	</form>-->
+
+	<form class="search">
+		<input type="text" class="searchTerm" placeholder="What are you looking for?">
+		<button type="submit" class="searchButton">
+<!--				<img src="img/account.svg" width="20" alt="">-->
+			<img src="img/search.svg" height="24" alt="">
+			<i class="fa fa-search"></i>
+		</button>
 	</form>
 
-	<section>
-		<h3>Basta con le liste di carta</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		<img src="img/placeholder.svg" alt="serviceName" height="130">
-	</section>
+	<dl id="sections">
+		<dt>sectionOne</dt>
+			<dd>
+				<img src="img/placeholder.svg" alt="serviceName" height="130">
+				<dl>
+					<dd>Lorem ipsum</dd>
+				</dl>
+			</dd>
 
-	<section>
-		<h3>La semplicità al centro</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		<img src="img/placeholder.svg" alt="serviceName" height="130">
-	</section>
+		<dt>sectionTwo</dt>
+			<dd>
+				<img src="img/placeholder.svg" alt="serviceName" height="130">
+				<dl>
+					<dd>Lorem ipsum</dd>
+				</dl>
+			</dd>
 
-	<section>
-		<h3>La tua sicurezza ha la priorità</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		<img src="img/placeholder.svg" alt="serviceName" height="130">
-	</section>
+		<dt>sectionThree</dt>
+			<dd>
+				<img src="img/placeholder.svg" alt="serviceName" height="130">
+				<dl>
+					<dd>Lorem ipsum</dd>
+				</dl>
+			</dd>
 
-	<section>
-		<h3>Amati dalle persone</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		<img src="img/ratings.svg" alt="Media delle recensioni dei nostri utenti di quattro e mezzo su cinque" width="200">
-	</section>
+
+	</dl>
 
 	<section>
 		<h3>Sei a pochi clic da rivoluzionare la tua collezione</h3>
 		<form>
 			<label for="mail">mail:</label>
 			<input type="email" placeholder="email" id="mail" name="mail"><br><br>
-			<button id="sendEmail">Invia</button>
-			<h6>Premendo il pulsante per l'invio di una mail di registrazione, accetti i nostri<a href="https://www.example.com"><u>Termini e Condizioni</u></a>e la nostra<span lang="en"><a href="https://www.example.com"><u>Privacy Policy</u></a></span> </h6>
+			<input value="Invia" type="submit">
+			<h6>Premendo il pulsante per l'invio di una mail di registrazione, accetti i nostri <a href="https://www.example.com"><u>Termini e Condizioni</u></a> e la nostra <span lang="en"><a href="https://www.example.com"><u>Privacy Policy</u></a></span> </h6>
 		</form>
 	</section>
 
@@ -80,23 +92,19 @@
 <footer id="footer">
 	<img src="img/logo.svg" alt="serviceName">
 
-	<dl>
-		<dt><strong>Riguardo a noi</strong></dt>
-		<dd><a href="https://www.example.com">Lorem</a></dd>
-		<dd><a href="https://www.example.com">Ipsum</a></dd>
-		<dd><a href="https://www.example.com">Ipsum</a></dd>
-	</dl>
+	<dl id="footerSection">
+		<dt>Riguardo a noi</dt>
+			<dd><a href="https://www.example.com">Lorem</a></dd>
+			<dd><a href="https://www.example.com">Ipsum</a></dd>
+			<dd><a href="https://www.example.com">Ipsum</a></dd>
 
-	<dl>
-		<dt><strong>Sicurezza</strong></dt>
-		<dd><a href="your-data.html">I tuoi dati</a></dd>
-		<dd><a href="privacy-policy.html"></a></dd>
-		<dd><a href="terms-and-conditions.html">Termini e Condizioni</a></dd>
-	</dl>
+		<dt>Sicurezza</dt>
+			<dd><a href="your-data.html">I tuoi dati</a></dd>
+			<dd><a href="privacy-policy.html">Provacy Policy</a></dd>
+			<dd><a href="terms-and-conditions.html">Termini e Condizioni</a></dd>
 
-	<dl>
-		<dt><strong>Contattaci</strong></dt>
-		<dd><a href="mailto:example@example.com">Mail</a></dd>
+		<dt>Contattaci</dt>
+			<dd><a href="mailto:example@example.com">Mail</a></dd>
 	</dl>
 
 	<h6>©2022 Lorem. Tutti i diritti sui contenuti di questo sito (nomi, immagini, testi e altro) sono di proprietà dei rispettivi autori e/o case editrici, sotto la tutela delle leggi internazionali sul copyright/trademark</h6>
