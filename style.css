@@ -1,6 +1,5 @@
 *{
 	font-family: "Sora", sans-serif;
-
 }
 
 :root{
@@ -16,59 +15,84 @@
 }
 
 body{
-	margin: 0.5em;
 	background-color: var(--bgcolor);
+	/*display: flex;
+	flex-direction: column;*/
 }
 
 main{
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
-	line-height: 1;
-	max-width: 1024px;
-	margin: auto;
+	line-height: 1em;
 }
 
-button{
+.accountButton{
 	background-color: transparent;
 	border: transparent;
+	position: absolute;
+	right: 1em;
+	align-content: center;
 }
 
 body h1,h2{
 	text-align: center;
 }
 
-footer{
+.search {
+	position: relative;
+	display: flex;
+	top: 97.67px;
+	left: 4%;
+
+}
+
+.searchShapeContainer {
+	height: 250px;
+	border-radius: 0 125px 125px 0;
 	background-color: var(--secondaryColor);
+}
+
+.searchTerm {
+	width: 80%;
+	padding: 9px;
+	border-radius: 12px 0 0 12px;
+	font-size: 16px;
+	border: transparent;
+	outline: none;
+}
+
+.searchButton {
 	padding: 1em;
+	background: var(--tetriaryColor);
+	align-content: center;
+	border-radius: 0 12px 12px 0;
+	cursor: pointer;
+	margin-left: 0;
+	margin-right: 0;
+	border: transparent;
 }
 
-#sections>dt{
-	font-weight: bold;
-}
-
-a{
-	color: red;
-}
 
 ul{
 	list-style-type:none;
 	display:flex;
-	justify-content: center;
-	max-width: 100%;
 	background-color: var(--secondaryColor);
 	padding: 0.7em;
+	justify-content: center;
 }
 
-li{
-
+.logoClass{
+	position: absolute;
+	left: 1em;
+	align-content: center;
 }
 
-li a{
+li>a{
 	display: block;
 	color: var(--txtcolor);
-	text-align: center;
-	padding: 10px 12px;
+	padding: 10px 24px;
 	text-decoration: none;
+
 }
 
 li a:hover:not(.active) {
@@ -79,25 +103,62 @@ li a:hover:not(.active) {
 	border-bottom: 3px solid var(--txtcolor);
 }
 
-.search {
-	position: relative;
+/*footer{
+	background-color: var(--secondaryColor);
+	color: var(--txtcolor);
+	margin-top: auto;
+}*/
+
+.footer {
+	height: 300px;
 	display: flex;
+	/* align-items: center; */
+	justify-content: space-between;
+	background-color: var(--secondaryColor);
+	padding: 1em;
 }
 
-.searchTerm {
-	width: 105%;
-	border: transparent;
-	padding: 9px;
-	border-radius: 7px 0 0 7px;
+.links {
+	display: flex;
+	flex-direction: column;
+
 }
 
 
-.searchButton {
-	padding: 0.6em;
-	background: var(--tetriaryColor);
-	align-content: center;
-	border-radius: 0 7px 7px 0;
-	cursor: pointer;
+
+.links li a {
+	color: var(--txtcolor);
+	text-decoration: underline;
+	text-decoration-color: blue;
 }
 
+
+
+/*.logo {
+
+	width: 30%;
+}
+
+.quickLinks {
+	width: 30%;
+}
+
+.quickContacts {
+	width: 30%;
+}*/
+
+@media screen and (max-width: 600px) {
+	.footer {
+		flex-direction: column;
+		justify-content: space-evenly;
+		height: 100vh;
+		padding: 0 20px;
+	}
+
+	.logo,
+	.quickLinks,
+	.quickContacts {
+		width: 100%;
+	}
+}
 

@@ -4,27 +4,26 @@
 	<meta charset="UTF-8">
 	<title>Lorem. La tua collezione. Ovunque.</title>
 	<meta name = "description" content = "">
-	<meta name = "keywords" content = "fumetti, collezione">
+	<meta name = "keywords" content = "film, collezione">
 	<meta name = "author" content = "Giovanni Filippini">
-	<link rel="stylesheet" href="style.css" media="screen"/>
-	<link rel="shortcut icon" type="image/png" href="img/favicon.svg"/>
+	<link rel="stylesheet" href="style.css" media="screen">
+	<link rel="shortcut icon" type="image/svg" href="img/favicon.svg">
 </head>
 
 <body>
 <header id="header">
 	<ul>
-<!--		<li><img src="img/logo.svg" alt="Nome Servizio" width="60" height="40"></li>-->
-		<li><a class="active" href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#home">Home</a></li>
-		<li><a href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#news">News</a></li>
-		<li><a href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#contact">Contact</a></li>
-		<li><a href="tryit.asp-filename=trycss_navbar_horizontal_black_active.html#about">About</a></li>
-		<!--<li>
-			<button type="button" id="accountButton">
-				<img src="img/account.svg" alt="Accedi al tuo account" width="44" height="44">
+		<li class="logoClass"><img src="img/logo.svg" alt="serviceName" height="32"></li>
+		<li><a class="active" href="https://www.example.com">Home</a></li>
+		<li><a href="https://www.example.com">About</a></li>
+		<li><a href="https://www.example.com">News</a></li>
+		<li><a href="https://www.example.com">Contact</a></li>
+		<li>
+			<button type="button" class="accountButton">
+				<img src="img/account.svg" alt="Accedi al tuo account" width="35" height="35">
 			</button>
-		</li>-->
+		</li>
 	</ul>
-
 </header>
 
 <main>
@@ -39,15 +38,16 @@
 		<input type="search" id="search-input" name="search" spellcheck="false" placeholder="Cerca">
 		<input value="Cerca" type="submit">
 	</form>-->
-
-	<form class="search">
-		<input type="text" class="searchTerm" placeholder="What are you looking for?">
-		<button type="submit" class="searchButton">
-<!--				<img src="img/account.svg" width="20" alt="">-->
-			<img src="img/search.svg" height="24" alt="">
-			<i class="fa fa-search"></i>
-		</button>
-	</form>
+	<div class="searchShapeContainer">
+		<form class="search">
+			<label for="my-field" aria-label="My field"></label>
+			<input type="text" id="my-field" class="searchTerm" placeholder="What are you looking for?">
+			<button type="submit" class="searchButton">
+				<img src="img/search.svg" height="24" alt="">
+				<i class="fa fa-search"></i>
+			</button>
+		</form>
+	</div>
 
 	<dl id="sections">
 		<dt>sectionOne</dt>
@@ -73,8 +73,6 @@
 					<dd>Lorem ipsum</dd>
 				</dl>
 			</dd>
-
-
 	</dl>
 
 	<section>
@@ -89,26 +87,38 @@
 
 </main>
 
-<footer id="footer">
-	<img src="img/logo.svg" alt="serviceName">
+<footer class="footer">
+	<div class="logo">
+		<img src="img/logo.svg" alt="serviceName" height="50">
+	</div>
 
-	<dl id="footerSection">
-		<dt>Riguardo a noi</dt>
-			<dd><a href="https://www.example.com">Lorem</a></dd>
-			<dd><a href="https://www.example.com">Ipsum</a></dd>
-			<dd><a href="https://www.example.com">Ipsum</a></dd>
+	<div class="quickLinks">
+		<h1>Riguardo a noi</h1>
+		<ul class="links">
+			<li><a href="https://www.example.com">Lorem</a></li>
+			<li><a href="https://www.example.com">Ipsum</a></li>
+			<li><a href="https://www.example.com">Ipsum</a></li>
+		</ul>
+	</div>
 
-		<dt>Sicurezza</dt>
-			<dd><a href="your-data.html">I tuoi dati</a></dd>
-			<dd><a href="privacy-policy.html">Provacy Policy</a></dd>
-			<dd><a href="terms-and-conditions.html">Termini e Condizioni</a></dd>
+	<div class="quickLinks">
+		<h1>Sicurezza</h1>
+		<ul class="links">
+			<li><a href="your-data.html">I tuoi dati</a></li>
+			<li><a href="privacy-policy.html">Provacy Policy</a></li>
+			<li><a href="terms-and-conditions.html">Termini e Condizioni</a></li>
+		</ul>
+	</div>
 
-		<dt>Contattaci</dt>
-			<dd><a href="mailto:example@example.com">Mail</a></dd>
-	</dl>
-
-	<h6>©2022 Lorem. Tutti i diritti sui contenuti di questo sito (nomi, immagini, testi e altro) sono di proprietà dei rispettivi autori e/o case editrici, sotto la tutela delle leggi internazionali sul copyright/trademark</h6>
-
+	<div class="quickContacts">
+		<h1>Contact Us</h1>
+		<ul class="links">
+			<li>
+				<a href="mailto:xyz@abc.com">sales@abc.com</a>
+			</li>
+		</ul>
+	</div>
 </footer>
+
 </body>
 </html>
