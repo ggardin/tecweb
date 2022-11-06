@@ -8,19 +8,22 @@ drop table if exists votazione;
 drop table if exists utente;
 drop table if exists casting;
 drop table if exists ruolo;
-drop table if exists persone;
+drop table if exists persona;
 drop table if exists film_genere;
 drop table if exists genere;
+drop table if exists film_keyword;
+drop table if exists keyword;
+drop table if exists film_compagnia;
+drop table if exists film_paese;
 drop table if exists film;
 drop table if exists compagnia;
 drop table if exists paese;
 
 
-
 create table paese (
-	iso varchar(5),
+	iso_3166-1 varchar(5),
 	nome varchar(30),
-	primary key (iso)
+	primary key (iso_3166-1)
 );
 
 create table compagnia (
@@ -30,7 +33,7 @@ create table compagnia (
 	data_fondazione date,
 	paese_fondazione varchar(5),
 	primary key (id),
-	foreign key (paese_fondazione) references paese(iso)
+	foreign key (paese_fondazione) references paese(iso_3166-1)
 );
 
 create table film (
@@ -38,18 +41,40 @@ create table film (
 	titolo varchar(150) not null,
 	descrizione varchar(10000),
 	data_rilascio date,
-	paese_produzione varchar(5),
-	produttore int,
-	stato varchar(50) not null,
 	budget int,
 	guadagno int,
-	durata int,
-	is_episodio boolean not null,
+	durata smallint,
+	voto smallint,
+	stato varchar(50),
 	copertina varchar(500),
-	keywords varchar(1000),
-	primary key (id),
-	foreign key (paese_produzione) references paese(iso),
-	foreign key (produttore) references compagnia(id)
+	is_episodio boolean not null,
+	primary key (id)
+);
+
+create table film_paese (
+	primary key (film, paese)
+	foreign key (film) references film(id),
+	foreign key (paese) references paese(iso_3166-1)
+);
+
+create table film_compagnia (
+	primary key (film, compagnia)
+	foreign key (film) references film(id),
+	foreign key (compagnia) references compagnia(id)
+);
+
+create table keyword (
+	id serial,
+	nome varchar(50),
+	primary key (id)
+);
+
+create table film_keyword (
+	film int,
+	keyword int,
+	primary key (film, keyword),
+	foreign key (film) references film(id),
+	foreign key (keyword) references keyword(id)
 );
 
 create table genere (
@@ -66,7 +91,7 @@ create table film_genere (
 	foreign key (genere) references genere(id)
 );
 
-create table persone (
+create table persona (
 	id serial,
 	nome varchar(30) not null,
 	descrizione varchar(1000),
@@ -74,7 +99,7 @@ create table persone (
 	paese_nascita varchar(30),
 	genere varchar(30),
 	primary key (id),
-	foreign key (paese_nascita) references paese(iso)
+	foreign key (paese_nascita) references paese(iso_3166-1)
 );
 
 create table ruolo (
@@ -85,12 +110,12 @@ create table ruolo (
 
 create table casting (
 	film int,
-	persone int,
+	persona int,
 	ruolo int,
 	interpretazione varchar(30),
-	primary key (film, persone, ruolo),
+	primary key (film, persona, ruolo),
 	foreign key (film) references film(id),
-	foreign key (persone) references persone(id),
+	foreign key (persona) references persona(id),
 	foreign key (ruolo) references ruolo(id)
 );
 
