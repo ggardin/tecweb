@@ -1,8 +1,8 @@
-*{
+* {
 	font-family: "Sora", sans-serif;
 }
 
-:root{
+:root {
 	--bgcolor: #E4DCD7;
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
@@ -14,19 +14,19 @@
 	src: url("fonts/Sora-VariableFont.ttf") format("truetype");
 }
 
-body{
+body {
 	background-color: var(--bgcolor);
 	/*display: flex;
 	flex-direction: column;*/
 }
 
-main{
+main {
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
 	line-height: 1em;
 }
 
-.accountButton{
+.accountButton {
 	background-color: transparent;
 	border: transparent;
 	position: absolute;
@@ -34,7 +34,7 @@ main{
 	align-content: center;
 }
 
-body h1,h2{
+body h1,h2 {
 	text-align: center;
 }
 
@@ -73,7 +73,7 @@ body h1,h2{
 }
 
 
-ul{
+ul {
 	list-style-type:none;
 	display:flex;
 	background-color: var(--secondaryColor);
@@ -81,13 +81,13 @@ ul{
 	justify-content: center;
 }
 
-.logoClass{
+.logo-header {
 	position: absolute;
 	left: 1em;
 	align-content: center;
 }
 
-li>a{
+li>a {
 	display: block;
 	color: var(--txtcolor);
 	padding: 10px 24px;
@@ -109,21 +109,34 @@ li a:hover:not(.active) {
 	margin-top: auto;
 }*/
 
-.footer {
-	height: 300px;
-	display: flex;
-	/* align-items: center; */
-	justify-content: space-between;
+footer {
 	background-color: var(--secondaryColor);
 	padding: 1em;
 }
 
+footer .info {
+	display: flex;
+	/* align-items: center; */
+	justify-content: space-between;
+}
+
+footer .tmdb-attribution {
+	display: flex;
+}
+
+/* footer .tmdb-attribution {
+	background-image: url("img/tmdb.svg");
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 6em;
+	text-indent: 10em;
+} */
+
 .links {
 	display: flex;
 	flex-direction: column;
-
 }
-
 
 
 .links li a {
@@ -133,8 +146,7 @@ li a:hover:not(.active) {
 }
 
 
-
-/*.logo {
+/*.logo-footer {
 
 	width: 30%;
 }
@@ -148,14 +160,14 @@ li a:hover:not(.active) {
 }*/
 
 @media screen and (max-width: 600px) {
-	.footer {
+	footer {
 		flex-direction: column;
 		justify-content: space-evenly;
 		height: 100vh;
 		padding: 0 20px;
 	}
 
-	.logo,
+	.logo-footer,
 	.quickLinks,
 	.quickContacts {
 		width: 100%;
