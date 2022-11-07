@@ -21,11 +21,12 @@ info
 - per usare lo script imposta la variabile d'ambiente TMDB_API
 
 TODO
-- tenere solo dati cast e crew di interesse
+- tenere solo dati cast e crew di interesse (attori, regista)
 - aggiungere mancanti:
-	- serie tv
+	- copertina
 	- paese
 	- compagnia
 	- persona
-- scaricare immagini da tmdb (??)
+	- serie tv
+	- immagini (??)
 - export in sql

@@ -49,6 +49,6 @@ for i in movies:
 	i["film_casting"]=credits.get("cast")
 	i["film_casting"]+=credits.get("crew")
 
-f=open("movies.json", "w")
+f=open("dump.json", "w")
 f.write(json.dumps(movies, indent="\t"))
 f.close()

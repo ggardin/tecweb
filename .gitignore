@@ -1,3 +1,3 @@
 .DS_Store
 /.idea/
-/db/movies.json
+/db/dump.json
