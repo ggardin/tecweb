@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to v2
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Validator
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
