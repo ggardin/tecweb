@@ -1,0 +1,10 @@
+footer {
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100vh;
+	padding: 0 20px;
+}
+
+.logo-footer, .quickLinks, .quickContacts {
+	width: 100%;
+}

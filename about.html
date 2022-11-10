@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" />
 	<title>About</title>
-	<meta name = "description" content = "">
-	<meta name = "keywords" content = "film, collezione">
-	<meta name = "author" content = "Riccardo Bonavigo">
-	<link rel="stylesheet" href="style.css" media="screen">
-	<link rel="shortcut icon" type="image/svg" href="img/favicon.svg">
+	<meta name="description" content="" />
+	<meta name="keywords" content="film, collezione" />
+	<meta name="author" content="Riccardo Bonavigo" />
+	<link rel="stylesheet" href="style.css" media="handheld, screen" />
+	<link rel="stylesheet" href="mini.css" media="handheld, screen and (max-width:600px), only screen and (max-device-width:600px)" />
+	<link rel="stylesheet" href="print.css" media="print" />
+	<link rel="shortcut icon" type="image/svg" href="img/favicon.svg" />
 </head>
 
 <body>
-<header id="header">
+
+<header>
 	<ul>
-		<li class="logoClass"><img src="img/logo.svg" alt="serviceName" height="32"></li>
-		<li><a href="main.html">Home</a></li>
-		<li><a class="active" href="about.html">About</a></li>
+		<li class="logo-header"><img src="img/logo.svg" alt="serviceName" height="32" /></li>
+		<li><a href="index.html">Home</a></li>
+		<li class="active">About</li>
 		<li><a href="https://www.example.com">News</a></li>
 		<li><a href="https://www.example.com">Contact</a></li>
 		<li>
 			<button type="button" class="accountButton">
-				<img src="img/account.svg" alt="Accedi al tuo account" width="35" height="35">
+				<img src="img/account.svg" alt="Accedi al tuo account" width="35" height="35" />
 			</button>
 		</li>
 	</ul>
@@ -31,14 +34,14 @@
 	<h2>Dati dei film</h2>
 	<p lang="en">All film-related metadata present on the site (including actors, directors, studio names, poster arts, etc.) is from The Movie Database (TMDB). We are not endorsed nor certified by them.</p>
 	<p>I dati testuali sono stati scaricati nel DB locale tramite API (con uno script). Le immagini sono caricate tramite indirizzo univoco di TMDB.</p>
-	<img src="img/tmdb.svg" alt="attribution" width="150">
+	<img src="img/tmdb.svg" alt="attribution" width="150" />
 	<p></p>
 </main>
 
 <footer>
 	<div class="info">
 		<div class="logo-footer">
-			<img src="img/logo.svg" alt="serviceName" height="50">
+			<img src="img/logo.svg" alt="serviceName" height="50" />
 		</div>
 
 		<div class="quickLinks">
@@ -70,6 +73,7 @@
 	</div>
 
 	<div class="tmdb-attribution">
+		<img src="img/tmdb.svg" alt="attribution" height="80" />
 		<p lang="en">All film-related metadata present on the site (including actors, directors, studio names, poster arts, etc.) is from The Movie Database (TMDB). We are not endorsed nor certified by them.</p>
 	</div>
 </footer>

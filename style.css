@@ -53,23 +53,28 @@ ul {
 .logo-header {
 	position: absolute;
 	left: 1em;
-	align-content: center;
 }
 
-li>a {
+header li {
 	display: block;
 	color: var(--txtcolor);
-	padding: 10px 24px;
-	text-decoration: none;
 }
 
-header li a:hover:not(.active) {
+header li.active {
+	padding: 0px 24px 10px;
+	border-bottom: 3px solid var(--txtcolor);
+}
+
+header li a {
+	padding: 0px 24px 10px;
+	text-decoration: none;
+	color: inherit;
+}
+
+header li a:hover {
 	border-bottom: 3px solid red;
 }
 
-.active {
-	border-bottom: 3px solid var(--txtcolor);
-}
 
 .accountButton {
 	background-color: transparent;
@@ -152,7 +157,9 @@ footer .info {
 }
 
 footer .tmdb-attribution {
+	padding-top: 1em;
 	display: flex;
+	justify-content: center;
 }
 
 .tmdb-attribution img {
@@ -174,22 +181,6 @@ footer .tmdb-attribution {
 .quickContacts {
 	width: 30%;
 }*/
-
-@media screen and (max-width: 600px) {
-	footer {
-		flex-direction: column;
-		justify-content: space-evenly;
-		height: 100vh;
-		padding: 0 20px;
-	}
-
-	.logo-footer,
-	.quickLinks,
-	.quickContacts {
-		width: 100%;
-	}
-}
-
 
 /*DEMO AREA*/
 
