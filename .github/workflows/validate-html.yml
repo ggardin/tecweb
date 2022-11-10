@@ -25,10 +25,7 @@ jobs:
       - name: Validator
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
-          root: ./
-          css: true
-          log_level: WARNING
-          format: text
+          config: .configs/validate-html-config.yml
       - name: log show
         if: failure()
         run: cat log.log > "${GITHUB_STEP_SUMMARY}"
