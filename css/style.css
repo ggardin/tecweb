@@ -11,7 +11,7 @@
 
 @font-face {
 	font-family: "Sora";
-	src: url("fonts/Sora-VariableFont.ttf") format("truetype");
+	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
 }
 
 body {
