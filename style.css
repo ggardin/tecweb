@@ -1,6 +1,5 @@
 * {
 	font-family: "Sora", sans-serif;
-
 }
 
 :root {
@@ -21,16 +20,17 @@ body {
 	flex-direction: column;*/
 }
 
-body h1,h2 {
+body h1,
+h2 {
 	text-align: center;
 }
 
-main>h1 {
+main > h1 {
 	font-size: 4em;
 	font-weight: 800;
 }
 
-main>h2 {
+main > h2 {
 	padding-top: 0.7em;
 	font-size: 2.5em;
 	font-weight: 500;
@@ -74,7 +74,6 @@ header li a {
 header li a:hover {
 	border-bottom: 3px solid red;
 }
-
 
 .accountButton {
 	background-color: transparent;
@@ -170,7 +169,6 @@ footer .tmdb-attribution {
 	font-size: 0.7em;
 	padding-left: 1em;
 }
-
 
 /*.logo-footer {
 	width: 30%;
