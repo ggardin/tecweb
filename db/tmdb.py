@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 genere=[]
 paese=[]
 compagnia=[]
-# network=[]
+network=[]
 keyword=[]
 persona=[]
 # ruolo=[]
@@ -30,7 +30,7 @@ episodio=[]
 serie_genere=[]
 # serie_paese=[]
 serie_compagnia=[]
-# serie_network=[]
+serie_network=[]
 serie_keyword=[]
 serie_persona=[]
 # stagione_network=[]
@@ -115,6 +115,8 @@ def get_film():
 				persona.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
 		if credits["crew"]!=None:
 			for x in credits["crew"]:
+				# jobs=[["Direttore", "Director"], ["Produttore", "Producer"], ["Scrittore", "Writer"], ["Compositore", "Original Music Composer"]]
+				# if (x["job"] in [jobs[i][1] for i in range(len(jobs))]):
 				jobs={"Director", "Producer", "Writer", "Original Music Composer"}
 				if (x["job"] in jobs):
 					x["id_film"]=f["id"]
@@ -138,23 +140,8 @@ def get_serie():
 			s[keys[i][0]]=info[keys[i][1]]
 
 		# ==== in altre tabelle
-		if info["genres"]!=None:
-			for x in info["genres"]:
-				x["id_serie"]=s["id"]
-				keys=[["id", "id"], ["nome", "name"], ["id_serie", "id_serie"]]
-				serie_genere.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
-
-		# if info["networks"]!=None:
-		# 	for x in info["networks"]:
-		# 		x["id_serie"]=s["id"]
-		# 		keys=[["id", "id"], ["nome", "name"], ["immagine", "logo_path"], ["paese_origine", "origin_country"], ["id_serie", "id_serie"]]
-		# 		serie_network.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
-
-		# if info["origin_country"]!=None: ????????????????
-
 		if info["seasons"]!=None:
 			for x in info["seasons"]:
-
 				stagione.extend(x)
 
 				# x["id_serie"]=s["id"]
@@ -170,12 +157,96 @@ def get_serie():
 				# ep=tmdb.TV(s["id"]).info(language="it")
 				# episodio.extend()
 
-def translate_keywords(var):
-	parole=[i["nome"] for i in var]
+		if info["genres"]!=None:
+			for x in info["genres"]:
+				x["id_serie"]=s["id"]
+				keys=[["id", "id"], ["id_serie", "id_serie"]]
+				serie_genere.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+				keys=[["id", "id"], ["nome", "name"]]
+				genere.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+
+		# if info["origin_country"]!=None: ????????????????
+
+		# if info["production_countries"]!=None:
+		# 	for x in info["production_countries"]:
+		# 		x["id_serie"]=s["id"]
+		# 		keys=[["iso_3166-1", "iso_3166_1"], ["id_serie", "id_serie"]]
+		# 		serie_paese.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+		# 		keys=[["iso_3166-1", "iso_3166_1"], ["nome", "name"]]
+		# 		paese.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+
+		# if info["production_companies"]!=None:
+		# 	for x in info["production_companies"]:
+		# 		x["id_serie"]=s["id"]
+		# 		keys=[["id", "id"], ["id_serie", "id_serie"]]
+		# 		serie_network.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+		# 		keys=[["id", "id"], ["nome", "name"], ["immagine", "logo_path"], ["paese_origine", "origin_country"]]
+		# 		network.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+
+		if info["networks"]!=None:
+			for x in info["networks"]:
+				x["id_serie"]=s["id"]
+				keys=[["id", "id"], ["id_serie", "id_serie"]]
+				serie_network.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+				keys=[["id", "id"], ["nome", "name"], ["immagine", "logo_path"], ["paese_origine", "origin_country"]]
+				network.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+
+		kws=tmdb.TV(s["id"]).keywords()
+		if kws!=None:
+			for x in kws["results"]:
+				x["id_serie"]=s["id"]
+				keys=[["id", "id"], ["id_serie", "id_serie"]]
+				serie_keyword.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+				keys=[["id", "id"], ["nome", "name"]]
+				keyword.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+
+		credits=tmdb.TV(s["id"]).credits()
+		if credits["cast"]!=None:
+			for x in credits["cast"]:
+				x["id_serie"]=s["id"]
+				keys=[["id", "id"], ["interpreta", "character"], ["id_serie", "id_serie"]]
+				cast=[{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}]
+				for i in cast:
+					i["ruolo"]="Attore"
+				serie_persona.extend(cast)
+				keys=[["id", "id"], ["nome", "name"], ["immagine", "profile_path"], ["genere", "gender"]]
+				persona.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+		# if credits["crew"]!=None:
+		# 	for x in credits["crew"]:
+		# 		jobs={"Director", "Producer", "Writer", "Original Music Composer"}
+		# 		if (x["job"] in jobs):
+		# 			x["id_serie"]=s["id"]
+		# 			keys=[["id", "id"], ["ruolo", "job"], ["id_serie", "id_serie"]]
+		# 			crew=[{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}]
+		# 			for i in crew:
+		# 				i["interpreta"]=""
+		# 			serie_persona.extend(crew)
+		# 			keys=[["id", "id"], ["nome", "name"], ["immagine", "profile_path"], ["genere", "gender"]]
+		# 			persona.extend([{keys[i][0]: x[keys[i][1]] for i in range(len(keys))}])
+
+def set_unique_all():
+	global genere
+	genere=pd.DataFrame(genere).drop_duplicates().to_dict("records")
+	global paese
+	paese=pd.DataFrame(paese).drop_duplicates().to_dict("records")
+	global compagnia
+	compagnia=pd.DataFrame(compagnia).drop_duplicates().to_dict("records")
+	global network
+	network=pd.DataFrame(network).drop_duplicates().to_dict("records")
+	global keyword
+	keyword=pd.DataFrame(keyword).drop_duplicates().to_dict("records")
+	global persona
+	persona=pd.DataFrame(persona).drop_duplicates().to_dict("records")
+	# ruolo=[]
+	# lingua=[]
+
+def translate_keywords():
+	global keyword
+	parole=[i["nome"] for i in keyword]
 	print(parole)
 	tr=GoogleTranslator("en", "it").translate_batch(parole)
-	for i in range(len(var)):
-		var[i]["nome"]=tr[i]
+	for i in range(len(keyword)):
+		keyword[i]["nome"]=tr[i]
 
 def write(nome, var):
 	if not os.path.exists("dump"):
@@ -184,32 +255,18 @@ def write(nome, var):
 	file.write(json.dumps(var, indent="\t"))
 	file.close()
 
-def db():
-	engine = create_engine("postgresql://postgres:postgres@localhost/db")
-
-def main():
-	if not start(): print("set env: TMDB_API"); return False
-
-	get_film()
-
-	# get_serie()
-
-	# dupl: genere=[]
-	# dupl: paese=[]
-	# dupl: compagnia=[]
-	# dupl: keyword=[]
-	# dupl: persona=[]
-
-	# translate_keywords(keyword)
-
-	write("film", film)
-	write("collezione", collezione)
-
+def write_all():
 	write("genere", genere)
 	write("paese", paese)
 	write("compagnia", compagnia)
+	write("network", network)
 	write("keyword", keyword)
 	write("persona", persona)
+	# write("ruolo", ruolo)
+	# write("lingua", lingua)
+
+	write("collezione", collezione)
+	write("film", film)
 
 	write("film_genere", film_genere)
 	write("film_paese", film_paese)
@@ -219,6 +276,34 @@ def main():
 
 	write("serie", serie)
 	write("stagione", stagione)
+	write("episodio", episodio)
+
+	write("serie_genere", serie_genere)
+	# write("serie_paese", serie_paese)
+	write("serie_compagnia", serie_compagnia)
+	write("serie_network", serie_network)
+	write("serie_keyword", serie_keyword)
+	write("serie_persona", serie_persona)
+	# write("stagione_network", stagione_network)
+	# write("episodio_genere", episodio_genere)
+	write("episodio_keyword", episodio_keyword)
+	write("episodio_persona", episodio_persona)
+
+def db():
+	engine = create_engine("postgresql://postgres:postgres@localhost/db")
+
+def main():
+	if not start(): print("set env: TMDB_API"); return False
+
+	get_film()
+
+	get_serie()
+
+	set_unique_all()
+
+	# translate_keywords()
+
+	write_all()
 
 	# db()
 

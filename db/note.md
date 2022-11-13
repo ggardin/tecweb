@@ -19,14 +19,4 @@ info
 - documentazione api: https://developers.themoviedb.org/3
 - wrapper usato: https://github.com/celiao/tmdbsimple
 - per usare lo script imposta la variabile d'ambiente TMDB_API
-
-TODO
-- tenere solo dati cast e crew di interesse (attori, regista)
-- aggiungere mancanti:
-	- copertina
-	- paese
-	- compagnia
-	- persona
-	- serie tv
-	- immagini (??)
-- export in sql
+- per dipendenze: `pip install tmdbsimple deep-translator pandas sqlalchemy psycopg2`
