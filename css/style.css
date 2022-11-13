@@ -15,9 +15,9 @@
 }
 
 body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 	background-color: var(--bgcolor);
-	/*display: flex;
-	flex-direction: column;*/
 }
 
 body h1,
