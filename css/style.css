@@ -6,7 +6,7 @@
 	--bgcolor: #E4DCD7;
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
-	--tetriaryColor: #12322D;
+	--tertiaryColor: #12322D;
 }
 
 @font-face {
@@ -111,7 +111,7 @@ header li a:hover {
 
 .searchButton {
 	padding: 1em;
-	background: var(--tetriaryColor);
+	background: var(--tertiaryColor);
 	border-radius: 0 12px 12px 0;
 	cursor: pointer;
 	border: transparent;
