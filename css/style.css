@@ -5,8 +5,7 @@
 	--tertiaryColor: #12322D;
 	--content-width: 1200px;
 	--content-padding: 1em;
-
-	scroll-behavior: smooth;
+	--border-radius: 8px;
 }
 
 @font-face {
@@ -70,10 +69,12 @@ header li {
 }
 
 header li.active {
+	background-color: var(--secondaryColor);
 	border-color: currentColor;
 }
 
 header li:hover {
+	background-color: var(--secondaryColor);
 	border-color: red; /* to be defined */
 }
 
@@ -128,20 +129,20 @@ footer {
 	padding: 1em;
 }
 
-footer h1 {
+footer .title {
 	text-transform: uppercase;
 	font-size: 0.8em;
 	letter-spacing: 0.05em;
+	margin-bottom: 1em;
 }
 
 footer .info {
 	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
+	margin: 1em 0;
 }
 
 footer .info > div {
-	flex: 1 1 200px;
+	flex: 1 1 auto;
 	gap: 1em;
 }
 
