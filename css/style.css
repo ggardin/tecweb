@@ -17,14 +17,14 @@
 
 * {
 	font-family: "Sora", sans-serif;
-	line-height: 1.5;
 }
 
 body {
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	gap: 5vh;
-	font-size: clamp(1rem, 2vw, 1.5rem);
+	font-size: 1.2rem;
+	line-height: 1.5;
 	background-color: var(--bgcolor);
 	padding: var(--content-padding);
 	color: var(--txtcolor);
@@ -109,7 +109,6 @@ header li a {
 	width: 80%;
 	padding: 1em;
 	border-radius: 12px 0 0 12px;
-	font-size: 16px;
 	border: transparent;
 	outline: none;
 }
