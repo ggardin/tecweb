@@ -1,27 +1,42 @@
-* {
-	font-family: "Sora", sans-serif;
-	line-height: 1.5;
-}
-
 :root {
 	--bgcolor: #E4DCD7;
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
+	--content-width: 1200px;
+	--content-padding: 1em;
+
+	scroll-behavior: smooth;
 }
 
 @font-face {
 	font-family: "Sora";
 	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
+	font-display: swap;
+}
+
+* {
+	font-family: "Sora", sans-serif;
+	line-height: 1.5;
 }
 
 body {
 	display: grid;
 	grid-template-rows: auto 1fr auto;
+	gap: 5vh;
+	font-size: clamp(1rem, 2vw, 1.5rem);
 	background-color: var(--bgcolor);
+	padding: var(--content-padding);
+	color: var(--txtcolor);
 }
 
-body h1,
+body > * {
+	width: 100%;
+	max-width: var(--content-width);
+	margin: 0 auto;
+}
+
+main h1,
 h2 {
 	text-align: center;
 }
@@ -32,56 +47,49 @@ main > h1 {
 }
 
 main > h2 {
-	padding-top: 0.7em;
 	font-size: 2.5em;
 	font-weight: 500;
 }
 
-main {
-	background-color: var(--bgcolor);
-	color: var(--txtcolor);
-	line-height: 1em;
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-ul {
-	list-style-type:none;
-	display:flex;
-	/*background-color: var(--secondaryColor);*/
-	padding: 0.7em;
-	justify-content: center;
-}
-
-.logo-header {
-	position: absolute;
-	left: 1em;
+header ul {
+	display: flex;
+	align-items: center;
+	list-style: none;
+	padding: 0;
 }
 
 header li {
-	display: block;
-	color: var(--txtcolor);
+	line-height: 3em;
+	border-bottom: 3px solid transparent;
 }
 
 header li.active {
-	padding: 0px 24px 10px;
-	border-bottom: 3px solid var(--txtcolor);
+	border-color: currentColor;
+}
+
+header li:hover {
+	border-color: red; /* to be defined */
+}
+
+header li > span {
+	padding: 1em;
 }
 
 header li a {
-	padding: 0px 24px 10px;
-	text-decoration: none;
+	padding: 1em;
 	color: inherit;
-}
-
-header li a:hover {
-	border-bottom: 3px solid red;
+	text-decoration: none;
 }
 
 .accountButton {
 	background-color: transparent;
-	border: transparent;
-	position: absolute;
-	right: 1em;
-	align-content: center;
+	border: 0;
 }
 
 .searchShapeContainer {
@@ -106,10 +114,6 @@ header li a:hover {
 	outline: none;
 }
 
-#my-field{
-	background-color: var(--secondaryColor);
-}
-
 .searchButton {
 	padding: 1em;
 	background: var(--tertiaryColor);
@@ -119,69 +123,54 @@ header li a:hover {
 	margin-left: 0;
 }
 
-/*footer{
-	background-color: var(--secondaryColor);
-	color: var(--txtcolor);
-	margin-top: auto;
-}*/
-
 footer {
 	background-color: var(--secondaryColor);
+	max-width: var(--content-width);
 	padding: 1em;
+}
+
+footer h1 {
+	text-transform: uppercase;
+	font-size: 0.8em;
+	letter-spacing: 0.05em;
 }
 
 footer .info {
 	display: flex;
-	/* align-items: center; */
-	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 100%;
 }
 
-/* footer .tmdb-attribution {
-	background-image: url("img/tmdb.svg");
-	background-position: left;
-	background-repeat: no-repeat;
-	background-size: contain;
-	height: 6em;
-	text-indent: 10em;
-} */
-
-.links {
-	display: flex;
-	flex-direction: column;
+footer .info > div {
+	flex: 1 1 200px;
+	gap: 1em;
 }
 
-.links li a {
+footer ul {
+	list-style: none;
+	padding: 0;
+}
+
+footer li {
+	padding: 0.2em 0;
+}
+
+footer li a {
 	color: var(--txtcolor);
-	text-decoration: underline;
-	text-decoration-color: var(--txtcolor);
 }
 
 footer .tmdb-attribution {
-	padding-top: 1em;
 	display: flex;
-	justify-content: center;
+	align-items: center;
+	gap: 1em;
+	font-size: 0.8em;
 }
 
-.tmdb-attribution img {
-	height: 2em;
+footer .tmdb-attribution img {
+	width: 4em;
 }
 
-.tmdb-attribution > p{
-	font-size: 0.7em;
-	padding-left: 1em;
-}
-
-/*.logo-footer {
-	width: 30%;
-}
-.quickLinks {
-	width: 30%;
-}
-.quickContacts {
-	width: 30%;
-}*/
-
-/*DEMO AREA*/
+/* DEMO AREA */
 
 .container{
 	padding-top: 0.5em;
@@ -197,19 +186,10 @@ footer .tmdb-attribution {
 	max-width: 100%;
 }
 
-.content {
-	height: 100%;
-	background-image: url(../img/logo.svg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
 .content .title {
 	text-align: center;
 	padding-top: 3.5em;
 }
-
 
 .content .title h1 {
 	font-size: 3.5em;
@@ -226,9 +206,7 @@ footer .tmdb-attribution {
 	text-align: center;
 }
 
-/*
- * CSS reset
- */
+/* CSS reset */
 
 *, *::before, *::after {
 	box-sizing: border-box;
