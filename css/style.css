@@ -169,42 +169,6 @@ footer .tmdb-attribution img {
 	width: 4em;
 }
 
-/* DEMO AREA */
-
-.container{
-	padding-top: 0.5em;
-}
-.contents {
-	background-color: var(--secondaryColor);
-}
-
-.image-container .content {
-	height: 640px;
-	width: 100%;
-	margin-bottom: 0;
-	max-width: 100%;
-}
-
-.content .title {
-	text-align: center;
-	padding-top: 3.5em;
-}
-
-.content .title h1 {
-	font-size: 3.5em;
-	color: var(--txtcolor);
-	font-weight: 600;
-}
-.content .title p {
-	font-size: 2em;
-	font-weight: 500;
-	color: gray;
-}
-
-.cta-links {
-	text-align: center;
-}
-
 /* CSS reset */
 
 *, *::before, *::after {
