@@ -161,13 +161,20 @@ footer li a {
 
 footer .tmdb-attribution {
 	display: flex;
+	flex-flow: row wrap;
 	align-items: center;
 	gap: 1em;
 	font-size: 0.8em;
 }
 
-footer .tmdb-attribution img {
-	width: 4em;
+.tmdb-attribution p {
+	flex: 1 0 100px;
+}
+
+.tmdb-attribution img {
+	flex: 0 0 3em;
+	width: 3em;
+	margin-top: 0.4em;
 }
 
 /* CSS reset */
