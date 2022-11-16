@@ -23,7 +23,7 @@ jobs:
       - name: Checkout to v3
         uses: actions/checkout@v3
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.5.1
+        uses: lycheeverse/lychee-action@v1.5.2
         with:
           args: --verbose --no-progress './**/*.html' # can be an URL
           fail: true # Fail action on broken links
