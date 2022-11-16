@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<meta charset="UTF-8">
-	<title>Crea un account</title>
-	<link rel="stylesheet" href="../style.css" media="screen"/>
+	<meta charset="UTF-8" />
+	<title>Registra il tuo account Lorem</title>
+	<meta name="description" content="Registra il tuo nuovo account Lorem" />
+	<meta name="keywords" content="fumetti, collezione" />
+	<meta name="author" content="Giovanni Filippini" />
 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/auth.css" media="handheld, screen" />
+	<link rel="stylesheet" href="../css/print.css" media="print" />
+	<link rel="shortcut icon" type="image/svg" href="img/favicon.svg" />
 </head>
 <body>
-	<form class="form">
-		<h1 class="title">Sign up</h1>
+	<header>
+		<img src="../img/logo.svg" alt="serviceName" height="32" />
+		<a href="/index.html">
+			Torna alla <span lang="en">home</span>
+		</a>
+	</header>
 
-		<p>
-			<label for="email">Email:</label>
-			<input type="email" id="email" name="email" placeholder="Enter your email" required>
-		</p>
+	<main>
+		<h1>Registrati ora</h1>
+		<form class="form">
+			<label for="email">Il tuo indirizzo email (richiesto):</label>
+			<input type="text" id="username" name="text" placeholder="Inserisci il nome utente (richiesto):" aria-required="true" required>
 
-		<p>
-			<label for="password">Password (8 characters minimum):</label>
-			<input type="password" placeholder="Password" id="password" required>
+			<label for="password">La tua password (richiesta):</label>
+			<input type="password" placeholder="Password" id="password" aria-required="true" required>
 
-			<label for="confirm_password">Confirm Password:</label>
-			<input type="password" placeholder="Confirm Password" id="confirm_password" required>
-		</p>
+			<label for="confirm_password">Conferma la tua password:</label>
+			<input type="password" placeholder="Confirm Password" id="confirm_password" aria-required="true" required>
 
-		<input type="submit" class="submitBtn" value="Sign up">
-	</form>
+			<input type="submit" value="Registrati">
+		</form>
+
+		<p>Hai già un <span lang="en">account</span>? <a href="signin.html">Accedi ora</a></p>
+	</main>
+
+	<footer>
+		<p>©2022 Lorem. Tutti i diritti sui contenuti di questo sito (nomi, immagini, testi e altro) sono di proprietà dei rispettivi autori e/o case editrici, sotto la tutela delle leggi internazionali sul copyright/trademark</p>
+	</footer>
 </body>
 </html>

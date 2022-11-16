@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" />
+	<title>Accedi al tuo account Lorem</title>
+	<meta name="description" content="Accedi al tuo account Lorem" />
+	<meta name="keywords" content="fumetti, collezione" />
+	<meta name="author" content="Giovanni Filippini" />
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
-	<link rel="stylesheet" href="../style.css" media="screen"/>
+	<link rel="stylesheet" href="../css/auth.css" media="handheld, screen" />
+	<link rel="stylesheet" href="../css/print.css" media="print" />
+	<link rel="shortcut icon" type="image/svg" href="img/favicon.svg" />
 </head>
 
 <body>
-<main id="main-holder">
-	<h1 id="login-header">Login</h1>
+	<header>
+		<img src="../img/logo.svg" alt="serviceName" height="32" />
+		<a href="/index.html">
+			Torna alla <span lang="en">home</span>
+		</a>
+	</header>
 
-	<div id="login-error-msg-holder">
-		<p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
-	</div>
+	<main>
+		<h1>Accedi a Lorem</h1>
+		<form action="">
+			<label for="mail">Nome utente (richiesto):</label>
+			<input type="text" id="username" name="username" aria-required="true" required/>
 
-	<form id="login-form">
-		<input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
-		<input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
-		<input type="submit" value="Login" id="login-form-submit">
-	</form>
+			<label for="userPassword">Password (richiesta):</label>
+			<input id="userPassword" type="password" aria-required="true" required/>
 
-</main>
+			<input type="submit" value="Accedi">
+		</form>
+
+		<p>Non hai ancora un <span lang="en">account</span>? <a href="signup.html">Creane uno</a></p>
+	</main>
+
+	<footer>
+		<p>©2022 Lorem. Tutti i diritti sui contenuti di questo sito (nomi, immagini, testi e altro) sono di proprietà dei rispettivi autori e/o case editrici, sotto la tutela delle leggi internazionali sul copyright/trademark</p>
+	</footer>
 </body>
-
 </html>
