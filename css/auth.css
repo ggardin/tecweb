@@ -1,0 +1,98 @@
+:root {
+	--bgcolor: #E4DCD7;
+	--txtcolor: #1A1A1A;
+	--secondaryColor: #D4C9C4;
+	--tertiaryColor: #12322D;
+	--content-width: 35em;
+	--content-padding: 1rem;
+	--border-radius: 8px;
+}
+
+@font-face {
+	font-family: "Sora";
+	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
+	font-display: swap;
+}
+
+* {
+	font-family: "Sora", sans-serif;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	line-height: 1.5;
+	background-color: var(--tertiaryColor);
+	color: var(--txtcolor);
+	max-width: var(--content-width);
+	margin: var(--content-padding) auto;
+}
+
+body > * {
+	background-color: var(--bgcolor);
+	padding: var(--content-padding);
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+main {
+	text-align: center;
+	padding: var(--content-padding);
+}
+
+footer {
+	background-color: var(--secondaryColor);
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
+	font-size: 0.8em;
+}
+
+/* Inputs */
+
+form {
+	margin-top: 2em;
+	text-align: left;
+}
+
+input {
+	width: 100%;
+	margin: 0.5em 0 1.5em;
+	padding: 1em;
+	border-radius: var(--border-radius);
+}
+
+input:focus {
+	border: 3px solid #555;
+}
+
+input[type=submit] {
+	color: white;
+	background-color: var(--tertiaryColor);
+}
+
+
+/* CSS reset */
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+img, picture, svg {
+	display: block;
+	max-width: 100%;
+}
+input, button, textarea, select {
+	font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+}
