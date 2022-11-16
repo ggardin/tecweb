@@ -4,7 +4,6 @@ services:
   caddy:
     container_name: caddy
     image: caddy:alpine
-    # build: ./caddy
     ports:
       - "80:80"
       - "443:443"
@@ -13,14 +12,14 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
       - caddy_data:/data
       - caddy_config:/config
-      - ./..:/srv/sito:ro,Z
+      - ./..:/srv/sito:ro,z
       - phpmyadmin:/srv/phpmyadmin
     restart: unless-stopped
   php-fpm:
     container_name: php-fpm
     build: ./php-fpm
     volumes:
-      - ./..:/var/www/html:ro,Z
+      - ./..:/var/www/html:ro,z
     restart: unless-stopped
   mariadb:
     container_name: mariadb

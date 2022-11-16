@@ -13,14 +13,10 @@ localhost {
 	}
 	handle {
 		root * /srv/sito
-		file_server
+		file_server browse
 		php_fastcgi php-fpm:9000 {
 			root /var/www/html
-		}
-	}
-	log {
-		output file /var/log/tecweb.log {
-			roll_size 10mb
+			try_files {path} {path}/ =404
 		}
 	}
 }
