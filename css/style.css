@@ -1,0 +1,166 @@
+:root {
+	--bgcolor: #E4DCD7;
+	--txtcolor: #1A1A1A;
+	--secondaryColor: #D4C9C4;
+	--tertiaryColor: #12322D;
+	--content-width: 80rem;
+	--content-padding: 1rem;
+	--border-radius: 8px;
+}
+
+@font-face {
+	font-family: "Sora";
+	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
+	font-display: swap;
+}
+
+* {
+	font-family: "Sora", sans-serif;
+}
+
+body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	gap: 5vh;
+	line-height: 1.5;
+	background-color: var(--bgcolor);
+	color: var(--txtcolor);
+	max-width: var(--content-width);
+	margin: 0 auto;
+}
+
+body > * {
+	padding: 1rem;
+}
+
+main h1,
+h2 {
+	text-align: center;
+}
+
+main > h1 {
+	font-size: 3em;
+	font-weight: 800;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 10;
+}
+
+header ul {
+	display: flex;
+	align-items: center;
+	list-style: none;
+	padding: 0;
+}
+
+header li {
+	line-height: 3em;
+	border-bottom: 3px solid transparent;
+}
+
+header li.active {
+	background-color: var(--secondaryColor);
+	border-color: currentColor;
+}
+
+header li:hover {
+	background-color: var(--secondaryColor);
+	border-color: red; /* to be defined */
+}
+
+/* rivedere questa regola, non è robusta */
+header li > span {
+	padding: 1em;
+}
+
+header li a {
+	padding: 1em;
+	color: inherit;
+}
+
+.accountButton {
+	background-color: transparent;
+	border: 0;
+}
+
+footer {
+	display: flex;
+	flex-flow: row wrap;
+	background-color: var(--secondaryColor);
+	padding: 1em;
+}
+
+footer > div:not(:last-child) {
+	flex: 1 0 auto;
+	width: 200px;
+}
+
+footer .title {
+	text-transform: uppercase;
+	font-size: 0.8em;
+	letter-spacing: 0.05em;
+	margin-bottom: 1em;
+}
+
+footer ul {
+	list-style: none;
+	padding: 0;
+}
+
+footer li {
+	padding: 0.2em 0;
+}
+
+footer li a {
+	color: var(--txtcolor);
+}
+
+footer .tmdb-attribution {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	gap: 1em;
+	font-size: 0.8em;
+}
+
+.tmdb-attribution p {
+	flex: 1 0 100px;
+}
+
+.tmdb-attribution img {
+	flex: 0 0 3em;
+	width: 3em;
+	margin-top: 0.4em;
+}
+
+/* CSS reset */
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+img, picture, svg {
+	display: block;
+	max-width: 100%;
+}
+input, button, textarea, select {
+	font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+}
+
+/* NAVBAR */
+
+#dropdown-menu-toggle {
+	display: none;
+}
