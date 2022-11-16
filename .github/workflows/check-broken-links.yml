@@ -10,9 +10,8 @@ on:
     branches:
       - main
       - dev
-  # push:
-  #   paths:
-  #     - .github/workflows/check-broken-links.yml
+    paths:
+      - .github/workflows/check-broken-links.yml
   # schedule:
   #   - cron: '0 0 * * *'
 

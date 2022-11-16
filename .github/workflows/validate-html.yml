@@ -10,9 +10,8 @@ on:
     branches:
       - main
       - dev
-  # push:
-  #   paths:
-  #     - .github/workflows/validate-html.yml
+    paths:
+      - .github/workflows/validate-html.yml
   # schedule:
   #   - cron: '0 0 * * *'
 
@@ -20,7 +19,7 @@ jobs:
   validator:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout to v2
+      - name: Checkout to v3
         uses: actions/checkout@v3
       - name: Validator
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
