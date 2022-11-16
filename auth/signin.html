@@ -24,14 +24,16 @@
 	<main>
 		<h1>Accedi a Lorem</h1>
 		<form action="">
-			<p><label for="mail">Mail:</label>
-			<input type="text" id="mail" name="username"></p>
-			<p><label for="userPassword">Password:</label>
-			<input id="userPassword" type="password"/></p>
-			<p><input type="submit" value="Accedi"></p>
+			<label for="mail">Nome utente (richiesto):</label>
+			<input type="text" id="username" name="username" aria-required="true" required/>
+
+			<label for="userPassword">Password (richiesta):</label>
+			<input id="userPassword" type="password" aria-required="true" required/>
+
+			<input type="submit" value="Accedi">
 		</form>
 
-		<p>Non hai un <span lang="en">account</span>? <a href="signup.html">Creane uno</a></p>
+		<p>Non hai ancora un <span lang="en">account</span>? <a href="signup.html">Creane uno</a></p>
 	</main>
 
 	<footer>
