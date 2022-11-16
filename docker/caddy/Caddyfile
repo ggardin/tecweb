@@ -16,7 +16,7 @@ localhost {
 		file_server browse
 		php_fastcgi php-fpm:9000 {
 			root /var/www/html
-			try_files {path} {path}/ =404
+			try_files {path} {path}/index.php {path}/
 		}
 	}
 }
