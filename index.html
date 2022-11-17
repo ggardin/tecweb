@@ -19,7 +19,7 @@
 
 <body>
 <header>
-	<img src="img/logo.svg" alt="" height="32" />
+	<img src="img/logo.svg" alt="" height="90" />
 	<nav id="dropdown-link-container" data-open="false">
 		<ul>
 			<li class="active"><span lang="en">Home</span></li>
@@ -48,11 +48,36 @@
 		<label for="query"></label><input type="search" id="query" name="q" placeholder="Search">
 		<button>Search</button>
 	</form>-->
-	<!--<form id="search" role="search">
-		<label for="search-input">Cerca un film o serie</label>
-		<input type="search" id="search-input" name="search" spellcheck="false" placeholder="Cerca">
-		<input value="Cerca" type="submit">
-	</form>-->
+
+	<nav class="sidebar">
+		<ul class="items">
+			<li class="item active">
+				<span class="icon"><img src="img/tobewatched.svg" alt="serviceName" width="24px" height="24px"/></span>
+				<span class="name">Da Guardare</span>
+			</li>
+
+			<li class="item">
+				<span class="icon"><img src="img/watched.svg" alt="serviceName" width="24px" height="24px"/></span>
+				<span class="name">Guardati</span>
+			</li>
+		</ul>
+
+		<div class="bottom">
+			<button class="outlined-button">Buy Storage</button>
+		</div>
+		<!-- Code -->
+	</nav>
+
+	<section class="searchShapeContainer">
+		<form class="search">
+			<label for="my-field" aria-label="My field"></label>
+			<input type="text" id="my-field" class="searchTerm" placeholder="What are you looking for?">
+			<button type="submit" class="searchButton">
+				<img src="img/search.svg" height="24" alt="" />
+				<i class="fa fa-search"></i>
+			</button>
+		</form>
+	</section>
 
 	<!-- DEMO AREA -->
 	<section class="container">
@@ -70,7 +95,65 @@
 				</div>
 			</div>
 		</div>
+	</section>
+
+	<!-- DEMO AREA -->
+	<div class="container">
+		<div class="contents">
+			<div class="image-container"> <!--  onclick="location.href='https://example.com/';" style="cursor: pointer;" -->
+				<div class="content">
+					<div class="title">
+						<h1>Lorem</h1>
+						<p>Ipsum</p>
+					</div>
+					<!--<div class="cta-links">
+						<a href="#" class="learn-more-link">Learn more ></a>
+						<a href="#" class="buy-link">Buy ></a>
+					</div>-->
+				</div>
+			</div>
+		</div>
 	</div>
+
+	<!-- DEMO AREA -->
+	<div class="container">
+		<div class="contents">
+			<div class="image-container"> <!--  onclick="location.href='https://example.com/';" style="cursor: pointer;" -->
+				<div class="content">
+					<div class="title">
+						<h1>Lorem</h1>
+						<p>Ipsum</p>
+					</div>
+					<!--<div class="cta-links">
+						<a href="#" class="learn-more-link">Learn more ></a>
+						<a href="#" class="buy-link">Buy ></a>
+					</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END DEMO AREA -->
+
+	<!--<dl id="sections">
+		<dt>sectionOne</dt>
+			<dd>
+				<img src="img/placeholder.svg" alt="serviceName" height="130" />
+			</dd>
+			<dd>Lorem Ipsum</dd>
+
+		<dt>sectionTwo</dt>
+			<dd>
+				<img src="img/placeholder.svg" alt="serviceName" height="130" />
+
+			</dd>
+			<dd>Lorem Ipsum</dd>
+
+		<dt>sectionThree</dt>
+			<dd>
+				<img src="img/placeholder.svg" alt="serviceName" height="130" />
+			</dd>
+			<dd>Lorem Ipsum</dd>
+	</dl>-->
 
 	<section>
 		<h3>Sei a pochi clic da rivoluzionare la tua collezione</h3>
