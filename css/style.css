@@ -6,6 +6,9 @@
 	--content-width: 80rem;
 	--content-padding: 1rem;
 	--border-radius: 8px;
+	--button-inactive: #20584F;
+	--link-color: #150CC8;
+	--visited-color: #4C0883;
 }
 
 @font-face {
@@ -33,14 +36,14 @@ body > * {
 	padding: 1rem;
 }
 
-main h1,
-h2 {
+main h1, h2 {
 	text-align: center;
 }
 
 main > h1 {
 	font-size: 3em;
 	font-weight: 800;
+	margin-top: -1em;
 }
 
 header {
@@ -48,6 +51,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
+	/*margin-bottom: -3em;*/
 }
 
 header ul {
@@ -137,7 +141,12 @@ footer .tmdb-attribution {
 	margin-top: 0.4em;
 }
 
-/* CSS reset */
+
+/*
+==============
+CSS REST
+==============
+*/
 
 *, *::before, *::after {
 	box-sizing: border-box;
@@ -159,13 +168,22 @@ p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 }
 
-/* NAVBAR */
+
+/*
+==============
+NAV BAR
+==============
+*/
 
 #dropdown-menu-toggle {
 	display: none;
 }
 
-/* SEARCH BAR */
+/*
+==============
+SEZIONE HEADER
+==============
+*/
 
 .search {
 	position: relative;
@@ -201,7 +219,17 @@ p, h1, h2, h3, h4, h5, h6 {
 	border: transparent;
 }
 
-/* SIDEBAR */
+
+/*
+==============
+SIDE BAR
+==============
+*/
+
+#sidebar{
+	display: block;
+}
+
 .sidebar {
 	user-select: none;
 	max-width: 15em;
@@ -229,26 +257,13 @@ p, h1, h2, h3, h4, h5, h6 {
 	pointer-events: none;
 }
 
-.new-btn:hover {
-	box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302),0 4px 8px 3px rgba(60,64,67,0.149);
-	background: #f8f9fa;
-}
-
-.new-btn:focus {
-	background-color: #f8f9fa;
-}
-
-.new-btn:active {
-	background-color: #e8f0fe;
-}
-
 .new-btn .icon {
 	margin-right: 10px;
 }
 
 .new-btn .name {
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 300;
 	margin-right: 9px;
 	color: #3c4043;
 }
@@ -259,46 +274,40 @@ p, h1, h2, h3, h4, h5, h6 {
 	overflow: auto;
 	margin-top: 10px;
 	padding: 0;
+	margin-right: 1em;
 }
 
 .item {
 	display: flex;
 	align-items: center;
 	padding: 6px 26px;
-	background: white;
+	background: var(--button-inactive);
 	border-radius: 0 100px 100px 0;
 	cursor: pointer;
 	transition: all 0.041s ease;
 	justify-content: flex-start;
+	margin-bottom: 0.5em;
 }
 
 .item.active {
-	background: #e8f0fe;
-	margin-bottom: 1em;
+	background: var(--tertiaryColor);
 }
 
 .item.active .name {
-	color: #226ed4;
-}
-
-.item.active .icon svg {
-	fill:  #226ed4;
+	color: white;
 }
 
 .item .name {
 	font-weight: 600;
 	font-size: 13px;
 	margin-left: 20px;
-	color: #5f6368;
+	color: white;
 }
 
 .item * {
 	pointer-events: none;
 }
 
-.item:not(.active):hover {
-	background: rgba(0,0,0,.04);
-}
 
 .bottom {
 	padding-left: 24px;
@@ -306,37 +315,29 @@ p, h1, h2, h3, h4, h5, h6 {
 	overflow: hidden;
 	margin-top: 6px;
 	margin-bottom: 10px;
+	border-top: 1px solid #eaeaea;
 
 }
 
 .outlined-button {
+	margin-top: 1.5em;
 	border: 1px solid #dadce0;
-	color: #15c;
-	background: white;
+	color: white;
+	background: var(--tertiaryColor);
 	border-radius: 4px;
 	padding: 10px 23px;
 	font-size: 14px;
 	font-weight: 500;
 	cursor: pointer;
-	transition: all 0.2s ease;
-}
-
-.outlined-button:hover {
-	border-color: #dadce0;
-	color: #185abc;
-	background: #f6f9fe;
-}
-
-.outlined-button:active {
-	background: #420f15;
-}
-
-.outlined-button:focus {
-	background: #e3eefd;
 }
 
 
-/* CONTENTS */
+/*
+==============
+CONTENTS
+==============
+*/
+
 .contents {
 	background-color: white;
 }
@@ -377,7 +378,13 @@ p, h1, h2, h3, h4, h5, h6 {
 	text-align: center;
 }
 
-/* RESULTS CARD */
+
+/*
+==============
+RESULTS CARD
+==============
+*/
+
 .cards{
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 12em);
@@ -414,4 +421,46 @@ p, h1, h2, h3, h4, h5, h6 {
 	font-size: 1em;
 	line-height: 1.5em;
 	font-weight: 400;
+}
+
+
+/*
+==============
+BREADCRUMB
+==============
+*/
+
+#breadcrumb{
+	background-color:var(--secondaryColor);
+	color: var(--txtcolor);
+	font-size: 1em;
+	padding: 0.5em 0 0.5em 1.0em;
+}
+
+#breadcrumb a:link{
+	color: var(--link-color);
+}
+
+#breadcrumb a:visited{
+	color: var(--visited-color);
+}
+
+#inputField form {
+	margin-top: 2em;
+	text-align: left;
+}
+
+#inputField input {
+	width: 100%;
+	padding: 1em;
+	border-radius: 8px;
+}
+
+#inputField input:focus {
+	border: 3px solid #555;
+}
+
+#inputField input[type=submit] {
+	color: white;
+	background-color: var(--tertiaryColor);
 }

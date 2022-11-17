@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 
 	<title>Lorem. La tua collezione. Ovunque.</title>
-	<meta name="description" content="" />
+	<meta name="description" content="Crea la tua collezione di film" />
 	<meta name="keywords" content="film, collezione" />
 	<meta name="author" content="Giovanni Filippini" />
 
@@ -19,15 +19,15 @@
 
 <body>
 <header>
-	<img src="img/logo.svg" alt="" height="90" />
-	<nav id="dropdown-link-container" data-open="false">
+	<img src="img/logo.svg" alt="" width="25" height="90" />
+<!--	<nav id="dropdown-link-container" data-open="false">
 		<ul>
 			<li class="active"><span lang="en">Home</span></li>
 			<li><a href="about.html"><span lang="en">About</span></a></li>
 			<li><a href="#"><span lang="en">News</span></a></li>
 			<li><a href="#">Contatti</a></li>
 		</ul>
-	</nav>
+	</nav>-->
 	<div class="actions">
 		<button type="button" class="accountButton">
 			<img src="img/account.svg" alt="Accedi al tuo account" width="35" height="35" />
@@ -41,6 +41,10 @@
 	</div>
 </header>
 
+<nav id="breadcrumb">
+	<p>Ti trovi in: <span lang="en">Home</span> </p>
+</nav>
+
 <main>
 	<h1><span lang="en">soundstage</span></h1>
 	<h2>Lorem. Ipsum.</h2>
@@ -49,7 +53,7 @@
 		<button>Search</button>
 	</form>-->
 
-	<nav class="sidebar">
+	<nav class="sidebar" id="sidebar">
 		<ul class="items">
 			<li class="item active">
 				<span class="icon"><img src="img/tobewatched.svg" alt="serviceName" width="24px" height="24px"/></span>
@@ -63,17 +67,29 @@
 		</ul>
 
 		<div class="bottom">
-			<button class="outlined-button">Buy Storage</button>
+			<button class="outlined-button">Crea Lista</button>
 		</div>
+
+		<ul class="items">
+			<li class="item">
+				<span class="icon"><img src="img/tobewatched.svg" alt="serviceName" width="24px" height="24px"/></span>
+				<span class="name">Nolan</span>
+			</li>
+
+			<li class="item">
+				<span class="icon"><img src="img/watched.svg" alt="serviceName" width="24px" height="24px"/></span>
+				<span class="name">MCU</span>
+			</li>
+		</ul>
 		<!-- Code -->
 	</nav>
 
 	<section class="searchShapeContainer">
 		<form class="search">
 			<label for="my-field" aria-label="My field"></label>
-			<input type="text" id="my-field" class="searchTerm" placeholder="What are you looking for?">
-			<button type="submit" class="searchButton">
-				<img src="img/search.svg" height="24" alt="" />
+			<input type="text" id="my-field" class="searchTerm" placeholder="Che film vuoi cercare?">
+			<button type="submit" class="searchButton" aria-label="Cerca">
+				<img src="img/search.svg" width="24" height="24" alt="" />
 				<i class="fa fa-search"></i>
 			</button>
 		</form>
@@ -155,10 +171,10 @@
 			<dd>Lorem Ipsum</dd>
 	</dl>-->
 
-	<section>
-		<h3>Sei a pochi clic da rivoluzionare la tua collezione</h3>
+	<section id="inputField">
+		<h1>Sei a pochi clic da rivoluzionare la tua collezione</h1>
 		<form>
-			<label for="mail">mail:</label>
+			<label for="mail">Inserisci il tuo indirizzo email</label>
 			<input type="email" placeholder="email" id="mail" name="mail"><br><br>
 			<input value="Invia" type="submit">
 			<p>Premendo il pulsante per l'invio di una mail di registrazione, accetti i nostri <a href="#">Termini e Condizioni</a> e la nostra <span lang="en"><a href="#">Privacy Policy</a></span> </p>
@@ -169,7 +185,7 @@
 
 <footer>
 	<div class="logo-footer">
-		<img src="img/logo.svg" alt="serviceName" height="50" />
+		<img src="img/logo.svg" alt="" width="25" height="90" />
 	</div>
 
 	<div>
@@ -200,7 +216,7 @@
 	</div>
 
 	<div class="tmdb-attribution">
-		<img src="img/tmdb.svg" alt="attribution"/>
+		<img src="img/tmdb.svg" width="75" height="75"alt="attribution"/>
 		<p lang="en">All film-related metadata present on the site (including actors, directors, studio names, poster arts, etc.) is from The Movie Database (TMDB). We are not endorsed nor certified by them.</p>
 	</div>
 </footer>

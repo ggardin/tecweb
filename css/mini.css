@@ -13,6 +13,10 @@
 	flex-direction: column;
 }
 
+#sidebar{
+	display: none;
+}
+
 header img, header .actions {
 	display: flex;
 	z-index: 15;
