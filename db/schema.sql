@@ -51,7 +51,7 @@ create table compagnia (
 );
 
 create table keyword (
-	id int unsigned,
+	id bigint unsigned,
 	nome varchar(50),
 	primary key (id)
 );
@@ -63,7 +63,7 @@ create table gender (
 );
 
 create table persona (
-	id int unsigned,
+	id bigint unsigned,
 	nome varchar(50) not null,
 	gender int unsigned,
 	immagine varchar(100),
@@ -93,7 +93,7 @@ create table collezione (
 );
 
 create table film (
-	id int unsigned,
+	id bigint unsigned,
 	titolo varchar(200) not null,
 	titolo_originale varchar(200) not null,
 	durata smallint unsigned,
@@ -114,7 +114,7 @@ create table film (
 
 
 create table film_genere (
-	film int unsigned,
+	film bigint unsigned,
 	genere int unsigned,
 	primary key (film, genere),
 	foreign key (film) references film(id) on delete cascade,
@@ -122,7 +122,7 @@ create table film_genere (
 );
 
 create table film_paese (
-	film int unsigned,
+	film bigint unsigned,
 	paese char(2),
 	primary key (film, paese),
 	foreign key (film) references film(id) on delete cascade,
@@ -130,7 +130,7 @@ create table film_paese (
 );
 
 create table film_compagnia (
-	film int unsigned,
+	film bigint unsigned,
 	compagnia int unsigned,
 	primary key (film, compagnia),
 	foreign key (film) references film(id) on delete cascade,
@@ -138,17 +138,17 @@ create table film_compagnia (
 );
 
 create table film_keyword (
-	film int unsigned,
-	keyword int unsigned,
+	film bigint unsigned,
+	keyword bigint unsigned,
 	primary key (film, keyword),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (keyword) references keyword(id) on delete cascade
 );
 
 create table film_partecipazione (
-	id serial,
-	film int unsigned,
-	persona int unsigned,
+	id bigint unsigned,
+	film bigint unsigned,
+	persona bigint unsigned,
 	ruolo int unsigned,
 	interpreta varchar(150),
 	primary key (id),
@@ -162,7 +162,7 @@ create table film_partecipazione (
 
 
 create table utente (
-	id int unsigned,
+	id bigint unsigned,
 	username varchar(30) unique not null,
 	mail varchar(100) unique,
 	nome varchar(50),
@@ -176,8 +176,8 @@ create table utente (
 );
 
 create table valutazione (
-	utente int unsigned,
-	film int unsigned,
+	utente bigint unsigned,
+	film bigint unsigned,
 	valore smallint unsigned not null,
 	primary key (utente, film),
 	foreign key (utente) references utente(id) on delete cascade,
@@ -185,15 +185,15 @@ create table valutazione (
 );
 
 create table lista (
-	id int unsigned,
-	utente int unsigned,
+	id bigint unsigned,
+	utente bigint unsigned,
 	nome varchar(50),
 	primary key (id),
 	foreign key (utente) references utente(id) on delete cascade
 );
 
 create table lista_collezione (
-	lista int unsigned,
+	lista bigint unsigned,
 	collezione int unsigned,
 	primary key (lista, collezione),
 	foreign key (lista) references lista(id) on delete cascade,
@@ -201,8 +201,8 @@ create table lista_collezione (
 );
 
 create table lista_film (
-	lista int unsigned,
-	film int unsigned,
+	lista bigint unsigned,
+	film bigint unsigned,
 	primary key (lista, film),
 	foreign key (lista) references lista(id) on delete cascade,
 	foreign key (film) references film(id) on delete cascade
@@ -227,15 +227,15 @@ create table i_compagnia (
 );
 
 create table i_keyword (
-	id int unsigned,
-	tmdb_id int unsigned,
+	id bigint unsigned,
+	tmdb_id bigint unsigned,
 	primary key (id),
 	foreign key (id) references keyword(id) on delete cascade
 );
 
 create table i_persona (
-	id int unsigned,
-	tmdb_id int unsigned,
+	id bigint unsigned,
+	tmdb_id bigint unsigned,
 	primary key (id),
 	foreign key (id) references persona(id) on delete cascade
 );
@@ -248,8 +248,8 @@ create table i_collezione (
 );
 
 create table i_film (
-	id int unsigned,
-	tmdb_id int unsigned,
+	id bigint unsigned,
+	tmdb_id bigint unsigned,
 	primary key (id),
 	foreign key (id) references film(id) on delete cascade
 );
