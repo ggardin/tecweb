@@ -1,92 +1,112 @@
+drop table if exists i_film;
+drop table if exists i_collezione;
+drop table if exists i_persona;
+drop table if exists i_keyword;
+drop table if exists i_compagnia;
+drop table if exists i_genere;
+
+drop table if exists lista_film;
+drop table if exists lista_collezione;
+drop table if exists lista;
+drop table if exists valutazione;
+drop table if exists utente;
+drop table if exists film_partecipazione;
+drop table if exists film_keyword;
+drop table if exists film_compagnia;
+drop table if exists film_paese;
+drop table if exists film_genere;
+drop table if exists film;
+drop table if exists collezione;
+drop table if exists ruolo;
+drop table if exists persona;
+drop table if exists gender;
+drop table if exists keyword;
+drop table if exists compagnia;
+drop table if exists paese;
+drop table if exists genere;
+
+
+
+
+
 create table genere (
-	id serial,
+	id int unsigned,
 	nome varchar(50),
 	primary key (id)
 );
 
 create table paese (
-	iso_3166-1 varchar(2),
-	nome varchar(30),
-	primary key (iso_3166-1)
+	iso_3166_1 char(2),
+	nome varchar(100),
+	primary key (iso_3166_1)
 );
 
 create table compagnia (
-	id serial,
-	nome varchar(60) not null,
-	descrizione varchar(1000),
-	data_fondazione date,
-	paese_fondazione varchar(2),
+	id int unsigned,
+	nome varchar(100) not null,
+	logo varchar(100),
+	paese_fondazione char(2),
 	primary key (id),
-	foreign key (paese_fondazione) references paese(iso_3166-1)
+	foreign key (paese_fondazione) references paese(iso_3166_1)
 );
 
--- create table network (
--- 	id serial,
--- 	nome varchar(60) not null,
--- 	descrizione varchar(1000),
--- 	data_fondazione date,
--- 	paese_fondazione varchar(2),
--- 	primary key (id),
--- 	foreign key (paese_fondazione) references paese(iso_3166-1)
--- );
-
 create table keyword (
-	id serial,
+	id int unsigned,
 	nome varchar(50),
 	primary key (id)
 );
 
-create table persona (
-	id serial,
-	nome varchar(30) not null,
-	descrizione varchar(1000),
-	data_nascita date,
-	paese_nascita varchar(2),
-	genere varchar(30),
-	primary key (id),
-	foreign key (paese_nascita) references paese(iso_3166-1)
+create table gender (
+	id int unsigned,
+	nome varchar(50) not null,
+	primary key (id)
 );
 
--- create table ruolo (
--- 	id serial,
--- 	nome varchar(30) unique not null,
--- 	primary key (id)
--- );
+create table persona (
+	id int unsigned,
+	nome varchar(50) not null,
+	gender int unsigned,
+	immagine varchar(100),
+	data_nascita date,
+	data_morte date,
+	luogo_nascita varchar(100),
+	primary key (id),
+	foreign key (gender) references gender(id)
+);
 
--- create table lingua (
--- 	iso_639-1 varchar(2),
--- 	nome varchar(30),
--- 	primary key (iso_639-1)
--- );
+create table ruolo (
+	id int unsigned,
+	nome varchar(50) unique not null,
+	primary key (id)
+);
 
 
 
 
 
 create table collezione (
-	id serial,
-	titolo varchar(200) not null,
+	id int unsigned,
+	nome varchar(200) not null,
 	descrizione varchar(10000),
 	copertina varchar(100),
 	primary key (id)
 );
 
 create table film (
-	id serial,
+	id int unsigned,
 	titolo varchar(200) not null,
 	titolo_originale varchar(200) not null,
-	lingua_originale varchar(2) not null,
+	durata smallint unsigned,
+	copertina varchar(100),
 	descrizione varchar(10000),
 	data_rilascio date,
-	budget int,
-	incassi int,
-	durata smallint,
-	voto smallint,
-	collezione int,
 	stato varchar(30),
-	copertina varchar(100),
-	primary key (id)
-	foreign key (collezione) references collezione(id)
+	budget int unsigned,
+	incassi int unsigned,
+	collezione int unsigned,
+	voto smallint unsigned,
+	primary key (id),
+	foreign key (collezione) references collezione(id) on delete set null
 );
 
 
@@ -94,199 +114,142 @@ create table film (
 
 
 create table film_genere (
-	film int,
-	genere int,
+	film int unsigned,
+	genere int unsigned,
 	primary key (film, genere),
-	foreign key (film) references film(id),
-	foreign key (genere) references genere(id)
+	foreign key (film) references film(id) on delete cascade,
+	foreign key (genere) references genere(id) on delete cascade
 );
 
 create table film_paese (
-	primary key (film, paese)
-	foreign key (film) references film(id),
-	foreign key (paese) references paese(iso_3166-1)
+	film int unsigned,
+	paese char(2),
+	primary key (film, paese),
+	foreign key (film) references film(id) on delete cascade,
+	foreign key (paese) references paese(iso_3166_1)
 );
 
 create table film_compagnia (
-	primary key (film, compagnia)
-	foreign key (film) references film(id),
-	foreign key (compagnia) references compagnia(id)
+	film int unsigned,
+	compagnia int unsigned,
+	primary key (film, compagnia),
+	foreign key (film) references film(id) on delete cascade,
+	foreign key (compagnia) references compagnia(id) on delete cascade
 );
 
 create table film_keyword (
-	film int,
-	keyword int,
+	film int unsigned,
+	keyword int unsigned,
 	primary key (film, keyword),
-	foreign key (film) references film(id),
-	foreign key (keyword) references keyword(id)
+	foreign key (film) references film(id) on delete cascade,
+	foreign key (keyword) references keyword(id) on delete cascade
 );
 
-create table film_persona (
-	film int,
-	persona int,
-	ruolo int not null,
-	interpretazione varchar(30),
-	primary key (film, persona, ruolo),
-	foreign key (film) references film(id),
-	foreign key (persona) references persona(id),
-	foreign key (ruolo) references ruolo(id)
-);
-
-
-
-
-
-create table serie (
+create table film_partecipazione (
 	id serial,
-	titolo varchar(200) not null,
-	descrizione varchar(10000),
-	copertina varchar(100),
-	n_stagioni int,
-	n_episodi int,
-	primary key (id)
-);
-
-create table stagione (
-	id serial,
-	serie int,
-	titolo varchar(200) not null,
-	descrizione varchar(10000),
-	numero int,
-	copertina varchar(100),
+	film int unsigned,
+	persona int unsigned,
+	ruolo int unsigned,
+	interpreta varchar(150),
 	primary key (id),
-	foreign key (serie) references serie(id)
+	foreign key (film) references film(id) on delete cascade,
+	foreign key (persona) references persona(id) on delete cascade,
+	foreign key (ruolo) references ruolo(id) on delete cascade
 );
-
-create table episodio (
-	id serial,
-	serie int,
-	stagione int,
-	titolo varchar(200) not null,
-	descrizione varchar(10000),
-	numero int,
-	immagine varchar(100),
-	primary key (id),
-	foreign key (serie) references serie(id),
-	foreign key (stagione) references stagione(id)
-);
-
-
-
-
-
-create table serie_genere ()
-
--- create table serie_paese ()
-
-create table serie_compagnia ()
-
--- create table serie_network ()
-
-create table serie_keyword ()
-
-create table serie_persona ()
-
--- create table stagione_network ()
-
--- create table episodio_genere ()
-
-create table episodio_keyword ()
-
-create table episodio_persona ()
-
-
-
-
-
 
 
 
 
 
 create table utente (
-	id serial,
+	id int unsigned,
 	username varchar(30) unique not null,
 	mail varchar(100) unique,
 	nome varchar(50),
-	genere varchar(30),
+	gender int unsigned,
 	data_nascita date,
 	salt varchar(16) not null,
 	password varchar(32) not null,
 	is_admin boolean not null,
-	primary key (id)
+	primary key (id),
+	foreign key (gender) references gender(id)
 );
 
-create table valutazione_film (
-	utente int,
-	film int,
-	valore smallint not null,
-	primary key (utenten, film),
-	foreign key (utente) references utente(id)
-	foreign key (film) references film(id),
-);
-
-create table valutazione_serie (
-	utente int,
-	serie int,
-	valore smallint not null,
-	primary key (utente, serie),
-	foreign key (utente) references utente(id)
-	foreign key (serie) references serie(id),
-);
-
-create table valutazione_episodio (
-	utente int,
-	episodio int,
-	valore smallint not null,
-	primary key (utente, episodio),
-	foreign key (utente) references utente(id)
-	foreign key (episodio) references episodio(id),
+create table valutazione (
+	utente int unsigned,
+	film int unsigned,
+	valore smallint unsigned not null,
+	primary key (utente, film),
+	foreign key (utente) references utente(id) on delete cascade,
+	foreign key (film) references film(id) on delete cascade
 );
 
 create table lista (
-	id serial,
-	utente int,
+	id int unsigned,
+	utente int unsigned,
 	nome varchar(50),
-	primary key (serial)
-	foreign key (utente) references utente(id)
-)
+	primary key (id),
+	foreign key (utente) references utente(id) on delete cascade
+);
 
 create table lista_collezione (
-	lista int,
-	collezione int,
+	lista int unsigned,
+	collezione int unsigned,
 	primary key (lista, collezione),
-	foreign key (lista) references lista(id),
-	foreign key (collezione) references collezione(id),
+	foreign key (lista) references lista(id) on delete cascade,
+	foreign key (collezione) references collezione(id) on delete cascade
 );
 
 create table lista_film (
-	lista int,
-	film int,
+	lista int unsigned,
+	film int unsigned,
 	primary key (lista, film),
-	foreign key (lista) references lista(id),
-	foreign key (film) references film(id)
+	foreign key (lista) references lista(id) on delete cascade,
+	foreign key (film) references film(id) on delete cascade
 );
 
-create table lista_serie (
-	lista int,
-	serie int,
-	primary key (lista, serie),
-	foreign key (lista) references lista(id),
-	foreign key (serie) references serie(id)
+
+
+
+
+create table i_genere (
+	id int unsigned,
+	tmdb_id int unsigned,
+	primary key (id),
+	foreign key (id) references genere(id) on delete cascade
 );
 
-create table lista_stagione (
-	lista int,
-	stagione int,
-	primary key (lista, stagione),
-	foreign key (lista) references lista(id),
-	foreign key (stagione) references stagione(id)
+create table i_compagnia (
+	id int unsigned,
+	tmdb_id int unsigned,
+	primary key (id),
+	foreign key (id) references compagnia(id) on delete cascade
 );
 
-create table lista_episodio (
-	lista int,
-	episodio int,
-	primary key (lista, episodio),
-	foreign key (lista) references lista(id),
-	foreign key (episodio) references episodio(id)
+create table i_keyword (
+	id int unsigned,
+	tmdb_id int unsigned,
+	primary key (id),
+	foreign key (id) references keyword(id) on delete cascade
+);
+
+create table i_persona (
+	id int unsigned,
+	tmdb_id int unsigned,
+	primary key (id),
+	foreign key (id) references persona(id) on delete cascade
+);
+
+create table i_collezione (
+	id int unsigned,
+	tmdb_id int unsigned,
+	primary key (id),
+	foreign key (id) references collezione(id) on delete cascade
+);
+
+create table i_film (
+	id int unsigned,
+	tmdb_id int unsigned,
+	primary key (id),
+	foreign key (id) references film(id) on delete cascade
 );
