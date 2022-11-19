@@ -156,7 +156,8 @@ def get_film():
 				x["id"]=i
 				x["id_film"]=f["id"]
 				x["ruolo"]=0
-				keys=[["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
+				x["index_id"]=len(film_partecipazione)
+				keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
 				film_partecipazione.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 				if i==l:
 					p=tmdb.People(i_persona[i]["tmdb_id"]).info()
@@ -177,7 +178,8 @@ def get_film():
 					x["id_film"]=f["id"]
 					x["ruolo"]=jobs[[jobs[i][1] for i in range(len(jobs))].index(x["job"])][0]
 					x["interpreta"]=""
-					keys=[["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "interpreta"]]
+					x["index_id"]=len(film_partecipazione)
+					keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "interpreta"]]
 					film_partecipazione.append({keys[i][0]: x[keys[i][1]] for i in range(len(keys))})
 					if i==l:
 						p=tmdb.People(i_persona[i]["tmdb_id"]).info()
