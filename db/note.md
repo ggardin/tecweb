@@ -1,12 +1,5 @@
 # note
 
-## postgres in locale con docker
-```
-sudo docker run -d --name pg_tecweb -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:15-alpine
-```
-
-autenticazione: `postgres:postgres`
-
 ## lista drop table
 ```
 grep "create table" schema.sql | cut -d' ' -f3 | tac
@@ -19,4 +12,17 @@ info
 - documentazione api: https://developers.themoviedb.org/3
 - wrapper usato: https://github.com/celiao/tmdbsimple
 - per usare lo script imposta la variabile d'ambiente TMDB_API
-- per dipendenze: `pip install tmdbsimple deep-translator pandas sqlalchemy psycopg2`
+- dipendenze python (pip):
+```
+tmdbsimple
+deep-translator
+pandas
+sqlalchemy
+PyMySQL
+```
+- env variables
+export TMDB_API=.....
+export DB_HOST=localhost
+export DB_NAME=rbonavig
+export DB_USER=rbonavig
+export DB_PASS=paJa5The1eiM4hei
