@@ -1,0 +1,29 @@
+localhost {
+	encode zstd gzip
+	handle_errors {
+		@e404 expression `{err.status_code} == 404`
+		handle @e404 {
+			rewrite * /404.html
+			file_server
+		}
+		handle {
+			respond "Error {err.status_code}: {err.status_text}"
+		}
+	}
+	redir /pma /pma/
+	handle_path /pma/* {
+		root * /srv/phpmyadmin
+		file_server
+		php_fastcgi phpmyadmin:9000 {
+			root /var/www/html
+		}
+	}
+	handle {
+		root * /srv/sito
+		file_server browse
+		php_fastcgi php-fpm:9000 {
+			root /var/www/html
+			try_files {path} {path}/index.php {path}/
+		}
+	}
+}

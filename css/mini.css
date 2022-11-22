@@ -41,7 +41,7 @@ header li > span {
 
 header li.active {
 	background-color: var(--secondaryColor);
-	border-color: currentColor;
+	border-color: currentcolor;
 }
 
 header li:hover {
@@ -53,7 +53,7 @@ header li:hover {
 .hamburger-middle,
 .hamburger-bottom {
 	width: 100%;
-	border-bottom: 4px solid currentColor;
+	border-bottom: 4px solid currentcolor;
 	transition: transform .2s,opacity .2s;
 }
 
