@@ -3,12 +3,12 @@
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
-	--content-width: 80rem;
-	--content-padding: 1rem;
-	--border-radius: 8px;
 	--button-inactive: #20584F;
 	--link-color: #150CC8;
 	--visited-color: #4C0883;
+	--content-width: 80rem;
+	--content-padding: 1rem;
+	--border-radius: 8px;
 }
 
 @font-face {
@@ -23,7 +23,7 @@
 
 body {
 	display: grid;
-	grid-template-rows: auto auto 1fr auto;
+	grid-template-rows: auto 1fr auto;
 	gap: 5vh;
 	line-height: 1.5;
 	background-color: var(--bgcolor);
@@ -46,15 +46,7 @@ main > h1 {
 	margin-top: -1em;
 }
 
-
-/*
-==============
-SEZIONE HEADER
-==============
-*/
-
 header {
-	padding: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -76,28 +68,12 @@ header li {
 
 header li.active {
 	background-color: var(--secondaryColor);
-	border-color: currentcolor;
+	border-color: currentColor;
 }
 
 header li:hover {
 	background-color: var(--secondaryColor);
 	border-color: red; /* to be defined */
-}
-
-
-/*
-==============
-BREADCRUMB
-==============
-*/
-
-#breadcrumb {
-	padding: 0.5em 0 0.5em 1.0em;
-	border: 1px solid currentcolor;
-}
-
-#breadcrumb a {
-	color: inherit;
 }
 
 /* rivedere questa regola, non è robusta */
@@ -114,13 +90,6 @@ header li a {
 	background-color: transparent;
 	border: 0;
 }
-
-
-/*
-==============
-FOOTER
-==============
-*/
 
 footer {
 	display: flex;
@@ -161,13 +130,6 @@ footer .tmdb-attribution {
 	gap: 1em;
 	font-size: 0.8em;
 }
-
-
-/*
-==============
-TMDB ARRTIBUTION
-==============
-*/
 
 .tmdb-attribution p {
 	flex: 1 0 100px;
@@ -217,26 +179,22 @@ NAV BAR
 	display: none;
 }
 
-
 /*
 ==============
 SEARCH BAR
 ==============
 */
 
-/*.searchShapeContainer {
-	height: 250px;
-	border-radius: 0 125px 125px 0;
-	background-color: var(--secondaryColor);
+.searchShapeContainer {
+	background-color: red;
 	margin-bottom: 2em;
-}*/
+}
 
 .search {
 	position: relative;
 	display: flex;
-	background-color: red;
-	margin-bottom: 5em;
-	margin-top: 5em;
+	/*top: 97.67px;*/
+	object-position: center;
 }
 
 .searchTerm {
@@ -288,7 +246,7 @@ SIDE BAR
 	border: none;
 	background: white;
 	padding: 5px 16px;
-	border-radius: 100px;
+	border-radius: var(--border-radius);
 	transition: all 0.2s ease;
 	cursor: pointer;
 }
@@ -364,7 +322,7 @@ SIDE BAR
 	border: 1px solid #dadce0;
 	color: white;
 	background: var(--tertiaryColor);
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	padding: 10px 23px;
 	font-size: 14px;
 	font-weight: 500;
@@ -475,7 +433,6 @@ BREADCRUMB
 	color: var(--txtcolor);
 	font-size: 1em;
 	padding: 0.5em 0 0.5em 1.0em;
-	border-color: transparent;
 }
 
 #breadcrumb a:link{
@@ -485,13 +442,6 @@ BREADCRUMB
 #breadcrumb a:visited{
 	color: var(--visited-color);
 }
-
-
-/*
-==============
-INPUT FIELD
-==============
-*/
 
 #inputField form {
 	margin-top: 2em;
