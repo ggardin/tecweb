@@ -11,19 +11,39 @@ class Page {
 		return "";
 	}
 
-	private static function replaceSection(&$page, $shared, $name) {
-		$s = self::getStringBetween($shared, "<!-- ${name}Start -->", "<!-- ${name}End -->");
-		$page = str_replace("<!-- ${name} -->", $s, $page);
+	private static function getSection(&$page, $name) {
+		return self::getStringBetween($page, "<!-- ${name}Start -->", "<!-- ${name}End -->");
 	}
 
-	private static function setActiveHeader (&$page, $active) {
-		// !!! preg_replace; passando per reference magari, invece che fare copia e assegnare ogni volta
-		//
-		// $a = self::getStringBetween($page, "<li><a href=\"${active}\">", "</a></li>", $page);
-		// $page = str_replace("<li><a href=\"${active}\">", "<li id=\"active\">", $page);
+	private static function replaceSection(&$page, &$shared, $name) {
+		$from = "<!-- ${name} -->";
+		$pos = strpos($page, $from);
+		$len = strlen($from);
+		$page = substr_replace($page, self::getSection($shared, $name), $pos, $len);
 	}
 
-	public static function build($name, $activeHeader) {
+	private static function setActiveHeader(&$page, &$shared, $name) {
+		if ($name != "index") $name .= ".php";
+		else $name = "/";
+
+		$open = '<li><a href="' . $name . '">';
+
+		if (strpos(self::getSection($shared, "header"), $open)) {
+			$close = "</a></li>";
+
+			$bw = self::getStringBetween($page, $open, $close);
+
+			$from = $open . $bw . $close;
+			$to = '<li class="active">' . $bw . '</li>';
+
+			$pos = strpos($page, $open);
+			$len = strlen($from);
+
+			$page = substr_replace($page, $to, $pos, $len);
+		}
+	}
+
+	public static function build($name) {
 		$page = file_get_contents(__DIR__ . "/../html/${name}.html");
 		$shared = file_get_contents(__DIR__ . "/../html/shared.html");
 
@@ -31,7 +51,7 @@ class Page {
 		self::replaceSection($page, $shared, "header");
 		self::replaceSection($page, $shared, "footer");
 
-		self::setActiveHeader($page, $activeHeader);
+		self::setActiveHeader($page, $shared, $name);
 
 		return $page;
 	}
