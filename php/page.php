@@ -23,10 +23,7 @@ class Page {
 	}
 
 	private static function setActiveHeader(&$page, &$shared, $name) {
-		if ($name != "index") $name .= ".php";
-		else $name = "/";
-
-		$open = '<li><a href="' . $name . '">';
+		$open = '<li><a href="' . $name . '.php">';
 
 		if (strpos(self::getSection($shared, "header"), $open)) {
 			$close = "</a></li>";
