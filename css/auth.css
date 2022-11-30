@@ -8,6 +8,13 @@
 	--border-radius: 8px;
 }
 
+:root.dark {
+	--bgcolor: #1A1A1A;
+	--txtcolor: #E4DCD7;
+	--secondaryColor: #8bdafc;
+	--tertiaryColor: #12322D;
+}
+
 @font-face {
 	font-family: "Sora";
 	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
@@ -36,6 +43,7 @@ body > * {
 
 header {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
@@ -74,6 +82,19 @@ input[type=submit] {
 	background-color: var(--tertiaryColor);
 }
 
+/* Screen reader */
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
 
 /* CSS reset */
 
@@ -96,3 +117,23 @@ input, button, textarea, select {
 p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 }
+
+/* ThemeToggle */
+
+#themeToggle {
+	padding: 0;
+	color: currentcolor;
+	background: transparent;
+	border: 0;
+}
+
+#themeToggle svg {
+	width: 1.8em;
+	fill: none;
+}
+
+#themeToggle svg .sun { stroke: var(--txtcolor); }
+#themeToggle svg .moon { stroke: transparent; }
+
+html.dark #themeToggle svg .sun { stroke: transparent; }
+html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
