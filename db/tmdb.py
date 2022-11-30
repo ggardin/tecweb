@@ -50,7 +50,7 @@ def start():
 
 def get_film():
 	f=[]
-	for i in range(1,11):
+	for i in range(1,6):
 		f.extend([k["id"] for k in tmdb.Discover().movie(sort_by="vote_count.desc", vote_average_gte=8, page=i)["results"]])
 	for k in range(len(f)):
 		i_film.append({"id": k, "tmdb_id": f[k]})
@@ -63,6 +63,10 @@ def get_film():
 		info=tmdb.Movies(i_f).info(language="it")
 		info["voto"]=None
 		if info["release_date"]=="": info["release_date"]=None
+		if info["poster_path"]: info["poster_path"]=info["poster_path"][:1]
+		orig=info["original_title"]
+		info["original_title"]="["+info["original_language"]+"]"+info["original_title"]+"[/"+info["original_language"]+"]"
+		if info["title"]==orig: info["title"]=info["original_title"]
 		keys=[["titolo", "title"], ["titolo_originale", "original_title"], ["durata", "runtime"], ["copertina", "poster_path"], ["descrizione", "overview"], ["data_rilascio", "release_date"], ["stato", "status"], ["budget", "budget"], ["incassi", "revenue"], ["collezione", "belongs_to_collection"], ["voto", "voto"]]
 		for i in range(len(keys)):
 			f[keys[i][0]]=info[keys[i][1]]
@@ -79,6 +83,7 @@ def get_film():
 			if i==l:
 				c=tmdb.Collections(f["collezione"]).info(language="it")
 				c["id"]=i
+				if c["poster_path"]: c["poster_path"]=c["poster_path"][:1]
 				keys=[["id", "id"], ["nome", "name"], ["descrizione", "overview"], ["copertina", "poster_path"]]
 				collezione.append({keys[k][0]: c[keys[k][1]] for k in range(len(keys))})
 				for k in range(len(c["parts"])):
@@ -124,6 +129,8 @@ def get_film():
 				keys=[["film", "id_film"], ["compagnia", "id"]]
 				film_compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 				if i==l:
+					x["name"]="[en]"+x["name"]+"[/en]"
+					if x["logo_path"]: x["logo_path"]=x["logo_path"][:1]
 					keys=[["id", "id"], ["nome", "name"], ["logo", "logo_path"], ["paese_fondazione", "origin_country"]]
 					compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 
@@ -146,24 +153,29 @@ def get_film():
 
 		credits=tmdb.Movies(i_f).credits()
 		if credits["cast"]!=None:
-			for x in credits["cast"]:
-				i=len(i_persona)
-				l=i
-				try:
-					i=[k["tmdb_id"] for k in i_persona].index(x["id"])
-				except:
-					i_persona.append({"id": i, "tmdb_id": x["id"]})
-				x["id"]=i
-				x["id_film"]=f["id"]
-				x["ruolo"]=0
-				x["index_id"]=len(film_partecipazione)
-				keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
-				film_partecipazione.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
-				if i==l:
-					p=tmdb.People(i_persona[i]["tmdb_id"]).info()
-					p["id"]=i
-					keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
-					persona.append({keys[k][0]: p[keys[k][1]] for k in range(len(keys))})
+			for i in range(len(credits["cast"])):
+				if i<10:
+					x=credits["cast"][i]
+					i=len(i_persona)
+					l=i
+					try:
+						i=[k["tmdb_id"] for k in i_persona].index(x["id"])
+					except:
+						i_persona.append({"id": i, "tmdb_id": x["id"]})
+					x["id"]=i
+					x["id_film"]=f["id"]
+					x["ruolo"]=0
+					x["index_id"]=len(film_partecipazione)
+					x["character"]="[en]"+x["character"]+"[/en]"
+					keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
+					film_partecipazione.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+					if i==l:
+						p=tmdb.People(i_persona[i]["tmdb_id"]).info()
+						p["id"]=i
+						p["name"]="[en]"+p["name"]+"[/en]"
+						if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
+						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
+						persona.append({keys[k][0]: p[keys[k][1]] for k in range(len(keys))})
 		if credits ["crew"]!=None:
 			for x in credits["crew"]:
 				jobs=[[1, "Director"], [2, "Writer"], [3, "Producer"], [4, "Original Music Composer"]]
@@ -184,6 +196,8 @@ def get_film():
 					if i==l:
 						p=tmdb.People(i_persona[i]["tmdb_id"]).info()
 						p["id"]=i
+						p["name"]="[en]"+p["name"]+"[/en]"
+						if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
 						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
 						persona.append({keys[i][0]: p[keys[i][1]] for i in range(len(keys))})
 
