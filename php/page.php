@@ -1,7 +1,7 @@
 <?php
 
 class Page {
-	private static function getStringBetween(&$in, $start, $end) {
+	public static function getStringBetween(&$in, $start, $end) {
 		$p = strpos($in, $start);
 		if ($p) {
 			$p += strlen($start);
