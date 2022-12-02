@@ -1,7 +1,7 @@
 <?php
 
 class Page {
-	public static function getStringBetween(&$in, $start, $end) {
+	public static function getStringBetween(&$in, $start, $end) : string {
 		$p = strpos($in, $start);
 		if ($p) {
 			$p += strlen($start);
@@ -11,18 +11,18 @@ class Page {
 		return "";
 	}
 
-	private static function getSection(&$page, $name) {
+	private static function getSection(&$page, $name) : string {
 		return self::getStringBetween($page, "<!-- ${name}Start -->", "<!-- ${name}End -->");
 	}
 
-	private static function replaceSection(&$page, &$shared, $name) {
+	private static function replaceSection(&$page, &$shared, $name) : void {
 		$from = "<!-- ${name} -->";
 		$pos = strpos($page, $from);
 		$len = strlen($from);
 		$page = substr_replace($page, self::getSection($shared, $name), $pos, $len);
 	}
 
-	private static function setActiveHeader(&$page, &$shared, $name) {
+	private static function setActiveHeader(&$page, &$shared, $name) : void {
 		$open = '<li><a href="' . $name . '.php">';
 
 		if (strpos(self::getSection($shared, "header"), $open)) {
@@ -40,7 +40,7 @@ class Page {
 		}
 	}
 
-	public static function build($name) {
+	public static function build($name) : string {
 		$page = file_get_contents(__DIR__ . "/../html/${name}.html");
 		$shared = file_get_contents(__DIR__ . "/../html/shared.html");
 

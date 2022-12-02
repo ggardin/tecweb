@@ -11,15 +11,15 @@ class Response {
 		$this->data = $data;
 	}
 
-	public function getStatus() {
+	public function getStatus() : int {
 		return $this->status;
 	}
 
-	public function getMessage() {
+	public function getMessage() : string {
 		return $this->message;
 	}
 
-	public function getData() {
+	public function getData() : array {
 		return $this->data;
 	}
 }
