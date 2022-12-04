@@ -169,9 +169,8 @@ create table utente (
 	nome varchar(50),
 	gender int unsigned,
 	data_nascita date,
-	salt varchar(16) not null,
-	password varchar(32) not null,
-	is_admin boolean not null,
+	password varchar(255) not null,
+	is_admin boolean not null default 0,
 	primary key (id),
 	foreign key (gender) references gender(id)
 );

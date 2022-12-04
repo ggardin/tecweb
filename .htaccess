@@ -1,6 +1,10 @@
-# RedirectMatch 301 ^/?$ /index.php
-
 RewriteEngine On
+
+# RedirectMatch 301 ^/?$ /index.php
+# RewriteCond {REQUEST_FILENAME} !-d
+# RewriteRule (.*)/ ($1)/index.php
+# https://httpd.apache.org/docs/2.4/rewrite/intro.html
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* 404.php
