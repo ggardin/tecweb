@@ -1,0 +1,31 @@
+# This workflow will deploy the entire branch to our remote system.
+# Uses rsync.
+# It will run on dispatch, on push, on PR.
+# See: https://zellwk.com/blog/github-actions-deploy/
+#      https://github.com/marketplace/actions/rsync-deployments-action
+
+name: Sync to remote
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    - name: Deployment
+      uses: burnett01/rsync-deployments@5.2.1
+      with:
+        switches: -avzrn --delete --exclude=".github" # dry-ru(n): delete -n after testing
+        path: /
+        remote_path: /home/azureuser/sito/
+        remote_host: ${{ secrets.SSH_HOSTNAME }}
+        remote_port: ${{ secrets.SSH_PORT }}
+        remote_user: ${{ secrets.SSH_USER }}
+        remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
