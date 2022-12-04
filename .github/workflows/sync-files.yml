@@ -21,7 +21,7 @@ jobs:
     - name: Deployment
       uses: burnett01/rsync-deployments@5.2.1
       with:
-        switches: -avzrn --delete --exclude=".github" --exclude=".git" # dry-ru(n): delete -n after testing
+        switches: -avzr --delete --exclude=".github" --exclude=".git"
         path: /
         remote_path: /home/azureuser/sito/${{ steps.branch-name.outputs.current_branch }}
         remote_host: ${{ secrets.SSH_HOSTNAME }}
