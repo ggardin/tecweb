@@ -15,16 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v6
     - name: Deployment
       uses: burnett01/rsync-deployments@5.2.1
       with:
         switches: -avzrn --delete --exclude=".github" # dry-ru(n): delete -n after testing
         path: /
-        remote_path: /home/azureuser/sito/
+        remote_path: /home/azureuser/sito/${{ steps.branch-name.outputs.current_branch }}
         remote_host: ${{ secrets.SSH_HOSTNAME }}
         remote_port: ${{ secrets.SSH_PORT }}
         remote_user: ${{ secrets.SSH_USER }}
