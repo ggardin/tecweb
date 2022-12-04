@@ -5,6 +5,14 @@
 [![A11y audit](https://github.com/ggardin/tecweb/actions/workflows/a11y-audit.yml/badge.svg)](https://github.com/ggardin/tecweb/actions/workflows/a11y-audit.yml)
 [![Site performance](https://github.com/ggardin/tecweb/actions/workflows/check-pagespeed-performance.yml/badge.svg)](https://github.com/ggardin/tecweb/actions/workflows/check-pagespeed-performance.yml)
 
+## Link utili
+
+| Descrizione        | Link                                            |
+|--------------------|-------------------------------------------------|
+| Sito web           | https://gagg11y.tecweb.duckdns.org/main/        |
+| Branch di sviluppo | https://gagg11y.tecweb.duckdns.org/ branch-name |
+| PhpMyAdmin         | https://gagg11y.tecweb.duckdns.org/pma/         |
+
 ## License
 
 [MIT](LICENSE)
