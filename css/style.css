@@ -1,30 +1,41 @@
 :root {
+	/*Colors*/
 	--bgcolor: #E4DCD7;
 	--txtcolor: #1A1A1A;
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
-	--content-width: 80rem;
-	--content-padding: 1rem;
-	--border-radius: 8px;
 	--button-inactive: #20584F;
 	--link-color: #150CC8;
 	--visited-color: #4C0883;
+
+	/*Global Variables*/
+	--content-width: 80rem;
+	--content-padding: 1rem;
+	--border-radius: 8px;
 }
 
 @font-face {
 	font-family: "Sora";
 	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
+	font-weight: auto;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Spectral";
+	src: url("../fonts/spectral") format("truetype");
+	font-weight: auto;
 	font-display: swap;
 }
 
 * {
-	font-family: "Sora", sans-serif;
+	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
 
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	gap: 5vh;
+	gap: 3vh;
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
@@ -32,8 +43,17 @@ body {
 	margin: 0 auto;
 }
 
-body > * {
+/*body > * {
 	padding: 1rem;
+}*/
+
+@media print {
+	body {
+		font-family: "Spectral", "Times New Roman", serif;
+		margin: 0;
+		color: #000;
+		background-color: #fff;
+	}
 }
 
 main h1, h2 {
@@ -42,8 +62,7 @@ main h1, h2 {
 
 main > h1 {
 	font-size: 3em;
-	font-weight: 800;
-	margin-top: -1em;
+	font-weight: bold;
 }
 
 
@@ -79,9 +98,24 @@ header li.active {
 	border-color: currentcolor;
 }
 
-header li:hover {
+/*header li:hover {
 	background-color: var(--secondaryColor);
-	border-color: red; /* to be defined */
+	border-color: red; !* to be defined *!
+}*/
+
+/* rivedere questa regola, non è robusta */
+header li > span {
+	padding: 1em;
+}
+
+header li a {
+	padding: 1em;
+	color: inherit;
+}
+
+.accountButton {
+	background-color: transparent;
+	border: 0;
 }
 
 
@@ -98,21 +132,6 @@ BREADCRUMB
 
 #breadcrumb a {
 	color: inherit;
-}
-
-/* rivedere questa regola, non è robusta */
-header li > span {
-	padding: 1em;
-}
-
-header li a {
-	padding: 1em;
-	color: inherit;
-}
-
-.accountButton {
-	background-color: transparent;
-	border: 0;
 }
 
 
@@ -303,7 +322,7 @@ SIDE BAR
 
 .new-btn .name {
 	font-size: 14px;
-	font-weight: 300;
+	font-weight: normal;
 	margin-right: 9px;
 	color: #3c4043;
 }
@@ -338,7 +357,7 @@ SIDE BAR
 }
 
 .item .name {
-	font-weight: 600;
+	font-weight: normal;
 	font-size: 13px;
 	margin-left: 20px;
 	color: white;
@@ -349,25 +368,22 @@ SIDE BAR
 }
 
 
-.bottom {
-	padding-left: 24px;
-	padding-right: 40px;
+.button {
+	border-top: 2px solid #bbb;
+
 	overflow: hidden;
-	margin-top: 6px;
-	margin-bottom: 10px;
-	border-top: 1px solid #eaeaea;
 
 }
 
 .outlined-button {
-	margin-top: 1.5em;
+	margin-top: .5em;
 	border: 1px solid #dadce0;
 	color: white;
 	background: var(--tertiaryColor);
 	border-radius: 4px;
 	padding: 10px 23px;
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: normal;
 	cursor: pointer;
 }
 
@@ -391,7 +407,7 @@ CONTENTS
 
 .content {
 	height: 100%;
-	background-image: url("../img/placeholder.svg");
+	background-image: url("../img/demo.svg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -405,12 +421,12 @@ CONTENTS
 .content .title h1 {
 	font-size: 50px;
 	color: rgba(0, 0, 0, 0.897);
-	font-weight: 700;
+	font-weight: bold;
 }
 
 .content .title p {
 	font-size: 25px;
-	font-weight: bold;
+	font-weight: normal;
 	color: rgba(41, 41, 41, 0.89)
 }
 
@@ -452,7 +468,7 @@ RESULTS CARD
 
 .details>h3{
 	color: var(--txtcolor);
-	font-weight: 900;
+	font-weight: bold;
 	font-size: 1.5em;
 }
 
@@ -460,7 +476,7 @@ RESULTS CARD
 	color: var(--txtcolor);
 	font-size: 1em;
 	line-height: 1.5em;
-	font-weight: 400;
+	font-weight: normal;
 }
 
 
