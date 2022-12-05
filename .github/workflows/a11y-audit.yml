@@ -16,7 +16,7 @@ jobs:
   a11yChecker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout v3
+      - name: Checkout branch
         uses: actions/checkout@v3
       - name: A11y Evaluation
         uses: a11ywatch/github-actions@v1.12.0

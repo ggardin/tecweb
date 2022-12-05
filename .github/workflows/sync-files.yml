@@ -14,11 +14,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout branch
+      uses: actions/checkout@v3
     - name: Get branch name
       id: branch-name
       uses: tj-actions/branch-names@v6
-    - name: Deployment
+    - name: Deploy
       uses: burnett01/rsync-deployments@5.2.1
       with:
         switches: -avzr --delete --exclude=".github" --exclude=".git"

@@ -1,5 +1,4 @@
-# This workflow will use v.Nu to validate HTML and CSS.
-# It will run on dispatch, on push (main + dev).
+# This workflow will validate HTML and CSS.
 # See: https://github.com/Cyb3r-Jak3/html5validator-action
 
 name: HTML5 validator
@@ -19,13 +18,13 @@ jobs:
   validator:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout to v3
+      - name: Checkout branch
         uses: actions/checkout@v3
-      - name: Validator
+      - name: Validate
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
           config: .configs/validate-html-config.yml
-      - name: log show
+      - name: Log failures
         if: failure()
         run: cat log.log > "${GITHUB_STEP_SUMMARY}"
 
