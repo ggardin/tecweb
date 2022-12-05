@@ -4,15 +4,11 @@
 name: HTML5 validator
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
-    branches:
-      - main
-      - dev
     paths:
       - .github/workflows/validate-html.yml
-  # schedule:
-  #   - cron: '0 0 * * *'
 
 jobs:
   validator:

@@ -6,16 +6,11 @@
 name: Site performance
 
 on:
+  workflow_call:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #     - dev
   push:
     paths:
       - .github/workflows/check-pagespeed-performance.yml
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   performanceChecker:

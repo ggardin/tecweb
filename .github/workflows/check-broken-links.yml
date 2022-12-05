@@ -5,6 +5,7 @@
 name: Broken links
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches:
