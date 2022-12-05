@@ -12,10 +12,11 @@ if (isset($_GET["id"])) {
 	try {
 		$connessione = new Database();
 		$res = $connessione->getCollezioneById($_GET["id"]);
-		unset($connessione);
 		$db_ok = true;
 	} catch (Exception $e) {
 		$content = "<h2>" . $e->getMessage() . "</h2>";
+	} finally {
+		unset($connessione);
 	}
 	if ($db_ok) {
 		$content = "<pre>" . print_r($res, true) . "</pre>";
