@@ -18,10 +18,11 @@ if (isset($_POST["submit"])) {
 	try {
 		$connessione = new Database();
 		$res = $connessione->login($username, $password);
-		unset($connessione);
 		$db_ok = true;
 	} catch (Exception $e) {
 		$content = "<h2>" . $e->getMessage() . "</h2>";
+	} finally {
+		unset($connessione);
 	}
 	if ($db_ok) {
 		$content = $res ? "OK: boomer" : "ERRORE: Credenziali errate";

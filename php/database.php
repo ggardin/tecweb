@@ -36,7 +36,7 @@ class Database {
 			if (is_string($p)) {
 				$p = trim($p);
 				$p = strip_tags($p);
-				$p = htmlspecialchars($p);
+				$p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
 		}
 	}
@@ -85,16 +85,27 @@ class Database {
 	}
 
 	public function getCollezioneById($id) : array {
-		$query = "select c.nome, f.titolo, f.data_rilascio
-			from collezione as c
-				join film as f on c.id = f.collezione
-			where c.id = ?";
+		$query = "select nome, descrizione, copertina
+			from collezione
+			where id = ?";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
+	}
 
-		// TODO: altri casi
+	public function getFilmInCollezioneById($id) : array {
+		$query = "select f.id, f.titolo, f.copertina, f.data_rilascio
+			from collezione as c
+				join film as f on c.id = f.collezione
+			where c.id = ?
+			order by f.data_rilascio";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->prepared_select($query, $params, $types);
 	}
 
 	public function getPersoneByFilmId($id) : array {
@@ -105,8 +116,9 @@ class Database {
 			where f.titolo = ?";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
 
 		// TODO: altri casi
 	}
@@ -119,8 +131,9 @@ class Database {
 			where p.id = ?";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
 
 		// TODO: altri casi
 	}
