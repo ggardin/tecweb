@@ -42,10 +42,10 @@ jobs:
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/check-broken-links.yml@sync-action
     with:
-      target-branch: ${{ steps.branch-name.outputs.current_branch }}
+      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
   pagespeed-audit:
     name: PageSpeed Insights
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@sync-action
     with:
-      target-branch: ${{ steps.branch-name.outputs.current_branch }}
+      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
