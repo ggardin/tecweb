@@ -23,6 +23,8 @@ jobs:
     - name: Get branch name
       id: branch-name
       uses: tj-actions/branch-names@v6
+    - name: Save branch name
+      run: echo "branch=${{ steps.branch-name.outputs.current_branch }}" >> $GITHUB_OUTPUT
     - name: Deploy
       uses: burnett01/rsync-deployments@5.2.1
       with:
