@@ -10,12 +10,6 @@ on:
         required: true
         type: string
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - dev
-    paths:
-      - .github/workflows/a11y-audit.yml
 
 jobs:
   a11yChecker:
