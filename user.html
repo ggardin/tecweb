@@ -18,7 +18,9 @@
 </head>
 <body>
     <header>
-        <img src="img/logo.svg" alt="" height="32" />
+        <a class="img-home" href=index.html>
+            <img src="img/logo.svg" alt="" height="32" />
+        </a>
         <div class="aiuti">
             <a class="contenuto" href="#contents">
                 salta al contenuto
@@ -29,7 +31,7 @@
         </div>
         <div class="actions">
             <button type="button" class="accountButton">
-                <img src="img/account.svg" alt="Accedi al tuo account" width="35" height="35" />
+                <img src="img/account.svg" alt="Dettagli account" width="35" height="35" />
             </button>
             <button id="dropdown-menu-toggle" onclick="toggleMenu()" data-open="false" aria-label="Menù" type="button">
                 Menù
@@ -42,12 +44,12 @@
     <main>
         <div class="user-info">
             <img src="img/placeholder.svg" alt="immagine profilo utente" height="150" width="150"/>
-            <div class="user name">
+            <div class="user-name">
                 <h1>Nome utente</h1>
             </div>
         </div>
         <nav id="link-container" data-open="false">
-            <ul>
+            <ul class="list-nav">
                 <li class="active">Utente</li>
                 <li><a href="list.html">Lista Film</a></li>
                 <li><a href="#">Statistiche</a></li>
@@ -72,12 +74,12 @@
                     <div class="grafico">
                         <dl class="dlfilmst">
                             <dt class="filmst">Genere Film</dt>
-                            <dd class="percentage percentage-11"><span class="textst">Avventura: 11.33%</span></dd>
-                            <dd class="percentage percentage-49"><span class="textst">Romantico: 49.77%</span></dd>
-                            <dd class="percentage percentage-16"><span class="textst">Thriller: 16.09%</span></dd>
-                            <dd class="percentage percentage-5"><span class="textst">Drammatico: 5.41%</span></dd>
-                            <dd class="percentage percentage-2"><span class="textst">Azione: 1.62%</span></dd>
-                            <dd class="percentage percentage-2"><span class="textst">Horror: 2%</span></dd>
+                            <dd class="percentage-11"><span class="textst">Avventura: 11.33%</span></dd>
+                            <dd class="percentage-49"><span class="textst">Romantico: 49.77%</span></dd>
+                            <dd class="percentage-16"><span class="textst" lang="en">Thriller: 16.09%</span></dd>
+                            <dd class="percentage-5"><span class="textst">Drammatico: 5.41%</span></dd>
+                            <dd class="percentage-2"><span class="textst">Azione: 1.62%</span></dd>
+                            <dd class="percentage-2"><span class="textst" lang="en">Horror: 2%</span></dd>
                           </dl>
                     </div>
                 </div>
