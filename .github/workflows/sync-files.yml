@@ -41,15 +41,21 @@ jobs:
     uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@sync-action
     with:
       target-branch: ${{ needs.deploy.outputs.current_branch }}
+    secrets:
+      inherit
   broken-links-check:
     name: Check broken links
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/check-broken-links.yml@sync-action
     with:
       target-branch: ${{ needs.deploy.outputs.current_branch }}
+    secrets:
+      inherit
   pagespeed-audit:
     name: PageSpeed Insights
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@sync-action
     with:
       target-branch: ${{ needs.deploy.outputs.current_branch }}
+    secrets:
+      inherit
