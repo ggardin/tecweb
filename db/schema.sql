@@ -152,6 +152,7 @@ create table film_partecipazione (
 	ruolo int unsigned,
 	interpreta varchar(150),
 	primary key (id),
+	unique (film, persona, ruolo),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (persona) references persona(id) on delete cascade,
 	foreign key (ruolo) references ruolo(id) on delete cascade
@@ -168,9 +169,8 @@ create table utente (
 	nome varchar(50),
 	gender int unsigned,
 	data_nascita date,
-	salt varchar(16) not null,
-	password varchar(32) not null,
-	is_admin boolean not null,
+	password varchar(255) not null,
+	is_admin boolean not null default 0,
 	primary key (id),
 	foreign key (gender) references gender(id)
 );
@@ -179,6 +179,7 @@ create table valutazione (
 	utente bigint unsigned,
 	film bigint unsigned,
 	valore smallint unsigned not null,
+	testo varchar(10000),
 	primary key (utente, film),
 	foreign key (utente) references utente(id) on delete cascade,
 	foreign key (film) references film(id) on delete cascade

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8" />
+
+	<title>Shared std</title>
+
+	<!-- head_start -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/style.css" media="handheld, screen" />
+	<link rel="stylesheet" href="css/mini.css" media="handheld, screen and (max-width:768px), only screen and (max-device-width:768px)" />
+	<link rel="stylesheet" href="css/print.css" media="print" />
+	<link rel="shortcut icon" type="image/svg" href="img/favicon.svg" />
+	<script src="js/utils.js"></script>
+	<!-- head_end -->
+</head>
+<body>
+	<header>
+	<!-- header_start -->
+		<img src="img/logo.svg" alt="" height="32" />
+		<nav id="dropdown-link-container" data-open="false">
+			<ul>
+				<li><a href="index.php"><span lang="en">Home</span></a></li>
+				<li><a href="about.php"><span lang="en">About</span></a></li>
+				<li><a href="broken.html"><span lang="en">News</span></a></li>
+				<li><a href="broken.html">Contatti</a></li>
+			</ul>
+		</nav>
+		<div class="actions">
+			<button type="button" class="accountButton">
+				<img src="img/account.svg" alt="Accedi al tuo account" width="35" height="35" />
+			</button>
+			<button id="dropdown-menu-toggle" onclick="toggleMenu()" data-open="false" aria-label="Menù" type="button">
+				Menù
+				<span class="hamburger-top" aria-hidden="true"></span>
+				<span class="hamburger-middle" aria-hidden="true"></span>
+				<span class="hamburger-bottom" aria-hidden="true"></span>
+			</button>
+		</div>
+	<!-- header_end -->
+	</header>
+
+	<footer>
+	<!-- footer_start -->
+		<div class="logo-footer">
+			<img src="img/logo.svg" alt="serviceName" height="50" />
+		</div>
+
+		<div>
+			<h1 class="title">Riguardo a noi</h1>
+			<ul>
+				<li><a href="broken.html">Lorem</a></li>
+				<li><a href="broken.html">Ipsum</a></li>
+				<li><a href="broken.html">Ipsum</a></li>
+			</ul>
+		</div>
+
+		<div>
+			<h1 class="title">Sicurezza</h1>
+			<ul>
+				<li><a href="broken.html">I tuoi dati</a></li>
+				<li><a href="broken.html">Privacy Policy</a></li>
+				<li><a href="broken.html">Termini e Condizioni</a></li>
+			</ul>
+		</div>
+
+		<div>
+			<h1 class="title">Contattaci</h1>
+			<ul>
+				<li>
+					<a href="mailto:xyz@abc.com">sales@abc.com</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="tmdb-attribution">
+			<img src="img/tmdb.svg" alt="attribution" />
+			<p lang="en">All film-related metadata present on the site (including actors, directors, studio names, poster arts, etc.) is from The Movie Database (TMDB). We are not endorsed nor certified by them.</p>
+		</div>
+	<!-- footer_end -->
+	</footer>
+</body>
+</html>

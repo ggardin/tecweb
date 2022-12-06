@@ -1,0 +1,37 @@
+# This workflow will deploy the entire branch to our remote system.
+# Uses rsync.
+# It will run on dispatch, on push, on PR.
+# See: https://zellwk.com/blog/github-actions-deploy/
+#      https://github.com/marketplace/actions/rsync-deployments-action
+
+name: Sync to remote
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v3
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v6
+    - name: Deploy
+      uses: burnett01/rsync-deployments@5.2.1
+      with:
+        switches: -avzr --delete --exclude=".github" --exclude=".git"
+        path: /
+        remote_path: /home/azureuser/sito/${{ steps.branch-name.outputs.current_branch }}
+        remote_host: ${{ secrets.SSH_HOSTNAME }}
+        remote_port: ${{ secrets.SSH_PORT }}
+        remote_user: ${{ secrets.SSH_USER }}
+        remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Audit accessibility
+      uses: ./.github/workflows/a11y-audit.yml
+    - name: Check broken links
+      uses: ./.github/workflows/check-broken.yml
+    - name: Run Google PSI
+      uses: ./.github/workflows/check-pagespeed-performance.yml

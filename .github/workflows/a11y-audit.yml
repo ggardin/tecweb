@@ -4,6 +4,7 @@
 name: A11y audit
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches:
@@ -16,12 +17,15 @@ jobs:
   a11yChecker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout v3
+      - name: Checkout branch
         uses: actions/checkout@v3
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
       - name: A11y Evaluation
         uses: a11ywatch/github-actions@v1.12.0
         with:
-          WEBSITE_URL: ${{ secrets.WEBSITE_URL }}
+          WEBSITE_URL: ${{ secrets.WEBSITE_URL }}/${{ steps.branch-name.outputs.current_branch }}
           SITE_WIDE: true
           FIX: false
           SUBDOMAINS: false

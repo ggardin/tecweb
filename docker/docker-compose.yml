@@ -12,14 +12,12 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
       - caddy_data:/data
       - caddy_config:/config
-      - ./..:/srv/sito:ro,z
-      - phpmyadmin:/srv/phpmyadmin
     restart: unless-stopped
-  php-fpm:
-    container_name: php-fpm
-    build: ./php-fpm
+  php-apache:
+    container_name: php-apache
+    build: ./php-apache
     volumes:
-      - ./..:/var/www/html:ro,z
+      - ./..:/var/www/html:ro,Z
     restart: unless-stopped
   mariadb:
     container_name: mariadb
@@ -33,7 +31,7 @@ services:
     restart: unless-stopped
   phpmyadmin:
     container_name: phpmyadmin
-    image: phpmyadmin:fpm-alpine
+    image: phpmyadmin
     env_file:
       - ./phpmyadmin/phpmyadmin.env
     volumes:

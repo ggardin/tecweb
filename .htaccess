@@ -1,1 +1,8 @@
-ErrorDocument 404 /404.html
+RewriteEngine On
+
+RedirectMatch permanent "^(.*)/$" "$1/index.php"
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule "^.*$" "404.php"
+# ErrorDocument 404 /404.php
