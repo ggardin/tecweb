@@ -31,14 +31,26 @@ jobs:
         remote_user: ${{ secrets.SSH_USER }}
         remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
   accessibility-audit:
-    uses: ./.github/workflows/a11y-audit.yml
-    with:
-      target-branch: ${{ steps.branch-name.outputs.current_branch }}
+    runs-on: ubuntu-latest
+    name: Accessibility audit
+    steps:
+      - name: a11y audit
+        uses: ./.github/workflows/a11y-audit.yml
+        with:
+          target-branch: ${{ steps.branch-name.outputs.current_branch }}
   broken-links-check:
-    uses: ./.github/workflows/check-broken-links.yml
-    with:
-      target-branch: ${{ steps.branch-name.outputs.current_branch }}
+    runs-on: ubuntu-latest
+    name: Check broken links
+    steps:
+      - name: Check broken links
+        uses: ./.github/workflows/check-broken-links.yml
+        with:
+          target-branch: ${{ steps.branch-name.outputs.current_branch }}
   pagespeed-audit:
-    uses: ./.github/workflows/check-pagespeed-performance.yml
-    with:
-      target-branch: ${{ steps.branch-name.outputs.current_branch }}
+    runs-on: ubuntu-latest
+    name: PageSpeed Insights
+    steps:
+      - name: PageSpeed Insights
+        uses: ./.github/workflows/check-pagespeed-performance.yml
+        with:
+          target-branch: ${{ steps.branch-name.outputs.current_branch }}
