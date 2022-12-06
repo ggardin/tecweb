@@ -11,12 +11,6 @@ on:
         required: true
         type: string
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - dev
-    paths:
-      - .github/workflows/check-broken-links.yml
 
 jobs:
   linkChecker:
