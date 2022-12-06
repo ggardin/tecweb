@@ -32,44 +32,20 @@ jobs:
         remote_user: ${{ secrets.SSH_USER }}
         remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
   accessibility-audit:
-    runs-on: ubuntu-latest
     name: Accessibility audit
     needs: deploy
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v6
-      - name: a11y audit
-        uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@0
-        with:
-          target-branch: ${{ steps.branch-name.outputs.current_branch }}
+    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@0
+    with:
+      target-branch: ${{ steps.branch-name.outputs.current_branch }}
   broken-links-check:
-    runs-on: ubuntu-latest
     name: Check broken links
     needs: deploy
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v6
-      - name: Check broken links
-        uses: ggardin/tecweb/.github/workflows/check-broken-links.yml@1
-        with:
-          target-branch: ${{ steps.branch-name.outputs.current_branch }}
+    uses: ggardin/tecweb/.github/workflows/check-broken-links.yml@1
+    with:
+      target-branch: ${{ steps.branch-name.outputs.current_branch }}
   pagespeed-audit:
-    runs-on: ubuntu-latest
     name: PageSpeed Insights
     needs: deploy
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v6
-      - name: PageSpeed Insights
-        uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@0
-        with:
-          target-branch: ${{ steps.branch-name.outputs.current_branch }}
+    uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@0
+    with:
+      target-branch: ${{ steps.branch-name.outputs.current_branch }}
