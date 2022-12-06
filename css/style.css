@@ -38,10 +38,16 @@ h2 {
 	text-align: center;
 }
 
+.user-info{
+	display: flex;
+}
+
 main > h1 {
 	font-size: 3em;
 	font-weight: 800;
 }
+
+
 
 header {
 	display: flex;
@@ -163,4 +169,107 @@ p, h1, h2, h3, h4, h5, h6 {
 
 #dropdown-menu-toggle {
 	display: none;
+}
+
+.aiuti{
+	position:absolute;
+	left:-999em;
+}
+
+.user-info{
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-name{
+    font-size: 3em;
+	font-weight: 800;
+}
+
+
+.list-nav{
+	display: flex;
+	list-style: none;
+	padding: 0;
+}
+
+.film-in-list{
+    display:flex;
+	align-items: center;
+	list-style: none;
+}
+
+.dlfilmst {
+	display: flex;
+	background-color: var(--bgcolor);
+	flex-direction: column;
+	width: 100%;
+	position: relative;
+	padding: 1em;
+}
+
+.filmst {
+	align-self: flex-start;
+	width: 100%;
+	font-weight: 700;
+	display: block;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+.textst {
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	height: 2em;
+	width: 100%;
+	background-color: var(--bgcolor);
+	position:initial;
+	left: 0;
+	justify-content: flex-start;
+}
+
+
+.percentage-11 {
+	display: flex;
+	background-color: var(--tertiaryColor);
+	width: 11%;
+ 	height: 3em;
+	line-height: 1em;
+}
+
+.percentage-49 {
+	display: flex;
+	background-color: var(--tertiaryColor);
+	height: 3em;
+	line-height: 1em;
+	width: 49%;
+}
+
+.percentage-16 {
+	display: flex;
+	background-color: var(--tertiaryColor);
+	height: 3em;
+	line-height: 1em;
+	width: 5%;
+}
+
+.percentage-5 {
+	display: flex;
+	background-color: var(--tertiaryColor);
+	height: 3em;
+	line-height: 1em;
+	width: 5%;
+}
+
+.percentage-2{
+	display: flex;
+	background-color: var(--tertiaryColor);
+	height: 3em;
+	line-height: 1em;
+	width: 2%;
+}
+
+.stat{
+	display: inline-block;
 }
