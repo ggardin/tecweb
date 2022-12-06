@@ -12,9 +12,6 @@ on:
         required: true
         type: string
   workflow_dispatch:
-  push:
-    paths:
-      - .github/workflows/check-pagespeed-performance.yml
 
 jobs:
   performanceChecker:
