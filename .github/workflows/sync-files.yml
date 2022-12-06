@@ -34,7 +34,7 @@ jobs:
   accessibility-audit:
     name: Accessibility audit
     needs: deploy
-    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@0
+    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@1
     with:
       target-branch: ${{ steps.branch-name.outputs.current_branch }}
   broken-links-check:
@@ -46,6 +46,6 @@ jobs:
   pagespeed-audit:
     name: PageSpeed Insights
     needs: deploy
-    uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@0
+    uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@1
     with:
       target-branch: ${{ steps.branch-name.outputs.current_branch }}
