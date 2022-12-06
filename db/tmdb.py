@@ -63,7 +63,7 @@ def get_film():
 		info=tmdb.Movies(i_f).info(language="it")
 		info["voto"]=None
 		if info["release_date"]=="": info["release_date"]=None
-		if info["poster_path"]: info["poster_path"]=info["poster_path"][:1]
+		if info["poster_path"]: info["poster_path"]=info["poster_path"][1:]
 		orig=info["original_title"]
 		info["original_title"]="["+info["original_language"]+"]"+info["original_title"]+"[/"+info["original_language"]+"]"
 		if info["title"]==orig: info["title"]=info["original_title"]
@@ -83,7 +83,7 @@ def get_film():
 			if i==l:
 				c=tmdb.Collections(f["collezione"]).info(language="it")
 				c["id"]=i
-				if c["poster_path"]: c["poster_path"]=c["poster_path"][:1]
+				if c["poster_path"]: c["poster_path"]=c["poster_path"][1:]
 				keys=[["id", "id"], ["nome", "name"], ["descrizione", "overview"], ["copertina", "poster_path"]]
 				collezione.append({keys[k][0]: c[keys[k][1]] for k in range(len(keys))})
 				for k in range(len(c["parts"])):
@@ -130,7 +130,7 @@ def get_film():
 				film_compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 				if i==l:
 					x["name"]="[en]"+x["name"]+"[/en]"
-					if x["logo_path"]: x["logo_path"]=x["logo_path"][:1]
+					if x["logo_path"]: x["logo_path"]=x["logo_path"][1:]
 					keys=[["id", "id"], ["nome", "name"], ["logo", "logo_path"], ["paese_fondazione", "origin_country"]]
 					compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 
@@ -174,6 +174,7 @@ def get_film():
 						p["id"]=i
 						p["name"]="[en]"+p["name"]+"[/en]"
 						if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
+						if p["place_of_birth"]: p["place_of_birth"]="[en]"+p["place_of_birth"]+"[/en]"
 						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
 						persona.append({keys[k][0]: p[keys[k][1]] for k in range(len(keys))})
 		if credits ["crew"]!=None:
@@ -198,6 +199,7 @@ def get_film():
 						p["id"]=i
 						p["name"]="[en]"+p["name"]+"[/en]"
 						if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
+						if p["place_of_birth"]: p["place_of_birth"]="[en]"+p["place_of_birth"]+"[/en]"
 						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
 						persona.append({keys[i][0]: p[keys[i][1]] for i in range(len(keys))})
 
