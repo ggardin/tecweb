@@ -34,7 +34,7 @@ jobs:
   accessibility-audit:
     name: Accessibility audit
     needs: deploy
-    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@1
+    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@0
     with:
       target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
   broken-links-check:
