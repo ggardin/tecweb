@@ -5,6 +5,7 @@
 #      https://github.com/marketplace/actions/rsync-deployments-action
 
 name: Sync to remote
+
 on:
   push:
   pull_request:
@@ -34,7 +35,7 @@ jobs:
     with:
       target-branch: ${{ steps.branch-name.outputs.current_branch }}
   broken-links-check:
-    uses: ./.github/workflows/check-broken.yml
+    uses: ./.github/workflows/check-broken-links.yml
     with:
       target-branch: ${{ steps.branch-name.outputs.current_branch }}
   pagespeed-audit:
