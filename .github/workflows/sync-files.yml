@@ -56,7 +56,7 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v6
       - name: Check broken links
-        uses: ./.github/workflows/check-broken-links.yml
+        uses: ./check-broken-links.yml
         with:
           target-branch: ${{ steps.branch-name.outputs.current_branch }}
   pagespeed-audit:
@@ -70,6 +70,6 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v6
       - name: PageSpeed Insights
-        uses: ./.github/workflows/check-pagespeed-performance.yml
+        uses: ./check-pagespeed-performance.yml@0
         with:
           target-branch: ${{ steps.branch-name.outputs.current_branch }}
