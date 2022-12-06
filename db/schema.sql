@@ -1,8 +1,5 @@
 drop table if exists i_film;
 drop table if exists i_collezione;
-drop table if exists i_persona;
-drop table if exists i_keyword;
-drop table if exists i_compagnia;
 drop table if exists i_genere;
 
 drop table if exists lista_film;
@@ -10,18 +7,10 @@ drop table if exists lista_collezione;
 drop table if exists lista;
 drop table if exists valutazione;
 drop table if exists utente;
-drop table if exists film_partecipazione;
-drop table if exists film_keyword;
-drop table if exists film_compagnia;
 drop table if exists film_paese;
 drop table if exists film_genere;
 drop table if exists film;
 drop table if exists collezione;
-drop table if exists ruolo;
-drop table if exists persona;
-drop table if exists gender;
-drop table if exists keyword;
-drop table if exists compagnia;
 drop table if exists paese;
 drop table if exists genere;
 
@@ -41,45 +30,6 @@ create table paese (
 	primary key (iso_3166_1)
 );
 
-create table compagnia (
-	id int unsigned,
-	nome varchar(100) not null,
-	logo varchar(100),
-	paese_fondazione char(2),
-	primary key (id),
-	foreign key (paese_fondazione) references paese(iso_3166_1)
-);
-
-create table keyword (
-	id bigint unsigned,
-	nome varchar(50),
-	primary key (id)
-);
-
-create table gender (
-	id int unsigned,
-	nome varchar(50) not null,
-	primary key (id)
-);
-
-create table persona (
-	id bigint unsigned,
-	nome varchar(50) not null,
-	gender int unsigned,
-	immagine varchar(100),
-	data_nascita date,
-	data_morte date,
-	luogo_nascita varchar(100),
-	primary key (id),
-	foreign key (gender) references gender(id)
-);
-
-create table ruolo (
-	id int unsigned,
-	nome varchar(50) unique not null,
-	primary key (id)
-);
-
 
 
 
@@ -94,8 +44,8 @@ create table collezione (
 
 create table film (
 	id bigint unsigned,
-	titolo varchar(200) not null,
-	titolo_originale varchar(200) not null,
+	nome varchar(200) not null,
+	nome_originale varchar(200) not null,
 	durata smallint unsigned,
 	copertina varchar(100),
 	descrizione varchar(10000),
@@ -129,35 +79,6 @@ create table film_paese (
 	foreign key (paese) references paese(iso_3166_1)
 );
 
-create table film_compagnia (
-	film bigint unsigned,
-	compagnia int unsigned,
-	primary key (film, compagnia),
-	foreign key (film) references film(id) on delete cascade,
-	foreign key (compagnia) references compagnia(id) on delete cascade
-);
-
-create table film_keyword (
-	film bigint unsigned,
-	keyword bigint unsigned,
-	primary key (film, keyword),
-	foreign key (film) references film(id) on delete cascade,
-	foreign key (keyword) references keyword(id) on delete cascade
-);
-
-create table film_partecipazione (
-	id bigint unsigned,
-	film bigint unsigned,
-	persona bigint unsigned,
-	ruolo int unsigned,
-	interpreta varchar(150),
-	primary key (id),
-	unique (film, persona, ruolo),
-	foreign key (film) references film(id) on delete cascade,
-	foreign key (persona) references persona(id) on delete cascade,
-	foreign key (ruolo) references ruolo(id) on delete cascade
-);
-
 
 
 
@@ -167,12 +88,10 @@ create table utente (
 	username varchar(30) unique not null,
 	mail varchar(100) unique,
 	nome varchar(50),
-	gender int unsigned,
 	data_nascita date,
 	password varchar(255) not null,
 	is_admin boolean not null default 0,
-	primary key (id),
-	foreign key (gender) references gender(id)
+	primary key (id)
 );
 
 create table valutazione (
@@ -218,27 +137,6 @@ create table i_genere (
 	tmdb_id int unsigned,
 	primary key (id),
 	foreign key (id) references genere(id) on delete cascade
-);
-
-create table i_compagnia (
-	id int unsigned,
-	tmdb_id int unsigned,
-	primary key (id),
-	foreign key (id) references compagnia(id) on delete cascade
-);
-
-create table i_keyword (
-	id bigint unsigned,
-	tmdb_id bigint unsigned,
-	primary key (id),
-	foreign key (id) references keyword(id) on delete cascade
-);
-
-create table i_persona (
-	id bigint unsigned,
-	tmdb_id bigint unsigned,
-	primary key (id),
-	foreign key (id) references persona(id) on delete cascade
 );
 
 create table i_collezione (
