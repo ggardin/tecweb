@@ -15,6 +15,8 @@ jobs:
   deploy:
     name: Remote deployment
     runs-on: ubuntu-latest
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
     steps:
     - name: Checkout branch
       uses: actions/checkout@v3
@@ -36,16 +38,16 @@ jobs:
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@sync-action
     with:
-      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
+      target-branch: ${{ jobs.deploy.outputs.current_branch }}
   broken-links-check:
     name: Check broken links
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/check-broken-links.yml@sync-action
     with:
-      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
+      target-branch: ${{ jobs.deploy.outputs.current_branch }}
   pagespeed-audit:
     name: PageSpeed Insights
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/check-pagespeed-performance.yml@sync-action
     with:
-      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
+      target-branch: ${{ jobs.deploy.outputs.current_branch }}
