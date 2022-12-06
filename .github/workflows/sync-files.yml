@@ -35,6 +35,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Accessibility audit
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
       - name: a11y audit
         uses: ./.github/workflows/a11y-audit.yml
         with:
@@ -43,6 +48,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Check broken links
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
       - name: Check broken links
         uses: ./.github/workflows/check-broken-links.yml
         with:
@@ -51,6 +61,11 @@ jobs:
     runs-on: ubuntu-latest
     name: PageSpeed Insights
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
       - name: PageSpeed Insights
         uses: ./.github/workflows/check-pagespeed-performance.yml
         with:
