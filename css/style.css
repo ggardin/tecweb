@@ -187,10 +187,39 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 
-.list-nav{
+main ul{
 	display: flex;
+	align-items: center;
 	list-style: none;
 	padding: 0;
+}
+
+.link-nav{
+	float: center;
+	line-height: 3em;
+	border-bottom: 3px solid transparent;
+}
+
+main .active{
+	background-color: var(--secondaryColor);
+	border-color: currentColor;
+}
+
+.link-nav a {
+	display: block;
+	text-align: center;
+	padding: 1em;
+	text-decoration: none;
+	background-color: var(--secondaryColor);
+	border-color: var(--tertiaryColor); /* to be defined */
+}
+  
+.link-nav a:hover {
+	background-color: var(--secondaryColor);
+}
+
+.link-nav > span {
+	padding: 1em;
 }
 
 .film-in-list{
@@ -272,4 +301,15 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .stat{
 	display: inline-block;
+}
+
+.all-films-list tr:nth-child(even){
+	background-color: var(--secondaryColor);
+	/* color: #fff; */
+}
+
+.all-films-list, th, td{
+	border: 1px solid;
+	border-collapse: collapse;
+	border-color: var(--tertiaryColor);
 }
