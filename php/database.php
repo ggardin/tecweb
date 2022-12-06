@@ -90,8 +90,9 @@ class Database {
 			where id = ?";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
 	}
 
 	public function getFilmInCollezioneById($id) : array {
@@ -102,8 +103,9 @@ class Database {
 			order by f.data_rilascio";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
 	}
 
 	public function getPersoneByFilmId($id) : array {
@@ -114,8 +116,9 @@ class Database {
 			where f.titolo = ?";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
 
 		// TODO: altri casi
 	}
@@ -128,8 +131,9 @@ class Database {
 			where p.id = ?";
 
 		$params = [$id];
+		$types = "i";
 
-		return $this->prepared_select($query, $params);
+		return $this->prepared_select($query, $params, $types);
 
 		// TODO: altri casi
 	}
