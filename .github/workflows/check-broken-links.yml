@@ -6,6 +6,10 @@ name: Broken links
 
 on:
   workflow_call:
+    inputs:
+      target-branch:
+        required: true
+        type: string
   workflow_dispatch:
   push:
     branches:
@@ -13,8 +17,6 @@ on:
       - dev
     paths:
       - .github/workflows/check-broken-links.yml
-  # schedule:
-  #   - cron: '0 0 * * *'
 
 jobs:
   linkChecker:

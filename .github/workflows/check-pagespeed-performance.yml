@@ -7,6 +7,10 @@ name: Site performance
 
 on:
   workflow_call:
+    inputs:
+      target-branch:
+        required: true
+        type: string
   workflow_dispatch:
   push:
     paths:
@@ -16,14 +20,11 @@ jobs:
   performanceChecker:
     runs-on: ubuntu-latest
     steps:
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v6
       - name: Run PageSpeed Insights (Mobile)
         uses: jakepartusch/psi-action@v1.2
         id: psi_mobile
         with:
-          url: "https://${{ secrets.WEBSITE_TLD }}/${{ steps.branch-name.outputs.current_branch }}"
+          url: "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}"
           threshold: 90
           strategy: mobile
           key: ${{ secrets.APIKEY }}
@@ -31,7 +32,7 @@ jobs:
         uses: jakepartusch/psi-action@v1.2
         id: psi_desktop
         with:
-          url: "https://${{ secrets.WEBSITE_TLD }}/${{ steps.branch-name.outputs.current_branch }}"
+          url: "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}"
           threshold: 90
           strategy: desktop
           key: ${{ secrets.APIKEY }}
