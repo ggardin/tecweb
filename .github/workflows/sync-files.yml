@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout branch
@@ -29,9 +29,9 @@ jobs:
         remote_port: ${{ secrets.SSH_PORT }}
         remote_user: ${{ secrets.SSH_USER }}
         remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Audit accessibility
-      uses: ./.github/workflows/a11y-audit.yml
-    - name: Check broken links
-      uses: ./.github/workflows/check-broken.yml
-    - name: Run Google PSI
-      uses: ./.github/workflows/check-pagespeed-performance.yml
+  Accessibility:
+    uses: ./.github/workflows/a11y-audit.yml
+  Links:
+    uses: ./.github/workflows/check-broken.yml
+  PageSpeed:
+    uses: ./.github/workflows/check-pagespeed-performance.yml
