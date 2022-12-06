@@ -34,6 +34,7 @@ jobs:
   accessibility-audit:
     runs-on: ubuntu-latest
     name: Accessibility audit
+    needs: deploy
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -47,6 +48,7 @@ jobs:
   broken-links-check:
     runs-on: ubuntu-latest
     name: Check broken links
+    needs: deploy
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -60,6 +62,7 @@ jobs:
   pagespeed-audit:
     runs-on: ubuntu-latest
     name: PageSpeed Insights
+    needs: deploy
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
