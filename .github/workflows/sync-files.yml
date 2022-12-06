@@ -32,11 +32,13 @@ jobs:
         remote_user: ${{ secrets.SSH_USER }}
         remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
   accessibility-audit:
+    runs-on: ubuntu-latest
     name: Accessibility audit
     needs: deploy
-    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@0
-    with:
-      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
+    steps:
+      - uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@0
+        with:
+          target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
   broken-links-check:
     name: Check broken links
     needs: deploy
