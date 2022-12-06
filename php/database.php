@@ -36,7 +36,7 @@ class Database {
 			if (is_string($p)) {
 				$p = trim($p);
 				$p = strip_tags($p);
-				$p = htmlspecialchars($p);
+				$p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
 		}
 	}
@@ -85,16 +85,25 @@ class Database {
 	}
 
 	public function getCollezioneById($id) : array {
-		$query = "select c.nome, f.titolo, f.data_rilascio
-			from collezione as c
-				join film as f on c.id = f.collezione
-			where c.id = ?";
+		$query = "select nome, descrizione, copertina
+			from collezione
+			where id = ?";
 
 		$params = [$id];
 
 		return $this->prepared_select($query, $params);
+	}
 
-		// TODO: altri casi
+	public function getFilmInCollezioneById($id) : array {
+		$query = "select f.id, f.titolo, f.copertina, f.data_rilascio
+			from collezione as c
+				join film as f on c.id = f.collezione
+			where c.id = ?
+			order by f.data_rilascio";
+
+		$params = [$id];
+
+		return $this->prepared_select($query, $params);
 	}
 
 	public function getPersoneByFilmId($id) : array {

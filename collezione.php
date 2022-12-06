@@ -11,7 +11,8 @@ if (isset($_GET["id"])) {
 	$db_ok = false;
 	try {
 		$connessione = new Database();
-		$res = $connessione->getCollezioneById($_GET["id"]);
+		$coll = $connessione->getCollezioneById($_GET["id"]);
+		$film = $connessione->getFilmInCollezioneById($_GET["id"]);
 		$db_ok = true;
 	} catch (Exception $e) {
 		$content = "<h2>" . $e->getMessage() . "</h2>";
@@ -19,7 +20,8 @@ if (isset($_GET["id"])) {
 		unset($connessione);
 	}
 	if ($db_ok) {
-		$content = "<pre>" . print_r($res, true) . "</pre>";
+		$content = "<pre>" . print_r($coll, true) . "</pre>";
+		$content .= "<pre>" . print_r($film, true) . "</pre>";
 	}
 }
 
