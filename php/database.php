@@ -96,7 +96,7 @@ class Database {
 	}
 
 	public function getFilmInCollezioneById($id) : array {
-		$query = "select f.id, f.titolo, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
 			from collezione as c
 				join film as f on c.id = f.collezione
 			where c.id = ?
@@ -106,36 +106,6 @@ class Database {
 		$types = "i";
 
 		return $this->prepared_select($query, $params, $types);
-	}
-
-	public function getPersoneByFilmId($id) : array {
-		$query = "select fp.id, fp.persona, p.id, p.nome
-			from film as f
-				join film_partecipazione as fp on f.id=fp.film
-				join persona as p on p.id = fp.persona
-			where f.titolo = ?";
-
-		$params = [$id];
-		$types = "i";
-
-		return $this->prepared_select($query, $params, $types);
-
-		// TODO: altri casi
-	}
-
-	public function getPersonaById($id) : array {
-		$query = "select p.id, p.nome, f.id, f.titolo
-			from persona as p
-				join film_partecipazione as fp on p.id=fp.persona
-				join film as f on f.id = fp.film
-			where p.id = ?";
-
-		$params = [$id];
-		$types = "i";
-
-		return $this->prepared_select($query, $params, $types);
-
-		// TODO: altri casi
 	}
 
 	public function signup($user, $pass) : bool {
