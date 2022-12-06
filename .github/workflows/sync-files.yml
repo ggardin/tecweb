@@ -36,7 +36,7 @@ jobs:
     needs: deploy
     uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@1
     with:
-      target-branch: ${{ steps.branch-name.outputs.current_branch }}
+      target-branch: ${{ jobs.deploy.steps.branch-name.outputs.current_branch }}
   broken-links-check:
     name: Check broken links
     needs: deploy
