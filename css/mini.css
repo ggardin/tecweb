@@ -109,3 +109,25 @@ nav.dropdown-opened .hamburger-bottom {
 	font-size: 2.5em;
 	line-height: 1.5em;
 }
+
+.movie-details{
+	margin-top: 2em;
+	margin-left: 0;
+}
+
+.movie-media {
+	float: none;
+	min-height: 0;
+}
+
+.movie-viewed{
+	width: 100%;
+	max-width: 20em;
+	margin: 0 auto 1em;
+}
+
+.movie-add-to-list{
+	width: 100%;
+	max-width: 20em;
+	margin: 0 auto;
+}
