@@ -23,7 +23,7 @@ Host tecweb
 
 | Descrizione    | Link                                            |
 |----------------|-------------------------------------------------|
-| Sito web       | https://gagg11y.tecweb.duckdns.org/main/        |
+| Sito web       | https://gagg11y.tecweb.duckdns.org/dev/        |
 | Preview branch | https://gagg11y.tecweb.duckdns.org/branch-name/ |
 | PhpMyAdmin     | https://gagg11y.tecweb.duckdns.org/pma/         |
 
