@@ -30,8 +30,8 @@ jobs:
           LIST: true
           UPGRADE: true
           COMPUTER_VISION_ENDPOINT: false
-      - name: Audit results
-        run: results_json="$(a11ywatch -r)" 
-      - name: Log failures
-        run: cat a11ywatch --find-results > "${GITHUB_STEP_SUMMARY}"
+      - name: Get results path
+        run: results_json="$(a11ywatch -r)"
+      - name: Output JSON
+        run: cat results_json > "${GITHUB_STEP_SUMMARY}"
  
