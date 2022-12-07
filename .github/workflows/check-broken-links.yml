@@ -21,6 +21,6 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.5.4
         with:
-          args: --verbose --no-progress './**/*.html' # can be an URL
+          args: --base "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}" --verbose --no-progress './**/*.html'
           fail: true # Fail action on broken links
 
