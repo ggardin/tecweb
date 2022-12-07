@@ -28,5 +28,7 @@ jobs:
           FAIL_WARNINGS_COUNT: 0
           FAIL_ERRORS_COUNT: 0
           LIST: true
-          UPGRADE: false
+          UPGRADE: true
           COMPUTER_VISION_ENDPOINT: false
+      - name: Audit results
+        run: results_json="$(a11ywatch -r)" 
