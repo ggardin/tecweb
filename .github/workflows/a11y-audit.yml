@@ -20,7 +20,7 @@ jobs:
       - name: A11y Evaluation
         uses: a11ywatch/github-actions@v1.12.0
         with:
-          WEBSITE_URL: ${{ secrets.WEBSITE_URL }}/${{ inputs.target-branch }}
+          WEBSITE_URL: ${{ secrets.WEBSITE_URL }}/${{ inputs.target-branch }}/index.php
           SITE_WIDE: true
           FIX: false
           SUBDOMAINS: false
@@ -33,5 +33,5 @@ jobs:
       - name: Audit results
         run: results_json="$(a11ywatch -r)" 
       - name: Log failures
-        run: cat a11ywatch -find-results > "${GITHUB_STEP_SUMMARY}"
+        run: cat a11ywatch --find-results > "${GITHUB_STEP_SUMMARY}"
  
