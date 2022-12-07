@@ -33,4 +33,5 @@ jobs:
       - name: Audit results
         run: results_json="$(a11ywatch -r)" 
       - name: Log failures
-        run: results_json="$(a11ywatch -r)" > "${GITHUB_STEP_SUMMARY}"
+        run: cat a11ywatch -find-results > "${GITHUB_STEP_SUMMARY}"
+ 
