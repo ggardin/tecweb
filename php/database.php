@@ -108,6 +108,62 @@ class Database {
 		return $this->prepared_select($query, $params, $types);
 	}
 
+	public function getFilmById($id) : array {
+		$query = "select *
+			from film
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->prepared_select($query, $params, $types);
+	}
+
+	public function getPaeseByFilmId($id) : array {
+		$query = "select p.nome
+			from film as f
+				join film_paese as fp
+					on f.id = fp.film
+				join paese as p
+					on fp.paese = p.iso_3166_1
+			where f.id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->prepared_select($query, $params, $types);
+	}
+
+	public function getGenereByFilmId($id) : array {
+		$query = "select g.nome
+			from film as f
+				join film_genere as fg
+					on f.id = fg.film
+				join genere as g
+					on fg.genere = g.id
+			where f.id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->prepared_select($query, $params, $types);
+	}
+
+	public function getValutazioneByFilmId($id) : array {
+		$query = "select u.username, v.valore, v.testo
+			from film as f
+				join valutazione as v
+					on f.id = v.film
+				join utente as u
+					on v.utente = u.id
+			where f.id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->prepared_select($query, $params, $types);
+	}
+
 	public function signup($user, $pass) : bool {
 		$query = "insert into utente(username, password)
 			values (?, ?)";
