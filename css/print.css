@@ -1,6 +1,41 @@
+* {
+	background-image: none !important;
+	break-before: avoid;
+}
+
+img, svg {
+	display: none !important;
+}
+
+img.print, svg.print {
+	display: block;
+	max-width: 100%;
+}
+
 html, body {
 	font-size: 12pt;
-	font-family: "Times New Roman", serif;
+	font-family: "Spectral", "Times New Roman", serif;
 	line-height: 1.5em;
 	margin: auto;
 }
+
+header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {
+	display: none;
+}
+
+img.dark {
+	filter: invert(100%) hue-rotate(180deg) brightness(120%) contrast(150%);
+}
+
+main::after {
+	content: "Copyright site.com";
+	display: block;
+	text-align: center;
+}
+
+@page {
+	margin: 2cm;
+	size: A4;
+}
+
+

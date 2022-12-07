@@ -6,35 +6,31 @@
 name: Site performance
 
 on:
+  workflow_call:
+    inputs:
+      target-branch:
+        required: true
+        type: string
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #     - dev
-  push:
-    paths:
-      - .github/workflows/check-pagespeed-performance.yml
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   performanceChecker:
     runs-on: ubuntu-latest
     steps:
-      - name: Running PageSpeed Insights (Mobile)
+      - name: Run PageSpeed Insights (Mobile)
         uses: jakepartusch/psi-action@v1.2
         id: psi_mobile
         with:
-          url: "https://${{ secrets.WEBSITE_TLD }}"
-          threshold: 70
+          url: "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}"
+          threshold: 90
           strategy: mobile
           key: ${{ secrets.APIKEY }}
-      - name: Running PageSpeed Insights (Desktop)
+      - name: Run PageSpeed Insights (Desktop)
         uses: jakepartusch/psi-action@v1.2
         id: psi_desktop
         with:
-          url: "https://${{ secrets.WEBSITE_TLD }}"
-          threshold: 70
+          url: "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}"
+          threshold: 90
           strategy: desktop
           key: ${{ secrets.APIKEY }}
 
