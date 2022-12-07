@@ -8,6 +8,7 @@ on:
     inputs:
       target-branch:
         required: true
+        default: 'dev'
         type: string
   workflow_dispatch:
 
@@ -30,8 +31,6 @@ jobs:
           LIST: true
           UPGRADE: true
           COMPUTER_VISION_ENDPOINT: false
-      - name: Get results path
-        run: results_json="$(a11ywatch -r)"
       - name: Output JSON
-        run: cat results_json > "${GITHUB_STEP_SUMMARY}"
+        run: a11ywatch -r > "${GITHUB_STEP_SUMMARY}"
  
