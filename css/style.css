@@ -1,23 +1,30 @@
 :root {
-	/*Colors*/
 	--bgcolor: #E4DCD7;
+	--bgcolor-alt: var(--secondaryColor);
 	--txtcolor: #1A1A1A;
+	--txtcolor-alt: var(--txtcolor)
+	--button-inactive: #20584F;
+	--anchorcolor: #0000B5;
+	--anchorcolor-alt: #4C0083;
+	--link-color: var(--anchorcolor);
+	--visited-color: var(--anchorcolor-alt);
+
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
-	--button-inactive: #20584F;
-	--link-color: #150CC8;
-	--visited-color: #4C0883;
 
-	/*Global Variables*/
-	--content-width: 80rem;
+	--content-width: 35em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
 }
 
 :root.dark {
 	--bgcolor: #1A1A1A;
+	--bgcolor-alt: #242424;
 	--txtcolor: #E4DCD7;
-	--secondaryColor: #D4C9C4;
+	--anchorcolor: #8BDAFC;
+	--anchorcolor-alt: #F6B5FF;
+
+	--secondaryColor: #242424;
 	--tertiaryColor: #12322D;
 }
 
@@ -119,6 +126,11 @@ header li > span {
 header li a {
 	padding: 1em;
 	color: inherit;
+}
+
+header .action {
+	display: flex;
+	align-items: center;
 }
 
 .accountButton {

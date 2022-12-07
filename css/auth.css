@@ -1,8 +1,14 @@
 :root {
 	--bgcolor: #E4DCD7;
+	--bgcolor-alt: var(--secondaryColor);
 	--txtcolor: #1A1A1A;
+	--txtcolor-alt: var(--txtcolor)
+	--anchorcolor: #0000B5;
+	--anchorcolor-alt: #4C0083;
+
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
+
 	--content-width: 35em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
@@ -10,8 +16,12 @@
 
 :root.dark {
 	--bgcolor: #1A1A1A;
+	--bgcolor-alt: #242424;
 	--txtcolor: #E4DCD7;
-	--secondaryColor: #8bdafc;
+	--anchorcolor: #8BDAFC;
+	--anchorcolor-alt: #F6B5FF;
+
+	--secondaryColor: #242424;
 	--tertiaryColor: #12322D;
 }
 
