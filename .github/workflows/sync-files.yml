@@ -8,6 +8,13 @@ name: Sync to remote
 
 on:
   push:
+    paths-ignore:
+      - '.github/**'
+      - '.configs/**'
+      - '.editorconfig'
+      - '.gitignore'
+      - 'README.md'
+      - 'LICENSE'
   pull_request:
   workflow_dispatch:
 
