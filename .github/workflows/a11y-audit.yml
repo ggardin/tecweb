@@ -5,13 +5,11 @@ name: A11y audit
 
 on:
   workflow_call:
+    inputs:
+      target-branch:
+        required: true
+        type: string
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - dev
-    paths:
-      - .github/workflows/a11y-audit.yml
 
 jobs:
   a11yChecker:
@@ -19,13 +17,10 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v6
       - name: A11y Evaluation
         uses: a11ywatch/github-actions@v1.12.0
         with:
-          WEBSITE_URL: ${{ secrets.WEBSITE_URL }}/${{ steps.branch-name.outputs.current_branch }}
+          WEBSITE_URL: ${{ secrets.WEBSITE_URL }}/${{ inputs.target-branch }}
           SITE_WIDE: true
           FIX: false
           SUBDOMAINS: false
