@@ -32,3 +32,5 @@ jobs:
           COMPUTER_VISION_ENDPOINT: false
       - name: Audit results
         run: results_json="$(a11ywatch -r)" 
+      - name: Log failures
+        run: results_json="$(a11ywatch -r)" > "${GITHUB_STEP_SUMMARY}"
