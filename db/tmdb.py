@@ -67,7 +67,7 @@ def get_film():
 		orig=info["original_title"]
 		info["original_title"]="["+info["original_language"]+"]"+info["original_title"]+"[/"+info["original_language"]+"]"
 		if info["title"]==orig: info["title"]=info["original_title"]
-		keys=[["titolo", "title"], ["titolo_originale", "original_title"], ["durata", "runtime"], ["copertina", "poster_path"], ["descrizione", "overview"], ["data_rilascio", "release_date"], ["stato", "status"], ["budget", "budget"], ["incassi", "revenue"], ["collezione", "belongs_to_collection"], ["voto", "voto"]]
+		keys=[["nome", "title"], ["nome_originale", "original_title"], ["durata", "runtime"], ["copertina", "poster_path"], ["descrizione", "overview"], ["data_rilascio", "release_date"], ["stato", "status"], ["budget", "budget"], ["incassi", "revenue"], ["collezione", "belongs_to_collection"], ["voto", "voto"]]
 		for i in range(len(keys)):
 			f[keys[i][0]]=info[keys[i][1]]
 
@@ -115,93 +115,93 @@ def get_film():
 				keys=[["film", "id_film"], ["paese", "iso_3166_1"]]
 				film_paese.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 
-		if info["production_companies"]!=None:
-			for x in info["production_companies"]:
-				i=len(i_compagnia)
-				l=i
-				try:
-					i=[k["tmdb_id"] for k in i_compagnia].index(x["id"])
-				except:
-					i_compagnia.append({"id": i, "tmdb_id": x["id"]})
-				x["id"]=i
-				x["id_film"]=f["id"]
-				if x["origin_country"]=="": x["origin_country"]=None
-				keys=[["film", "id_film"], ["compagnia", "id"]]
-				film_compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
-				if i==l:
-					x["name"]="[en]"+x["name"]+"[/en]"
-					if x["logo_path"]: x["logo_path"]=x["logo_path"][1:]
-					keys=[["id", "id"], ["nome", "name"], ["logo", "logo_path"], ["paese_fondazione", "origin_country"]]
-					compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+		# if info["production_companies"]!=None:
+		# 	for x in info["production_companies"]:
+		# 		i=len(i_compagnia)
+		# 		l=i
+		# 		try:
+		# 			i=[k["tmdb_id"] for k in i_compagnia].index(x["id"])
+		# 		except:
+		# 			i_compagnia.append({"id": i, "tmdb_id": x["id"]})
+		# 		x["id"]=i
+		# 		x["id_film"]=f["id"]
+		# 		if x["origin_country"]=="": x["origin_country"]=None
+		# 		keys=[["film", "id_film"], ["compagnia", "id"]]
+		# 		film_compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+		# 		if i==l:
+		# 			x["name"]="[en]"+x["name"]+"[/en]"
+		# 			if x["logo_path"]: x["logo_path"]=x["logo_path"][1:]
+		# 			keys=[["id", "id"], ["nome", "name"], ["logo", "logo_path"], ["paese_fondazione", "origin_country"]]
+		# 			compagnia.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 
-		kws=tmdb.Movies(i_f).keywords()
-		if kws!=None:
-			for x in kws["keywords"]:
-				i=len(i_keyword)
-				l=i
-				try:
-					i=[k["tmdb_id"] for k in i_keyword].index(x["id"])
-				except:
-					i_keyword.append({"id": i, "tmdb_id": x["id"]})
-				x["id"]=i
-				x["id_film"]=f["id"]
-				keys=[["film", "id_film"], ["keyword", "id"]]
-				film_keyword.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
-				if i==l:
-					keys=[["id", "id"], ["nome", "name"]]
-					keyword.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+		# kws=tmdb.Movies(i_f).keywords()
+		# if kws!=None:
+		# 	for x in kws["keywords"]:
+		# 		i=len(i_keyword)
+		# 		l=i
+		# 		try:
+		# 			i=[k["tmdb_id"] for k in i_keyword].index(x["id"])
+		# 		except:
+		# 			i_keyword.append({"id": i, "tmdb_id": x["id"]})
+		# 		x["id"]=i
+		# 		x["id_film"]=f["id"]
+		# 		keys=[["film", "id_film"], ["keyword", "id"]]
+		# 		film_keyword.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+		# 		if i==l:
+		# 			keys=[["id", "id"], ["nome", "name"]]
+		# 			keyword.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 
-		credits=tmdb.Movies(i_f).credits()
-		if credits["cast"]!=None:
-			for i in range(len(credits["cast"])):
-				if i<10:
-					x=credits["cast"][i]
-					i=len(i_persona)
-					l=i
-					try:
-						i=[k["tmdb_id"] for k in i_persona].index(x["id"])
-					except:
-						i_persona.append({"id": i, "tmdb_id": x["id"]})
-					x["id"]=i
-					x["id_film"]=f["id"]
-					x["ruolo"]=0
-					x["index_id"]=len(film_partecipazione)
-					x["character"]="[en]"+x["character"]+"[/en]"
-					keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
-					film_partecipazione.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
-					if i==l:
-						p=tmdb.People(i_persona[i]["tmdb_id"]).info()
-						p["id"]=i
-						p["name"]="[en]"+p["name"]+"[/en]"
-						if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
-						if p["place_of_birth"]: p["place_of_birth"]="[en]"+p["place_of_birth"]+"[/en]"
-						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
-						persona.append({keys[k][0]: p[keys[k][1]] for k in range(len(keys))})
-		if credits ["crew"]!=None:
-			for x in credits["crew"]:
-				jobs=[[1, "Director"], [2, "Writer"], [3, "Producer"], [4, "Original Music Composer"]]
-				if (x["job"] in [jobs[i][1] for i in range(len(jobs))]):
-					i=len(i_persona)
-					l=i
-					try:
-						i=[k["tmdb_id"] for k in i_persona].index(x["id"])
-					except:
-						i_persona.append({"id": i, "tmdb_id": x["id"]})
-					x["id"]=i
-					x["id_film"]=f["id"]
-					x["ruolo"]=jobs[[jobs[i][1] for i in range(len(jobs))].index(x["job"])][0]
-					x["interpreta"]=""
-					x["index_id"]=len(film_partecipazione)
-					keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "interpreta"]]
-					film_partecipazione.append({keys[i][0]: x[keys[i][1]] for i in range(len(keys))})
-					if i==l:
-						p=tmdb.People(i_persona[i]["tmdb_id"]).info()
-						p["id"]=i
-						p["name"]="[en]"+p["name"]+"[/en]"
-						if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
-						if p["place_of_birth"]: p["place_of_birth"]="[en]"+p["place_of_birth"]+"[/en]"
-						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
-						persona.append({keys[i][0]: p[keys[i][1]] for i in range(len(keys))})
+		# credits=tmdb.Movies(i_f).credits()
+		# if credits["cast"]!=None:
+		# 	for i in range(len(credits["cast"])):
+		# 		if i<10:
+		# 			x=credits["cast"][i]
+		# 			i=len(i_persona)
+		# 			l=i
+		# 			try:
+		# 				i=[k["tmdb_id"] for k in i_persona].index(x["id"])
+		# 			except:
+		# 				i_persona.append({"id": i, "tmdb_id": x["id"]})
+		# 			x["id"]=i
+		# 			x["id_film"]=f["id"]
+		# 			x["ruolo"]=0
+		# 			x["index_id"]=len(film_partecipazione)
+		# 			x["character"]="[en]"+x["character"]+"[/en]"
+		# 			keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
+		# 			film_partecipazione.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+		# 			if i==l:
+		# 				p=tmdb.People(i_persona[i]["tmdb_id"]).info()
+		# 				p["id"]=i
+		# 				p["name"]="[en]"+p["name"]+"[/en]"
+		# 				if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
+		# 				if p["place_of_birth"]: p["place_of_birth"]="[en]"+p["place_of_birth"]+"[/en]"
+		# 				keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
+		# 				persona.append({keys[k][0]: p[keys[k][1]] for k in range(len(keys))})
+		# if credits ["crew"]!=None:
+		# 	for x in credits["crew"]:
+		# 		jobs=[[1, "Director"], [2, "Writer"], [3, "Producer"], [4, "Original Music Composer"]]
+		# 		if (x["job"] in [jobs[i][1] for i in range(len(jobs))]):
+		# 			i=len(i_persona)
+		# 			l=i
+		# 			try:
+		# 				i=[k["tmdb_id"] for k in i_persona].index(x["id"])
+		# 			except:
+		# 				i_persona.append({"id": i, "tmdb_id": x["id"]})
+		# 			x["id"]=i
+		# 			x["id_film"]=f["id"]
+		# 			x["ruolo"]=jobs[[jobs[i][1] for i in range(len(jobs))].index(x["job"])][0]
+		# 			x["interpreta"]=""
+		# 			x["index_id"]=len(film_partecipazione)
+		# 			keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "interpreta"]]
+		# 			film_partecipazione.append({keys[i][0]: x[keys[i][1]] for i in range(len(keys))})
+		# 			if i==l:
+		# 				p=tmdb.People(i_persona[i]["tmdb_id"]).info()
+		# 				p["id"]=i
+		# 				p["name"]="[en]"+p["name"]+"[/en]"
+		# 				if p["profile_path"]: p["profile_path"]=p["profile_path"][1:]
+		# 				if p["place_of_birth"]: p["place_of_birth"]="[en]"+p["place_of_birth"]+"[/en]"
+		# 				keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"], ["luogo_nascita", "place_of_birth"]]
+		# 				persona.append({keys[i][0]: p[keys[i][1]] for i in range(len(keys))})
 
 def set_ruolo():
 	global ruolo
@@ -497,9 +497,9 @@ def db_insert(var, nome, engine):
 def db_insert_all():
 	engine=create_engine("mariadb+pymysql://"+db_user+":"+db_pass+"@"+db_host+"/"+db_name)
 
-	db_del(film_partecipazione, "film_partecipazione", engine)
-	db_del(film_keyword, "film_keyword", engine)
-	db_del(film_compagnia, "film_compagnia", engine)
+	# db_del(film_partecipazione, "film_partecipazione", engine)
+	# db_del(film_keyword, "film_keyword", engine)
+	# db_del(film_compagnia, "film_compagnia", engine)
 	db_del(film_paese, "film_paese", engine)
 	db_del(film_genere, "film_genere", engine)
 
@@ -508,14 +508,14 @@ def db_insert_all():
 	db_del(i_collezione, "i_collezione", engine)
 	db_del(collezione, "collezione", engine)
 
-	db_del(ruolo, "ruolo", engine)
-	db_del(i_persona, "i_persona", engine)
-	db_del(persona, "persona", engine)
-	db_del(gender, "gender", engine)
-	db_del(i_keyword, "i_keyword", engine)
-	db_del(keyword, "keyword", engine)
-	db_del(i_compagnia, "i_compagnia", engine)
-	db_del(compagnia, "compagnia", engine)
+	# db_del(ruolo, "ruolo", engine)
+	# db_del(i_persona, "i_persona", engine)
+	# db_del(persona, "persona", engine)
+	# db_del(gender, "gender", engine)
+	# db_del(i_keyword, "i_keyword", engine)
+	# db_del(keyword, "keyword", engine)
+	# db_del(i_compagnia, "i_compagnia", engine)
+	# db_del(compagnia, "compagnia", engine)
 	db_del(paese, "paese", engine)
 	db_del(i_genere, "i_genere", engine)
 	db_del(genere, "genere", engine)
@@ -523,14 +523,14 @@ def db_insert_all():
 	db_insert(genere, "genere", engine)
 	db_insert(i_genere, "i_genere", engine)
 	db_insert(paese, "paese", engine)
-	db_insert(compagnia, "compagnia", engine)
-	db_insert(i_compagnia, "i_compagnia", engine)
-	db_insert(keyword, "keyword", engine)
-	db_insert(i_keyword, "i_keyword", engine)
-	db_insert(gender, "gender", engine)
-	db_insert(persona, "persona", engine)
-	db_insert(i_persona, "i_persona", engine)
-	db_insert(ruolo, "ruolo", engine)
+	# db_insert(compagnia, "compagnia", engine)
+	# db_insert(i_compagnia, "i_compagnia", engine)
+	# db_insert(keyword, "keyword", engine)
+	# db_insert(i_keyword, "i_keyword", engine)
+	# db_insert(gender, "gender", engine)
+	# db_insert(persona, "persona", engine)
+	# db_insert(i_persona, "i_persona", engine)
+	# db_insert(ruolo, "ruolo", engine)
 
 	db_insert(collezione, "collezione", engine)
 	db_insert(i_collezione, "i_collezione", engine)
@@ -539,9 +539,9 @@ def db_insert_all():
 
 	db_insert(film_genere, "film_genere", engine)
 	db_insert(film_paese, "film_paese", engine)
-	db_insert(film_compagnia, "film_compagnia", engine)
-	db_insert(film_keyword, "film_keyword", engine)
-	db_insert(film_partecipazione, "film_partecipazione", engine)
+	# db_insert(film_compagnia, "film_compagnia", engine)
+	# db_insert(film_keyword, "film_keyword", engine)
+	# db_insert(film_partecipazione, "film_partecipazione", engine)
 
 def translate_keywords():
 	global keyword
@@ -554,13 +554,13 @@ def main():
 
 	get_film()
 
-	set_ruolo()
+	# set_ruolo()
 
-	set_gender()
+	# set_gender()
 
 	set_paese()
 
-	translate_keywords()
+	# translate_keywords()
 
 	db_insert_all()
 

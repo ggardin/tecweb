@@ -23,15 +23,15 @@ if (isset($_POST["submit"])) {
 			$res = $connessione->signup($username, $password);
 			$db_ok = true;
 		} catch (Exception $e) {
-			$content = "<h2>" . $e->getMessage() . "</h2>";
+			$content .= "<p>" . $e->getMessage() . "</p>";
 		} finally {
 			unset($connessione);
 		}
 		if ($db_ok) {
-			$content = $res ? "OK: boomer" : "ERRORE: Utente già registrato";
+			$content .= "<p>" . ($res ? "OK: boomer" : "ERRORE: Utente già registrato") . "</p>";
 		}
 	} else {
-		$content = "ERRORE: Le password non coincidono";
+		$content .= "ERRORE: Le password non coincidono";
 	}
 }
 
