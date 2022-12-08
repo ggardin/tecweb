@@ -20,12 +20,12 @@ if (isset($_POST["submit"])) {
 		$res = $connessione->login($username, $password);
 		$db_ok = true;
 	} catch (Exception $e) {
-		$content = "<h2>" . $e->getMessage() . "</h2>";
+		$content .= "<p>" . $e->getMessage() . "</p>";
 	} finally {
 		unset($connessione);
 	}
 	if ($db_ok) {
-		$content = $res ? "OK: boomer" : "ERRORE: Credenziali errate";
+		$content .= "<p>" . ($res ? "OK: boomer" : "ERRORE: Credenziali errate") . "</p>";
 	}
 }
 
