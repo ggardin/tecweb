@@ -20,16 +20,13 @@ class Page {
 		}
 	}
 
-	public static function langToNone($str) : string {
-		$str = preg_replace("#\[([a-z]{2})\]#", '', $str);
-		$str = preg_replace("#\[\/([a-z]{2})\]#", '', $str);
-		return $str;
-	}
-
-	public static function langToSpan($str) : string {
-		$str = preg_replace("#\[([a-z]{2})\]#", '<span lang="${1}">', $str);
-		$str = preg_replace("#\[\/([a-z]{2})\]#", '</span>', $str);
-		return $str;
+	public static function langToTag($str, $tag = "span") : string {
+		$from = ["#\[([a-z]{2})\]#", "#\[\/([a-z]{2})\]#"];
+		if ($tag != '')
+			$to = ['<' . $tag . ' lang="${1}">', '</' . $tag . '>'];
+		else
+			$to = ['', ''];
+		return preg_replace($from, $to, $str);
 	}
 
 	private static function getSection(&$page, $name) : string {
@@ -57,7 +54,7 @@ class Page {
 		}
 	}
 
-	public static function build($name, $type="std", $active=false) : string {
+	public static function build($name, $type = "std", $setActive = false) : string {
 		$page = file_get_contents(__DIR__ . "/../html/${name}.html");
 		$shared = file_get_contents(__DIR__ . "/../html/shared_${type}.html");
 
@@ -65,7 +62,7 @@ class Page {
 		self::replaceSection($page, $shared, "header");
 		self::replaceSection($page, $shared, "footer");
 
-		if ($active) self::setActiveHeader($page, $shared, $name);
+		if ($setActive) self::setActiveHeader($page, $shared, $name);
 
 		return $page;
 	}
