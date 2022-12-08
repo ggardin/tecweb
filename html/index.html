@@ -6,13 +6,12 @@
 	<title>Index</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
-	<meta name="author" content="" />
 
 	<!-- head -->
 </head>
 <body>
 	<header>
-	<!-- header -->
+		<!-- header -->
 	</header>
 
 	<nav id="breadcrumb">
@@ -90,11 +89,11 @@
 		</div>
 
 		<!--	<section class="searchShapeContainer">-->
-		<form class="search">
+		<form method="get" action="cerca.php" class="search">
 			<label for="my-field" aria-label="My field"></label>
-			<input type="text" id="my-field" class="searchTerm" placeholder="Che film vuoi cercare?">
+			<input type="text" id="my-field" class="searchTerm" name="query" placeholder="Che film vuoi cercare?" />
 			<button type="submit" class="searchButton" aria-label="Cerca">
-				<img src="./img/search.svg" width="28" height="28" alt="" />
+				<img src="img/search.svg" width="28" height="28" alt="" />
 				<i class="fa fa-search"></i>
 			</button>
 		</form>
@@ -142,7 +141,7 @@
 	</main>
 
 	<footer>
-	<!-- footer -->
+		<!-- footer -->
 	</footer>
 </body>
 </html>
