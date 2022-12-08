@@ -10,20 +10,25 @@ $content = "";
 
 $err = "Questa ricerca non ha prodotto risultati";
 
-$q = (isset($_GET["q"])) ? $_GET["q"] : "";
-$t = (isset($_GET["t"])) ? $_GET["t"] : "film";
+$query = (isset($_GET["query"])) ? $_GET["query"] : "";
+$per = (isset($_GET["per"])) ? $_GET["per"] : "film";
 $db_ok = false;
 
 try {
 	$connessione = new Database();
-	if ($t == "film")
-		$cerca = $connessione->searchFilm($q);
-	else if ($t == "collezione")
-		$cerca = $connessione->searchCollezione($q);
-	else if ($t == "genere")
-		$cerca = $connessione->searchFilmByGenere($q);
-	else if ($t == "paese")
-		$cerca = $connessione->searchFilmByPaese($q);
+	$tipo = $per;
+	if ($per == "film")
+		$cerca = $connessione->searchFilm($query);
+	else if ($per == "collezione")
+		$cerca = $connessione->searchCollezione($query);
+	else if ($per == "genere") {
+		$cerca = $connessione->searchFilmByGenere($query);
+		$tipo = "film";
+	}
+	else if ($per == "paese") {
+		$cerca = $connessione->searchFilmByPaese($query);
+		$tipo = "film";
+	}
 	else
 		$cerca = array();
 	$db_ok = true;
@@ -33,29 +38,31 @@ try {
 	unset($connessione);
 }
 if ($db_ok) {
-	if ($q) $title = $q . " -- " . $title;
-	$title .= " " . $t;
+	if ($query) $title = $query . " — " . $title;
+	$title .= " " . $tipo . ($tipo != $per ? " per " . $per : "");
 	if (!empty($cerca)) {
-		$content .= "<ol>";
+		$t = "";
 		foreach ($cerca as $c) {
-			$content .= "<li><ul>";
-				$content .= '<li>Copertina: ' . '<img height="150" size="100" src="https://www.themoviedb.org/t/p/w500/' . $c["copertina"] . '" alt="copertina" />' . '</li>';
-				if ($t == "film" || $t == "genere" || $t == "paese") {
-					$content .= '<li>Link: <a href="film.php?id=' . $c["id"] . '">' . Page::langToTag($c["nome"]) . '</a></li>';
-					$content .= '<li>Data rilascio: ' . $c["data_rilascio"] . '</li>';
-				} else if ($t == "collezione") {
-					$content .= '<li>Link: <a href="collezione.php?id=' . $c["id"] . '">' . Page::langToTag($c["nome"]) . '</a></li>';
-				}
-			$content .= "</ul></li>";
+			$t .= '<div class="card">' . "\n";
+			$copertina = ($c["copertina"] ? ("https://www.themoviedb.org/t/p/w500/" . $c["copertina"]) : "img/placeholder.svg");
+			$t .= '<img width="200" height="300" width src="' . $copertina . '" alt="Locandina del film" />' . "\n";
+			$t .= '<div class="details">' . "\n";
+			$t .= '<h2>' . '<a href="' . $tipo . '.php?id=' . $c["id"] . '">' . Page::langToTag($c["nome"]) . '</a>' . '</h2>' . "\n";
+			if ($tipo == "film")
+				$t .= '<p>' . $c["data_rilascio"] . '</p>' . "\n";
+			$t .= '</div>' . "\n";
+			$t .= '</div>' . "\n";
 		}
-		$content .= "</ol>";
+		Page::replaceAnchor($page, "card", $t);
 	} else {
 		$content .= "<h1>" . $err . "</h1>";
 	}
 }
 
+Page::replaceAnchor($page, "ricerca", ($tipo . ($tipo != $per ? " per " . $per : "") . ': "' . $query . '"'));
+Page::replaceAnchor($page, "tipo", $tipo);
 Page::replaceAnchor($page, "title", $title);
-Page::replaceAnchor($page, "cerca", $content);
+// Page::replaceAnchor($page, "cerca", $content);
 
 echo($page);
 
