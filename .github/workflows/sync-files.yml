@@ -11,6 +11,7 @@ on:
     paths-ignore:
       - '.github/**'
       - '.configs/**'
+      - 'docker/**'
       - '.editorconfig'
       - '.gitignore'
       - 'README.md'
