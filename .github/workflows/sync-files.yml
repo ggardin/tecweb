@@ -12,6 +12,7 @@ on:
       - '.github/**'
       - '.configs/**'
       - 'docker/**'
+      - 'db/**'
       - '.editorconfig'
       - '.gitignore'
       - 'README.md'
@@ -36,7 +37,7 @@ jobs:
     - name: Deploy
       uses: burnett01/rsync-deployments@5.2.1
       with:
-        switches: -avzr --delete --exclude=".github" --exclude=".configs" --exclude=".git" --exclude ".gitignore" --exclude="docker"
+        switches: -avzr --delete --exclude=".github" --exclude=".configs" --exclude=".git" --exclude ".gitignore" --exclude="docker" --exclude="db"
         path: /
         remote_path: /home/azureuser/sito/${{ steps.branch-name.outputs.current_branch }}
         remote_host: ${{ secrets.SSH_HOSTNAME }}
