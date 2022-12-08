@@ -25,10 +25,18 @@
 			<h2>Intestazione interessante</h2>
 			<p>Testo interessante</p>
 		</section>
-		<section>
+		<section id="tmdb-about" >
 			<h2>Dati dei film</h2>
-			<p lang="en">All film-related metadata present on the site (including actors, directors, studio names, poster arts, etc.) is from The Movie Database (TMDB). We are not endorsed nor certified by them.</p>
-			<p>I dati testuali sono stati scaricati nel DB locale tramite API (con uno script). Le immagini sono caricate tramite indirizzo univoco di TMDB.</p>
+			<div>
+				<h3>Italiano</h3>
+				<p>Tutti i dati presenti sul sito relativi ai film sono di <a href="https://www.themoviedb.org/" lang="en">The Movie Database</a> (TMDB).</p>
+				<p>Sono stati aggiunti al database locale i primi N-film più votati — con relative collezioni e metadati — tramite uno <span lang="en">script Python</span>.</p>
+				<p>Non siamo approvati ne certificati da loro.</p>
+				<h3 lang="en">English</h3>
+				<p lang="en">All film-related metadata present on this site is <a href="https://www.themoviedb.org/">The Movie Database</a> (TMDB).</p>
+				<p>The first N-th film — with associated collections and metadata — have been added to the local database with a Python script.</p>
+				<p>We are not endorsed nor certified by them.</p>
+			</div>
 			<img src="img/tmdb.svg" alt="attribution" width="150" />
 		</section>
 	</main>
