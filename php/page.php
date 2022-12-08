@@ -4,7 +4,8 @@ require_once("ini.php");
 
 class Page {
 	public static function getStringBetween(&$in, $start, $end) : string {
-		if ($p = strpos($in, $start)) {
+		$p = strpos($in, $start);
+		if ($p !== false) {
 			$p += strlen($start);
 			$len = strpos($in, $end, $p) - $p;
 			return trim(substr($in, $p, $len));
@@ -14,7 +15,8 @@ class Page {
 
 	public static function replaceAnchor(&$page, $anchor, $content) : void {
 		$from = "<!-- $anchor -->";
-		if ($pos = strpos($page, $from)) {
+		$pos = strpos($page, $from);
+		if ($pos !== false) {
 			$len = strlen($from);
 			$page = substr_replace($page, $content, $pos, $len);
 		}
@@ -40,7 +42,8 @@ class Page {
 	private static function setActiveHeader(&$page, &$shared, $name) : void {
 		$open = '<li><a href="' . $name . '.php">';
 
-		if (strpos(self::getSection($shared, "header"), $open)) {
+		$p = strpos(self::getSection($shared, "header"), $open);
+		if ($p !== false) {
 			$close = "</a></li>";
 
 			$bw = self::getStringBetween($page, $open, $close);
