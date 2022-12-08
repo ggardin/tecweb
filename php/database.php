@@ -42,7 +42,7 @@ class Database {
 	}
 
 	// see: https://phpdelusions.net/mysqli
-	private function prepared_query(&$query, &$params, $types = "") : mysqli_stmt {
+	private function preparedQuery(&$query, &$params, $types = "") : mysqli_stmt {
 		$this->pulisciInput($params);
 		$types = $types ?: str_repeat("s", count($params));
 		$stmt = $this->connection->prepare($query);
@@ -51,9 +51,9 @@ class Database {
 		return $stmt;
 	}
 
-	private function prepared_select(&$query, &$params, $types = "") : array {
+	private function preparedSelect(&$query, &$params, $types = "") : array {
 		try {
-			$stmt = $this->prepared_query($query, $params, $types);
+			$stmt = $this->preparedQuery($query, $params, $types);
 			$result = $stmt->get_result();
 			$ret = $result->fetch_all(MYSQLI_ASSOC);
 			$result->close();
@@ -64,9 +64,9 @@ class Database {
 		}
 	}
 
-	private function prepared_insert(&$query, &$params, $types = "") : bool {
+	private function preparedInsert(&$query, &$params, $types = "") : bool {
 		try {
-			$stmt = $this->prepared_query($query, $params, $types);
+			$stmt = $this->preparedQuery($query, $params, $types);
 			$stmt->close();
 		} catch (mysqli_sql_exception $e) {
 			if ($e->getCode() == 1062)
@@ -92,20 +92,21 @@ class Database {
 		$params = [$id];
 		$types = "i";
 
-		return $this->prepared_select($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 
 	public function getFilmInCollezioneById($id) : array {
 		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
 			from collezione as c
-				join film as f on c.id = f.collezione
+				join film as f
+					on c.id = f.collezione
 			where c.id = ?
 			order by f.data_rilascio";
 
 		$params = [$id];
 		$types = "i";
 
-		return $this->prepared_select($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 
 	public function getFilmById($id) : array {
@@ -116,7 +117,7 @@ class Database {
 		$params = [$id];
 		$types = "i";
 
-		return $this->prepared_select($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 
 	public function getPaeseByFilmId($id) : array {
@@ -131,7 +132,7 @@ class Database {
 		$params = [$id];
 		$types = "i";
 
-		return $this->prepared_select($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 
 	public function getGenereByFilmId($id) : array {
@@ -146,7 +147,7 @@ class Database {
 		$params = [$id];
 		$types = "i";
 
-		return $this->prepared_select($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 
 	public function getValutazioneByFilmId($id) : array {
@@ -161,26 +162,88 @@ class Database {
 		$params = [$id];
 		$types = "i";
 
-		return $this->prepared_select($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function signup($user, $pass) : bool {
+	public function searchFilm($str) : array {
+		$query = "select id, nome, copertina, data_rilascio
+			from film
+			where nome like ?";
+
+		$str = trim($str);
+		$str = "%${str}%";
+		$params = [$str];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function searchCollezione($str) : array {
+		$query = "select id, nome, copertina
+			from collezione
+			where nome like ?";
+
+		$str = trim($str);
+		$str = "%${str}%";
+		$params = [$str];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function searchFilmByGenere($str) : array {
+		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+			from film as f
+				join film_genere as fg
+					on f.id = fg.film
+				join genere as g
+					on fg.genere = g.id
+			where g.nome like ?";
+
+		$str = trim($str);
+		$str = "${str}";
+		$params = [$str];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function searchFilmByPaese($str) : array {
+		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+			from film as f
+				join film_paese as fp
+					on f.id = fp.film
+				join paese as p
+					on fp.paese = p.iso_3166_1
+			where p.nome like ?";
+
+		$str = trim($str);
+		$str = "${str}";
+		$params = [$str];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function insertUtente($user, $pass) : bool {
 		$query = "insert into utente(username, password)
 			values (?, ?)";
 
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
 		$params = [$user, $pass];
 
-		return $this->prepared_insert($query, $params);
+		return $this->preparedInsert($query, $params);
+	}
+
+	public function signup($user, $pass) : bool {
+		// TODO: inserimento automatico liste di default
+		return $this->insertUtente($user, $pass);
 	}
 
 	public function login($user, $pass) : bool {
 		$query = "select password
 			from utente
-			where username=?";
+			where username = ?";
 
 		$params = [$user];
-		$res = $this->prepared_select($query, $params);
+
+		$res = $this->preparedSelect($query, $params);
 
 		$pw = !empty($res) ? $res[0]["password"] : null;
 		if ($pw && password_verify($pass, $pw))
