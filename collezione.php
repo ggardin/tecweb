@@ -31,14 +31,14 @@ if ($id != "") {
 		if (!empty($collezione)) {
 			$title = Tools::langToTag($collezione["nome"], "") . " — " . $title;
 			$content .= "<h1>" . Tools::langToTag($collezione["nome"]) . "</h1>";
-			$content .= '<img width="250" height="375" src="https://www.themoviedb.org/t/p/w500/' . $collezione["copertina"] . '" alt="copertina" />';
+			$content .= '<img width="250" height="375" src="https://www.themoviedb.org/t/p/w500/' . $collezione["locandina"] . '" alt="" />';
 			$content .= "<p>Descrizione: " . Tools::langToTag($collezione["descrizione"]) . "</p>";
 			$content .= "<p>film: </p>";
 
 			$content .= "<ol>";
 			foreach ($film as $f) {
 				$content .= "<li><ul>";
-					$content .= '<li>Copertina: ' . '<img width="200" height="300" src="https://www.themoviedb.org/t/p/w500/' . $f["copertina"] . '" alt="copertina" />' . '</li>';
+					$content .= '<li>Locandina: ' . '<img width="200" height="300" src="https://www.themoviedb.org/t/p/w500/' . $f["locandina"] . '" alt="" />' . '</li>';
 					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . Tools::langToTag($f["nome"]) . '</a></li>';
 					$content .= '<li>Data rilascio: ' . $f["data_rilascio"] . '</li>';
 				$content .= "</ul></li>";

@@ -33,8 +33,8 @@ if ($id != "") {
 		if (!empty($film)) {
 			$title = Tools::langToTag($film["nome"], "") . " — " . $title;
 			Tools::replaceAnchor($page, "nome_film", Tools::langToTag($film["nome"]));
-			$copertina = ($film["copertina"] ? ("https://www.themoviedb.org/t/p/w500/" . $film["copertina"]) : "img/placeholder.svg");
-			Tools::replaceAnchor($page, "copertina", $copertina);
+			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w500/" . $film["locandina"]) : "img/placeholder.svg");
+			Tools::replaceAnchor($page, "locandina", $locandina);
 			$r = "";
 			if (isset($film["data_rilascio"]))
 				$r .= $film["data_rilascio"];

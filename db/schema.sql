@@ -38,7 +38,7 @@ create table collezione (
 	id int unsigned,
 	nome varchar(200) not null,
 	descrizione varchar(10000),
-	copertina varchar(100),
+	locandina varchar(100),
 	primary key (id)
 );
 
@@ -47,7 +47,7 @@ create table film (
 	nome varchar(200) not null,
 	nome_originale varchar(200) not null,
 	durata smallint unsigned,
-	copertina varchar(100),
+	locandina varchar(100),
 	descrizione varchar(10000),
 	data_rilascio date,
 	stato varchar(30) not null,

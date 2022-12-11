@@ -78,7 +78,7 @@ class Database {
 	}
 
 	public function getCollezioneById($id) : array {
-		$query = "select nome, descrizione, copertina
+		$query = "select nome, descrizione, locandina
 			from collezione
 			where id = ?";
 
@@ -89,7 +89,7 @@ class Database {
 	}
 
 	public function getFilmInCollezioneById($id) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from collezione as c
 				join film as f
 					on c.id = f.collezione
@@ -159,7 +159,7 @@ class Database {
 	}
 
 	public function searchFilm($str) : array {
-		$query = "select id, nome, copertina, data_rilascio
+		$query = "select id, nome, locandina, data_rilascio
 			from film
 			where nome like ?";
 
@@ -169,7 +169,7 @@ class Database {
 	}
 
 	public function searchCollezione($str) : array {
-		$query = "select id, nome, copertina
+		$query = "select id, nome, locandina
 			from collezione
 			where nome like ?";
 
@@ -179,7 +179,7 @@ class Database {
 	}
 
 	public function searchFilmByGenere($str) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from film as f
 				join film_genere as fg
 					on f.id = fg.film
@@ -193,7 +193,7 @@ class Database {
 	}
 
 	public function searchFilmByPaese($str) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from film as f
 				join film_paese as fp
 					on f.id = fp.film

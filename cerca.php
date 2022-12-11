@@ -46,8 +46,8 @@ if ($db_ok) {
 		$r = "";
 		foreach ($cerca as $c) {
 			$t = $card;
-			$copertina = ($c["copertina"] ? ("https://www.themoviedb.org/t/p/w500/" . $c["copertina"]) : "img/placeholder.svg");
-			Tools::replaceAnchor($t, "copertina", $copertina);
+			$locandina = ($c["locandina"] ? ("https://www.themoviedb.org/t/p/w500/" . $c["locandina"]) : "img/placeholder.svg");
+			Tools::replaceAnchor($t, "locandina", $locandina);
 			Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 			Tools::replaceAnchor($t, "nome", Tools::langToTag($c["nome"]));
 			if (isset($c["data_rilascio"])) {
