@@ -9,7 +9,7 @@ $query = (isset($_GET["q"])) ? $_GET["q"] : "";
 $per = (isset($_GET["t"])) ? $_GET["t"] : "film";
 
 $tipo = $per;
-if ($per == "collezione" || $per == "genere") $tipo = "film";
+if ($per == "genere" || $per == "paese") $tipo = "film";
 
 $title = "Cerca " . $tipo . ($tipo != $per ? " per " . $per : "");
 if ($query) $title = $query . " — " . $title;
@@ -21,7 +21,6 @@ $db_ok = false;
 
 try {
 	$connessione = new Database();
-	$tipo = $per;
 	if ($per == "film")
 		$cerca = $connessione->searchFilm($query);
 	else if ($per == "collezione")
@@ -35,14 +34,14 @@ try {
 	$db_ok = true;
 } catch (Exception $e) {
 	Tools::replaceAnchor($page, "intestazione", $e->getMessage());
-	Tools::replaceSection($page, "content", "");
+	Tools::replaceSection($page, "message", "");
+	Tools::replaceSection($page, "results", "");
 } finally {
 	unset($connessione);
 }
 if ($db_ok) {
-	Tools::replaceAnchor($page, "cerca", ($tipo . ($tipo != $per ? " per " . $per : "") . ': "' . $query . '"'));
+	Tools::replaceAnchor($page, "intestazione", "Cerca " . ($tipo . ($tipo != $per ? " per " . $per : "") . ': "' . $query . '"'));
 	if (!empty($cerca)) {
-		Tools::replaceAnchor($page, "intestazione", $tipo);
 		$card = Tools::getSection($page, "card");
 		$r = "";
 		foreach ($cerca as $c) {
@@ -58,8 +57,9 @@ if ($db_ok) {
 			$r .= $t;
 		}
 		Tools::replaceSection($page, "card", $r);
+		Tools::replaceSection($page, "message", "");
 	} else {
-		Tools::replaceAnchor($page, "intestazione", $err);
+		Tools::replaceAnchor($page, "message", $err);
 		Tools::replaceSection($page, "results", "");
 	}
 }
