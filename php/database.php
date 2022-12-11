@@ -77,13 +77,6 @@ class Database {
 		return true;
 	}
 
-	// see: https://phpdelusions.net/mysqli
-	private function mysqli_info_array() : array {
-		$pattern = '~Rows matched: (?<matched>\d+)  Changed: (?<changed>\d+)  Warnings: (?<warnings>\d+)~';
-		preg_match($pattern, $this->connection->info, $matches);
-		return array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-	}
-
 	public function getCollezioneById($id) : array {
 		$query = "select nome, descrizione, copertina
 			from collezione
@@ -170,9 +163,7 @@ class Database {
 			from film
 			where nome like ?";
 
-		$str = trim($str);
-		$str = "%${str}%";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%")];
 
 		return $this->preparedSelect($query, $params);
 	}
@@ -182,9 +173,7 @@ class Database {
 			from collezione
 			where nome like ?";
 
-		$str = trim($str);
-		$str = "%${str}%";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%")];
 
 		return $this->preparedSelect($query, $params);
 	}
@@ -198,9 +187,7 @@ class Database {
 					on fg.genere = g.id
 			where g.nome like ?";
 
-		$str = trim($str);
-		$str = "${str}";
-		$params = [$str];
+		$params = [trim($str)];
 
 		return $this->preparedSelect($query, $params);
 	}
@@ -214,9 +201,7 @@ class Database {
 					on fp.paese = p.iso_3166_1
 			where p.nome like ?";
 
-		$str = trim($str);
-		$str = "${str}";
-		$params = [$str];
+		$params = [trim($str)];
 
 		return $this->preparedSelect($query, $params);
 	}
@@ -231,9 +216,23 @@ class Database {
 		return $this->preparedInsert($query, $params);
 	}
 
+	public function insertLista($user, $list) : bool {
+		$query = "insert into lista(utente, nome)
+			values (?, ?)";
+
+		$params = [$user, $list];
+
+		return $this->preparedInsert($query, $params);
+	}
+
 	public function signup($user, $pass) : bool {
-		// TODO: inserimento automatico liste di default
-		return $this->insertUtente($user, $pass);
+		$s = $this->insertUtente($user, $pass);
+		if ($s) {
+			return ($this->insertLista($user, "Da guardare") &&
+				$this->insertLista($user, "Visti"));
+			// TODO: o serve transaction?
+		}
+		return false;
 	}
 
 	public function login($user, $pass) : bool {
