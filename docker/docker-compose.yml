@@ -34,13 +34,9 @@ services:
     image: phpmyadmin
     env_file:
       - ./phpmyadmin/phpmyadmin.env
-    volumes:
-      - phpmyadmin:/var/www/html
     restart: unless-stopped
 
 volumes:
   caddy_data:
-    external: true
   caddy_config:
-  phpmyadmin:
   mariadb:
