@@ -144,7 +144,7 @@ class Database {
 	}
 
 	public function getValutazioneByFilmId($id) : array {
-		$query = "select u.username, v.valore, v.testo
+		$query = "select u.username as utente, v.valore, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
