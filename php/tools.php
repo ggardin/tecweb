@@ -13,8 +13,11 @@ class Tools {
 		return "";
 	}
 
-	public static function replaceAnchor(&$in, $anchor, $content) : void {
-		$from = "<!-- $anchor -->";
+	public static function replaceAnchor(&$in, $anchor, $content, $comment = false) : void {
+		if (! $comment)
+			$from = "@@${anchor}@@";
+		else
+			$from = "<!-- $anchor -->";
 		$pos = strpos($in, $from);
 		if ($pos !== false) {
 			$len = strlen($from);
@@ -23,8 +26,8 @@ class Tools {
 	}
 
 	public static function deleteSectionAnchor(&$in, $name): void {
-		self::replaceAnchor($in, ($name . "_start"), "");
-		self::replaceAnchor($in, ($name . "_end"), "");
+		self::replaceAnchor($in, ($name . "_start"), "", true);
+		self::replaceAnchor($in, ($name . "_end"), "", true);
 	}
 
 	public static function deleteAllSectionAnchors(&$in) : void {
@@ -57,7 +60,7 @@ class Tools {
 	}
 
 	private static function replacePageSection(&$page, &$shared, $name) : void {
-		self::replaceAnchor($page, $name, self::getSection($shared, $name));
+		self::replaceAnchor($page, $name, self::getSection($shared, $name), true);
 	}
 
 	private static function setPageActiveHeader(&$page, $name) : void {
