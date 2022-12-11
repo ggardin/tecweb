@@ -19,17 +19,23 @@
 	</nav>
 
 	<main>
+		<!-- main_start -->
 		<div class="movie-page">
 			<div class="movie-media">
-				<img src="<!-- copertina -->" alt="Locandina del film" width="250" height="375" />
+				<img src="<!-- copertina -->" alt="" width="250" height="375" />
 				<button type="button" class="movie-viewed">Visto</button>
 				<button type="button" class="movie-add-to-list">Aggiungi alla lista</button>
 			</div>
 
+			<!-- dettagli_start -->
 			<div class="movie-details">
-				<h1><!-- nome --></h1>
-				<p id="subtitle"><!-- data_rilascio --> — <!-- durata --> — <!-- voto --></p>
+				<h1><!-- nome_film --></h1>
+				<!-- sottotitolo_start -->
+				<p id="subtitle"><!-- sottotitolo --></p>
+				<!-- sottotitolo_end -->
+				<!-- descrizione_start -->
 				<p><!-- descrizione --></p>
+				<!-- descrizione_end -->
 
 				<!-- <h2>Cast</h2>
 				<ul>
@@ -38,31 +44,57 @@
 					<li>Attori: actorName</li>
 				</ul> -->
 
+				<!-- generi_start -->
 				<h2>Generi</h2>
 				<ul>
-					<!-- genere -->
+					<!-- genere_start -->
+					<li><a href="cerca.php?q=<!-- link -->&t=genere"><!-- nome --></a></li>
+					<!-- genere_end -->
 				</ul>
+				<!-- generi_end -->
 
+				<!-- paesi_start -->
 				<h2>Paesi di produzione</h2>
 				<ul>
-					<!-- paese_produzione -->
+					<!-- paese_start -->
+					<li><a href="cerca.php?q=<!-- link -->&t=paese"><!-- nome --></a></li>
+					<!-- paese_end -->
 				</ul>
+				<!-- paesi_end -->
 
 				<h2>Altri dettagli</h2>
 				<ul>
 					<li>Titolo originale: <!-- nome_originale --></li>
 					<li>Stato: <!-- stato --></li>
-					<li><span lang="en">Budget:</span> <!-- budget --></li>
+					<!-- budget_start -->
+					<li><span lang="en">Budget</span>: <!-- budget --></li>
+					<!-- budget_end -->
+					<!-- incassi_start -->
 					<li>Incassi: <!-- incassi --></li>
-					<li>Collezione: <!-- collezione --></li>
+					<!-- incassi_end -->
+					<!-- collezione_start -->
+					<li>Collezione: <a href="collezione.php?id=<!-- link -->"><!-- nome --></a><!-- collezione --></li>
+					<!-- collezione_end -->
 				</ul>
 
+				<!-- valutazioni_start -->
 				<h2>Valutazioni</h2>
 				<ol>
-					<!-- valutazione -->
+					<!-- valutazione_start -->
+					<li><ul>
+						<li>Utente: <!-- utente --></li>
+						<li>Valore: <!-- valore --></li>
+						<!-- testo_start -->
+						<li>Testo: <!-- testo --></li>
+						<!-- testo_end -->
+					</ul></li>
+					<!-- valutazione_end -->
 				</ol>
+				<!-- valutazioni_end -->
 			</div>
+			<!-- dettagli_end -->
 		</div>
+		<!-- main_end -->
 	</main>
 
 	<footer>

@@ -1,16 +1,15 @@
 <?php
 
-require_once("php/page.php");
+require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Page::build(basename($_SERVER["PHP_SELF"], ".php"));
-
-$title = "Film";
-$content = "";
-
-$err = "Film non esistente";
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
+
+$title = "Film";
+
+$err = "Film non esistente";
 
 if ($id != "") {
 	$db_ok = false;
@@ -26,60 +25,98 @@ if ($id != "") {
 		}
 		$db_ok = true;
 	} catch (Exception $e) {
-		$content .= "<h1>" . $e->getMessage() . "</h1>";
+		Tools::replaceSection($page, "main", ("<h1>" . $e->getMessage() . "</h1>"));
 	} finally {
 		unset($connessione);
 	}
 	if ($db_ok) {
 		if (!empty($film)) {
-			$title = Page::langToTag($film["nome"], "") . " — " . $title;
-			Page::replaceAnchor($page, "nome", Page::langToTag($film["nome"]));
+			$title = Tools::langToTag($film["nome"], "") . " — " . $title;
+			Tools::replaceAnchor($page, "nome_film", Tools::langToTag($film["nome"]));
 			$copertina = ($film["copertina"] ? ("https://www.themoviedb.org/t/p/w500/" . $film["copertina"]) : "img/placeholder.svg");
-			Page::replaceAnchor($page, "copertina", $copertina);
-			Page::replaceAnchor($page, "data_rilascio", $film["data_rilascio"]);
-			Page::replaceAnchor($page, "durata", $film["durata"] . " min");
-			if ($film["voto"]) Page::replaceAnchor($page, "voto", $film["voto"]);
-			Page::replaceAnchor($page, "descrizione", Page::langToTag($film["descrizione"]));
+			Tools::replaceAnchor($page, "copertina", $copertina);
+			$r = "";
+			if (isset($film["data_rilascio"]))
+				$r .= $film["data_rilascio"];
+			if (isset($film["durata"]))
+				$r .= ($r ? " — " : "") . $film["durata"] . " min";
+			if (isset($film["voto"]))
+				$r .= ($r ? " — " : "") . $film["voto"] . " *";
+			if ($r)
+				Tools::replaceAnchor($page, "sottotitolo", $r);
+			else
+				Tools::replaceSection($page, "sottotitolo", "");
+			if (isset($film["descrizione"]))
+				Tools::replaceAnchor($page, "descrizione", Tools::langToTag($film["descrizione"]));
+			else
+				Tools::replaceSection($page, "descrizione", "");
 			if (!empty($genere)) {
-				$t = "";
-				foreach ($genere as $g)
-					$t .= '<li><a href="cerca.php?query=' . $g["nome"] . '&per=genere">' . $g["nome"] . '</a></li>';
-				Page::replaceAnchor($page, "genere", $t);
-			}
-			if (!empty($paese)) {
-				$t = "";
-				foreach ($paese as $p)
-					$t .= '<li><a href="cerca.php?query=' . $p["nome"] . '&per=paese">' . $p["nome"] . '</a></li>';
-				Page::replaceAnchor($page, "paese_produzione", $t);
-			}
-			Page::replaceAnchor($page, "nome_originale", Page::langToTag($film["nome_originale"]));
-			Page::replaceAnchor($page, "stato", $film["stato"]);
-			Page::replaceAnchor($page, "budget", ($film["budget"] . " $"));
-			Page::replaceAnchor($page, "incassi", ($film["incassi"] . " $"));
-			if (!empty($collezione))
-				Page::replaceAnchor($page, "collezione", ('<a href="collezione.php?id=' . $film["collezione"] . '">' . $collezione[0]["nome"] . '</a>'));
-			if (!empty($valutazione)) {
-				$t = "";
-				foreach ($valutazione as $v) {
-					$t .= "<li><ul>";
-						$t .= '<li>Utente: ' . $v["username"] . '</li>';
-						$t .= '<li>Valore: ' . $v["valore"] . '</li>';
-						$t .= '<li>Testo: ' . Page::langtoTag($v["testo"]) . '</li>';
-					$t .= "</ul></li>";
+				$list = Tools::getSection($page, "genere");
+				$r = "";
+				foreach ($genere as $g) {
+					$t = $list;
+					Tools::replaceAnchor($t, "link", $g["nome"]);
+					Tools::replaceAnchor($t, "nome", $g["nome"]);
+					$r .= $t;
 				}
-				Page::replaceAnchor($page, "valutazione", $t);
-			}
+				Tools::replaceSection($page, "genere", $r);
+			} else
+				Tools::replaceSection($page, "generi", "");
+			if (!empty($paese)) {
+				$list = Tools::getSection($page, "paese");
+				$r = "";
+				foreach ($paese as $p) {
+					$t = $list;
+					Tools::replaceAnchor($t, "link", $p["nome"]);
+					Tools::replaceAnchor($t, "nome", $p["nome"]);
+					$r .= $t;
+				}
+				Tools::replaceSection($page, "paese", $r);
+			} else
+				Tools::replaceSection($page, "paesi", "");
+			Tools::replaceAnchor($page, "nome_originale", Tools::langToTag($film["nome_originale"]));
+			Tools::replaceAnchor($page, "stato", $film["stato"]);
+			if (isset($film["budget"])) {
+				Tools::ReplaceAnchor($page, "budget", $film["budget"] . " $");
+			} else
+				Tools::replaceSection($page, "budget", "");
+			if (isset($film["incassi"])) {
+				Tools::ReplaceAnchor($page, "incassi", $film["incassi"] . " $");
+			} else
+				Tools::replaceSection($page, "incassi", "");
+			if (isset($film["collezione"])) {
+				$c = Tools::getSection($page, "collezione");
+				Tools::ReplaceAnchor($c, "link", $film["collezione"]);
+				Tools::ReplaceAnchor($c, "nome", $collezione[0]["nome"]);
+				Tools::ReplaceSection($page, "collezione", $c);
+			} else
+				Tools::replaceSection($page, "collezione", "");
+			if (!empty($valutazione)) {
+				$list = Tools::getSection($page, "valutazione");
+				$r = "";
+				foreach ($valutazione as $v) {
+					$t = $list;
+					Tools::replaceAnchor($t, "utente", $v["utente"]);
+					Tools::replaceAnchor($t, "valore", $v["valore"]);
+					if (isset($v["testo"])) {
+						Tools::replaceAnchor($t, "testo", Tools::langToTag($v["testo"]));
+					} else
+						Tools::replaceSection($t, "testo", "");
+					$r .= $t;
+				}
+				Tools::replaceSection($page, "valutazione", $r);
+			} else
+				Tools::replaceSection($page, "valutazioni", "");
 		} else {
-			$content .= "<h1>" . $err . "</h1>";
+			Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
 		}
 	}
 } else {
-	$content .= "<h1>" . $err . "</h1>";
+	Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
 }
 
-Page::replaceAnchor($page, "title", $title);
-// Page::replaceAnchor($page, "film", $content);
+Tools::replaceAnchor($page, "title", $title);
 
-echo($page);
+Tools::showPage($page);
 
 ?>
