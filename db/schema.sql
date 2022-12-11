@@ -50,11 +50,11 @@ create table film (
 	copertina varchar(100),
 	descrizione varchar(10000),
 	data_rilascio date,
-	stato varchar(30),
+	stato varchar(30) not null,
 	budget int unsigned,
 	incassi int unsigned,
 	collezione int unsigned,
-	voto smallint unsigned,
+	voto float unsigned,
 	primary key (id),
 	foreign key (collezione) references collezione(id) on delete set null
 );
