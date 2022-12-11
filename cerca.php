@@ -5,8 +5,8 @@ require_once("php/database.php");
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
-$query = (isset($_GET["query"])) ? $_GET["query"] : "";
-$per = (isset($_GET["per"])) ? $_GET["per"] : "film";
+$query = (isset($_GET["q"])) ? $_GET["q"] : "";
+$per = (isset($_GET["t"])) ? $_GET["t"] : "film";
 
 $tipo = $per;
 if ($per == "collezione" || $per == "genere") $tipo = "film";
