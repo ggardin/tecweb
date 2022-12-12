@@ -35,6 +35,7 @@
 	font-display: swap;
 }
 
+/* ??? giovanni - START ??? */
 @font-face {
 	font-family: "Spectral";
 	src: url("../fonts/spectral") format("truetype");
@@ -45,6 +46,7 @@
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
+/* ??? giovanni - END ??? */
 
 body {
 	display: grid;
@@ -71,18 +73,6 @@ body {
 	}
 }
 /* ??? giovanni f. - END ??? */
-
-/* ??? elena - START ??? */
-.user-info{
-	display: flex;
-}
-
-main > h1 {
-	font-size: 3em;
-	font-weight: 800;
-}
-/* ??? elena - END ??? */
-
 
 /*
 ==============
@@ -169,6 +159,9 @@ BREADCRUMB
 MAIN
 ==============
 */
+
+/* ??? gio - START ??? */
+/*
 main > h1, h2{
 	text-align: center;
 }
@@ -176,6 +169,8 @@ main > h1, h2{
 main > h2{
 	font-weight: 600;
 }
+*/
+/* ??? gio - END ??? */
 
 
 /*
@@ -319,13 +314,13 @@ NAV BAR
 	font-weight: 800;
 }
 
-
-main ul{
+/* questo rompe non poche cose */
+/* main ul{
 	align-items: center;
 	font-weight: bold;
 	display: flex;
 	list-style: none;
-}
+} */
 
 .list-nav{
 	text-align: center;
@@ -353,7 +348,6 @@ main ul{
 	list-style: none;
 }
 
-
 .all-films-list tr:nth-child(even){
 	background-color: var(--secondaryColor);
 	/* color: #fff; */
@@ -365,20 +359,22 @@ main ul{
 	border-color: var(--tertiaryColor);
 }
 
-main h2 {
+/* main h2 {
 	font-size: 1.5em;
 	font-weight: bold;
-}
-main ul{
+} */
+
+/* main ul{
 	text-align: center;
-}
+} */
 
 .stats{
 	text-align: center;
 }
-main dt {
+
+/* main dt {
 	font-weight: bold;
-}
+} */
 
 .primo{
 	text-align: center;
@@ -684,7 +680,7 @@ MOVIE PAGE
 }
 
 .movie-details{
-	margin-left: 25%;
+	margin-left: 31%;
 }
 
 .movie-details > h2{
@@ -697,7 +693,7 @@ MOVIE PAGE
 }
 
 .movie-media{
-	/*width: 25%;*/
+	width: 30%;
 	float: left;
 	display: flex;
 	flex-direction: column;
