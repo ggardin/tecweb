@@ -61,6 +61,7 @@ body {
 	padding: 1rem;
 }*/
 
+/* ??? giovanni f. - START ??? */
 @media print {
 	body {
 		font-family: "Spectral", "Times New Roman", serif;
@@ -69,6 +70,18 @@ body {
 		background-color: #fff;
 	}
 }
+/* ??? giovanni f. - END ??? */
+
+/* ??? elena - START ??? */
+.user-info{
+	display: flex;
+}
+
+main > h1 {
+	font-size: 3em;
+	font-weight: 800;
+}
+/* ??? elena - END ??? */
 
 
 /*
@@ -295,6 +308,99 @@ NAV BAR
 	display: none;
 }
 
+/* ??? elena - START ??? */
+.aiuti{
+	position:absolute;
+	left:-999em;
+}
+
+.user-info{
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-name{
+    font-size: 3em;
+	font-weight: 800;
+}
+
+
+main ul{
+	align-items: center;
+	font-weight: bold;
+	display: flex;
+	list-style: none;
+}
+
+.list-nav{
+	text-align: center;
+	background-color: var(--secondaryColor);
+	line-height: 3em;
+	border-bottom: 3px solid transparent;
+}
+
+.link-nav a {
+	padding: 1em;
+	border-color: var(--tertiaryColor); /* to be defined */
+}
+
+.link-nav a:hover {
+	background-color: var(--secondaryColor);
+}
+
+.link-nav > span {
+	padding: 1em;
+}
+
+.film-in-list{
+    display:flex;
+	align-items: center;
+	list-style: none;
+}
+
+
+.all-films-list tr:nth-child(even){
+	background-color: var(--secondaryColor);
+	/* color: #fff; */
+}
+
+.all-films-list, th, td{
+	border: 1px solid;
+	border-collapse: collapse;
+	border-color: var(--tertiaryColor);
+}
+
+main h2 {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+main ul{
+	text-align: center;
+}
+
+.stats{
+	text-align: center;
+}
+main dt {
+	font-weight: bold;
+}
+
+.primo{
+	text-align: center;
+	font-size: large;
+	font-weight: bold
+}
+.secondo{
+	font-size: medium;
+	font-weight: normal;
+
+}
+.terzo{
+	font-size: small;
+	font-weight: lighter;
+}
+
+/* ??? elena - END ??? */
 
 /*
 ==============
