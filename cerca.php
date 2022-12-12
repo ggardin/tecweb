@@ -12,7 +12,7 @@ $tipo = $per;
 if ($per == "genere" || $per == "paese") $tipo = "film";
 
 $title = "Cerca " . $tipo . ($tipo != $per ? " per " . $per : "");
-if ($query) $title = $query . " — " . $title;
+if ($query) $title = $query . " · " . $title;
 Tools::replaceAnchor($page, "title", $title);
 
 $err = "Questa ricerca non ha prodotto risultati";
