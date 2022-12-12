@@ -138,3 +138,12 @@ nav.dropdown-opened .hamburger-bottom {
 	max-width: 20em;
 	margin: 0 auto;
 }
+
+/*
+==============
+MAIN
+==============
+*/
+main > h1, h2{
+	text-align: center;
+}

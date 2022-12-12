@@ -113,6 +113,10 @@ header li a {
 	border-color: transparent;
 }
 
+#logo-icon{
+	margin-left: .5em;
+}
+
 
 /*
 ==============
@@ -127,6 +131,20 @@ BREADCRUMB
 
 #breadcrumb a {
 	color: inherit;
+}
+
+
+/*
+==============
+MAIN
+==============
+*/
+main > h1, h2{
+	text-align: center;
+}
+
+main > h2{
+	font-weight: 600;
 }
 
 
@@ -249,7 +267,7 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	/*background-color: red;*/
-	margin: 4em 1em 4em 1em;
+	margin: 4em .5em 4em .5em;
 /*	width: 100%;
 	height: 3em;
 	margin-left: 1em;*/
