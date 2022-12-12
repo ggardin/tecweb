@@ -224,41 +224,42 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function insertUtente($user, $pass) : bool {
+	public function insertUtente($username, $pass) : bool {
 		$query = "insert into utente(username, password)
 			values (?, ?)";
 
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
-		$params = [$user, $pass];
+		$params = [$username, $pass];
 
 		return $this->preparedInsert($query, $params);
 	}
 
-	public function insertLista($user, $list) : bool {
+	public function insertLista($user_id, $list) : bool {
 		$query = "insert into lista(utente, nome)
 			values (?, ?)";
 
-		$params = [$user, $list];
+		$params = [$user_id, $list];
 
 		return $this->preparedInsert($query, $params);
 	}
 
-	public function signup($user, $pass) : bool {
-		$s = $this->insertUtente($user, $pass);
+	public function signup($username, $pass) : bool {
+		$s = $this->insertUtente($username, $pass);
 		if ($s) {
-			return ($this->insertLista($user, "Da guardare") &&
-				$this->insertLista($user, "Visti"));
+			$user_id = $this->connection->insert_id;
+			return ($this->insertLista($user_id, "Da guardare") &&
+				$this->insertLista($user_id, "Visti"));
 			// TODO: o serve transaction?
 		}
 		return false;
 	}
 
-	public function login($user, $pass) : bool {
+	public function login($username, $pass) : bool {
 		$query = "select password
 			from utente
 			where username = ?";
 
-		$params = [$user];
+		$params = [$username];
 
 		$res = $this->preparedSelect($query, $params);
 
