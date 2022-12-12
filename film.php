@@ -19,6 +19,7 @@ if ($id != "") {
 		if (!empty($film)) {
 			$film = $film[0];
 			$collezione = $connessione->getCollezioneById($film["collezione"]);
+			$crew = $connessione->getCrewByFilmId($id);
 			$genere = $connessione->getGenereByFilmId($id);
 			$paese = $connessione->getPaeseByFilmId($id);
 			$valutazione = $connessione->getValutazioneByFilmId($id);
@@ -31,7 +32,7 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($film)) {
-			$title = Tools::langToTag($film["nome"], "") . " — " . $title;
+			$title = Tools::langToTag($film["nome"], "") . " · " . $title;
 			Tools::replaceAnchor($page, "nome_film", Tools::langToTag($film["nome"]));
 			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w500/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
@@ -39,9 +40,9 @@ if ($id != "") {
 			if (isset($film["data_rilascio"]))
 				$r .= $film["data_rilascio"];
 			if (isset($film["durata"]))
-				$r .= ($r ? " — " : "") . $film["durata"] . " min";
+				$r .= ($r ? " · " : "") . $film["durata"] . " min";
 			if (isset($film["voto"]))
-				$r .= ($r ? " — " : "") . $film["voto"] . " *";
+				$r .= ($r ? " · " : "") . $film["voto"] . " *";
 			if ($r)
 				Tools::replaceAnchor($page, "sottotitolo", $r);
 			else
@@ -50,6 +51,18 @@ if ($id != "") {
 				Tools::replaceAnchor($page, "descrizione", Tools::langToTag($film["descrizione"]));
 			else
 				Tools::replaceSection($page, "descrizione", "");
+			if (!empty($crew)) {
+				$list = Tools::getSection($page, "partecipazione");
+				$r = "";
+				foreach ($crew as $c) {
+					$t = $list;
+					Tools::replaceAnchor($t, "ruolo", $c["ruolo"]);
+					Tools::replaceAnchor($t, "persona", Tools::langToTag($c["persona"]));
+					$r .= $t;
+				}
+				Tools::replaceSection($page, "partecipazione", $r);
+			} else
+				Tools::replaceSection($page, "crew", "");
 			if (!empty($genere)) {
 				$list = Tools::getSection($page, "genere");
 				$r = "";
