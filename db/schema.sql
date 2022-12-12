@@ -8,7 +8,7 @@ drop table if exists lista_collezione;
 drop table if exists lista;
 drop table if exists valutazione;
 drop table if exists utente;
-drop table if exists film_partecipazione;
+drop table if exists crew;
 drop table if exists film_paese;
 drop table if exists film_genere;
 drop table if exists film;
@@ -107,14 +107,11 @@ create table film_paese (
 	foreign key (paese) references paese(iso_3166_1)
 );
 
-create table film_partecipazione (
-	id bigint unsigned,
+create table crew (
 	film bigint unsigned,
 	persona int unsigned,
 	ruolo int unsigned,
-	interpreta varchar(150),
-	primary key (id),
-	unique (film, persona, ruolo),
+	primary key (film, persona, ruolo),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (persona) references persona(id) on delete cascade,
 	foreign key (ruolo) references ruolo(id) on delete cascade
