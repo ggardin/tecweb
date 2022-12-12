@@ -103,13 +103,13 @@ header li {
 
 header li.active {
 	background-color: var(--secondaryColor);
-	border-color: currentcolor;
+	/*border-color: currentcolor;*/
 }
 
-/*header li:hover {
-	background-color: var(--secondaryColor);
-	border-color: red; !* to be defined *!
-}*/
+header li:hover {
+	/*background-color: var(--secondaryColor);*/
+	border-color: var(--txtcolor);
+}
 
 /* rivedere questa regola, non è robusta */
 header li > span {
