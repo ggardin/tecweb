@@ -42,7 +42,7 @@ create table gender (
 );
 
 create table persona (
-	id bigint unsigned,
+	id int unsigned,
 	nome varchar(50) not null,
 	gender int unsigned,
 	immagine varchar(100),
@@ -110,7 +110,7 @@ create table film_paese (
 create table film_partecipazione (
 	id bigint unsigned,
 	film bigint unsigned,
-	persona bigint unsigned,
+	persona int unsigned,
 	ruolo int unsigned,
 	interpreta varchar(150),
 	primary key (id),
@@ -183,8 +183,8 @@ create table i_genere (
 );
 
 create table i_persona (
-	id bigint unsigned,
-	tmdb_id bigint unsigned,
+	id int unsigned,
+	tmdb_id int unsigned,
 	primary key (id),
 	foreign key (id) references persona(id) on delete cascade
 );
