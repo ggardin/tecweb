@@ -309,11 +309,6 @@ NAV BAR
 }
 
 /* ??? elena - START ??? */
-.aiuti{
-	position:absolute;
-	left:-999em;
-}
-
 .user-info{
 	display: flex;
 	align-items: flex-start;
