@@ -94,7 +94,7 @@ class Database {
 				join film as f
 					on c.id = f.collezione
 			where c.id = ?
-			order by f.data_rilascio";
+			order by f.data_rilascio is null, f.data_rilascio";
 
 		$params = [$id];
 		$types = "i";
