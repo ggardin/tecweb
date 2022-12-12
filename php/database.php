@@ -77,15 +77,8 @@ class Database {
 		return true;
 	}
 
-	// see: https://phpdelusions.net/mysqli
-	private function mysqli_info_array() : array {
-		$pattern = '~Rows matched: (?<matched>\d+)  Changed: (?<changed>\d+)  Warnings: (?<warnings>\d+)~';
-		preg_match($pattern, $this->connection->info, $matches);
-		return array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-	}
-
 	public function getCollezioneById($id) : array {
-		$query = "select nome, descrizione, copertina
+		$query = "select nome, descrizione, locandina
 			from collezione
 			where id = ?";
 
@@ -96,12 +89,12 @@ class Database {
 	}
 
 	public function getFilmInCollezioneById($id) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from collezione as c
 				join film as f
 					on c.id = f.collezione
 			where c.id = ?
-			order by f.data_rilascio";
+			order by f.data_rilascio is null, f.data_rilascio";
 
 		$params = [$id];
 		$types = "i";
@@ -113,6 +106,24 @@ class Database {
 		$query = "select *
 			from film
 			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getCrewByFilmId($id) : array {
+		$query = "select r.nome as ruolo, p.nome as persona
+			from film as f
+				join crew as c
+					on f.id = c.film
+				join persona as p
+					on c.persona = p.id
+				join ruolo as r
+					on c.ruolo = r.id
+			where f.id = ?
+			order by r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -151,7 +162,7 @@ class Database {
 	}
 
 	public function getValutazioneByFilmId($id) : array {
-		$query = "select u.username, v.valore, v.testo
+		$query = "select u.username as utente, v.valore, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
@@ -166,31 +177,27 @@ class Database {
 	}
 
 	public function searchFilm($str) : array {
-		$query = "select id, nome, copertina, data_rilascio
+		$query = "select id, nome, locandina, data_rilascio
 			from film
 			where nome like ?";
 
-		$str = trim($str);
-		$str = "%${str}%";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%")];
 
 		return $this->preparedSelect($query, $params);
 	}
 
 	public function searchCollezione($str) : array {
-		$query = "select id, nome, copertina
+		$query = "select id, nome, locandina
 			from collezione
 			where nome like ?";
 
-		$str = trim($str);
-		$str = "%${str}%";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%")];
 
 		return $this->preparedSelect($query, $params);
 	}
 
 	public function searchFilmByGenere($str) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from film as f
 				join film_genere as fg
 					on f.id = fg.film
@@ -198,15 +205,13 @@ class Database {
 					on fg.genere = g.id
 			where g.nome like ?";
 
-		$str = trim($str);
-		$str = "${str}";
-		$params = [$str];
+		$params = [trim($str)];
 
 		return $this->preparedSelect($query, $params);
 	}
 
 	public function searchFilmByPaese($str) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from film as f
 				join film_paese as fp
 					on f.id = fp.film
@@ -214,34 +219,47 @@ class Database {
 					on fp.paese = p.iso_3166_1
 			where p.nome like ?";
 
-		$str = trim($str);
-		$str = "${str}";
-		$params = [$str];
+		$params = [trim($str)];
 
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function insertUtente($user, $pass) : bool {
+	public function insertUtente($username, $pass) : bool {
 		$query = "insert into utente(username, password)
 			values (?, ?)";
 
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
-		$params = [$user, $pass];
+		$params = [$username, $pass];
 
 		return $this->preparedInsert($query, $params);
 	}
 
-	public function signup($user, $pass) : bool {
-		// TODO: inserimento automatico liste di default
-		return $this->insertUtente($user, $pass);
+	public function insertLista($user_id, $list) : bool {
+		$query = "insert into lista(utente, nome)
+			values (?, ?)";
+
+		$params = [$user_id, $list];
+
+		return $this->preparedInsert($query, $params);
 	}
 
-	public function login($user, $pass) : bool {
+	public function signup($username, $pass) : bool {
+		$s = $this->insertUtente($username, $pass);
+		if ($s) {
+			$user_id = $this->connection->insert_id;
+			return ($this->insertLista($user_id, "Da guardare") &&
+				$this->insertLista($user_id, "Visti"));
+			// TODO: o serve transaction?
+		}
+		return false;
+	}
+
+	public function login($username, $pass) : bool {
 		$query = "select password
 			from utente
 			where username = ?";
 
-		$params = [$user];
+		$params = [$username];
 
 		$res = $this->preparedSelect($query, $params);
 

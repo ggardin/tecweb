@@ -1,9 +1,9 @@
 <?php
 
-require_once("php/page.php");
+require_once("php/tools.php");
 
-$page = Page::build(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
-echo($page);
+Tools::showPage($page);
 
 ?>
