@@ -12,7 +12,7 @@
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
 
-	--content-width: 35em;
+	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
 }
@@ -554,7 +554,7 @@ BREADCRUMB
 	border-color: transparent;
 }
 
-#breadcrumb a:link{
+#breadcrumb a:link{ /* why :link? */
 	color: var(--link-color);
 }
 
