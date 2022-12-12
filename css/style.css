@@ -128,9 +128,8 @@ header li a {
 	color: inherit;
 }
 
-header .action {
+header .actions {
 	display: flex;
-	align-items: center;
 }
 
 .accountButton {
