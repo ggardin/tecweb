@@ -28,7 +28,8 @@ film_genere=[]
 film_paese=[]
 film_compagnia=[]
 film_keyword=[]
-film_partecipazione=[]
+cast=[]
+crew=[]
 
 
 
@@ -50,7 +51,7 @@ def start():
 
 def get_film():
 	f=[]
-	for i in range(1,9):
+	for i in range(1,8):
 		f.extend([k["id"] for k in tmdb.Discover().movie(sort_by="vote_count.desc", vote_average_gte=8, page=i)["results"]])
 	for k in range(len(f)):
 		i_film.append({"id": k, "tmdb_id": f[k]})
@@ -88,7 +89,7 @@ def get_film():
 			if i==l:
 				c=tmdb.Collections(f["collezione"]).info(language="it")
 				c["id"]=i
-				c["name"].replace(" - Collezione", "")
+				c["name"] = c["name"].replace(" - Collezione", "")
 				if c["overview"]=="": c["overview"]=None
 				if c["poster_path"]: c["poster_path"]=c["poster_path"][1:]
 				else: c["poster_path"]=None
@@ -172,11 +173,10 @@ def get_film():
 		# 				i_persona.append({"id": i, "tmdb_id": x["id"]})
 		# 			x["id"]=i
 		# 			x["id_film"]=f["id"]
-		# 			x["ruolo"]=0
-		# 			x["index_id"]=len(film_partecipazione)
+		# 			x["index_id"]=len(cast)
 		# 			x["character"]="[en]"+x["character"]+"[/en]"
-		# 			keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "character"]]
-		# 			film_partecipazione.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
+		# 			keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["interpreta", "character"]]
+		# 			cast.append({keys[k][0]: x[keys[k][1]] for k in range(len(keys))})
 		# 			if i==l:
 		# 				p=tmdb.People(i_persona[i]["tmdb_id"]).info()
 		# 				p["id"]=i
@@ -190,7 +190,7 @@ def get_film():
 		# 				persona.append({keys[k][0]: p[keys[k][1]] for k in range(len(keys))})
 		if credits ["crew"]!=None:
 			for x in credits["crew"]:
-				jobs=[[1, "Director"], [2, "Writer"], [3, "Producer"], [4, "Original Music Composer"]]
+				jobs=[[0, "Director"], [1, "Writer"], [2, "Producer"], [3, "Original Music Composer"]]
 				if (x["job"] in [jobs[i][1] for i in range(len(jobs))]):
 					i=len(i_persona)
 					l=i
@@ -202,9 +202,8 @@ def get_film():
 					x["id_film"]=f["id"]
 					x["ruolo"]=jobs[[jobs[i][1] for i in range(len(jobs))].index(x["job"])][0]
 					x["interpreta"]=""
-					x["index_id"]=len(film_partecipazione)
-					keys=[["id", "index_id"], ["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"], ["interpreta", "interpreta"]]
-					film_partecipazione.append({keys[i][0]: x[keys[i][1]] for i in range(len(keys))})
+					keys=[["film", "id_film"], ["persona", "id"], ["ruolo", "ruolo"]]
+					crew.append({keys[i][0]: x[keys[i][1]] for i in range(len(keys))})
 					if i==l:
 						p=tmdb.People(i_persona[i]["tmdb_id"]).info()
 						p["id"]=i
@@ -220,11 +219,10 @@ def get_film():
 def set_ruolo():
 	global ruolo
 	ruolo=[
-		{"id": 0, "nome": "Attore"},
-		{"id": 1, "nome": "Regia"},
-		{"id": 2, "nome": "Sceneggiatura"},
-		{"id": 3, "nome": "Produttore"},
-		{"id": 4, "nome": "Musiche"}
+		{"id": 0, "nome": "Regista"},
+		{"id": 1, "nome": "Sceneggiatore"},
+		{"id": 2, "nome": "Produttore"},
+		{"id": 3, "nome": "Compositore"}
 		]
 
 def set_gender():
@@ -245,13 +243,16 @@ def db_del(var, nome, engine):
 
 def db_insert(var, nome, engine):
 	# pd.DataFrame(var).to_csv("dump_text/"+nome+".csv", index=False)
+	if not os.path.exists("dump_text"):
+		os.makedirs("dump_text")
 	pd.DataFrame(var).to_json("dump_text/"+nome+".json", orient="records", indent=2)
 	pd.DataFrame(var).to_sql(nome, con=engine, if_exists="append", index=False, chunksize=10000)
 
 def db_insert_all():
 	engine=create_engine("mariadb+pymysql://"+db_user+":"+db_pass+"@"+db_host+"/"+db_name)
 
-	db_del(film_partecipazione, "film_partecipazione", engine)
+	db_del(crew, "crew", engine)
+	# db_del(cast, "cast", engine)
 	# db_del(film_keyword, "film_keyword", engine)
 	# db_del(film_compagnia, "film_compagnia", engine)
 	db_del(film_paese, "film_paese", engine)
@@ -295,7 +296,8 @@ def db_insert_all():
 	db_insert(film_paese, "film_paese", engine)
 	# db_insert(film_compagnia, "film_compagnia", engine)
 	# db_insert(film_keyword, "film_keyword", engine)
-	db_insert(film_partecipazione, "film_partecipazione", engine)
+	# db_insert(cast, "cast", engine)
+	db_insert(crew, "crew", engine)
 
 def translate_keywords():
 	global keyword
