@@ -113,6 +113,24 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getCrewByFilmId($id) : array {
+		$query = "select r.nome as ruolo, p.nome as persona
+			from film as f
+				join crew as c
+					on f.id = c.film
+				join persona as p
+					on c.persona = p.id
+				join ruolo as r
+					on c.ruolo = r.id
+			where f.id = ?
+			order by r.id";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function getPaeseByFilmId($id) : array {
 		$query = "select p.nome
 			from film as f
