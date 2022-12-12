@@ -1,11 +1,28 @@
 :root {
 	--bgcolor: #E4DCD7;
+	--bgcolor-alt: var(--secondaryColor);
 	--txtcolor: #1A1A1A;
+	--txtcolor-alt: var(--txtcolor)
+	--anchorcolor: #0000B5;
+	--anchorcolor-alt: #4C0083;
+
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
+
 	--content-width: 35em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
+}
+
+:root.dark {
+	--bgcolor: #1A1A1A;
+	--bgcolor-alt: #242424;
+	--txtcolor: #E4DCD7;
+	--anchorcolor: #8BDAFC;
+	--anchorcolor-alt: #F6B5FF;
+
+	--secondaryColor: #242424;
+	--tertiaryColor: #12322D;
 }
 
 @font-face {
@@ -36,6 +53,7 @@ body > * {
 
 header {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
@@ -49,6 +67,14 @@ footer {
 	background-color: var(--secondaryColor);
 	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	font-size: 0.8em;
+}
+
+a {
+	color: var(--anchorcolor);
+}
+
+a:visited { /* serve anche focused, ma dev'essere un colore diverso */
+	color: var(--anchorcolor-alt);
 }
 
 /* Inputs */
@@ -74,6 +100,19 @@ input[type=submit] {
 	background-color: var(--tertiaryColor);
 }
 
+/* Screen reader */
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
 
 /* CSS reset */
 
@@ -95,4 +134,43 @@ input, button, textarea, select {
 }
 p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
+}
+
+/* ThemeToggle */
+
+#themeToggle {
+	padding: 0;
+	color: currentcolor;
+	background: transparent;
+	border: 0;
+}
+
+#themeToggle svg {
+	width: 1.8em;
+	fill: none;
+}
+
+#themeToggle svg .sun { stroke: var(--txtcolor); }
+#themeToggle svg .moon { stroke: transparent; }
+
+html.dark #themeToggle svg .sun { stroke: transparent; }
+html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
+
+/*
+==============
+TMDB ATTRIBUTION
+==============
+*/
+
+.tmdb-attribution {
+	display: flex;
+	gap: 1em;
+}
+
+.tmdb-attribution p {
+	flex: 1 0 100px;
+}
+
+.tmdb-attribution img {
+	width: 3em;
 }
