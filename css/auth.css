@@ -69,6 +69,14 @@ footer {
 	font-size: 0.8em;
 }
 
+a {
+	color: var(--anchorcolor);
+}
+
+a:visited { /* serve anche focused, ma dev'essere un colore diverso */
+	color: var(--anchorcolor-alt);
+}
+
 /* Inputs */
 
 form {
@@ -147,3 +155,22 @@ p, h1, h2, h3, h4, h5, h6 {
 
 html.dark #themeToggle svg .sun { stroke: transparent; }
 html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
+
+/*
+==============
+TMDB ATTRIBUTION
+==============
+*/
+
+.tmdb-attribution {
+	display: flex;
+	gap: 1em;
+}
+
+.tmdb-attribution p {
+	flex: 1 0 100px;
+}
+
+.tmdb-attribution img {
+	width: 3em;
+}
