@@ -188,29 +188,21 @@ p, h1, h2, h3, h4, h5, h6 {
 
 
 main ul{
-	display: flex;
 	align-items: center;
+	font-weight: bold;
+	display: flex;
 	list-style: none;
-	padding: 0;
 }
 
-.link-nav{
-	float: center;
+.list-nav{
+	text-align: center;
+	background-color: var(--secondaryColor);
 	line-height: 3em;
 	border-bottom: 3px solid transparent;
 }
 
-main .active{
-	background-color: var(--secondaryColor);
-	border-color: currentColor;
-}
-
 .link-nav a {
-	display: block;
-	text-align: center;
 	padding: 1em;
-	text-decoration: none;
-	background-color: var(--secondaryColor);
 	border-color: var(--tertiaryColor); /* to be defined */
 }
   
@@ -229,10 +221,6 @@ main .active{
 }
 
 
-.stat{
-	position: relative;
-}
-
 .all-films-list tr:nth-child(even){
 	background-color: var(--secondaryColor);
 	/* color: #fff; */
@@ -244,11 +232,32 @@ main .active{
 	border-color: var(--tertiaryColor);
 }
 
-.bar{
-	clear: both;
-	margin: 0.5em;
-	display: flex;
-	background-color: var(--tertiaryColor);
-	height: 2em;
-	width: var(--bar-value);
+main h2 {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+main ul{
+	text-align: center;
+}
+
+.stats{
+	text-align: center;
+}
+main dt {
+	font-weight: bold;
+}
+
+.primo{
+	text-align: center;
+	font-size: large;
+	font-weight: bold
+}
+.secondo{
+	font-size: medium;
+	font-weight: normal;
+
+}
+.terzo{
+	font-size: small;
+	font-weight: lighter;
 }
