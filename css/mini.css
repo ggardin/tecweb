@@ -1,7 +1,14 @@
 /* NAVBAR */
 
+.accountButton{
+	visibility: hidden;
+	padding: 0;
+}
+
 #dropdown-menu-toggle {
 	display: block;
+	background-color: transparent;
+	border-color: transparent;
 }
 
 #dropdown-link-container[data-open="false"] {

@@ -70,7 +70,8 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
-	margin: 1em;
+	margin-top: 1em;
+	/*margin-bottom: 1em;*/
 
 	/*margin-bottom: -3em;*/
 }
@@ -109,7 +110,7 @@ header li a {
 
 .accountButton {
 	background-color: transparent;
-	border: 0;
+	border-color: transparent;
 }
 
 
@@ -249,7 +250,9 @@ SEARCH BAR
 	display: flex;
 	/*background-color: red;*/
 	margin: 4em 1em 4em 1em;
-
+/*	width: 100%;
+	height: 3em;
+	margin-left: 1em;*/
 }
 
 .searchTerm {
@@ -262,9 +265,7 @@ SEARCH BAR
 }
 
 .searchButton {
-	padding: 1em;
 	background: var(--tertiaryColor);
-	align-content: center;
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
 	margin-left: 0;
@@ -539,7 +540,7 @@ MOVIE PAGE
 	float: left;
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh;
+	/*min-height: 100vh;*/
 	padding-right: 2em;
 }
 
