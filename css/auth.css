@@ -43,9 +43,8 @@ body {
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
 	max-width: var(--content-width);
-	margin: var(--content-padding) auto;
-	margin-left: .5em;
-	margin-right: .5em;
+	/*margin: var(--content-padding) auto;*/
+	margin: auto;
 }
 
 body > * {
