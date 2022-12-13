@@ -131,6 +131,8 @@ header .actions {
 .accountButton {
 	background-color: transparent;
 	border-color: transparent;
+	height:50px;
+	width:50px;
 }
 
 #logo-icon{
