@@ -1,14 +1,12 @@
 <?php
 
-require_once("php/page.php");
+require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Page::build(basename($_SERVER["PHP_SELF"], ".php"), "auth");
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"), "auth");
 
 $username = "";
 $password = "";
-
-$content = "";
 
 if (isset($_POST["submit"])) {
 	$username = $_POST["username"];
@@ -20,20 +18,19 @@ if (isset($_POST["submit"])) {
 		$res = $connessione->login($username, $password);
 		$db_ok = true;
 	} catch (Exception $e) {
-		$content .= "<p>" . $e->getMessage() . "</p>";
+		Tools::replaceAnchor($page, "message", $e->getMessage());
 	} finally {
 		unset($connessione);
 	}
 	if ($db_ok) {
-		$content .= "<p>" . ($res ? "OK: boomer" : "ERRORE: Credenziali errate") . "</p>";
+		Tools::replaceAnchor($page, "message", ($res ? "Accesso eseguito" : "Errore: Credenziali errate"));
 	}
-}
+} else
+	Tools::replaceSection($page, "message", "");
 
-Page::replaceAnchor($page, "form_username", $username);
-Page::replaceAnchor($page, "form_password", $password);
+Tools::replaceAnchor($page, "form_username", $username);
+Tools::replaceAnchor($page, "form_password", $password);
 
-Page::replaceAnchor($page, "form_messages", $content);
-
-echo($page);
+Tools::showPage($page);
 
 ?>

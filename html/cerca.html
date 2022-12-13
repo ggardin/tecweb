@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 
-	<title><!-- title --></title>
-	<meta name="description" content="">
-	<meta name="keywords" content="film, collezione">
+	<title>@@title@@</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
 
 	<!-- head -->
 </head>
@@ -19,10 +19,21 @@
 	</nav>
 
 	<main>
-		<h1><!-- tipo --></h1>   <!-- Rimuovere? -->
-		<p>Cerca <!-- ricerca --></p>   <!-- cambiare in "Risultati per: Lorem" -->
+		<h1>@@intestazione@@</h1>
+		<!-- message_start -->
+		<p>@@message@@</p>
+		<!-- message_end -->
+		<!-- results_start -->
 		<div class="cards">
-			<!-- card -->
+			<!-- card_start -->
+			<div class="card">
+				<img width="200" height="300" src="@@locandina@@" alt="" />
+				<div class="details">
+					<h2><a href="@@link@@">@@nome@@</a></h2>
+					<!-- data_start --><p>@@data_rilascio@@</p><!-- data_end -->
+				</div>
+			</div>
+			<!-- card_end -->
 		</div>
 
 		<!-- <h1>Attori</h1>
@@ -35,6 +46,7 @@
 				</div>
 			</div>
 		</div> -->
+		<!-- results_end -->
 	</main>
 
 	<footer>

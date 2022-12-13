@@ -1,9 +1,9 @@
 <?php
 
-require_once("php/page.php");
+require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Page::build(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 $title = "Collezione";
 $content = "";
@@ -29,17 +29,18 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($collezione)) {
-			$title = Page::langToTag($collezione["nome"], "") . " — " . $title;
-			$content .= "<h1>" . Page::langToTag($collezione["nome"]) . "</h1>";
-			$content .= '<img width="250" height="375" src="https://www.themoviedb.org/t/p/w500/' . $collezione["copertina"] . '" alt="copertina" />';
-			$content .= "<p>Descrizione: " . Page::langToTag($collezione["descrizione"]) . "</p>";
+			$title = Tools::langToTag($collezione["nome"], "") . " — " . $title;
+			$content .= "<h1>" . Tools::langToTag($collezione["nome"]) . "</h1>";
+			$content .= '<img width="250" height="375" src="https://www.themoviedb.org/t/p/w500/' . $collezione["locandina"] . '" alt="" />';
+			if (isset($collezione["descrizione"]))
+				$content .= "<p>Descrizione: " . Tools::langToTag($collezione["descrizione"]) . "</p>";
 			$content .= "<p>film: </p>";
 
 			$content .= "<ol>";
 			foreach ($film as $f) {
 				$content .= "<li><ul>";
-					$content .= '<li>Copertina: ' . '<img width="200" height="300" src="https://www.themoviedb.org/t/p/w500/' . $f["copertina"] . '" alt="copertina" />' . '</li>';
-					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . Page::langToTag($f["nome"]) . '</a></li>';
+					$content .= '<li>Locandina: ' . '<img width="200" height="300" src="https://www.themoviedb.org/t/p/w500/' . $f["locandina"] . '" alt="" />' . '</li>';
+					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . Tools::langToTag($f["nome"]) . '</a></li>';
 					$content .= '<li>Data rilascio: ' . $f["data_rilascio"] . '</li>';
 				$content .= "</ul></li>";
 			}
@@ -52,9 +53,9 @@ if ($id != "") {
 	$content .= "<h1>" . $err . "</h1>";
 }
 
-Page::replaceAnchor($page, "title", $title);
-Page::replaceAnchor($page, "collezione", $content);
+Tools::replaceAnchor($page, "title", $title);
+Tools::replaceAnchor($page, "collezione", $content);
 
-echo($page);
+Tools::showPage($page);
 
 ?>
