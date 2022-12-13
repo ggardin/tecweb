@@ -304,91 +304,85 @@ NAV BAR
 }
 
 /* ??? elena - START ??? */
-.user-info{
-	display: flex;
-	align-items: flex-start;
+/* 
+==============
+USER PAGE
+============== 
+*/
+
+
+/* 
+==============
+LIST PAGE
+============== 
+*/
+
+.modifyListButton{
+	background: var(--secondaryColor);
+	cursor: pointer;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0.5em;
+	border: transparent;
+}
+.modifyListButton:hover{
+	background: var(--tertiaryColor);
+}
+.cards-list{
+	background-color: var(--bgcolor);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 12em);
+	padding-top: 1em;
+	padding-bottom: 2em;
+	grid-gap: 0.8em;
 }
 
-.user-name{
-	font-size: 3em;
-	font-weight: 800;
+.card-list{
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
 }
 
-/* questo rompe non poche cose */
-/* main ul{
-	align-items: center;
-	font-weight: bold;
-	display: flex;
-	list-style: none;
-} */
+.card-list > img{
+	display: block;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	object-fit: cover;
+}
 
-.list-nav{
+/* 
+==============
+STATS PAGE
+============== 
+*/
+
+.general-stats{
+	border: 1px solid var(--tertiaryColor);
+	border-collapse:collapse ;
+	width: 100%;
 	text-align: center;
-	background-color: var(--secondaryColor);
-	line-height: 3em;
-	border-bottom: 3px solid transparent;
+	margin-bottom: 2em;
+	margin-top: 1em;
 }
-
-.link-nav a {
-	padding: 1em;
-	border-color: var(--tertiaryColor); /* to be defined */
+.stats tr,td,th{
+	border: 1px solid var(--tertiaryColor);
 }
-
-.link-nav a:hover {
+.st-col:nth-child(odd) {
 	background-color: var(--secondaryColor);
 }
 
-.link-nav > span {
-	padding: 1em;
-}
-
-.film-in-list{
-	display:flex;
-	align-items: center;
-	list-style: none;
-}
-
-.all-films-list tr:nth-child(even){
-	background-color: var(--secondaryColor);
-	/* color: #fff; */
-}
-
-.all-films-list, th, td{
-	border: 1px solid;
+.genre-stats{
+	border: 1px solid var(--tertiaryColor);
 	border-collapse: collapse;
-	border-color: var(--tertiaryColor);
-}
-
-/* main h2 {
-	font-size: 1.5em;
-	font-weight: bold;
-} */
-
-/* main ul{
+	width: 100%;
+	margin-top: 1em;
 	text-align: center;
-} */
+}
+tr:nth-child(odd) {
+	background-color: var(--secondaryColor);
+}
 
 .stats{
-	text-align: center;
-}
+	background-color: var(--bgcolor);
 
-/* main dt {
-	font-weight: bold;
-} */
-
-.primo{
-	text-align: center;
-	font-size: large;
-	font-weight: bold
-}
-.secondo{
-	font-size: medium;
-	font-weight: normal;
-
-}
-.terzo{
-	font-size: small;
-	font-weight: lighter;
 }
 
 /* ??? elena - END ??? */
