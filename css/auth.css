@@ -40,14 +40,16 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	line-height: 1.5;
-	background-color: var(--tertiaryColor);
+	background-color: var(--bgcolor);
 	color: var(--txtcolor);
 	max-width: var(--content-width);
 	margin: var(--content-padding) auto;
+	margin-left: .5em;
+	margin-right: .5em;
 }
 
 body > * {
-	background-color: var(--bgcolor);
+	background-color: var(--secondaryColor);
 	padding: var(--content-padding);
 }
 
@@ -77,6 +79,10 @@ a:visited { /* serve anche focused, ma dev'essere un colore diverso */
 	color: var(--anchorcolor-alt);
 }
 
+#field{
+	border-color: transparent;
+}
+
 /* Inputs */
 
 form {
@@ -89,6 +95,7 @@ input {
 	margin: 0.5em 0 1.5em;
 	padding: 1em;
 	border-radius: var(--border-radius);
+	border: none;
 }
 
 input:focus {
