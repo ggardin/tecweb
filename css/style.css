@@ -661,7 +661,8 @@ MOVIE PAGE
 	margin-right: .5em;
 
 	grid-gap: 1.5em;
-	grid-template-areas: "a b";
+	grid-template-areas: "a b"
+"a c";
 	/*	flex-direction: row;
 		justify-content: space-between;
 		padding: 1em;*/
@@ -692,9 +693,12 @@ MOVIE PAGE
 	margin-bottom: 1.5em;
 }
 
-.movie-details{
+#first{
 	grid-area: b;
-	margin-left: 20fr;
+}
+
+#second{
+	grid-area: c;
 }
 
 .movie-details > h1{

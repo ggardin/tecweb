@@ -21,14 +21,10 @@
 	<main>
 		<!-- main_start -->
 		<div class="movie-page">
-			<div class="movie-media">
-				<img src="@@locandina@@" alt="" width="250" height="375" />
-				<button type="button" class="movie-viewed">Visto</button>
-				<button type="button" class="movie-add-to-list">Aggiungi alla lista</button>
-			</div>
+
 
 			<!-- dettagli_start -->
-			<div class="movie-details">
+			<div class="movie-details" id="first">
 				<h1>@@nome_film@@</h1>
 				<!-- sottotitolo_start -->
 				<p id="subtitle">@@sottotitolo@@</p>
@@ -37,6 +33,17 @@
 				<p>@@descrizione@@</p>
 				<!-- descrizione_end -->
 
+
+				</div>
+
+			<div class="movie-media">
+				<img src="@@locandina@@" alt="" width="250" height="375" />
+				<button type="button" class="movie-viewed">Visto</button>
+				<button type="button" class="movie-add-to-list">Aggiungi alla lista</button>
+			</div>
+
+
+				<div class="movie-details" id="second">
 				<!-- crew_start -->
 				<h2 lang="en">Crew</h2>
 				<dl>

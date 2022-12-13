@@ -124,7 +124,8 @@ nav.dropdown-opened .hamburger-bottom {
 
 .movie-page{
 	grid-template-areas: "a"
-						 "b";
+						 "b"
+"c";
 
 }
 /*.movie-media {*/
