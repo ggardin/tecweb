@@ -118,25 +118,24 @@ nav.dropdown-opened .hamburger-bottom {
 }
 
 .movie-details{
-	margin-top: 2em;
-	margin-left: 0;
+	margin: 1em;
+
 }
 
-.movie-media {
-	float: none;
-	min-height: 0;
-}
+.movie-page{
+	grid-template-areas: "a"
+						 "b"
+						 "c";
 
-.movie-viewed{
-	width: 100%;
-	max-width: 20em;
+}
+/*.movie-media {*/
+/*	grid-area: a;*/
+/*	min-height: 0;*/
+/*}*/
+
+
+.movie-media{
 	margin: 0 auto 1em;
-}
-
-.movie-add-to-list{
-	width: 100%;
-	max-width: 20em;
-	margin: 0 auto;
 }
 
 /*
