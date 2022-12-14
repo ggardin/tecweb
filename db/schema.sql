@@ -53,7 +53,7 @@ create table persona (
 );
 
 create table ruolo (
-	id int unsigned,
+	id smallint unsigned,
 	nome varchar(50) unique not null,
 	primary key (id)
 );
@@ -110,7 +110,7 @@ create table film_paese (
 create table crew (
 	film bigint unsigned,
 	persona int unsigned,
-	ruolo int unsigned,
+	ruolo smallint unsigned,
 	primary key (film, persona, ruolo),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (persona) references persona(id) on delete cascade,
