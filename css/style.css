@@ -588,6 +588,8 @@ CONTENTS
 	border-radius: var(--border-radius);
 	padding: 2em;
 	margin: 2em 0;
+	margin-left: .5em;
+	margin-right: .5em;
 }
 
 .container > .text {
@@ -627,6 +629,14 @@ RESULTS CARD
 	display: block;
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	object-fit: cover;
+}
+
+.card a {
+	color: var(--anchorcolor);
+}
+
+.card a:visited { /* serve anche focused, ma dev'essere un colore diverso */
+	color: var(--anchorcolor-alt);
 }
 
 .details{
