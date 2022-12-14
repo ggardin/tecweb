@@ -192,19 +192,21 @@ footer {
 	display: flex;
 	flex-flow: row wrap;
 	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	padding: 1em;
 }
 
 footer > div:not(:last-child) {
 	flex: 1 0 auto;
 	width: 200px;
+	padding: 1em 0;
 }
 
 footer .title {
 	text-transform: uppercase;
 	font-size: 0.8em;
 	letter-spacing: 0.05em;
-	margin-bottom: 1em;
+	margin-bottom: 0.5em;
 }
 
 footer ul {
@@ -228,6 +230,7 @@ footer .tmdb-attribution {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
+	margin-top: 2em;
 	gap: 1em;
 	font-size: 0.8em;
 }
