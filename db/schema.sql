@@ -129,7 +129,7 @@ create table utente (
 	gender int unsigned not null default 0,
 	data_nascita date,
 	password varchar(255) not null,
-	is_admin boolean not null default 0,
+	is_admin tinyint unsigned not null default 0,
 	primary key (id),
 	foreign key (gender) references gender(id)
 );
