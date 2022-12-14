@@ -310,10 +310,8 @@ USER PAGE
 ============== 
 */
 
-
 /* massimo 5 carte film lista */
 .user-info{
-	display: block;
 	margin-left: 35%;
 	margin-right: 35%;
 	width: 30%;
@@ -322,17 +320,23 @@ USER PAGE
 	background-color: var(--bgcolor);
 	margin-top: 2em;
 	display: grid;
-	grid-gap: 1em;
+	grid-gap: 3em;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
+	
+
 }
 
 .user-card{
 	text-align: center;
+	border-radius: 3em;
+	background-color: var(--secondaryColor);
+	cursor: pointer;
 }
-
+/* 
+cambio colore?
 .user-card:hover{
 	background-color: var(--secondaryColor);
-}
+} */
 
 .user-card > img{
 	display: block;
@@ -439,6 +443,59 @@ tr:nth-child(odd) {
 	background-color: var(--bgcolor);
 
 }
+
+/* 
+==============
+SETTINGS PAGE
+============== 
+*/
+.title-sett{
+	margin-top: 1em;
+}
+.user-setting{
+	margin-top: 0.5em;
+}
+.user-profile{
+	background-color: var(--bgcolor);
+}
+.username{
+	height: 2em;
+	resize: none;
+}
+#image-upload{
+	display: none;
+}
+.psw{
+	resize: none;
+	height: 2em;
+}
+.avatar{
+	display: block;
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	text-align: center;
+	cursor: pointer;
+    justify-content: center;
+    position: relative;
+	height: 7em;
+	width: 7em;
+	/* 
+    border-radius: 4px;
+    display: inline-flex;
+    font-size: 1.3rem;
+    height: 200px;
+    margin-right: 20px;
+    outline-offset: -12px;
+    outline: 2px dashed rgba(var(--color-text),.2);
+    padding: 18px 20px;
+    transition: .2s;
+    vertical-align: text-top;
+    width: 200px; */
+}
+.showed{
+	list-style-type: none;
+}
+
 
 /* ??? elena - END ??? */
 
