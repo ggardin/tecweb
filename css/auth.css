@@ -9,7 +9,8 @@
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
 
-	--content-width: 35em;
+	--content-width: 60em;
+	--form-width: 35em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
 }
@@ -22,40 +23,55 @@
 	--anchorcolor-alt: #F6B5FF;
 
 	--secondaryColor: #242424;
-	--tertiaryColor: #12322D;
+	--tertiaryColor: #BDDDAA;
 }
 
 @font-face {
 	font-family: "Sora";
 	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
+	font-weight: 100 900;
 	font-display: swap;
 }
 
 * {
-	font-family: "Sora", sans-serif;
+	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
 
-body {
+body{
+	display: flex;
+	flex-direction: column;
+	background-color: var(--bgcolor);
+	padding: .5em;
+}
+
+body > main{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	line-height: 1.5;
-	background-color: var(--tertiaryColor);
+	background-color: var(--secondaryColor);
 	color: var(--txtcolor);
-	max-width: var(--content-width);
+	max-width: var(--form-width);
 	margin: var(--content-padding) auto;
-}
+	border-radius: var(--border-radius);
 
-body > * {
-	background-color: var(--bgcolor);
-	padding: var(--content-padding);
 }
 
 header {
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	align-items: center;
+	width: 100%;
+	margin: 0 auto 3em auto;
+	max-width: var(--content-width);
+}
+
+#logo-icon{
+
+}
+
+#signup{
+	padding-top: 1em;
 }
 
 main {
@@ -63,11 +79,12 @@ main {
 	padding: var(--content-padding);
 }
 
-footer {
+/*footer {
 	background-color: var(--secondaryColor);
 	border-radius: 0 0 var(--border-radius) var(--border-radius);
-	font-size: 0.8em;
-}
+	!*font-size: 0.8em;*!
+	text-align: center;
+}*/
 
 a {
 	color: var(--anchorcolor);
@@ -75,6 +92,10 @@ a {
 
 a:visited { /* serve anche focused, ma dev'essere un colore diverso */
 	color: var(--anchorcolor-alt);
+}
+
+#field{
+	border-color: transparent;
 }
 
 /* Inputs */
@@ -89,15 +110,18 @@ input {
 	margin: 0.5em 0 1.5em;
 	padding: 1em;
 	border-radius: var(--border-radius);
+	border: none;
 }
 
-input:focus {
-	border: 3px solid #555;
-}
+/*input:focus {
+	border: 2px solid #555;
+}*/
 
 input[type=submit] {
-	color: white;
+	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
+	font-weight: 600;
+	font-size: 1.2em;
 }
 
 /* Screen reader */
@@ -158,19 +182,15 @@ html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
 
 /*
 ==============
-TMDB ATTRIBUTION
+AUTH FOOTER
 ==============
 */
 
-.tmdb-attribution {
+.auth-footer {
 	display: flex;
 	gap: 1em;
 }
 
-.tmdb-attribution p {
+.auth-footer p {
 	flex: 1 0 100px;
-}
-
-.tmdb-attribution img {
-	width: 3em;
 }

@@ -15,31 +15,36 @@
 	</header>
 
 	<main>
-		<h1>Registrazione</h1>
+		<h1>Per iniziare, crea un account</h1>
 		<!-- message_start -->
 		<p>@@message@@</p>
 		<!-- message_end -->
+
+		<p id="signup">Hai già un <span lang="en">account</span>? <a href="login.php">Accedi ora</a></p>
+
 		<form method="post" action="signup.php">
-			<fieldset>
+			<fieldset id="field">
 				<label for="username">Nome utente</label>
 				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required/>
-				<br />
+<!--				<br />-->
 
-				<label for="password">Password</label>
+				<label for="password"><span lang="en">Password</span></label>
 				<input type="password" id="password" name="password" aria-required="true" value="@@form_password@@" required/>
-				<br />
+<!--				<br />-->
 
-				<label for="password_confirm">Conferma Password</label>
+				<label for="password_confirm">Conferma <span lang="en">Password</span></label>
 				<input type="password" id="password_confirm" name="password_confirm" aria-required="true" value="@@form_password_confirm@@" required/>
-				<br />
+<!--				<br />-->
 
 				<input type="submit" name="submit" value="Registrati">
+
 			</fieldset>
 		</form>
 	</main>
 
-	<footer class="tmdb-attribution">
-		<!-- footer -->
-	</footer>
+<!--	<footer class="auth-footer" id="signup">
+		&lt;!&ndash; footer &ndash;&gt;
+		<p>Hai già un <span lang="en">account</span>? <a href="login.php">Accedi ora</a></p>
+	</footer>-->
 </body>
 </html>

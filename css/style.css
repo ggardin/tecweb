@@ -25,7 +25,7 @@
 	--anchorcolor-alt: #F6B5FF;
 
 	--secondaryColor: #242424;
-	--tertiaryColor: #12322D;
+	--tertiaryColor: #BDDDAA;
 }
 
 @font-face {
@@ -87,9 +87,6 @@ header {
 	align-items: center;
 	z-index: 10;
 	margin-top: 1em;
-	/*margin-bottom: 1em;*/
-
-	/*margin-bottom: -3em;*/
 }
 
 header ul {
@@ -222,6 +219,10 @@ footer li {
 
 footer li a {
 	color: var(--txtcolor);
+}
+
+footer p a{
+	color: var(--link-color);
 }
 
 footer .tmdb-attribution {
@@ -420,7 +421,7 @@ SEARCH BAR
 
 .searchTerm {
 	width: 100%;
-	padding: 9px;
+	padding: 1em;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	font-size: 16px;
 	border: transparent;
@@ -431,9 +432,15 @@ SEARCH BAR
 	background: var(--tertiaryColor);
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
-	margin-left: 0;
-	margin-right: 0;
 	border: transparent;
+	padding-left: .8em;
+	padding-right: .8em;
+}
+
+.searchButton img {
+	width: 35px;
+	height: 35px;
+
 }
 
 .h1 {
@@ -698,6 +705,10 @@ MOVIE PAGE
 .movie-details > ul{
 	list-style-type: none;
 	padding-left: 0;
+}
+
+.movie-details a{
+	color: var(--link-color);
 }
 
 .movie-viewed{
