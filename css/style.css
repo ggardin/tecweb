@@ -221,6 +221,10 @@ footer li a {
 	color: var(--txtcolor);
 }
 
+footer p a{
+	color: var(--link-color);
+}
+
 footer .tmdb-attribution {
 	display: flex;
 	flex-flow: row wrap;
