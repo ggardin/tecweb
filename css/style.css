@@ -86,7 +86,6 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
-	margin-top: 1em;
 }
 
 header ul {
@@ -413,6 +412,14 @@ SEARCH BAR
 ==============
 */
 
+#hero .search {
+	position: relative;
+	display: flex;
+	margin: 2em auto 3em;
+	width: 100%;
+	max-width: 60%;
+}
+
 .search {
 	position: relative;
 	display: flex;
@@ -558,39 +565,31 @@ CONTENTS
 ==============
 */
 
-.contents {
-	background-color: white;
-}
-
-.image-container .content {
-	height: 640px;
-	width: 100%;
-	margin-bottom: 2em;
-}
-
-.content {
-	height: 100%;
-	background-image: url("../img/demo.svg");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
-.content .title {
+#hero {
+	font-size: 2em;
 	text-align: center;
-	padding-top: 50px;
 }
 
-.content .title h1 {
-	font-size: 50px;
-	color: rgba(0, 0, 0, 0.897);
-	font-weight: bold;
+.container {
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	gap: 2em;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--bgcolor-alt);
+	border-radius: var(--border-radius);
+	padding: 2em;
+	margin: 2em 0;
 }
 
-.content .title p {
-	font-size: 25px;
-	font-weight: normal;
-	color: rgba(41, 41, 41, 0.89)
+.container > .text {
+	flex: 1 0;
+}
+
+.container > img {
+	flex-grow: 0;
+	width: 300px; /* TODO: ridimensiona il png */
 }
 
 .cta-links {
