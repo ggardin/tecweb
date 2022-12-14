@@ -311,14 +311,67 @@ USER PAGE
 */
 
 
+/* massimo 5 carte film lista */
+.user-info{
+	display: block;
+	margin-left: 35%;
+	margin-right: 35%;
+	width: 30%;
+}
+.user-cards{
+	background-color: var(--bgcolor);
+	margin-top: 2em;
+	display: grid;
+	grid-gap: 1em;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.user-card{
+	text-align: center;
+}
+
+.user-card:hover{
+	background-color: var(--secondaryColor);
+}
+
+.user-card > img{
+	display: block;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	object-fit: cover;
+}
+
+.show-list{
+
+	background-color: var(--bgcolor);
+	display: grid;
+	grid-template-areas: "a a a a a"
+						 "b c d e f";
+	padding-top: 1em;
+	padding-bottom: 2em;
+	grid-gap: 0.8em;
+}
+.lists-name{
+	grid-area: a;
+}
+.list-card{
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+}
+
+.list-card > img{
+	display: block;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	object-fit: cover;
+}
+
 /* 
 ==============
 LIST PAGE
 ============== 
 */
-
 .modifyListButton{
-	background: var(--secondaryColor);
+	display: flex;
+	background: var(--bgcolor);
 	cursor: pointer;
 	margin-left: 0;
 	margin-right: 0;
@@ -326,7 +379,7 @@ LIST PAGE
 	border: transparent;
 }
 .modifyListButton:hover{
-	background: var(--tertiaryColor);
+	background: var(--secondaryColor);
 }
 .cards-list{
 	background-color: var(--bgcolor);
@@ -338,11 +391,13 @@ LIST PAGE
 }
 
 .card-list{
+	text-align: center;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 }
 
 .card-list > img{
+/* mettere l'immagine al centro della carta */
 	display: block;
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	object-fit: cover;
