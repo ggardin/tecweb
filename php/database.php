@@ -9,7 +9,7 @@ class Database {
 	private const USER = "rbonavig";
 	private const PASS = "paJa5The1eiM4hei";
 
-	private const ERR = "Siamo spiacenti, abbiamo riscontrato un errore. Riprova più tardi.";
+	private const ERR = "Errore interno. Ci dispiace. Riprova più tardi.";
 
 	private $connection;
 
@@ -88,13 +88,44 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getFilmInCollezioneById($id) : array {
+	public function getFilmByCollezioneId($id) : array {
 		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from collezione as c
 				join film as f
 					on c.id = f.collezione
 			where c.id = ?
 			order by f.data_rilascio is null, f.data_rilascio";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getPersonaById($id) : array {
+		$query = "select p.nome, g.nome as gender, p.immagine, p.data_nascita, p.data_morte
+			from persona as p
+				join gender as g
+					on p.gender = g.id
+			where p.id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getFilmByPersonaId($id) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio, r.nome as ruolo
+			from persona as p
+				join crew as c
+					on p.id = c.persona
+				join film as f
+					on c.film = f.id
+				join ruolo as r
+					on c.ruolo = r.id
+			where p.id = ?
+			order by f.id, r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -114,7 +145,7 @@ class Database {
 	}
 
 	public function getCrewByFilmId($id) : array {
-		$query = "select r.nome as ruolo, p.nome as persona
+		$query = "select r.nome as ruolo, p.id as p_id, p.nome as p_nome
 			from film as f
 				join crew as c
 					on f.id = c.film
@@ -186,6 +217,41 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
+	public function searchFilmFilteredByGenere($str, $genere) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
+			from film as f
+				join film_genere as fg
+					on f.id = fg.film
+				join genere as g
+					on fg.genere = g.id
+			where f.nome like ?
+				and g.nome = ?";
+
+		$params = [("%" . trim($str) . "%"), $genere];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function searchFilmFilteredByPaese($str, $paese) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
+			from film as f
+				join film_paese as fp
+					on f.id = fp.film
+				join paese as p
+					on fp.paese = p.iso_3166_1
+			where f.nome like ?
+				and p.nome = ?";
+
+		$params = [("%" . trim($str) . "%"), $paese];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function searchFilmFilteredByData($str, $data) : array {
+		// TODO
+		return [];
+	}
+
 	public function searchCollezione($str) : array {
 		$query = "select id, nome, locandina
 			from collezione
@@ -196,30 +262,12 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function searchFilmByGenere($str) : array {
-		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
-			from film as f
-				join film_genere as fg
-					on f.id = fg.film
-				join genere as g
-					on fg.genere = g.id
-			where g.nome like ?";
+	public function searchPersona($str) : array {
+		$query = "select id, nome, immagine
+			from persona
+			where nome like ?";
 
-		$params = [trim($str)];
-
-		return $this->preparedSelect($query, $params);
-	}
-
-	public function searchFilmByPaese($str) : array {
-		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
-			from film as f
-				join film_paese as fp
-					on f.id = fp.film
-				join paese as p
-					on fp.paese = p.iso_3166_1
-			where p.nome like ?";
-
-		$params = [trim($str)];
+		$params = [("%" . trim($str) . "%")];
 
 		return $this->preparedSelect($query, $params);
 	}
