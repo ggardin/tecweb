@@ -185,6 +185,10 @@ main > h2{
 */
 /* ??? gio - END ??? */
 
+main h1{
+	margin-left: .5em;
+	margin-right: .5em;
+}
 
 /*
 ==============
@@ -237,6 +241,10 @@ footer .tmdb-attribution {
 	margin-top: 2em;
 	gap: 1em;
 	font-size: 0.8em;
+}
+
+footer svg{
+	margin-right: 3em;
 }
 
 
@@ -446,8 +454,8 @@ SEARCH BAR
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
 	border: transparent;
-	padding-left: .5em;
-	padding-right: .5em;
+	padding-left: .4em;
+	padding-right: .4em;
 }
 
 .searchButton svg {
@@ -587,9 +595,7 @@ CONTENTS
 	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
 	padding: 2em;
-	margin: 2em 0;
-	margin-left: .5em;
-	margin-right: .5em;
+	margin: 2em .5em;
 }
 
 .container > .text {
