@@ -9,7 +9,8 @@
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
 
-	--content-width: 35em;
+	--content-width: 60em;
+	--form-width: 35em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
 }
@@ -36,28 +37,41 @@
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
 
-body {
+body{
+	display: flex;
+	flex-direction: column;
+	background-color: var(--bgcolor);
+	padding: .5em;
+}
+
+body > main{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	line-height: 1.5;
-	background-color: var(--bgcolor);
-	color: var(--txtcolor);
-	max-width: var(--content-width);
-	margin: var(--content-padding) auto;
-}
-
-body > * {
 	background-color: var(--secondaryColor);
-	padding: var(--content-padding);
-	margin: 0 1em 0 1em;
+	color: var(--txtcolor);
+	max-width: var(--form-width);
+	margin: var(--content-padding) auto;
+	border-radius: var(--border-radius);
+
 }
 
 header {
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	align-items: center;
+	width: 100%;
+	margin: 0 auto 3em auto;
+	max-width: var(--content-width);
+}
+
+#logo-icon{
+
+}
+
+#signup{
+	padding-top: 1em;
 }
 
 main {
@@ -65,12 +79,12 @@ main {
 	padding: var(--content-padding);
 }
 
-footer {
+/*footer {
 	background-color: var(--secondaryColor);
 	border-radius: 0 0 var(--border-radius) var(--border-radius);
-	/*font-size: 0.8em;*/
+	!*font-size: 0.8em;*!
 	text-align: center;
-}
+}*/
 
 a {
 	color: var(--anchorcolor);

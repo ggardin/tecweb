@@ -19,25 +19,28 @@
 		<!-- message_start -->
 		<p>@@message@@</p>
 		<!-- message_end -->
+
+		<p id="signup">Non hai un <span lang="en">account</span>? <a href="signup.php">Creane uno subito</a></p>
+
 		<form method="post" action="login.php">
 			<fieldset id="field">
 
 				<label for="username">Nome utente</label>
 				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required/>
-				<br />
+<!--				<br />-->
 
 				<label for="password"><span lang="en">Password</span></label>
 				<input type="password" id="password" name="password" aria-required="true" value="@@form_password@@" required/>
-				<br />
+<!--				<br />-->
 
 				<input type="submit" name="submit" value="Accedi">
 			</fieldset>
 		</form>
 	</main>
 
-	<footer class="auth-footer" id="login">
-		<!-- footer -->
+<!--	<footer class="auth-footer" id="login">
+		&lt;!&ndash; footer &ndash;&gt;
 		<p>Non hai un <span lang="en">account</span>? <a href="signup.php">Creane uno subito</a></p>
-	</footer>
+	</footer>-->
 </body>
 </html>
