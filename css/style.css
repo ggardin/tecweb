@@ -76,7 +76,7 @@ body {
 
 /*
 ==============
-SEZIONE HEADER
+HEADER
 ==============
 */
 
@@ -102,11 +102,9 @@ header li {
 
 header li.active {
 	background-color: var(--secondaryColor);
-	/*border-color: currentcolor;*/
 }
 
 header li:hover {
-	/*background-color: var(--secondaryColor);*/
 	border-color: var(--txtcolor);
 }
 
@@ -132,7 +130,9 @@ header .actions {
 }
 
 #logo-icon{
+	color: red;
 	margin-left: .5em;
+	fill: currentcolor;
 }
 
 
