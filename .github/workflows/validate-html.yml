@@ -9,6 +9,9 @@ on:
   push:
     paths:
       - .github/workflows/validate-html.yml
+    branches:
+      - main
+      - dev
 
 jobs:
   validator:
