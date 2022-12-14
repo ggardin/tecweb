@@ -22,7 +22,7 @@
 	--anchorcolor-alt: #F6B5FF;
 
 	--secondaryColor: #242424;
-	--tertiaryColor: #12322D;
+	--tertiaryColor: #BDDDAA;
 }
 
 @font-face {
@@ -33,7 +33,7 @@
 }
 
 * {
-	font-family: "Sora", sans-serif;
+	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
 
 body {
@@ -44,13 +44,13 @@ body {
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
 	max-width: var(--content-width);
-	/*margin: var(--content-padding) auto;*/
-	margin: auto;
+	margin: var(--content-padding) auto;
 }
 
 body > * {
 	background-color: var(--secondaryColor);
 	padding: var(--content-padding);
+	margin: 0 1em 0 1em;
 }
 
 header {
@@ -69,6 +69,7 @@ footer {
 	background-color: var(--secondaryColor);
 	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	font-size: 0.8em;
+	text-align: center;
 }
 
 a {
@@ -98,12 +99,12 @@ input {
 	border: none;
 }
 
-input:focus {
-	border: 3px solid #555;
-}
+/*input:focus {
+	border: 2px solid #555;
+}*/
 
 input[type=submit] {
-	color: white;
+	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
 }
 
