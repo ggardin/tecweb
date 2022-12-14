@@ -166,19 +166,15 @@ html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
 
 /*
 ==============
-TMDB ATTRIBUTION
+AUTH FOOTER
 ==============
 */
 
-.tmdb-attribution {
+.auth-footer {
 	display: flex;
 	gap: 1em;
 }
 
-.tmdb-attribution p {
+.auth-footer p {
 	flex: 1 0 100px;
-}
-
-.tmdb-attribution img {
-	width: 3em;
 }
