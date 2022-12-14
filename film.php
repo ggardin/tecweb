@@ -7,9 +7,7 @@ $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
-$title = "Film";
-
-$err = "Film non esistente";
+$err = "Errore: Film non presente";
 
 if ($id != "") {
 	$db_ok = false;
@@ -26,15 +24,16 @@ if ($id != "") {
 		}
 		$db_ok = true;
 	} catch (Exception $e) {
+		Tools::replaceAnchor($page, "title", $e->getMessage());
 		Tools::replaceSection($page, "main", ("<h1>" . $e->getMessage() . "</h1>"));
 	} finally {
 		unset($connessione);
 	}
 	if ($db_ok) {
 		if (!empty($film)) {
-			$title = Tools::langToTag($film["nome"], "") . " · " . $title;
+			Tools::replaceAnchor($page, "title", Tools::langToTag($film["nome"], "") . " · Film");
 			Tools::replaceAnchor($page, "nome_film", Tools::langToTag($film["nome"]));
-			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w500/" . $film["locandina"]) : "img/placeholder.svg");
+			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
 			$r = "";
 			if (isset($film["data_rilascio"]))
@@ -52,15 +51,23 @@ if ($id != "") {
 			else
 				Tools::replaceSection($page, "descrizione", "");
 			if (!empty($crew)) {
-				$list = Tools::getSection($page, "partecipazione");
-				$r = "";
+				$ruolo = Tools::getSection($page, "ruolo");
+				$persona = Tools::getSection($page, "persona");
+				$res = "";
+				$last_ruolo = "";
 				foreach ($crew as $c) {
-					$t = $list;
-					Tools::replaceAnchor($t, "ruolo", $c["ruolo"]);
-					Tools::replaceAnchor($t, "persona", Tools::langToTag($c["persona"]));
-					$r .= $t;
+					if ($c["ruolo"] != $last_ruolo) {
+						$r = $ruolo;
+						Tools::replaceAnchor($r, "ruolo", $c["ruolo"]);
+						$last_ruolo = $c["ruolo"];
+						$res .= $r;
+					}
+					$p = $persona;
+					Tools::replaceAnchor($p, "nome", Tools::langToTag($c["p_nome"]));
+					Tools::replaceAnchor($p, "id", $c["p_id"]);
+					$res .= $p;
 				}
-				Tools::replaceSection($page, "partecipazione", $r);
+				Tools::replaceSection($page, "ruoli", $res);
 			} else
 				Tools::replaceSection($page, "crew", "");
 			if (!empty($genere)) {
@@ -68,7 +75,7 @@ if ($id != "") {
 				$r = "";
 				foreach ($genere as $g) {
 					$t = $list;
-					Tools::replaceAnchor($t, "link", $g["nome"]);
+					Tools::replaceAnchor($t, "valore", $g["nome"]);
 					Tools::replaceAnchor($t, "nome", $g["nome"]);
 					$r .= $t;
 				}
@@ -80,7 +87,7 @@ if ($id != "") {
 				$r = "";
 				foreach ($paese as $p) {
 					$t = $list;
-					Tools::replaceAnchor($t, "link", $p["nome"]);
+					Tools::replaceAnchor($t, "valore", $p["nome"]);
 					Tools::replaceAnchor($t, "nome", $p["nome"]);
 					$r .= $t;
 				}
@@ -99,8 +106,8 @@ if ($id != "") {
 				Tools::replaceSection($page, "incassi", "");
 			if (isset($film["collezione"])) {
 				$c = Tools::getSection($page, "collezione");
-				Tools::ReplaceAnchor($c, "link", $film["collezione"]);
-				Tools::ReplaceAnchor($c, "nome", $collezione[0]["nome"]);
+				Tools::ReplaceAnchor($c, "id", $film["collezione"]);
+				Tools::ReplaceAnchor($c, "nome", Tools::langToTag($collezione[0]["nome"]));
 				Tools::ReplaceSection($page, "collezione", $c);
 			} else
 				Tools::replaceSection($page, "collezione", "");
@@ -121,14 +128,14 @@ if ($id != "") {
 			} else
 				Tools::replaceSection($page, "valutazioni", "");
 		} else {
+			Tools::replaceAnchor($page, "title", $err);
 			Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
 		}
 	}
 } else {
+	Tools::replaceAnchor($page, "title", $err);
 	Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
 }
-
-Tools::replaceAnchor($page, "title", $title);
 
 Tools::showPage($page);
 
