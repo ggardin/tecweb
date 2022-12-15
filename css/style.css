@@ -686,7 +686,9 @@ MOVIE PAGE
 }
 
 .movie-media button{
-	width: 15.625em;
+	/*width: 15.625em;*/
+	font-size: 1.2em;
+	font-weight: 600;
 }
 
 .movie-media img{
