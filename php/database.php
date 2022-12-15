@@ -36,7 +36,8 @@ class Database {
 			if (is_string($p)) {
 				$p = trim($p);
 				$p = strip_tags($p);
-				$p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+				$p = htmlspecialchars($p, ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+				// $p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
 		}
 	}
