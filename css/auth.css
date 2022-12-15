@@ -58,16 +58,13 @@ body > main{
 }
 
 header {
+	color: var(--txtcolor);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	margin: 0 auto 3em auto;
 	max-width: var(--content-width);
-}
-
-#logo-icon{
-
 }
 
 #signup{
