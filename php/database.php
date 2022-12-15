@@ -134,9 +134,11 @@ class Database {
 	}
 
 	public function getFilmById($id) : array {
-		$query = "select *
-			from film
-			where id = ?";
+		$query = "select f.id, f.nome, f.nome_originale, f.durata, f.locandina, f.descrizione, f.data_rilascio, f.budget, f.incassi, f.collezione, f.voto, s.nome as stato
+			from film as f
+				join stato as s
+					on f.stato = s.id
+			where f.id = ?";
 
 		$params = [$id];
 		$types = "i";
