@@ -23,6 +23,7 @@ if ($id != "") {
 		$db_ok = true;
 	} catch (Exception $e) {
 		Tools::replaceAnchor($page, "title", $e->getMessage());
+		Tools::replaceAnchor($page, "breadcrumb", "Errore");
 		$content .= "<h1>" . $e->getMessage() . "</h1>";
 	} finally {
 		unset($connessione);
@@ -30,6 +31,7 @@ if ($id != "") {
 	if ($db_ok) {
 		if (!empty($collezione)) {
 			Tools::replaceAnchor($page, "title", Tools::langToTag($collezione["nome"], "") . " · Collezione");
+			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($collezione["nome"]));
 			$content .= "<h1>" . Tools::langToTag($collezione["nome"]) . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($collezione["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';
 			if (isset($collezione["descrizione"]))
@@ -47,11 +49,13 @@ if ($id != "") {
 			$content .= "</ol>";
 		} else {
 			Tools::replaceAnchor($page, "title", $err);
+			Tools::replaceAnchor($page, "breadcrumb", "Errore");
 			$content .= "<h1>" . $err . "</h1>";
 		}
 	}
 } else {
 	Tools::replaceAnchor($page, "title", $err);
+	Tools::replaceAnchor($page, "breadcrumb", "Errore");
 	$content .= "<h1>" . $err . "</h1>";
 }
 

@@ -23,6 +23,7 @@ if ($id != "") {
 		$db_ok = true;
 	} catch (Exception $e) {
 		Tools::replaceAnchor($page, "title", $e->getMessage());
+		Tools::replaceAnchor($page, "breadcrumb", "Errore");
 		$content .= "<h1>" . $e->getMessage() . "</h1>";
 	} finally {
 		unset($connessione);
@@ -30,6 +31,7 @@ if ($id != "") {
 	if ($db_ok) {
 		if (!empty($persona)) {
 			Tools::replaceAnchor($page, "title", Tools::langToTag($persona["nome"], "") . " · Persona");
+			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($collezione["nome"]));
 			$content .= "<h1>" . Tools::langToTag($persona["nome"]) . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg") . '" alt="" />';
 			$content .= '<p><span lang="en">Gender</span>: ' . $persona["gender"] . "</p>";
@@ -50,11 +52,13 @@ if ($id != "") {
 			$content .= "</ol>";
 		} else {
 			Tools::replaceAnchor($page, "title", $err);
+			Tools::replaceAnchor($page, "breadcrumb", "Errore");
 			$content .= "<h1>" . $err . "</h1>";
 		}
 	}
 } else {
 	Tools::replaceAnchor($page, "title", $err);
+	Tools::replaceAnchor($page, "breadcrumb", "Errore");
 	$content .= "<h1>" . $err . "</h1>";
 }
 
