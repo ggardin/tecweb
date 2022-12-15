@@ -312,12 +312,11 @@ USER PAGE
 
 /* massimo 5 carte film lista */
 .user-info{
-	margin-left: 35%;
-	margin-right: 35%;
-	width: 30%;
+	margin: auto;
+	display: block;
+	position: absolute;
 }
 .user-cards{
-	background-color: var(--bgcolor);
 	margin-top: 2em;
 	display: grid;
 	grid-gap: 3em;
@@ -329,7 +328,7 @@ USER PAGE
 .user-card{
 	text-align: center;
 	border-radius: 3em;
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor);
 	cursor: pointer;
 }
 /* 
@@ -345,8 +344,6 @@ cambio colore?
 }
 
 .show-list{
-
-	background-color: var(--bgcolor);
 	display: grid;
 	grid-template-areas: "a a a a a"
 						 "b c d e f";
@@ -358,7 +355,7 @@ cambio colore?
 	grid-area: a;
 }
 .list-card{
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor);
 	border-radius: var(--border-radius);
 }
 
@@ -375,7 +372,7 @@ LIST PAGE
 */
 .modifyListButton{
 	display: flex;
-	background: var(--bgcolor);
+	background: var(--secondaryColor);
 	cursor: pointer;
 	margin-left: 0;
 	margin-right: 0;
@@ -383,10 +380,9 @@ LIST PAGE
 	border: transparent;
 }
 .modifyListButton:hover{
-	background: var(--secondaryColor);
+	background: var(--bgcolor);
 }
 .cards-list{
-	background-color: var(--bgcolor);
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 12em);
 	padding-top: 1em;
@@ -396,7 +392,7 @@ LIST PAGE
 
 .card-list{
 	text-align: center;
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor);
 	border-radius: var(--border-radius);
 }
 
@@ -440,7 +436,7 @@ tr:nth-child(odd) {
 }
 
 .stats{
-	background-color: var(--bgcolor);
+	background-color: var(--secondaryColor);
 
 }
 
@@ -456,7 +452,7 @@ SETTINGS PAGE
 	margin-top: 0.5em;
 }
 .user-profile{
-	background-color: var(--bgcolor);
+	background-color: var(--secondaryColor);
 }
 .username{
 	height: 2em;
@@ -471,7 +467,7 @@ SETTINGS PAGE
 }
 .avatar{
 	display: block;
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor);
 	border-radius: var(--border-radius);
 	text-align: center;
 	cursor: pointer;
@@ -479,18 +475,6 @@ SETTINGS PAGE
     position: relative;
 	height: 7em;
 	width: 7em;
-	/* 
-    border-radius: 4px;
-    display: inline-flex;
-    font-size: 1.3rem;
-    height: 200px;
-    margin-right: 20px;
-    outline-offset: -12px;
-    outline: 2px dashed rgba(var(--color-text),.2);
-    padding: 18px 20px;
-    transition: .2s;
-    vertical-align: text-top;
-    width: 200px; */
 }
 .showed{
 	list-style-type: none;
