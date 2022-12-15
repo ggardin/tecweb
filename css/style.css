@@ -104,6 +104,8 @@ header li {
 
 header li.active {
 	background-color: var(--secondaryColor);
+	border-bottom: hidden;
+	cursor: auto;
 }
 
 header li:hover {
