@@ -36,7 +36,7 @@ create table paese (
 );
 
 create table gender (
-	id int unsigned,
+	id tinyint unsigned,
 	nome varchar(50) not null,
 	primary key (id)
 );
@@ -44,7 +44,7 @@ create table gender (
 create table persona (
 	id int unsigned,
 	nome varchar(50) not null,
-	gender int unsigned,
+	gender tinyint unsigned not null default 0,
 	immagine varchar(100),
 	data_nascita date,
 	data_morte date,
@@ -53,7 +53,7 @@ create table persona (
 );
 
 create table ruolo (
-	id int unsigned,
+	id smallint unsigned,
 	nome varchar(50) unique not null,
 	primary key (id)
 );
@@ -110,7 +110,7 @@ create table film_paese (
 create table crew (
 	film bigint unsigned,
 	persona int unsigned,
-	ruolo int unsigned,
+	ruolo smallint unsigned,
 	primary key (film, persona, ruolo),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (persona) references persona(id) on delete cascade,
@@ -126,10 +126,10 @@ create table utente (
 	username varchar(30) unique not null,
 	mail varchar(100) unique,
 	nome varchar(50),
-	gender int unsigned,
+	gender tinyint unsigned not null default 0,
 	data_nascita date,
 	password varchar(255) not null,
-	is_admin boolean not null default 0,
+	is_admin tinyint unsigned not null default 0,
 	primary key (id),
 	foreign key (gender) references gender(id)
 );
