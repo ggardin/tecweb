@@ -36,10 +36,15 @@ class Database {
 			if (is_string($p)) {
 				$p = trim($p);
 				$p = strip_tags($p);
-				$p = htmlspecialchars($p, ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+				// convertiamo in entità durante output
 				// $p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
 		}
+	}
+
+	private function pulisciOutput(&$item, $key) : void {
+		if (is_string($item))
+			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
 	}
 
 	// see: https://phpdelusions.net/mysqli
@@ -59,6 +64,7 @@ class Database {
 			$ret = $result->fetch_all(MYSQLI_ASSOC);
 			$result->close();
 			$stmt->close();
+			array_walk_recursive($ret, "self::pulisciOutput");
 			return $ret;
 		} catch (mysqli_sql_exception $e) {
 			throw new Exception(self::ERR);
