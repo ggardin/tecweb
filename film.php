@@ -38,17 +38,17 @@ if ($id != "") {
 			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
 			$r = "";
-			if (isset($film["data_rilascio"]))
+			if ($film["data_rilascio"])
 				$r .= $film["data_rilascio"];
-			if (isset($film["durata"]))
+			if ($film["durata"])
 				$r .= ($r ? " · " : "") . $film["durata"] . " min";
-			if (isset($film["voto"]))
+			if ($film["voto"])
 				$r .= ($r ? " · " : "") . $film["voto"] . " *";
 			if ($r)
 				Tools::replaceAnchor($page, "sottotitolo", $r);
 			else
 				Tools::replaceSection($page, "sottotitolo", "");
-			if (isset($film["descrizione"]))
+			if ($film["descrizione"])
 				Tools::replaceAnchor($page, "descrizione", Tools::langToTag($film["descrizione"]));
 			else
 				Tools::replaceSection($page, "descrizione", "");
@@ -98,15 +98,15 @@ if ($id != "") {
 				Tools::replaceSection($page, "paesi", "");
 			Tools::replaceAnchor($page, "nome_originale", Tools::langToTag($film["nome_originale"]));
 			Tools::replaceAnchor($page, "stato", $film["stato"]);
-			if (isset($film["budget"])) {
+			if ($film["budget"]) {
 				Tools::ReplaceAnchor($page, "budget", $film["budget"] . " $");
 			} else
 				Tools::replaceSection($page, "budget", "");
-			if (isset($film["incassi"])) {
+			if ($film["incassi"]) {
 				Tools::ReplaceAnchor($page, "incassi", $film["incassi"] . " $");
 			} else
 				Tools::replaceSection($page, "incassi", "");
-			if (isset($film["collezione"])) {
+			if ($film["collezione"]) {
 				$c = Tools::getSection($page, "collezione");
 				Tools::ReplaceAnchor($c, "id", $film["collezione"]);
 				Tools::ReplaceAnchor($c, "nome", Tools::langToTag($collezione[0]["nome"]));
@@ -120,7 +120,7 @@ if ($id != "") {
 					$t = $list;
 					Tools::replaceAnchor($t, "utente", $v["utente"]);
 					Tools::replaceAnchor($t, "valore", $v["valore"]);
-					if (isset($v["testo"])) {
+					if ($v["testo"]) {
 						Tools::replaceAnchor($t, "testo", Tools::langToTag($v["testo"]));
 					} else
 						Tools::replaceSection($t, "testo", "");

@@ -18,26 +18,33 @@ drop table if exists persona;
 drop table if exists gender;
 drop table if exists paese;
 drop table if exists genere;
+drop table if exists stato;
 
 
 
 
+
+create table stato (
+	id tinyint unsigned,
+	nome varchar(50) unique not null,
+	primary key (id)
+);
 
 create table genere (
-	id int unsigned,
-	nome varchar(50),
+	id smallint unsigned,
+	nome varchar(50) unique not null,
 	primary key (id)
 );
 
 create table paese (
 	iso_3166_1 char(2),
-	nome varchar(100),
+	nome varchar(100) unique not null,
 	primary key (iso_3166_1)
 );
 
 create table gender (
 	id tinyint unsigned,
-	nome varchar(50) not null,
+	nome varchar(50) unique not null,
 	primary key (id)
 );
 
@@ -45,7 +52,7 @@ create table persona (
 	id int unsigned,
 	nome varchar(50) not null,
 	gender tinyint unsigned not null default 0,
-	immagine varchar(100),
+	immagine varchar(100) unique,
 	data_nascita date,
 	data_morte date,
 	primary key (id),
@@ -66,7 +73,7 @@ create table collezione (
 	id int unsigned,
 	nome varchar(200) not null,
 	descrizione varchar(10000),
-	locandina varchar(100),
+	locandina varchar(100) unique,
 	primary key (id)
 );
 
@@ -75,16 +82,18 @@ create table film (
 	nome varchar(200) not null,
 	nome_originale varchar(200) not null,
 	durata smallint unsigned,
-	locandina varchar(100),
+	locandina varchar(100) unique,
 	descrizione varchar(10000),
+	stato tinyint unsigned not null default 0,
 	data_rilascio date,
-	stato varchar(30) not null,
 	budget int unsigned,
 	incassi int unsigned,
 	collezione int unsigned,
 	voto float unsigned,
 	primary key (id),
-	foreign key (collezione) references collezione(id) on delete set null
+	foreign key (collezione) references collezione(id) on delete set null,
+	foreign key (stato) references stato(id),
+	constraint rilascio check (stato < 5 or data_rilascio is not null)
 );
 
 
@@ -93,7 +102,7 @@ create table film (
 
 create table film_genere (
 	film bigint unsigned,
-	genere int unsigned,
+	genere smallint unsigned,
 	primary key (film, genere),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (genere) references genere(id) on delete cascade
@@ -149,7 +158,8 @@ create table lista (
 	utente bigint unsigned,
 	nome varchar(50),
 	primary key (id),
-	foreign key (utente) references utente(id) on delete cascade
+	foreign key (utente) references utente(id) on delete cascade,
+	constraint no_stesso_nome unique (utente, nome)
 );
 
 create table lista_collezione (
@@ -173,8 +183,8 @@ create table lista_film (
 
 
 create table i_genere (
-	id int unsigned,
-	tmdb_id int unsigned,
+	id smallint unsigned,
+	tmdb_id smallint unsigned,
 	primary key (id),
 	foreign key (id) references genere(id) on delete cascade
 );
