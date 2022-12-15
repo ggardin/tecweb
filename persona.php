@@ -31,7 +31,7 @@ if ($id != "") {
 	if ($db_ok) {
 		if (!empty($persona)) {
 			Tools::replaceAnchor($page, "title", Tools::langToTag($persona["nome"], "") . " · Persona");
-			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($collezione["nome"]));
+			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($persona["nome"]));
 			$content .= "<h1>" . Tools::langToTag($persona["nome"]) . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg") . '" alt="" />';
 			$content .= '<p><span lang="en">Gender</span>: ' . $persona["gender"] . "</p>";
