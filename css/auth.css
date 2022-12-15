@@ -174,11 +174,11 @@ p, h1, h2, h3, h4, h5, h6 {
 	fill: none;
 }
 
-#themeToggle svg .sun { stroke: var(--txtcolor); }
-#themeToggle svg .moon { stroke: transparent; }
+#themeToggle svg .sun { fill: transparent; }
+#themeToggle svg .moon { fill: var(--txtcolor); }
 
-html.dark #themeToggle svg .sun { stroke: transparent; }
-html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
+html.dark #themeToggle svg .sun { fill: var(--txtcolor); }
+html.dark #themeToggle svg .moon { fill: transparent; }
 
 /*
 ==============
