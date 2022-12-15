@@ -160,6 +160,10 @@ p, h1, h2, h3, h4, h5, h6 {
 #logo-icon{
 	color: var(--txtcolor);
 	fill: none;
+	cursor: pointer;
+}
+a{
+	color: inherit;
 }
 
 /* ThemeToggle */
@@ -169,6 +173,7 @@ p, h1, h2, h3, h4, h5, h6 {
 	color: currentcolor;
 	background: transparent;
 	border: 0;
+	cursor: pointer;
 }
 
 #themeToggle svg {
