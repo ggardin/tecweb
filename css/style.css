@@ -133,11 +133,6 @@ header .actions {
 	width:50px;
 }
 
-#logo-icon{
-	color: var(--txtcolor);
-	fill: none;
-}
-
 header .accountButton, #dropdown-menu-toggle{
 	color: var(--tertiaryColor);
 }
