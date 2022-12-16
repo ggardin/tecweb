@@ -50,12 +50,15 @@ class Tools {
 		}
 	}
 
-	public static function langToTag(&$in, $tag = "span") : string {
+	public static function stripSpanLang(&$in) : string {
+		$from = ['/<span lang="([a-z]{2})">/', '#</span>#'];
+		$to = ['', ''];
+		return preg_replace($from, $to, $in);
+	}
+
+	public static function toSpanLang(&$in) : string {
 		$from = ["/\[([a-z]{2})\]/", "/\[\/([a-z]{2})\]/"];
-		if ($tag != '')
-			$to = ['<' . $tag . ' lang="${1}">', '</' . $tag . '>'];
-		else
-			$to = ['', ''];
+		$to = ['<span lang="${1}">', '</span>'];
 		return preg_replace($from, $to, $in);
 	}
 

@@ -77,7 +77,7 @@ if ($db_ok) {
 				$immagine = ($c["immagine"] ? ("https://www.themoviedb.org/t/p/w300/" . $c["immagine"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($t, "immagine", $immagine);
 			Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
-			Tools::replaceAnchor($t, "nome", Tools::langToTag($c["nome"]));
+			Tools::replaceAnchor($t, "nome", $c["nome"]);
 			if ($tipo == "film" && $c["data_rilascio"]) {
 				Tools::replaceAnchor($t, "data_rilascio", $c["data_rilascio"]);
 			} else
