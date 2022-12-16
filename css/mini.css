@@ -24,34 +24,35 @@
 	display: none;
 }
 
-header img, header .actions {
+#page-header img,
+#page-header .actions {
 	display: flex;
 	z-index: 15;
 }
 
-header ul {
+#page-header ul {
 	display: flex;
 	align-items: center;
 	list-style: none;
 	padding: 0;
 }
 
-header li {
+#page-header li {
 	width: 100%;
 }
 
-header li a,
-header li > span {
+#page-header li a,
+#page-header li > span {
 	width: 100%;
 	padding: 1em;
 }
 
-header li.active {
+#page-header li.active {
 	background-color: var(--secondaryColor);
 	border-color: currentcolor;
 }
 
-header li:hover {
+#page-header li:hover {
 	background-color: var(--secondaryColor);
 	border-color: red; /* to be defined */
 }
