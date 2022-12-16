@@ -4,8 +4,10 @@ require_once("php/tools.php");
 require_once("php/database.php");
 
 session_start();
-if (isset($_SESSION["user"]))
+if (isset($_SESSION["user"])) {
 	header("location: user.php");
+	exit();
+}
 
 $username = isset($_POST["username"]) ? $_POST["username"] : "";
 $password = isset($_POST["password"]) ? $_POST["password"] : "";
