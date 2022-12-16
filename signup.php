@@ -30,6 +30,7 @@ if (isset($_POST["submit"])) {
 		}
 		if ($db_ok) {
 			if ($res) {
+				$_SESSION["user"] = $username;
 				Tools::replaceAnchor($page, "message", "Registrazione eseguita. Ritorno in 5 secondi.");
 				header("refresh:5; url=" . (isset($_SESSION["last"]) ? $_SESSION["last"] : "index.php"));
 			} else
