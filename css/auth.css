@@ -28,7 +28,7 @@
 
 @font-face {
 	font-family: "Sora";
-	src: local("../fonts/Sora-VariableFont.ttf");
+	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
 	font-weight: 100 900;
 	font-display: swap;
 }
@@ -181,11 +181,11 @@ a{
 	fill: none;
 }
 
-#themeToggle svg .sun { fill: transparent; }
-#themeToggle svg .moon { fill: var(--txtcolor); }
+#themeToggle svg .sun { fill: var(--txtcolor);  }
+#themeToggle svg .moon { fill: transparent; }
 
-html.dark #themeToggle svg .sun { fill: var(--txtcolor); }
-html.dark #themeToggle svg .moon { fill: transparent; }
+html.dark #themeToggle svg .sun { fill: transparent; }
+html.dark #themeToggle svg .moon { fill: var(--txtcolor); }
 
 /*
 ==============

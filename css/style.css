@@ -30,23 +30,14 @@
 
 @font-face {
 	font-family: "Sora";
-	src: url("../fonts/Sora-VariableFont.ttf");
+	src: url("../fonts/Sora-VariableFont.ttf") format("truetype");
 	font-weight: 100 900;
-	font-display: swap;
-}
-
-/* ??? giovanni - START ??? */
-@font-face {
-	font-family: "Spectral";
-	src: url("../fonts/spectral");
-	font-weight: 200 800;
 	font-display: swap;
 }
 
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
-/* ??? giovanni - END ??? */
 
 body {
 	display: grid;
@@ -58,21 +49,6 @@ body {
 	max-width: var(--content-width);
 	margin: 0 auto;
 }
-
-/*body > * {
-	padding: 1rem;
-}*/
-
-/* ??? giovanni f. - START ??? */
-@media print {
-	body {
-		font-family: "Spectral", "Times New Roman", serif;
-		margin: 0;
-		color: #000;
-		background-color: #fff;
-	}
-}
-/* ??? giovanni f. - END ??? */
 
 /*
 ==============
@@ -317,11 +293,11 @@ p, h1, h2, h3, h4, h5, h6 {
 	fill: none;
 }
 
-#themeToggle svg .sun { fill: transparent; }
-#themeToggle svg .moon { fill: var(--txtcolor); }
+#themeToggle svg .sun { fill: var(--txtcolor);  }
+#themeToggle svg .moon { fill: transparent; }
 
-html.dark #themeToggle svg .sun { fill: var(--txtcolor); }
-html.dark #themeToggle svg .moon { fill: transparent; }
+html.dark #themeToggle svg .sun { fill: transparent; }
+html.dark #themeToggle svg .moon { fill: var(--txtcolor); }
 
 
 /*
