@@ -30,9 +30,9 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($persona)) {
-			Tools::replaceAnchor($page, "title", Tools::langToTag($persona["nome"], "") . " · Persona");
-			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($persona["nome"]));
-			$content .= "<h1>" . Tools::langToTag($persona["nome"]) . "</h1>";
+			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($persona["nome"]) . " · Persona");
+			Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
+			$content .= "<h1>" . $persona["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . ($persona["immagine"] ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg") . '" alt="" />';
 			$content .= '<p><span lang="en">Gender</span>: ' . $persona["gender"] . "</p>";
 			if ($persona["data_nascita"])
@@ -44,7 +44,7 @@ if ($id != "") {
 			foreach ($film as $f) {
 				$content .= "<li><ul>";
 					$content .= '<img width="250" height="375" src="' . ($f["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $f["locandina"]) : "img/placeholder.svg") . '" alt="" />';
-					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . Tools::langToTag($f["nome"]) . '</a></li>';
+					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . $f["nome"] . '</a></li>';
 					$content .= '<li>Ruolo: ' . $f["ruolo"] . '</li>';
 					$content .= '<li>Data rilascio: ' . $f["data_rilascio"] . '</li>';
 				$content .= "</ul></li>";

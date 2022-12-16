@@ -1,6 +1,8 @@
 <?php
 
 require_once("ini.php");
+require_once("tools.php");
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 class Database {
@@ -44,8 +46,10 @@ class Database {
 	}
 
 	private function pulisciOutput(&$item, $key) : void {
-		if (is_string($item))
+		if (is_string($item)) {
 			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
+			$item = Tools::toSpanLang($item);
+		}
 	}
 
 	// see: https://phpdelusions.net/mysqli

@@ -32,9 +32,9 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($film)) {
-			Tools::replaceAnchor($page, "title", Tools::langToTag($film["nome"], "") . " · Film");
-			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($film["nome"]));
-			Tools::replaceAnchor($page, "nome_film", Tools::langToTag($film["nome"]));
+			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($film["nome"]) . " · Film");
+			Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
+			Tools::replaceAnchor($page, "nome_film", $film["nome"]);
 			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
 			$r = "";
@@ -49,7 +49,7 @@ if ($id != "") {
 			else
 				Tools::replaceSection($page, "sottotitolo", "");
 			if ($film["descrizione"])
-				Tools::replaceAnchor($page, "descrizione", Tools::langToTag($film["descrizione"]));
+				Tools::replaceAnchor($page, "descrizione", $film["descrizione"]);
 			else
 				Tools::replaceSection($page, "descrizione", "");
 			if (!empty($crew)) {
@@ -65,7 +65,7 @@ if ($id != "") {
 						$res .= $r;
 					}
 					$p = $persona;
-					Tools::replaceAnchor($p, "nome", Tools::langToTag($c["p_nome"]));
+					Tools::replaceAnchor($p, "nome", $c["p_nome"]);
 					Tools::replaceAnchor($p, "id", $c["p_id"]);
 					$res .= $p;
 				}
@@ -96,7 +96,7 @@ if ($id != "") {
 				Tools::replaceSection($page, "paese", $r);
 			} else
 				Tools::replaceSection($page, "paesi", "");
-			Tools::replaceAnchor($page, "nome_originale", Tools::langToTag($film["nome_originale"]));
+			Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
 			Tools::replaceAnchor($page, "stato", $film["stato"]);
 			if ($film["budget"]) {
 				Tools::ReplaceAnchor($page, "budget", $film["budget"] . " $");
@@ -109,7 +109,7 @@ if ($id != "") {
 			if ($film["collezione"]) {
 				$c = Tools::getSection($page, "collezione");
 				Tools::ReplaceAnchor($c, "id", $film["collezione"]);
-				Tools::ReplaceAnchor($c, "nome", Tools::langToTag($collezione[0]["nome"]));
+				Tools::ReplaceAnchor($c, "nome", $collezione[0]["nome"]);
 				Tools::ReplaceSection($page, "collezione", $c);
 			} else
 				Tools::replaceSection($page, "collezione", "");
@@ -121,7 +121,7 @@ if ($id != "") {
 					Tools::replaceAnchor($t, "utente", $v["utente"]);
 					Tools::replaceAnchor($t, "valore", $v["valore"]);
 					if ($v["testo"]) {
-						Tools::replaceAnchor($t, "testo", Tools::langToTag($v["testo"]));
+						Tools::replaceAnchor($t, "testo", $v["testo"]);
 					} else
 						Tools::replaceSection($t, "testo", "");
 					$r .= $t;

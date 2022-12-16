@@ -30,19 +30,19 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($collezione)) {
-			Tools::replaceAnchor($page, "title", Tools::langToTag($collezione["nome"], "") . " · Collezione");
-			Tools::replaceAnchor($page, "breadcrumb", Tools::langToTag($collezione["nome"]));
-			$content .= "<h1>" . Tools::langToTag($collezione["nome"]) . "</h1>";
+			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " · Collezione");
+			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
+			$content .= "<h1>" . $collezione["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . ($collezione["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';
 			if ($collezione["descrizione"])
-				$content .= "<p>Descrizione: " . Tools::langToTag($collezione["descrizione"]) . "</p>";
+				$content .= "<p>Descrizione: " . $collezione["descrizione"] . "</p>";
 			$content .= "<p>film: </p>";
 
 			$content .= "<ol>";
 			foreach ($film as $f) {
 				$content .= "<li><ul>";
 					$content .= '<img width="250" height="375" src="' . ($f["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $f["locandina"]) : "img/placeholder.svg") . '" alt="" />';
-					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . Tools::langToTag($f["nome"]) . '</a></li>';
+					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . $f["nome"] . '</a></li>';
 					$content .= '<li>Data rilascio: ' . $f["data_rilascio"] . '</li>';
 				$content .= "</ul></li>";
 			}
