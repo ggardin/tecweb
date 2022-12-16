@@ -56,7 +56,7 @@ HEADER
 ==============
 */
 
-header {
+#page-header {
 	color: var(--txtcolor);
 	/*margin-left: .5em;*/
 	/*margin-right: .5em;*/
@@ -66,39 +66,39 @@ header {
 	z-index: 10;
 }
 
-header ul {
+#page-header ul {
 	display: flex;
 	align-items: center;
 	list-style: none;
 	padding: 0;
 }
 
-header li {
+#page-header li {
 	line-height: 3em;
 	border-bottom: 3px solid transparent;
 }
 
-header li.active {
+#page-header li.active {
 	background-color: var(--secondaryColor);
 	border-bottom: hidden;
 	cursor: auto;
 }
 
-header li:hover {
+#page-header li:hover {
 	border-color: var(--txtcolor);
 }
 
 /* rivedere questa regola, non è robusta */
-header li > span {
+#page-header li > span {
 	padding: 1em;
 }
 
-header li a {
+#page-header li a {
 	padding: 1em;
 	color: inherit;
 }
 
-header .actions {
+#page-header .actions {
 	display: flex;
 }
 
@@ -113,7 +113,7 @@ header .actions {
 	width:50px;
 }
 
-header .accountButton, #dropdown-menu-toggle{
+#page-header .accountButton, #dropdown-menu-toggle{
 	color: var(--tertiaryColor);
 }
 
@@ -175,7 +175,7 @@ FOOTER
 ==============
 */
 
-footer {
+#page-footer {
 	display: flex;
 	flex-flow: row wrap;
 	background-color: var(--secondaryColor);
@@ -183,37 +183,37 @@ footer {
 	padding: 1em;
 }
 
-footer > div:not(:last-child) {
+#page-footer > div:not(:last-child) {
 	flex: 1 0 auto;
 	width: 200px;
 	padding: 1em 0;
 }
 
-footer .title {
+#page-footer .title {
 	text-transform: uppercase;
 	font-size: 0.8em;
 	letter-spacing: 0.05em;
 	margin-bottom: 0.5em;
 }
 
-footer ul {
+#page-footer ul {
 	list-style: none;
 	padding: 0;
 }
 
-footer li {
+#page-footer li {
 	padding: 0.2em 0;
 }
 
-footer li a {
+#page-footer li a {
 	color: var(--txtcolor);
 }
 
-footer p a{
+#page-footer p a{
 	color: var(--link-color);
 }
 
-footer .tmdb-attribution {
+#page-footer .tmdb-attribution {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
@@ -222,7 +222,7 @@ footer .tmdb-attribution {
 	font-size: 0.8em;
 }
 
-footer svg{
+#page-footer svg{
 	margin-right: 3em;
 }
 
@@ -600,6 +600,7 @@ RESULTS CARD
 
 .cards{
 	display: grid;
+	list-style-type: none;
 	grid-template-columns: repeat(auto-fit, 12em);
 	padding-top: 1.5em;
 	padding-bottom: 2em;

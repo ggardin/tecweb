@@ -44,14 +44,14 @@ jobs:
         remote_port: ${{ secrets.SSH_PORT }}
         remote_user: ${{ secrets.SSH_USER }}
         remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
-  accessibility-audit:
-    name: Accessibility audit
-    needs: deploy
-    uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@dev
-    with:
-      target-branch: ${{ needs.deploy.outputs.current_branch }}
-    secrets:
-      inherit
+  #accessibility-audit:
+  #  name: Accessibility audit
+  #  needs: deploy
+  #  uses: ggardin/tecweb/.github/workflows/a11y-audit.yml@dev
+  #  with:
+  #    target-branch: ${{ needs.deploy.outputs.current_branch }}
+  #  secrets:
+  #    inherit
   broken-links-check:
     name: Check broken links
     needs: deploy

@@ -10,7 +10,7 @@
 	<!-- head -->
 </head>
 <body>
-	<header>
+	<header id="page-header">
 		<!-- header -->
 	</header>
 
@@ -24,17 +24,20 @@
 		<p>@@message@@</p>
 		<!-- message_end -->
 		<!-- results_start -->
-		<div class="cards">
+		<ul class="cards">
 			<!-- card_start -->
-			<div class="card">
-				<img width="200" height="300" src="@@locandina@@" alt="" />
+			<li class="card">
+				<img width="200" height="300" src="@@immagine@@" alt="" />
 				<div class="details">
 					<h2><a href="@@link@@">@@nome@@</a></h2>
-					<!-- data_start --><p>@@data_rilascio@@</p><!-- data_end -->
+					<!-- data_start -->
+					<p>@@data_rilascio@@</p>
+					<!-- data_end -->
 				</div>
-			</div>
+			</li>
 			<!-- card_end -->
-		</div>
+		</ul>
+		<!-- results_end -->
 
 		<!-- <h1>Attori</h1>
 		<div class="cards">
@@ -46,10 +49,9 @@
 				</div>
 			</div>
 		</div> -->
-		<!-- results_end -->
 	</main>
 
-	<footer>
+	<footer id="page-footer">
 		<!-- footer -->
 	</footer>
 </body>
