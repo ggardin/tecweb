@@ -16,10 +16,9 @@ html, body {
 	font-size: 12pt;
 	font-family: "Spectral", "Times New Roman", serif;
 	line-height: 1.5em;
-	margin: auto;
 }
 
-header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {
+#page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
 	display: none;
 }
 
@@ -37,5 +36,3 @@ main::after {
 	margin: 2cm;
 	size: A4;
 }
-
-

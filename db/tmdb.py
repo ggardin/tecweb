@@ -9,15 +9,16 @@ import pandas as pd
 
 genere=[]
 i_genere=[]
+stato=[]
 paese=[]
+gender=[]
+ruolo=[]
+persona=[]
+i_persona=[]
 compagnia=[]
 i_compagnia=[]
 keyword=[]
 i_keyword=[]
-gender=[]
-persona=[]
-i_persona=[]
-ruolo=[]
 
 collezione=[]
 i_collezione=[]
@@ -73,7 +74,9 @@ def get_film():
 		orig=info["original_title"]
 		info["original_title"]="["+info["original_language"]+"]"+info["original_title"]+"[/"+info["original_language"]+"]"
 		if info["title"]==orig: info["title"]=info["original_title"]
-		keys=[["nome", "title"], ["nome_originale", "original_title"], ["durata", "runtime"], ["locandina", "poster_path"], ["descrizione", "overview"], ["data_rilascio", "release_date"], ["stato", "status"], ["budget", "budget"], ["incassi", "revenue"], ["collezione", "belongs_to_collection"], ["voto", "voto"]]
+		status=[["Released", 5], ["In Production", 1], ["Post Production", 3]]
+		info["status"]=status[[status[i][0] for i in range(len(status))].index(info["status"])][1]
+		keys=[["nome", "title"], ["nome_originale", "original_title"], ["durata", "runtime"], ["locandina", "poster_path"], ["descrizione", "overview"], ["stato", "status"], ["data_rilascio", "release_date"], ["budget", "budget"], ["incassi", "revenue"], ["collezione", "belongs_to_collection"], ["voto", "voto"]]
 		for i in range(len(keys)):
 			f[keys[i][0]]=info[keys[i][1]]
 
@@ -216,14 +219,20 @@ def get_film():
 						keys=[["id", "id"], ["nome", "name"], ["gender", "gender"], ["immagine", "profile_path"], ["data_nascita", "birthday"], ["data_morte", "deathday"]]
 						persona.append({keys[i][0]: p[keys[i][1]] for i in range(len(keys))})
 
-def set_ruolo():
-	global ruolo
-	ruolo=[
-		{"id": 0, "nome": "Regista"},
-		{"id": 1, "nome": "Sceneggiatore"},
-		{"id": 2, "nome": "Produttore"},
-		{"id": 3, "nome": "Compositore"}
+def set_stato():
+	global stato
+	stato=[
+		{"id": 0, "nome": "Annunciato"},
+		{"id": 1, "nome": "Pre Produzione"},
+		{"id": 2, "nome": "Riprese in corso"},
+		{"id": 3, "nome": "Post Produzione"},
+		{"id": 4, "nome": "Completato"},
+		{"id": 5, "nome": "Rilasciato"}
 		]
+
+def set_paese():
+	global paese
+	paese = (pd.read_json("paese.json")).to_dict(orient='records')
 
 def set_gender():
 	global gender
@@ -234,9 +243,14 @@ def set_gender():
 		{"id": 3, "nome": "non binario"}
 		]
 
-def set_paese():
-	global paese
-	paese = (pd.read_json("paese.json")).to_dict(orient='records')
+def set_ruolo():
+	global ruolo
+	ruolo=[
+		{"id": 0, "nome": "Regista"},
+		{"id": 1, "nome": "Sceneggiatore"},
+		{"id": 2, "nome": "Produttore"},
+		{"id": 3, "nome": "Compositore"}
+		]
 
 def db_del(var, nome, engine):
 	engine.execute("delete from "+nome+";")
@@ -263,29 +277,31 @@ def db_insert_all():
 	db_del(i_collezione, "i_collezione", engine)
 	db_del(collezione, "collezione", engine)
 
-	db_del(ruolo, "ruolo", engine)
-	db_del(i_persona, "i_persona", engine)
-	db_del(persona, "persona", engine)
-	db_del(gender, "gender", engine)
 	# db_del(i_keyword, "i_keyword", engine)
 	# db_del(keyword, "keyword", engine)
 	# db_del(i_compagnia, "i_compagnia", engine)
 	# db_del(compagnia, "compagnia", engine)
+	db_del(i_persona, "i_persona", engine)
+	db_del(persona, "persona", engine)
+	db_del(ruolo, "ruolo", engine)
+	db_del(gender, "gender", engine)
 	db_del(paese, "paese", engine)
+	db_del(stato, "stato", engine)
 	db_del(i_genere, "i_genere", engine)
 	db_del(genere, "genere", engine)
 
 	db_insert(genere, "genere", engine)
 	db_insert(i_genere, "i_genere", engine)
+	db_insert(stato, "stato", engine)
 	db_insert(paese, "paese", engine)
+	db_insert(gender, "gender", engine)
+	db_insert(ruolo, "ruolo", engine)
+	db_insert(persona, "persona", engine)
+	db_insert(i_persona, "i_persona", engine)
 	# db_insert(compagnia, "compagnia", engine)
 	# db_insert(i_compagnia, "i_compagnia", engine)
 	# db_insert(keyword, "keyword", engine)
 	# db_insert(i_keyword, "i_keyword", engine)
-	db_insert(gender, "gender", engine)
-	db_insert(persona, "persona", engine)
-	db_insert(i_persona, "i_persona", engine)
-	db_insert(ruolo, "ruolo", engine)
 
 	db_insert(collezione, "collezione", engine)
 	db_insert(i_collezione, "i_collezione", engine)
@@ -310,11 +326,10 @@ def main():
 
 	get_film()
 
-	set_ruolo()
-
-	set_gender()
-
+	set_stato()
 	set_paese()
+	set_gender()
+	set_ruolo()
 
 	# translate_keywords()
 

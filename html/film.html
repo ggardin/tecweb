@@ -15,7 +15,7 @@
 	</header>
 
 	<nav id="breadcrumb">
-		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Film</p>
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca.php"><span lang="en">Film</span></a> &gt;&gt; @@breadcrumb@@</p>
 	</nav>
 
 	<main>
@@ -41,10 +41,14 @@
 				<!-- crew_start -->
 				<h2 lang="en">Crew</h2>
 				<dl>
-					<!-- partecipazione_start -->
+					<!-- ruoli_start -->
+					<!-- ruolo_start -->
 					<dt>@@ruolo@@</dt>
-					<dd>@@persona@@</dd>
-					<!-- partecipazione_end -->
+					<!-- ruolo_end -->
+					<!-- persona_start -->
+					<dd><a href="persona.php?id=@@id@@">@@nome@@</a></dd>
+					<!-- persona_end -->
+					<!-- ruoli_end -->
 				</dl>
 				<!-- crew_end -->
 
@@ -52,7 +56,7 @@
 				<h2>Generi</h2>
 				<ul>
 					<!-- genere_start -->
-					<li><a href="cerca.php?q=@@link@@&t=genere">@@nome@@</a></li>
+					<li><a href="cerca.php?fn=genere&fv=@@valore@@">@@nome@@</a></li>
 					<!-- genere_end -->
 				</ul>
 				<!-- generi_end -->
@@ -61,7 +65,7 @@
 				<h2>Paesi di produzione</h2>
 				<ul>
 					<!-- paese_start -->
-					<li><a href="cerca.php?q=@@link@@&t=paese">@@nome@@</a></li>
+					<li><a href="cerca.php?fn=paese&fv=@@valore@@">@@nome@@</a></li>
 					<!-- paese_end -->
 				</ul>
 				<!-- paesi_end -->
@@ -77,7 +81,7 @@
 					<li>Incassi: @@incassi@@</li>
 					<!-- incassi_end -->
 					<!-- collezione_start -->
-					<li>Collezione: <a href="collezione.php?id=@@link@@">@@nome@@</a></li>
+					<li>Collezione: <a href="collezione.php?id=@@id@@">@@nome@@</a></li>
 					<!-- collezione_end -->
 				</ul>
 
