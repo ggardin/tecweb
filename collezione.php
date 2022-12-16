@@ -3,13 +3,14 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-
-$content = "";
-
-$err = "Errore: Collezione non presente";
+session_start();
+$_SESSION["last"] = $_SERVER["REQUEST_URI"];
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
+
+$content = "";
+$err = "Errore: Collezione non presente";
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
 	$db_ok = false;

@@ -3,17 +3,17 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
+session_start();
+if (isset($_SESSION["user"]))
+	header("location: user.php");
+
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
+$password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
+
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"), "auth");
 
-$username = "";
-$password = "";
-$password_confirm = "";
-
 if (isset($_POST["submit"])) {
-	$username = $_POST["username"];
-	$password = $_POST["password"];
-	$password_confirm = $_POST["password_confirm"];
-
 	if ($password == $password_confirm) {
 		$db_ok = false;
 		try {
@@ -26,7 +26,11 @@ if (isset($_POST["submit"])) {
 			unset($connessione);
 		}
 		if ($db_ok) {
-			Tools::replaceAnchor($page, "message", ($res ? "Registrazione eseguita" : "Errore: Utente già registrato"));
+			if ($res) {
+				Tools::replaceAnchor($page, "message", "Registrazione eseguita. Ritorno in 5 secondi.");
+				header("refresh:5; url=" . (isset($_SESSION["last"]) ? $_SESSION["last"] : "index.php"));
+			} else
+				Tools::replaceAnchor($page, "message", "Errore: Utente già registrato");
 		}
 	} else
 		Tools::replaceAnchor($page, "message", "Errore: Le password non coincidono");
