@@ -35,18 +35,9 @@
 	font-display: swap;
 }
 
-/* ??? giovanni - START ??? */
-@font-face {
-	font-family: "Spectral";
-	src: url("../fonts/spectral") format("truetype");
-	font-weight: 200 800;
-	font-display: swap;
-}
-
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
-/* ??? giovanni - END ??? */
 
 body {
 	display: grid;
