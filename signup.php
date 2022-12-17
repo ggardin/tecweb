@@ -29,8 +29,8 @@ if (isset($_POST["submit"])) {
 			unset($connessione);
 		}
 		if ($db_ok) {
-			if ($res) {
-				$_SESSION["user"] = $username;
+			if (! empty($res)) {
+				$_SESSION["user_id"] = $res["id"];
 				Tools::replaceAnchor($page, "message", "Registrazione eseguita. Ritorno in 5 secondi.");
 				header("refresh:5; url=" . (isset($_SESSION["last"]) ? $_SESSION["last"] : "index.php"));
 			} else

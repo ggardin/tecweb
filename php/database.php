@@ -286,6 +286,28 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
+	public function getUsernameByUserId($id) : array {
+		$query = "select username
+			from utente
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function isAdminByUserId($id) : array {
+		$query = "select is_admin
+			from utente
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function insertUtente($username, $pass) : bool {
 		$query = "insert into utente(username, password)
 			values (?, ?)";
@@ -305,19 +327,8 @@ class Database {
 		return $this->preparedInsert($query, $params);
 	}
 
-	public function signup($username, $pass) : bool {
-		$s = $this->insertUtente($username, $pass);
-		if ($s) {
-			$user_id = $this->connection->insert_id;
-			return ($this->insertLista($user_id, "Da guardare") &&
-				$this->insertLista($user_id, "Visti"));
-			// TODO: o serve transaction?
-		}
-		return false;
-	}
-
-	public function login($username, $pass) : bool {
-		$query = "select password
+	public function login($username, $password) : array {
+		$query = "select id, password
 			from utente
 			where username = ?";
 
@@ -325,11 +336,28 @@ class Database {
 
 		$res = $this->preparedSelect($query, $params);
 
-		$pw = !empty($res) ? $res[0]["password"] : null;
-		if ($pw && password_verify($pass, $pw))
-			return true;
-		return false;
+		$status = [];
+		if (!empty($res) && password_verify($password, $res[0]["password"])) {
+			$status["id"] = $res[0]["id"];
+		}
+		return $status;
 	}
+
+	public function signup($username, $password) : array {
+		$s = $this->insertUtente($username, $password);
+
+		if ($s) {
+			$user_id = $this->connection->insert_id;
+			// TODO : transazione
+			if ($this->insertLista($user_id, "Da guardare") &&
+				$this->insertLista($user_id, "Visti"));
+				$connection->insertId();
+				return login($username, $password);
+		}
+
+		return [];
+	}
+
 }
 
 ?>
