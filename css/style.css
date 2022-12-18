@@ -40,7 +40,7 @@
 }
 
 body {
-	display: grid;
+	/*display: grid;*/
 	grid-template-rows: auto auto 1fr auto;
 	gap: 3vh;
 	line-height: 1.5;
@@ -50,69 +50,71 @@ body {
 	margin: 0 auto;
 }
 
-/*body > * {
-	padding: 1rem;
-}*/
-
 /*
 ==============
 HEADER
 ==============
 */
 
-header {
-	padding: 0;
+#page-header {
+	color: var(--txtcolor);
+	/*margin-left: .5em;*/
+	/*margin-right: .5em;*/
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
 }
 
-header ul {
+#page-header ul {
 	display: flex;
 	align-items: center;
 	list-style: none;
 	padding: 0;
 }
 
-header li {
+#page-header li {
 	line-height: 3em;
 	border-bottom: 3px solid transparent;
 }
 
-header li.active {
+#page-header li.active {
 	background-color: var(--secondaryColor);
+	border-bottom: hidden;
+	cursor: auto;
 }
 
-header li:hover {
+#page-header li:hover {
 	border-color: var(--txtcolor);
 }
 
 /* rivedere questa regola, non è robusta */
-header li > span {
+#page-header li > span {
 	padding: 1em;
 }
 
-header li a {
+#page-header li a {
 	padding: 1em;
 	color: inherit;
 }
 
-header .actions {
+#page-header .actions {
 	display: flex;
 }
 
-.accountButton {
+.accountButton{
+	margin-left: 0.5em;
+	cursor: pointer;
+}
+.accountButton a{
 	background-color: transparent;
 	border-color: transparent;
 	height:50px;
 	width:50px;
 }
 
-#logo-icon{
-	color: red;
-	margin-left: .5em;
-	fill: currentcolor;
+#page-header .accountButton, #dropdown-menu-toggle{
+	color: var(--tertiaryColor);
 }
 
 
@@ -126,7 +128,8 @@ BREADCRUMB
 	background-color: var(--secondaryColor);
 	color: var(--txtcolor);
 	/*font-size: 1em;*/
-	padding: 0.5em 0 0.5em 1.0em;
+	padding: 0.5em 0 0.5em 0.5em;
+	margin-top: 1em;
 	border-color: transparent;
 }
 
@@ -161,6 +164,10 @@ main > h2{
 */
 /* ??? gio - END ??? */
 
+/*main h1{
+	margin-left: .5em;
+	margin-right: .5em;
+}*/
 
 /*
 ==============
@@ -168,7 +175,7 @@ FOOTER
 ==============
 */
 
-footer {
+#page-footer {
 	display: flex;
 	flex-flow: row wrap;
 	background-color: var(--secondaryColor);
@@ -176,43 +183,47 @@ footer {
 	padding: 1em;
 }
 
-footer > div:not(:last-child) {
+#page-footer > div:not(:last-child) {
 	flex: 1 0 auto;
 	width: 200px;
 	padding: 1em 0;
 }
 
-footer .title {
+#page-footer .title {
 	text-transform: uppercase;
 	font-size: 0.8em;
 	letter-spacing: 0.05em;
 	margin-bottom: 0.5em;
 }
 
-footer ul {
+#page-footer ul {
 	list-style: none;
 	padding: 0;
 }
 
-footer li {
+#page-footer li {
 	padding: 0.2em 0;
 }
 
-footer li a {
+#page-footer li a {
 	color: var(--txtcolor);
 }
 
-footer p a{
+#page-footer p a{
 	color: var(--link-color);
 }
 
-footer .tmdb-attribution {
+#page-footer .tmdb-attribution {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	margin-top: 2em;
 	gap: 1em;
 	font-size: 0.8em;
+}
+
+#page-footer svg{
+	margin-right: 3em;
 }
 
 
@@ -275,6 +286,7 @@ p, h1, h2, h3, h4, h5, h6 {
 	color: currentcolor;
 	background: transparent;
 	border: 0;
+	cursor: pointer;
 }
 
 #themeToggle svg {
@@ -282,11 +294,11 @@ p, h1, h2, h3, h4, h5, h6 {
 	fill: none;
 }
 
-#themeToggle svg .sun { stroke: var(--txtcolor); }
-#themeToggle svg .moon { stroke: transparent; }
+#themeToggle svg .sun { fill: transparent; }
+#themeToggle svg .moon { fill: var(--txtcolor);  }
 
-html.dark #themeToggle svg .sun { stroke: transparent; }
-html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
+html.dark #themeToggle svg .sun { fill: var(--txtcolor); }
+html.dark #themeToggle svg .moon { fill: transparent; }
 
 
 /*
@@ -398,9 +410,8 @@ SEARCH BAR
 #hero .search {
 	position: relative;
 	display: flex;
-	margin: 2em auto 3em;
-	width: 100%;
-	max-width: 60%;
+	margin: 1.5em auto 2.5em;
+	max-width: 95%;
 }
 
 .search {
@@ -423,15 +434,16 @@ SEARCH BAR
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
 	border: transparent;
-	padding-left: .8em;
-	padding-right: .8em;
+	padding-left: .4em;
+	padding-right: .4em;
 }
 
-.searchButton img {
-	width: 35px;
-	height: 35px;
-
+.searchButton svg {
+	color: var(--bgcolor);
+	width: 34px;
+	height: 34px;
 }
+
 
 .h1 {
 	font-size: 3em;
@@ -563,7 +575,7 @@ CONTENTS
 	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
 	padding: 2em;
-	margin: 2em 0;
+	margin: 2em .5em;
 }
 
 .container > .text {
@@ -606,6 +618,14 @@ RESULTS CARD
 	object-fit: cover;
 }
 
+.card a {
+	color: var(--anchorcolor);
+}
+
+.card a:visited { /* serve anche focused, ma dev'essere un colore diverso */
+	color: var(--anchorcolor-alt);
+}
+
 .details{
 	padding: 20px 10px;
 }
@@ -646,7 +666,9 @@ MOVIE PAGE
 }
 
 .movie-media button{
-	width: 15.625em;
+	/*width: 15.625em;*/
+	font-size: 1.2em;
+	font-weight: 600;
 }
 
 .movie-media img{

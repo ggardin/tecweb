@@ -58,16 +58,13 @@ body > main{
 }
 
 header {
+	color: var(--txtcolor);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	margin: 0 auto 3em auto;
 	max-width: var(--content-width);
-}
-
-#logo-icon{
-
 }
 
 #signup{
@@ -160,6 +157,15 @@ p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 }
 
+#logo-icon{
+	color: var(--txtcolor);
+	fill: none;
+	cursor: pointer;
+}
+a{
+	color: inherit;
+}
+
 /* ThemeToggle */
 
 #themeToggle {
@@ -167,6 +173,7 @@ p, h1, h2, h3, h4, h5, h6 {
 	color: currentcolor;
 	background: transparent;
 	border: 0;
+	cursor: pointer;
 }
 
 #themeToggle svg {
@@ -174,11 +181,11 @@ p, h1, h2, h3, h4, h5, h6 {
 	fill: none;
 }
 
-#themeToggle svg .sun { stroke: var(--txtcolor); }
-#themeToggle svg .moon { stroke: transparent; }
+#themeToggle svg .sun { fill: var(--txtcolor);  }
+#themeToggle svg .moon { fill: transparent; }
 
-html.dark #themeToggle svg .sun { stroke: transparent; }
-html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
+html.dark #themeToggle svg .sun { fill: transparent; }
+html.dark #themeToggle svg .moon { fill: var(--txtcolor); }
 
 /*
 ==============
