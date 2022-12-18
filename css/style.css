@@ -85,10 +85,14 @@ HEADER
 	line-height: 2.6em;
 }
 
+#page-header li {
+	border-bottom: 0.2em solid transparent;
+}
+
 #page-header li a {
 	color: inherit;
 	text-decoration: none;
-	padding: 0.5em 1em;
+	padding: 0.8em 1em;
 }
 
 #page-header li.active {
@@ -97,7 +101,7 @@ HEADER
 	padding: 0 1em;
 }
 
-#page-header li a:hover:not(.active) {
+#page-header li:hover:not(.active) {
 	border-bottom: 0.2em solid var(--txtcolor);
 }
 
