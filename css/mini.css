@@ -25,13 +25,6 @@
 	z-index: 15;
 }
 
-#page-header ul {
-	display: flex;
-	align-items: center;
-	list-style: none;
-	padding: 0;
-}
-
 #page-header li {
 	width: 100%;
 }
