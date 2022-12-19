@@ -41,7 +41,7 @@
 
 body{
 	max-width: var(--content-width);
-	margin: 0 auto;;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--bgcolor);
@@ -162,10 +162,8 @@ p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 }
 
-#logo-icon{
+#logo{
 	color: var(--txtcolor);
-	fill: none;
-	cursor: pointer;
 }
 
 /* ThemeToggle */
@@ -179,7 +177,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 #themeToggle svg {
-	width: 1.8em;
+	/*width: 1.8em;*/
 	fill: none;
 }
 
