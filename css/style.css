@@ -723,15 +723,8 @@ INPUT FIELD
 ==============
 */
 
-#inputField form {
-	margin-top: 2em;
-	text-align: left;
-}
-
 input {
 	width: 100%;
-	margin: 0.5em 0 1.5em;
-	padding: 1em;
 	border-radius: var(--border-radius);
 	border: none;
 }
@@ -764,11 +757,16 @@ main#auth {
 	padding-top: 1em;
 }
 
-form#auth_form {
+#auth_form {
 	margin-top: 2em;
 	text-align: left;
 }
 
-fieldset#auth_field {
+#auth_form > fieldset {
 	border-color: transparent;
+}
+
+#auth_form > fieldset input {
+	margin: 0.5em 0 1.5em;
+	padding: 1em;
 }

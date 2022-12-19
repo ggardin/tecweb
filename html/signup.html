@@ -21,21 +21,17 @@
 		<p id="auth_message">Hai già un <span lang="en">account</span>? <a href="login.php">Accedi ora</a></p>
 
 		<form id="auth_form" method="post" action="signup.php">
-			<fieldset id="auth_field">
+			<fieldset>
 				<label for="username">Nome utente</label>
 				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required/>
-<!--				<br />-->
 
 				<label for="password"><span lang="en">Password</span></label>
 				<input type="password" id="password" name="password" aria-required="true" value="@@form_password@@" required/>
-<!--				<br />-->
 
 				<label for="password_confirm">Conferma <span lang="en">Password</span></label>
 				<input type="password" id="password_confirm" name="password_confirm" aria-required="true" value="@@form_password_confirm@@" required/>
-<!--				<br />-->
 
 				<input type="submit" name="submit" value="Registrati">
-
 			</fieldset>
 		</form>
 	</main>
