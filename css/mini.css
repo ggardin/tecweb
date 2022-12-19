@@ -25,6 +25,10 @@
 	z-index: 15;
 }
 
+#page-header ul {
+	gap: 1em;
+}
+
 #page-header li {
 	width: 100%;
 }
