@@ -728,17 +728,47 @@ INPUT FIELD
 	text-align: left;
 }
 
-#inputField input {
+input {
 	width: 100%;
+	margin: 0.5em 0 1.5em;
 	padding: 1em;
 	border-radius: var(--border-radius);
+	border: none;
 }
 
-#inputField input:focus {
-	border: 3px solid #555;
-}
-
-#inputField input[type=submit] {
-	color: white;
+input[type=submit] {
+	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
+	font-weight: 600;
+	font-size: 1.2em;
+}
+
+/*
+==============
+AUTH
+==============
+*/
+
+main#auth {
+	background-color: var(--secondaryColor);
+	max-width: var(--auth-form-width);
+	margin: var(--content-padding) auto;
+	border-radius: var(--border-radius);
+	text-align: center;
+	padding: var(--content-padding);
+}
+
+/* Inputs */
+
+#auth_message {
+	padding-top: 1em;
+}
+
+form#auth_form {
+	margin-top: 2em;
+	text-align: left;
+}
+
+fieldset#auth_field {
+	border-color: transparent;
 }

@@ -12,16 +12,16 @@
 <body>
 	<!-- header -->
 
-	<main>
+	<main id="auth">
 		<h1>Bentornato</h1>
 		<!-- message_start -->
 		<p>@@message@@</p>
 		<!-- message_end -->
 
-		<p id="signup">Non hai un <span lang="en">account</span>? <a href="signup.php">Creane uno subito</a></p>
+		<p id="auth_message">Non hai un <span lang="en">account</span>? <a href="signup.php">Creane uno subito</a></p>
 
-		<form method="post" action="login.php">
-			<fieldset id="field">
+		<form id="auth_form" method="post" action="login.php">
+			<fieldset id="auth_field">
 
 				<label for="username">Nome utente</label>
 				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required/>
