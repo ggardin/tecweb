@@ -42,7 +42,7 @@
 body > #page-header,
 body > main,
 body > #page-footer {
-	margin: var(--content-padding);
+	padding: var(--content-padding);
 }
 
 body {
@@ -554,7 +554,7 @@ CONTENTS
 */
 
 #hero {
-	font-size: 1.5em;
+	font-size: 2em;
 	text-align: center;
 }
 
