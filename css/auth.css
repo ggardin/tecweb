@@ -180,11 +180,11 @@ p, h1, h2, h3, h4, h5, h6 {
 	fill: none;
 }
 
-#themeToggle svg .sun { fill: var(--txtcolor);  }
-#themeToggle svg .moon { fill: transparent; }
+#themeToggle svg .sun { fill: transparent; }
+#themeToggle svg .moon { fill: var(--tertiaryColor);  }
 
-html.dark #themeToggle svg .sun { fill: transparent; }
-html.dark #themeToggle svg .moon { fill: var(--txtcolor); }
+html.dark #themeToggle svg .sun { fill: var(--tertiaryColor); }
+html.dark #themeToggle svg .moon { fill: transparent; }
 
 /*
 ==============
