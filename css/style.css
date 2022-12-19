@@ -600,11 +600,11 @@ RESULTS CARD
 .card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
+	overflow: hidden;
 }
 
 .card img {
 	display: block;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	object-fit: cover;
 }
 
