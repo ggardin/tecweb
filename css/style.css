@@ -48,7 +48,7 @@ body > #page-footer {
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	gap: 3vh;
+	gap: 0.5em;
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
