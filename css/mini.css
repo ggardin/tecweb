@@ -92,8 +92,8 @@ nav.dropdown-opened .hamburger-bottom {
 	flex-direction: column;
 	justify-content: center;
 
-	background-color: var(--tertiaryColor);
-	color: white;
+	background-color: var(--bgcolor);
+	color: var(--text);
 }
 
 #dropdown-link-container[data-open="false"] {
