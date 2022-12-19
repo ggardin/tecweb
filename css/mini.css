@@ -93,7 +93,7 @@ nav.dropdown-opened .hamburger-bottom {
 	justify-content: center;
 
 	background-color: var(--bgcolor);
-	color: var(--text);
+	color: var(--txtcolor);
 }
 
 #dropdown-link-container[data-open="false"] {

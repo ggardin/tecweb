@@ -741,3 +741,33 @@ INPUT FIELD
 	color: white;
 	background-color: var(--tertiaryColor);
 }
+
+
+/*
+==============
+404 PAGE
+==============
+*/
+
+.letters > span {
+	float: left;
+	transform: rotate(-30deg);
+}
+
+.letters{
+	font-size: 7em;
+	font-weight: 800;
+}
+
+#Ink svg{
+	width: 20em;
+	height: 20em;
+}
+
+#Ink #surrounding {
+	fill: var(--txtcolor);
+}
+
+#Ink #alien{
+	fill: var(--tertiaryColor);
+}
