@@ -39,6 +39,12 @@
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
 
+body > #page-header,
+body > main,
+body > #page-footer {
+	margin: var(--content-padding);
+}
+
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
@@ -68,9 +74,6 @@ HEADER
 
 #page-header {
 	color: var(--txtcolor);
-	padding: 0 0.3em;
-	/*margin-left: .5em;*/
-	/*margin-right: .5em;*/
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
