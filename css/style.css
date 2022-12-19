@@ -588,7 +588,7 @@ RESULTS CARD
 ==============
 */
 
-.cards{
+.cards {
 	display: grid;
 	list-style-type: none;
 	grid-template-columns: repeat(auto-fit, 12em);
@@ -597,28 +597,28 @@ RESULTS CARD
 	grid-gap: 1.5em;
 }
 
-.card{
+.card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
+	overflow: hidden;
 }
 
-.card > img{
+.card img {
 	display: block;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	object-fit: cover;
 }
 
-.details{
+.details {
 	padding: 20px 10px;
 }
 
-.details > h3{
+.details > h3 {
 	color: var(--txtcolor);
 	font-weight: bold;
 	font-size: 1.5em;
 }
 
-.details > p{
+.details > p {
 	color: var(--txtcolor);
 	font-size: 1em;
 	line-height: 1.5em;
