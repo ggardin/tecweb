@@ -24,7 +24,7 @@
 	display: none;
 }
 
-#page-header img,
+#page-header #logo-icon,
 #page-header .actions {
 	display: flex;
 	z-index: 15;
