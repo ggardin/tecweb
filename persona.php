@@ -35,9 +35,9 @@ if ($id != "") {
 			$content .= "<h1>" . $persona["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . ($persona["immagine"] ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg") . '" alt="" />';
 			$content .= '<p><span lang="en">Gender</span>: ' . $persona["gender"] . "</p>";
-			if ($persona["data_nascita"])
+			if (isset($persona["data_nascita"]))
 				$content .= "<p>Data nascita: " . $persona["data_nascita"] . "</p>";
-			if ($persona["data_morte"])
+			if (isset($persona["data_morte"]))
 				$content .= "<p>Data morte: " . $persona["data_morte"] . "</p>";
 			$content .= "<p>film: </p>";
 			$content .= "<ol>";

@@ -78,7 +78,7 @@ if ($db_ok) {
 			Tools::replaceAnchor($t, "immagine", $immagine);
 			Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 			Tools::replaceAnchor($t, "nome", $c["nome"]);
-			if ($tipo == "film" && $c["data_rilascio"]) {
+			if ($tipo == "film" && isset($c["data_rilascio"])) {
 				Tools::replaceAnchor($t, "data_rilascio", $c["data_rilascio"]);
 			} else
 				Tools::replaceSection($t, "data", "");

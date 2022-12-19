@@ -34,7 +34,7 @@ if ($id != "") {
 			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
 			$content .= "<h1>" . $collezione["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . ($collezione["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';
-			if ($collezione["descrizione"])
+			if (isset($collezione["descrizione"]))
 				$content .= "<p>Descrizione: " . $collezione["descrizione"] . "</p>";
 			$content .= "<p>film: </p>";
 
