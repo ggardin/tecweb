@@ -139,8 +139,7 @@ BREADCRUMB
 	background-color: var(--secondaryColor);
 	color: var(--txtcolor);
 	/*font-size: 1em;*/
-	padding: 0.5em 0 0.5em 0.5em;
-	margin-top: 1em;
+	padding: 0.5em;
 	border-color: transparent;
 }
 
@@ -404,13 +403,13 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	margin: 1.5em auto 2.5em;
-	max-width: 95%;
+	max-width: 18em;
 }
 
 .search {
 	position: relative;
 	display: flex;
-	margin: 4em .5em 4em .5em;
+	margin: 4em .5em;
 }
 
 .searchTerm {
@@ -554,7 +553,7 @@ CONTENTS
 */
 
 #hero {
-	font-size: 2em;
+	font-size: 1.5em;
 	text-align: center;
 }
 
@@ -568,7 +567,7 @@ CONTENTS
 	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
 	padding: 2em;
-	margin: 2em .5em;
+	margin: 2em 0;
 }
 
 .container > .text {
