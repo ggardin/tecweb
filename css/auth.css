@@ -1,13 +1,15 @@
 :root {
 	--bgcolor: #E4DCD7;
 	--bgcolor-alt: var(--secondaryColor);
+
 	--txtcolor: #1A1A1A;
-	--txtcolor-alt: var(--txtcolor);
-	--anchorcolor: #0000B5;
-	--anchorcolor-alt: #4C0083;
+	--txtcolor-alt: var(--txtcolor); /* ??? */
 
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
+
+	--anchorcolor: #0000B5;
+	--anchorcolor-alt: #4C0083;
 
 	--content-width: 60em;
 	--form-width: 35em;
@@ -87,7 +89,7 @@ a {
 	color: var(--anchorcolor);
 }
 
-a:visited { /* serve anche focused, ma dev'essere un colore diverso */
+a:visited {
 	color: var(--anchorcolor-alt);
 }
 
@@ -161,9 +163,6 @@ p, h1, h2, h3, h4, h5, h6 {
 	color: var(--txtcolor);
 	fill: none;
 	cursor: pointer;
-}
-a{
-	color: inherit;
 }
 
 /* ThemeToggle */

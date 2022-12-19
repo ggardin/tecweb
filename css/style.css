@@ -1,20 +1,20 @@
 :root {
 	--bgcolor: #E4DCD7;
 	--bgcolor-alt: var(--secondaryColor);
+
 	--txtcolor: #1A1A1A;
-	--txtcolor-alt: var(--txtcolor);
-	--button-inactive: #20584F;
-	--anchorcolor: #0000B5;
-	--anchorcolor-alt: #4C0083;
-	--link-color: var(--anchorcolor);
-	--visited-color: var(--anchorcolor-alt);
+	--txtcolor-alt: var(--txtcolor); /* ??? */
 
 	--secondaryColor: #D4C9C4;
 	--tertiaryColor: #12322D;
 
+	--anchorcolor: #0000B5;
+	--anchorcolor-alt: #4C0083;
+
 	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
+	--button-inactive: #20584F;
 }
 
 :root.dark {
@@ -40,7 +40,7 @@
 }
 
 body {
-	/*display: grid;*/
+	display: grid;
 	grid-template-rows: auto auto 1fr auto;
 	gap: 3vh;
 	line-height: 1.5;
@@ -50,6 +50,16 @@ body {
 	margin: 0 auto;
 }
 
+a {
+	color: var(--anchorcolor);
+}
+
+a:visited {
+	color: var(--anchorcolor-alt);
+}
+
+/* volendo si può mettere anche per a:active, ma dev'essere un colore diverso */
+
 /*
 ==============
 HEADER
@@ -58,6 +68,7 @@ HEADER
 
 #page-header {
 	color: var(--txtcolor);
+	padding: 0 0.3em;
 	/*margin-left: .5em;*/
 	/*margin-right: .5em;*/
 	display: flex;
@@ -71,31 +82,27 @@ HEADER
 	align-items: center;
 	list-style: none;
 	padding: 0;
+	line-height: 2.6em;
 }
 
 #page-header li {
-	line-height: 3em;
-	border-bottom: 3px solid transparent;
+	border-bottom: 0.2em solid transparent;
+}
+
+#page-header li a {
+	color: inherit;
+	text-decoration: none;
+	padding: 0.8em 1em;
 }
 
 #page-header li.active {
 	background-color: var(--secondaryColor);
-	border-bottom: hidden;
-	cursor: auto;
+	cursor: default;
+	padding: 0 1em;
 }
 
-#page-header li:hover {
-	border-color: var(--txtcolor);
-}
-
-/* rivedere questa regola, non è robusta */
-#page-header li > span {
-	padding: 1em;
-}
-
-#page-header li a {
-	padding: 1em;
-	color: inherit;
+#page-header li:hover:not(.active) {
+	border-bottom: 0.2em solid var(--txtcolor);
 }
 
 #page-header .actions {
@@ -106,15 +113,16 @@ HEADER
 	margin-left: 0.5em;
 	cursor: pointer;
 }
-.accountButton a{
+
+.accountButton a {
 	background-color: transparent;
 	border-color: transparent;
-	height:50px;
-	width:50px;
+	/* height:50px;
+	width:50px; */
 }
 
-#page-header .accountButton, #dropdown-menu-toggle{
-	color: var(--tertiaryColor);
+.accountButton {
+	color: var(--txtcolor);
 }
 
 
@@ -133,26 +141,12 @@ BREADCRUMB
 	border-color: transparent;
 }
 
-#breadcrumb a {
-	color: inherit;
-}
-
-#breadcrumb a:link{ /* why :link? */
-	color: var(--link-color);
-}
-
-#breadcrumb a:visited{
-	color: var(--visited-color);
-}
-
-
 /*
 ==============
 MAIN
 ==============
 */
 
-/* ??? gio - START ??? */
 /*
 main > h1, h2{
 	text-align: center;
@@ -162,7 +156,6 @@ main > h2{
 	font-weight: 600;
 }
 */
-/* ??? gio - END ??? */
 
 /*main h1{
 	margin-left: .5em;
@@ -207,10 +200,6 @@ FOOTER
 
 #page-footer li a {
 	color: var(--txtcolor);
-}
-
-#page-footer p a{
-	color: var(--link-color);
 }
 
 #page-footer .tmdb-attribution {
@@ -309,6 +298,7 @@ NAV BAR
 
 #dropdown-menu-toggle {
 	display: none;
+	color: var(--txtcolor);
 }
 
 /* ??? elena - START ??? */
@@ -618,14 +608,6 @@ RESULTS CARD
 	object-fit: cover;
 }
 
-.card a {
-	color: var(--anchorcolor);
-}
-
-.card a:visited { /* serve anche focused, ma dev'essere un colore diverso */
-	color: var(--anchorcolor-alt);
-}
-
 .details{
 	padding: 20px 10px;
 }
@@ -710,10 +692,6 @@ MOVIE PAGE
 .movie-details > ul{
 	list-style-type: none;
 	padding-left: 0;
-}
-
-.movie-details a{
-	color: var(--link-color);
 }
 
 .movie-viewed{
