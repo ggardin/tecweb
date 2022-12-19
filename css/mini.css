@@ -1,10 +1,5 @@
 /* NAVBAR */
 
-.accountButton{
-	visibility: hidden;
-	padding: 0;
-}
-
 #dropdown-menu-toggle {
 	display: block;
 	background-color: transparent;
@@ -31,25 +26,25 @@
 }
 
 #page-header ul {
-	display: flex;
-	align-items: center;
-	list-style: none;
-	padding: 0;
+	gap: 1em;
 }
 
 #page-header li {
 	width: 100%;
+	padding: var(--content-padding);
 }
 
 #page-header li a,
 #page-header li > span {
+	display: block;
 	width: 100%;
-	padding: 1em;
+	padding: 0;
 }
 
 #page-header li.active {
 	background-color: var(--secondaryColor);
 	border-color: currentcolor;
+	padding: var(--content-padding);
 }
 
 #page-header li:hover {
@@ -97,8 +92,8 @@ nav.dropdown-opened .hamburger-bottom {
 	flex-direction: column;
 	justify-content: center;
 
-	background-color: var(--tertiaryColor);
-	color: white;
+	background-color: var(--bgcolor);
+	color: var(--text);
 }
 
 #dropdown-link-container[data-open="false"] {
@@ -113,8 +108,9 @@ nav.dropdown-opened .hamburger-bottom {
 	transform: translateY(0);
 }
 
-#dropdown-link-container a {
-	font-size: 2.5em;
+#dropdown-link-container li > a,
+#dropdown-link-container li > span {
+	font-size: 2em;
 	line-height: 1.5em;
 }
 
