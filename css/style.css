@@ -42,7 +42,7 @@
 body > #page-header,
 body > main,
 body > #page-footer {
-	margin: var(--content-padding);
+	padding: var(--content-padding);
 }
 
 body {
@@ -410,7 +410,7 @@ SEARCH BAR
 .search {
 	position: relative;
 	display: flex;
-	margin: 4em .5em;
+	margin: 4em .5em 4em .5em;
 }
 
 .searchTerm {
