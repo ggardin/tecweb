@@ -35,7 +35,7 @@ if ($id != "") {
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($film["nome"]) . " · Film");
 			Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 			Tools::replaceAnchor($page, "nome_film", $film["nome"]);
-			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
+			$locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
 			$r = "";
 			if (isset($film["data_rilascio"]))

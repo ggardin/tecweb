@@ -33,7 +33,7 @@ if ($id != "") {
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " · Collezione");
 			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
 			$content .= "<h1>" . $collezione["nome"] . "</h1>";
-			$content .= '<img width="250" height="375" src="' . ($collezione["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';
+			$content .= '<img width="250" height="375" src="' . (isset($collezione["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';
 			if (isset($collezione["descrizione"]))
 				$content .= "<p>Descrizione: " . $collezione["descrizione"] . "</p>";
 			$content .= "<p>film: </p>";
@@ -41,7 +41,7 @@ if ($id != "") {
 			$content .= "<ol>";
 			foreach ($film as $f) {
 				$content .= "<li><ul>";
-					$content .= '<img width="250" height="375" src="' . ($f["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $f["locandina"]) : "img/placeholder.svg") . '" alt="" />';
+					$content .= '<img width="250" height="375" src="' . (isset($f["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $f["locandina"]) : "img/placeholder.svg") . '" alt="" />';
 					$content .= '<li>Link: <a href="film.php?id=' . $f["id"] . '">' . $f["nome"] . '</a></li>';
 					$content .= '<li>Data rilascio: ' . $f["data_rilascio"] . '</li>';
 				$content .= "</ul></li>";
