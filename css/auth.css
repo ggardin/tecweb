@@ -40,6 +40,8 @@
 }
 
 body{
+	max-width: var(--content-width);
+	margin: 0 auto;;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--bgcolor);
@@ -67,6 +69,7 @@ header {
 	width: 100%;
 	margin: 0 auto 3em auto;
 	max-width: var(--content-width);
+	padding: 0 0.5em;
 }
 
 #signup{
