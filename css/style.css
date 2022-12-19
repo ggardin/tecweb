@@ -6,7 +6,7 @@
 	--txtcolor-alt: var(--txtcolor); /* ??? */
 
 	--secondaryColor: #D4C9C4;
-	--tertiaryColor: #12322D;
+	--tertiaryColor: #275407;
 
 	--anchorcolor: #0000B5;
 	--anchorcolor-alt: #4C0083;
@@ -15,6 +15,7 @@
 	--content-padding: 1rem;
 	--border-radius: 8px;
 	--button-inactive: #20584F;
+	--auth-form-width: 35em;
 }
 
 :root.dark {
@@ -78,6 +79,7 @@ HEADER
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
+	line-height: 2.6em;
 }
 
 #page-header ul {
@@ -85,7 +87,6 @@ HEADER
 	align-items: center;
 	list-style: none;
 	padding: 0;
-	line-height: 2.6em;
 }
 
 #page-header li {
@@ -125,7 +126,7 @@ HEADER
 }
 
 .accountButton {
-	color: var(--tertiaryColor);
+	color: var(--txtcolor);
 }
 
 
@@ -724,24 +725,52 @@ INPUT FIELD
 ==============
 */
 
-#inputField form {
+input {
+	width: 100%;
+	border-radius: var(--border-radius);
+	border: none;
+}
+
+input[type=submit] {
+	color: var(--bgcolor);
+	background-color: var(--tertiaryColor);
+	font-weight: 600;
+	font-size: 1.2em;
+}
+
+/*
+==============
+AUTH
+==============
+*/
+
+main#auth {
+	background-color: var(--secondaryColor);
+	max-width: var(--auth-form-width);
+	margin: var(--content-padding) auto;
+	border-radius: var(--border-radius);
+	text-align: center;
+	padding: var(--content-padding);
+}
+
+/* Inputs */
+
+#auth_message {
+	padding-top: 1em;
+}
+
+#auth_form {
 	margin-top: 2em;
 	text-align: left;
 }
 
-#inputField input {
-	width: 100%;
+#auth_form > fieldset {
+	border-color: transparent;
+}
+
+#auth_form > fieldset input {
+	margin: 0.5em 0 1.5em;
 	padding: 1em;
-	border-radius: var(--border-radius);
-}
-
-#inputField input:focus {
-	border: 3px solid #555;
-}
-
-#inputField input[type=submit] {
-	color: white;
-	background-color: var(--tertiaryColor);
 }
 
 
