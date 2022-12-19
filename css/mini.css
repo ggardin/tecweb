@@ -4,6 +4,8 @@
 	display: block;
 	background-color: transparent;
 	border-color: transparent;
+	padding: 0;
+	border: 0;
 }
 
 #dropdown-link-container[data-open="false"] {
