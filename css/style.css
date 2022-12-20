@@ -799,3 +799,33 @@ main#auth {
 #Ink #alien{
 	fill: var(--tertiaryColor);
 }
+
+/*
+==============
+USER PAGE
+incl. Stats, Settings
+==============
+*/
+
+#user .user-info,
+#list .user-info,
+#stats .user-info,
+#settings .user-info {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	margin-bottom: 2em;
+}
+
+#user .user-info img,
+#list .user-info img,
+#stats .user-info img,
+#settings .user-info img {
+	border-radius: 100%;
+	background-color: #0000B5; /* debug */
+}
+
+#user .functions {
+	display: flex;
+	justify-content: space-between;
+}
