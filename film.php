@@ -37,20 +37,20 @@ if ($id != "") {
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($film["nome"]) . " · Film");
 			Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 			Tools::replaceAnchor($page, "nome_film", $film["nome"]);
-			$locandina = ($film["locandina"] ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
+			$locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
 			$r = "";
-			if ($film["data_rilascio"])
+			if (isset($film["data_rilascio"]))
 				$r .= $film["data_rilascio"];
-			if ($film["durata"])
+			if (isset($film["durata"]))
 				$r .= ($r ? " · " : "") . $film["durata"] . " min";
-			if ($film["voto"])
+			if (isset($film["voto"]))
 				$r .= ($r ? " · " : "") . $film["voto"] . " *";
 			if ($r)
 				Tools::replaceAnchor($page, "sottotitolo", $r);
 			else
 				Tools::replaceSection($page, "sottotitolo", "");
-			if ($film["descrizione"])
+			if (isset($film["descrizione"]))
 				Tools::replaceAnchor($page, "descrizione", $film["descrizione"]);
 			else
 				Tools::replaceSection($page, "descrizione", "");
@@ -100,15 +100,15 @@ if ($id != "") {
 				Tools::replaceSection($page, "paesi", "");
 			Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
 			Tools::replaceAnchor($page, "stato", $film["stato"]);
-			if ($film["budget"]) {
+			if (isset($film["budget"])) {
 				Tools::ReplaceAnchor($page, "budget", $film["budget"] . " $");
 			} else
 				Tools::replaceSection($page, "budget", "");
-			if ($film["incassi"]) {
+			if (isset($film["incassi"])) {
 				Tools::ReplaceAnchor($page, "incassi", $film["incassi"] . " $");
 			} else
 				Tools::replaceSection($page, "incassi", "");
-			if ($film["collezione"]) {
+			if (isset($film["collezione"])) {
 				$c = Tools::getSection($page, "collezione");
 				Tools::ReplaceAnchor($c, "id", $film["collezione"]);
 				Tools::ReplaceAnchor($c, "nome", $collezione[0]["nome"]);
@@ -122,7 +122,7 @@ if ($id != "") {
 					$t = $list;
 					Tools::replaceAnchor($t, "utente", $v["utente"]);
 					Tools::replaceAnchor($t, "valore", $v["valore"]);
-					if ($v["testo"]) {
+					if (isset($v["testo"])) {
 						Tools::replaceAnchor($t, "testo", $v["testo"]);
 					} else
 						Tools::replaceSection($t, "testo", "");

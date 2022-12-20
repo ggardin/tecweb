@@ -1,6 +1,19 @@
+@font-face {
+	font-family: "Spectral";
+	src: url("../fonts/spectral") format("truetype");
+	font-weight: 200 800;
+	font-display: swap;
+}
+
 * {
 	background-image: none !important;
 	break-before: avoid;
+}
+
+html, body {
+	font-size: 12pt;
+	font-family: "Spectral", "Times New Roman", serif;
+	line-height: 1.5em;
 }
 
 img, svg {
@@ -10,12 +23,6 @@ img, svg {
 img.print, svg.print {
 	display: block;
 	max-width: 100%;
-}
-
-html, body {
-	font-size: 12pt;
-	font-family: "Spectral", "Times New Roman", serif;
-	line-height: 1.5em;
 }
 
 #page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {

@@ -10,34 +10,28 @@
 	<!-- head -->
 </head>
 <body>
-	<header>
-		<!-- header -->
-	</header>
+	<!-- header -->
 
-	<main>
+	<main id="auth">
 		<h1>Per iniziare, crea un account</h1>
 		<!-- message_start -->
 		<p>@@message@@</p>
 		<!-- message_end -->
 
-		<p id="signup">Hai già un <span lang="en">account</span>? <a href="login.php">Accedi ora</a></p>
+		<p id="auth_message">Hai già un <span lang="en">account</span>? <a href="login.php">Accedi ora</a></p>
 
-		<form method="post" action="signup.php">
-			<fieldset id="field">
+		<form id="auth_form" method="post" action="signup.php">
+			<fieldset>
 				<label for="username">Nome utente</label>
 				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required/>
-<!--				<br />-->
 
 				<label for="password"><span lang="en">Password</span></label>
-				<input type="password" id="password" name="password" aria-required="true" value="@@form_password@@" required/>
-<!--				<br />-->
+				<input type="password" id="password" name="password" aria-required="true" value="@@form_password@@" required />
 
 				<label for="password_confirm">Conferma <span lang="en">Password</span></label>
-				<input type="password" id="password_confirm" name="password_confirm" aria-required="true" value="@@form_password_confirm@@" required/>
-<!--				<br />-->
+				<input type="password" id="password_confirm" name="password_confirm" aria-required="true" value="@@form_password_confirm@@" required />
 
-				<input type="submit" name="submit" value="Registrati">
-
+				<input type="submit" name="submit" value="Registrati" />
 			</fieldset>
 		</form>
 	</main>

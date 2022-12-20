@@ -1,14 +1,10 @@
 /* NAVBAR */
 
-.accountButton{
-	visibility: hidden;
-	padding: 0;
-}
-
 #dropdown-menu-toggle {
 	display: block;
 	background-color: transparent;
-	border-color: transparent;
+	padding: 0;
+	border: 0 transparent;
 }
 
 #dropdown-link-container[data-open="false"] {
@@ -24,34 +20,34 @@
 	display: none;
 }
 
-header img, header .actions {
-	display: flex;
+#page-header #logo-icon,
+#page-header .actions {
 	z-index: 15;
 }
 
-header ul {
-	display: flex;
-	align-items: center;
-	list-style: none;
+#page-header ul {
+	gap: 1em;
+}
+
+#page-header li {
+	width: 100%;
+	padding: var(--content-padding);
+}
+
+#page-header li a,
+#page-header li > span {
+	display: block;
+	width: 100%;
 	padding: 0;
 }
 
-header li {
-	width: 100%;
-}
-
-header li a,
-header li > span {
-	width: 100%;
-	padding: 1em;
-}
-
-header li.active {
+#page-header li.active {
 	background-color: var(--secondaryColor);
 	border-color: currentcolor;
+	padding: var(--content-padding);
 }
 
-header li:hover {
+#page-header li:hover {
 	background-color: var(--secondaryColor);
 	border-color: red; /* to be defined */
 }
@@ -96,8 +92,8 @@ nav.dropdown-opened .hamburger-bottom {
 	flex-direction: column;
 	justify-content: center;
 
-	background-color: var(--tertiaryColor);
-	color: white;
+	background-color: var(--bgcolor);
+	color: var(--txtcolor);
 }
 
 #dropdown-link-container[data-open="false"] {
@@ -112,8 +108,9 @@ nav.dropdown-opened .hamburger-bottom {
 	transform: translateY(0);
 }
 
-#dropdown-link-container a {
-	font-size: 2.5em;
+#dropdown-link-container li > a,
+#dropdown-link-container li > span {
+	font-size: 2em;
 	line-height: 1.5em;
 }
 
@@ -143,6 +140,8 @@ nav.dropdown-opened .hamburger-bottom {
 MAIN
 ==============
 */
+/*
 main > h1, h2{
 	text-align: center;
 }
+*/

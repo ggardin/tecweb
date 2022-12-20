@@ -1,20 +1,21 @@
 :root {
 	--bgcolor: #E4DCD7;
 	--bgcolor-alt: var(--secondaryColor);
+
 	--txtcolor: #1A1A1A;
-	--txtcolor-alt: var(--txtcolor);
-	--button-inactive: #20584F;
-	--anchorcolor: #0000B5;
-	--anchorcolor-alt: #4C0083;
-	--link-color: var(--anchorcolor);
-	--visited-color: var(--anchorcolor-alt);
+	--txtcolor-alt: var(--txtcolor); /* ??? */
 
 	--secondaryColor: #D4C9C4;
-	--tertiaryColor: #12322D;
+	--tertiaryColor: #0C443B;
+
+	--anchorcolor: #0000B5;
+	--anchorcolor-alt: #4C0083;
 
 	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
+	--button-inactive: #20584F;
+	--auth-form-width: 35em;
 }
 
 :root.dark {
@@ -35,23 +36,20 @@
 	font-display: swap;
 }
 
-/* ??? giovanni - START ??? */
-@font-face {
-	font-family: "Spectral";
-	src: url("../fonts/spectral") format("truetype");
-	font-weight: 200 800;
-	font-display: swap;
-}
-
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
 }
-/* ??? giovanni - END ??? */
+
+body > #page-header,
+body > main,
+body > #page-footer {
+	padding: var(--content-padding);
+}
 
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	gap: 3vh;
+	gap: 0.5em;
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
@@ -59,9 +57,15 @@ body {
 	margin: 0 auto;
 }
 
-/*body > * {
-	padding: 1rem;
-}*/
+a {
+	color: var(--anchorcolor);
+}
+
+a:visited {
+	color: var(--anchorcolor-alt);
+}
+
+/* volendo si può mettere anche per a:active, ma dev'essere un colore diverso */
 
 /*
 ==============
@@ -69,59 +73,60 @@ HEADER
 ==============
 */
 
-header {
-	padding: 0;
+#page-header {
+	color: var(--txtcolor);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
+	line-height: 2.6em;
 }
 
-header ul {
+#page-header ul {
 	display: flex;
 	align-items: center;
 	list-style: none;
 	padding: 0;
 }
 
-header li {
-	line-height: 3em;
-	border-bottom: 3px solid transparent;
+#page-header li {
+	border-bottom: 0.2em solid transparent;
 }
 
-header li.active {
-	background-color: var(--secondaryColor);
-}
-
-header li:hover {
-	border-color: var(--txtcolor);
-}
-
-/* rivedere questa regola, non è robusta */
-header li > span {
-	padding: 1em;
-}
-
-header li a {
-	padding: 1em;
+#page-header li a {
 	color: inherit;
+	text-decoration: none;
+	padding: 0.8em 1em;
 }
 
-header .actions {
+#page-header li.active {
+	background-color: var(--secondaryColor);
+	cursor: default;
+	padding: 0 1em;
+}
+
+#page-header li:hover:not(.active) {
+	border-bottom: 0.2em solid var(--txtcolor);
+}
+
+#page-header .actions {
 	display: flex;
+	gap: 0.5em;
+}
+
+.accountButton{
+	cursor: pointer;
+}
+
+.accountButton a {
+	background-color: transparent;
+	border-color: transparent;
+	/* height:50px;
+	width:50px; */
 }
 
 .accountButton {
-	background-color: transparent;
-	border-color: transparent;
-	height:50px;
-	width:50px;
-}
-
-#logo-icon{
-	color: red;
-	margin-left: .5em;
-	fill: currentcolor;
+	color: var(--txtcolor);
 }
 
 
@@ -135,22 +140,9 @@ BREADCRUMB
 	background-color: var(--secondaryColor);
 	color: var(--txtcolor);
 	/*font-size: 1em;*/
-	padding: 0.5em 0 0.5em 1.0em;
+	padding: 0.5em;
 	border-color: transparent;
 }
-
-#breadcrumb a {
-	color: inherit;
-}
-
-#breadcrumb a:link{ /* why :link? */
-	color: var(--link-color);
-}
-
-#breadcrumb a:visited{
-	color: var(--visited-color);
-}
-
 
 /*
 ==============
@@ -158,7 +150,6 @@ MAIN
 ==============
 */
 
-/* ??? gio - START ??? */
 /*
 main > h1, h2{
 	text-align: center;
@@ -168,8 +159,11 @@ main > h2{
 	font-weight: 600;
 }
 */
-/* ??? gio - END ??? */
 
+/*main h1{
+	margin-left: .5em;
+	margin-right: .5em;
+}*/
 
 /*
 ==============
@@ -177,7 +171,7 @@ FOOTER
 ==============
 */
 
-footer {
+#page-footer {
 	display: flex;
 	flex-flow: row wrap;
 	background-color: var(--secondaryColor);
@@ -185,43 +179,43 @@ footer {
 	padding: 1em;
 }
 
-footer > div:not(:last-child) {
+#page-footer > div:not(:last-child) {
 	flex: 1 0 auto;
 	width: 200px;
 	padding: 1em 0;
 }
 
-footer .title {
+#page-footer .title {
 	text-transform: uppercase;
 	font-size: 0.8em;
 	letter-spacing: 0.05em;
 	margin-bottom: 0.5em;
 }
 
-footer ul {
+#page-footer ul {
 	list-style: none;
 	padding: 0;
 }
 
-footer li {
+#page-footer li {
 	padding: 0.2em 0;
 }
 
-footer li a {
+#page-footer li a {
 	color: var(--txtcolor);
 }
 
-footer p a{
-	color: var(--link-color);
-}
-
-footer .tmdb-attribution {
+#page-footer .tmdb-attribution {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	margin-top: 2em;
 	gap: 1em;
 	font-size: 0.8em;
+}
+
+#page-footer svg{
+	margin-right: 3em;
 }
 
 
@@ -284,18 +278,19 @@ p, h1, h2, h3, h4, h5, h6 {
 	color: currentcolor;
 	background: transparent;
 	border: 0;
+	cursor: pointer;
 }
 
 #themeToggle svg {
-	width: 1.8em;
+	/*width: 1.8em;*/ /*Commentato perché troncava l'icona*/
 	fill: none;
 }
 
-#themeToggle svg .sun { stroke: var(--txtcolor); }
-#themeToggle svg .moon { stroke: transparent; }
+#themeToggle svg .sun { fill: transparent; }
+#themeToggle svg .moon { fill: var(--tertiaryColor);  }
 
-html.dark #themeToggle svg .sun { stroke: transparent; }
-html.dark #themeToggle svg .moon { stroke: var(--txtcolor); }
+html.dark #themeToggle svg .sun { fill: var(--tertiaryColor); }
+html.dark #themeToggle svg .moon { fill: transparent; }
 
 
 /*
@@ -306,6 +301,7 @@ NAV BAR
 
 #dropdown-menu-toggle {
 	display: none;
+	color: var(--txtcolor);
 }
 
 /* ??? elena - START ??? */
@@ -407,15 +403,14 @@ SEARCH BAR
 #hero .search {
 	position: relative;
 	display: flex;
-	margin: 2em auto 3em;
-	width: 100%;
-	max-width: 60%;
+	margin: 1.5em auto 2.5em;
+	max-width: 18em;
 }
 
 .search {
 	position: relative;
 	display: flex;
-	margin: 4em .5em 4em .5em;
+	margin: 4em .5em;
 }
 
 .searchTerm {
@@ -432,15 +427,16 @@ SEARCH BAR
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
 	border: transparent;
-	padding-left: .8em;
-	padding-right: .8em;
+	padding-left: .4em;
+	padding-right: .4em;
 }
 
-.searchButton img {
-	width: 35px;
-	height: 35px;
-
+.searchButton svg {
+	color: var(--bgcolor);
+	width: 34px;
+	height: 34px;
 }
+
 
 .h1 {
 	font-size: 3em;
@@ -558,7 +554,7 @@ CONTENTS
 */
 
 #hero {
-	font-size: 2em;
+	font-size: 1.5em;
 	text-align: center;
 }
 
@@ -595,37 +591,37 @@ RESULTS CARD
 ==============
 */
 
-.cards{
+.cards {
 	display: grid;
 	list-style-type: none;
 	grid-template-columns: repeat(auto-fit, 12em);
-	padding-top: 1.5em;
-	padding-bottom: 2em;
 	grid-gap: 1.5em;
+	padding: 1.5em 0 0;
+	justify-content: center;
 }
 
-.card{
+.card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
+	overflow: hidden;
 }
 
-.card > img{
+.card img {
 	display: block;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	object-fit: cover;
 }
 
-.details{
+.details {
 	padding: 20px 10px;
 }
 
-.details > h3{
+.details > h3 {
 	color: var(--txtcolor);
 	font-weight: bold;
 	font-size: 1.5em;
 }
 
-.details > p{
+.details > p {
 	color: var(--txtcolor);
 	font-size: 1em;
 	line-height: 1.5em;
@@ -641,8 +637,6 @@ MOVIE PAGE
 
 .movie-page{
 	display: grid;
-	margin-left: .5em;
-	margin-right: .5em;
 	grid-gap: 1.5em;
 	grid-template-areas: "a b"
 						 "a c";
@@ -655,7 +649,8 @@ MOVIE PAGE
 }
 
 .movie-media button{
-	width: 15.625em;
+	font-size: 1.2em;
+	font-weight: 600;
 }
 
 .movie-media img{
@@ -699,10 +694,6 @@ MOVIE PAGE
 	padding-left: 0;
 }
 
-.movie-details a{
-	color: var(--link-color);
-}
-
 .movie-viewed{
 	color: var(--bgcolor);
 	width: 100%;
@@ -731,22 +722,110 @@ INPUT FIELD
 ==============
 */
 
-#inputField form {
+input {
+	width: 100%;
+	border-radius: var(--border-radius);
+	border: none;
+}
+
+input[type=submit] {
+	color: var(--bgcolor);
+	background-color: var(--tertiaryColor);
+	font-weight: 600;
+	font-size: 1.2em;
+}
+
+/*
+==============
+AUTH
+==============
+*/
+
+main#auth {
+	background-color: var(--secondaryColor);
+	max-width: var(--auth-form-width);
+	margin: var(--content-padding) auto;
+	border-radius: var(--border-radius);
+	text-align: center;
+	padding: var(--content-padding);
+}
+
+/* Inputs */
+
+#auth_message {
+	padding-top: 1em;
+}
+
+#auth_form {
 	margin-top: 2em;
 	text-align: left;
 }
 
-#inputField input {
-	width: 100%;
+#auth_form > fieldset {
+	border-color: transparent;
+}
+
+#auth_form > fieldset input {
+	margin: 0.5em 0 1.5em;
 	padding: 1em;
-	border-radius: var(--border-radius);
 }
 
-#inputField input:focus {
-	border: 3px solid #555;
+
+/*
+==============
+404 PAGE
+==============
+*/
+
+.letters > span {
+	float: left;
+	transform: rotate(-30deg);
 }
 
-#inputField input[type=submit] {
-	color: white;
-	background-color: var(--tertiaryColor);
+.letters{
+	font-size: 5em;
+	font-weight: 800;
+}
+
+#Ink svg{
+	width: 20em;
+	height: 20em;
+}
+
+#Ink #surrounding {
+	fill: var(--txtcolor);
+}
+
+#Ink #alien{
+	fill: var(--tertiaryColor);
+}
+
+/*
+==============
+USER PAGE
+incl. Stats, Settings
+==============
+*/
+
+#user .user-info,
+#list .user-info,
+#stats .user-info,
+#settings .user-info {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	margin-bottom: 2em;
+}
+
+#user .user-info img,
+#list .user-info img,
+#stats .user-info img,
+#settings .user-info img {
+	border-radius: 100%;
+	background-color: #0000B5; /* debug */
+}
+
+#user .functions {
+	display: flex;
+	justify-content: space-between;
 }
