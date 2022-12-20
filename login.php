@@ -4,7 +4,7 @@ require_once("php/tools.php");
 require_once("php/database.php");
 
 session_start();
-if (isset($_SESSION["user"])) {
+if (isset($_SESSION["user_id"])) {
 	header("location: user.php");
 	exit();
 }
@@ -28,8 +28,8 @@ if (isset($_POST["submit"])) {
 	if ($db_ok) {
 		if (! empty($res)) {
 			$_SESSION["user_id"] = $res["id"];
-			Tools::replaceAnchor($page, "message", "Accesso eseguito. Ritorno in 5 secondi.");
-			header("refresh:5; url=" . (isset($_SESSION["last"]) ? $_SESSION["last"] : "index.php"));
+			header("location: user.php");
+			exit();
 		} else
 			Tools::replaceAnchor($page, "message", "Errore: Credenziali errate");
 	}
