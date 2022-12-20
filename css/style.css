@@ -183,7 +183,6 @@ FOOTER
 #page-footer > div:not(:last-child) {
 	flex: 1 0 auto;
 	width: 200px;
-	padding: 1em 0;
 }
 
 #page-footer .title {
@@ -428,8 +427,8 @@ SEARCH BAR
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
 	border: transparent;
-	padding-left: .4em;
-	padding-right: .4em;
+	padding-left: .5em;
+	padding-right: .5em;
 }
 
 .searchButton svg {
@@ -453,10 +452,10 @@ FILTERS
 
 .button-value {
 	border: var(--border-width) solid var(--tertiaryColor);
-	font-size: .9em;
+	font-size: .8em;
 	padding: .2em .5em;
 	font-weight: 600;
-	margin: 1em;
+	margin: auto .8em;
 	border-radius: var(--border-radius);
 	background-color: transparent;
 	color: var(--tertiaryColor);
