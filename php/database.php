@@ -351,8 +351,7 @@ class Database {
 			// TODO : transazione
 			if ($this->insertLista($user_id, "Da guardare") &&
 				$this->insertLista($user_id, "Visti"));
-				$connection->insertId();
-				return login($username, $password);
+				return $this->login($username, $password);
 		}
 
 		return [];
