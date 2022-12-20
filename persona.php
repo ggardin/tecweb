@@ -3,9 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-$_SESSION["last"] = $_SERVER["REQUEST_URI"];
-
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
 $content = "";
