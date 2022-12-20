@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 
-	<title>Utente</title>
+	<title>Liste</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 
@@ -16,28 +16,26 @@
 	</header>
 
 	<nav id="breadcrumb">
-		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Utente</p>
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="user.php">Utente</a> &gt;&gt; Liste di film</p>
 	</nav>
 
-	<main id="user">
+	<main id="list">
 		<header class="user-info">
 			<img src="img/placeholder.svg" alt="" height="100" width="100"/>
-			<h1>Nome utente</h1>
+			<h1>Le tue liste</h1>
 		</header>
-		<section class="functions">
-			<header class="sr-only">
-				<h2>Funzioni account</h2>
+		<!-- inizio lista -->
+		<section>
+			<header>
+				<h2 class="lists-name">
+					<a href="list.php">Nome Lista</a>
+				</h2>
 			</header>
-			<a href="lists.php">
-				Le tue liste
-			</a>
-			<a href="stats.php">
-				Statistiche
-			</a>
-			<a href="settings.php">
-				Impostazioni
-			</a>
+
+			<!-- qui ci va la preview della lista: usare la componente card già definita -->
+
 		</section>
+		<!-- fine lista -->
 	</main>
 
 	<footer>
