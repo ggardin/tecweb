@@ -3,9 +3,8 @@
 #dropdown-menu-toggle {
 	display: block;
 	background-color: transparent;
-	border-color: transparent;
 	padding: 0;
-	border: 0;
+	border: 0 transparent;
 }
 
 #dropdown-link-container[data-open="false"] {

@@ -6,7 +6,7 @@
 	--txtcolor-alt: var(--txtcolor); /* ??? */
 
 	--secondaryColor: #D4C9C4;
-	--tertiaryColor: #275407;
+	--tertiaryColor: #0C443B;
 
 	--anchorcolor: #0000B5;
 	--anchorcolor-alt: #4C0083;
@@ -637,8 +637,6 @@ MOVIE PAGE
 
 .movie-page{
 	display: grid;
-	margin-left: .5em;
-	margin-right: .5em;
 	grid-gap: 1.5em;
 	grid-template-areas: "a b"
 						 "a c";
@@ -651,7 +649,6 @@ MOVIE PAGE
 }
 
 .movie-media button{
-	/*width: 15.625em;*/
 	font-size: 1.2em;
 	font-weight: 600;
 }
