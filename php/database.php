@@ -49,6 +49,7 @@ class Database {
 		if (is_string($item)) {
 			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
 			$item = Tools::toSpanLang($item);
+			$item = Tools::toAbbr($item);
 		}
 	}
 
