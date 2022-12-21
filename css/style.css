@@ -449,6 +449,7 @@ SEARCH BAR
 FILTERS
 ==============
 */
+
 #filters{
 	display: flex;
 	flex-flow: row wrap;
@@ -741,7 +742,7 @@ MOVIE PAGE
 	width: 100%;
 	height: 2.5em;
 	background: transparent;
-	border: var(--border-radius) solid var(--tertiaryColor);
+	border: var(--border-width) solid var(--tertiaryColor);
 	border-radius: var(--border-radius);
 	cursor: pointer;
 }
