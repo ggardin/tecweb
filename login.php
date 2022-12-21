@@ -3,15 +3,18 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
+session_start();
+if (isset($_SESSION["user_id"])) {
+	header("location: user.php");
+	exit();
+}
+
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
+
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"), "auth");
 
-$username = "";
-$password = "";
-
 if (isset($_POST["submit"])) {
-	$username = $_POST["username"];
-	$password = $_POST["password"];
-
 	$db_ok = false;
 	try {
 		$connessione = new Database();
@@ -23,7 +26,12 @@ if (isset($_POST["submit"])) {
 		unset($connessione);
 	}
 	if ($db_ok) {
-		Tools::replaceAnchor($page, "message", ($res ? "Accesso eseguito" : "Errore: Credenziali errate"));
+		if (! empty($res)) {
+			$_SESSION["user_id"] = $res["id"];
+			header("location: user.php");
+			exit();
+		} else
+			Tools::replaceAnchor($page, "message", "Errore: Credenziali errate");
 	}
 } else
 	Tools::replaceSection($page, "message", "");

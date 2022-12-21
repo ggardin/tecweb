@@ -3,13 +3,11 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
 $content = "";
-
 $err = "Errore: Persona non presente";
-
-$id = (isset($_GET["id"])) ? $_GET["id"] : "";
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
 	$db_ok = false;

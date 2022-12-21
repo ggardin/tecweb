@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8" />
+
+	<title>Impostazioni</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+
+	<!-- head -->
+</head>
+<body>
+	<!-- header -->
+
+	<nav id="breadcrumb">
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="user.php">Utente</a> &gt;&gt; Dati personali</p>
+	</nav>
+
+	<main id="settings">
+		<h1>Dati personali</h1>
+		<form action="">
+			<fieldset>
+				<legend>Ma che ne so</legend>
+				<label for="username"><span lang="en">Username</span></label>
+				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required />
+			</fieldset>
+			<fieldset>
+				<legend>Cambia la tua <span lang="en">password</span></legend>
+				<label for="old_password">Vecchia<span lang="en">Password</span></label>
+				<input type="password" id="old_password" name="old_password" aria-required="true" value="@@old_password@@" required />
+				<label for="new_password">Nuova <span lang="en">Password</span></label>
+				<input type="password" id="new_password" name="new_password" aria-required="true" value="@@new_password@@" required />
+			</fieldset>
+			<fieldset>
+				<legend>Opzionali</legend>
+				<label for="email"><span lang="en">Email</span></label>
+				<input type="text" id="email" name="email" aria-required="true" value="@@form_email@@" />
+				<label for="nome">Nome</label>
+				<input type="text" id="nome" name="nome" aria-required="true" value="@@form_nome@@" />
+				<label for="data">Data di nascita</label>
+				<input type="text" id="data" name="data" aria-required="true" value="@@form_data@@" />
+				<label for="gender"><span lang="en">Gender</span></label>
+				<select id="gender" name="gender" aria-required="true">
+					<option value="0">NS</option>
+					<option value="1">M</option>
+					<option value="2">F</option>
+					<option value="3">NB</option>
+				</select>
+			<input type="submit" name="submit" value="Salva" />
+			</fieldset>
+		</form>
+	</main>
+
+	<!-- footer -->
+</body>
+</html>

@@ -3,14 +3,14 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-
 $query = (isset($_GET["q"])) ? $_GET["q"] : "";
 $tipo = (isset($_GET["t"])) ? $_GET["t"] : "film";
 $f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
 $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 
 $db_ok = false;
+
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 try {
 	$connessione = new Database();
