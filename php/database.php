@@ -11,7 +11,7 @@ class Database {
 	private const USER = "rbonavig";
 	private const PASS = "paJa5The1eiM4hei";
 
-	private const ERR = "Errore interno. Ci dispiace. Riprova più tardi.";
+	private const ERR = "Errore in database.php";
 
 	private $connection;
 
@@ -309,13 +309,36 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function isAdminByUserId($id) : array {
-		$query = "select is_admin
-			from utente
-			where id = ?";
+	public function getListNameByIds($user, $list) : array {
+		$query = "select nome
+			from lista
+			where utente = ? and id = ?";
 
-		$params = [$id];
-		$types = "i";
+		$params = [$user, $list];
+		$types = "ii";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getListItemsByIds($user, $list) : array {
+		$query = "select 'film' as tipo, f.id, f.nome, f.locandina, f.data_rilascio
+			from lista as l
+				join lista_film as lf
+					on l.id = lf.lista
+				join film as f
+					on lf.film = f.id
+			where l.utente = ? and l.id = ?
+			union
+			select 'collezione' as tipo, c.id, c.nome, c.locandina, null as data_rilascio
+			from lista as l
+				join lista_collezione as lc
+					on l.id = lc.lista
+				join collezione as c
+					on lc.collezione = c.id
+			where l.utente = ? and l.id = ?";
+
+		$params = [$user, $list, $user, $list];
+		$types = "iiii";
 
 		return $this->preparedSelect($query, $params, $types);
 	}
