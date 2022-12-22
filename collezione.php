@@ -8,7 +8,6 @@ session_start();
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
 $content = "";
-$err = "Errore: Collezione non presente";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
@@ -16,20 +15,19 @@ if ($id != "") {
 	try {
 		$connessione = new Database();
 		$collezione = $connessione->getCollezioneById($id);
-		if (!empty($collezione)) {
-			$collezione = $collezione[0];
+		if (!empty($collezione))
 			$film = $connessione->getFilmByCollezioneId($id);
-		}
-		$db_ok = true;
-	} catch (Exception $e) {
-		Tools::replaceAnchor($page, "title", $e->getMessage());
-		Tools::replaceAnchor($page, "breadcrumb", "Errore");
-		$content .= "<h1>" . $e->getMessage() . "</h1>";
-	} finally {
 		unset($connessione);
+		$db_ok = true;
+	} catch (Exception) {
+		unset($connessione);
+		Tools::errCode(500);
 	}
 	if ($db_ok) {
 		if (!empty($collezione)) {
+			$collezione = $collezione[0];
+			Tools::toHtml($collezione);
+			Tools::toHtml($film);
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " · Collezione");
 			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
 			$content .= "<h1>" . $collezione["nome"] . "</h1>";
@@ -48,15 +46,11 @@ if ($id != "") {
 			}
 			$content .= "</ol>";
 		} else {
-			Tools::replaceAnchor($page, "title", $err);
-			Tools::replaceAnchor($page, "breadcrumb", "Errore");
-			$content .= "<h1>" . $err . "</h1>";
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceAnchor($page, "title", $err);
-	Tools::replaceAnchor($page, "breadcrumb", "Errore");
-	$content .= "<h1>" . $err . "</h1>";
+	Tools::errCode(404);
 }
 
 Tools::replaceAnchor($page, "collezione", $content);

@@ -7,7 +7,6 @@ session_start();
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
-$err = "Errore: Film non presente";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
@@ -16,23 +15,22 @@ if ($id != "") {
 		$connessione = new Database();
 		$film = $connessione->getFilmById($id);
 		if (!empty($film)) {
-			$film = $film[0];
-			$collezione = $connessione->getCollezioneById($film["collezione"]);
+			$collezione = $connessione->getCollezioneById($film[0]["collezione"]);
 			$crew = $connessione->getCrewByFilmId($id);
 			$genere = $connessione->getGenereByFilmId($id);
 			$paese = $connessione->getPaeseByFilmId($id);
 			$valutazione = $connessione->getValutazioneByFilmId($id);
 		}
-		$db_ok = true;
-	} catch (Exception $e) {
-		Tools::replaceAnchor($page, "title", $e->getMessage());
-		Tools::replaceAnchor($page, "breadcrumb", "Errore");
-		Tools::replaceSection($page, "main", ("<h1>" . $e->getMessage() . "</h1>"));
-	} finally {
 		unset($connessione);
+		$db_ok = true;
+	} catch (Exception) {
+		unset($connessione);
+		Tools::errCode(500);
 	}
 	if ($db_ok) {
 		if (!empty($film)) {
+			$film = $film[0];
+			Tools::toHtml($film);
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($film["nome"]) . " · Film");
 			Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 			Tools::replaceAnchor($page, "nome_film", $film["nome"]);
@@ -54,6 +52,7 @@ if ($id != "") {
 			else
 				Tools::replaceSection($page, "descrizione", "");
 			if (!empty($crew)) {
+				Tools::toHtml($crew);
 				$ruolo = Tools::getSection($page, "ruolo");
 				$persona = Tools::getSection($page, "persona");
 				$res = "";
@@ -74,6 +73,7 @@ if ($id != "") {
 			} else
 				Tools::replaceSection($page, "crew", "");
 			if (!empty($genere)) {
+				Tools::toHtml($genere);
 				$list = Tools::getSection($page, "genere");
 				$r = "";
 				foreach ($genere as $g) {
@@ -86,6 +86,7 @@ if ($id != "") {
 			} else
 				Tools::replaceSection($page, "generi", "");
 			if (!empty($paese)) {
+				Tools::toHtml($paese);
 				$list = Tools::getSection($page, "paese");
 				$r = "";
 				foreach ($paese as $p) {
@@ -107,7 +108,8 @@ if ($id != "") {
 				Tools::ReplaceAnchor($page, "incassi", $film["incassi"] . " $");
 			} else
 				Tools::replaceSection($page, "incassi", "");
-			if (isset($film["collezione"])) {
+			if (!empty($collezione)) {
+				Tools::toHtml($collezione);
 				$c = Tools::getSection($page, "collezione");
 				Tools::ReplaceAnchor($c, "id", $film["collezione"]);
 				Tools::ReplaceAnchor($c, "nome", $collezione[0]["nome"]);
@@ -115,6 +117,7 @@ if ($id != "") {
 			} else
 				Tools::replaceSection($page, "collezione", "");
 			if (!empty($valutazione)) {
+				Tools::toHtml($valutazione);
 				$list = Tools::getSection($page, "valutazione");
 				$r = "";
 				foreach ($valutazione as $v) {
@@ -130,16 +133,19 @@ if ($id != "") {
 				Tools::replaceSection($page, "valutazione", $r);
 			} else
 				Tools::replaceSection($page, "valutazioni", "");
+			if (isset($_SESSION["id"])) {
+				if ($_SESSION["is_admin"] == 0)
+					Tools::replaceSection($page, "admin", "");
+			} else {
+				Tools::replaceSection($page, "user", "");
+				Tools::replaceSection($page, "admin", "");
+			}
 		} else {
-			Tools::replaceAnchor($page, "title", $err);
-			Tools::replaceAnchor($page, "breadcrumb", "Errore");
-			Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceAnchor($page, "title", $err);
-	Tools::replaceAnchor($page, "breadcrumb", "Errore");
-	Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
+	Tools::errCode(404);
 }
 
 Tools::showPage($page);

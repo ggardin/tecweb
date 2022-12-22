@@ -1,7 +1,6 @@
 <?php
 
 require_once("ini.php");
-require_once("tools.php");
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -11,7 +10,7 @@ class Database {
 	private const USER = "rbonavig";
 	private const PASS = "paJa5The1eiM4hei";
 
-	private const ERR = "Errore interno. Ci dispiace. Riprova più tardi.";
+	private const ERR = "Errore in database.php";
 
 	private $connection;
 
@@ -40,15 +39,7 @@ class Database {
 				$p = strip_tags($p);
 				// convertiamo in entità durante output, qui facciamo il contrario
 				$p = htmlspecialchars_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-				// $p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
-		}
-	}
-
-	private function pulisciOutput(&$item, $key) : void {
-		if (is_string($item)) {
-			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
-			$item = Tools::toSpanLang($item);
 		}
 	}
 
@@ -69,7 +60,6 @@ class Database {
 			$ret = $result->fetch_all(MYSQLI_ASSOC);
 			$result->close();
 			$stmt->close();
-			array_walk_recursive($ret, "self::pulisciOutput");
 			return $ret;
 		} catch (mysqli_sql_exception $e) {
 			throw new Exception(self::ERR);
@@ -297,13 +287,58 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function isAdminByUserId($id) : array {
-		$query = "select is_admin
-			from utente
+	public function getListsByUserId($id) : array {
+		$query = "select id, nome
+			from lista
+			where utente = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function checkListOwnership($user, $list) : bool {
+		$query = "select nome
+			from lista
+			where utente = ? and id = ?";
+
+		$params = [$user, $list];
+		$types = "ii";
+
+		return (!empty($this->preparedSelect($query, $params, $types)));
+	}
+
+	public function getListNameById($id) : array {
+		$query = "select nome
+			from lista
 			where id = ?";
 
 		$params = [$id];
 		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getListItemsById($id) : array {
+		$query = "select 'film' as tipo, f.id, f.nome, f.locandina, f.data_rilascio
+			from lista as l
+				join lista_film as lf
+					on l.id = lf.lista
+				join film as f
+					on lf.film = f.id
+			where l.id = ?
+			union
+			select 'collezione' as tipo, c.id, c.nome, c.locandina, null as data_rilascio
+			from lista as l
+				join lista_collezione as lc
+					on l.id = lc.lista
+				join collezione as c
+					on lc.collezione = c.id
+			where l.id = ?";
+
+		$params = [$id, $id];
+		$types = "ii";
 
 		return $this->preparedSelect($query, $params, $types);
 	}
@@ -328,7 +363,7 @@ class Database {
 	}
 
 	public function login($username, $password) : array {
-		$query = "select id, password
+		$query = "select id, is_admin, password
 			from utente
 			where username = ?";
 
@@ -339,6 +374,7 @@ class Database {
 		$status = [];
 		if (!empty($res) && password_verify($password, $res[0]["password"])) {
 			$status["id"] = $res[0]["id"];
+			$status["is_admin"] = $res[0]["is_admin"];
 		}
 		return $status;
 	}

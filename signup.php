@@ -5,7 +5,7 @@ require_once("php/database.php");
 
 session_start();
 
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["id"])) {
 	header("location: user.php");
 	exit();
 }
@@ -22,15 +22,15 @@ if (isset($_POST["submit"])) {
 		try {
 			$connessione = new Database();
 			$res = $connessione->signup($username, $password);
-			$db_ok = true;
-		} catch (Exception $e) {
-			Tools::replaceAnchor($page, "message", $e->getMessage());
-		} finally {
 			unset($connessione);
+			$db_ok = true;
+		} catch (Exception) {
+			unset($connessione);
+			Tools::errCode(500);
 		}
 		if ($db_ok) {
 			if (! empty($res)) {
-				$_SESSION["user_id"] = $res["id"];
+				$_SESSION["id"] = $res["id"];
 				header("location: user.php");
 				exit();
 			} else

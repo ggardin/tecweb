@@ -6,7 +6,6 @@ require_once("php/database.php");
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
 $content = "";
-$err = "Errore: Persona non presente";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
@@ -15,19 +14,19 @@ if ($id != "") {
 		$connessione = new Database();
 		$persona = $connessione->getPersonaById($id);
 		if (!empty($persona)) {
-			$persona = $persona[0];
 			$film = $connessione->getFilmByPersonaId($id);
 		}
-		$db_ok = true;
-	} catch (Exception $e) {
-		Tools::replaceAnchor($page, "title", $e->getMessage());
-		Tools::replaceAnchor($page, "breadcrumb", "Errore");
-		$content .= "<h1>" . $e->getMessage() . "</h1>";
-	} finally {
 		unset($connessione);
+		$db_ok = true;
+	} catch (Exception) {
+		unset($connessione);
+		Tools::errCode(500);
 	}
 	if ($db_ok) {
 		if (!empty($persona)) {
+			$persona = $persona[0];
+			Tools::toHtml($persona);
+			Tools::toHtml($film);
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($persona["nome"]) . " · Persona");
 			Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 			$content .= "<h1>" . $persona["nome"] . "</h1>";
@@ -49,15 +48,11 @@ if ($id != "") {
 			}
 			$content .= "</ol>";
 		} else {
-			Tools::replaceAnchor($page, "title", $err);
-			Tools::replaceAnchor($page, "breadcrumb", "Errore");
-			$content .= "<h1>" . $err . "</h1>";
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceAnchor($page, "title", $err);
-	Tools::replaceAnchor($page, "breadcrumb", "Errore");
-	$content .= "<h1>" . $err . "</h1>";
+	Tools::errCode(404);
 }
 
 Tools::replaceAnchor($page, "persona", $content);

@@ -3,6 +3,12 @@
 require_once("ini.php");
 
 class Tools {
+	public static function errCode($num) : void {
+		http_response_code($num);
+		include ("${num}.php");
+		exit();
+	}
+
 	public static function getStringBetween(&$in, $start, $end) : string {
 		$pos = strpos($in, $start);
 		if ($pos !== false) {
@@ -51,15 +57,35 @@ class Tools {
 	}
 
 	public static function stripSpanLang(&$in) : string {
-		$from = ['/<span lang="([a-z]{2})">/', '#</span>#'];
+		$from = ['/<span lang="([a-z]{2,3})">/', '/<\/span>/'];
 		$to = ['', ''];
 		return preg_replace($from, $to, $in);
 	}
 
 	public static function toSpanLang(&$in) : string {
-		$from = ["/\[([a-z]{2})\]/", "/\[\/([a-z]{2})\]/"];
+		$from = ["/\[([a-z]{2,3})\]/", "/\[\/([a-z]{2,3})\]/"];
 		$to = ['<span lang="${1}">', '</span>'];
 		return preg_replace($from, $to, $in);
+	}
+
+	public static function toAbbr(&$in) : string {
+		$from = "/\{abbr\}(.*?)(;(.*))?\{\/abbr\}/";
+		$to = '<abbr title="${1}">${3}</abbr>';
+		return preg_replace($from, $to, $in);
+	}
+
+	private static function pulisci(&$item, $key, $conv_marker) : void {
+		if (! is_null($item)) {
+			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
+			if ($conv_marker) {
+				$item = Tools::toSpanLang($item);
+				$item = Tools::toAbbr($item);
+			}
+		}
+	}
+
+	public static function toHtml(&$in, $conv_marker = true) : void {
+		array_walk_recursive($in, "self::pulisci", $conv_marker);
 	}
 
 	private static function replacePageSection(&$page, &$shared, $name) : void {

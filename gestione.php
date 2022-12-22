@@ -4,8 +4,8 @@ require_once("php/tools.php");
 
 session_start();
 
-if (! isset($_SESSION["id"])) {
-	header ("location: login.php");
+if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
+	header ("location: index.php");
 	exit();
 }
 

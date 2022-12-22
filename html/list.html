@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 
-	<title>Lista</title>
+	<title>@@title@@</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 
@@ -17,14 +17,32 @@
 	</nav>
 
 	<main id="content">
-		<h1 class="list-title">@@intestazione@@</h1>
+		<h1>@@intestazione@@</h1>
+		<!-- message_start -->
+		<p>@@message@@</p>
+		<!-- message_end -->
 		<button type="button" class="modifyListButton">
 			<img src="img/edit.svg" alt="Modifica la lista" width="35" height="35" />
 			Modifica Lista
 		</button>
-		<section>
-			<!-- qui ci vanno i film della lista: usare la componente card già definita -->
-		</section>
+		<!-- lista_start -->
+		<ul class="cards">
+			<!-- elemento_start -->
+			<li class="card">
+				<a href="@@link@@">
+					<img width="200" height="300" src="@@immagine@@" alt="" />
+					<div class="details">
+						<h2>@@nome@@</h2>
+						<!-- data_start -->
+						<p>@@data_rilascio@@</p>
+						<!-- data_end -->
+					</div>
+				</a>
+			</li>
+			<!-- elemento_end -->
+		</ul>
+		<!-- lista_end -->
+
 	</main>
 
 	<!-- footer -->

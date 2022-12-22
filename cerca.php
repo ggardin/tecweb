@@ -31,14 +31,11 @@ try {
 		$cerca = $connessione->searchPersona($query);
 	else
 		$cerca = array();
-	$db_ok = true;
-} catch (Exception $e) {
-	Tools::replaceAnchor($page, "title", $e->getMessage());
-	Tools::replaceAnchor($page, "intestazione", $e->getMessage());
-	Tools::replaceSection($page, "message", "");
-	Tools::replaceSection($page, "results", "");
-} finally {
 	unset($connessione);
+	$db_ok = true;
+} catch (Exception) {
+	unset($connessione);
+	Tools::errCode(500);
 }
 if ($db_ok) {
 	if (in_array($tipo, ["film", "collezione", "persona"])) {
@@ -66,7 +63,8 @@ if ($db_ok) {
 	}
 	Tools::replaceAnchor($page, "title", $titolo);
 	Tools::replaceAnchor($page, "intestazione", $intestazione);
-	if (!empty($cerca)) {
+	if (isset($cerca)) {
+		Tools::toHtml($cerca);
 		$card = Tools::getSection($page, "card");
 		$r = "";
 		foreach ($cerca as $c) {
@@ -85,7 +83,7 @@ if ($db_ok) {
 			$r .= $t;
 		}
 		Tools::replaceSection($page, "card", $r);
-		Tools::replaceAnchor($page, "message", (count($cerca) . " risultati"));
+		Tools::replaceAnchor($page, "message", (count($cerca) . (count($cerca) != 1 ? " risultati" : " risultato")));
 	} else {
 		Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
 		Tools::replaceSection($page, "results", "");
