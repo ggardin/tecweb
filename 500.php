@@ -2,8 +2,7 @@
 
 require_once("php/tools.php");
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-
+$page = Tools::buildPage("500");
 Tools::showPage($page);
 
 ?>
