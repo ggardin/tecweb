@@ -5,7 +5,7 @@ require_once("php/database.php");
 
 session_start();
 
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["id"])) {
 	header("location: user.php");
 	exit();
 }
@@ -30,7 +30,7 @@ if (isset($_POST["submit"])) {
 		}
 		if ($db_ok) {
 			if (! empty($res)) {
-				$_SESSION["user_id"] = $res["id"];
+				$_SESSION["id"] = $res["id"];
 				header("location: user.php");
 				exit();
 			} else
