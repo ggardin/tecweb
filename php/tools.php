@@ -74,6 +74,20 @@ class Tools {
 		return preg_replace($from, $to, $in);
 	}
 
+	private static function pulisci(&$item, $key, $conv_marker) : void {
+		if (! is_null($item)) {
+			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
+			if ($conv_marker) {
+				$item = Tools::toSpanLang($item);
+				$item = Tools::toAbbr($item);
+			}
+		}
+	}
+
+	public static function toHtml(&$in, $conv_marker = true) : void {
+		array_walk_recursive($in, "self::pulisci", $conv_marker);
+	}
+
 	private static function replacePageSection(&$page, &$shared, $name) : void {
 		self::replaceAnchor($page, $name, self::getSection($shared, $name), true);
 	}

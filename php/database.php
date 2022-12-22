@@ -1,7 +1,6 @@
 <?php
 
 require_once("ini.php");
-require_once("tools.php");
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -40,16 +39,7 @@ class Database {
 				$p = strip_tags($p);
 				// convertiamo in entità durante output, qui facciamo il contrario
 				$p = htmlspecialchars_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-				// $p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
-		}
-	}
-
-	private function pulisciOutput(&$item, $key) : void {
-		if (is_string($item)) {
-			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
-			$item = Tools::toSpanLang($item);
-			$item = Tools::toAbbr($item);
 		}
 	}
 
@@ -70,7 +60,6 @@ class Database {
 			$ret = $result->fetch_all(MYSQLI_ASSOC);
 			$result->close();
 			$stmt->close();
-			array_walk_recursive($ret, "self::pulisciOutput");
 			return $ret;
 		} catch (mysqli_sql_exception $e) {
 			throw new Exception(self::ERR);
