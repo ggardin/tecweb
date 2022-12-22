@@ -8,7 +8,6 @@ session_start();
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
 $content = "";
-$err = "Errore: Collezione non presente";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
@@ -46,15 +45,11 @@ if ($id != "") {
 			}
 			$content .= "</ol>";
 		} else {
-			Tools::replaceAnchor($page, "title", $err);
-			Tools::replaceAnchor($page, "breadcrumb", "Errore");
-			$content .= "<h1>" . $err . "</h1>";
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceAnchor($page, "title", $err);
-	Tools::replaceAnchor($page, "breadcrumb", "Errore");
-	$content .= "<h1>" . $err . "</h1>";
+	Tools::errCode(404);
 }
 
 Tools::replaceAnchor($page, "collezione", $content);

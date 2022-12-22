@@ -6,7 +6,6 @@ require_once("php/database.php");
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
 $content = "";
-$err = "Errore: Persona non presente";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
@@ -47,15 +46,11 @@ if ($id != "") {
 			}
 			$content .= "</ol>";
 		} else {
-			Tools::replaceAnchor($page, "title", $err);
-			Tools::replaceAnchor($page, "breadcrumb", "Errore");
-			$content .= "<h1>" . $err . "</h1>";
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceAnchor($page, "title", $err);
-	Tools::replaceAnchor($page, "breadcrumb", "Errore");
-	$content .= "<h1>" . $err . "</h1>";
+	Tools::errCode(404);
 }
 
 Tools::replaceAnchor($page, "persona", $content);

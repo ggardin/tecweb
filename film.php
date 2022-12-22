@@ -7,7 +7,6 @@ session_start();
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 
-$err = "Errore: Film non presente";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "") {
@@ -136,15 +135,11 @@ if ($id != "") {
 				Tools::replaceSection($page, "admin", "");
 			}
 		} else {
-			Tools::replaceAnchor($page, "title", $err);
-			Tools::replaceAnchor($page, "breadcrumb", "Errore");
-			Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceAnchor($page, "title", $err);
-	Tools::replaceAnchor($page, "breadcrumb", "Errore");
-	Tools::replaceSection($page, "main", ("<h1>" . $err . "</h1>"));
+	Tools::errCode(404);
 }
 
 Tools::showPage($page);

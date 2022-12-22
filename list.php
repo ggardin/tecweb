@@ -56,10 +56,12 @@ if ($id != "") {
 				Tools::replaceAnchor($page, "message", "Questa lista non ha elementi");
 				Tools::replaceSection($page, "lista", "");
 			}
+		} else {
+			Tools::errCode(404);
 		}
 	}
 } else {
-	Tools::replaceSection($page, "message", "la lista non va bene");
+	Tools::errCode(404);
 }
 
 Tools::showPage($page);
