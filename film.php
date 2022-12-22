@@ -130,8 +130,13 @@ if ($id != "") {
 				Tools::replaceSection($page, "valutazione", $r);
 			} else
 				Tools::replaceSection($page, "valutazioni", "");
-			if (! isset($_SESSION["id"]))
-				Tools::replaceSection($page, "aggiungi", "");
+			if (isset($_SESSION["id"])) {
+				if ($_SESSION["is_admin"] == 0)
+					Tools::replaceSection($page, "admin", "");
+			} else {
+				Tools::replaceSection($page, "user", "");
+				Tools::replaceSection($page, "admin", "");
+			}
 		} else {
 			Tools::replaceAnchor($page, "title", $err);
 			Tools::replaceAnchor($page, "breadcrumb", "Errore");
