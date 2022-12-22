@@ -238,7 +238,8 @@ TMDB ATTRIBUTION
 
 /* Screen reader */
 
-.sr-only {
+.sr-only,
+.skip-to-content {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -248,6 +249,16 @@ TMDB ATTRIBUTION
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border-width: 0;
+}
+
+.skip-to-content:focus {
+	color: var(--bgcolor);
+	background-color: var(--tertiaryColor);
+	z-index: 999;
+	width: auto;
+	height: auto;
+	clip: auto;
+	padding: 0.5em;
 }
 
 /* CSS reset */
@@ -659,7 +670,7 @@ AUTH
 ==============
 */
 
-main#auth {
+#auth main {
 	background-color: var(--secondaryColor);
 	max-width: var(--auth-form-width);
 	margin: var(--content-padding) auto;
