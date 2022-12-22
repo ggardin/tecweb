@@ -38,6 +38,7 @@
 
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
+
 }
 
 body > #page-header,
@@ -710,6 +711,14 @@ main#auth {
 #Ink #alien{
 	fill: var(--tertiaryColor);
 }
+
+
+/*
+==============
+ABOUT PAGE
+==============
+*/
+
 
 /*
 ==============
