@@ -63,7 +63,8 @@ if ($db_ok) {
 	}
 	Tools::replaceAnchor($page, "title", $titolo);
 	Tools::replaceAnchor($page, "intestazione", $intestazione);
-	if (!empty($cerca)) {
+	if (isset($cerca)) {
+		Tools::toHtml($cerca);
 		$card = Tools::getSection($page, "card");
 		$r = "";
 		foreach ($cerca as $c) {

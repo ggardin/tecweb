@@ -15,10 +15,8 @@ if ($id != "") {
 	try {
 		$connessione = new Database();
 		$collezione = $connessione->getCollezioneById($id);
-		if (!empty($collezione)) {
-			$collezione = $collezione[0];
+		if (!empty($collezione))
 			$film = $connessione->getFilmByCollezioneId($id);
-		}
 		unset($connessione);
 		$db_ok = true;
 	} catch (Exception) {
@@ -27,6 +25,9 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($collezione)) {
+			$collezione = $collezione[0];
+			Tools::toHtml($collezione);
+			Tools::toHtml($film);
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " · Collezione");
 			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
 			$content .= "<h1>" . $collezione["nome"] . "</h1>";

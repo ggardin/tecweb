@@ -14,7 +14,6 @@ if ($id != "") {
 		$connessione = new Database();
 		$persona = $connessione->getPersonaById($id);
 		if (!empty($persona)) {
-			$persona = $persona[0];
 			$film = $connessione->getFilmByPersonaId($id);
 		}
 		unset($connessione);
@@ -25,6 +24,9 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if (!empty($persona)) {
+			$persona = $persona[0];
+			Tools::toHtml($persona);
+			Tools::toHtml($film);
 			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($persona["nome"]) . " · Persona");
 			Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 			$content .= "<h1>" . $persona["nome"] . "</h1>";

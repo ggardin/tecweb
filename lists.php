@@ -24,6 +24,7 @@ try {
 }
 if ($db_ok) {
 	if (!empty($liste)) {
+		Tools::toHtml($liste);
 		$lista = Tools::getSection($page, "lista");
 		$r = "";
 		foreach ($liste as $l) {

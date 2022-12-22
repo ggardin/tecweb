@@ -32,10 +32,12 @@ if ($id != "") {
 	}
 	if ($db_ok) {
 		if ($own) {
+			Tools::toHtml($nome);
 			Tools::replaceAnchor($page, "intestazione", $nome[0]["nome"]);
 			Tools::replaceAnchor($page, "breadcrumb", $nome[0]["nome"]);
 			Tools::replaceAnchor($page, "title", ($nome[0]["nome"] . " · Lista"));
 			if (!empty($lista)) {
+				Tools::toHtml($lista);
 				$elemento = Tools::getSection($page, "elemento");
 				$r = "";
 				foreach ($lista as $l) {
