@@ -3,6 +3,12 @@
 require_once("ini.php");
 
 class Tools {
+	public static function errCode($num) : void {
+		http_response_code($num);
+		include ("${num}.php");
+		exit();
+	}
+
 	public static function getStringBetween(&$in, $start, $end) : string {
 		$pos = strpos($in, $start);
 		if ($pos !== false) {

@@ -19,11 +19,11 @@ if (isset($_POST["submit"])) {
 	try {
 		$connessione = new Database();
 		$res = $connessione->login($username, $password);
-		$db_ok = true;
-	} catch (Exception $e) {
-		Tools::replaceAnchor($page, "message", $e->getMessage());
-	} finally {
 		unset($connessione);
+		$db_ok = true;
+	} catch (Exception) {
+		unset($connessione);
+		Tools::errCode(500);
 	}
 	if ($db_ok) {
 		if (! empty($res)) {

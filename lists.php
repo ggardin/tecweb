@@ -16,11 +16,11 @@ $db_ok = false;
 try {
 	$connessione = new Database();
 	$liste = $connessione->getListsByUserId($_SESSION["id"]);
-	$db_ok = true;
-} catch (Exception $e) {
-	Tools::replaceSection($page, "message", $e->getMessage());
-} finally {
 	unset($connessione);
+	$db_ok = true;
+} catch (Exception) {
+	unset($connessione);
+	Tools::errCode(500);
 }
 if ($db_ok) {
 	if (!empty($liste)) {

@@ -31,14 +31,11 @@ try {
 		$cerca = $connessione->searchPersona($query);
 	else
 		$cerca = array();
-	$db_ok = true;
-} catch (Exception $e) {
-	Tools::replaceAnchor($page, "title", $e->getMessage());
-	Tools::replaceAnchor($page, "intestazione", $e->getMessage());
-	Tools::replaceSection($page, "message", "");
-	Tools::replaceSection($page, "results", "");
-} finally {
 	unset($connessione);
+	$db_ok = true;
+} catch (Exception) {
+	unset($connessione);
+	Tools::errCode(500);
 }
 if ($db_ok) {
 	if (in_array($tipo, ["film", "collezione", "persona"])) {

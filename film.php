@@ -23,13 +23,11 @@ if ($id != "") {
 			$paese = $connessione->getPaeseByFilmId($id);
 			$valutazione = $connessione->getValutazioneByFilmId($id);
 		}
-		$db_ok = true;
-	} catch (Exception $e) {
-		Tools::replaceAnchor($page, "title", $e->getMessage());
-		Tools::replaceAnchor($page, "breadcrumb", "Errore");
-		Tools::replaceSection($page, "main", ("<h1>" . $e->getMessage() . "</h1>"));
-	} finally {
 		unset($connessione);
+		$db_ok = true;
+	} catch (Exception) {
+		unset($connessione);
+		Tools::errCode(500);
 	}
 	if ($db_ok) {
 		if (!empty($film)) {
