@@ -3,27 +3,41 @@
 <head>
 	<meta charset="utf-8">
 
-	<title><!-- title --></title>
-	<meta name="description" content="">
-	<meta name="keywords" content="film, collezione">
+	<title>@@title@@</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
 
 	<!-- head -->
 </head>
 <body>
-	<header>
-		<!-- header -->
-	</header>
+	<!-- header -->
 
 	<nav id="breadcrumb">
 		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Cerca</p>
 	</nav>
 
-	<main>
-		<h1><!-- tipo --></h1>
-		<p>Cerca <!-- ricerca --></p>
-		<div class="cards">
-			<!-- card -->
-		</div>
+	<main id="content">
+		<h1>@@intestazione@@</h1>
+		<!-- message_start -->
+		<p>@@message@@</p>
+		<!-- message_end -->
+		<!-- results_start -->
+		<ul class="cards">
+			<!-- card_start -->
+			<li class="card">
+				<a href="@@link@@">
+					<img width="200" height="300" src="@@immagine@@" alt="" />
+					<div class="details">
+						<h2>@@nome@@</h2>
+						<!-- data_start -->
+						<p>@@data_rilascio@@</p>
+						<!-- data_end -->
+					</div>
+				</a>
+			</li>
+			<!-- card_end -->
+		</ul>
+		<!-- results_end -->
 
 		<!-- <h1>Attori</h1>
 		<div class="cards">
@@ -37,8 +51,6 @@
 		</div> -->
 	</main>
 
-	<footer>
-		<!-- footer -->
-	</footer>
+	<!-- footer -->
 </body>
 </html>

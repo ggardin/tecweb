@@ -1,6 +1,8 @@
 <?php
 
 require_once("ini.php");
+require_once("tools.php");
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 class Database {
@@ -9,7 +11,7 @@ class Database {
 	private const USER = "rbonavig";
 	private const PASS = "paJa5The1eiM4hei";
 
-	private const ERR = "Siamo spiacenti, abbiamo riscontrato un errore. Riprova più tardi.";
+	private const ERR = "Errore interno. Ci dispiace. Riprova più tardi.";
 
 	private $connection;
 
@@ -36,8 +38,17 @@ class Database {
 			if (is_string($p)) {
 				$p = trim($p);
 				$p = strip_tags($p);
-				$p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+				// convertiamo in entità durante output, qui facciamo il contrario
+				$p = htmlspecialchars_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+				// $p = htmlspecialchars($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
+		}
+	}
+
+	private function pulisciOutput(&$item, $key) : void {
+		if (is_string($item)) {
+			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
+			$item = Tools::toSpanLang($item);
 		}
 	}
 
@@ -58,6 +69,7 @@ class Database {
 			$ret = $result->fetch_all(MYSQLI_ASSOC);
 			$result->close();
 			$stmt->close();
+			array_walk_recursive($ret, "self::pulisciOutput");
 			return $ret;
 		} catch (mysqli_sql_exception $e) {
 			throw new Exception(self::ERR);
@@ -77,15 +89,8 @@ class Database {
 		return true;
 	}
 
-	// see: https://phpdelusions.net/mysqli
-	private function mysqli_info_array() : array {
-		$pattern = '~Rows matched: (?<matched>\d+)  Changed: (?<changed>\d+)  Warnings: (?<warnings>\d+)~';
-		preg_match($pattern, $this->connection->info, $matches);
-		return array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-	}
-
 	public function getCollezioneById($id) : array {
-		$query = "select nome, descrizione, copertina
+		$query = "select nome, descrizione, locandina
 			from collezione
 			where id = ?";
 
@@ -95,13 +100,44 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getFilmInCollezioneById($id) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+	public function getFilmByCollezioneId($id) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from collezione as c
 				join film as f
 					on c.id = f.collezione
 			where c.id = ?
-			order by f.data_rilascio";
+			order by f.data_rilascio is null, f.data_rilascio";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getPersonaById($id) : array {
+		$query = "select p.nome, g.nome as gender, p.immagine, p.data_nascita, p.data_morte
+			from persona as p
+				join gender as g
+					on p.gender = g.id
+			where p.id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getFilmByPersonaId($id) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio, r.nome as ruolo
+			from persona as p
+				join crew as c
+					on p.id = c.persona
+				join film as f
+					on c.film = f.id
+				join ruolo as r
+					on c.ruolo = r.id
+			where p.id = ?
+			order by f.id, r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -110,9 +146,29 @@ class Database {
 	}
 
 	public function getFilmById($id) : array {
-		$query = "select *
-			from film
-			where id = ?";
+		$query = "select f.id, f.nome, f.nome_originale, f.durata, f.locandina, f.descrizione, f.data_rilascio, f.budget, f.incassi, f.collezione, f.voto, s.nome as stato
+			from film as f
+				join stato as s
+					on f.stato = s.id
+			where f.id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getCrewByFilmId($id) : array {
+		$query = "select r.nome as ruolo, p.id as p_id, p.nome as p_nome
+			from film as f
+				join crew as c
+					on f.id = c.film
+				join persona as p
+					on c.persona = p.id
+				join ruolo as r
+					on c.ruolo = r.id
+			where f.id = ?
+			order by r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -151,7 +207,7 @@ class Database {
 	}
 
 	public function getValutazioneByFilmId($id) : array {
-		$query = "select u.username, v.valore, v.testo
+		$query = "select u.username as utente, v.valore, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
@@ -166,90 +222,141 @@ class Database {
 	}
 
 	public function searchFilm($str) : array {
-		$query = "select id, nome, copertina, data_rilascio
+		$query = "select id, nome, locandina, data_rilascio
 			from film
 			where nome like ?";
 
-		$str = trim($str);
-		$str = "%${str}%";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%")];
 
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function searchCollezione($str) : array {
-		$query = "select id, nome, copertina
-			from collezione
-			where nome like ?";
-
-		$str = trim($str);
-		$str = "%${str}%";
-		$params = [$str];
-
-		return $this->preparedSelect($query, $params);
-	}
-
-	public function searchFilmByGenere($str) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+	public function searchFilmFilteredByGenere($str, $genere) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from film as f
 				join film_genere as fg
 					on f.id = fg.film
 				join genere as g
 					on fg.genere = g.id
-			where g.nome like ?";
+			where f.nome like ?
+				and g.nome = ?";
 
-		$str = trim($str);
-		$str = "${str}";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%"), $genere];
 
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function searchFilmByPaese($str) : array {
-		$query = "select f.id, f.nome, f.copertina, f.data_rilascio
+	public function searchFilmFilteredByPaese($str, $paese) : array {
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from film as f
 				join film_paese as fp
 					on f.id = fp.film
 				join paese as p
 					on fp.paese = p.iso_3166_1
-			where p.nome like ?";
+			where f.nome like ?
+				and p.nome = ?";
 
-		$str = trim($str);
-		$str = "${str}";
-		$params = [$str];
+		$params = [("%" . trim($str) . "%"), $paese];
 
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function insertUtente($user, $pass) : bool {
+	public function searchFilmFilteredByData($str, $data) : array {
+		// TODO
+		return [];
+	}
+
+	public function searchCollezione($str) : array {
+		$query = "select id, nome, locandina
+			from collezione
+			where nome like ?";
+
+		$params = [("%" . trim($str) . "%")];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function searchPersona($str) : array {
+		$query = "select id, nome, immagine
+			from persona
+			where nome like ?";
+
+		$params = [("%" . trim($str) . "%")];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getUsernameByUserId($id) : array {
+		$query = "select username
+			from utente
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function isAdminByUserId($id) : array {
+		$query = "select is_admin
+			from utente
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function insertUtente($username, $pass) : bool {
 		$query = "insert into utente(username, password)
 			values (?, ?)";
 
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
-		$params = [$user, $pass];
+		$params = [$username, $pass];
 
 		return $this->preparedInsert($query, $params);
 	}
 
-	public function signup($user, $pass) : bool {
-		// TODO: inserimento automatico liste di default
-		return $this->insertUtente($user, $pass);
+	public function insertLista($user_id, $list) : bool {
+		$query = "insert into lista(utente, nome)
+			values (?, ?)";
+
+		$params = [$user_id, $list];
+
+		return $this->preparedInsert($query, $params);
 	}
 
-	public function login($user, $pass) : bool {
-		$query = "select password
+	public function login($username, $password) : array {
+		$query = "select id, password
 			from utente
 			where username = ?";
 
-		$params = [$user];
+		$params = [$username];
 
 		$res = $this->preparedSelect($query, $params);
 
-		$pw = !empty($res) ? $res[0]["password"] : null;
-		if ($pw && password_verify($pass, $pw))
-			return true;
-		return false;
+		$status = [];
+		if (!empty($res) && password_verify($password, $res[0]["password"])) {
+			$status["id"] = $res[0]["id"];
+		}
+		return $status;
 	}
+
+	public function signup($username, $password) : array {
+		$s = $this->insertUtente($username, $password);
+
+		if ($s) {
+			$user_id = $this->connection->insert_id;
+			// TODO : transazione
+			if ($this->insertLista($user_id, "Da guardare") &&
+				$this->insertLista($user_id, "Visti"));
+				return $this->login($username, $password);
+		}
+
+		return [];
+	}
+
 }
 
 ?>

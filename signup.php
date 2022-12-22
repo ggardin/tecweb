@@ -1,21 +1,22 @@
 <?php
 
-require_once("php/page.php");
+require_once("php/tools.php");
 require_once("php/database.php");
 
-$page = Page::build(basename($_SERVER["PHP_SELF"], ".php"), "auth");
+session_start();
 
-$username = "";
-$password = "";
-$password_confirm = "";
+if (isset($_SESSION["user_id"])) {
+	header("location: user.php");
+	exit();
+}
 
-$content = "";
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
+$password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
+
+$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"), "auth");
 
 if (isset($_POST["submit"])) {
-	$username = $_POST["username"];
-	$password = $_POST["password"];
-	$password_confirm = $_POST["password_confirm"];
-
 	if ($password == $password_confirm) {
 		$db_ok = false;
 		try {
@@ -23,24 +24,27 @@ if (isset($_POST["submit"])) {
 			$res = $connessione->signup($username, $password);
 			$db_ok = true;
 		} catch (Exception $e) {
-			$content .= "<p>" . $e->getMessage() . "</p>";
+			Tools::replaceAnchor($page, "message", $e->getMessage());
 		} finally {
 			unset($connessione);
 		}
 		if ($db_ok) {
-			$content .= "<p>" . ($res ? "OK: boomer" : "ERRORE: Utente già registrato") . "</p>";
+			if (! empty($res)) {
+				$_SESSION["user_id"] = $res["id"];
+				header("location: user.php");
+				exit();
+			} else
+				Tools::replaceAnchor($page, "message", "Errore: Utente già registrato");
 		}
-	} else {
-		$content .= "ERRORE: Le password non coincidono";
-	}
-}
+	} else
+		Tools::replaceAnchor($page, "message", "Errore: Le password non coincidono");
+} else
+	Tools::replaceSection($page, "message", "");
 
-Page::replaceAnchor($page, "form_username", $username);
-Page::replaceAnchor($page, "form_password", $password);
-Page::replaceAnchor($page, "form_password_confirm", $password_confirm);
+Tools::replaceAnchor($page, "form_username", $username);
+Tools::replaceAnchor($page, "form_password", $password);
+Tools::replaceAnchor($page, "form_password_confirm", $password_confirm);
 
-Page::replaceAnchor($page, "form_messages", $content);
-
-echo($page);
+Tools::showPage($page);
 
 ?>

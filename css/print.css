@@ -1,6 +1,19 @@
+@font-face {
+	font-family: "Spectral";
+	src: url("../fonts/spectral") format("truetype");
+	font-weight: 200 800;
+	font-display: swap;
+}
+
 * {
 	background-image: none !important;
 	break-before: avoid;
+}
+
+html, body {
+	font-size: 12pt;
+	font-family: "Spectral", "Times New Roman", serif;
+	line-height: 1.5em;
 }
 
 img, svg {
@@ -12,14 +25,7 @@ img.print, svg.print {
 	max-width: 100%;
 }
 
-html, body {
-	font-size: 12pt;
-	font-family: "Spectral", "Times New Roman", serif;
-	line-height: 1.5em;
-	margin: auto;
-}
-
-header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {
+#page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
 	display: none;
 }
 
@@ -37,5 +43,3 @@ main::after {
 	margin: 2cm;
 	size: A4;
 }
-
-
