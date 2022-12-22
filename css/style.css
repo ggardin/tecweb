@@ -516,6 +516,12 @@ RESULTS CARD
 	overflow: hidden;
 }
 
+.card > a {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .card img {
 	display: block;
 	object-fit: cover;
