@@ -38,6 +38,7 @@
 
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
+
 }
 
 body > #page-header,
@@ -237,7 +238,8 @@ TMDB ATTRIBUTION
 
 /* Screen reader */
 
-.sr-only {
+.sr-only,
+.skip-to-content {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -247,6 +249,16 @@ TMDB ATTRIBUTION
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border-width: 0;
+}
+
+.skip-to-content:focus {
+	color: var(--bgcolor);
+	background-color: var(--tertiaryColor);
+	z-index: 999;
+	width: auto;
+	height: auto;
+	clip: auto;
+	padding: 0.5em;
 }
 
 /* CSS reset */
@@ -516,6 +528,12 @@ RESULTS CARD
 	overflow: hidden;
 }
 
+.card > a {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .card img {
 	display: block;
 	object-fit: cover;
@@ -548,6 +566,7 @@ MOVIE PAGE
 .movie-page{
 	display: grid;
 	grid-gap: 1.5em;
+	grid-template-columns: auto 1fr;
 	grid-template-areas: "a b"
 						 "a c";
 }
@@ -651,7 +670,7 @@ AUTH
 ==============
 */
 
-main#auth {
+#auth main {
 	background-color: var(--secondaryColor);
 	max-width: var(--auth-form-width);
 	margin: var(--content-padding) auto;
@@ -709,6 +728,22 @@ main#auth {
 #Ink #alien{
 	fill: var(--tertiaryColor);
 }
+
+
+/*
+==============
+ABOUT PAGE
+==============
+*/
+
+.about-section{
+	margin-top: 2em;
+}
+
+.about-section p{
+	margin-top: .5em;
+}
+
 
 /*
 ==============
