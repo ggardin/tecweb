@@ -52,34 +52,6 @@
 	border-color: red; /* to be defined */
 }
 
-.hamburger-top,
-.hamburger-middle,
-.hamburger-bottom {
-	width: 100%;
-	border-bottom: 4px solid currentcolor;
-	transition: transform .2s,opacity .2s;
-}
-
-.hamburger-top {
-	transform-origin: top right;
-}
-
-.hamburger-bottom {
-	transform-origin: bottom right;
-}
-
-nav.dropdown-opened .hamburger-top {
-	transform: rotate(-45deg);
-}
-
-nav.dropdown-opened .hamburger-middle {
-	transform: scale(0);
-}
-
-nav.dropdown-opened .hamburger-bottom {
-	transform: rotate(+45deg);
-}
-
 #dropdown-link-container {
 	position: fixed;
 	top: 0;
@@ -113,6 +85,12 @@ nav.dropdown-opened .hamburger-bottom {
 	font-size: 2em;
 	line-height: 1.5em;
 }
+
+#dropdown-menu-toggle[data-open="false"] .hamburger { fill: var(--tertiaryColor);  }
+#dropdown-menu-toggle[data-open="false"] .cross { fill: transparent; }
+
+#dropdown-menu-toggle[data-open="true"] .hamburger { fill: transparent; }
+#dropdown-menu-toggle[data-open="true"] .cross { fill: var(--tertiaryColor); }
 
 .movie-details{
 	margin: 1em;
