@@ -86,6 +86,12 @@
 	line-height: 1.5em;
 }
 
+#dropdown-menu-toggle[data-open="false"] .hamburger { fill: var(--tertiaryColor);  }
+#dropdown-menu-toggle[data-open="false"] .cross { fill: transparent; }
+
+#dropdown-menu-toggle[data-open="true"] .hamburger { fill: transparent; }
+#dropdown-menu-toggle[data-open="true"] .cross { fill: var(--tertiaryColor); }
+
 .movie-details{
 	margin: 1em;
 }
