@@ -75,7 +75,10 @@ HEADER
 */
 
 #page-header {
+	position: sticky;
+	top: 0;
 	color: var(--txtcolor);
+	background-color: var(--bgcolor);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
