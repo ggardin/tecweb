@@ -669,7 +669,7 @@ AUTH
 ==============
 */
 
-main#auth {
+#auth main {
 	background-color: var(--secondaryColor);
 	max-width: var(--auth-form-width);
 	margin: var(--content-padding) auto;
