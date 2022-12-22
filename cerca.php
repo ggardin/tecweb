@@ -85,7 +85,7 @@ if ($db_ok) {
 			$r .= $t;
 		}
 		Tools::replaceSection($page, "card", $r);
-		Tools::replaceAnchor($page, "message", (count($cerca) . " risultati"));
+		Tools::replaceAnchor($page, "message", (count($cerca) . (count($cerca) != 1 ? " risultati" : " risultato")));
 	} else {
 		Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
 		Tools::replaceSection($page, "results", "");
