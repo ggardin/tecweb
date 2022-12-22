@@ -309,7 +309,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getListNameByIds($user, $list) : array {
+	public function checkListOwnership($user, $list) : bool {
 		$query = "select nome
 			from lista
 			where utente = ? and id = ?";
@@ -317,17 +317,28 @@ class Database {
 		$params = [$user, $list];
 		$types = "ii";
 
+		return (!empty($this->preparedSelect($query, $params, $types)));
+	}
+
+	public function getListNameById($id) : array {
+		$query = "select nome
+			from lista
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getListItemsByIds($user, $list) : array {
+	public function getListItemsById($id) : array {
 		$query = "select 'film' as tipo, f.id, f.nome, f.locandina, f.data_rilascio
 			from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
 				join film as f
 					on lf.film = f.id
-			where l.utente = ? and l.id = ?
+			where l.id = ?
 			union
 			select 'collezione' as tipo, c.id, c.nome, c.locandina, null as data_rilascio
 			from lista as l
@@ -335,10 +346,10 @@ class Database {
 					on l.id = lc.lista
 				join collezione as c
 					on lc.collezione = c.id
-			where l.utente = ? and l.id = ?";
+			where l.id = ?";
 
-		$params = [$user, $list, $user, $list];
-		$types = "iiii";
+		$params = [$id, $id];
+		$types = "ii";
 
 		return $this->preparedSelect($query, $params, $types);
 	}
