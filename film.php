@@ -130,6 +130,8 @@ if ($id != "") {
 				Tools::replaceSection($page, "valutazione", $r);
 			} else
 				Tools::replaceSection($page, "valutazioni", "");
+			if (! isset($_SESSION["id"]))
+				Tools::replaceSection($page, "aggiungi", "");
 		} else {
 			Tools::replaceAnchor($page, "title", $err);
 			Tools::replaceAnchor($page, "breadcrumb", "Errore");
