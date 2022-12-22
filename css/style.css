@@ -720,7 +720,11 @@ ABOUT PAGE
 */
 
 .about-section{
-	padding: 3em;
+	margin-top: 2em;
+}
+
+.about-section p{
+	margin-top: .5em;
 }
 
 
