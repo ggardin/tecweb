@@ -298,6 +298,17 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getListsByUserId($id) : array {
+		$query = "select id, nome
+			from lista
+			where utente = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function isAdminByUserId($id) : array {
 		$query = "select is_admin
 			from utente
@@ -329,7 +340,7 @@ class Database {
 	}
 
 	public function login($username, $password) : array {
-		$query = "select id, password
+		$query = "select id, is_admin, password
 			from utente
 			where username = ?";
 
@@ -340,6 +351,7 @@ class Database {
 		$status = [];
 		if (!empty($res) && password_verify($password, $res[0]["password"])) {
 			$status["id"] = $res[0]["id"];
+			$status["is_admin"] = $res[0]["is_admin"];
 		}
 		return $status;
 	}
