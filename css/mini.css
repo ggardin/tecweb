@@ -116,10 +116,10 @@ nav.dropdown-opened .hamburger-bottom {
 
 .movie-details{
 	margin: 1em;
-
 }
 
 .movie-page{
+	grid-template-columns: auto;
 	grid-template-areas: "a"
 						 "b"
 						 "c";
