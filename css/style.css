@@ -548,6 +548,7 @@ MOVIE PAGE
 .movie-page{
 	display: grid;
 	grid-gap: 1.5em;
+	grid-template-columns: auto 1fr;
 	grid-template-areas: "a b"
 						 "a c";
 }
