@@ -58,8 +58,7 @@ if ($db_ok) {
 			$titolo = $intestazione;
 		}
 	} else {
-		$intestazione = "Errore: parametri di ricerca sbagliati";
-		$titolo = $intestazione;
+		Tools::errCode(404);
 	}
 	Tools::replaceAnchor($page, "title", $titolo);
 	Tools::replaceAnchor($page, "intestazione", $intestazione);
