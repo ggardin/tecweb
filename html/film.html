@@ -16,34 +16,24 @@
 		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca.php"><span lang="en">Film</span></a> &gt;&gt; @@breadcrumb@@</p>
 	</nav>
 
-	<main id="content">
+	<main id="content" class="movie-page">
 		<!-- main_start -->
-		<div class="movie-page">
-			<div class="movie-details" id="first">
-				<h1>@@nome_film@@</h1>
-				<!-- sottotitolo_start -->
-				<p id="subtitle">@@sottotitolo@@</p>
-				<!-- sottotitolo_end -->
-				<!-- descrizione_start -->
-				<p>@@descrizione@@</p>
-				<!-- descrizione_end -->
-			</div>
+		<div class="movie-details">
 
-			<div class="movie-media">
-				<img src="@@locandina@@" alt="" width="250" height="375" />
-				<!-- admin_start -->
-				<button type="button" class="movie-viewed">Modifica</button>
-				<!-- admin_end -->
-				<!-- user_start -->
-				<button type="button" class="movie-viewed">Visto</button>
-				<button type="button" class="movie-add-to-list">Aggiungi alla lista</button>
-				<!-- user_end -->
-			</div>
+			<h1>@@nome_film@@</h1>
+			<!-- sottotitolo_start -->
+			<p id="subtitle">@@sottotitolo@@</p>
+			<!-- sottotitolo_end -->
+			<!-- descrizione_start -->
+			<p>@@descrizione@@</p>
+			<!-- descrizione_end -->
 
-			<div class="movie-details" id="second">
+			<section>
 				<!-- crew_start -->
-				<h2 lang="en">Crew</h2>
-				<dl>
+				<header>
+					<h2 lang="en">Crew</h2>
+				</header>
+				<dl class="pills">
 					<!-- ruoli_start -->
 					<!-- ruolo_start -->
 					<dt>@@ruolo@@</dt>
@@ -54,56 +44,95 @@
 					<!-- ruoli_end -->
 				</dl>
 				<!-- crew_end -->
+			</section>
 
+			<section>
 				<!-- generi_start -->
-				<h2>Generi</h2>
-				<ul>
+				<header>
+					<h2>Generi</h2>
+				</header>
+				<ul class="pills">
 					<!-- genere_start -->
 					<li><a href="cerca.php?fn=genere&fv=@@valore@@">@@nome@@</a></li>
 					<!-- genere_end -->
 				</ul>
 				<!-- generi_end -->
+			</section>
 
+			<section>
 				<!-- paesi_start -->
-				<h2>Paesi di produzione</h2>
-				<ul>
+				<header>
+					<h2>Paesi di produzione</h2>
+				</header>
+				<ul class="pills">
 					<!-- paese_start -->
 					<li><a href="cerca.php?fn=paese&fv=@@valore@@">@@nome@@</a></li>
 					<!-- paese_end -->
 				</ul>
 				<!-- paesi_end -->
+			</section>
 
-				<h2>Altri dettagli</h2>
-				<ul>
-					<li>Titolo originale: @@nome_originale@@</li>
-					<li>Stato: @@stato@@</li>
+			<section>
+				<header>
+					<h2>Altri dettagli</h2>
+				</header>
+				<dl>
+					<dt>Titolo originale</dt>
+					<dd>@@nome_originale@@</dd>
+					<dt>Stato</dt>
+					<dd>@@stato@@</dd>
 					<!-- budget_start -->
-					<li><span lang="en">Budget</span>: @@budget@@</li>
+					<dt><span lang="en">Budget</span></dt>
+					<dd>@@budget@@</dd>
 					<!-- budget_end -->
 					<!-- incassi_start -->
-					<li>Incassi: @@incassi@@</li>
+					<dt>Incassi</dt>
+					<dd>@@incassi@@</dd>
 					<!-- incassi_end -->
 					<!-- collezione_start -->
-					<li>Collezione: <a href="collezione.php?id=@@id@@">@@nome@@</a></li>
+					<dt>Collezione</dt>
+					<dd><a href="collezione.php?id=@@id@@">@@nome@@</a></dd>
 					<!-- collezione_end -->
-				</ul>
+				</dl>
+			</section>
 
+			<section>
 				<!-- valutazioni_start -->
-				<h2>Valutazioni</h2>
+				<header>
+					<h2>Valutazioni</h2>
+				</header>
 				<ol>
 					<!-- valutazione_start -->
-					<li><ul>
-						<li>Utente: @@utente@@</li>
-						<li>Valore: @@valore@@</li>
-						<!-- testo_start -->
-						<li>Testo: @@testo@@</li>
-						<!-- testo_end -->
-					</ul></li>
+					<li>
+						<dl>
+							<dt>Utente</dt>
+							<dd>@@utente@@</dd>
+							<dt>Valore</dt>
+							<dd>@@valore@@</dd>
+							<!-- testo_start -->
+							<dt>Testo</dt>
+							<dd>@@testo@@</dd>
+							<!-- testo_end -->
+						</dl>
+					</li>
 					<!-- valutazione_end -->
 				</ol>
 				<!-- valutazioni_end -->
-			</div>
+			</section>
+
 		</div>
+
+		<div class="movie-media">
+			<img src="@@locandina@@" alt=""/>
+			<!-- admin_start -->
+			<button type="button" class="movie-viewed">Modifica</button>
+			<!-- admin_end -->
+			<!-- user_start -->
+			<button type="button" class="movie-viewed">Visto</button>
+			<button type="button" class="add-to-list">Aggiungi alla lista</button>
+			<!-- user_end -->
+		</div>
+
 		<!-- main_end -->
 	</main>
 

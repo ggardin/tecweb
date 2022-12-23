@@ -1,6 +1,7 @@
 :root {
 	--bgcolor: #E4DCD7;
 	--bgcolor-alt: var(--secondaryColor);
+	--bgcolor-off: #CCB9B0;
 
 	--txtcolor: #1A1A1A;
 	--txtcolor-alt: var(--txtcolor); /* ??? */
@@ -21,6 +22,7 @@
 :root.dark {
 	--bgcolor: #1A1A1A;
 	--bgcolor-alt: #242424;
+	--bgcolor-off: #434343;
 	--txtcolor: #E4DCD7;
 	--anchorcolor: #8BDAFC;
 	--anchorcolor-alt: #F6B5FF;
@@ -566,85 +568,95 @@ MOVIE PAGE
 ==============
 */
 
-.movie-page{
-	display: grid;
-	grid-gap: 1.5em;
-	grid-template-columns: auto 1fr;
-	grid-template-areas: "a b"
-						 "a c";
-}
-
-.movie-media{
-	grid-area: a;
+.movie-page {
 	display: flex;
-	flex-direction: column;
+	flex-flow: row-reverse wrap;
+	gap: 2em;
 }
 
-.movie-media button{
-	font-size: 1.2em;
-	font-weight: 600;
+.movie-details {
+	flex: 1 1;
 }
 
-.movie-media img{
+.movie-media {
+	flex: 0 1 300px; /* set to image width */
+}
+
+.movie-media img {
 	margin-bottom: 1.5em;
 }
 
-#first{
-	grid-area: b;
-}
-
-#second{
-	grid-area: c;
-}
-
-.movie-details > h1{
+.movie-details h1 {
 	font-size: 2em;
 	font-weight: 700;
 	color: var(--txtcolor);
 }
 
-.movie-details > h2{
+.movie-details section {
+	margin: 2em 0;
+}
+
+.movie-details dl:not(.pills) {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 0.5em 1em;
+}
+
+.movie-details dl:not(.pills) dt::after {
+	content: ':';
+}
+
+.movie-details .pills dd,
+.movie-details .pills li {
+	display: inline;
+	margin-right: 0.5em;
+	line-height: 3em;
+	white-space: nowrap;
+}
+
+.movie-details .pills dt:not(:first-of-type) {
 	margin-top: 1em;
-	text-align: left;
 }
 
-.movie-details > p{
-	font-size: 1em;
-	color: var(--txtcolor);
+.movie-details .pills dd > a,
+.movie-details .pills li > a {
+	padding: 0.5em;
+	border: 1px solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+	background-color: var(--bgcolor-alt);
 }
 
-#subtitle{
+
+#subtitle {
 	font-size: .9em;
 	font-weight: 500;
-	color: var(--txtcolor);
-	margin-top: .2em;
-	margin-bottom: .7em;
+	margin: 0.5em 0;
 }
 
-.movie-details > ul{
+.movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
 }
 
-.movie-viewed{
-	color: var(--bgcolor);
+.movie-media button {
+	font-size: 1.2em;
+	font-weight: 600;
 	width: 100%;
 	height: 2.5em;
-	background: var(--tertiaryColor);
-	border-color: transparent;
-	border-radius: var(--border-radius);
 	margin-bottom: 1em;
 	cursor: pointer;
+	border-radius: var(--border-radius);
+	border: 3px solid var(--tertiaryColor);
 }
 
-.movie-add-to-list{
+.movie-media button.movie-viewed {
+	color: var(--bgcolor);
+	background: var(--tertiaryColor);
+}
+
+.movie-media button.add-to-list {
 	color: var(--tertiaryColor);
-	width: 100%;
-	height: 2.5em;
 	background: transparent;
-	border: 3px solid var(--tertiaryColor);
-	border-radius: var(--border-radius);
-	cursor: pointer;
 }
 
 

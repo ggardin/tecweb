@@ -92,25 +92,9 @@
 #dropdown-menu-toggle[data-open="true"] .hamburger { fill: transparent; }
 #dropdown-menu-toggle[data-open="true"] .cross { fill: var(--tertiaryColor); }
 
-.movie-details{
-	margin: 1em;
-}
-
 .movie-page{
-	grid-template-columns: auto;
-	grid-template-areas: "a"
-						 "b"
-						 "c";
-
-}
-/*.movie-media {*/
-/*	grid-area: a;*/
-/*	min-height: 0;*/
-/*}*/
-
-
-.movie-media{
-	margin: 0 auto 1em;
+	flex-direction: column-reverse;
+	align-items: center;
 }
 
 /*
