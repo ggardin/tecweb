@@ -1,6 +1,7 @@
 :root {
 	--bgcolor: #E4DCD7;
 	--bgcolor-alt: var(--secondaryColor);
+	--bgcolor-off: #CCB9B0;
 
 	--txtcolor: #1A1A1A;
 	--txtcolor-alt: var(--txtcolor); /* ??? */
@@ -21,6 +22,7 @@
 :root.dark {
 	--bgcolor: #1A1A1A;
 	--bgcolor-alt: #242424;
+	--bgcolor-off: #434343;
 	--txtcolor: #E4DCD7;
 	--anchorcolor: #8BDAFC;
 	--anchorcolor-alt: #F6B5FF;
