@@ -747,12 +747,24 @@ ABOUT PAGE
 ==============
 */
 
-.about-section{
-	margin-top: 2em;
+.about-page section {
+	margin: 2em 0;
 }
 
-.about-section p{
-	margin-top: .5em;
+.about-page h3,
+.about-page p {
+	margin-bottom: 0.5em;
+}
+
+.about-page blockquote {
+	font-size: 1.2em;
+	text-align: center;
+	margin-top: 1em;
+}
+
+.about-page figcaption {
+	text-align: center;
+	margin-bottom: 1em;
 }
 
 
