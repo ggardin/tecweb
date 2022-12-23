@@ -566,33 +566,33 @@ MOVIE PAGE
 ==============
 */
 
-.movie-page{
+.movie-page {
 	display: flex;
 	flex-flow: row-reverse wrap;
 	gap: var(--content-padding);
 }
 
-.movie-media button{
+.movie-media button {
 	font-size: 1.2em;
 	font-weight: 600;
 }
 
-.movie-media img{
+.movie-media img {
 	margin-bottom: 1.5em;
 }
 
-.movie-details > h1{
+.movie-details > h1 {
 	font-size: 2em;
 	font-weight: 700;
 	color: var(--txtcolor);
 }
 
-.movie-details > h2{
+.movie-details > h2 {
 	margin-top: 1em;
 	text-align: left;
 }
 
-#subtitle{
+#subtitle {
 	font-size: .9em;
 	font-weight: 500;
 	color: var(--txtcolor);
@@ -600,12 +600,12 @@ MOVIE PAGE
 	margin-bottom: .7em;
 }
 
-.movie-details > ul{
+.movie-details > ul {
 	list-style-type: none;
 	padding-left: 0;
 }
 
-.movie-viewed{
+.movie-viewed {
 	color: var(--bgcolor);
 	width: 100%;
 	height: 2.5em;
@@ -616,7 +616,7 @@ MOVIE PAGE
 	cursor: pointer;
 }
 
-.movie-add-to-list{
+.movie-add-to-list {
 	color: var(--tertiaryColor);
 	width: 100%;
 	height: 2.5em;
