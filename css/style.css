@@ -589,14 +589,6 @@ MOVIE PAGE
 	margin-bottom: 1.5em;
 }
 
-#first{
-	grid-area: b;
-}
-
-#second{
-	grid-area: c;
-}
-
 .movie-details > h1{
 	font-size: 2em;
 	font-weight: 700;
@@ -606,11 +598,6 @@ MOVIE PAGE
 .movie-details > h2{
 	margin-top: 1em;
 	text-align: left;
-}
-
-.movie-details > p{
-	font-size: 1em;
-	color: var(--txtcolor);
 }
 
 #subtitle{
