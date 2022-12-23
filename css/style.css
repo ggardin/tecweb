@@ -596,13 +596,13 @@ MOVIE PAGE
 	margin: 2em 0;
 }
 
-.movie-details dl:not(.pills) {
+.movie-details dl.info {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-gap: 0.5em 1em;
 }
 
-.movie-details dl:not(.pills) dt::after {
+.movie-details dl.info dt::after {
 	content: ':';
 }
 
