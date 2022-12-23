@@ -626,11 +626,21 @@ MOVIE PAGE
 	background-color: var(--bgcolor-alt);
 }
 
-
-#subtitle {
+.movie-page #subtitle {
+	display: flex;
+	flex-wrap: wrap;
 	font-size: .9em;
 	font-weight: 500;
 	margin: 0.5em 0;
+}
+
+.movie-page #subtitle dd:not(:first-of-type)::before {
+	content: '\2022';
+	margin: 0 0.75em;
+}
+
+.movie-page #subtitle .length::after {
+	content: '\'';
 }
 
 .movie-details ul {
