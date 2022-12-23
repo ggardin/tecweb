@@ -43,7 +43,7 @@ if ($db_ok) {
 			$intestazione = "Cerca $tipo";
 			if ($tipo == "film" && $f_nome != "")
 				$intestazione .= " filtrati per $f_nome ($f_val)";
-			$titolo = $query . " · " . $intestazione;
+			$titolo = $query . " • " . $intestazione;
 			$intestazione .= ': "' . $query . '"';
 		} else {
 			if ($tipo == "film") {

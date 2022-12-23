@@ -596,13 +596,13 @@ MOVIE PAGE
 	margin: 2em 0;
 }
 
-.movie-details dl:not(.pills) {
+.movie-details dl.info {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-gap: 0.5em 1em;
 }
 
-.movie-details dl:not(.pills) dt::after {
+.movie-details dl.info dt::after {
 	content: ':';
 }
 
@@ -626,11 +626,17 @@ MOVIE PAGE
 	background-color: var(--bgcolor-alt);
 }
 
-
-#subtitle {
+.movie-page #subtitle {
+	display: flex;
+	flex-wrap: wrap;
 	font-size: .9em;
 	font-weight: 500;
 	margin: 0.5em 0;
+}
+
+.movie-page #subtitle dd:not(:first-of-type)::before {
+	content: '\2022';
+	margin: 0 0.75em;
 }
 
 .movie-details ul {

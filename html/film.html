@@ -17,19 +17,31 @@
 	</nav>
 
 	<main id="content" class="movie-page">
-		<!-- main_start -->
 		<div class="movie-details">
 
 			<h1>@@nome_film@@</h1>
 			<!-- sottotitolo_start -->
-			<p id="subtitle">@@sottotitolo@@</p>
+			<dl id="subtitle">
+				<!-- data_start -->
+				<dt class="sr-only">Data rilascio</dt>
+				<dd>@@data_rilascio@@</dd>
+				<!-- data_end -->
+				<!-- durata_start -->
+				<dt class="sr-only">Durata</dt>
+				<dd>@@durata@@</dd>
+				<!-- durata_end -->
+				<!-- voto_start -->
+				<dt class="sr-only">Voto</dt>
+				<dd>@@voto@@</dd>
+				<!-- voto_end -->
+			</dl>
 			<!-- sottotitolo_end -->
 			<!-- descrizione_start -->
 			<p>@@descrizione@@</p>
 			<!-- descrizione_end -->
 
+			<!-- crew_start -->
 			<section>
-				<!-- crew_start -->
 				<header>
 					<h2 lang="en">Crew</h2>
 				</header>
@@ -43,11 +55,11 @@
 					<!-- persona_end -->
 					<!-- ruoli_end -->
 				</dl>
-				<!-- crew_end -->
 			</section>
+			<!-- crew_end -->
 
+			<!-- generi_start -->
 			<section>
-				<!-- generi_start -->
 				<header>
 					<h2>Generi</h2>
 				</header>
@@ -56,11 +68,11 @@
 					<li><a href="cerca.php?fn=genere&fv=@@valore@@">@@nome@@</a></li>
 					<!-- genere_end -->
 				</ul>
-				<!-- generi_end -->
 			</section>
+			<!-- generi_end -->
 
+			<!-- paesi_start -->
 			<section>
-				<!-- paesi_start -->
 				<header>
 					<h2>Paesi di produzione</h2>
 				</header>
@@ -69,14 +81,14 @@
 					<li><a href="cerca.php?fn=paese&fv=@@valore@@">@@nome@@</a></li>
 					<!-- paese_end -->
 				</ul>
-				<!-- paesi_end -->
 			</section>
+			<!-- paesi_end -->
 
 			<section>
 				<header>
 					<h2>Altri dettagli</h2>
 				</header>
-				<dl>
+				<dl class="info">
 					<dt>Titolo originale</dt>
 					<dd>@@nome_originale@@</dd>
 					<dt>Stato</dt>
@@ -96,8 +108,8 @@
 				</dl>
 			</section>
 
+			<!-- valutazioni_start -->
 			<section>
-				<!-- valutazioni_start -->
 				<header>
 					<h2>Valutazioni</h2>
 				</header>
@@ -117,8 +129,8 @@
 					</li>
 					<!-- valutazione_end -->
 				</ol>
-				<!-- valutazioni_end -->
 			</section>
+			<!-- valutazioni_end -->
 
 		</div>
 
@@ -132,8 +144,6 @@
 			<button type="button" class="add-to-list">Aggiungi alla lista</button>
 			<!-- user_end -->
 		</div>
-
-		<!-- main_end -->
 	</main>
 
 	<!-- footer -->
