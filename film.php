@@ -36,16 +36,24 @@ if ($id != "") {
 			Tools::replaceAnchor($page, "nome_film", $film["nome"]);
 			$locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($page, "locandina", $locandina);
-			$r = "";
-			if (isset($film["data_rilascio"]))
-				$r .= $film["data_rilascio"];
-			if (isset($film["durata"]))
-				$r .= ($r ? " · " : "") . $film["durata"] . " min";
-			if (isset($film["voto"]))
-				$r .= ($r ? " · " : "") . $film["voto"] . " *";
-			if ($r)
-				Tools::replaceAnchor($page, "sottotitolo", $r);
-			else
+
+			$sub = false;
+			if (isset($film["data_rilascio"])) {
+				Tools::replaceAnchor($page, "data_rilascio", $film["data_rilascio"]);
+				$sub = true;
+			} else
+				Tools::replaceSection($page, "data_rilascio", "");
+			if (isset($film["durata"])) {
+				Tools::replaceAnchor($page, "durata", $film["durata"]);
+				$sub = true;
+			} else
+				Tools::replaceSection($page, "durata", "");
+			if (isset($film["voto"])) {
+				Tools::replaceAnchor($page, "voto", $film["voto"]);
+				$sub = true;
+			} else
+				Tools::replaceSection($page, "voto", "");
+			if (! $sub)
 				Tools::replaceSection($page, "sottotitolo", "");
 			if (isset($film["descrizione"]))
 				Tools::replaceAnchor($page, "descrizione", $film["descrizione"]);
