@@ -31,7 +31,7 @@ if ($id != "") {
 		if (!empty($film)) {
 			$film = $film[0];
 			Tools::toHtml($film);
-			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($film["nome"]) . " · Film");
+			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($film["nome"]) . " • Film");
 			Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 			Tools::replaceAnchor($page, "nome_film", $film["nome"]);
 			$locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
@@ -44,7 +44,14 @@ if ($id != "") {
 			} else
 				Tools::replaceSection($page, "data_rilascio", "");
 			if (isset($film["durata"])) {
-				Tools::replaceAnchor($page, "durata", $film["durata"]);
+				$h = floor($film["durata"]/60);
+				$m = $film["durata"]%60;
+				$d = "";
+				if ($h)
+					$d .= $h . ($h>1 ? " ore" : " ora");
+				if ($m)
+					$d .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
+				Tools::replaceAnchor($page, "durata", $d);
 				$sub = true;
 			} else
 				Tools::replaceSection($page, "durata", "");

@@ -639,10 +639,6 @@ MOVIE PAGE
 	margin: 0 0.75em;
 }
 
-.movie-page #subtitle .length::after {
-	content: '\'';
-}
-
 .movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
