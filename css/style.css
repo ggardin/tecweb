@@ -597,9 +597,40 @@ MOVIE PAGE
 	color: var(--txtcolor);
 }
 
-.movie-details h2 {
+.movie-details section {
+	margin: 2em 0;
+}
+
+.movie-details dl:not(.pills) {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 0.5em 1em;
+}
+
+.movie-details dl:not(.pills) dt::after {
+	content: ':';
+}
+
+.movie-details .pills dd,
+.movie-details .pills li {
+	display: inline;
+	margin-right: 0.5em;
+	line-height: 3em;
+	white-space: nowrap;
+}
+
+.movie-details .pills dt:not(:first-of-type) {
 	margin-top: 1em;
 }
+
+.movie-details .pills dd > a,
+.movie-details .pills li > a {
+	padding: 0.5em;
+	border: 1px solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+	background-color: var(--bgcolor-alt);
+}
+
 
 #subtitle {
 	font-size: .9em;
