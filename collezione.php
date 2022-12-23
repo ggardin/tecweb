@@ -28,7 +28,7 @@ if ($id != "") {
 			$collezione = $collezione[0];
 			Tools::toHtml($collezione);
 			Tools::toHtml($film);
-			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " · Collezione");
+			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " • Collezione");
 			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
 			$content .= "<h1>" . $collezione["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($collezione["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';

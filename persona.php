@@ -27,7 +27,7 @@ if ($id != "") {
 			$persona = $persona[0];
 			Tools::toHtml($persona);
 			Tools::toHtml($film);
-			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($persona["nome"]) . " · Persona");
+			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($persona["nome"]) . " • Persona");
 			Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 			$content .= "<h1>" . $persona["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg") . '" alt="" />';
