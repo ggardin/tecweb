@@ -597,15 +597,12 @@ MOVIE PAGE
 
 .movie-details h2 {
 	margin-top: 1em;
-	text-align: left;
 }
 
 #subtitle {
 	font-size: .9em;
 	font-weight: 500;
-	color: var(--txtcolor);
-	margin-top: .2em;
-	margin-bottom: .7em;
+	margin: 0.5em 0;
 }
 
 .movie-details ul {
