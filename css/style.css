@@ -600,7 +600,7 @@ MOVIE PAGE
 	margin-bottom: .7em;
 }
 
-.movie-details > ul {
+.movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
 }
