@@ -571,7 +571,7 @@ MOVIE PAGE
 .movie-page {
 	display: flex;
 	flex-flow: row-reverse wrap;
-	gap: var(--content-padding);
+	gap: 2em;
 }
 
 .movie-details {
