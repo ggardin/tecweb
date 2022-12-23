@@ -610,25 +610,23 @@ MOVIE PAGE
 	padding-left: 0;
 }
 
-.movie-viewed {
-	color: var(--bgcolor);
+.movie-media button {
 	width: 100%;
 	height: 2.5em;
-	background: var(--tertiaryColor);
-	border-color: transparent;
-	border-radius: var(--border-radius);
 	margin-bottom: 1em;
 	cursor: pointer;
+	border-radius: var(--border-radius);
+	border: 3px solid var(--tertiaryColor);
 }
 
-.movie-add-to-list {
+.movie-media button.movie-viewed {
+	color: var(--bgcolor);
+	background: var(--tertiaryColor);
+}
+
+.movie-media button.add-to-list {
 	color: var(--tertiaryColor);
-	width: 100%;
-	height: 2.5em;
 	background: transparent;
-	border: 3px solid var(--tertiaryColor);
-	border-radius: var(--border-radius);
-	cursor: pointer;
 }
 
 
