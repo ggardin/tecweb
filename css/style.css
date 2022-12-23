@@ -572,6 +572,14 @@ MOVIE PAGE
 	gap: var(--content-padding);
 }
 
+.movie-details {
+	flex: 1 1;
+}
+
+.movie-media {
+	flex: 0 1 300px; /* set to image width */
+}
+
 .movie-media button {
 	font-size: 1.2em;
 	font-weight: 600;
@@ -581,13 +589,13 @@ MOVIE PAGE
 	margin-bottom: 1.5em;
 }
 
-.movie-details > h1 {
+.movie-details h1 {
 	font-size: 2em;
 	font-weight: 700;
 	color: var(--txtcolor);
 }
 
-.movie-details > h2 {
+.movie-details h2 {
 	margin-top: 1em;
 	text-align: left;
 }
