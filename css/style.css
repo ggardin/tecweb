@@ -856,3 +856,14 @@ select  {
 	border-radius: var(--border-radius);
 	margin-bottom: 1.2em;
 }
+
+#addMovieButton {
+	background-color: var(--tertiaryColor);
+	border: none;
+	color: var(--bgcolor);
+	border-radius: var(--border-radius);
+	padding: 1em;
+	font-size: 1.3em;
+	font-weight: 600;
+	margin: auto 1.3em 1em;
+}
