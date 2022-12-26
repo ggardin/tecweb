@@ -344,7 +344,7 @@ SEARCH BAR
 	width: 100%;
 	padding: 1em;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
-	font-size: 16px;
+	font-size: 0.8em;
 	border: transparent;
 	outline: none;
 }
@@ -363,13 +363,6 @@ SEARCH BAR
 	width: 34px;
 	height: 34px;
 }
-
-
-.h1 {
-	font-size: 3em;
-	font-weight: 700;
-}
-
 
 /*
 ==============
@@ -476,7 +469,7 @@ hr.solid {
 
 /*
 ==============
-CONTENTS
+INDEX
 ==============
 */
 
@@ -506,11 +499,6 @@ CONTENTS
 	flex-grow: 0;
 	width: 300px; /* TODO: ridimensiona il png */
 }
-
-.cta-links {
-	text-align: center;
-}
-
 
 /*
 ==============
@@ -794,80 +782,45 @@ incl. Stats, Settings
 */
 
 
-
 /*
 ==============
-INPUT FIELD
+GESTIONE
 ==============
 */
 
-#inputField form {
-	margin-top: 2em;
-	text-align: left;
+#gestione fieldset {
+	border: 0;
+	margin-top: 1.5em;
 }
 
-#inputField input {
+#gestione fieldset > * {
 	width: 100%;
-	padding: 1em;
-	border-radius: var(--border-radius);
 }
 
-#inputField input:focus {
-	border: 3px solid #555;
-}
-
-#inputField input[type=submit] {
-	color: white;
-	background-color: var(--tertiaryColor);
-}
-
-textarea {
-	width: 100%;
+#gestione textarea {
 	height: 5em;
 	background-color: var(--secondaryColor);
 	box-sizing: border-box;
 	border: none;
 	border-radius: var(--border-radius);
 	resize: none;
-	margin-bottom: 1.2em;
 }
 
-label {
+#gestione legend {
+	font-size: 1.8em;
+	font-weight: 600;
+}
+
+#gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
-	margin-top: 3em;
 }
 
-fieldset{
-	border: 0;
-}
-
-fieldset > h1{
-	margin-top: 1.5em;
-}
-
-fieldset h2{
-	margin-top: 1.5em;
-}
-
-select  {
-	width: 100%;
+#gestione select {
 	padding: 1em;
 	border-radius: var(--border-radius);
-	margin-bottom: 1.2em;
 }
 
-input[type=date] {
-	margin-bottom: 1.2em;
-}
-
-#addMovieButton {
-	background-color: var(--tertiaryColor);
-	border: none;
-	color: var(--bgcolor);
-	border-radius: var(--border-radius);
-	padding: .5em;
-	font-size: 1.3em;
-	font-weight: 600;
-	margin: 1em .5em;
+#gestione input {
+	padding: 1em;
 }
