@@ -3232,9 +3232,9 @@ CREATE TABLE `lista` (
 --
 
 INSERT INTO `lista` (`id`, `utente`, `nome`) VALUES
-(0, 0, 'Da guardare'),
+(0, 0, 'Da vedere'),
 (1, 0, 'Visti'),
-(2, 1, 'Da guardare'),
+(2, 1, 'Da vedere'),
 (3, 1, 'Visti');
 
 -- --------------------------------------------------------
