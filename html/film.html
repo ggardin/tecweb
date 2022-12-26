@@ -19,7 +19,7 @@
 	<main id="content" class="movie-page">
 		<div class="movie-details">
 
-			<h1>@@nome_film@@</h1>
+			<h1>@@nome@@</h1>
 			<!-- sottotitolo_start -->
 			<dl id="subtitle">
 				<!-- data_start -->
@@ -136,17 +136,17 @@
 
 		<div class="movie-media">
 			<img src="@@locandina@@" alt=""/>
-			<!-- form_start -->
+			<!-- admin_start -->
+			<form method="get" action="gest_film.php">
+				<button type="submit" class="movie-viewed" name="id">Modifica</button>
+			</form>
+			<!-- admin_end -->
+			<!-- user_start -->
 			<form method="post">
-				<!-- admin_start -->
-				<button type="button" class="movie-viewed" formaction="gest_film.php">Modifica</button>
-				<!-- admin_end -->
-				<!-- user_start -->
 				<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
 				<button type="button" class="add-to-list">Aggiungi alla lista</button>
-				<!-- user_end -->
 			</form>
-			<!-- form_end -->
+			<!-- user_end -->
 		</div>
 	</main>
 
