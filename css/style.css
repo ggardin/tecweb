@@ -40,7 +40,6 @@
 
 * {
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
-
 }
 
 body > #page-header,
@@ -85,12 +84,10 @@ HEADER
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
-	line-height: 2.6em;
 }
 
 #page-header ul {
 	display: flex;
-	align-items: center;
 	list-style: none;
 	padding: 0;
 }
@@ -100,19 +97,20 @@ HEADER
 }
 
 #page-header li a {
+	display: block;
 	color: inherit;
 	text-decoration: none;
-	padding: 0.8em 1em;
+	padding: 0.55em 1em;
 }
 
 #page-header li.active {
+	padding: 0.55em 1em;
 	background-color: var(--secondaryColor);
 	cursor: default;
-	padding: 0 1em;
 }
 
 #page-header li:hover:not(.active) {
-	border-bottom: 0.2em solid var(--txtcolor);
+	border-color: var(--txtcolor);
 }
 
 #page-header .actions {
@@ -124,17 +122,9 @@ HEADER
 	cursor: pointer;
 }
 
-.accountButton a {
-	background-color: transparent;
-	border-color: transparent;
-	/* height:50px;
-	width:50px; */
+.accountButton path {
+	fill: var(--txtcolor);
 }
-
-.accountButton {
-	color: var(--txtcolor);
-}
-
 
 /*
 ==============
