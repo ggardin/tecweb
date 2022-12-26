@@ -10,8 +10,6 @@ $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 
 $db_ok = false;
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
@@ -36,27 +34,26 @@ try {
 	Tools::errCode(500);
 }
 if ($db_ok) {
-	if (isset($cerca)) {
-		if ($query != "") {
-			$intestazione = "Cerca $tipo";
-			if ($tipo == "film" && $f_nome != "")
-				$intestazione .= " filtrati per $f_nome ($f_val)";
-			$titolo = $query . " • " . $intestazione;
-			$intestazione .= ': "' . $query . '"';
-		} else {
-			if ($tipo == "film") {
-				$intestazione = "Tutti i film";
-				if ($f_nome != "")
-					$intestazione .= " filtrati per $f_nome ($f_val)";
-			}
-			elseif ($tipo == "collezione")
-				$intestazione = "Tutte le collezioni";
-			else
-				$intestazione = "Tutte le persone";
-			$titolo = $intestazione;
-		}
+	if (!isset($cerca)) Tools::errCode(404);
+	// else
+	$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+	if ($query != "") {
+		$intestazione = "Cerca $tipo";
+		if ($tipo == "film" && $f_nome != "")
+			$intestazione .= " filtrati per $f_nome ($f_val)";
+		$titolo = $query . " • " . $intestazione;
+		$intestazione .= ': "' . $query . '"';
 	} else {
-		Tools::errCode(404);
+		if ($tipo == "film") {
+			$intestazione = "Tutti i film";
+			if ($f_nome != "")
+				$intestazione .= " filtrati per $f_nome ($f_val)";
+		}
+		elseif ($tipo == "collezione")
+			$intestazione = "Tutte le collezioni";
+		else
+			$intestazione = "Tutte le persone";
+		$titolo = $intestazione;
 	}
 	Tools::replaceAnchor($page, "title", $titolo);
 	Tools::replaceAnchor($page, "intestazione", $intestazione);
@@ -85,8 +82,7 @@ if ($db_ok) {
 		Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
 		Tools::replaceSection($page, "results", "");
 	}
+	Tools::showPage($page);
 }
-
-Tools::showPage($page);
 
 ?>
