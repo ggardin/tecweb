@@ -29,8 +29,6 @@ try {
 		$cerca = $connessione->searchCollezione($query);
 	elseif ($tipo == "persona")
 		$cerca = $connessione->searchPersona($query);
-	else
-		$cerca = array();
 	unset($connessione);
 	$db_ok = true;
 } catch (Exception) {
@@ -38,7 +36,7 @@ try {
 	Tools::errCode(500);
 }
 if ($db_ok) {
-	if (in_array($tipo, ["film", "collezione", "persona"])) {
+	if (isset($cerca)) {
 		if ($query != "") {
 			$intestazione = "Cerca $tipo";
 			if ($tipo == "film" && $f_nome != "")
@@ -62,7 +60,7 @@ if ($db_ok) {
 	}
 	Tools::replaceAnchor($page, "title", $titolo);
 	Tools::replaceAnchor($page, "intestazione", $intestazione);
-	if (isset($cerca)) {
+	if (!empty($cerca)) {
 		Tools::toHtml($cerca);
 		$card = Tools::getSection($page, "card");
 		$r = "";
