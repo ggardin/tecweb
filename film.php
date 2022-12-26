@@ -39,7 +39,7 @@ if ($id != "") {
 
 			$sub = false;
 			if (isset($film["data_rilascio"])) {
-				Tools::replaceAnchor($page, "data_rilascio", $film["data_rilascio"]);
+				Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $film["data_rilascio"]), 'd/m/Y'));
 				$sub = true;
 			} else
 				Tools::replaceSection($page, "data_rilascio", "");
