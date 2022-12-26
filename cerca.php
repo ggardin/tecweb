@@ -76,7 +76,7 @@ if ($db_ok) {
 			Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 			Tools::replaceAnchor($t, "nome", $c["nome"]);
 			if ($tipo == "film" && isset($c["data_rilascio"])) {
-				Tools::replaceAnchor($t, "data_rilascio", $c["data_rilascio"]);
+				Tools::replaceAnchor($t, "data_rilascio", date_format(date_create_from_format('Y-m-d', $c["data_rilascio"]), 'd/m/Y'));
 			} else
 				Tools::replaceSection($t, "data", "");
 			$r .= $t;
