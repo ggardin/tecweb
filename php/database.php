@@ -38,7 +38,7 @@ class Database {
 				$p = trim($p);
 				$p = strip_tags($p);
 				// convertiamo in entità durante output, qui facciamo il contrario
-				$p = htmlspecialchars_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+				$p = html_entity_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 			}
 		}
 	}
