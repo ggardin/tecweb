@@ -862,8 +862,8 @@ select  {
 	border: none;
 	color: var(--bgcolor);
 	border-radius: var(--border-radius);
-	padding: 1em;
+	padding: .5em;
 	font-size: 1.3em;
 	font-weight: 600;
-	margin: auto 1.3em 1em;
+	margin: .5em 1em .5em;
 }
