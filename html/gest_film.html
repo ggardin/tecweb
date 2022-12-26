@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8" />
+
+	<title>Aggiungi un film</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+
+	<!-- head -->
+</head>
+<body>
+<!-- header -->
+
+<nav id="breadcrumb">
+	<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <span lang="en">Aggiungi un film</span></p>
+</nav>
+
+<fieldset>
+
+	<h2>Informazioni principali:</h2>
+	<label id="labelTitolo" for="titolo">Titolo</label>
+	<textarea name="sceneggiatura" id="titolo"></textarea>
+
+	<label id="labelDataUscita" for="dataUscita">Data d'uscita</label>
+	<input type="date" id="dataUscita" name="trip-start"
+		   value="2015-01-01"
+		   min="1900-01-01" max="2099-12-31">
+
+	<label id="labelDurata" for="durata">Durata</label>
+	<textarea name="sceneggiatura" id="durata"></textarea>
+
+	<label id="labelDescrizione" for="descrizione">Descrizione</label>
+	<textarea name="sceneggiatura" id="descrizione"></textarea>
+
+    <h2>Crew:</h2>
+    <label id="labelRegista" for="sceneggiatura">Regista</label>
+    <textarea name="sceneggiatura" id="sceneggiatura"></textarea>
+
+    <label id="labelSoggetto" for="soggetto">Sceneggiatore</label>
+    <textarea name="soggetto" id="soggetto"></textarea>
+
+    <label id="labelProduttore" for="produttore">Produttore</label>
+    <textarea name="produttore" id="produttore"></textarea>
+
+    <label id="labelCompositore" for="Compositore">Compositore</label>
+    <textarea name="Compositore" id="Compositore"></textarea>
+
+    <h2>Generi:</h2>
+    <label id="labelGeneri" for="generi">Generi</label>
+    <textarea name="generi" id="generi"></textarea>
+
+    <h2>Altri dettagli:</h2>
+    <label id="labelTitoloOriginale" for="titoloOriginale">Titolo originale</label>
+    <textarea name="titoloOriginale" id="titoloOriginale"></textarea>
+
+    <label id="labelStato" for="stato">Stato</label>
+    <select id="stato" class="form-control">
+        <option value="" selected="selected">Nessuna selezione</option>
+        <option value="1">Rilasciato</option>
+        <option value="2">In produzione</option>
+    </select>
+
+    <label id="labelBudget" for="budget">Budget</label>
+    <textarea name="budget" id="budget"></textarea>
+
+    <label id="labelIncassi" for="incassi">Incassi</label>
+    <textarea name="incassi" id="incassi"></textarea>
+</fieldset>
+
+<button id="addMovieButton">
+	<span>Aggiungi</span>
+</button>
+
+<!-- footer -->
+</body>
+</html>
