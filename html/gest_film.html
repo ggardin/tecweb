@@ -17,11 +17,14 @@
 	</nav>
 
 	<main id="content">
-		<form method="post">
+		<form id="gestione" method="post">
 			<fieldset>
 				<legend>Informazioni principali</legend>
 				<label for="titolo">Titolo</label>
 				<textarea name="titolo" id="titolo"></textarea>
+
+				<label for="descrizione">Descrizione</label>
+				<textarea name="descrizione" id="descrizione"></textarea>
 
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data"
@@ -81,7 +84,7 @@
 				<textarea name="collezione" id="collezione"></textarea>
 			</fieldset>
 
-			<input type="submit" value="@@type@@" />
+			<input type="submit" name="submit" value="@@type@@" />
 		</form>
 	</main>
 
