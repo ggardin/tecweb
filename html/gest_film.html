@@ -21,18 +21,18 @@
 			<fieldset>
 				<legend>Informazioni principali</legend>
 				<label for="titolo">Titolo</label>
-				<textarea name="titolo" id="titolo"></textarea>
+				<input name="titolo" id="titolo" value="@@nome@@" />
 
 				<label for="descrizione">Descrizione</label>
-				<textarea name="descrizione" id="descrizione"></textarea>
+				<textarea name="descrizione" id="descrizione">@@descrizione@@</textarea>
 
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data"
-					value="2023-01-01"
+					value="@@data_rilascio@@"
 					min="1900-01-01" max="2099-12-31" />
 
 				<label for="durata">Durata in minuti</label>
-				<input type="number" id="durata" name="durata" min="0" max="1000">
+				<input type="number" id="durata" name="durata" min="0" max="1000" />
 			</fieldset>
 
 			<fieldset>
@@ -65,7 +65,7 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="nome_originale">Titolo originale</label>
-				<textarea name="nome_originale" id="nome_originale"></textarea>
+				<input name="nome_originale" id="nome_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
 				<select id="stato" class="form-control">
@@ -75,10 +75,10 @@
 				</select>
 
 				<label for="budget">Budget</label>
-				<textarea name="budget" id="budget"></textarea>
+				<input type="number" id="budget" name="budget" min="0" />
 
 				<label for="incassi">Incassi</label>
-				<textarea name="incassi" id="incassi"></textarea>
+				<input type="number" id="incassi" name="incassi" min="0" />
 
 				<label for="collezione">Collezione</label>
 				<textarea name="collezione" id="collezione"></textarea>
