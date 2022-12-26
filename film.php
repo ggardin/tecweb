@@ -20,6 +20,11 @@ if ($id != "") {
 			$genere = $connessione->getGenereByFilmId($id);
 			$paese = $connessione->getPaeseByFilmId($id);
 			$valutazione = $connessione->getValutazioneByFilmId($id);
+			if (isset($_SESSION["id"])) {
+				$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere");
+				if (!empty($dv) && isset($_POST["da_vedere"])) // TODO
+					$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
+			}
 		}
 		unset($connessione);
 		$db_ok = true;
@@ -149,11 +154,11 @@ if ($id != "") {
 			} else
 				Tools::replaceSection($page, "valutazioni", "");
 			if (isset($_SESSION["id"])) {
+				Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
 				if ($_SESSION["is_admin"] == 0)
 					Tools::replaceSection($page, "admin", "");
 			} else {
-				Tools::replaceSection($page, "user", "");
-				Tools::replaceSection($page, "admin", "");
+				Tools::replaceSection($page, "form", "");
 			}
 		} else {
 			Tools::errCode(404);
