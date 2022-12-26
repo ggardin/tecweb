@@ -823,7 +823,7 @@ INPUT FIELD
 
 textarea {
 	width: 100%;
-	height: 6em;
+	height: 5em;
 	background-color: var(--secondaryColor);
 	box-sizing: border-box;
 	border: none;
@@ -857,6 +857,10 @@ select  {
 	margin-bottom: 1.2em;
 }
 
+input[type=date] {
+	margin-bottom: 1.2em;
+}
+
 #addMovieButton {
 	background-color: var(--tertiaryColor);
 	border: none;
@@ -865,5 +869,5 @@ select  {
 	padding: .5em;
 	font-size: 1.3em;
 	font-weight: 600;
-	margin: .5em 1em .5em;
+	margin: 1em .5em;
 }
