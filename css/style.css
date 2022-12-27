@@ -137,7 +137,7 @@ BREADCRUMB
 
 #breadcrumb{
 	background-color: var(--secondaryColor);
-	padding: 0.5em;
+	padding: 0.5em var(--content-padding);
 }
 
 /*
