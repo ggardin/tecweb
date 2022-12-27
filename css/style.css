@@ -791,7 +791,7 @@ GESTIONE
 
 #gestione textarea {
 	height: 5em;
-	background-color: var(--secondaryColor);
+	background-color: white;
 	box-sizing: border-box;
 	border: none;
 	border-radius: var(--border-radius);
