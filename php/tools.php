@@ -61,15 +61,9 @@ class Tools {
 		return preg_replace($from, $to, $in);
 	}
 
-	private static function convAbbr1($in, $strip=false) : string {
-		$from = "/\{abbr\}(.*?);(.*)\{\/abbr\}/";
-		$to = (! $strip) ? '<abbr title="${1}">${2}</abbr>' : '';
-		return preg_replace($from, $to, $in);
-	}
-
-	private static function convAbbr2($in, $strip=false) : string {
-		$from = "/\{abbr\}(.*?)\{\/abbr\}/";
-		$to = (! $strip) ? '<abbr>${1}</abbr>' : '';
+	private static function convAbbr($in, $strip=false) : string {
+		$from = ["/\{abbr\}(.*?);(.*)\{\/abbr\}/", "/\{abbr\}(.*?)\{\/abbr\}/"];
+		$to = (! $strip) ? ['<abbr title="${1}">${2}</abbr>', '<abbr>${1}</abbr>'] : ['', ''];
 		return preg_replace($from, $to, $in);
 	}
 
@@ -80,8 +74,7 @@ class Tools {
 			if ($conv_level != 1) {
 				$strip = ($conv_level == 0);
 				$item = Tools::convLang($item, $strip);
-				$item = Tools::convAbbr1($item, $strip);
-				$item = Tools::convAbbr2($item, $strip);
+				$item = Tools::convAbbr($item, $strip);
 			}
 		}
 	}
