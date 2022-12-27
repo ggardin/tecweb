@@ -109,7 +109,7 @@ HEADER
 
 #page-header li a,
 #page-header li.active {
-	padding: 0.55em 1em;
+	padding: 0.5em 1em 0.3em;
 }
 
 #page-header li:hover:not(.active) {
