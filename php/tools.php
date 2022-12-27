@@ -62,7 +62,7 @@ class Tools {
 	}
 
 	private static function convAbbr($in, $strip=false) : string {
-		$from = ["/\{abbr\}([\w\-]*?){\/abbr\}/", "/\{abbr\}([\w\s\-]*?);([\w\-]*?){\/abbr\}/"];
+		$from = ["/\{abbr\}([^;]*?){\/abbr\}/", "/\{abbr\}([^\{\};]*?);(.*?){\/abbr\}/s"];
 		$to = (! $strip) ? ['<abbr>${1}</abbr>', '<abbr title="${1}">${2}</abbr>'] : ['', ''];
 		return preg_replace($from, $to, $in);
 	}
