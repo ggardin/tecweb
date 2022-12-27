@@ -17,6 +17,7 @@
 	--border-radius: 8px;
 	--button-inactive: #20584F;
 	--auth-form-width: 35em;
+	--header-height: 4.5em;
 }
 
 :root.dark {
@@ -84,6 +85,7 @@ HEADER
 	justify-content: space-between;
 	align-items: center;
 	z-index: 10;
+	height: var(--header-height);
 }
 
 #page-header ul {
@@ -147,6 +149,11 @@ BREADCRUMB
 MAIN
 ==============
 */
+
+#content {
+	padding-top: calc( var(--header-height) ); /* se calc non supportato, non applica né padding né margin */
+	margin-top: calc( var(--header-height) * -1 );
+}
 
 /*
 main > h1, h2{
