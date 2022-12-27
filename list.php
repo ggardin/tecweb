@@ -10,9 +10,8 @@ if (! isset($_SESSION["id"])) {
 	exit();
 }
 
-$id = (isset($_GET["id"])) ? $_GET["id"] : "";
-
-if ($id == "") Tools::errCode(404);
+if (isset($_GET["id"])) $id = $_GET["id"];
+else Tools::errCode(404);
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
@@ -32,35 +31,35 @@ try {
 	Tools::errCode(500);
 }
 if ($db_ok) {
-	if ($own) {
-		Tools::toHtml($nome);
-		Tools::replaceAnchor($page, "intestazione", $nome[0]["nome"]);
-		Tools::replaceAnchor($page, "breadcrumb", $nome[0]["nome"]);
-		Tools::replaceAnchor($page, "title", ($nome[0]["nome"] . " • Lista"));
-		if (!empty($lista)) {
-			Tools::toHtml($lista);
-			$elemento = Tools::getSection($page, "elemento");
-			$r = "";
-			foreach ($lista as $l) {
-				$t = $elemento;
-				Tools::replaceAnchor($t, "link", ($l["tipo"] . ".php?id=" . $l["id"]));
-				$immagine = (isset($l["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $l["locandina"]) : "img/placeholder.svg");
-				Tools::replaceAnchor($t, "immagine", $immagine);
-				Tools::replaceAnchor($t, "nome", $l["nome"]);
-				if ($l["tipo"] == "film" && isset($l["data_rilascio"]))
-					Tools::replaceSection($t, "data", $l["data_rilascio"]);
-				else
-					Tools::replaceSection($t, "data", "");
-				$r .= $t;
-			}
-			Tools::replaceSection($page, "elemento", $r);
-			Tools::replaceAnchor($page, "message", (count($lista) . (count($lista) != 1 ? " elementi" : " elemento") . " in questa lista"));
-		} else {
-			Tools::replaceAnchor($page, "message", "Questa lista non ha elementi");
-			Tools::replaceSection($page, "lista", "");
+	if (!$own) Tools::errCode(404);
+	// else
+	$nome = $nome[0];
+	$title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 0);
+	Tools::replaceAnchor($page, "title", $title);
+	Tools::toHtml($nome);
+	Tools::replaceAnchor($page, "intestazione", $nome["nome"]);
+	Tools::replaceAnchor($page, "breadcrumb", $nome["nome"]);
+	if (!empty($lista)) {
+		Tools::toHtml($lista);
+		$elemento = Tools::getSection($page, "elemento");
+		$r = "";
+		foreach ($lista as $l) {
+			$t = $elemento;
+			Tools::replaceAnchor($t, "link", ($l["tipo"] . ".php?id=" . $l["id"]));
+			$immagine = (isset($l["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $l["locandina"]) : "img/placeholder.svg");
+			Tools::replaceAnchor($t, "immagine", $immagine);
+			Tools::replaceAnchor($t, "nome", $l["nome"]);
+			if ($l["tipo"] == "film" && isset($l["data_rilascio"]))
+				Tools::replaceSection($t, "data", $l["data_rilascio"]);
+			else
+				Tools::replaceSection($t, "data", "");
+			$r .= $t;
 		}
+		Tools::replaceSection($page, "elemento", $r);
+		Tools::replaceAnchor($page, "message", (count($lista) . (count($lista) != 1 ? " elementi" : " elemento") . " in questa lista"));
 	} else {
-		Tools::errCode(404);
+		Tools::replaceAnchor($page, "message", "Questa lista non ha elementi");
+		Tools::replaceSection($page, "lista", "");
 	}
 }
 
