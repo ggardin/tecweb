@@ -138,11 +138,12 @@
 			<img src="@@locandina@@" alt=""/>
 			<!-- admin_start -->
 			<form method="get" action="gest_film.php">
-				<button type="submit" class="movie-viewed" name="id" value="@@film_id@@">Modifica</button>
+				<button type="submit" class="movie-viewed" name="id" value="@@gest_id@@">Modifica</button>
 			</form>
 			<!-- admin_end -->
 			<!-- user_start -->
-			<form method="post">
+			<form method="get">
+				<input type="hidden" name="id" value="@@film_id@@" />
 				<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
 				<button type="button" class="add-to-list">Aggiungi alla lista</button>
 			</form>

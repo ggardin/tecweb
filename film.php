@@ -23,7 +23,7 @@ try {
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
 			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere");
-			if (!empty($dv) && isset($_POST["da_vedere"])) // TODO
+			if (!empty($dv) && isset($_GET["da_vedere"])) // TODO
 				$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
 		}
 	}
@@ -161,11 +161,12 @@ if ($db_ok) {
 	} else
 		Tools::replaceSection($page, "valutazioni", "");
 	if (isset($_SESSION["id"])) {
-		Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
 		if ($_SESSION["is_admin"] == 0)
 			Tools::replaceSection($page, "admin", "");
 		else
-			Tools::replaceAnchor($page, "film_id", $id);
+			Tools::replaceAnchor($page, "gest_id", $id);
+		Tools::replaceAnchor($page, "film_id", $id);
+		Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
 	} else {
 		Tools::replaceSection($page, "admin", "");
 		Tools::replaceSection($page, "user", "");
