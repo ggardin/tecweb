@@ -100,13 +100,16 @@ HEADER
 	display: block;
 	color: inherit;
 	text-decoration: none;
-	padding: 0.55em 1em;
 }
 
 #page-header li.active {
-	padding: 0.55em 1em;
 	background-color: var(--secondaryColor);
 	cursor: default;
+}
+
+#page-header li a,
+#page-header li.active {
+	padding: 0.55em 1em;
 }
 
 #page-header li:hover:not(.active) {
