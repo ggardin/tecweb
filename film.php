@@ -164,6 +164,8 @@ if ($db_ok) {
 		Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
 		if ($_SESSION["is_admin"] == 0)
 			Tools::replaceSection($page, "admin", "");
+		else
+			Tools::replaceAnchor($page, "film_id", $id);
 	} else {
 		Tools::replaceSection($page, "admin", "");
 		Tools::replaceSection($page, "user", "");
