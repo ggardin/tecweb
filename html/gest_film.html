@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 
-	<title>Aggiungi un film</title>
+	<title>@@title@@</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 
@@ -13,7 +13,8 @@
 	<!-- header -->
 
 	<nav id="breadcrumb">
-		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca.php"><span lang="en">Film</span></a> &gt;&gt; @@breadcrumb@@</p>
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca.php"><span lang="en">Film</span></a> &gt;&gt;
+			<!-- breadcrumb_start --> <a href="film.php?id=@@bc_id@@">@@bc_nome@@</a> &gt;&gt; Modifica <!-- breadcrumb_end --></p>
 	</nav>
 
 	<main id="content">
@@ -21,70 +22,68 @@
 			<fieldset>
 				<legend>Informazioni principali</legend>
 				<label for="titolo">Titolo</label>
-				<textarea name="titolo" id="titolo"></textarea>
+				<input name="titolo" id="titolo" value="@@nome@@" />
 
 				<label for="descrizione">Descrizione</label>
-				<textarea name="descrizione" id="descrizione"></textarea>
+				<textarea name="descrizione" id="descrizione">@@descrizione@@</textarea>
 
 				<label for="data">Data rilascio</label>
-				<input type="date" id="data" name="data"
-					value="2023-01-01"
-					min="1900-01-01" max="2099-12-31" />
+				<input type="date" id="data" name="data" min="1900-01-01" max="2099-12-31" value="@@data_rilascio@@" />
 
 				<label for="durata">Durata in minuti</label>
-				<input type="number" id="durata" name="durata" min="0" max="1000">
+				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" />
 			</fieldset>
 
 			<fieldset>
 				<legend lang="en">Crew</legend>
 				<label for="regista">Regista</label>
-				<textarea name="regista" id="regista"></textarea>
+				<textarea name="regista" id="regista">TODO</textarea>
 
 				<label for="sceneggiatore">Sceneggiatore</label>
-				<textarea name="sceneggiatore" id="sceneggiatore"></textarea>
+				<textarea name="sceneggiatore" id="sceneggiatore">TODO</textarea>
 
 				<label for="produttore">Produttore</label>
-				<textarea name="produttore" id="produttore"></textarea>
+				<textarea name="produttore" id="produttore">TODO</textarea>
 
 				<label for="compositore">Compositore</label>
-				<textarea name="compositore" id="compositore"></textarea>
+				<textarea name="compositore" id="compositore">TODO</textarea>
 			</fieldset>
 
 			<fieldset>
 				<legend>Generi</legend>
 				<label for="generi">Generi</label>
-				<textarea name="generi" id="generi"></textarea>
+				<textarea name="generi" id="generi">TODO</textarea>
 			</fieldset>
 
 			<fieldset>
 				<legend>Paesi di produzione</legend>
 				<label for="paesi">Paesi</label>
-				<textarea name="paesi" id="paesi"></textarea>
+				<textarea name="paesi" id="paesi">TODO</textarea>
 			</fieldset>
 
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="nome_originale">Titolo originale</label>
-				<textarea name="nome_originale" id="nome_originale"></textarea>
+				<input name="nome_originale" id="nome_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
 				<select id="stato" class="form-control">
-					<option value="-1" selected="selected">Nessuna selezione</option>
+					<option value="-1" selected="selected">TODO</option>
 					<option value="0">Rilasciato</option>
 					<option value="1">In produzione</option>
 				</select>
 
 				<label for="budget">Budget</label>
-				<textarea name="budget" id="budget"></textarea>
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" />
 
 				<label for="incassi">Incassi</label>
-				<textarea name="incassi" id="incassi"></textarea>
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" />
 
 				<label for="collezione">Collezione</label>
-				<textarea name="collezione" id="collezione"></textarea>
+				<input name="collezione" id="collezione" value="TODO" />
 			</fieldset>
 
-			<input type="submit" name="submit" value="@@type@@" />
+			<button type="submit" name="submit">@@submit@@</button>
 		</form>
 	</main>
 

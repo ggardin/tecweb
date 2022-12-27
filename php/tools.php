@@ -6,7 +6,6 @@ class Tools {
 	public static function errCode($num) : void {
 		http_response_code($num);
 		include ("${num}.php");
-		exit();
 	}
 
 	public static function getStringBetween(&$in, $start, $end) : string {
@@ -56,36 +55,39 @@ class Tools {
 		}
 	}
 
-	public static function stripSpanLang(&$in) : string {
-		$from = ['/<span lang="([a-z]{2,3})">/', '/<\/span>/'];
-		$to = ['', ''];
-		return preg_replace($from, $to, $in);
-	}
-
-	public static function toSpanLang(&$in) : string {
+	private static function convLang($in, $strip=false) : string {
 		$from = ["/\[([a-z]{2,3})\]/", "/\[\/([a-z]{2,3})\]/"];
-		$to = ['<span lang="${1}">', '</span>'];
+		$to = (! $strip) ? ['<span lang="${1}">', '</span>'] : ['', ''];
 		return preg_replace($from, $to, $in);
 	}
 
-	public static function toAbbr(&$in) : string {
-		$from = "/\{abbr\}(.*?)(;(.*))?\{\/abbr\}/";
-		$to = '<abbr title="${1}">${3}</abbr>';
+	private static function convAbbr($in, $strip=false) : string {
+		$from = ["/\{abbr\}([\w\-]*?){\/abbr\}/", "/\{abbr\}([\w\s\-]*?);([\w\-]*?){\/abbr\}/"];
+		$to = (! $strip) ? ['<abbr>${1}</abbr>', '<abbr title="${1}">${2}</abbr>'] : ['', ''];
 		return preg_replace($from, $to, $in);
 	}
 
-	private static function pulisci(&$item, $key, $conv_marker) : void {
+	private static function convHelper(&$item, $key, $conv_level) : void {
 		if (! is_null($item)) {
-			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
-			if ($conv_marker) {
-				$item = Tools::toSpanLang($item);
-				$item = Tools::toAbbr($item);
+			if ($conv_level)
+				$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
+			if ($conv_level != 1) {
+				$strip = ($conv_level == 0);
+				$item = Tools::convLang($item, $strip);
+				$item = Tools::convAbbr($item, $strip);
 			}
 		}
 	}
 
-	public static function toHtml(&$in, $conv_marker = true) : void {
-		array_walk_recursive($in, "self::pulisci", $conv_marker);
+	// conv_level
+	// 0: keep specials, strip markers (for titles)
+	// 1: conv specials, keep makers (for editing)
+	// 2: conv specials, conv markers (for normal pages), DEFAULT
+	public static function toHtml(&$in, $conv_level = 2) : void {
+		if (is_array($in))
+			array_walk_recursive($in, "self::convHelper", $conv_level);
+		elseif (is_string($in))
+			self::convHelper($in, null, $conv_level);
 	}
 
 	private static function replacePageSection(&$page, &$shared, $name) : void {

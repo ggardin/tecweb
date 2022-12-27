@@ -3,12 +3,16 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-$id = (isset($_GET["id"])) ? $_GET["id"] : "";
+if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
+else {
+	Tools::errCode(404);
+	exit();
+}
 
 $content = "";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
-if ($id != "") {
+// so che è da cambiare l'indentazione, ma è da spostare comunque tutto in html
 	$db_ok = false;
 	try {
 		$connessione = new Database();
@@ -21,13 +25,15 @@ if ($id != "") {
 	} catch (Exception) {
 		unset($connessione);
 		Tools::errCode(500);
+		exit();
 	}
 	if ($db_ok) {
 		if (!empty($persona)) {
 			$persona = $persona[0];
+			$title = $persona["nome"] . " • Persona"; Tools::toHtml($title, 0);
+			Tools::replaceAnchor($page, "title", $title);
 			Tools::toHtml($persona);
 			Tools::toHtml($film);
-			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($persona["nome"]) . " • Persona");
 			Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 			$content .= "<h1>" . $persona["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg") . '" alt="" />';
@@ -49,11 +55,9 @@ if ($id != "") {
 			$content .= "</ol>";
 		} else {
 			Tools::errCode(404);
+			exit();
 		}
 	}
-} else {
-	Tools::errCode(404);
-}
 
 Tools::replaceAnchor($page, "persona", $content);
 

@@ -353,13 +353,36 @@ class Database {
 		return $this->preparedInsert($query, $params);
 	}
 
-	public function insertLista($user_id, $list) : bool {
+	public function insertLista($user_id, $list_name) : bool {
 		$query = "insert into lista(utente, nome)
 			values (?, ?)";
 
-		$params = [$user_id, $list];
+		$params = [$user_id, $list_name];
+		$types = "is";
 
-		return $this->preparedInsert($query, $params);
+		return $this->preparedInsert($query, $params, $types);
+	}
+
+	public function getListIdByName($user_id, $list_name) : array {
+		$query = "select id
+			from lista
+			where utente = ?
+				and nome like ?";
+
+		$params = [$user_id, ("%" . trim($list_name) . "%")];
+		$types = "is";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function addToListById($list_id, $film_id) : bool {
+		$query = "insert into lista_film(lista, film)
+			values (?, ?)";
+
+		$params = [$list_id, $film_id];
+		$types = "ii";
+
+		return $this->preparedInsert($query, $params, $types);
 	}
 
 	public function login($username, $password) : array {
@@ -385,7 +408,7 @@ class Database {
 		if ($s) {
 			$user_id = $this->connection->insert_id;
 			// TODO : transazione
-			if ($this->insertLista($user_id, "Da guardare") &&
+			if ($this->insertLista($user_id, "Da vedere") &&
 				$this->insertLista($user_id, "Visti"));
 				return $this->login($username, $password);
 		}

@@ -10,8 +10,6 @@ $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 
 $db_ok = false;
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
@@ -29,40 +27,41 @@ try {
 		$cerca = $connessione->searchCollezione($query);
 	elseif ($tipo == "persona")
 		$cerca = $connessione->searchPersona($query);
-	else
-		$cerca = array();
 	unset($connessione);
 	$db_ok = true;
 } catch (Exception) {
 	unset($connessione);
 	Tools::errCode(500);
+	exit();
 }
 if ($db_ok) {
-	if (in_array($tipo, ["film", "collezione", "persona"])) {
-		if ($query != "") {
-			$intestazione = "Cerca $tipo";
-			if ($tipo == "film" && $f_nome != "")
-				$intestazione .= " filtrati per $f_nome ($f_val)";
-			$titolo = $query . " • " . $intestazione;
-			$intestazione .= ': "' . $query . '"';
-		} else {
-			if ($tipo == "film") {
-				$intestazione = "Tutti i film";
-				if ($f_nome != "")
-					$intestazione .= " filtrati per $f_nome ($f_val)";
-			}
-			elseif ($tipo == "collezione")
-				$intestazione = "Tutte le collezioni";
-			else
-				$intestazione = "Tutte le persone";
-			$titolo = $intestazione;
-		}
-	} else {
+	if (!isset($cerca)) {
 		Tools::errCode(404);
+		exit();
+	}
+	// else
+	$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+	if ($query != "") {
+		$intestazione = "Cerca $tipo";
+		if ($tipo == "film" && $f_nome != "")
+			$intestazione .= " filtrati per $f_nome ($f_val)";
+		$titolo = $query . " • " . $intestazione;
+		$intestazione .= ': "' . $query . '"';
+	} else {
+		if ($tipo == "film") {
+			$intestazione = "Tutti i film";
+			if ($f_nome != "")
+				$intestazione .= " filtrati per $f_nome ($f_val)";
+		}
+		elseif ($tipo == "collezione")
+			$intestazione = "Tutte le collezioni";
+		else
+			$intestazione = "Tutte le persone";
+		$titolo = $intestazione;
 	}
 	Tools::replaceAnchor($page, "title", $titolo);
 	Tools::replaceAnchor($page, "intestazione", $intestazione);
-	if (isset($cerca)) {
+	if (!empty($cerca)) {
 		Tools::toHtml($cerca);
 		$card = Tools::getSection($page, "card");
 		$r = "";
@@ -87,8 +86,7 @@ if ($db_ok) {
 		Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
 		Tools::replaceSection($page, "results", "");
 	}
+	Tools::showPage($page);
 }
-
-Tools::showPage($page);
 
 ?>

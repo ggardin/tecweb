@@ -27,6 +27,7 @@ if (isset($_POST["submit"])) {
 		} catch (Exception) {
 			unset($connessione);
 			Tools::errCode(500);
+			exit();
 		}
 		if ($db_ok) {
 			if (! empty($res)) {

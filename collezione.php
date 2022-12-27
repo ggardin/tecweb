@@ -5,12 +5,17 @@ require_once("php/database.php");
 
 session_start();
 
-$id = (isset($_GET["id"])) ? $_GET["id"] : "";
+if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
+else {
+	Tools::errCode(404);
+	exit();
+}
 
 $content = "";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
-if ($id != "") {
+
+// so che è da cambiare l'indentazione, ma è da spostare comunque tutto in html
 	$db_ok = false;
 	try {
 		$connessione = new Database();
@@ -22,13 +27,15 @@ if ($id != "") {
 	} catch (Exception) {
 		unset($connessione);
 		Tools::errCode(500);
+		exit();
 	}
 	if ($db_ok) {
 		if (!empty($collezione)) {
 			$collezione = $collezione[0];
+			$title = $collezione["nome"] . " • Collezione"; Tools::toHtml($title, 0);
+			Tools::replaceAnchor($page, "title", $title);
 			Tools::toHtml($collezione);
 			Tools::toHtml($film);
-			Tools::replaceAnchor($page, "title", Tools::stripSpanLang($collezione["nome"]) . " • Collezione");
 			Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
 			$content .= "<h1>" . $collezione["nome"] . "</h1>";
 			$content .= '<img width="250" height="375" src="' . (isset($collezione["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg") . '" alt="" />';
@@ -47,11 +54,9 @@ if ($id != "") {
 			$content .= "</ol>";
 		} else {
 			Tools::errCode(404);
+			exit();
 		}
 	}
-} else {
-	Tools::errCode(404);
-}
 
 Tools::replaceAnchor($page, "collezione", $content);
 

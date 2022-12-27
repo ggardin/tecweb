@@ -335,7 +335,6 @@ SEARCH BAR
 
 .searchTerm {
 	width: 100%;
-	padding: 1em;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	font-size: 0.8em;
 	border: transparent;
@@ -420,11 +419,6 @@ hr.solid {
 
 .item.new-list .name{
 	color: var(--bgcolor);
-}
-
-.button {
-	border-top: 1px solid red;
-	overflow: hidden;
 }
 
 .new-item {
@@ -655,11 +649,12 @@ INPUT FIELD
 
 input {
 	width: 100%;
+	padding: 1em;
 	border-radius: var(--border-radius);
 	border: none;
 }
 
-input[type=submit] {
+button[type=submit] {
 	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
 	font-weight: 600;
@@ -681,8 +676,6 @@ AUTH
 	padding: var(--content-padding);
 }
 
-/* Inputs */
-
 #auth_message {
 	padding-top: 1em;
 }
@@ -697,8 +690,14 @@ AUTH
 }
 
 #auth_form > fieldset input {
-	margin: 0.5em 0 1.5em;
+	margin-bottom: 1em;
+}
+
+#auth_form > fieldset button {
+	width: 100%;
 	padding: 1em;
+	border-radius: var(--border-radius);
+	border: none;
 }
 
 
@@ -796,7 +795,11 @@ GESTIONE
 	box-sizing: border-box;
 	border: none;
 	border-radius: var(--border-radius);
-	resize: none;
+	resize: vertical;
+}
+
+#gestione textarea#descrizione {
+	height: 15em;
 }
 
 #gestione legend {
@@ -814,6 +817,9 @@ GESTIONE
 	border-radius: var(--border-radius);
 }
 
-#gestione input {
+#gestione > button {
+	width: 100%;
 	padding: 1em;
+	border-radius: var(--border-radius);
+	border: none;
 }
