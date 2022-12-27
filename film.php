@@ -165,7 +165,8 @@ if ($db_ok) {
 		if ($_SESSION["is_admin"] == 0)
 			Tools::replaceSection($page, "admin", "");
 	} else {
-		Tools::replaceSection($page, "form", "");
+		Tools::replaceSection($page, "admin", "");
+		Tools::replaceSection($page, "user", "");
 	}
 	Tools::showPage($page);
 }
