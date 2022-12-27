@@ -21,6 +21,7 @@ try {
 } catch (Exception) {
 	unset($connessione);
 	Tools::errCode(500);
+	exit();
 }
 if ($db_ok) {
 	$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));

@@ -11,7 +11,10 @@ if (! isset($_SESSION["id"])) {
 }
 
 if (isset($_GET["id"])) $id = $_GET["id"];
-else Tools::errCode(404);
+else {
+	Tools::errCode(404);
+	exit();
+}
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
@@ -29,9 +32,13 @@ try {
 } catch (Exception) {
 	unset($connessione);
 	Tools::errCode(500);
+	exit();
 }
 if ($db_ok) {
-	if (!$own) Tools::errCode(404);
+	if (!$own) {
+		Tools::errCode(404);
+		exit();
+	}
 	// else
 	$nome = $nome[0];
 	$title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 0);

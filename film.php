@@ -6,7 +6,10 @@ require_once("php/database.php");
 session_start();
 
 if (isset($_GET["id"])) $id = $_GET["id"];
-else Tools::errCode(404);
+else {
+	Tools::errCode(404);
+	exit();
+}
 
 $db_ok = false;
 try {
@@ -29,9 +32,13 @@ try {
 } catch (Exception) {
 	unset($connessione);
 	Tools::errCode(500);
+	exit();
 }
 if ($db_ok) {
-	if (empty($film)) Tools::errCode(404);
+	if (empty($film)) {
+		Tools::errCode(404);
+		exit();
+	}
 	// else
 	$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 	$film = $film[0];

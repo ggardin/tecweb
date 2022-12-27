@@ -4,7 +4,10 @@ require_once("php/tools.php");
 require_once("php/database.php");
 
 if (isset($_GET["id"])) $id = $_GET["id"];
-else Tools::errCode(404);
+else {
+	Tools::errCode(404);
+	exit();
+}
 
 $content = "";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
@@ -22,6 +25,7 @@ $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 	} catch (Exception) {
 		unset($connessione);
 		Tools::errCode(500);
+		exit();
 	}
 	if ($db_ok) {
 		if (!empty($persona)) {
@@ -51,6 +55,7 @@ $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 			$content .= "</ol>";
 		} else {
 			Tools::errCode(404);
+			exit();
 		}
 	}
 

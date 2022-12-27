@@ -32,9 +32,13 @@ try {
 } catch (Exception) {
 	unset($connessione);
 	Tools::errCode(500);
+	exit();
 }
 if ($db_ok) {
-	if (!isset($cerca)) Tools::errCode(404);
+	if (!isset($cerca)) {
+		Tools::errCode(404);
+		exit();
+	}
 	// else
 	$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 	if ($query != "") {
