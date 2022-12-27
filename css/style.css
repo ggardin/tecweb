@@ -639,6 +639,34 @@ MOVIE PAGE
 	background: transparent;
 }
 
+/*
+==============
+REVIEWS
+==============
+*/
+
+.movie-page .reviews {
+	display: flex;
+	flex-direction: column;
+}
+
+.movie-page .review {
+	background-color: var(--secondaryColor);
+	padding: var(--content-padding);
+	border-radius: var(--border-radius);
+	margin-bottom: 1em;
+}
+
+.movie-page .review .rating {
+	font-size: 1.2em;
+	font-weight: 600;
+	display: inline-block;
+}
+
+.movie-page .review .author {
+	display: inline-block;
+}
+
 
 /*
 ==============
