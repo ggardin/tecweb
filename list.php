@@ -10,7 +10,7 @@ if (! isset($_SESSION["id"])) {
 	exit();
 }
 
-if (isset($_GET["id"])) $id = $_GET["id"];
+if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
 else {
 	Tools::errCode(404);
 	exit();

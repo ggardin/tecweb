@@ -3,7 +3,7 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-if (isset($_GET["id"])) $id = $_GET["id"];
+if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
 else {
 	Tools::errCode(404);
 	exit();

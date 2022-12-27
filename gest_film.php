@@ -10,7 +10,7 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	exit();
 }
 
-if (isset($_GET["id"])) $id = $_GET["id"];
+if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
 
 $db_ok = false;
 try {
