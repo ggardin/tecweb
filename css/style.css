@@ -17,6 +17,7 @@
 	--border-radius: 8px;
 	--button-inactive: #20584F;
 	--auth-form-width: 35em;
+	--header-height: 4.5em;
 }
 
 :root.dark {
