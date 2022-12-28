@@ -659,6 +659,7 @@ REVIEWS
 
 .movie-page .review .rating {
 	font-size: 1.2em;
+	line-height: 1.2;
 	font-weight: 600;
 	float: right;
 }
@@ -669,7 +670,8 @@ REVIEWS
 }
 
 .movie-page .review .author {
-	display: inline-block;
+	line-height: 1.2;
+	margin-bottom: 1em;
 }
 
 
