@@ -150,7 +150,7 @@ if ($db_ok) {
 		foreach ($valutazione as $v) {
 			$t = $list;
 			Tools::replaceAnchor($t, "utente", $v["utente"]);
-			Tools::replaceAnchor($t, "valore", $v["valore"]);
+			Tools::replaceAnchor($t, "voto", $v["voto"]);
 			if (isset($v["testo"])) {
 				Tools::replaceAnchor($t, "testo", $v["testo"]);
 			} else
