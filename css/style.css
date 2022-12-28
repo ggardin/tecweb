@@ -1,16 +1,16 @@
 :root {
-	--bgcolor: #E4DCD7;
+	--bgcolor: #E7E1DF;
 	--bgcolor-alt: var(--secondaryColor);
 	--bgcolor-off: #CCB9B0;
 
 	--txtcolor: #1A1A1A;
 	--txtcolor-alt: var(--txtcolor); /* ??? */
 
-	--secondaryColor: #D4C9C4;
+	--secondaryColor: #DBD2CD;
 	--tertiaryColor: #0C443B;
 
-	--anchorcolor: #0000B5;
-	--anchorcolor-alt: #4C0083;
+	--anchorcolor: #110093;
+	--anchorcolor-alt: #D04637;
 
 	--content-width: 60em;
 	--content-padding: 1rem;
@@ -25,8 +25,8 @@
 	--bgcolor-alt: #242424;
 	--bgcolor-off: #434343;
 	--txtcolor: #E4DCD7;
-	--anchorcolor: #8BDAFC;
-	--anchorcolor-alt: #F6B5FF;
+	--anchorcolor: #91E8FB;
+	--anchorcolor-alt: #da4635;
 
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
