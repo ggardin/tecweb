@@ -112,11 +112,11 @@
 				<header>
 					<h2>Valutazioni</h2>
 				</header>
-				<form action="">
+				<form id="add_review" action="" method="post">
 					<fieldset>
-						<input type="range" name="" id="" min="1" max="10" step="1"/>
-						<textarea name="" id="" rows="3"></textarea>
-						<input type="submit" value="Pubblica la tua recensione" />
+						<input type="number" name="voto" min="1" max="10" />
+						<textarea name="testo" id="testo" rows="3"></textarea>
+						<button type="submit">Pubblica la tua recensione</button>
 					</fieldset>
 				</form>
 				<!-- valutazioni_start -->
