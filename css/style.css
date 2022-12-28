@@ -829,27 +829,23 @@ GESTIONE
 	border-radius: var(--border-radius);
 	border: none;
 }
-
-
+		
 /*
 ==============
-COLLECTION PAGE
+PERSON PAGE
 ==============
 */
-.collection-general{
-	display: grid;
-	grid-template-areas: "a a a"
-						 "b c c";
+.person-info{
 	margin-bottom: 2em;
 }
-.collection-title{
-	grid-area: a;
+.person-name{
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
-.locandina{
-	grid-area: b;
-}
-.descr{
-	grid-area: c;
-	padding-left: 1em;
+.person-data{
+	margin-top: 0.5em;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
 }
 	
