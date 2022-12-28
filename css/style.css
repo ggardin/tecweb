@@ -829,3 +829,27 @@ GESTIONE
 	border-radius: var(--border-radius);
 	border: none;
 }
+
+
+/*
+==============
+COLLECTION PAGE
+==============
+*/
+.collection-general{
+	display: grid;
+	grid-template-areas: "a a a"
+						 "b c c";
+	margin-bottom: 2em;
+}
+.collection-title{
+	grid-area: a;
+}
+.locandina{
+	grid-area: b;
+}
+.descr{
+	grid-area: c;
+	padding-left: 1em;
+}
+	
