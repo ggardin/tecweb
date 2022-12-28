@@ -660,7 +660,7 @@ REVIEWS
 .movie-page .review .rating {
 	font-size: 1.2em;
 	font-weight: 600;
-	display: inline-block;
+	float: right;
 }
 
 .movie-page .review .rating > span {
