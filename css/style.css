@@ -142,6 +142,7 @@ BREADCRUMB
 	font-size: 0.9em;
 	padding: 0.5em var(--content-padding);
 	border-radius: var(--border-radius);
+	z-index: 5;
 }
 
 /*
