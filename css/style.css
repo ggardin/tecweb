@@ -663,6 +663,11 @@ REVIEWS
 	display: inline-block;
 }
 
+.movie-page .review .rating > span {
+	font-size: initial;
+	font-weight: initial;
+}
+
 .movie-page .review .author {
 	display: inline-block;
 }
