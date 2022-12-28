@@ -333,14 +333,12 @@ SEARCH BAR
 }
 
 .searchTerm {
-	width: 100%;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	font-size: 0.8em;
-	border: transparent;
-	outline: none;
 }
 
 .searchButton {
+	width: auto;
 	background: var(--tertiaryColor);
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
@@ -674,6 +672,9 @@ REVIEWS
 	margin-bottom: 1em;
 }
 
+#add_review fieldset > * {
+	margin-top: 0.5em;
+}
 
 /*
 ==============
@@ -681,11 +682,17 @@ INPUT FIELD
 ==============
 */
 
-input {
+input, textarea, button, select {
 	width: 100%;
-	padding: 1em;
+	padding: 0.5em;
 	border-radius: var(--border-radius);
 	border: none;
+	outline: none;
+}
+
+textarea {
+	min-height: 5em;
+	resize: vertical;
 }
 
 button[type=submit] {
@@ -726,14 +733,6 @@ AUTH
 #auth_form > fieldset input {
 	margin-bottom: 1em;
 }
-
-#auth_form > fieldset button {
-	width: 100%;
-	padding: 1em;
-	border-radius: var(--border-radius);
-	border: none;
-}
-
 
 /*
 ==============
@@ -819,19 +818,6 @@ GESTIONE
 	margin-top: 1.5em;
 }
 
-#gestione fieldset > * {
-	width: 100%;
-}
-
-#gestione textarea {
-	height: 5em;
-	background-color: white;
-	box-sizing: border-box;
-	border: none;
-	border-radius: var(--border-radius);
-	resize: vertical;
-}
-
 #gestione textarea#descrizione {
 	height: 15em;
 }
@@ -844,16 +830,4 @@ GESTIONE
 #gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
-}
-
-#gestione select {
-	padding: 1em;
-	border-radius: var(--border-radius);
-}
-
-#gestione > button {
-	width: 100%;
-	padding: 1em;
-	border-radius: var(--border-radius);
-	border: none;
 }
