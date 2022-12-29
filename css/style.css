@@ -335,6 +335,7 @@ SEARCH BAR
 .searchTerm {
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	font-size: 0.8em;
+	/* outline: none; */
 }
 
 .searchButton {
@@ -687,7 +688,6 @@ input, textarea, button, select {
 	padding: 0.5em;
 	border-radius: var(--border-radius);
 	border: none;
-	outline: none;
 }
 
 textarea {
