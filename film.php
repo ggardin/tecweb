@@ -88,8 +88,8 @@ if ($db_ok) {
 			if ($c["ruolo"] != $last_ruolo) {
 				$r = $ruolo;
 				Tools::replaceAnchor($r, "ruolo", $c["ruolo"]);
-				$last_ruolo = $c["ruolo"];
 				$res .= $r;
+				$last_ruolo = $c["ruolo"];
 			}
 			$p = $persona;
 			Tools::replaceAnchor($p, "nome", $c["p_nome"]);

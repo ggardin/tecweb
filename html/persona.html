@@ -17,7 +17,44 @@
 	</nav>
 
 	<main id="content">
-		@@persona@@
+		<div>
+			<h1>@@nome@@</h1>
+			<img src="@@immagine@@" alt="" />
+			<ul >
+				<li><span lang="en">Gender:</span> @@gender@@</li>
+				<!-- data_nascita_start -->
+				<li>Data di nascita: @@data_nascita@@</li>
+				<!-- data_nascita_end -->
+				<!-- data_morte_start -->
+				<li>Data di morte: @@data_morte@@</li>
+				<!-- data_morte_end -->
+			</ul>
+		</div>
+		<!-- partecipazioni_start -->
+		<div>
+			<ul class="cards">
+				<!-- card_start -->
+				<li class="card">
+					<a href="film.php?id=@@id@@">
+						<img src="@@immagine@@" alt="" />
+						<div class="details">
+							<h2>@@nome@@</h2>
+							<!-- data_rilascio_start -->
+							<p>@@data_rilascio@@</p>
+							<!-- data_rilascio_end -->
+							<p>Ruoli:</p>
+							<ul>
+								<!-- ruolo_start -->
+								<li>@@ruolo@@</li>
+								<!-- ruolo_end -->
+							</ul>
+						</div>
+					</a>
+				</li>
+				<!-- card_end -->
+			</ul>
+		</div>
+		<!-- partecipazioni_end -->
 	</main>
 
 	<!-- footer -->
