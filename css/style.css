@@ -121,6 +121,10 @@ HEADER
 	gap: 0.5em;
 }
 
+#page-header button {
+	width: auto;
+}
+
 .accountButton{
 	cursor: pointer;
 }
