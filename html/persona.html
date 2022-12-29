@@ -18,26 +18,43 @@
 
 	<main id="content">
 		<div class="person-info">
-			<h1 class="person-name">Nome</h1>
-			<img class="person-photo"width="250" height="375" src="img/placeholder.svg" alt="">
+			<h1 class="person-name">@@nome@@</h1>
+			<img class="person-photo" src="@@immagine@@" alt="" />
 			<ul class="person-data">
-				<li><span lang="en">Gender:</span> maschio</li>
-				<li>Data di nascita: 15/12/2002</li>
+				<li><span lang="en">Gender:</span> @@gender@@</li>
+				<!-- data_nascita_start -->
+				<li>Data di nascita: @@data_nascita@@</li>
+				<!-- data_nascita_end -->
+				<!-- data_morte_start -->
+				<li>Data di morte: @@data_morte@@</li>
+				<!-- data_morte_end -->
 			</ul>
 		</div>
+		<!-- partecipazioni_start -->
 		<div class="film-person">
 			<ul class="cards">
+				<!-- card_start -->
 				<li class="card">
-					<a href="film.html">
-						<img width="200" height="300" src="img/placeholder.svg" alt="" />
+					<a href="film.php?id=@@id@@">
+						<img src="@@immagine@@" alt="" />
 						<div class="details">
 							<h2>@@nome@@</h2>
+							<!-- data_rilascio_start -->
 							<p>@@data_rilascio@@</p>
+							<!-- data_rilascio_end -->
+							<p>Ruoli:</p>
+							<ul>
+								<!-- ruolo_start -->
+								<li>@@ruolo@@</li>
+								<!-- ruolo_end -->
+							</ul>
 						</div>
 					</a>
 				</li>
+				<!-- card_end -->
 			</ul>
 		</div>
+		<!-- partecipazioni_end -->
 	</main>
 
 	<!-- footer -->
