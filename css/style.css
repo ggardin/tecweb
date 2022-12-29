@@ -783,6 +783,27 @@ incl. Stats, Settings
 */
 
 
+table{
+	border-collapse: collapse;
+	border-style: solid;
+	margin-top: 3em;
+}
+
+table td, th {
+	border: 2px solid #bbb2b1;
+}
+
+td {
+	text-align: center;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: var(--secondaryColor);
+}
+
+
 /*
 ==============
 GESTIONE
