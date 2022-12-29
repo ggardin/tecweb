@@ -166,7 +166,7 @@ if ($db_ok) {
 		Tools::replaceSection($page, "sect_valutazioni", "");
 	else if (! $show_add_review)
 		Tools::replaceSection($page, "add_review", "");
-	else
+	else if (! $show_valutazioni)
 		Tools::replaceSection($page, "valutazioni", "");
 	if (isset($_SESSION["id"])) {
 		if ($_SESSION["is_admin"] == 0)
