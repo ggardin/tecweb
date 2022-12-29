@@ -829,23 +829,3 @@ GESTIONE
 	border-radius: var(--border-radius);
 	border: none;
 }
-		
-/*
-==============
-PERSON PAGE
-==============
-*/
-.person-info{
-	margin-bottom: 2em;
-}
-.person-name{
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-.person-data{
-	margin-top: 0.5em;
-	list-style: none;
-	margin-left: 0;
-	padding-left: 0;
-}
-	
