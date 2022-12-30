@@ -681,6 +681,10 @@ REVIEWS
 	margin-top: 0.5em;
 }
 
+#add-review textarea {
+	min-height: 7em;
+}
+
 #add-review .rating-range {
 	display: flex;
 }
