@@ -88,10 +88,3 @@ main > h1, h2{
 PERSON PAGE
 ==============
 */
-
-.person-page {
-	grid-template-areas: "p"
-		"d"
-		"m";
-	grid-template-columns: none;
-}

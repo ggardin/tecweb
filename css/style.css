@@ -874,22 +874,13 @@ PERSON PAGE
 ==============
 */
 
-.person-page {
-	display: grid;
-	grid-template-areas: "p d"
-		"m m";
-	grid-template-columns: 300px auto;
-	grid-gap: 1em;
-}
-
-#person-picture {
-	grid-area: p;
-}
-
 #person-details {
-	grid-area: d;
+	display: flex;
+	flex-flow: wrap row-reverse;
+	justify-content: flex-end;
+	gap: 2em;
 }
 
-#person-movies {
-	grid-area: m;
+#person-details img {
+	flex: 0 1 300px;
 }
