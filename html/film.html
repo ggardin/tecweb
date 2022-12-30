@@ -8,6 +8,7 @@
 	<meta name="keywords" content="" />
 
 	<!-- head -->
+	<script src="js/validators.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -32,7 +33,12 @@
 				<!-- durata_end -->
 				<!-- voto_start -->
 				<dt class="sr-only">Voto</dt>
-				<dd>@@voto@@</dd>
+				<dd>
+					@@voto@@
+					<span aria-label="su 10">
+						/ 10
+					</span>
+				</dd>
 				<!-- voto_end -->
 			</dl>
 			<!-- sottotitolo_end -->
@@ -108,29 +114,97 @@
 				</dl>
 			</section>
 
-			<!-- valutazioni_start -->
+			<!-- sect_valutazioni_start -->
 			<section>
 				<header>
 					<h2>Valutazioni</h2>
 				</header>
-				<ol>
+				<!-- add_review_start -->
+				<form id="add-review" method="post" onsubmit="return validateNewReview();">
+					<fieldset>
+						<legend>Nuova recensione</legend>
+
+						<p>Voto</p>
+						<div class="rating-range">
+							<input type="radio" id="rating0" name="voto" value="0" hidden checked/>
+
+							<div>
+								<label for="rating1">1</label>
+								<input type="radio" id="rating1" name="voto" value="1" />
+							</div>
+							<div>
+								<label for="rating2">2</label>
+								<input type="radio" id="rating2" name="voto" value="2" />
+							</div>
+							<div>
+								<label for="rating3">3</label>
+								<input type="radio" id="rating3" name="voto" value="3" />
+							</div>
+							<div>
+								<label for="rating4">4</label>
+								<input type="radio" id="rating4" name="voto" value="4" />
+							</div>
+							<div>
+								<label for="rating5">5</label>
+								<input type="radio" id="rating5" name="voto" value="5" />
+							</div>
+							<div>
+								<label for="rating6">6</label>
+								<input type="radio" id="rating6" name="voto" value="6" />
+							</div>
+							<div>
+								<label for="rating7">7</label>
+								<input type="radio" id="rating7" name="voto" value="7" />
+							</div>
+							<div>
+								<label for="rating8">8</label>
+								<input type="radio" id="rating8" name="voto" value="8"/>
+							</div>
+							<div>
+								<label for="rating9">9</label>
+								<input type="radio" id="rating9" name="voto" value="9" />
+							</div>
+							<div>
+								<label for="rating10">10</label>
+								<input type="radio" id="rating10" name="voto" value="10" />
+							</div>
+						</div>
+
+						<label for="review-text">Recensione</label>
+						<p id="review-chars">Hai a disposizione 500 caratteri.</p>
+						<textarea name="testo" id="review-text" maxlength="500" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();"></textarea>
+
+						<button type="submit">Pubblica la tua recensione</button>
+					</fieldset>
+
+				</form>
+				<!-- add_review_end -->
+				<!-- valutazioni_start -->
+				<p>Gli altri utenti dicono:</p>
+				<ul class="reviews">
 					<!-- valutazione_start -->
-					<li>
+					<li class="review">
 						<dl>
-							<dt>Utente</dt>
-							<dd>@@utente@@</dd>
-							<dt>Valore</dt>
-							<dd>@@valore@@</dd>
+							<dt class="sr-only">Voto</dt>
+							<dd class="rating">
+								@@voto@@
+								<span aria-label="su 10">
+									/ 10
+								</span>
+							</dd>
+							<dt class="sr-only">Utente</dt>
+							<dd class="author">@@utente@@</dd>
 							<!-- testo_start -->
-							<dt>Testo</dt>
-							<dd>@@testo@@</dd>
+							<dt class="sr-only">Recensione</dt>
+							<dd class="text">@@testo@@</dd>
 							<!-- testo_end -->
 						</dl>
 					</li>
 					<!-- valutazione_end -->
-				</ol>
+				</ul>
+				<!-- valutazioni_end -->
 			</section>
-			<!-- valutazioni_end -->
+			<!-- sect_valutazioni_end -->
 
 		</div>
 

@@ -128,29 +128,35 @@ if ($db_ok) {
 	Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
 	Tools::replaceAnchor($page, "stato", $film["stato"]);
 	if (isset($film["budget"])) {
-		Tools::ReplaceAnchor($page, "budget", $film["budget"] . " $");
+		Tools::replaceAnchor($page, "budget", $film["budget"] . " $");
 	} else
 		Tools::replaceSection($page, "budget", "");
 	if (isset($film["incassi"])) {
-		Tools::ReplaceAnchor($page, "incassi", $film["incassi"] . " $");
+		Tools::replaceAnchor($page, "incassi", $film["incassi"] . " $");
 	} else
 		Tools::replaceSection($page, "incassi", "");
 	if (!empty($collezione)) {
 		Tools::toHtml($collezione);
 		$c = Tools::getSection($page, "collezione");
-		Tools::ReplaceAnchor($c, "id", $film["collezione"]);
-		Tools::ReplaceAnchor($c, "nome", $collezione[0]["nome"]);
-		Tools::ReplaceSection($page, "collezione", $c);
+		Tools::replaceAnchor($c, "id", $film["collezione"]);
+		Tools::replaceAnchor($c, "nome", $collezione[0]["nome"]);
+		Tools::replaceSection($page, "collezione", $c);
 	} else
 		Tools::replaceSection($page, "collezione", "");
+	$val = false;
+	if (isset($_SESSION["id"]))
+		$val = true;
+	else
+		Tools::replaceSection($page, "add_review", "");
 	if (!empty($valutazione)) {
+		$val = true;
 		Tools::toHtml($valutazione);
 		$list = Tools::getSection($page, "valutazione");
 		$r = "";
 		foreach ($valutazione as $v) {
 			$t = $list;
 			Tools::replaceAnchor($t, "utente", $v["utente"]);
-			Tools::replaceAnchor($t, "valore", $v["valore"]);
+			Tools::replaceAnchor($t, "voto", $v["voto"]);
 			if (isset($v["testo"])) {
 				Tools::replaceAnchor($t, "testo", $v["testo"]);
 			} else
@@ -160,6 +166,8 @@ if ($db_ok) {
 		Tools::replaceSection($page, "valutazione", $r);
 	} else
 		Tools::replaceSection($page, "valutazioni", "");
+	if (! $val)
+		Tools::replaceSection($page, "sect_valutazioni", "");
 	if (isset($_SESSION["id"])) {
 		if ($_SESSION["is_admin"] == 0)
 			Tools::replaceSection($page, "admin", "");

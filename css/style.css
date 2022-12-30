@@ -1,7 +1,7 @@
 :root {
 	--bgcolor: #E7E1DF;
 	--bgcolor-alt: var(--secondaryColor);
-	--bgcolor-off: #CCB9B0;
+	--bgcolor-off: #BBB2B1;
 
 	--txtcolor: #1A1A1A;
 	--txtcolor-alt: var(--txtcolor); /* ??? */
@@ -128,6 +128,10 @@ HEADER
 #page-header .actions {
 	display: flex;
 	gap: 0.5em;
+}
+
+#page-header button {
+	width: auto;
 }
 
 .accountButton{
@@ -345,14 +349,13 @@ SEARCH BAR
 }
 
 .searchTerm {
-	width: 100%;
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 	font-size: 0.8em;
-	border: transparent;
-	outline: none;
+	/* outline: none; */
 }
 
 .searchButton {
+	width: auto;
 	background: var(--tertiaryColor);
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
 	cursor: pointer;
@@ -642,6 +645,59 @@ MOVIE PAGE
 	background: transparent;
 }
 
+/*
+==============
+REVIEWS
+==============
+*/
+
+.movie-page .reviews {
+	display: flex;
+	flex-direction: column;
+}
+
+.movie-page .review {
+	background-color: var(--secondaryColor);
+	padding: var(--content-padding);
+	border-radius: var(--border-radius);
+	margin-bottom: 1em;
+}
+
+.movie-page .review .rating {
+	font-size: 1.2em;
+	line-height: 1.2;
+	font-weight: 600;
+	float: right;
+}
+
+.movie-page .review .rating > span {
+	font-size: initial;
+	font-weight: initial;
+}
+
+.movie-page .review .author {
+	line-height: 1.2;
+	margin-bottom: 1em;
+}
+
+#add-review fieldset > * {
+	margin-top: 0.5em;
+}
+
+#add-review textarea {
+	min-height: 7em;
+}
+
+#add-review .rating-range {
+	display: flex;
+}
+
+#add-review .rating-range > div {
+	flex: 1 1 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 /*
 ==============
@@ -649,11 +705,16 @@ INPUT FIELD
 ==============
 */
 
-input {
+input, textarea, button, select {
 	width: 100%;
-	padding: 1em;
+	padding: 0.5em;
 	border-radius: var(--border-radius);
 	border: none;
+}
+
+textarea {
+	min-height: 5em;
+	resize: vertical;
 }
 
 button[type=submit] {
@@ -694,14 +755,6 @@ AUTH
 #auth_form > fieldset input {
 	margin-bottom: 1em;
 }
-
-#auth_form > fieldset button {
-	width: 100%;
-	padding: 1em;
-	border-radius: var(--border-radius);
-	border: none;
-}
-
 
 /*
 ==============
@@ -775,6 +828,38 @@ incl. Stats, Settings
 ==============
 */
 
+table{
+	width: 45em;
+	border-collapse: collapse;
+	margin-top: 3.5em;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+caption {
+	font-size: 1.3em;
+	font-weight: 600;
+	margin-bottom: 1em;
+}
+
+table td, th {
+	border: 2px solid var(--bgcolor-off);
+	padding: 0.5em;
+}
+
+td {
+	text-align: center;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: var(--secondaryColor);
+}
+
 
 /*
 ==============
@@ -785,19 +870,6 @@ GESTIONE
 #gestione fieldset {
 	border: 0;
 	margin-top: 1.5em;
-}
-
-#gestione fieldset > * {
-	width: 100%;
-}
-
-#gestione textarea {
-	height: 5em;
-	background-color: white;
-	box-sizing: border-box;
-	border: none;
-	border-radius: var(--border-radius);
-	resize: vertical;
 }
 
 #gestione textarea#descrizione {
@@ -812,18 +884,6 @@ GESTIONE
 #gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
-}
-
-#gestione select {
-	padding: 1em;
-	border-radius: var(--border-radius);
-}
-
-#gestione > button {
-	width: 100%;
-	padding: 1em;
-	border-radius: var(--border-radius);
-	border: none;
 }
 
 /*
