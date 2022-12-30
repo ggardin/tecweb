@@ -39,11 +39,11 @@ if ($db_ok) {
 	$immagine = (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg");
 	Tools::replaceAnchor($page, "immagine", $immagine);
 	if (isset($persona["data_nascita"]))
-		Tools::replaceAnchor($page, "data_nascita", $persona["data_nascita"]);
+		Tools::replaceAnchor($page, "data_nascita", date_format(date_create_from_format('Y-m-d', $persona["data_nascita"]), 'd/m/Y'));
 	else
 		Tools::replaceSection($page, "data_nascita", "");
 	if (isset($persona["data_morte"]))
-		Tools::replaceAnchor($page, "data_morte", $persona["data_morte"]);
+		Tools::replaceAnchor($page, "data_morte", date_format(date_create_from_format('Y-m-d', $persona["data_morte"]), 'd/m/Y'));
 	else
 		Tools::replaceSection($page, "data_morte", "");
 	Tools::replaceAnchor($page, "gender", $persona["gender"]);
@@ -65,7 +65,7 @@ if ($db_ok) {
 				Tools::replaceAnchor($c, "immagine", $immagine);
 				Tools::replaceAnchor($c, "nome", $f["nome"]);
 				if (isset($f["data_rilascio"]))
-					Tools::replaceAnchor($c, "data_rilascio", $f["data_rilascio"]);
+					Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $f["data_rilascio"]), 'd/m/Y'));
 				else
 					Tools::replaceSection($c, "data_rilascio", "");
 				$last_film = $c;
