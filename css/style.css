@@ -523,28 +523,9 @@ RESULTS CARD
 	height: 100%;
 }
 
-.card img {
-	display: block;
-	object-fit: cover;
+.card > a .details {
+	padding: 0.5em;
 }
-
-.details {
-	padding: 20px 10px;
-}
-
-.details > h3 {
-	color: var(--txtcolor);
-	font-weight: bold;
-	font-size: 1.5em;
-}
-
-.details > p {
-	color: var(--txtcolor);
-	font-size: 1em;
-	line-height: 1.5em;
-	font-weight: normal;
-}
-
 
 /*
 ==============
@@ -847,17 +828,22 @@ HORIZONTAL CARDS
 
 .h-card {
 	margin-top: 1em;
-}
-
-.h-cards .h-card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 }
 
-.h-card a {
+.h-card > a {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+}
+
+.h-card > a img {
+	width: 10em;
+}
+
+.h-card > a .details {
+	padding: 0.5em;
 }
 
 /*
@@ -884,8 +870,4 @@ PERSON PAGE
 
 #person-movies {
 	grid-area: m;
-}
-
-#person-movies img {
-	width: 10em;
 }
