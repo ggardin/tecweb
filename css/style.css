@@ -73,7 +73,9 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-/* volendo si può mettere anche per a:active, ma dev'essere un colore diverso */
+img {
+	border-radius: var(--border-radius);
+}
 
 /*
 ==============
@@ -830,6 +832,7 @@ HORIZONTAL CARDS
 	margin-top: 1em;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
+	overflow: hidden;
 }
 
 .h-card > a {
