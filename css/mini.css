@@ -88,3 +88,13 @@ main > h1, h2{
 PERSON PAGE
 ==============
 */
+
+#person-details {
+	flex-direction: column-reverse;
+	align-items: center;
+	gap: 1em;
+}
+
+#person-movies {
+	grid-template-columns: none;
+}

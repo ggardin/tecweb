@@ -939,8 +939,25 @@ PERSON PAGE
 	flex-flow: wrap row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
+	margin-bottom: 2em;
+}
+
+#person-details dl {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 0em 1em;
+}
+
+#person-details dl dt::after {
+	content: ':';
 }
 
 #person-details img {
 	flex: 0 1 300px;
+}
+
+#person-movies {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1em;
 }
