@@ -1,7 +1,7 @@
 :root {
 	--bgcolor: #E7E1DF;
 	--bgcolor-alt: var(--secondaryColor);
-	--bgcolor-off: #CCB9B0;
+	--bgcolor-off: #BBB2B1;
 
 	--txtcolor: #1A1A1A;
 	--txtcolor-alt: var(--txtcolor); /* ??? */
@@ -781,6 +781,38 @@ USER PAGE
 incl. Stats, Settings
 ==============
 */
+
+table{
+	width: 45em;
+	border-collapse: collapse;
+	margin-top: 3.5em;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+caption {
+	font-size: 1.3em;
+	font-weight: 600;
+	margin-bottom: 1em;
+}
+
+table td, th {
+	border: 2px solid var(--bgcolor-off);
+	padding: 0.5em;
+}
+
+td {
+	text-align: center;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: var(--secondaryColor);
+}
 
 
 /*
