@@ -1,6 +1,6 @@
 <?php
 
-require_once("ini.php");
+require_once("php/ini.php");
 
 session_start();
 session_unset();
