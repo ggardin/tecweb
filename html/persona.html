@@ -19,41 +19,44 @@
 	<main id="content">
 		<div>
 			<h1>@@nome@@</h1>
-			<img src="@@immagine@@" alt="" />
-			<ul >
-				<li><span lang="en">Gender:</span> @@gender@@</li>
+			<dl>
+				<dt><span lang="en">Gender</span></dt>
+				<dd>@@gender@@</dd>
 				<!-- data_nascita_start -->
-				<li>Data di nascita: @@data_nascita@@</li>
+				<dt>Data di nascita</dt>
+				<dd>@@data_nascita@@</dd>
 				<!-- data_nascita_end -->
 				<!-- data_morte_start -->
-				<li>Data di morte: @@data_morte@@</li>
+				<dt>Data di morte</dt>
+				<dd>@@data_morte@@</dd>
 				<!-- data_morte_end -->
-			</ul>
+			</dl>
+		</div>
+		<div>
+			<img src="@@immagine@@" alt="" />
 		</div>
 		<!-- partecipazioni_start -->
-		<div>
-			<ul class="cards">
-				<!-- card_start -->
-				<li class="card">
-					<a href="film.php?id=@@id@@">
-						<img src="@@immagine@@" alt="" />
-						<div class="details">
-							<h2>@@nome@@</h2>
-							<!-- data_rilascio_start -->
-							<p>@@data_rilascio@@</p>
-							<!-- data_rilascio_end -->
-							<p>Ruoli:</p>
-							<ul>
-								<!-- ruolo_start -->
-								<li>@@ruolo@@</li>
-								<!-- ruolo_end -->
-							</ul>
-						</div>
-					</a>
-				</li>
-				<!-- card_end -->
-			</ul>
-		</div>
+		<ul class="cards">
+			<!-- card_start -->
+			<li class="card">
+				<a href="film.php?id=@@id@@">
+					<img src="@@immagine@@" alt="" />
+					<div class="details">
+						<h2>@@nome@@</h2>
+						<!-- data_rilascio_start -->
+						<p>@@data_rilascio@@</p>
+						<!-- data_rilascio_end -->
+						<p>Ruoli:</p>
+						<ul>
+							<!-- ruolo_start -->
+							<li>@@ruolo@@</li>
+							<!-- ruolo_end -->
+						</ul>
+					</div>
+				</a>
+			</li>
+			<!-- card_end -->
+		</ul>
 		<!-- partecipazioni_end -->
 	</main>
 
