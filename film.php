@@ -143,9 +143,13 @@ if ($db_ok) {
 		Tools::replaceSection($page, "collezione", $c);
 	} else
 		Tools::replaceSection($page, "collezione", "");
-	$show_add_review = (isset($_SESSION["id"]) ? true : false);
+	$val = false;
+	if (isset($_SESSION["id"]))
+		$val = true;
+	else
+		Tools::replaceSection($page, "add_review", "");
 	if (!empty($valutazione)) {
-		$show_valutazioni = true;
+		$val = true;
 		Tools::toHtml($valutazione);
 		$list = Tools::getSection($page, "valutazione");
 		$r = "";
@@ -161,13 +165,9 @@ if ($db_ok) {
 		}
 		Tools::replaceSection($page, "valutazione", $r);
 	} else
-		$show_valutazioni = false;
-	if (! $show_add_review && ! $show_valutazioni)
-		Tools::replaceSection($page, "sect_valutazioni", "");
-	else if (! $show_add_review)
-		Tools::replaceSection($page, "add_review", "");
-	else if (! $show_valutazioni)
 		Tools::replaceSection($page, "valutazioni", "");
+	if (! $val)
+		Tools::replaceSection($page, "sect_valutazioni", "");
 	if (isset($_SESSION["id"])) {
 		if ($_SESSION["is_admin"] == 0)
 			Tools::replaceSection($page, "admin", "");
