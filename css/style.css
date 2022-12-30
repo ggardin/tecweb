@@ -530,13 +530,14 @@ RESULTS CARD
 	padding: 0.5em;
 }
 
-.card > a .details h2 {
+.card > a .details > .cardtitle {
 	text-decoration: underline;
 }
 
-.card > a .details > *:not(h2) {
+.card > a .details > *:not(.cardtitle) {
 	color: var(--txtcolor);
 }
+
 
 /*
 ==============
@@ -859,11 +860,11 @@ HORIZONTAL CARDS
 	padding: 0.5em;
 }
 
-.h-card > a .details h2 {
+.h-card > a .details > .cardtitle {
 	text-decoration: underline;
 }
 
-.h-card > a .details > *:not(h2) {
+.h-card > a .details > *:not(.cardtitle) {
 	color: var(--txtcolor);
 }
 
