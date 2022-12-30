@@ -15,26 +15,22 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"), "auth");
 
 if (isset($_POST["submit"])) {
-	$db_ok = false;
 	try {
 		$connessione = new Database();
 		$res = $connessione->login($username, $password);
 		unset($connessione);
-		$db_ok = true;
 	} catch (Exception) {
 		unset($connessione);
 		Tools::errCode(500);
 		exit();
 	}
-	if ($db_ok) {
-		if (! empty($res)) {
-			$_SESSION["id"] = $res["id"];
-			$_SESSION["is_admin"] = $res["is_admin"];
-			header("location: user.php");
-			exit();
-		} else
-			Tools::replaceAnchor($page, "message", "Errore: Credenziali errate");
-	}
+	if (! empty($res)) {
+		$_SESSION["id"] = $res["id"];
+		$_SESSION["is_admin"] = $res["is_admin"];
+		header("location: user.php");
+		exit();
+	} else
+		Tools::replaceAnchor($page, "message", "Errore: Credenziali errate");
 } else
 	Tools::replaceSection($page, "message", "");
 

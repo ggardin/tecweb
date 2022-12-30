@@ -12,21 +12,19 @@ if (! isset($_SESSION["id"])) {
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
-$db_ok = false;
 try {
 	$connessione = new Database();
 	$username = $connessione->getUsernameByUserId($_SESSION["id"]);
 	unset($connessione);
-	$db_ok = true;
 } catch (Exception) {
 	unset($connessione);
 	Tools::errCode(500);
 	exit();
 }
-if ($db_ok) {
-	Tools::replaceAnchor($page, "username", $username[0]["username"]);
-	if ($_SESSION["is_admin"] == 0) Tools::replaceSection($page, "admin", "");
-}
+
+Tools::replaceAnchor($page, "username", $username[0]["username"]);
+
+if ($_SESSION["is_admin"] == 0) Tools::replaceSection($page, "admin", "");
 
 Tools::showPage($page);
 
