@@ -1,7 +1,7 @@
 :root {
 	--bgcolor: #E7E1DF;
 	--bgcolor-alt: var(--secondaryColor);
-	--bgcolor-off: #CCB9B0;
+	--bgcolor-off: #BBB2B1;
 
 	--txtcolor: #1A1A1A;
 	--txtcolor-alt: var(--txtcolor); /* ??? */
@@ -785,7 +785,6 @@ incl. Stats, Settings
 table{
 	width: 45em;
 	border-collapse: collapse;
-	border-style: solid;
 	margin-top: 3.5em;
 }
 
@@ -801,7 +800,7 @@ caption {
 }
 
 table td, th {
-	border: 2px solid #bbb2b1;
+	border: 2px solid var(--bgcolor-off);
 	padding: 0.5em;
 }
 
