@@ -868,7 +868,7 @@ GESTIONE
 */
 
 #gestione fieldset {
-	border: 0;
+	/* border: 0; */
 	margin-top: 1.5em;
 }
 
