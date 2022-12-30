@@ -65,7 +65,7 @@ if ($db_ok) {
 				Tools::replaceAnchor($c, "immagine", $immagine);
 				Tools::replaceAnchor($c, "nome", $f["nome"]);
 				if (isset($f["data_rilascio"]))
-					Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $f["data_rilascio"]), 'd/m/Y'));
+					Tools::replaceAnchor($c, "data_rilascio", date_format(date_create_from_format('Y-m-d', $f["data_rilascio"]), 'd/m/Y'));
 				else
 					Tools::replaceSection($c, "data_rilascio", "");
 				$last_film = $c;
