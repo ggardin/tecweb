@@ -82,3 +82,16 @@ main > h1, h2{
 	text-align: center;
 }
 */
+
+/*
+==============
+PERSON PAGE
+==============
+*/
+
+.person-page {
+	grid-template-areas: "p"
+		"d"
+		"m";
+	grid-template-columns: none;
+}

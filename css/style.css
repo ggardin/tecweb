@@ -832,3 +832,60 @@ GESTIONE
 	border-radius: var(--border-radius);
 	border: none;
 }
+
+/*
+==============
+HORIZONTAL CARDS
+==============
+*/
+
+
+.h-cards {
+	list-style-type: none;
+	padding: 0;
+}
+
+.h-card {
+	margin-top: 1em;
+}
+
+.h-cards .h-card {
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+}
+
+.h-card a {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+/*
+==============
+PERSON PAGE
+==============
+*/
+
+.person-page {
+	display: grid;
+	grid-template-areas: "p d"
+		"m m";
+	grid-template-columns: 300px auto;
+	grid-gap: 1em;
+}
+
+#person-picture {
+	grid-area: p;
+}
+
+#person-details {
+	grid-area: d;
+}
+
+#person-movies {
+	grid-area: m;
+}
+
+#person-movies img {
+	width: 10em;
+}
