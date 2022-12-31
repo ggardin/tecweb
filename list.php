@@ -55,9 +55,9 @@ if (!empty($lista)) {
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "nome", $l["nome"]);
 		if ($l["tipo"] == "film" && isset($l["data_rilascio"]))
-			Tools::replaceSection($t, "data", $l["data_rilascio"]);
+			Tools::replaceAnchor($t, "data_rilascio", $l["data_rilascio"]);
 		else
-			Tools::replaceSection($t, "data", "");
+			Tools::replaceSection($t, "data_rilascio", "");
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "elemento", $r);
