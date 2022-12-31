@@ -23,7 +23,7 @@ try {
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canReview($_SESSION["id"], $id);
 			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere");
-			if (!empty($dv) && isset($_GET["da_vedere"])) // TODO
+			if (!empty($dv) && isset($_POST["da_vedere"])) // TODO
 				$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
 		}
 	}
