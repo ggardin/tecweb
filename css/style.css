@@ -483,8 +483,7 @@ INDEX
 
 .container {
 	display: flex;
-	flex-direction: row-reverse;
-	flex-wrap: wrap;
+	flex-flow: row-reverse wrap;
 	gap: 2em;
 	align-items: center;
 	justify-content: center;
@@ -915,13 +914,14 @@ GESTIONE
 
 /*
 ==============
-PERSON PAGE
+PERSON/COLLECTION PAGE
 ==============
 */
 
-#person-details {
+#person-details,
+#collection-details {
 	display: flex;
-	flex-flow: wrap row-reverse;
+	flex-direction: row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
 	margin-bottom: 2em;
@@ -937,7 +937,8 @@ PERSON PAGE
 	content: ':';
 }
 
-#person-details img {
+#person-details img,
+#collection-details img {
 	flex: 0 1 300px;
 }
 
@@ -945,4 +946,8 @@ PERSON PAGE
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1em;
+}
+
+#collection-movies li {
+	margin-top: 1em;
 }

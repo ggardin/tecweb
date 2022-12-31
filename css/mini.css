@@ -85,11 +85,12 @@ main > h1, h2{
 
 /*
 ==============
-PERSON PAGE
+PERSON/COLLECTION PAGE
 ==============
 */
 
-#person-details {
+#person-details,
+#collection-details {
 	flex-direction: column-reverse;
 	align-items: center;
 	gap: 1em;
