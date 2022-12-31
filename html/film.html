@@ -120,7 +120,7 @@
 					<h2>Valutazioni</h2>
 				</header>
 				<!-- add_review_start -->
-				<form id="add-review" method="post" action="add_review.php">
+				<form id="add-review" method="post" action="post_add_review.php">
 					<input type="hidden" name="film_id" value="@@review_film_id@@" />
 					<fieldset>
 						<legend>Nuova recensione</legend>
@@ -212,12 +212,10 @@
 		<div class="movie-media">
 			<img src="@@locandina@@" alt=""/>
 			<!-- admin_start -->
-			<form method="get" action="gest_film.php">
-				<button type="submit" class="movie-viewed" name="id" value="@@gest_id@@">Modifica</button>
-			</form>
+			<a href "gest_film.php?id=@@gest_film_id@@">Modifica</a>
 			<!-- admin_end -->
 			<!-- user_start -->
-			<form method="get">
+			<form method="post">
 				<input type="hidden" name="film_id" value="@@list_film_id@@" />
 				<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
 				<button type="button" class="add-to-list">Aggiungi alla lista</button>

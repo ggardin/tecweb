@@ -172,7 +172,7 @@ if (isset($_SESSION["id"])) {
 	if ($_SESSION["is_admin"] == 0)
 		Tools::replaceSection($page, "admin", "");
 	else
-		Tools::replaceAnchor($page, "gest_id", $id);
+		Tools::replaceAnchor($page, "gest_film_id", $id);
 	Tools::replaceAnchor($page, "list_film_id", $id);
 	Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
 } else {
