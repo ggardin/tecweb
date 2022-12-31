@@ -2,8 +2,14 @@
  * Richiama validatori del form di inserimento nuova recensione
  */
 function validateNewReview() {
-	validateNewReviewRatingRadiobox();
-	validateNewReviewText();
+
+	let form = document.getElementById("add-review");
+
+	form.addEventListener("submit", function (event) {
+		if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
+			event.preventDefault();
+		}
+	});
 }
 
 /*
@@ -14,6 +20,7 @@ function validateNewReviewRatingRadiobox() {
 		alert('Non hai espresso un voto');
 		return false;
 	}
+	return true;
 }
 
 /*
@@ -24,6 +31,7 @@ function validateNewReviewText() {
 		alert('La recensione è troppo breve');
 		return false;
 	}
+	return true;
 }
 
 /*
@@ -42,4 +50,9 @@ function checkNewReviewCharactersCounter() {
 
 	charactersCounter.innerHTML = "Hai a disposizione " + (maxLength - currentLength) + " caratteri.";
 
+	return true;
 }
+
+window.addEventListener('load', function () {
+	validateNewReview();
+});
