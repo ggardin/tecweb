@@ -21,6 +21,7 @@ try {
 		$paese = $connessione->getPaeseByFilmId($id);
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
+			$can_review = $connessione->canReview($_SESSION["id"], $id);
 			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere");
 			if (!empty($dv) && isset($_GET["da_vedere"])) // TODO
 				$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
@@ -142,9 +143,10 @@ if (!empty($collezione)) {
 } else
 	Tools::replaceSection($page, "collezione", "");
 $val = false;
-if (isset($_SESSION["id"]))
+if (isset($_SESSION["id"]) && $can_review) {
+	Tools::replaceAnchor($page, "review_film_id", $id);
 	$val = true;
-else
+} else
 	Tools::replaceSection($page, "add_review", "");
 if (!empty($valutazione)) {
 	$val = true;
@@ -171,7 +173,7 @@ if (isset($_SESSION["id"])) {
 		Tools::replaceSection($page, "admin", "");
 	else
 		Tools::replaceAnchor($page, "gest_id", $id);
-	Tools::replaceAnchor($page, "film_id", $id);
+	Tools::replaceAnchor($page, "list_film_id", $id);
 	Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
 } else {
 	Tools::replaceSection($page, "admin", "");
