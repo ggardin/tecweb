@@ -345,7 +345,6 @@ SEARCH BAR
 .search {
 	position: relative;
 	display: flex;
-	margin: 4em .5em;
 }
 
 .searchTerm {
@@ -503,41 +502,66 @@ INDEX
 
 /*
 ==============
-RESULTS CARD
+CARDS / H-CARDS
 ==============
 */
 
+
+.cards, .h-cards {
+	list-style-type: none;
+	padding: 0;
+}
+
 .cards {
 	display: grid;
-	list-style-type: none;
-	grid-template-columns: repeat(auto-fit, 12em);
-	grid-gap: 1.5em;
-	padding: 1.5em 0 0;
+	grid-template-columns: repeat(auto-fit, 10.5em);
+	gap: 1em;
 	justify-content: center;
 }
 
-.card {
+.card, .h-card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	overflow: hidden;
 }
 
-.card > a {
+.card > a,
+.h-card > a {
 	display: flex;
-	flex-direction: column;
-	height: 100%;
 	text-decoration: none;
 }
 
-.card > a .details {
+.card > a {
+	flex-direction: column;
+	height: 100%;
+}
+
+.h-card > a {
+	flex-direction: row;
+	width: 100%;
+}
+
+.card > a img {
+	height: 15.75em;
+}
+
+.h-card > a img {
+	height: 13em;
+}
+
+.card > a .details,
+.h-card > a .details {
 	padding: 0.5em;
 }
 
-.card > a .details > .cardtitle {
+.card > a .details > .cardtitle,
+.h-card > a .details > .cardtitle {
 	text-decoration: underline;
+	font-size: 1.3em;
 }
 
-.card > a .details > *:not(.cardtitle) {
+.card > a .details > *:not(.cardtitle),
+.h-card > a .details > *:not(.cardtitle) {
 	color: var(--txtcolor);
 }
 
@@ -884,48 +908,6 @@ GESTIONE
 #gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
-}
-
-/*
-==============
-HORIZONTAL CARDS
-==============
-*/
-
-
-.h-cards {
-	list-style-type: none;
-	padding: 0;
-}
-
-.h-card {
-	margin-top: 1em;
-	background-color: var(--secondaryColor);
-	border-radius: var(--border-radius);
-	overflow: hidden;
-}
-
-.h-card > a {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	text-decoration: none;
-}
-
-.h-card > a img {
-	width: 10em;
-}
-
-.h-card > a .details {
-	padding: 0.5em;
-}
-
-.h-card > a .details > .cardtitle {
-	text-decoration: underline;
-}
-
-.h-card > a .details > *:not(.cardtitle) {
-	color: var(--txtcolor);
 }
 
 /*
