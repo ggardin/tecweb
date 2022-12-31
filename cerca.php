@@ -15,8 +15,8 @@ try {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $f_val);
 		elseif ($f_nome == "paese" && $f_val)
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $f_val);
-		elseif ($f_nome == "data" && $f_val)
-			$cerca = $connessione->searchFilmFilteredByData($query, $f_val);
+		// elseif ($f_nome == "data" && $f_val) // TODO
+		// 	$cerca = $connessione->searchFilmFilteredByData($query, $f_val);
 		else {
 			$cerca = $connessione->searchFilm($query);
 			$f_nome = "";
