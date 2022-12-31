@@ -95,7 +95,7 @@ class Database {
 	}
 
 	public function getFilmByCollezioneId($id) : array {
-		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio, f.descrizione
 			from collezione as c
 				join film as f
 					on c.id = f.collezione
@@ -131,7 +131,7 @@ class Database {
 				join ruolo as r
 					on c.ruolo = r.id
 			where p.id = ?
-			order by f.id, r.id";
+			order by f.data_rilascio is null, f.data_rilascio, f.id, r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -218,7 +218,8 @@ class Database {
 	public function searchFilm($str) : array {
 		$query = "select id, nome, locandina, data_rilascio
 			from film
-			where nome like ?";
+			where nome like ?
+			order by data_rilascio is null, data_rilascio";
 
 		$params = [("%" . trim($str) . "%")];
 
@@ -233,7 +234,8 @@ class Database {
 				join genere as g
 					on fg.genere = g.id
 			where f.nome like ?
-				and g.nome = ?";
+				and g.nome = ?
+			order by f.data_rilascio is null, f.data_rilascio";
 
 		$params = [("%" . trim($str) . "%"), $genere];
 
@@ -248,16 +250,12 @@ class Database {
 				join paese as p
 					on fp.paese = p.iso_3166_1
 			where f.nome like ?
-				and p.nome = ?";
+				and p.nome = ?
+			order by f.data_rilascio is null, f.data_rilascio";
 
 		$params = [("%" . trim($str) . "%"), $paese];
 
 		return $this->preparedSelect($query, $params);
-	}
-
-	public function searchFilmFilteredByData($str, $data) : array {
-		// TODO
-		return [];
 	}
 
 	public function searchCollezione($str) : array {
