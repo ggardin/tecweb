@@ -31,6 +31,10 @@ class Database {
 			$this->connection->close();
 	}
 
+	public function insertId() {
+		return $this->connection->insert_id;
+	}
+
 	// adattata da quella vista a lezione
 	private function pulisciInput(&$params) : void {
 		foreach ($params as &$p) {
@@ -435,23 +439,9 @@ class Database {
 			$status["id"] = $res[0]["id"];
 			$status["is_admin"] = $res[0]["is_admin"];
 		}
+
 		return $status;
 	}
-
-	public function signup($username, $password) : array {
-		$s = $this->insertUtente($username, $password);
-
-		if ($s) {
-			$user_id = $this->connection->insert_id;
-			// TODO : transazione
-			if ($this->insertLista($user_id, "Da vedere") &&
-				$this->insertLista($user_id, "Visti"));
-				return $this->login($username, $password);
-		}
-
-		return [];
-	}
-
 }
 
 ?>
