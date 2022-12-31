@@ -35,8 +35,7 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($persona);
 Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 Tools::replaceAnchor($page, "nome", $persona["nome"]);
-$immagine = (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg");
-Tools::replaceAnchor($page, "immagine", $immagine);
+Tools::replaceAnchor($page, "gender", $persona["gender"]);
 if (isset($persona["data_nascita"]))
 	Tools::replaceAnchor($page, "data_nascita", date_format(date_create_from_format('Y-m-d', $persona["data_nascita"]), 'd/m/Y'));
 else
@@ -45,7 +44,8 @@ if (isset($persona["data_morte"]))
 	Tools::replaceAnchor($page, "data_morte", date_format(date_create_from_format('Y-m-d', $persona["data_morte"]), 'd/m/Y'));
 else
 	Tools::replaceSection($page, "data_morte", "");
-Tools::replaceAnchor($page, "gender", $persona["gender"]);
+$immagine = (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg");
+Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {
 	Tools::toHtml($film);
 	$card = Tools::getSection($page, "card");
