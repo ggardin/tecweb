@@ -375,6 +375,8 @@ SIDE BAR
 ==============
 */
 
+/*
+
 #sidebar{
 	display: block;
 }
@@ -383,7 +385,7 @@ SIDE BAR
 	user-select: none;
 	max-width: 15em;
 	border-right: 2px solid var(--secondaryColor);
-	/*overflow: hidden;*/
+	// overflow: hidden;
 }
 
 .items {
@@ -466,6 +468,7 @@ hr.solid {
 	margin-right: 1em;
 }
 
+*/
 
 /*
 ==============
