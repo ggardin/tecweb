@@ -73,7 +73,9 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-/* volendo si può mettere anche per a:active, ma dev'essere un colore diverso */
+img {
+	border-radius: var(--border-radius);
+}
 
 /*
 ==============
@@ -524,28 +526,19 @@ RESULTS CARD
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	text-decoration: none;
 }
 
-.card img {
-	display: block;
-	object-fit: cover;
+.card > a .details {
+	padding: 0.5em;
 }
 
-.details {
-	padding: 20px 10px;
+.card > a .details > .cardtitle {
+	text-decoration: underline;
 }
 
-.details > h3 {
+.card > a .details > *:not(.cardtitle) {
 	color: var(--txtcolor);
-	font-weight: bold;
-	font-size: 1.5em;
-}
-
-.details > p {
-	color: var(--txtcolor);
-	font-size: 1em;
-	line-height: 1.5em;
-	font-weight: normal;
 }
 
 
@@ -875,7 +868,7 @@ GESTIONE
 */
 
 #gestione fieldset {
-	border: 0;
+	/* border: 0; */
 	margin-top: 1.5em;
 }
 
@@ -891,4 +884,80 @@ GESTIONE
 #gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
+}
+
+/*
+==============
+HORIZONTAL CARDS
+==============
+*/
+
+
+.h-cards {
+	list-style-type: none;
+	padding: 0;
+}
+
+.h-card {
+	margin-top: 1em;
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	overflow: hidden;
+}
+
+.h-card > a {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	text-decoration: none;
+}
+
+.h-card > a img {
+	width: 10em;
+}
+
+.h-card > a .details {
+	padding: 0.5em;
+}
+
+.h-card > a .details > .cardtitle {
+	text-decoration: underline;
+}
+
+.h-card > a .details > *:not(.cardtitle) {
+	color: var(--txtcolor);
+}
+
+/*
+==============
+PERSON PAGE
+==============
+*/
+
+#person-details {
+	display: flex;
+	flex-flow: wrap row-reverse;
+	justify-content: flex-end;
+	gap: 2em;
+	margin-bottom: 2em;
+}
+
+#person-details dl {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 0em 1em;
+}
+
+#person-details dl dt::after {
+	content: ':';
+}
+
+#person-details img {
+	flex: 0 1 300px;
+}
+
+#person-movies {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1em;
 }

@@ -31,6 +31,10 @@ class Database {
 			$this->connection->close();
 	}
 
+	public function insertId() {
+		return $this->connection->insert_id;
+	}
+
 	// adattata da quella vista a lezione
 	private function pulisciInput(&$params) : void {
 		foreach ($params as &$p) {
@@ -385,6 +389,42 @@ class Database {
 		return $this->preparedInsert($query, $params, $types);
 	}
 
+	public function canReview($user_id, $film_id) : bool {
+		$query = "select *
+			from valutazione
+			where utente = ? and film = ?";
+
+		$params = [$user_id, $film_id];
+		$types = "ii";
+
+		return empty($this->preparedSelect($query, $params, $types));
+	}
+
+	public function updateVoto($film_id) : bool {
+		$query = "update film
+			set voto = (select avg(valore)
+				from valutazione
+				group by film
+				having film = ?)
+			where id = ?";
+
+		$params = [$film_id, $film_id];
+		$types = "ii";
+
+		return $this->preparedInsert($query, $params, $types);
+	}
+
+	public function addReview($user_id, $film_id, $valore, $testo) : bool {
+		$query = "insert into valutazione(utente, film, valore, testo)
+			values (?, ?, ?, ?)";
+
+		$params = [$user_id, $film_id, $valore, $testo];
+		$types = "iiis";
+
+		return $this->preparedInsert($query, $params, $types) &&
+			$this->updateVoto($film_id);
+	}
+
 	public function login($username, $password) : array {
 		$query = "select id, is_admin, password
 			from utente
@@ -399,23 +439,9 @@ class Database {
 			$status["id"] = $res[0]["id"];
 			$status["is_admin"] = $res[0]["is_admin"];
 		}
+
 		return $status;
 	}
-
-	public function signup($username, $password) : array {
-		$s = $this->insertUtente($username, $password);
-
-		if ($s) {
-			$user_id = $this->connection->insert_id;
-			// TODO : transazione
-			if ($this->insertLista($user_id, "Da vedere") &&
-				$this->insertLista($user_id, "Visti"));
-				return $this->login($username, $password);
-		}
-
-		return [];
-	}
-
 }
 
 ?>

@@ -82,3 +82,19 @@ main > h1, h2{
 	text-align: center;
 }
 */
+
+/*
+==============
+PERSON PAGE
+==============
+*/
+
+#person-details {
+	flex-direction: column-reverse;
+	align-items: center;
+	gap: 1em;
+}
+
+#person-movies {
+	grid-template-columns: none;
+}
