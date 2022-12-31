@@ -15,8 +15,6 @@ $film_id = $_POST["film_id"];
 $valore = isset($_POST["voto"]) ? $_POST["voto"] : "";
 $testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
-header("location: film.php?id=$film_id");
-
 try {
 	$connessione = new Database();
 	$res = $connessione->addReview($user_id, $film_id, $valore, $testo);
@@ -26,5 +24,8 @@ try {
 	Tools::errCode(500);
 	exit();
 }
+
+header("location: film.php?id=$film_id");
+exit();
 
 ?>
