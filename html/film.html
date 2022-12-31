@@ -120,7 +120,9 @@
 					<h2>Valutazioni</h2>
 				</header>
 				<!-- add_review_start -->
-				<form id="add-review" method="post" onsubmit="return validateNewReview();">
+				<form id="add-review" method="post" action="add_review.php" onsubmit="return validateNewReview();">
+					<input type="hidden" name="film_id" value="@@review_film_id@@" />
+
 					<fieldset>
 						<legend>Nuova recensione</legend>
 
@@ -217,7 +219,7 @@
 			<!-- admin_end -->
 			<!-- user_start -->
 			<form method="get">
-				<input type="hidden" name="id" value="@@film_id@@" />
+				<input type="hidden" name="film_id" value="@@list_film_id@@" />
 				<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
 				<button type="button" class="add-to-list">Aggiungi alla lista</button>
 			</form>
