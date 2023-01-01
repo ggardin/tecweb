@@ -15,8 +15,8 @@ try {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $f_val);
 		elseif ($f_nome == "paese" && $f_val)
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $f_val);
-		elseif ($f_nome == "data" && $f_val)
-			$cerca = $connessione->searchFilmFilteredByData($query, $f_val);
+		// elseif ($f_nome == "data" && $f_val) // TODO
+		// 	$cerca = $connessione->searchFilmFilteredByData($query, $f_val);
 		else {
 			$cerca = $connessione->searchFilm($query);
 			$f_nome = "";
@@ -71,9 +71,9 @@ if (!empty($cerca)) {
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 		Tools::replaceAnchor($t, "nome", $c["nome"]);
-		if ($tipo == "film" && isset($c["data_rilascio"])) {
-			Tools::replaceAnchor($t, "data_rilascio", date_format(date_create_from_format('Y-m-d', $c["data_rilascio"]), 'd/m/Y'));
-		} else
+		if ($tipo == "film" && isset($c["data_rilascio"]))
+			Tools::replaceAnchor($t, "data", date_format(date_create_from_format('Y-m-d', $c["data_rilascio"]), 'd/m/Y'));
+		else
 			Tools::replaceSection($t, "data", "");
 		$r .= $t;
 	}

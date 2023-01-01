@@ -345,7 +345,6 @@ SEARCH BAR
 .search {
 	position: relative;
 	display: flex;
-	margin: 4em .5em;
 }
 
 .searchTerm {
@@ -376,6 +375,8 @@ SIDE BAR
 ==============
 */
 
+/*
+
 #sidebar{
 	display: block;
 }
@@ -384,7 +385,7 @@ SIDE BAR
 	user-select: none;
 	max-width: 15em;
 	border-right: 2px solid var(--secondaryColor);
-	/*overflow: hidden;*/
+	// overflow: hidden;
 }
 
 .items {
@@ -467,6 +468,7 @@ hr.solid {
 	margin-right: 1em;
 }
 
+*/
 
 /*
 ==============
@@ -481,8 +483,7 @@ INDEX
 
 .container {
 	display: flex;
-	flex-direction: row-reverse;
-	flex-wrap: wrap;
+	flex-flow: row-reverse wrap;
 	gap: 2em;
 	align-items: center;
 	justify-content: center;
@@ -503,41 +504,66 @@ INDEX
 
 /*
 ==============
-RESULTS CARD
+CARDS / H-CARDS
 ==============
 */
 
+
+.cards, .h-cards {
+	list-style-type: none;
+	padding: 0;
+}
+
 .cards {
 	display: grid;
-	list-style-type: none;
-	grid-template-columns: repeat(auto-fit, 12em);
-	grid-gap: 1.5em;
-	padding: 1.5em 0 0;
+	grid-template-columns: repeat(auto-fit, 10.5em);
+	gap: 1em;
 	justify-content: center;
 }
 
-.card {
+.card, .h-card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	overflow: hidden;
 }
 
-.card > a {
+.card > a,
+.h-card > a {
 	display: flex;
-	flex-direction: column;
-	height: 100%;
 	text-decoration: none;
 }
 
-.card > a .details {
+.card > a {
+	flex-direction: column;
+	height: 100%;
+}
+
+.h-card > a {
+	flex-direction: row;
+	width: 100%;
+}
+
+.card > a img {
+	height: 15.75em;
+}
+
+.h-card > a img {
+	height: 13em;
+}
+
+.card > a .details,
+.h-card > a .details {
 	padding: 0.5em;
 }
 
-.card > a .details > .cardtitle {
+.card > a .details > .cardtitle,
+.h-card > a .details > .cardtitle {
 	text-decoration: underline;
+	font-size: 1.3em;
 }
 
-.card > a .details > *:not(.cardtitle) {
+.card > a .details > *:not(.cardtitle),
+.h-card > a .details > *:not(.cardtitle) {
 	color: var(--txtcolor);
 }
 
@@ -873,55 +899,14 @@ GESTIONE
 
 /*
 ==============
-HORIZONTAL CARDS
+PERSON/COLLECTION PAGE
 ==============
 */
 
-
-.h-cards {
-	list-style-type: none;
-	padding: 0;
-}
-
-.h-card {
-	margin-top: 1em;
-	background-color: var(--secondaryColor);
-	border-radius: var(--border-radius);
-	overflow: hidden;
-}
-
-.h-card > a {
+#person-details,
+#collection-details {
 	display: flex;
-	flex-direction: row;
-	width: 100%;
-	text-decoration: none;
-}
-
-.h-card > a img {
-	width: 10em;
-}
-
-.h-card > a .details {
-	padding: 0.5em;
-}
-
-.h-card > a .details > .cardtitle {
-	text-decoration: underline;
-}
-
-.h-card > a .details > *:not(.cardtitle) {
-	color: var(--txtcolor);
-}
-
-/*
-==============
-PERSON PAGE
-==============
-*/
-
-#person-details {
-	display: flex;
-	flex-flow: wrap row-reverse;
+	flex-direction: row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
 	margin-bottom: 2em;
@@ -937,7 +922,8 @@ PERSON PAGE
 	content: ':';
 }
 
-#person-details img {
+#person-details img,
+#collection-details img {
 	flex: 0 1 300px;
 }
 
@@ -945,4 +931,8 @@ PERSON PAGE
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1em;
+}
+
+#collection-movies li {
+	margin-top: 1em;
 }

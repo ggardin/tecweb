@@ -17,7 +17,34 @@
 	</nav>
 
 	<main id="content">
-		@@collezione@@
+		<div id="collection-details">
+			<div>
+				<h1>@@nome@@</h1>
+				<p>@@descrizione@@</p>
+			</div>
+			<img src="@@immagine@@" alt="" />
+		</div>
+		<!-- film_start -->
+		<ul id="collection-movies" class="h-cards">
+			<!-- card_start -->
+			<li class="h-card">
+				<a href="film.php?id=@@id@@">
+					<img src="@@immagine@@" alt="" />
+					<div class="details">
+						<h2 class="cardtitle">@@nome@@</h2>
+						<!-- data_rilascio_start -->
+						<p>@@data_rilascio@@</p>
+						<!-- data_rilascio_end -->
+						<!-- descrizione_start -->
+						<p>@@descrizione@@</p>
+						<!-- descrizione_end -->
+					</div>
+				</a>
+			</li>
+			<!-- card_end -->
+		</ul>
+		<!-- film_end -->
+	</main>
 	</main>
 
 	<!-- footer -->
