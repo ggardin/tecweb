@@ -829,14 +829,14 @@ incl. Stats, Settings
 */
 
 table {
-	table-layout: fixed;
+	/*table-layout: fixed;*/
 	width: 100%;
 	border-collapse: collapse;
 }
 
 table caption {
 	font-size: 1.5em;
-	margin: 1.5em auto .5em;
+	margin: 1.7em auto .5em;
 }
 
 table tr {
