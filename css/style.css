@@ -847,12 +847,6 @@ table th, td {
 	padding: .5em;
 	text-align: center;
 	border: 2px solid var(--bgcolor-off);
-
-}
-
-table th {
-	font-size: 1em;
-	letter-spacing: .1em;
 }
 
 table tr:nth-child(odd) td{

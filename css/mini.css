@@ -108,11 +108,12 @@ incl. Stats, Settings
 */
 
 table thead {
-	border: none;
+	display: none;
+	/*border: none;
 	clip: rect(0 0 0 0);
 	overflow: hidden;
 	position: absolute;
-	width: 0;
+	width: 0;*/
 }
 
 table td, th{
@@ -130,6 +131,7 @@ table td::before {
 	font-weight: 600;
 	border-collapse: collapse;
 }
+
 
 
 
