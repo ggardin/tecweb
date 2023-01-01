@@ -828,36 +828,21 @@ incl. Stats, Settings
 ==============
 */
 
-table{
-	width: 45em;
-	border-collapse: collapse;
-	margin-top: 3.5em;
-}
-
-.center {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-caption {
-	font-size: 1.3em;
-	font-weight: 600;
-	margin-bottom: 1em;
-}
-
-table td, th {
-	border: 2px solid var(--bgcolor-off);
-	padding: 0.5em;
-}
-
-td {
+table {
+	/*table-layout: fixed;*/
+	width: 100%;
 	text-align: center;
-	margin: 0 auto;
-	vertical-align: middle;
+	border-collapse: collapse;
 }
 
-tbody tr:nth-child(odd) {
-	background-color: var(--secondaryColor);
+table caption {
+	font-size: 1.5em;
+	margin: 1.7em auto .5em;
+}
+
+table th, td {
+	padding: .5em;
+	border: 2px solid var(--bgcolor-off);
 }
 
 
@@ -945,7 +930,7 @@ PERSON PAGE
 #person-details dl {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-gap: 0em 1em;
+	grid-gap: 0 1em;
 }
 
 #person-details dl dt::after {
