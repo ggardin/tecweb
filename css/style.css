@@ -828,36 +828,35 @@ incl. Stats, Settings
 ==============
 */
 
-table{
-	width: 45em;
+table {
+	table-layout: fixed;
+	width: 100%;
 	border-collapse: collapse;
-	margin-top: 3.5em;
 }
 
-.center {
-	margin-left: auto;
-	margin-right: auto;
+table caption {
+	font-size: 1.5em;
+	margin: 1.5em auto .5em;
 }
 
-caption {
-	font-size: 1.3em;
-	font-weight: 600;
-	margin-bottom: 1em;
-}
-
-table td, th {
-	border: 2px solid var(--bgcolor-off);
-	padding: 0.5em;
-}
-
-td {
-	text-align: center;
-	margin: 0 auto;
-	vertical-align: middle;
-}
-
-tbody tr:nth-child(odd) {
+table tr {
 	background-color: var(--secondaryColor);
+}
+
+table th, td {
+	padding: .5em;
+	text-align: center;
+	border: 2px solid var(--txtcolor);
+
+}
+
+table th {
+	font-size: 1em;
+	letter-spacing: .1em;
+}
+
+table tr:nth-child(odd) td{
+	background-color: var(--bgcolor);
 }
 
 
