@@ -100,10 +100,12 @@ PERSON PAGE
 }
 
 
-
-
-
-
+/*
+==============
+USER PAGE
+incl. Stats, Settings
+==============
+*/
 
 table {
 	border: 0;
@@ -125,9 +127,7 @@ table thead {
 }
 
 table td, td {
-	border: 1px inset var(--txtcolor);
-	border-collapse: collapse;
-	border-spacing: 0;
+	border: 1px inset var(--bgcolor-off);
 	display: block;
 	text-align: right;
 }

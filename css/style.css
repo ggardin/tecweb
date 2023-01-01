@@ -846,7 +846,7 @@ table tr {
 table th, td {
 	padding: .5em;
 	text-align: center;
-	border: 2px solid var(--txtcolor);
+	border: 2px solid var(--bgcolor-off);
 
 }
 
@@ -944,7 +944,7 @@ PERSON PAGE
 #person-details dl {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-gap: 0em 1em;
+	grid-gap: 0 1em;
 }
 
 #person-details dl dt::after {
