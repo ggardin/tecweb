@@ -839,18 +839,14 @@ table caption {
 	margin: 1.7em auto .5em;
 }
 
-table tr {
-	background-color: var(--secondaryColor);
-}
-
 table th, td {
 	padding: .5em;
 	text-align: center;
 	border: 2px solid var(--bgcolor-off);
 }
 
-table tr:nth-child(odd) td{
-	background-color: var(--bgcolor);
+table td:nth-child(even) {
+	background-color: var(--secondaryColor);
 }
 
 
