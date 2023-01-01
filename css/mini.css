@@ -107,10 +107,6 @@ incl. Stats, Settings
 ==============
 */
 
-table {
-	border: 0;
-}
-
 table caption {
 	font-size: 1.3em;
 }
@@ -127,7 +123,6 @@ table thead {
 }
 
 table td, td {
-	border: 1px inset var(--bgcolor-off);
 	display: block;
 	text-align: right;
 }
@@ -141,6 +136,7 @@ table td::before {
 	float: left;
 	font-weight: bold;
 	text-transform: uppercase;
+	border-collapse: collapse;
 }
 
 
