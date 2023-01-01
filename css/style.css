@@ -831,6 +831,7 @@ incl. Stats, Settings
 table {
 	/*table-layout: fixed;*/
 	width: 100%;
+	text-align: center;
 	border-collapse: collapse;
 }
 
@@ -841,12 +842,7 @@ table caption {
 
 table th, td {
 	padding: .5em;
-	text-align: center;
 	border: 2px solid var(--bgcolor-off);
-}
-
-table td:nth-child(even) {
-	background-color: var(--secondaryColor);
 }
 
 

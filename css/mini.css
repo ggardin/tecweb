@@ -123,6 +123,11 @@ table td, th{
 
 table th::before{
 	content: attr(data-label) ": ";
+	float: left;
+}
+
+table th::after{
+	text-align: right;
 }
 
 table td::before {
