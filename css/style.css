@@ -577,6 +577,7 @@ CARDS / H-CARDS
 	width: 4em;
 	height: 4em;
 	background-color: var(--tertiaryColor);
+	background-image: url(../img/trashcan.svg);
 }
 
 .deleteElementButton img{
