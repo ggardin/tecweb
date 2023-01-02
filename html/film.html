@@ -20,6 +20,8 @@
 	<main id="content" class="movie-page">
 		<div class="movie-details">
 
+			<a class="skip-to-content" href="#manage">Aggiungi film ad una lista</a>
+
 			<h1>@@nome@@</h1>
 			<!-- sottotitolo_start -->
 			<dl id="subtitle">
@@ -42,6 +44,7 @@
 				<!-- voto_end -->
 			</dl>
 			<!-- sottotitolo_end -->
+			<h2 class="sr-only">Descrizione</h2>
 			<!-- descrizione_start -->
 			<p>@@descrizione@@</p>
 			<!-- descrizione_end -->
@@ -211,20 +214,24 @@
 
 		<div class="movie-media">
 			<img src="@@locandina@@" alt=""/>
-			<!-- admin_start -->
-			<a href="gest_film.php?id=@@gest_film_id@@">Modifica</a>
-			<!-- admin_end -->
-			<!-- user_start -->
-			<form method="post" action="post_add_to_list.php">
-				<input type="hidden" name="film_id" value="@@list_film_id@@" />
-				<select name="list_id">
-					<!-- lista_start -->
-					<option value="@@id@@">@@nome@@</option>
-					<!-- lista_end -->
-				</select>
-				<button type="submit">Aggiungi alla lista</button>
-			</form>
-			<!-- user_end -->
+
+			<aside id="manage">
+				<h2 class="sr-only">Aggiunta ad una lista</h2>
+				<!-- admin_start -->
+				<a href="gest_film.php?id=@@gest_film_id@@">Modifica</a>
+				<!-- admin_end -->
+				<!-- user_start -->
+				<form method="post" action="post_add_to_list.php">
+					<input type="hidden" name="film_id" value="@@list_film_id@@" />
+					<select name="list_id">
+						<!-- lista_start -->
+						<option value="@@id@@">@@nome@@</option>
+						<!-- lista_end -->
+					</select>
+					<button type="submit">Aggiungi alla lista</button>
+				</form>
+				<!-- user_end -->
+			</aside>
 		</div>
 	</main>
 

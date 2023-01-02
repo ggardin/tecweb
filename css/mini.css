@@ -92,7 +92,6 @@ PERSON/COLLECTION PAGE
 #person-details,
 #collection-details {
 	flex-direction: column-reverse;
-	align-items: center;
 	gap: 1em;
 }
 
