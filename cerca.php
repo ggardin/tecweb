@@ -46,6 +46,19 @@ Tools::replaceAnchor($page, "title", $titolo);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
 Tools::replaceAnchor($page, "search_value", $query);
 Tools::replaceAnchor($page, "search_tipo", $tipo);
+$tmp = Tools::getSection($page, "tipo");
+$res = "";
+foreach (["film", "collezione", "persona"] as $k) {
+	$t = $tmp;
+	Tools::replaceAnchor($t, "val", $k);
+	Tools::replaceAnchor($t, "nome", $k);
+	if ($k == $tipo)
+		Tools::replaceAnchor($t, "sel", "selected");
+	else
+		Tools::replaceAnchor($t, "sel", "");
+	$res .= $t;
+}
+Tools::replaceSection($page, "tipo", $res);
 if (!empty($cerca)) {
 	Tools::toHtml($cerca);
 	$card = Tools::getSection($page, "card");
