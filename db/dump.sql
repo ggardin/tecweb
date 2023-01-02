@@ -3240,17 +3240,6 @@ INSERT INTO `lista` (`id`, `utente`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lista_collezione`
---
-
-CREATE TABLE `lista_collezione` (
-  `lista` bigint(20) UNSIGNED NOT NULL,
-  `collezione` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `lista_film`
 --
 
@@ -4343,13 +4332,6 @@ ALTER TABLE `lista`
   ADD UNIQUE KEY `no_stesso_nome` (`utente`,`nome`);
 
 --
--- Indexes for table `lista_collezione`
---
-ALTER TABLE `lista_collezione`
-  ADD PRIMARY KEY (`lista`,`collezione`),
-  ADD KEY `collezione` (`collezione`);
-
---
 -- Indexes for table `lista_film`
 --
 ALTER TABLE `lista_film`
@@ -4521,13 +4503,6 @@ ALTER TABLE `i_persona`
 --
 ALTER TABLE `lista`
   ADD CONSTRAINT `lista_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `lista_collezione`
---
-ALTER TABLE `lista_collezione`
-  ADD CONSTRAINT `lista_collezione_ibfk_1` FOREIGN KEY (`lista`) REFERENCES `lista` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `lista_collezione_ibfk_2` FOREIGN KEY (`collezione`) REFERENCES `collezione` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `lista_film`
