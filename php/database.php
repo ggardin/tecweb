@@ -300,12 +300,12 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function checkListOwnership($user, $list) : bool {
+	public function checkListOwnership($list_id, $user_id) : bool {
 		$query = "select nome
 			from lista
-			where utente = ? and id = ?";
+			where id = ? and utente = ?";
 
-		$params = [$user, $list];
+		$params = [$list_id, $user_id];
 		$types = "ii";
 
 		return (!empty($this->preparedSelect($query, $params, $types)));
@@ -437,7 +437,7 @@ class Database {
 
 	public function deleteList($list_id, $user_id) : bool {
 		$query = "delete from lista
-			where utente = ? and id = ?";
+			where id = ? and utente = ?";
 
 		$params = [$list_id, $user_id];
 		$types = "ii";
