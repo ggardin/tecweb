@@ -20,6 +20,8 @@
 	<main id="content" class="movie-page">
 		<div class="movie-details">
 
+			<a class="skip-to-content" href="#manage">Aggiungi film ad una lista</a>
+
 			<h1>@@nome@@</h1>
 			<!-- sottotitolo_start -->
 			<dl id="subtitle">
@@ -212,16 +214,20 @@
 
 		<div class="movie-media">
 			<img src="@@locandina@@" alt=""/>
-			<!-- admin_start -->
-			<a href="gest_film.php?id=@@gest_film_id@@">Modifica</a>
-			<!-- admin_end -->
-			<!-- user_start -->
-			<form method="post">
-				<input type="hidden" name="film_id" value="@@list_film_id@@" />
-				<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
-				<button type="button" class="add-to-list">Aggiungi alla lista</button>
-			</form>
-			<!-- user_end -->
+
+			<aside id="manage">
+				<h2 class="sr-only">Aggiunta ad una lista</h2>
+				<!-- admin_start -->
+				<a href="gest_film.php?id=@@gest_film_id@@">Modifica</a>
+				<!-- admin_end -->
+				<!-- user_start -->
+				<form method="post">
+					<input type="hidden" name="film_id" value="@@list_film_id@@" />
+					<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
+					<button type="button" class="add-to-list">Aggiungi alla lista</button>
+				</form>
+				<!-- user_end -->
+			</aside>
 		</div>
 	</main>
 
