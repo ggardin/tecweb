@@ -121,6 +121,7 @@ HEADER
 #page-header li a,
 #page-header li.active {
 	padding: 0.5em 1em 0.3em;
+	margin: 0.5em 0.5em;
 }
 
 #page-header li:hover:not(.active) {
