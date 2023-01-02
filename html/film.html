@@ -71,7 +71,7 @@
 				</header>
 				<ul class="pills">
 					<!-- genere_start -->
-					<li><a href="cerca.php?fn=genere&fv=@@valore@@">@@nome@@</a></li>
+					<li><a href="cerca.php?fn=genere&fv=@@id@@">@@nome@@</a></li>
 					<!-- genere_end -->
 				</ul>
 			</section>
@@ -84,7 +84,7 @@
 				</header>
 				<ul class="pills">
 					<!-- paese_start -->
-					<li><a href="cerca.php?fn=paese&fv=@@valore@@">@@nome@@</a></li>
+					<li><a href="cerca.php?fn=paese&fv=@@id@@">@@nome@@</a></li>
 					<!-- paese_end -->
 				</ul>
 			</section>
@@ -215,10 +215,14 @@
 			<a href="gest_film.php?id=@@gest_film_id@@">Modifica</a>
 			<!-- admin_end -->
 			<!-- user_start -->
-			<form method="post">
+			<form method="post" action="post_add_to_list.php">
 				<input type="hidden" name="film_id" value="@@list_film_id@@" />
-				<button type="submit" class="movie-viewed" name="da_vedere">@@da_vedere_status@@ "Da vedere"</button>
-				<button type="button" class="add-to-list">Aggiungi alla lista</button>
+				<select name="list_id">
+					<!-- lista_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- lista_end -->
+				</select>
+				<button type="submit" class="movie-viewed">Aggiungi alla lista</button>
 			</form>
 			<!-- user_end -->
 		</div>

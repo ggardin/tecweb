@@ -22,9 +22,7 @@ try {
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere"); // TODO eliminare e funzione chiamata da database.php
-			if (!empty($dv) && isset($_POST["da_vedere"])) // TODO
-				$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
+			$lista = $connessione->getListsByUserId($_SESSION["id"]);
 		}
 	}
 	unset($connessione);
@@ -40,6 +38,7 @@ if (empty($film)) {
 }
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+
 $film = $film[0];
 $title = $film["nome"] . " • Film"; Tools::toHtml($title, 0);
 Tools::replaceAnchor($page, "title", $title);
@@ -104,7 +103,7 @@ if (!empty($genere)) {
 	$r = "";
 	foreach ($genere as $g) {
 		$t = $list;
-		Tools::replaceAnchor($t, "valore", $g["nome"]);
+		Tools::replaceAnchor($t, "id", $g["nome"]); // TODO
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
 		$r .= $t;
 	}
@@ -117,7 +116,7 @@ if (!empty($paese)) {
 	$r = "";
 	foreach ($paese as $p) {
 		$t = $list;
-		Tools::replaceAnchor($t, "valore", $p["nome"]);
+		Tools::replaceAnchor($t, "id", $p["nome"]); // TODO
 		Tools::replaceAnchor($t, "nome", $p["nome"]);
 		$r .= $t;
 	}
@@ -168,17 +167,24 @@ if (!empty($valutazione)) {
 	Tools::replaceSection($page, "valutazioni", "");
 if (! $val)
 	Tools::replaceSection($page, "sect_valutazioni", "");
-if (isset($_SESSION["id"])) {
-	if ($_SESSION["is_admin"] == 0)
-		Tools::replaceSection($page, "admin", "");
-	else
-		Tools::replaceAnchor($page, "gest_film_id", $id);
+if (isset($_SESSION["id"]) && !empty($lista)) {
+	Tools::toHtml($lista);
+	$list = Tools::getSection($page, "lista");
+	$r = "";
+	foreach ($lista as $l) {
+		$t = $list;
+		Tools::replaceAnchor($t, "id", $l["id"]);
+		Tools::replaceAnchor($t, "nome", $l["nome"]);
+		$r .= $t;
+	}
+	Tools::replaceSection($page, "lista", $r);
 	Tools::replaceAnchor($page, "list_film_id", $id);
-	Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
-} else {
-	Tools::replaceSection($page, "admin", "");
+} else
 	Tools::replaceSection($page, "user", "");
-}
+if (isset($_SESSION["id"]) && $_SESSION["is_admin"] == 0)
+	Tools::replaceSection($page, "admin", "");
+else
+	Tools::replaceAnchor($page, "gest_film_id", $id);
 
 Tools::showPage($page);
 
