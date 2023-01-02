@@ -4420,6 +4420,12 @@ ALTER TABLE `lista`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `lista_film`
+--
+ALTER TABLE `lista_film`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
 -- AUTO_INCREMENT for table `persona`
 --
 ALTER TABLE `persona`
