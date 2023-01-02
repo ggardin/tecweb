@@ -50,7 +50,7 @@ if (!empty($lista)) {
 	$r = "";
 	foreach ($lista as $l) {
 		$t = $elemento;
-		Tools::replaceAnchor($t, "link", ($l["tipo"] . ".php?id=" . $l["id"]));
+		Tools::replaceAnchor($t, "id", $l["id"]);
 		$immagine = (isset($l["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $l["locandina"]) : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "nome", $l["nome"]);
