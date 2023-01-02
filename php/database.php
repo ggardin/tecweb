@@ -70,7 +70,7 @@ class Database {
 		}
 	}
 
-	private function preparedInsert(&$query, &$params, $types = "") : bool {
+	private function preparedUpdates(&$query, &$params, $types = "") : bool {
 		try {
 			$stmt = $this->preparedQuery($query, $params, $types);
 			$stmt->close();
@@ -323,24 +323,17 @@ class Database {
 	}
 
 	public function getListItemsById($id) : array {
-		$query = "select 'film' as tipo, f.id, f.nome, f.locandina, f.data_rilascio
+		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
 				join film as f
 					on lf.film = f.id
 			where l.id = ?
-			union
-			select 'collezione' as tipo, c.id, c.nome, c.locandina, null as data_rilascio
-			from lista as l
-				join lista_collezione as lc
-					on l.id = lc.lista
-				join collezione as c
-					on lc.collezione = c.id
-			where l.id = ?";
+			order by f.data_rilascio is null, f.data_rilascio";
 
-		$params = [$id, $id];
-		$types = "ii";
+		$params = [$id];
+		$types = "i";
 
 		return $this->preparedSelect($query, $params, $types);
 	}
@@ -352,7 +345,7 @@ class Database {
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
 		$params = [$username, $pass];
 
-		return $this->preparedInsert($query, $params);
+		return $this->preparedUpdates($query, $params);
 	}
 
 	public function insertLista($user_id, $list_name) : bool {
@@ -362,7 +355,7 @@ class Database {
 		$params = [$user_id, $list_name];
 		$types = "is";
 
-		return $this->preparedInsert($query, $params, $types);
+		return $this->preparedUpdates($query, $params, $types);
 	}
 
 	public function getListIdByName($user_id, $list_name) : array {
@@ -384,7 +377,7 @@ class Database {
 		$params = [$list_id, $film_id];
 		$types = "ii";
 
-		return $this->preparedInsert($query, $params, $types);
+		return $this->preparedUpdates($query, $params, $types);
 	}
 
 	public function canReview($user_id, $film_id) : bool {
@@ -398,6 +391,60 @@ class Database {
 		return empty($this->preparedSelect($query, $params, $types));
 	}
 
+	public function modificaFilm($film_id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : bool {
+		$query = "update film
+			set nome = ?, nome_originale = ?, durata = ?, locandina = ?, descrizione = ?,
+				stato = ?, data_rilascio = ?, budget = ?, incassi = ?, collezione = ?
+			where id = ?";
+
+		$params = [$nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione, $film_id];
+		$params = "ssissisiiii";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function modificaPersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
+		$query = "update persona
+			set nome = ?, gender = ?, immagine = ?, data_nascita = ?, data_morte = ?
+			where id = ?";
+
+		$params = [$nome, $gender, $immagine, $data_nascita, $data_morte, $id];
+		$params = "sisssi";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function modificaCollezione($id, $nome, $descrizione, $locandina) : bool {
+		$query = "update collezione
+			set nome = ?, descrizione = ?, locandina = ?
+			where id = ?";
+
+		$params = [$nome, $descrizione, $locandina, $id];
+		$params = "sssi";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function modificaUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
+		$query = "update utente
+			set username = ?, mail = ?, nome = ?, gender = ?, data_nascita = ?, password = ?";
+
+		$params = [$username, $mail, $nome, $gender, $data_nascita, $password, $id];
+		$params = "sssissi";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function deleteList($list_id, $user_id) : bool {
+		$query = "delete from lista
+			where utente = ? and id = ?";
+
+		$params = [$list_id, $user_id];
+		$types = "ii";
+
+		return $this->preparedUpdates();
+	}
+
 	public function updateVoto($film_id) : bool {
 		$query = "update film
 			set voto = (select avg(voto)
@@ -409,7 +456,7 @@ class Database {
 		$params = [$film_id, $film_id];
 		$types = "ii";
 
-		return $this->preparedInsert($query, $params, $types);
+		return $this->preparedUpdates($query, $params, $types);
 	}
 
 	public function addReview($user_id, $film_id, $voto, $testo) : bool {
@@ -419,7 +466,7 @@ class Database {
 		$params = [$user_id, $film_id, $voto, $testo];
 		$types = "iiis";
 
-		return $this->preparedInsert($query, $params, $types) &&
+		return $this->preparedUpdates($query, $params, $types) &&
 			$this->updateVoto($film_id);
 	}
 
