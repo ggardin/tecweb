@@ -38,26 +38,14 @@ if (!isset($cerca)) {
 }
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-if ($query != "") {
-	$intestazione = "Cerca $tipo";
-	if ($tipo == "film" && $f_nome != "")
-		$intestazione .= " filtrati per $f_nome ($f_val)";
-	$titolo = $query . " • " . $intestazione;
-	$intestazione .= ': "' . $query . '"';
-} else {
-	if ($tipo == "film") {
-		$intestazione = "Tutti i film";
-		if ($f_nome != "")
-			$intestazione .= " filtrati per $f_nome ($f_val)";
-	}
-	elseif ($tipo == "collezione")
-		$intestazione = "Tutte le collezioni";
-	else
-		$intestazione = "Tutte le persone";
-	$titolo = $intestazione;
-}
+$intestazione = "Cerca $tipo";
+if ($tipo == "film" && $f_nome != "")
+	$intestazione .= " filtrati per $f_nome ($f_val)";
+$titolo = $query . " • " . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
+Tools::replaceAnchor($page, "search_value", $query);
+Tools::replaceAnchor($page, "search_tipo", $tipo);
 if (!empty($cerca)) {
 	Tools::toHtml($cerca);
 	$card = Tools::getSection($page, "card");
