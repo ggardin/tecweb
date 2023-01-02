@@ -445,6 +445,19 @@ class Database {
 		return $this->preparedUpdates();
 	}
 
+	public function deleteFromList($list_id, $user_id, $film_id) : bool {
+		$query = "delete lf
+			from lista_film as lf
+			join lista as l
+				on lf.lista = l.id
+			where l.id = ? and l.utente = ? and lf.film = ?";
+
+		$params = [$list_id, $user_id, $film_id];
+		$params = "iii";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
 	public function updateVoto($film_id) : bool {
 		$query = "update film
 			set voto = (select avg(voto)
