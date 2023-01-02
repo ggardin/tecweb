@@ -567,6 +567,7 @@ CARDS / H-CARDS
 	color: var(--txtcolor);
 }
 
+/*MODIFY LIST*/
 .modifyListButton{
 	background-color: var(--tertiaryColor);
 	background-image: url(../img/edit.svg);
@@ -578,10 +579,10 @@ CARDS / H-CARDS
 	cursor: pointer;
 	font-size: 1.5em;
 	padding: 0.5em;
+	width: 15em;
 }
 
 /*DELETE CARD*/
-
 .deleteElementButton{
 	background-color: var(--tertiaryColor);
 	background-image: url(../img/trashcan.svg);
@@ -592,7 +593,6 @@ CARDS / H-CARDS
 	margin-right: 0;
 	width: 4em;
 	height: 4em;
-
 }
 
 .deleteElementButton img{
