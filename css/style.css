@@ -44,6 +44,7 @@
 }
 
 html {
+	scroll-padding-top: var(--header-height); /* fixes anchor links behind sticky header */
 	height: 100%;
 }
 
