@@ -567,17 +567,31 @@ CARDS / H-CARDS
 	color: var(--txtcolor);
 }
 
+.modifyListButton{
+	background-color: var(--tertiaryColor);
+	background-image: url(../img/edit.svg);
+	background-repeat: no-repeat;
+	border: none;
+	border-radius: var(--border-radius);
+	color: var(--bgcolor);
+	cursor: pointer;
+	font-size: 1.5em;
+	padding: 0.5em;
+}
+
 /*DELETE CARD*/
 
 .deleteElementButton{
+	background-color: var(--tertiaryColor);
+	background-image: url(../img/trashcan.svg);
+	background-repeat: no-repeat;
 	display: flex;
 	justify-content: flex-end;
 	margin-left: auto;
 	margin-right: 0;
 	width: 4em;
 	height: 4em;
-	background-color: var(--tertiaryColor);
-	background-image: url(../img/trashcan.svg);
+
 }
 
 .deleteElementButton img{
