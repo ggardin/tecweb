@@ -920,7 +920,9 @@ PERSON/COLLECTION PAGE
 
 #person-details img,
 #collection-details img {
-	flex: 0 1 300px;
+	flex: 0 1;
+	max-width: 300px;
+	align-self: center;
 }
 
 #person-movies {
