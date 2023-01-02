@@ -215,6 +215,24 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getPaesi() : array {
+		$query = "select iso_3166_1 as id, nome
+			from paese";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getGeneri() : array {
+		$query = "select id, nome
+			from genere";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
 	public function searchFilm($str) : array {
 		$query = "select id, nome, locandina, data_rilascio
 			from film
