@@ -567,6 +567,23 @@ CARDS / H-CARDS
 	color: var(--txtcolor);
 }
 
+/*DELETE CARD*/
+
+.deleteElementButton{
+	display: flex;
+	justify-content: flex-end;
+	margin-left: auto;
+	margin-right: 0;
+	width: 4em;
+	height: 4em;
+	background-color: var(--tertiaryColor);
+}
+
+.deleteElementButton img{
+	width: 3em;
+	height: 3em;
+}
+
 
 /*
 ==============
