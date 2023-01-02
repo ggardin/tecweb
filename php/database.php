@@ -347,8 +347,7 @@ class Database {
 					on l.id = lf.lista
 				join film as f
 					on lf.film = f.id
-			where l.id = ?
-			order by f.data_rilascio is null, f.data_rilascio";
+			where l.id = ?";
 
 		$params = [$id];
 		$types = "i";
@@ -441,25 +440,22 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function deleteList($list_id, $user_id) : bool {
+	public function deleteList($list_id) : bool {
 		$query = "delete from lista
-			where id = ? and utente = ?";
+			where id = ?";
 
-		$params = [$list_id, $user_id];
-		$types = "ii";
+		$params = [$list_id];
+		$types = "i";
 
 		return $this->preparedUpdates();
 	}
 
-	public function deleteFromList($list_id, $user_id, $film_id) : bool {
-		$query = "delete lf
-			from lista_film as lf
-			join lista as l
-				on lf.lista = l.id
-			where l.id = ? and l.utente = ? and lf.film = ?";
+	public function deleteFromList($list_id, $film_id) : bool {
+		$query = "delete from lista_film
+			where id = ? and film = ?";
 
-		$params = [$list_id, $user_id, $film_id];
-		$params = "iii";
+		$params = [$list_id, $film_id];
+		$params = "ii";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
