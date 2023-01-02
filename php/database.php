@@ -52,7 +52,7 @@ class Database {
 		$this->pulisciInput($params);
 		$types = $types ?: str_repeat("s", count($params));
 		$stmt = $this->connection->prepare($query);
-		$stmt->bind_param($types, ...$params);
+		if (!empty($params)) $stmt->bind_param($types, ...$params);
 		$stmt->execute();
 		return $stmt;
 	}
