@@ -10,13 +10,17 @@ if (! isset($_SESSION["id"])) {
 	exit();
 }
 
-$user_id = $_SESSION["id"];
-$list_id = $_POST["list_id"];
-$film_id = $_POST["film_id"];
+$user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
+$film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
 
 try {
 	$connessione = new Database();
-	$res = $connessione->deleteFromList($list_id, $user_id, $film_id);
+	$own = false;
+	if ($connessione->checkListOwnership($list_id, $_SESSION["id"])) {
+		$own = true;
+		$res = $connessione->deleteFromList($list_id, $film_id);
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

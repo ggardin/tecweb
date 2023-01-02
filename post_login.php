@@ -11,8 +11,8 @@ if (isset($_SESSION["id"])) {
 	exit();
 }
 
-$username = isset($_POST["username"]) ? $_POST["username"] : null;
-$password = isset($_POST["password"]) ? $_POST["password"] : null;
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
 
 try {
 	$connessione = new Database();

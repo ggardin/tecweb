@@ -11,9 +11,9 @@ if (isset($_SESSION["id"])) {
 	exit();
 }
 
-$username = isset($_POST["username"]) ? $_POST["username"] : null;
-$password = isset($_POST["password"]) ? $_POST["password"] : null;
-$password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : null;
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
+$password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
 
 if (! $username || ! $password || ! $password_confirm || $password != $password_confirm) {
 	header("location: signup.php");

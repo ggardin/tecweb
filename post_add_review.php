@@ -10,8 +10,8 @@ if (! isset($_SESSION["id"])) {
 	exit();
 }
 
-$user_id = $_SESSION["id"];
-$film_id = $_POST["film_id"];
+$user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
 $voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
 $testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
