@@ -650,7 +650,7 @@ MOVIE PAGE
 	padding-left: 0;
 }
 
-.movie-media button {
+/* .movie-media button {
 	font-size: 1.2em;
 	font-weight: 600;
 	width: 100%;
@@ -664,7 +664,7 @@ MOVIE PAGE
 .movie-media button.movie-viewed {
 	color: var(--bgcolor);
 	background: var(--tertiaryColor);
-}
+} */
 
 /* .movie-media button.add-to-list {
 	color: var(--tertiaryColor);
