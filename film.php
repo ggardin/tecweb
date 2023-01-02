@@ -50,11 +50,12 @@ $locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/
 Tools::replaceAnchor($page, "locandina", $locandina);
 $sub = false;
 if (isset($film["data_rilascio"])) {
-	Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $film["data_rilascio"]), 'd/m/Y'));
 	$sub = true;
+	Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $film["data_rilascio"]), 'd/m/Y'));
 } else
 	Tools::replaceSection($page, "data_rilascio", "");
 if (isset($film["durata"])) {
+	$sub = true;
 	$h = floor($film["durata"]/60);
 	$m = $film["durata"]%60;
 	$d = "";
@@ -63,12 +64,11 @@ if (isset($film["durata"])) {
 	if ($m)
 		$d .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
 	Tools::replaceAnchor($page, "durata", $d);
-	$sub = true;
 } else
 	Tools::replaceSection($page, "durata", "");
 if (isset($film["voto"])) {
-	Tools::replaceAnchor($page, "voto", $film["voto"]);
 	$sub = true;
+	Tools::replaceAnchor($page, "voto", $film["voto"]);
 } else
 	Tools::replaceSection($page, "voto", "");
 if (! $sub)
@@ -144,8 +144,8 @@ if (!empty($collezione)) {
 	Tools::replaceSection($page, "collezione", "");
 $val = false;
 if (isset($_SESSION["id"]) && $can_review) {
-	Tools::replaceAnchor($page, "review_film_id", $id);
 	$val = true;
+	Tools::replaceAnchor($page, "review_film_id", $id);
 } else
 	Tools::replaceSection($page, "add_review", "");
 if (!empty($valutazione)) {
