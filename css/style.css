@@ -570,9 +570,11 @@ CARDS / H-CARDS
 /*MODIFY LIST*/
 .modifyListButton{
 	background-color: var(--tertiaryColor);
-	background-image: url(../img/edit.svg);
+	/*
+	background-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 45 45' %3E%3C fill='currentcolor' path d='M 22.496094 44.996094 C 34.531387 44.996094 44.496094 35.031387 44.496094 22.996094 C 44.496094 10.982368 34.509819 0.996094 22.474525 0.996094 C 10.460799 0.996094 0.496094 10.982368 0.496094 22.996094 C 0.496094 35.031387 10.482368 44.996094 22.496094 44.996094 Z M 31.296093 16.784328 L 28.643152 14.152956 L 30.282368 12.513741 C 31.015701 11.823544 31.83531 11.73727 32.503937 12.405899 L 33.000015 12.923546 C 33.690212 13.592173 33.647076 14.433348 32.913742 15.166681 Z M 15.378447 32.637268 L 12.294133 33.801975 C 11.819623 33.974525 11.280408 33.500015 11.517662 32.939232 L 12.768642 30.005898 L 27.305897 15.468643 L 29.958839 18.121584 Z'/%3E%3C/svg%3E" );
 	background-repeat: no-repeat;
 	background-position: left;
+	*/
 	border: none;
 	border-radius: var(--border-radius);
 	color: var(--bgcolor);
@@ -585,8 +587,8 @@ CARDS / H-CARDS
 /*DELETE CARD*/
 .deleteElementButton{
 	background-color: var(--tertiaryColor);
-	background-image: url(../img/trashcan.svg);
-	background-repeat: no-repeat;
+	border: none;
+	color: red;
 	display: flex;
 	justify-content: flex-end;
 	margin-left: auto;
