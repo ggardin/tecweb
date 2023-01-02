@@ -666,10 +666,10 @@ MOVIE PAGE
 	background: var(--tertiaryColor);
 }
 
-.movie-media button.add-to-list {
+/* .movie-media button.add-to-list {
 	color: var(--tertiaryColor);
 	background: transparent;
-}
+} */
 
 /*
 ==============
