@@ -22,7 +22,7 @@ try {
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere");
+			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere"); // TODO eliminare e funzione chiamata da database.php
 			if (!empty($dv) && isset($_POST["da_vedere"])) // TODO
 				$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
 		}
