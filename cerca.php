@@ -11,12 +11,14 @@ $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
-		if ($f_nome == "genere" && $f_val)
+		if ($f_nome == "genere" && $f_val) {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $f_val);
-		elseif ($f_nome == "paese" && $f_val)
+			$generi = $connessione->getGeneri();
+		}
+		elseif ($f_nome == "paese" && $f_val) {
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $f_val);
-		// elseif ($f_nome == "data" && $f_val) // TODO
-		// 	$cerca = $connessione->searchFilmFilteredByData($query, $f_val);
+			$paesi = $connessione->getPaesi();
+		}
 		else {
 			$cerca = $connessione->searchFilm($query);
 			$f_nome = "";
@@ -46,6 +48,7 @@ Tools::replaceAnchor($page, "title", $titolo);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
 Tools::replaceAnchor($page, "search_value", $query);
 Tools::replaceAnchor($page, "search_tipo", $tipo);
+
 $tmp = Tools::getSection($page, "tipo");
 $res = "";
 foreach (["film", "collezione", "persona"] as $k) {
@@ -59,6 +62,9 @@ foreach (["film", "collezione", "persona"] as $k) {
 	$res .= $t;
 }
 Tools::replaceSection($page, "tipo", $res);
+
+// TODO integrare filtri
+
 if (!empty($cerca)) {
 	Tools::toHtml($cerca);
 	$card = Tools::getSection($page, "card");
