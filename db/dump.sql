@@ -4251,7 +4251,7 @@ INSERT INTO `utente` (`id`, `username`, `mail`, `nome`, `gender`, `data_nascita`
 CREATE TABLE `valutazione` (
   `utente` bigint(20) UNSIGNED NOT NULL,
   `film` bigint(20) UNSIGNED NOT NULL,
-  `valore` smallint(5) UNSIGNED NOT NULL,
+  `voto` smallint(5) UNSIGNED NOT NULL,
   `testo` varchar(10000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
