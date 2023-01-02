@@ -12,12 +12,12 @@ if (! isset($_SESSION["id"])) {
 
 $user_id = $_SESSION["id"];
 $film_id = $_POST["film_id"];
-$valore = isset($_POST["voto"]) ? $_POST["voto"] : "";
+$voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
 $testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
 try {
 	$connessione = new Database();
-	$res = $connessione->addReview($user_id, $film_id, $valore, $testo);
+	$res = $connessione->addReview($user_id, $film_id, $voto, $testo);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

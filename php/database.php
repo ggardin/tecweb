@@ -201,7 +201,7 @@ class Database {
 	}
 
 	public function getValutazioneByFilmId($id) : array {
-		$query = "select u.username as utente, v.valore as voto, v.testo
+		$query = "select u.username as utente, v.voto, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
@@ -400,7 +400,7 @@ class Database {
 
 	public function updateVoto($film_id) : bool {
 		$query = "update film
-			set voto = (select avg(valore)
+			set voto = (select avg(voto)
 				from valutazione
 				group by film
 				having film = ?)
@@ -412,11 +412,11 @@ class Database {
 		return $this->preparedInsert($query, $params, $types);
 	}
 
-	public function addReview($user_id, $film_id, $valore, $testo) : bool {
-		$query = "insert into valutazione(utente, film, valore, testo)
+	public function addReview($user_id, $film_id, $voto, $testo) : bool {
+		$query = "insert into valutazione(utente, film, voto, testo)
 			values (?, ?, ?, ?)";
 
-		$params = [$user_id, $film_id, $valore, $testo];
+		$params = [$user_id, $film_id, $voto, $testo];
 		$types = "iiis";
 
 		return $this->preparedInsert($query, $params, $types) &&
