@@ -44,6 +44,7 @@
 }
 
 html {
+	scroll-padding-top: var(--header-height); /* fixes anchor links behind sticky header */
 	height: 100%;
 }
 
@@ -161,11 +162,6 @@ BREADCRUMB
 MAIN
 ==============
 */
-
-#content {
-	padding-top: calc( var(--header-height) ); /* se calc non supportato, non applica né padding né margin */
-	margin-top: calc( var(--header-height) * -1 );
-}
 
 /*
 main > h1, h2{
