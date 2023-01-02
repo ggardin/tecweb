@@ -54,7 +54,7 @@ if (!empty($lista)) {
 		$immagine = (isset($l["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $l["locandina"]) : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "nome", $l["nome"]);
-		if ($l["tipo"] == "film" && isset($l["data_rilascio"]))
+		if (isset($l["data_rilascio"]))
 			Tools::replaceAnchor($t, "data_rilascio", $l["data_rilascio"]);
 		else
 			Tools::replaceSection($t, "data_rilascio", "");
