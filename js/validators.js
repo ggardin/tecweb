@@ -35,7 +35,7 @@ function validateNewReviewText() {
 }
 
 /*
- * Controlla che la lunghezza della recensione non superi il numero massimo di caratteri impostato.
+ * Controlla che la lunghezza della recensione non superi i 500 caratteri.
  */
 function checkNewReviewCharactersCounter() {
 	const textarea = document.forms['add-review']['review-text'];
