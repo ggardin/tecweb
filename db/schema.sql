@@ -162,14 +162,6 @@ create table lista (
 	constraint no_stesso_nome unique (utente, nome)
 );
 
-create table lista_collezione (
-	lista bigint unsigned,
-	collezione int unsigned,
-	primary key (lista, collezione),
-	foreign key (lista) references lista(id) on delete cascade,
-	foreign key (collezione) references collezione(id) on delete cascade
-);
-
 create table lista_film (
 	lista bigint unsigned,
 	film bigint unsigned,
