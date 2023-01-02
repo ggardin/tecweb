@@ -4,7 +4,6 @@ drop table if exists i_persona;
 drop table if exists i_genere;
 
 drop table if exists lista_film;
-drop table if exists lista_collezione;
 drop table if exists lista;
 drop table if exists valutazione;
 drop table if exists utente;
@@ -92,8 +91,7 @@ create table film (
 	voto float unsigned,
 	primary key (id),
 	foreign key (collezione) references collezione(id) on delete set null,
-	foreign key (stato) references stato(id),
-	constraint rilascio check (stato < 5 or data_rilascio is not null)
+	foreign key (stato) references stato(id)
 );
 
 
@@ -105,7 +103,7 @@ create table film_genere (
 	genere smallint unsigned,
 	primary key (film, genere),
 	foreign key (film) references film(id) on delete cascade,
-	foreign key (genere) references genere(id) on delete cascade
+	foreign key (genere) references genere(id)
 );
 
 create table film_paese (
@@ -123,7 +121,7 @@ create table crew (
 	primary key (film, persona, ruolo),
 	foreign key (film) references film(id) on delete cascade,
 	foreign key (persona) references persona(id) on delete cascade,
-	foreign key (ruolo) references ruolo(id) on delete cascade
+	foreign key (ruolo) references ruolo(id)
 );
 
 
@@ -147,7 +145,7 @@ create table valutazione (
 	utente bigint unsigned,
 	film bigint unsigned,
 	voto smallint unsigned not null,
-	testo varchar(10000),
+	testo varchar(1000),
 	primary key (utente, film),
 	foreign key (utente) references utente(id) on delete cascade,
 	foreign key (film) references film(id) on delete cascade
@@ -163,9 +161,10 @@ create table lista (
 );
 
 create table lista_film (
+	id bigint unsigned,
 	lista bigint unsigned,
 	film bigint unsigned,
-	primary key (lista, film),
+	primary key (id),
 	foreign key (lista) references lista(id) on delete cascade,
 	foreign key (film) references film(id) on delete cascade
 );
