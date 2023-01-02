@@ -358,18 +358,6 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function getListIdByName($user_id, $list_name) : array {
-		$query = "select id
-			from lista
-			where utente = ?
-				and nome like ?";
-
-		$params = [$user_id, ("%" . trim($list_name) . "%")];
-		$types = "is";
-
-		return $this->preparedSelect($query, $params, $types);
-	}
-
 	public function addToListById($list_id, $film_id) : bool {
 		$query = "insert into lista_film(lista, film)
 			values (?, ?)";
