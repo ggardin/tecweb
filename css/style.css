@@ -112,6 +112,8 @@ HEADER
 }
 
 #page-header li.active {
+	font-weight: 600;
+	border-radius: var(--border-radius);
 	background-color: var(--secondaryColor);
 	cursor: default;
 }
