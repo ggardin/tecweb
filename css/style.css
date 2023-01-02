@@ -571,6 +571,7 @@ CARDS / H-CARDS
 	background-color: var(--tertiaryColor);
 	background-image: url(../img/edit.svg);
 	background-repeat: no-repeat;
+	background-position: left;
 	border: none;
 	border-radius: var(--border-radius);
 	color: var(--bgcolor);
