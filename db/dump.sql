@@ -3244,6 +3244,7 @@ INSERT INTO `lista` (`id`, `utente`, `nome`) VALUES
 --
 
 CREATE TABLE `lista_film` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `lista` bigint(20) UNSIGNED NOT NULL,
   `film` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -4241,7 +4242,7 @@ CREATE TABLE `valutazione` (
   `utente` bigint(20) UNSIGNED NOT NULL,
   `film` bigint(20) UNSIGNED NOT NULL,
   `voto` smallint(5) UNSIGNED NOT NULL,
-  `testo` varchar(10000) DEFAULT NULL
+  `testo` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -4335,7 +4336,8 @@ ALTER TABLE `lista`
 -- Indexes for table `lista_film`
 --
 ALTER TABLE `lista_film`
-  ADD PRIMARY KEY (`lista`,`film`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `lista` (`lista`),
   ADD KEY `film` (`film`);
 
 --
@@ -4450,8 +4452,7 @@ ALTER TABLE `utente`
 --
 ALTER TABLE `crew`
   ADD CONSTRAINT `crew_ibfk_1` FOREIGN KEY (`film`) REFERENCES `film` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `crew_ibfk_2` FOREIGN KEY (`persona`) REFERENCES `persona` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `crew_ibfk_3` FOREIGN KEY (`ruolo`) REFERENCES `ruolo` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `crew_ibfk_2` FOREIGN KEY (`persona`) REFERENCES `persona` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `film`
@@ -4464,8 +4465,7 @@ ALTER TABLE `film`
 -- Constraints for table `film_genere`
 --
 ALTER TABLE `film_genere`
-  ADD CONSTRAINT `film_genere_ibfk_1` FOREIGN KEY (`film`) REFERENCES `film` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `film_genere_ibfk_2` FOREIGN KEY (`genere`) REFERENCES `genere` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `film_genere_ibfk_1` FOREIGN KEY (`film`) REFERENCES `film` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `film_paese`
