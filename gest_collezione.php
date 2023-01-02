@@ -14,7 +14,7 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
-	if (isset($id))
+	if ($id != "")
 		$collezione = $connessione->getCollezioneById($id);
 	unset($connessione);
 } catch (Exception) {

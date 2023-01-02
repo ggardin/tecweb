@@ -10,11 +10,12 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	exit();
 }
 
-if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
+$id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
-	if (isset($id)) $film = $connessione->getFilmById($id);
+	if ($id != "")
+		$film = $connessione->getFilmById($id);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -24,7 +25,7 @@ try {
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
-if (isset($id) && !empty($film)) {
+if ($id != "" && !empty($film)) {
 	$film = $film[0];
 	$title = $film["nome"] . " • Modifica Film"; Tools::toHtml($title, 0);
 	Tools::replaceAnchor($page, "title", $title);

@@ -5,15 +5,15 @@ require_once("php/database.php");
 
 session_start();
 
-if (! isset($_SESSION["id"])) {
-	header("location: index.php");
-	exit();
-}
-
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
 $voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
 $testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
+
+if ($user_id == "") {
+	header("location: index.php");
+	exit();
+}
 
 try {
 	$connessione = new Database();

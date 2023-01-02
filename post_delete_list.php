@@ -5,13 +5,13 @@ require_once("php/database.php");
 
 session_start();
 
-if (! isset($_SESSION["id"])) {
+$user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
+
+if ($user_id == "") {
 	header("location: index.php");
 	exit();
 }
-
-$user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
-$list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
 
 try {
 	$connessione = new Database();

@@ -14,7 +14,7 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
-	if (isset($id))
+	if ($id != "")
 		$persona = $connessione->getPersonaById($id);
 	unset($connessione);
 } catch (Exception) {

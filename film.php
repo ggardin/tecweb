@@ -5,8 +5,9 @@ require_once("php/database.php");
 
 session_start();
 
-if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
-else {
+$id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
+
+if ($id == "") {
 	Tools::errCode(404);
 	exit();
 }
