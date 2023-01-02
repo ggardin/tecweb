@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run PageSpeed Insights (Mobile)
-        uses: jakepartusch/psi-action@v1.2
+        uses: jakepartusch/psi-action@v1.3
         id: psi_mobile
         with:
           url: "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}"
@@ -26,7 +26,7 @@ jobs:
           strategy: mobile
           key: ${{ secrets.APIKEY }}
       - name: Run PageSpeed Insights (Desktop)
-        uses: jakepartusch/psi-action@v1.2
+        uses: jakepartusch/psi-action@v1.3
         id: psi_desktop
         with:
           url: "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}"
