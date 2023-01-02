@@ -19,7 +19,7 @@ else {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->checkListOwnership($_SESSION["id"], $id)) {
+	if ($connessione->checkListOwnership($id, $_SESSION["id"])) {
 		$own = true;
 		$nome = $connessione->getListNameById($id);
 		$lista = $connessione->getListItemsById($id);
