@@ -403,7 +403,7 @@ class Database {
 			where id = ?";
 
 		$params = [$nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione, $film_id];
-		$params = "ssissisiiii";
+		$types = "ssissisiiii";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
@@ -414,7 +414,7 @@ class Database {
 			where id = ?";
 
 		$params = [$nome, $gender, $immagine, $data_nascita, $data_morte, $id];
-		$params = "sisssi";
+		$types = "sisssi";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
@@ -425,7 +425,7 @@ class Database {
 			where id = ?";
 
 		$params = [$nome, $descrizione, $locandina, $id];
-		$params = "sssi";
+		$types = "sssi";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
@@ -435,7 +435,7 @@ class Database {
 			set username = ?, mail = ?, nome = ?, gender = ?, data_nascita = ?, password = ?";
 
 		$params = [$username, $mail, $nome, $gender, $data_nascita, $password, $id];
-		$params = "sssissi";
+		$types = "sssissi";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
@@ -452,10 +452,10 @@ class Database {
 
 	public function deleteFromList($list_id, $film_id) : bool {
 		$query = "delete from lista_film
-			where id = ? and film = ?";
+			where lista = ? and film = ?";
 
 		$params = [$list_id, $film_id];
-		$params = "ii";
+		$types = "ii";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
