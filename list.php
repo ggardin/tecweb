@@ -59,6 +59,8 @@ if (!empty($lista)) {
 			Tools::replaceAnchor($t, "data_rilascio", $l["data_rilascio"]);
 		else
 			Tools::replaceSection($t, "data_rilascio", "");
+		Tools::replaceAnchor($t, "list_id", $id);
+		Tools::replaceAnchor($t, "film_id", $l["id"]);
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "elemento", $r);
