@@ -351,10 +351,8 @@ SEARCH BAR
 
 .searchButton {
 	width: auto;
-	background: var(--tertiaryColor);
+	/* background: var(--tertiaryColor); */
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
-	cursor: pointer;
-	border: transparent;
 	padding-left: .4em;
 	padding-right: .4em;
 }
@@ -731,6 +729,7 @@ input, textarea, button, select {
 	width: 100%;
 	padding: 0.5em;
 	border-radius: var(--border-radius);
+	background-color: white;
 	border: none;
 }
 
@@ -742,6 +741,8 @@ textarea {
 button[type=submit] {
 	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
+	cursor: pointer;
+	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
 }
