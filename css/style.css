@@ -110,7 +110,7 @@ HEADER
 	display: block;
 	color: inherit;
 	text-decoration: none;
-	margin: 0.5em 0.5em;
+	margin: 1em;
 }
 
 #page-header li.active {
@@ -120,9 +120,7 @@ HEADER
 	pointer-events:none;
 }
 
-#page-header li a {
-	padding: .5em .5em .3em;
-}
+
 
 #page-header li:hover:not(.active) {
 	border-color: var(--txtcolor);
