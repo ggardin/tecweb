@@ -11,12 +11,14 @@ $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
-		if ($f_nome == "genere" && $f_val)
+		if ($f_nome == "genere" && $f_val) {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $f_val);
-		elseif ($f_nome == "paese" && $f_val)
+			$generi = $connessione->getGeneri();
+		}
+		elseif ($f_nome == "paese" && $f_val) {
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $f_val);
-		// elseif ($f_nome == "data" && $f_val) // TODO
-		// 	$cerca = $connessione->searchFilmFilteredByData($query, $f_val);
+			$paesi = $connessione->getPaesi();
+		}
 		else {
 			$cerca = $connessione->searchFilm($query);
 			$f_nome = "";
@@ -38,26 +40,31 @@ if (!isset($cerca)) {
 }
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-if ($query != "") {
-	$intestazione = "Cerca $tipo";
-	if ($tipo == "film" && $f_nome != "")
-		$intestazione .= " filtrati per $f_nome ($f_val)";
-	$titolo = $query . " • " . $intestazione;
-	$intestazione .= ': "' . $query . '"';
-} else {
-	if ($tipo == "film") {
-		$intestazione = "Tutti i film";
-		if ($f_nome != "")
-			$intestazione .= " filtrati per $f_nome ($f_val)";
-	}
-	elseif ($tipo == "collezione")
-		$intestazione = "Tutte le collezioni";
-	else
-		$intestazione = "Tutte le persone";
-	$titolo = $intestazione;
-}
+$intestazione = "Cerca $tipo";
+if ($tipo == "film" && $f_nome != "")
+	$intestazione .= " filtrati per $f_nome ($f_val)";
+$titolo = (($query != "") ? ($query . " • ") : "") . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
+Tools::replaceAnchor($page, "search_value", $query);
+Tools::replaceAnchor($page, "search_tipo", $tipo);
+
+$tmp = Tools::getSection($page, "tipo");
+$res = "";
+foreach (["film", "collezione", "persona"] as $k) {
+	$t = $tmp;
+	Tools::replaceAnchor($t, "val", $k);
+	Tools::replaceAnchor($t, "nome", $k);
+	if ($k == $tipo)
+		Tools::replaceAnchor($t, "sel", "selected");
+	else
+		Tools::replaceAnchor($t, "sel", "");
+	$res .= $t;
+}
+Tools::replaceSection($page, "tipo", $res);
+
+// TODO integrare filtri
+
 if (!empty($cerca)) {
 	Tools::toHtml($cerca);
 	$card = Tools::getSection($page, "card");

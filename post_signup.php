@@ -5,15 +5,15 @@ require_once("php/database.php");
 
 session_start();
 
-// TODO controlli
 if (isset($_SESSION["id"])) {
 	header("location: user.php");
 	exit();
 }
 
-$username = isset($_POST["username"]) ? $_POST["username"] : null;
-$password = isset($_POST["password"]) ? $_POST["password"] : null;
-$password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : null;
+// TODO controlli
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
+$password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
 
 if (! $username || ! $password || ! $password_confirm || $password != $password_confirm) {
 	header("location: signup.php");

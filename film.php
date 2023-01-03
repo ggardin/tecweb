@@ -5,8 +5,9 @@ require_once("php/database.php");
 
 session_start();
 
-if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
-else {
+$id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
+
+if ($id == "") {
 	Tools::errCode(404);
 	exit();
 }
@@ -22,9 +23,7 @@ try {
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$dv = $connessione->getListIdByName($_SESSION["id"], "Da vedere");
-			if (!empty($dv) && isset($_POST["da_vedere"])) // TODO
-				$aggiunto = $connessione->addToListById($dv[0]["id"], $id);
+			$lista = $connessione->getUserListsWithoutFilm($_SESSION["id"], $id);
 		}
 	}
 	unset($connessione);
@@ -40,6 +39,7 @@ if (empty($film)) {
 }
 
 $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+
 $film = $film[0];
 $title = $film["nome"] . " • Film"; Tools::toHtml($title, 0);
 Tools::replaceAnchor($page, "title", $title);
@@ -50,11 +50,12 @@ $locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/
 Tools::replaceAnchor($page, "locandina", $locandina);
 $sub = false;
 if (isset($film["data_rilascio"])) {
-	Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $film["data_rilascio"]), 'd/m/Y'));
 	$sub = true;
+	Tools::replaceAnchor($page, "data_rilascio", date_format(date_create_from_format('Y-m-d', $film["data_rilascio"]), 'd/m/Y'));
 } else
 	Tools::replaceSection($page, "data_rilascio", "");
 if (isset($film["durata"])) {
+	$sub = true;
 	$h = floor($film["durata"]/60);
 	$m = $film["durata"]%60;
 	$d = "";
@@ -63,12 +64,11 @@ if (isset($film["durata"])) {
 	if ($m)
 		$d .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
 	Tools::replaceAnchor($page, "durata", $d);
-	$sub = true;
 } else
 	Tools::replaceSection($page, "durata", "");
 if (isset($film["voto"])) {
-	Tools::replaceAnchor($page, "voto", $film["voto"]);
 	$sub = true;
+	Tools::replaceAnchor($page, "voto", $film["voto"]);
 } else
 	Tools::replaceSection($page, "voto", "");
 if (! $sub)
@@ -104,7 +104,7 @@ if (!empty($genere)) {
 	$r = "";
 	foreach ($genere as $g) {
 		$t = $list;
-		Tools::replaceAnchor($t, "valore", $g["nome"]);
+		Tools::replaceAnchor($t, "id", $g["nome"]); // TODO
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
 		$r .= $t;
 	}
@@ -117,7 +117,7 @@ if (!empty($paese)) {
 	$r = "";
 	foreach ($paese as $p) {
 		$t = $list;
-		Tools::replaceAnchor($t, "valore", $p["nome"]);
+		Tools::replaceAnchor($t, "id", $p["nome"]); // TODO
 		Tools::replaceAnchor($t, "nome", $p["nome"]);
 		$r .= $t;
 	}
@@ -144,8 +144,8 @@ if (!empty($collezione)) {
 	Tools::replaceSection($page, "collezione", "");
 $val = false;
 if (isset($_SESSION["id"]) && $can_review) {
-	Tools::replaceAnchor($page, "review_film_id", $id);
 	$val = true;
+	Tools::replaceAnchor($page, "review_film_id", $id);
 } else
 	Tools::replaceSection($page, "add_review", "");
 if (!empty($valutazione)) {
@@ -168,17 +168,24 @@ if (!empty($valutazione)) {
 	Tools::replaceSection($page, "valutazioni", "");
 if (! $val)
 	Tools::replaceSection($page, "sect_valutazioni", "");
-if (isset($_SESSION["id"])) {
-	if ($_SESSION["is_admin"] == 0)
-		Tools::replaceSection($page, "admin", "");
-	else
-		Tools::replaceAnchor($page, "gest_film_id", $id);
+if (isset($_SESSION["id"]) && !empty($lista)) {
+	Tools::toHtml($lista);
+	$list = Tools::getSection($page, "lista");
+	$r = "";
+	foreach ($lista as $l) {
+		$t = $list;
+		Tools::replaceAnchor($t, "id", $l["id"]);
+		Tools::replaceAnchor($t, "nome", $l["nome"]);
+		$r .= $t;
+	}
+	Tools::replaceSection($page, "lista", $r);
 	Tools::replaceAnchor($page, "list_film_id", $id);
-	Tools::replaceAnchor($page, "da_vedere_status", "Aggiungi a");
-} else {
-	Tools::replaceSection($page, "admin", "");
+} else
 	Tools::replaceSection($page, "user", "");
-}
+if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
+	Tools::replaceAnchor($page, "gest_id", $id);
+else
+	Tools::replaceSection($page, "admin", "");
 
 Tools::showPage($page);
 

@@ -6,9 +6,8 @@ require_once("php/database.php");
 session_start();
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
 $film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
-$voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
-$testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
 if ($user_id == "") {
 	header("location: index.php");
@@ -17,7 +16,11 @@ if ($user_id == "") {
 
 try {
 	$connessione = new Database();
-	$res = $connessione->addReview($user_id, $film_id, $voto, $testo);
+	$own = false;
+	if ($connessione->checkListOwnership($list_id, $user_id)) {
+		$own = true;
+		$res = $connessione->deleteFromList($list_id, $film_id);
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -25,7 +28,7 @@ try {
 	exit();
 }
 
-header("location: film.php?id=$film_id");
+header("location: list.php?id=$list_id");
 exit();
 
 ?>

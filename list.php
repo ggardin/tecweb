@@ -10,8 +10,9 @@ if (! isset($_SESSION["id"])) {
 	exit();
 }
 
-if (isset($_GET["id"]) && $_GET["id"] != "") $id = $_GET["id"];
-else {
+$id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
+
+if ($id == "") {
 	Tools::errCode(404);
 	exit();
 }
@@ -19,7 +20,7 @@ else {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->checkListOwnership($_SESSION["id"], $id)) {
+	if ($connessione->checkListOwnership($id, $_SESSION["id"])) {
 		$own = true;
 		$nome = $connessione->getListNameById($id);
 		$lista = $connessione->getListItemsById($id);
@@ -50,14 +51,16 @@ if (!empty($lista)) {
 	$r = "";
 	foreach ($lista as $l) {
 		$t = $elemento;
-		Tools::replaceAnchor($t, "link", ($l["tipo"] . ".php?id=" . $l["id"]));
+		Tools::replaceAnchor($t, "id", $l["id"]);
 		$immagine = (isset($l["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $l["locandina"]) : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "nome", $l["nome"]);
-		if ($l["tipo"] == "film" && isset($l["data_rilascio"]))
+		if (isset($l["data_rilascio"]))
 			Tools::replaceAnchor($t, "data_rilascio", $l["data_rilascio"]);
 		else
 			Tools::replaceSection($t, "data_rilascio", "");
+		Tools::replaceAnchor($t, "list_id", $id);
+		Tools::replaceAnchor($t, "film_id", $l["id"]);
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "elemento", $r);
