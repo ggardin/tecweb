@@ -583,20 +583,25 @@ MOVIE PAGE
 }
 
 .admin{
-	margin-bottom: 1em;
 	display: flex;
+	border: .3em solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+	padding: .5em;
+	margin-bottom: 1em;
 }
 
 .admin a{
 	/*margin: auto;*/
 	color: var(--txtcolor);
 	align-self: center;
-	margin-left: 2em;
+	margin-left: 1.5em;
+	font-size: 1.1em;
+	font-weight: 500;
 }
 
 .admin svg{
-	width: 2.5em;
-	height: 2.5em;
+	width: 2em;
+	height: 2em;
 }
 
 .movie-media img {
