@@ -584,9 +584,9 @@ MOVIE PAGE
 
 .admin{
 	display: flex;
-	border: .3em solid var(--bgcolor-off);
-	border-radius: var(--border-radius);
-	padding: .5em;
+	/*border: .3em solid var(--bgcolor-off);*/
+	/*border-radius: var(--border-radius);*/
+	/*padding: .5em;*/
 	margin-bottom: 1em;
 }
 
@@ -595,8 +595,8 @@ MOVIE PAGE
 	color: var(--txtcolor);
 	align-self: center;
 	margin-left: 1.5em;
-	font-size: 1.1em;
-	font-weight: 500;
+	/*font-size: 1.1em;*/
+	/*font-weight: 500;*/
 }
 
 .admin svg{
