@@ -43,7 +43,7 @@ $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 $intestazione = "Cerca $tipo";
 if ($tipo == "film" && $f_nome != "")
 	$intestazione .= " filtrati per $f_nome ($f_val)";
-$titolo = $query . " • " . $intestazione;
+$titolo = (($query != "") ? ($query . " • ") : "") . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
 Tools::replaceAnchor($page, "search_value", $query);
