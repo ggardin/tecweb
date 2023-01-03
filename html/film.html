@@ -216,9 +216,12 @@
 			<img src="@@locandina@@" alt=""/>
 
 			<aside id="manage">
-				<h2 class="sr-only">Aggiunta ad una lista</h2>
+				<h2 class="sr-only">Aggiunta a una lista</h2>
 				<!-- admin_start -->
-				<a href="gest_film.php?id=@@gest_id@@">Modifica</a>
+				<div class="admin">
+					<a href="gest_film.php?id=@@gest_id@@">Modifica</a>
+				</div>
+
 				<!-- admin_end -->
 				<!-- user_start -->
 				<form method="post" action="post_add_to_list.php">

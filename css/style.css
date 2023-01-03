@@ -582,6 +582,13 @@ MOVIE PAGE
 	flex: 0 1 300px; /* set to image width */
 }
 
+.admin{
+	background-color: red;
+	text-align: center;
+	padding: .5em;
+	margin-bottom: 1em;
+}
+
 .movie-media img {
 	margin-bottom: 1.5em;
 }
