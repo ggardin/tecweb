@@ -582,7 +582,7 @@ MOVIE PAGE
 	flex: 0 1 300px; /* set to image width */
 }
 
-.admin{
+.admin {
 	display: flex;
 	/*border: .3em solid var(--bgcolor-off);*/
 	/*border-radius: var(--border-radius);*/
@@ -590,7 +590,7 @@ MOVIE PAGE
 	margin-bottom: 1em;
 }
 
-.admin a{
+.admin a {
 	/*margin: auto;*/
 	color: var(--txtcolor);
 	align-self: center;
@@ -599,7 +599,7 @@ MOVIE PAGE
 	/*font-weight: 500;*/
 }
 
-.admin svg{
+.admin svg {
 	width: 2em;
 	height: 2em;
 }
