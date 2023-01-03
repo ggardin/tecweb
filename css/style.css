@@ -583,15 +583,15 @@ MOVIE PAGE
 }
 
 .admin{
-	padding: .5em;
 	margin-bottom: 1em;
 	display: flex;
 }
 
 .admin a{
+	/*margin: auto;*/
 	color: var(--txtcolor);
 	align-self: center;
-	padding-left: 1em;
+	margin-left: 2em;
 }
 
 .admin svg{
