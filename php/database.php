@@ -318,6 +318,22 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getUserListsWithoutFilm($user_id, $film_id) : array {
+		$query = "select id, nome
+			from lista
+			where utente = ? and id not in
+				(select l.id
+				from lista as l
+				join lista_film as lf
+					on l.id = lf.lista
+				where lf.film = ?)";
+
+		$params = [$user_id, $film_id];
+		$types = "ii";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function checkListOwnership($list_id, $user_id) : bool {
 		$query = "select nome
 			from lista

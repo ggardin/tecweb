@@ -23,7 +23,7 @@ try {
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$lista = $connessione->getListsByUserId($_SESSION["id"]);
+			$lista = $connessione->getUserListsWithoutFilm($_SESSION["id"], $id);
 		}
 	}
 	unset($connessione);
