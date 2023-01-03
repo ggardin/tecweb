@@ -6,9 +6,7 @@ require_once("php/database.php");
 session_start();
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
-$film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
-$voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
-$testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
+$list_name = isset($_POST["list_name"]) ? $_POST["list_name"] : "";
 
 if ($user_id == "") {
 	header("location: index.php");
@@ -17,7 +15,7 @@ if ($user_id == "") {
 
 try {
 	$connessione = new Database();
-	$res = $connessione->addReview($user_id, $film_id, $voto, $testo);
+	$res = $connessione->insertLista($user_id, $list_name);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -25,7 +23,7 @@ try {
 	exit();
 }
 
-header("location: film.php?id=$film_id");
+header("location: lists.php");
 exit();
 
 ?>

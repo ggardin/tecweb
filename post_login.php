@@ -5,14 +5,14 @@ require_once("php/database.php");
 
 session_start();
 
-// TODO controlli
 if (isset($_SESSION["id"])) {
 	header("location: user.php");
 	exit();
 }
 
-$username = isset($_POST["username"]) ? $_POST["username"] : null;
-$password = isset($_POST["password"]) ? $_POST["password"] : null;
+// TODO controlli
+$username = isset($_POST["username"]) ? $_POST["username"] : "";
+$password = isset($_POST["password"]) ? $_POST["password"] : "";
 
 try {
 	$connessione = new Database();
