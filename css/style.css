@@ -582,6 +582,28 @@ MOVIE PAGE
 	flex: 0 1 300px; /* set to image width */
 }
 
+.admin {
+	display: flex;
+	gap: 1em;
+	/*border: .3em solid var(--bgcolor-off);*/
+	/*border-radius: var(--border-radius);*/
+	/*padding: .5em;*/
+	margin-bottom: 1em;
+}
+
+.admin a {
+	/*margin: auto;*/
+	color: var(--txtcolor);
+	align-self: center;
+	/*font-size: 1.1em;*/
+	/*font-weight: 500;*/
+}
+
+.admin svg {
+	width: 2em;
+	height: 2em;
+}
+
 .movie-media img {
 	margin-bottom: 1.5em;
 }
@@ -745,6 +767,7 @@ button[type=submit] {
 	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
+	margin-top: 0.5em;
 }
 
 /*
