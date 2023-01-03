@@ -45,6 +45,10 @@ if (isset($persona["data_morte"]))
 	Tools::replaceAnchor($page, "data_morte", date_format(date_create_from_format('Y-m-d', $persona["data_morte"]), 'd/m/Y'));
 else
 	Tools::replaceSection($page, "data_morte", "");
+if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
+	Tools::replaceAnchor($page, "gest_id", $id);
+else
+	Tools::replaceSection($page, "admin", "");
 $immagine = (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg");
 Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {
