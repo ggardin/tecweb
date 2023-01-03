@@ -3,6 +3,8 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
+session_start();
+
 $id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
 
 if ($id == "") {
@@ -39,6 +41,10 @@ if (isset($collezione["descrizione"]))
 	Tools::replaceAnchor($page, "descrizione", $collezione["descrizione"]);
 else
 	Tools::replaceSection($page, "descrizione", "");
+if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
+	Tools::replaceAnchor($page, "gest_id", $id);
+else
+	Tools::replaceSection($page, "admin", "");
 $immagine = (isset($collezione["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $collezione["locandina"]) : "img/placeholder.svg");
 Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {

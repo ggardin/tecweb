@@ -182,10 +182,10 @@ if (isset($_SESSION["id"]) && !empty($lista)) {
 	Tools::replaceAnchor($page, "list_film_id", $id);
 } else
 	Tools::replaceSection($page, "user", "");
-if (isset($_SESSION["id"]) && $_SESSION["is_admin"] == 0)
-	Tools::replaceSection($page, "admin", "");
+if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
+	Tools::replaceAnchor($page, "gest_id", $id);
 else
-	Tools::replaceAnchor($page, "gest_film_id", $id);
+	Tools::replaceSection($page, "admin", "");
 
 Tools::showPage($page);
 
