@@ -583,8 +583,6 @@ MOVIE PAGE
 }
 
 .admin{
-	border: 3px solid red;
-	border-radius: var(--border-radius);
 	padding: .5em;
 	margin-bottom: 1em;
 	display: flex;
@@ -597,8 +595,8 @@ MOVIE PAGE
 }
 
 .admin svg{
-	width: 40px;
-	height: 40px;
+	width: 2.5em;
+	height: 2.5em;
 }
 
 .movie-media img {
@@ -764,6 +762,7 @@ button[type=submit] {
 	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
+	margin-top: 0.5em;
 }
 
 /*
