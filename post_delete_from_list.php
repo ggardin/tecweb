@@ -17,7 +17,7 @@ if ($user_id == "") {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->checkListOwnership($list_id, $_SESSION["id"])) {
+	if ($connessione->checkListOwnership($list_id, $user_id)) {
 		$own = true;
 		$res = $connessione->deleteFromList($list_id, $film_id);
 	}
