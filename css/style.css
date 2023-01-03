@@ -866,6 +866,10 @@ table th, td {
 	border: 2px solid var(--bgcolor-off);
 }
 
+tbody tr:nth-child(odd){
+	background-color: var(--secondaryColor);
+}
+
 /*
 ==============
 USER LISTS PAGE
