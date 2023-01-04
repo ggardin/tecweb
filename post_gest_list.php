@@ -39,7 +39,7 @@ try {
 
 if ($res) {
 	if ($submit == "modifica")
-		header("location: gest_list.php?id=$list_id");
+		header("location: list.php?id=$list_id");
 	else
 		header("location: lists.php");
 	exit();
