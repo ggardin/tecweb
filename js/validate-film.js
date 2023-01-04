@@ -66,7 +66,7 @@ function validateMovie() {
 }
 
 /*
- * Contralla se il browser supporta <input type="date" />
+ * Controlla se il browser supporta <input type="date" />
  */
 function inputDateBrowserSupport() {
 	const fallbackTestElement = document.createElement('input');
