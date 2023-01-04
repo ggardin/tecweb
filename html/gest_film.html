@@ -32,10 +32,10 @@
 				<textarea id="locandina" name="locandina">TODO</textarea>
 
 				<label for="data">Data rilascio</label>
-				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" />
+				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validaMovieReleaseDate();"/>
 
 				<label for="durata">Durata in minuti</label>
-				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" />
+				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" onblur="validateMovieRuntime();"/>
 			</fieldset>
 
 			<fieldset>
