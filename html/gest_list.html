@@ -19,18 +19,18 @@
 
 	<main id="content">
 		<h1>@@intestazione@@</h1>
-		<form id="gestione" method="post" action="post_gest_list.php">
-			<input type="hidden" name="id" value="@@list_id@@" />
+		<form id="gestione" method="post" action="post_list.php">
+			<input type="hidden" name="list_id" value="@@list_id@@" />
 			<fieldset>
 				<legend>Informazioni</legend>
 				<label for="nome">Nome</label>
 				<input id="nome" name="nome" value="@@nome@@" />
-				<button type="submit" value="@@action@@">@@submit@@</button>
+				<button type="submit" name="submit" value="@@submit_val@@">@@submit@@</button>
 			</fieldset>
 			<!-- delete_start -->
 			<fieldset>
 				<legend>Elimina</legend>
-				<button id="delete" type="submit" value="delete">Elimina</button>
+				<button id="delete" type="submit" name="submit" value="elimina">Elimina</button>
 			</fieldset>
 			<!-- delete_end -->
 		</form>
