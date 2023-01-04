@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( validaMovieReleaseDate() && validateMovieRuntime() ) {
+		if ( validateMovieReleaseDate() && validateMovieRuntime() ) {
 			event.preventDefault();
 		}
 	});
@@ -22,7 +22,7 @@ function validateMovie() {
  * NB: la data divisa da "/" è un formato di localizzazione.
  *     Il browser utilizza il separatore "-".
  */
- function validaMovieReleaseDate() {
+ function validateMovieReleaseDate() {
 	var releaseDate = document.forms['gestione']['data'].value;
 	var dateLowerBound = new Date(document.forms['gestione']['data'].min);
 	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
