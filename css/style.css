@@ -922,12 +922,6 @@ li {
 	justify-content: center;  /* Center the .button-container element horizontally */
 }
 
-.button-container {
-	display: flex;  /* Make the container a flex container */
-	align-items: center;  /* Center the elements vertically */
-	flex-direction: row-reverse;
-}
-
 .deleteElementButton {
 	margin-top: auto;
 	margin-right: .5em;
