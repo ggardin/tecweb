@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8" />
+
+	<title>@@title@@</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+
+	<!-- head -->
+</head>
+<body>
+	<!-- header -->
+
+	<nav id="breadcrumb">
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="user.php">Utente</a> &gt;&gt; <a href="lists.php">Liste</a> &gt;&gt;
+			<!-- breadcrumb_start --> <a href="list.php?id=@@bc_id@@">@@bc_nome@@</a> &gt;&gt; Modifica <!-- breadcrumb_end --></p>
+	</nav>
+
+	<main id="content">
+		<h1>@@intestazione@@</h1>
+		<form id="gestione" method="post" action="post_gest_list.php">
+			<input type="hidden" name="id" value="@@list_id@@" />
+			<fieldset>
+				<legend>Informazioni</legend>
+				<label for="nome">Nome</label>
+				<input id="nome" name="nome" value="@@nome@@" />
+				<button type="submit" value="@@action@@">@@submit@@</button>
+			</fieldset>
+			<!-- delete_start -->
+			<fieldset>
+				<legend>Elimina</legend>
+				<button id="delete" type="submit" value="delete">Elimina</button>
+			</fieldset>
+			<!-- delete_end -->
+		</form>
+	</main>
+
+	<!-- footer -->
+</body>
+</html>
