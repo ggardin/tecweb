@@ -27,7 +27,7 @@ $page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
 
 if ($id != "" && !empty($film)) {
 	$film = $film[0];
-	$title = $film["nome"] . " • Modifica Film"; Tools::toHtml($title, 0);
+	$title = $film["nome"] . " • Modifica film"; Tools::toHtml($title, 0);
 	Tools::replaceAnchor($page, "title", $title);
 	Tools::replaceAnchor($page, "bc_id", $id);
 	$bc_nome = $film["nome"]; Tools::toHtml($bc_nome, 2);
