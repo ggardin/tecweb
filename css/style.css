@@ -104,6 +104,7 @@ HEADER
 
 #page-header li {
 	border-bottom: 0.2em solid transparent;
+	margin: 0 0.5em;
 }
 
 #page-header li a {
