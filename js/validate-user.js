@@ -34,22 +34,15 @@ function validateUserBirthday() {
 
 	// Non c'è fallback
 	if (inputDateBrowserSupport()) {
-		console.log("Supporto browser attivo");
-		console.log(birthday);
 		var dateOfBirth = new Date(birthday);
-		console.log("Data di nascita: " + dateOfBirth);
 	}
 	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
 	else {
-		console.log("Supporto browser non attivo");
 		const yearRegex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
 		// Controllo che sia nel formato dd/mm/yyyy
 		if (yearRegex.test(birthday)) {
-			console.log("La stringa è correttamente formattata");
 			var parts = birthday.split("/");
 			var dateOfBirth = new Date(parts[2], parts[1], parts[0]);
-			console.log("Data di nascita: " + parts);
-			console.log("Data di nascita: " + dateOfBirth);
 		}
 		else {
 			alert('Formato della data non corretto. Usa dd/mm/yyyy');
@@ -59,7 +52,6 @@ function validateUserBirthday() {
 
 	// Ho a disposizione la data di nascita
 	var age = today.getFullYear() - dateOfBirth.getFullYear();
-	console.log("Età (anni): " + age);
 
 	// controlla che l'utente abbia almeno 13 anni
 	if (age < 13) {
@@ -84,8 +76,6 @@ function validateUserBirthday() {
 		alert('Guarda, non è per fare i guastafeste, ma non ti sembra di essere in là con gli anni?');
 		return false;
 	}
-
-	console.log("Età valida")
 	return true;
 }
 
