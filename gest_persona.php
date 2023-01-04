@@ -14,8 +14,10 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
-	if ($id != "")
+	if ($id != "") {
+		$gender = $connessione->getGenders($id);
 		$persona = $connessione->getPersonaById($id);
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -35,8 +37,21 @@ if ($id != "" && !empty($persona)) {
 	Tools::replaceAnchor($page, "intestazione", "Modifica persona");
 	Tools::toHtml($persona, 1);
 	Tools::replaceAnchor($page, "nome", $persona["nome"]);
-	Tools::replaceAnchor($page, "data_nascita", $persona["data_nascita"]);
-	Tools::replaceAnchor($page, "data_morte", $persona["data_morte"]);
+	$option = Tools::getSection($page, "gender");
+	$res = "";
+	foreach ($gender as $g) {
+		$t = $option;
+		Tools::replaceAnchor($t, "id", $g["id"]);
+		Tools::replaceAnchor($t, "nome", $g["nome"]);
+		$sel = (($g["id"] == $persona["gender_id"]) ? "selected" : "");
+		Tools::replaceAnchor($t, "sel", $sel);
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "gender", $res);
+	$dn = (isset($persona["data_nascita"]) ? $persona["data_nascita"] : "");
+	Tools::replaceAnchor($page, "data_nascita", $dn);
+	$dm = (isset($persona["data_morte"]) ? $persona["data_morte"] : "");
+	Tools::replaceAnchor($page, "data_morte", $dm);
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi persona");
