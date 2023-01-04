@@ -32,13 +32,15 @@ if ($id != "" && !empty($collezione)) {
 	Tools::replaceAnchor($page, "bc_id", $id);
 	$bc_nome = $collezione["nome"]; Tools::toHtml($bc_nome, 2);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
+	Tools::replaceAnchor($page, "intestazione", "Modifica collezione");
 	Tools::toHtml($collezione, 1);
 	Tools::replaceAnchor($page, "nome", $collezione["nome"]);
 	Tools::replaceAnchor($page, "descrizione", $collezione["descrizione"]);
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
-	Tools::replaceAnchor($page, "title", "Aggiungi Collezione");
+	Tools::replaceAnchor($page, "title", "Aggiungi collezione");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
+	Tools::replaceAnchor($page, "intestazione", "Aggiungi collezione");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 }
 

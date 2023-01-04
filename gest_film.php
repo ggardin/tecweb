@@ -32,6 +32,7 @@ if ($id != "" && !empty($film)) {
 	Tools::replaceAnchor($page, "bc_id", $id);
 	$bc_nome = $film["nome"]; Tools::toHtml($bc_nome, 2);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
+	Tools::replaceAnchor($page, "intestazione", "Modifica film");
 	Tools::toHtml($film, 1);
 	Tools::replaceAnchor($page, "nome", $film["nome"]);
 	Tools::replaceAnchor($page, "descrizione", $film["descrizione"]);
@@ -42,8 +43,9 @@ if ($id != "" && !empty($film)) {
 	Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
-	Tools::replaceAnchor($page, "title", "Aggiungi Film");
+	Tools::replaceAnchor($page, "title", "Aggiungi film");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
+	Tools::replaceAnchor($page, "intestazione", "Aggiungi film");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 }
 
