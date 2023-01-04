@@ -448,7 +448,8 @@ class Database {
 
 	public function modificaUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
 		$query = "update utente
-			set username = ?, mail = ?, nome = ?, gender = ?, data_nascita = ?, password = ?";
+			set username = ?, mail = ?, nome = ?, gender = ?, data_nascita = ?, password = ?
+			where id = ?";
 
 		$params = [$username, $mail, $nome, $gender, $data_nascita, $password, $id];
 		$types = "sssissi";
@@ -463,15 +464,16 @@ class Database {
 		$params = [$list_id];
 		$types = "i";
 
-		return $this->preparedUpdates();
+		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function modificaLista($name) : bool {
+	public function modificaLista($list_id, $name) : bool {
 		$query = "update lista
-			set nome = ?";
+			set nome = ?
+			where id = ?";
 
-		$params = [$name];
-		$types = "s";
+		$params = [$name, $list_id];
+		$types = "si";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
