@@ -32,10 +32,10 @@
 				<textarea id="locandina" name="locandina">TODO</textarea>
 
 				<label for="data_nascita">Data di nascita</label>
-				<input type="date" id="data_nascita" name="data" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" />
+				<input type="date" id="data_nascita" name="data" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
 
 				<label for="data_morte">Data di morte</label>
-				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2999-12-31" value="@@data_morte@@" />
+				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2999-12-31" value="@@data_morte@@" onblur="validatePersonDateOfDeath();comparePersonDates();" />
 			</fieldset>
 			<button type="submit" name="submit">@@submit@@</button>
 		</form>
