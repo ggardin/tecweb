@@ -26,7 +26,11 @@
 				<input id="nome" name="nome" value="@@nome@@" />
 
 				<label for="gender">Gender</label>
-				<input id="gender" name="gender" value="TODO" />
+				<select name="gender" id="gender">
+					<!-- gender_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- gender_end -->
+				</select>
 
 				<label for="locandina">Locandina</label>
 				<textarea id="locandina" name="locandina">TODO</textarea>
@@ -37,7 +41,17 @@
 				<label for="data_morte">Data di morte</label>
 				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2999-12-31" value="@@data_morte@@" />
 			</fieldset>
-			<button type="submit" name="submit">@@submit@@</button>
+			<fieldset>
+				<legend>Salva</legend>
+				<button type="submit" name="submit" value="@@submit_value@@">@@submit@@</button>
+			</fieldset>
+
+			<!-- delete_start -->
+			<fieldset>
+				<legend>Elimina</legend>
+				<button id="delete" type="submit" name="submit" value="elimina">Elimina</button>
+			</fieldset>
+			<!-- delete_end -->
 		</form>
 	</main>
 
