@@ -582,7 +582,7 @@ MOVIE PAGE
 	flex: 0 1 300px; /* set to image width */
 }
 
-.admin-button {
+.modify-button {
 	display: flex;
 	gap: 1em;
 	margin-top: .5em;
@@ -590,13 +590,13 @@ MOVIE PAGE
 	text-align: center;
 }
 
-.admin-button a {
+.modify-button a {
 	color: var(--txtcolor);
 	align-self: center;
 	font-size: 1.2em;
 }
 
-.admin-button svg {
+.modify-button svg {
 	width: 2em;
 	height: 2em;
 }
@@ -904,7 +904,7 @@ USER LISTS PAGE
 }
 
 /*MODIFY LIST*/
-.modifyListButton{
+/* .modifyListButton{ */
 	/* margin-top: 1em; */
 	/* display: flex; */
 	/* background-color: var(--tertiaryColor); */
@@ -913,9 +913,9 @@ USER LISTS PAGE
 	/* background-position: left; */
 	/* cursor: pointer; */
 	/* font-size: 1.5em; */
-	height: 3.3em;
+	/* height: 3.3em;
 	width: 3.3em;
-}
+} */
 
 /* .modifyListButton svg {
 	color: var(--bgcolor);
@@ -963,6 +963,10 @@ GESTIONE
 #gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
+}
+
+#gestione #delete {
+	background-color: red;
 }
 
 /*
