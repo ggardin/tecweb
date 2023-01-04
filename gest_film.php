@@ -14,8 +14,11 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
-	if ($id != "")
+	if ($id != "") {
 		$film = $connessione->getFilmById($id);
+		$collezioni = $connessione->getCollezioni($id);
+		$stati = $connessione->getStati($id);
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -35,12 +38,33 @@ if ($id != "" && !empty($film)) {
 	Tools::replaceAnchor($page, "intestazione", "Modifica film");
 	Tools::toHtml($film, 1);
 	Tools::replaceAnchor($page, "nome", $film["nome"]);
-	Tools::replaceAnchor($page, "descrizione", $film["descrizione"]);
-	Tools::replaceAnchor($page, "data_rilascio", $film["data_rilascio"]);
-	Tools::replaceAnchor($page, "durata", $film["durata"]);
-	Tools::replaceAnchor($page, "incassi", $film["incassi"]);
-	Tools::replaceAnchor($page, "budget", $film["budget"]);
+	Tools::replaceAnchor($page, "descrizione", (isset($film["descrizione"]) ? $film["descrizione"] : ""));
+	Tools::replaceAnchor($page, "data_rilascio", (isset($film["data_rilascio"]) ? $film["data_rilascio"] : ""));
+	Tools::replaceAnchor($page, "durata", (isset($film["durata"]) ? $film["durata"] : ""));
 	Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
+	$option = Tools::getSection($page, "stato");
+	$res = "";
+	foreach ($stati as $s) {
+		$t = $option;
+		Tools::replaceAnchor($t, "id", $s["id"]);
+		Tools::replaceAnchor($t, "nome", $s["nome"]);
+		Tools::replaceAnchor($t, "sel", (($s["id"] == $film["stato"]) ? "selected" : ""));
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "stato", $res);
+	Tools::replaceAnchor($page, "budget", (isset($film["budget"]) ? $film["budget"] : ""));
+	Tools::replaceAnchor($page, "incassi", (isset($film["incassi"]) ? $film["incassi"] : ""));
+	Tools::toHtml($collezioni);
+	$option = Tools::getSection($page, "collezione");
+	$res = "";
+	foreach ($collezioni as $c) {
+		$t = $option;
+		Tools::replaceAnchor($t, "id", $c["id"]);
+		Tools::replaceAnchor($t, "nome", $c["nome"]);
+		Tools::replaceAnchor($t, "sel", (($c["id"] == $film["collezione"]) ? "selected" : ""));
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "collezione", $res);
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi film");

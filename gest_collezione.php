@@ -35,7 +35,7 @@ if ($id != "" && !empty($collezione)) {
 	Tools::replaceAnchor($page, "intestazione", "Modifica collezione");
 	Tools::toHtml($collezione, 1);
 	Tools::replaceAnchor($page, "nome", $collezione["nome"]);
-	Tools::replaceAnchor($page, "descrizione", $collezione["descrizione"]);
+	Tools::replaceAnchor($page, "descrizione", (isset($collezione["descrizione"]) ? $collezione["descrizione"] : ""));
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi collezione");

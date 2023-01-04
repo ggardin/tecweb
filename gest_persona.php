@@ -43,15 +43,12 @@ if ($id != "" && !empty($persona)) {
 		$t = $option;
 		Tools::replaceAnchor($t, "id", $g["id"]);
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
-		$sel = (($g["id"] == $persona["gender_id"]) ? "selected" : "");
-		Tools::replaceAnchor($t, "sel", $sel);
+		Tools::replaceAnchor($t, "sel", (($g["id"] == $persona["gender"]) ? "selected" : ""));
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "gender", $res);
-	$dn = (isset($persona["data_nascita"]) ? $persona["data_nascita"] : "");
-	Tools::replaceAnchor($page, "data_nascita", $dn);
-	$dm = (isset($persona["data_morte"]) ? $persona["data_morte"] : "");
-	Tools::replaceAnchor($page, "data_morte", $dm);
+	Tools::replaceAnchor($page, "data_nascita", (isset($persona["data_nascita"]) ? $persona["data_nascita"] : ""));
+	Tools::replaceAnchor($page, "data_morte", (isset($persona["data_morte"]) ? $persona["data_morte"] : ""));
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi persona");
