@@ -13,6 +13,18 @@ function validateUserData() {
 }
 
 /*
+ * Verifica che il nome utente (username) contenga solo lettere A~z
+ */
+function validateUserUsername() {
+	var username = document.forms['update-user-data']['username'].value;
+	const allowedChars = /^[A-Za-z0-9]+$/; // lettere maiuscole e minuscole, numeri
+	if (!allowedChars.test(username)) {
+		alert('Nome utente non valido, usa solo lettere');
+		return false;
+	}
+	return true;
+}
+/*
  * Verifica che:
 *	1. la data fornita sia una data valida
  *	2. utente abbia età compresa fra 13 e 100 anni
