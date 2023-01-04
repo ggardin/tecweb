@@ -6,7 +6,7 @@ require_once("php/database.php");
 session_start();
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
-$list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
+$list_id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
