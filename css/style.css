@@ -483,8 +483,17 @@ INDEX
 	justify-content: center;
 	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
-	padding: 2em;
+	padding: 1.5em;
 	margin: 2em 0;
+}
+
+.hero-image {
+	background-image: url("../img/mockup_device_dark.webp");
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 17em;
+	height: 34em;
+	width: 17em;
 }
 
 .container > .text {
