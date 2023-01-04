@@ -51,25 +51,3 @@ const handleThemeSwitch = () => {
 // Aggiunge funzionalità al bottone
 const button = document.getElementById("themeToggle");
 if (button != null) button.addEventListener("click", handleThemeSwitch);
-
-
-// Define the function
-function setActiveLink() {
-	// Get the nav element
-	var nav = document.querySelector('#dropdown-link-container');
-
-	// Get all the links inside the nav element
-	var links = nav.querySelectorAll('ul li a');
-
-	// Loop through the links
-	for (var i = 0; i < links.length; i++) {
-		// Get the current link
-		var link = links[i];
-
-		// Check if the link leads to the current page
-		if (link.href === window.location.href) {
-			// If it does, add the "active" class to the parent li element
-			link.parentElement.classList.add("active");
-		}
-	}
-}

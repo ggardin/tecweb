@@ -33,13 +33,41 @@
 				<li>
 					<a href="cerca.php" id="link-film"><span lang="en">Film</span></a>
 				</li>
+
+				<!-- user_start -->
+				<li>
+					<a>User</a>
+				</li>
+
+				<!-- admin_start -->
+				<li>
+					<a>Admin</a>
+				</li>
+				<!-- admin_end -->
+
+				<!-- user_start -->
+
 			</ul>
 		</nav>
 
 		<script>
-			window.onload = function() {
-				setActiveLink();
-			};
+			// Get the nav element
+			var nav = document.querySelector('#dropdown-link-container');
+
+			// Get all the links inside the nav element
+			var links = nav.querySelectorAll('ul li a');
+
+			// Loop through the links
+			for (var i = 0; i < links.length; i++) {
+				// Get the current link
+				var link = links[i];
+
+				// Check if the link leads to the current page
+				if (link.href === window.location.href) {
+					// If it does, add the "active" class to the parent li element
+					link.parentElement.classList.add("active");
+				}
+			}
 		</script>
 
 		<div class="actions">
