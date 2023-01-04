@@ -1109,7 +1109,7 @@ CREATE TABLE `film` (
   `durata` smallint(5) UNSIGNED DEFAULT NULL,
   `locandina` varchar(100) DEFAULT NULL,
   `descrizione` varchar(10000) DEFAULT NULL,
-  `stato` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `stato` tinyint(3) UNSIGNED NOT NULL,
   `data_rilascio` date DEFAULT NULL,
   `budget` int(10) UNSIGNED DEFAULT NULL,
   `incassi` int(10) UNSIGNED DEFAULT NULL,
@@ -3533,7 +3533,7 @@ INSERT INTO `paese` (`iso_3166_1`, `nome`) VALUES
 CREATE TABLE `persona` (
   `id` int(10) UNSIGNED NOT NULL,
   `nome` varchar(50) NOT NULL,
-  `gender` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `gender` tinyint(3) UNSIGNED NOT NULL,
   `immagine` varchar(100) DEFAULT NULL,
   `data_nascita` date DEFAULT NULL,
   `data_morte` date DEFAULT NULL
@@ -4218,7 +4218,7 @@ CREATE TABLE `utente` (
   `username` varchar(30) NOT NULL,
   `mail` varchar(100) DEFAULT NULL,
   `nome` varchar(50) DEFAULT NULL,
-  `gender` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `gender` tinyint(3) UNSIGNED NOT NULL,
   `data_nascita` date DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `is_admin` tinyint(1) UNSIGNED NOT NULL DEFAULT 0
