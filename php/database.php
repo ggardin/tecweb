@@ -84,7 +84,7 @@ class Database {
 	}
 
 	public function getCollezioneById($id) : array {
-		$query = "select nome, descrizione, locandina
+		$query = "select *
 			from collezione
 			where id = ?";
 
@@ -108,17 +108,46 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getPersonaById($id) : array {
-		$query = "select p.nome, g.nome as gender, g.id as gender_id, p.immagine, p.data_nascita, p.data_morte
-			from persona as p
-				join gender as g
-					on p.gender = g.id
-			where p.id = ?";
+	public function getGenderById($id) : array {
+		$query = "select *
+			from gender
+			where id = ?";
 
 		$params = [$id];
 		$types = "i";
 
 		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getPersonaById($id) : array {
+		$query = "select *
+			from persona
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getStati() : array {
+		$query = "select id, nome
+			from stato
+			order by id";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getCollezioni() : array {
+		$query = "select id, nome
+			from collezione
+			order by id";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
 	}
 
 	public function getGenders() : array {
@@ -149,12 +178,21 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getStatoById($id) : array {
+		$query = "select id, nome
+			from stato
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function getFilmById($id) : array {
-		$query = "select f.id, f.nome, f.nome_originale, f.durata, f.locandina, f.descrizione, f.data_rilascio, f.budget, f.incassi, f.collezione, f.voto, s.nome as stato
-			from film as f
-				join stato as s
-					on f.stato = s.id
-			where f.id = ?";
+		$query = "select *
+			from film
+			where id = ?";
 
 		$params = [$id];
 		$types = "i";
