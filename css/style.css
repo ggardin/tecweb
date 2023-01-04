@@ -585,18 +585,15 @@ MOVIE PAGE
 .admin-button {
 	display: flex;
 	gap: 1em;
-	/*border: .3em solid var(--bgcolor-off);*/
-	/*border-radius: var(--border-radius);*/
-	/*padding: .5em;*/
+	margin-top: .5em;
 	margin-bottom: 1em;
+	text-align: center;
 }
 
 .admin-button a {
-	/*margin: auto;*/
 	color: var(--txtcolor);
 	align-self: center;
-	/*font-size: 1.1em;*/
-	/*font-weight: 500;*/
+	font-size: 1.2em;
 }
 
 .admin-button svg {
@@ -605,7 +602,7 @@ MOVIE PAGE
 }
 
 .movie-media img {
-	margin-bottom: 1.5em;
+	margin-bottom: 1em;
 }
 
 .movie-details h1 {
