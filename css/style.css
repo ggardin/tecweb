@@ -488,7 +488,7 @@ INDEX
 }
 
 .hero-image {
-	background-image: url("../img/mockup_device_dark.png");
+	background-image: url("../img/mockup_device_dark.webp");
 	background-repeat: no-repeat;
 	background-position: left;
 	background-size: 17em;
