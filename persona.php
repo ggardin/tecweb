@@ -17,6 +17,7 @@ try {
 	$persona = $connessione->getPersonaById($id);
 	if (!empty($persona)) {
 		$film = $connessione->getFilmByPersonaId($id);
+		$gender = $connessione->getGenderById($persona[0]["gender"]);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -38,7 +39,7 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($persona);
 Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 Tools::replaceAnchor($page, "nome", $persona["nome"]);
-Tools::replaceAnchor($page, "gender", $persona["gender"]);
+Tools::replaceAnchor($page, "gender", $gender[0]["nome"]);
 if (isset($persona["data_nascita"]))
 	Tools::replaceAnchor($page, "data_nascita", date_format(date_create_from_format('Y-m-d', $persona["data_nascita"]), 'd/m/Y'));
 else
