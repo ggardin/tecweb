@@ -6,7 +6,7 @@ require_once("php/database.php");
 session_start();
 
 if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
-	header ("location: user.php");
+	header ("location: login.php");
 	exit();
 }
 
