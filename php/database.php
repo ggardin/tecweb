@@ -473,6 +473,16 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
+	public function inserisciPersona($nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
+		$query = "insert into persona(nome, gender, immagine, data_nascita, data_morte)
+			values (?, ?, ?, ?, ?)";
+
+		$params = [$nome, $gender, $immagine, $data_nascita, $data_morte];
+		$types = "sisss";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
 	public function modificaPersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
 		$query = "update persona
 			set nome = ?, gender = ?, immagine = ?, data_nascita = ?, data_morte = ?
