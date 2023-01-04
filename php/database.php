@@ -109,7 +109,7 @@ class Database {
 	}
 
 	public function getPersonaById($id) : array {
-		$query = "select p.nome, g.nome as gender, p.immagine, p.data_nascita, p.data_morte
+		$query = "select p.nome, g.nome as gender, g.id as gender_id, p.immagine, p.data_nascita, p.data_morte
 			from persona as p
 				join gender as g
 					on p.gender = g.id
@@ -119,6 +119,16 @@ class Database {
 		$types = "i";
 
 		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getGenders() : array {
+		$query = "select id, nome
+			from gender
+			order by id";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
 	}
 
 	public function getFilmByPersonaId($id) : array {
@@ -363,7 +373,8 @@ class Database {
 					on l.id = lf.lista
 				join film as f
 					on lf.film = f.id
-			where l.id = ?";
+			where l.id = ?
+			order by lf.id";
 
 		$params = [$id];
 		$types = "i";
@@ -372,8 +383,8 @@ class Database {
 	}
 
 	public function insertUtente($username, $pass) : bool {
-		$query = "insert into utente(username, password)
-			values (?, ?)";
+		$query = "insert into utente(username, password, gender)
+			values (?, ?, 0)";
 
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
 		$params = [$username, $pass];
