@@ -24,6 +24,20 @@ function validateUserUsername() {
 	}
 	return true;
 }
+
+/*
+ * Verifica che il nome dell'utente sia valido
+ */
+function validateUserName() {
+	var name = document.forms['update-user-data']['nome'].value;
+	const allowedChars = /^[A-Za-z\s'][^\d]*$/; // lettere, spazi, apostrofi
+	if (!allowedChars.test(name)) {
+		alert('Nome non valido');
+		return false;
+	}
+	return true;
+}
+
 /*
  * Verifica che:
 *	1. la data fornita sia una data valida
