@@ -72,10 +72,10 @@
 				<input id="nome_originale" name="nome_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
-				<select id="stato" class="form-control">
-					<option value="-1" selected="selected">TODO</option>
-					<option value="0">Rilasciato</option>
-					<option value="1">In produzione</option>
+				<select name="stato" id="stato">
+					<!-- stato_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- stato_end -->
 				</select>
 
 				<label for="budget">Budget</label>
@@ -85,7 +85,12 @@
 				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();"/>
 
 				<label for="collezione">Collezione</label>
-				<input name="collezione" id="collezione" value="TODO" />
+				<select name="collezione" id="collezione">
+					<option value=""></option>
+					<!-- collezione_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- collezione_end -->
+				</select>
 			</fieldset>
 			<fieldset>
 				<legend>Salva</legend>
