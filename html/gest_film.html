@@ -8,6 +8,7 @@
 	<meta name="keywords" content="" />
 
 	<!-- head -->
+	<script src="js/validate-film-management.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -77,10 +78,10 @@
 				</select>
 
 				<label for="budget">Budget</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" />
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();"/>
 
 				<label for="incassi">Incassi</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" />
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();"/>
 
 				<label for="collezione">Collezione</label>
 				<input name="collezione" id="collezione" value="TODO" />

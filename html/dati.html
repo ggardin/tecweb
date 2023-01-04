@@ -8,6 +8,7 @@
 	<meta name="keywords" content="" />
 
 	<!-- head -->
+	<script src="js/validate-user.js"></script>
 </head>
 <body id="settings">
 	<!-- header -->
@@ -18,27 +19,34 @@
 
 	<main id="content">
 		<h1>Dati personali</h1>
-		<form>
+		<form id="update-user-data">
 			<fieldset>
 				<legend>Ma che ne so</legend>
+
 				<label for="username"><span lang="en">Username</span></label>
 				<input type="text" id="username" name="username" aria-required="true" value="@@form_username@@" required />
 			</fieldset>
 			<fieldset>
 				<legend>Cambia la tua <span lang="en">password</span></legend>
-				<label for="old_password">Vecchia<span lang="en">Password</span></label>
+
+				<label for="old_password">Vecchia<span lang="en">password</span></label>
 				<input type="password" id="old_password" name="old_password" aria-required="true" value="@@old_password@@" required />
-				<label for="new_password">Nuova <span lang="en">Password</span></label>
+
+				<label for="new_password">Nuova <span lang="en">password</span></label>
 				<input type="password" id="new_password" name="new_password" aria-required="true" value="@@new_password@@" required />
 			</fieldset>
 			<fieldset>
 				<legend>Opzionali</legend>
+
 				<label for="email"><span lang="en">Email</span></label>
-				<input type="text" id="email" name="email" aria-required="true" value="@@form_email@@" />
+				<input type="text" id="email" name="email" aria-required="true" value="@@form_email@@" onblur="validateUserEmail();"/>
+
 				<label for="nome">Nome</label>
 				<input type="text" id="nome" name="nome" aria-required="true" value="@@form_nome@@" />
+
 				<label for="data">Data di nascita</label>
-				<input type="text" id="data" name="data" aria-required="true" value="@@form_data@@" />
+				<input type="date" id="data" name="data" aria-required="true" value="@@form_data@@" min="1900-01-01" max="2099-12-31" pattern="\d{2}/\d{2}/\d{4}" onblur="validateUserBirthday();"/>
+
 				<label for="gender"><span lang="en">Gender</span></label>
 				<select id="gender" name="gender" aria-required="true">
 					<option value="0">NS</option>
@@ -46,7 +54,8 @@
 					<option value="2">F</option>
 					<option value="3">NB</option>
 				</select>
-			<button type="submit" name="submit">Salva</button>
+
+				<button type="submit" name="submit">Salva</button>
 			</fieldset>
 		</form>
 	</main>
