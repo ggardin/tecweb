@@ -466,6 +466,16 @@ class Database {
 		return $this->preparedUpdates();
 	}
 
+	public function modificaLista($name) : bool {
+		$query = "update lista
+			set nome = ?";
+
+		$params = [$name];
+		$types = "s";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
 	public function deleteFromList($list_id, $film_id) : bool {
 		$query = "delete from lista_film
 			where lista = ? and film = ?";
