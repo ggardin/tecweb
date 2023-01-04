@@ -916,7 +916,7 @@ USER LISTS PAGE
 
 
 /*DELETE CARD*/
-li {
+.h-cards > li {
 	display: flex;  /* Set the display property to flex to enable flexbox layout */
 	align-items: center;  /* Center the .button-container element vertically */
 	justify-content: center;  /* Center the .button-container element horizontally */
