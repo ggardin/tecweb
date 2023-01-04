@@ -901,22 +901,6 @@ USER LISTS PAGE
 
 #list-movies li {
 	margin-top: 1.5em;
-}
-
-/*MODIFY LIST*/
-.modifyListButton{
-	width: 3em;
-	height: 3em;
-}
-
-.modifyListButton svg{
-	width: 2em;
-	height: 2em;
-}
-
-
-/*DELETE CARD*/
-#list-movies li {
 	display: flex;  /* Set the display property to flex to enable flexbox layout */
 	align-items: center;  /* Center the .button-container element vertically */
 	justify-content: center;  /* Center the .button-container element horizontally */
