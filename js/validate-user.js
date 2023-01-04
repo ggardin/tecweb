@@ -6,7 +6,7 @@ function validateUserData() {
 	let form = document.getElementById("update-user-data");
 
 	form.addEventListener("submit", function (event) {
-		if ( validateUserEmail() && validateUserBirthday() ) {
+		if ( validateUserUsername() && validateUserName() && validateUserEmail() && validateUserBirthday() ) {
 			event.preventDefault();
 		}
 	});
