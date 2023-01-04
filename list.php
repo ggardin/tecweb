@@ -43,8 +43,9 @@ $nome = $nome[0];
 $title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 0);
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($nome);
-Tools::replaceAnchor($page, "intestazione", $nome["nome"]);
 Tools::replaceAnchor($page, "breadcrumb", $nome["nome"]);
+Tools::replaceAnchor($page, "intestazione", $nome["nome"]);
+Tools::replaceAnchor($page, "gest_id", $id);
 if (!empty($lista)) {
 	Tools::toHtml($lista);
 	$elemento = Tools::getSection($page, "elemento");
