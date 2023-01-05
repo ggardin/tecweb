@@ -5,29 +5,29 @@ require_once("php/database.php");
 
 session_start();
 
-$user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
-$list_id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
+$user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if ($user_id == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $list_id == "")) {
+if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
 	header("location: index.php");
 	exit();
 }
 
 if ($nome == "") {
-	header("location: gest_list.php?id=$list_id");
+	header("location: gest_list.php?id=$id");
 	exit();
 }
 
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi")
-		$res = $connessione->insertLista($user_id, $nome);
-	elseif ($submit == "modifica" && $connessione->isListaDiUtente($list_id, $user_id))
-		$res = $connessione->updateLista($list_id, $nome);
-	elseif ($submit == "elimina" && $connessione->isListaDiUtente($list_id, $user_id))
-		$res = $connessione->deleteLista($list_id);
+		$res = $connessione->insertLista($user, $nome);
+	elseif ($submit == "modifica" && $connessione->isListaDiUtente($id, $user))
+		$res = $connessione->updateLista($id, $nome);
+	elseif ($submit == "elimina" && $connessione->isListaDiUtente($id, $user))
+		$res = $connessione->deleteLista($id);
 	else
 		$res = false;
 	unset($connessione);
@@ -39,7 +39,7 @@ try {
 
 if ($res) {
 	if ($submit == "modifica")
-		header("location: list.php?id=$list_id");
+		header("location: list.php?id=$id");
 	else
 		header("location: lists.php");
 	exit();
