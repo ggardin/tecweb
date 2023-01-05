@@ -12,27 +12,31 @@
 	--anchorcolor: #110093;
 	--anchorcolor-alt: #D04637;
 
+	--form-required-field: #d50000;
+	--form-invalid: var(--form-required-field);
+
 	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
-	--button-inactive: #20584F;
 	--auth-form-width: 35em;
 	--header-height: 4.5em;
-
-	--form-required-field: red;
-	--form-invalid: red;
 }
 
 :root.dark {
 	--bgcolor: #1A1A1A;
 	--bgcolor-alt: #242424;
 	--bgcolor-off: #434343;
+
 	--txtcolor: #E4DCD7;
+
 	--anchorcolor: #91E8FB;
 	--anchorcolor-alt: #da4635;
 
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
+
+	--form-required-field: #ff3030;
+	--form-invalid: var(--form-required-field);
 }
 
 @font-face {
@@ -618,21 +622,31 @@ MOVIE PAGE
 
 .modify-button {
 	display: flex;
-	gap: 1em;
-	margin-top: .5em;
-	margin-bottom: 1em;
 	text-align: center;
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	border: 2px solid var(--bgcolor-off);
+	padding: .5em;
+	height: 4em;
+	margin: 0.5em auto;
+	max-width: 22em;
 }
 
 .modify-button a {
-	color: var(--txtcolor);
 	align-self: center;
 	font-size: 1.2em;
 }
 
 .modify-button svg {
-	width: 2em;
-	height: 2em;
+	min-width: 2em;
+	min-height: 2em;
+	margin: auto 0.3em;
+}
+
+
+li .modify-button a {
+	margin-right: .5em;
+
 }
 
 .movie-media img {
