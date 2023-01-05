@@ -33,8 +33,8 @@ if ($id != "" && !empty($lista)) {
 	$bc_nome = $lista["nome"]; Tools::toHtml($bc_nome, 2);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica lista");
-	Tools::toHtml($lista, 1);
 	Tools::replaceAnchor($page, "gest_id", $id);
+	Tools::toHtml($lista, 1);
 	Tools::replaceAnchor($page, "nome", $lista["nome"]);
 	Tools::replaceAnchor($page, "submit_value", "modifica");
 	Tools::replaceAnchor($page, "submit", "Modifica");

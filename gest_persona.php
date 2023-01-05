@@ -35,6 +35,7 @@ if ($id != "" && !empty($persona)) {
 	$bc_nome = $persona["nome"]; Tools::toHtml($bc_nome, 2);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica persona");
+	Tools::replaceAnchor($page, "gest_id", $id);
 	Tools::toHtml($persona, 1);
 	Tools::replaceAnchor($page, "nome", $persona["nome"]);
 	$option = Tools::getSection($page, "gender");
@@ -49,11 +50,13 @@ if ($id != "" && !empty($persona)) {
 	Tools::replaceSection($page, "gender", $res);
 	Tools::replaceAnchor($page, "data_nascita", (isset($persona["data_nascita"]) ? $persona["data_nascita"] : ""));
 	Tools::replaceAnchor($page, "data_morte", (isset($persona["data_morte"]) ? $persona["data_morte"] : ""));
+	Tools::replaceAnchor($page, "submit_value", "modifica");
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi persona");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi persona");
+	Tools::replaceAnchor($page, "submit_value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 }
 
