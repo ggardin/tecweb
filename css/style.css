@@ -603,10 +603,8 @@ MOVIE PAGE
 
 .modify-button {
 	display: flex;
-	gap: 1em;
-	margin-top: .5em;
-	margin-bottom: 1em;
 	text-align: center;
+	padding-bottom: .5em;
 }
 
 .modify-button a {
@@ -624,11 +622,19 @@ li .modify-button  {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
-	padding: .5em 0;
+	padding: .5em;
 }
 
+
 li .modify-button svg {
-	padding-left: .5em;
+	min-width: 2em;
+	min-height: 2em;
+	margin: auto 0.3em;
+}
+
+li .modify-button a {
+	margin-right: .5em;
+
 }
 
 .movie-media img {
