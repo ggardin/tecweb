@@ -12,27 +12,33 @@
 	--anchorcolor: #110093;
 	--anchorcolor-alt: #D04637;
 
+	--form-required-field: #d50000;
+	--form-invalid: var(--form-required-field);
+
+	--button-inactive: #20584F;
+
 	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
-	--button-inactive: #20584F;
 	--auth-form-width: 35em;
 	--header-height: 4.5em;
-
-	--form-required-field: red;
-	--form-invalid: red;
 }
 
 :root.dark {
 	--bgcolor: #1A1A1A;
 	--bgcolor-alt: #242424;
 	--bgcolor-off: #434343;
+
 	--txtcolor: #E4DCD7;
+
 	--anchorcolor: #91E8FB;
 	--anchorcolor-alt: #da4635;
 
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
+
+	--form-required-field: #ff3030;
+	--form-invalid: var(--form-required-field);
 }
 
 @font-face {
