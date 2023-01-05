@@ -18,6 +18,9 @@
 	--button-inactive: #20584F;
 	--auth-form-width: 35em;
 	--header-height: 4.5em;
+
+	--form-required-field: red;
+	--form-invalid: red;
 }
 
 :root.dark {
@@ -1000,4 +1003,19 @@ PERSON/COLLECTION PAGE
 
 #collection-movies li {
 	margin-top: 1em;
+}
+
+/*
+==============
+FORMS
+==============
+*/
+
+form .required {
+	margin-left: 0.5ch;
+	color: var(--form-required-field);
+}
+
+form input.invalid {
+	outline: 0.15rem solid var(--form-invalid);
 }

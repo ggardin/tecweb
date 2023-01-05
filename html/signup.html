@@ -8,6 +8,7 @@
 	<meta name="keywords" content="" />
 
 	<!-- head -->
+	<script src="js/validate-signup.js"></script>
 </head>
 <body id="auth">
 	<!-- header -->
@@ -21,15 +22,17 @@
 		<p id="auth_message">Hai già un <span lang="en">account</span>? <a href="login.php">Accedi ora</a></p>
 
 		<form id="auth_form" method="post" action="post_signup.php">
+
 			<fieldset>
-				<label for="username">Nome utente</label>
-				<input type="text" id="username" name="username" aria-required="true" required/>
+				<label for="username">Nome utente<span class="required">(richiesto)</span></label>
+				<input type="text" id="username" name="username" required aria-describedby="username-hint" onblur="validateNewUsername();" />
+				<p id="username-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</p>
 
-				<label for="password"><span lang="en">Password</span></label>
-				<input type="password" id="password" name="password" aria-required="true" required />
+				<label for="password"><span lang="en">Password</span><span class="required">(richiesto)</span></label>
+				<input type="password" id="password" name="password" required />
 
-				<label for="password_confirm">Conferma <span lang="en">Password</span></label>
-				<input type="password" id="password_confirm" name="password_confirm" aria-required="true" required />
+				<label for="password_confirm">Conferma <span lang="en">Password</span><span class="required">(richiesto)</span></label>
+				<input type="password" id="password_confirm" name="password_confirm" required />
 
 				<button type="submit" name="submit">Registrati</button>
 			</fieldset>
