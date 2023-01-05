@@ -835,19 +835,23 @@ AUTH
 #auth main {
 	background-color: var(--secondaryColor);
 	max-width: var(--auth-form-width);
-	margin: var(--content-padding);
+	margin: 0 auto ;
 	border-radius: var(--border-radius);
 	text-align: center;
 	padding: var(--content-padding);
-
 }
+
+#content {
+	margin-left: 3em;
+}
+
 
 #auth_message {
 	padding-top: 1em;
 }
 
 #auth_form {
-	margin-top: 2em;
+	margin-top: 1.5em;
 	text-align: left;
 }
 
