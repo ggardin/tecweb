@@ -20,8 +20,8 @@
 
 	<main id="content">
 		<h1>@@intestazione@@</h1>
-		<form id="gestione" method="post">
-
+		<form id="gestione" method="post" action="post_gest_film.php">
+			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni principali</legend>
 				<label for="titolo">Titolo</label>
@@ -75,10 +75,10 @@
 				<input id="nome_originale" name="nome_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
-				<select id="stato" class="form-control">
-					<option value="-1" selected="selected">TODO</option>
-					<option value="0">Rilasciato</option>
-					<option value="1">In produzione</option>
+				<select name="stato" id="stato">
+					<!-- stato_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- stato_end -->
 				</select>
 
 				<label for="budget">Budget</label>
@@ -90,10 +90,24 @@
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
-				<input name="collezione" id="collezione" value="TODO" />
+				<select name="collezione" id="collezione">
+					<option value=""></option>
+					<!-- collezione_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- collezione_end -->
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>Salva</legend>
+				<button type="submit" name="submit" value="@@submit_value@@">@@submit@@</button>
 			</fieldset>
 
-			<button type="submit" name="submit">@@submit@@</button>
+			<!-- delete_start -->
+			<fieldset>
+				<legend>Elimina</legend>
+				<button id="delete" type="submit" name="submit" value="elimina">Elimina</button>
+			</fieldset>
+			<!-- delete_end -->
 		</form>
 	</main>
 

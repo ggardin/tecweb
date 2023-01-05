@@ -16,14 +16,15 @@ try {
 	$connessione = new Database();
 	$film = $connessione->getFilmById($id);
 	if (!empty($film)) {
+		$stato = $connessione->getStatoById($film[0]["stato"]);
 		$collezione = $connessione->getCollezioneById($film[0]["collezione"]);
 		$crew = $connessione->getCrewByFilmId($id);
 		$genere = $connessione->getGenereByFilmId($id);
 		$paese = $connessione->getPaeseByFilmId($id);
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
-			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$lista = $connessione->getUserListsWithoutFilm($_SESSION["id"], $id);
+			$can_review = $connessione->canUtenteValutare($_SESSION["id"], $id);
+			$lista = $connessione->getListeSenzaFilm($_SESSION["id"], $id);
 		}
 	}
 	unset($connessione);
@@ -125,7 +126,7 @@ if (!empty($paese)) {
 } else
 	Tools::replaceSection($page, "paesi", "");
 Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
-Tools::replaceAnchor($page, "stato", $film["stato"]);
+Tools::replaceAnchor($page, "stato", $stato[0]["nome"]);
 if (isset($film["budget"])) {
 	Tools::replaceAnchor($page, "budget", $film["budget"] . " $");
 } else

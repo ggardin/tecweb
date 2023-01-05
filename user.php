@@ -12,7 +12,7 @@ if (! isset($_SESSION["id"])) {
 
 try {
 	$connessione = new Database();
-	$username = $connessione->getUsernameByUserId($_SESSION["id"]);
+	$username = $connessione->getUsernameByUtenteId($_SESSION["id"]);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

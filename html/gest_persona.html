@@ -20,21 +20,25 @@
 
 	<main id="content">
 		<h1>@@intestazione@@</h1>
-		<form id="gestione" method="post">
-
+		<form id="gestione" method="post" action="post_gest_persona.php">
+			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni</legend>
 				<label for="nome">Nome</label>
 				<input id="nome" name="nome" value="@@nome@@" />
 
 				<label for="gender"><span lang="en">Gender</span></label>
-				<input id="gender" name="gender" value="TODO" />
+				<select name="gender" id="gender">
+					<!-- gender_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- gender_end -->
+				</select>
 
-				<label for="locandina">Locandina</label>
-				<textarea id="locandina" name="locandina">TODO</textarea>
+				<label for="immagine">Immagine</label>
+				<textarea id="immagine" name="immagine">TODO</textarea>
 
 				<label for="data_nascita">Data di nascita</label>
-				<input type="date" id="data_nascita" name="data" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
+				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
 				<p id="data_nascita-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data_morte">Data di morte</label>
@@ -42,7 +46,17 @@
 				<p id="data_morte-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 			</fieldset>
-			<button type="submit" name="submit">@@submit@@</button>
+			<fieldset>
+				<legend>Salva</legend>
+				<button type="submit" name="submit" value="@@submit_value@@">@@submit@@</button>
+			</fieldset>
+
+			<!-- delete_start -->
+			<fieldset>
+				<legend>Elimina</legend>
+				<button id="delete" type="submit" name="submit" value="elimina">Elimina</button>
+			</fieldset>
+			<!-- delete_end -->
 		</form>
 	</main>
 
