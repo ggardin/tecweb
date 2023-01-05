@@ -518,7 +518,7 @@ CARDS
 	list-style-type: none;
 	padding: 0;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
 	gap: 1.5em;
 	justify-content: center;
 }
@@ -548,7 +548,7 @@ CARDS
 }
 
 .card > a img {
-	height: 14em;
+	height: 20em;
 	object-fit: cover;
 	flex-shrink: 0;
 }
