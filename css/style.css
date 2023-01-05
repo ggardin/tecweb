@@ -344,6 +344,11 @@ SEARCH BAR
 	display: flex;
 }
 
+.input-button-wrapper{
+	display: flex;
+	margin-top: 2em;
+}
+
 .searchTerm {
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
