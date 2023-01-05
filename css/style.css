@@ -604,33 +604,26 @@ MOVIE PAGE
 .modify-button {
 	display: flex;
 	text-align: center;
-	padding-bottom: .5em;
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	border: 2px solid var(--bgcolor-off);
+	padding: .5em;
+	height: 4.5em;
+	margin: 0.5em auto;
+	max-width: 18em;
 }
 
 .modify-button a {
-	color: var(--txtcolor);
 	align-self: center;
 	font-size: 1.2em;
 }
 
 .modify-button svg {
-	width: 2em;
-	height: 2em;
-}
-
-li .modify-button  {
-	background-color: var(--secondaryColor);
-	border-radius: var(--border-radius);
-	border: 2px solid var(--bgcolor-off);
-	padding: .5em;
-}
-
-
-li .modify-button svg {
 	min-width: 2em;
 	min-height: 2em;
 	margin: auto 0.3em;
 }
+
 
 li .modify-button a {
 	margin-right: .5em;
