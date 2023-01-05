@@ -759,12 +759,15 @@ INPUT FIELD
 ==============
 */
 
+fieldset, input, textarea, button, select {
+	border-radius: var(--border-radius);
+	border: 1px solid var(--bgcolor-off);
+}
+
 input, textarea, button, select {
 	width: 100%;
 	padding: 0.5em;
-	border-radius: var(--border-radius);
 	background-color: white;
-	border: none;
 }
 
 textarea {
@@ -916,9 +919,9 @@ USER LISTS PAGE
 
 #list-movies li {
 	margin-top: 1.5em;
-	display: flex;  /* Set the display property to flex to enable flexbox layout */
-	align-items: center;  /* Center the .button-container element vertically */
-	justify-content: center;  /* Center the .button-container element horizontally */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .deleteElementButton {
@@ -940,11 +943,6 @@ GESTIONE
 ==============
 */
 
-#gestione fieldset {
-	/* border: 0; */
-	margin-top: 1.5em;
-}
-
 #gestione textarea#descrizione {
 	height: 15em;
 }
@@ -955,7 +953,6 @@ GESTIONE
 }
 
 #gestione label {
-	font-size: 1.2em;
 	font-weight: 600;
 }
 
@@ -1018,4 +1015,10 @@ form .required {
 
 form input.invalid {
 	outline: 0.15rem solid var(--form-invalid);
+}
+
+@media (pointer: coarse) {
+	select[multiple] {
+		display: block;
+	}
 }
