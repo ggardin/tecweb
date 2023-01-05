@@ -15,8 +15,6 @@
 	--form-required-field: #d50000;
 	--form-invalid: var(--form-required-field);
 
-	--button-inactive: #20584F;
-
 	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
