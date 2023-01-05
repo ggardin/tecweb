@@ -616,6 +616,17 @@ MOVIE PAGE
 	height: 2em;
 }
 
+li .modify-button  {
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	border: 2px solid var(--bgcolor-off);
+	padding: .5em 0;
+}
+
+li .modify-button svg {
+	padding-left: .5em;
+}
+
 .movie-media img {
 	margin-bottom: 1em;
 }
