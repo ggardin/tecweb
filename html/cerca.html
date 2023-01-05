@@ -31,46 +31,32 @@
 			</div>
 
 			<div class="searchFilter">
-				<select name="t">
-					<!-- tipo_start -->
-					<option value="@@val@@" @@sel@@>@@nome@@</option>
-					<!-- tipo_end -->
+				<label for="type-select">Filtra per:</label>
+				<select name="fn" id="type-select">
+					<option value="">Niente, ma sai il niente?</option>
+					<option value="paese">Nazione</option>
+					<option value="genere">Genere (DEL FILM)</option>
 				</select>
+
 				<!-- filtri_start -->
-				<select name="fn">
+				<label for="genre-choice">Genere:</label>
+				<input list="genre-list" id="genre-choice" name="genre-choice">
+				<datalist id="genre-list">
 					<option hidden>-- nome filtro --</option>
 					<!-- f_nome_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
 					<!-- f_nome_end -->
-				</select>
-				<select name="fv">
-					<option hidden>-- valore filtro --</option>
-					<!-- f_val_start -->
-					<option value="@@val@@" @@sel@@>@@nome@@</option>
-					<!-- f_val_end -->
-				</select>
-				<!-- filtri_end -->
-
-
-				<label for="genre-choice">Genere:</label>
-				<input list="genre-list" id="genre-choice" name="genre-choice">
-				<datalist id="genre-list">
-					<option value="Horror">
-					<option value="Fantastico">
-					<option value="Fantascienza">
-					<option value="Thriller">
-					<option value="Animazione">
 				</datalist>
 
 				<label for="country-choice">Paese di produzione:</label>
 				<input list="country-list" id="country-choice" name="country-choice">
 				<datalist id="country-list">
-					<option value="Italia">
-					<option value="Stati Uniti">
-					<option value="Francia">
-					<option value="Giappone">
-					<option value="Spagna">
+					<option hidden>-- valore filtro --</option>
+					<!-- f_val_start -->
+					<option value="@@val@@" @@sel@@>@@nome@@</option>
+					<!-- f_val_end -->
 				</datalist>
+				<!-- filtri_end -->
 
 			</div>
 		</form>
