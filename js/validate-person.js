@@ -39,8 +39,8 @@ function validatePersonDateOfDeath() {
 
 	// Controlla che ci sia una stringa
 	if (date == null || date == '') {
-		showErrorMessage(id, 'Data di ' + event + ' non inserita.');
-		return false;
+		removeErrorMessage(id);
+		return true;
 	}
 
 	// Non c'è fallback
@@ -80,11 +80,13 @@ function validatePersonDateOfDeath() {
  * Confronta le date di nascita e di morte.
  */
 function comparePersonDates() {
+
 	// Le date sono state entrambe inserite e validate
 	if (validatePersonDateOfBirth() && validatePersonDateOfDeath()) {
 		var id = 'data_morte';
 		var birth = document.forms['gestione']['data_nascita'].value;
 		var death = document.forms['gestione']['data_morte'].value;
+		var lifeExpectancy = 120;
 
 		// Non c'è fallback, procedo
 		if (inputDateBrowserSupport()) {
@@ -99,12 +101,18 @@ function comparePersonDates() {
 
 		// Confronto le date
 		if (dateOfBirth.getTime() >= dateOfDeath.getTime()) {
-			showErrorMessage(id, 'Le date non sono coerenti')
+			showErrorMessage(id, 'Le data di morte indicata è antecedente a quella di nascita.')
 			return false;
 		}
+		// Confronto le date
+		if (dateOfDeath.getFullYear() - dateOfBirth.getFullYear() >= lifeExpectancy) {
+			showErrorMessage(id, 'Le date indicate sono troppo distanti fra loro.')
+			return false;
+		}
+
+		removeErrorMessage(id);
 	}
 
-	removeErrorMessage(id);
 	return true;
 }
 
