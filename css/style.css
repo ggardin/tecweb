@@ -569,11 +569,13 @@ CARDS
 	text-decoration: underline;
 	font-size: 1.2em;
 	margin-bottom: 1em;
-	text-overflow: ellipsis;
+	/* text-overflow: ellipsis;
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
+			line-clamp: 3;
 	-webkit-box-orient: vertical;
+			box-orient: vertical; */
 }
 
 .card > a .details > *:not(.title) {
