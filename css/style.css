@@ -133,7 +133,6 @@ HEADER
 }
 
 #page-header .actions {
-	border: 1px solid red;
 	display: flex;
 	gap: 0.5em;
 }
