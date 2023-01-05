@@ -57,16 +57,59 @@
 				<textarea id="compositore" name="compositore" >TODO</textarea>
 			</fieldset>
 
+			<fieldset id="crew">
+				<legend lang="en">Crew</legend>
+
+				<input type="button" onclick="addNewCrewMember(this.parentNode);" value="Aggiungi">
+				<input type="button" onclick="removeLastCrewMember(this.parentNode);" value="Rimuovi ultima aggiunta">
+
+				<!-- <label for="crew-name0">Nome e cognome</label>
+				<input id="crew-name0" name="crew-name0" type="text"></input>
+				<label for="crew-role0">Ruolo</label>
+				<select id="crew-role0" name="crew-role0">
+					<option value="0">Regista</option>
+					<option value="1">Sceneggiatore</option>
+					<option value="2">Produttore</option>
+					<option value="3">Compositore</option>
+				</select> -->
+
+			</fieldset>
+
 			<fieldset>
 				<legend>Generi</legend>
 				<label for="generi">Generi</label>
-				<textarea id="generi" name="generi">TODO</textarea>
+				<select id="generi" name="generi" multiple>
+					<option value="0">Azione</option>
+					<option value="1">Fantascienza</option>
+					<option value="2">Avventura</option>
+					<option value="3">Dramma</option>
+					<option value="4"><span lang="en">Crime</span></option>
+					<option value="5"><span lang="en">Thriller</span></option>
+					<option value="6">Commedia</option>
+					<option value="7"><span lang="en">Romance</span></option>
+					<option value="8"><span lang="en">Western</span></option>
+					<option value="9"><span lang="en">Fantasy</span></option>
+					<option value="10">Mistero</option>
+					<option value="11">Guerra</option>
+					<option value="12">Famiglia</option>
+					<option value="13">Animazione</option>
+					<option value="14">Musica</option>
+					<option value="15">Storia</option>
+					<option value="16"><span lang="en">Horror</span></option>
+				</select>
 			</fieldset>
 
 			<fieldset>
 				<legend>Paesi di produzione</legend>
 				<label for="paesi">Paesi</label>
-				<textarea id="paesi" name="paesi">TODO</textarea>
+				<input list="lista-paesi" id="paesi" name="paesi">
+				<input type="button" onclick="" />
+				<p role="status" id="selezione-paesi"></p>
+
+				<datalist id="lista-paesi">
+					<option value="Italia"></option>
+					<option value="Germania"></option>
+				</datalist>
 			</fieldset>
 
 			<fieldset>

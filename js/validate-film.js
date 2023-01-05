@@ -119,3 +119,44 @@ function validateMoney(id) {
 window.addEventListener('load', function () {
 	validateMovie();
 });
+
+var instance = 0;
+
+function addNewCrewMember(element) {
+	// Create new input fields
+	var newNameLabel = document.createElement("label");
+	var newNameInput = document.createElement("input");
+	var newRoleLabel = document.createElement("label");
+	var newRoleSelect = document.createElement("select");
+
+	newNameInput.id = "crew-name" + instance;
+	newNameInput.name = "crew-name" + instance;
+	newNameInput.type = "text";
+
+	newRoleSelect.id = "crew-role" + instance;
+	newRoleSelect.name = "crew-role" + instance;
+
+	newNameLabel.htmlFor = "crew-name" + instance;
+	newNameLabel.innerHTML = "Nome e cognome";
+
+	newRoleLabel.htmlFor = "crew-role" + instance;
+	newRoleLabel.innerHTML = "Ruolo";
+
+	element.appendChild(newNameInput, element.previousSibling.previousSibling);
+	element.insertBefore(newNameLabel, newNameInput);
+
+	element.appendChild(newRoleSelect, element.previousSibling.previousSibling);
+	element.insertBefore(newRoleLabel, newRoleSelect);
+
+	instance++;
+}
+
+function removeLastCrewMember(element) {
+
+	element.removeChild(element.lastChild);
+	element.removeChild(element.lastChild);
+	element.removeChild(element.lastChild);
+	element.removeChild(element.lastChild);
+
+	instance--;
+}
