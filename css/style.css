@@ -338,6 +338,8 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	max-width: 26em;
+	margin: 0 auto;
 }
 
 .input-button-wrapper {
