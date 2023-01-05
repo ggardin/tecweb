@@ -15,7 +15,7 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 try {
 	$connessione = new Database();
 	if ($id != "")
-		$lista = $connessione->getListNameById($id);
+		$lista = $connessione->getNomeListaById($id);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

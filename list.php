@@ -20,10 +20,10 @@ if ($id == "") {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->checkListOwnership($id, $_SESSION["id"])) {
+	if ($connessione->isListaPropria($id, $_SESSION["id"])) {
 		$own = true;
-		$nome = $connessione->getListNameById($id);
-		$lista = $connessione->getListItemsById($id);
+		$nome = $connessione->getNomeListaById($id);
+		$lista = $connessione->getFilmInLista($id);
 	}
 	unset($connessione);
 } catch (Exception) {

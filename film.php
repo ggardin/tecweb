@@ -23,8 +23,8 @@ try {
 		$paese = $connessione->getPaeseByFilmId($id);
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
-			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$lista = $connessione->getUserListsWithoutFilm($_SESSION["id"], $id);
+			$can_review = $connessione->puoValutare($_SESSION["id"], $id);
+			$lista = $connessione->getListeSenzaFilm($_SESSION["id"], $id);
 		}
 	}
 	unset($connessione);

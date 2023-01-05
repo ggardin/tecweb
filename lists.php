@@ -12,7 +12,7 @@ if (! isset($_SESSION["id"])) {
 
 try {
 	$connessione = new Database();
-	$liste = $connessione->getListsByUserId($_SESSION["id"]);
+	$liste = $connessione->getListeByUtenteId($_SESSION["id"]);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

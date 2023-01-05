@@ -24,10 +24,10 @@ try {
 	$connessione = new Database();
 	if ($submit == "aggiungi")
 		$res = $connessione->insertLista($user_id, $nome);
-	elseif ($submit == "modifica" && $connessione->checkListOwnership($list_id, $user_id))
-		$res = $connessione->modificaLista($list_id, $nome);
-	elseif ($submit == "elimina" && $connessione->checkListOwnership($list_id, $user_id))
-		$res = $connessione->deleteList($list_id);
+	elseif ($submit == "modifica" && $connessione->isListaPropria($list_id, $user_id))
+		$res = $connessione->updateLista($list_id, $nome);
+	elseif ($submit == "elimina" && $connessione->isListaPropria($list_id, $user_id))
+		$res = $connessione->deleteLista($list_id);
 	else
 		$res = false;
 	unset($connessione);

@@ -344,7 +344,7 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function getUsernameByUserId($id) : array {
+	public function getUsernameByUtenteId($id) : array {
 		$query = "select username
 			from utente
 			where id = ?";
@@ -355,7 +355,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getListsByUserId($id) : array {
+	public function getListeByUtenteId($id) : array {
 		$query = "select id, nome
 			from lista
 			where utente = ?";
@@ -366,7 +366,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getUserListsWithoutFilm($user_id, $film_id) : array {
+	public function getListeSenzaFilm($user_id, $film_id) : array {
 		$query = "select id, nome
 			from lista
 			where utente = ? and id not in
@@ -382,7 +382,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function checkListOwnership($list_id, $user_id) : bool {
+	public function isListaPropria($list_id, $user_id) : bool {
 		$query = "select nome
 			from lista
 			where id = ? and utente = ?";
@@ -393,7 +393,7 @@ class Database {
 		return (!empty($this->preparedSelect($query, $params, $types)));
 	}
 
-	public function getListNameById($id) : array {
+	public function getNomeListaById($id) : array {
 		$query = "select nome
 			from lista
 			where id = ?";
@@ -404,7 +404,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getListItemsById($id) : array {
+	public function getFilmInLista($id) : array {
 		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
 			from lista as l
 				join lista_film as lf
@@ -440,7 +440,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function addToListById($list_id, $film_id) : bool {
+	public function insertFilmInLista($list_id, $film_id) : bool {
 		$query = "insert into lista_film(lista, film)
 			values (?, ?)";
 
@@ -450,7 +450,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function canReview($user_id, $film_id) : bool {
+	public function puoValutare($user_id, $film_id) : bool {
 		$query = "select *
 			from valutazione
 			where utente = ? and film = ?";
@@ -461,7 +461,7 @@ class Database {
 		return empty($this->preparedSelect($query, $params, $types));
 	}
 
-	public function modificaFilm($film_id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : bool {
+	public function updateFilm($film_id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : bool {
 		$query = "update film
 			set nome = ?, nome_originale = ?, durata = ?, locandina = ?, descrizione = ?,
 				stato = ?, data_rilascio = ?, budget = ?, incassi = ?, collezione = ?
@@ -473,7 +473,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function inserisciPersona($nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
+	public function insertPersona($nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
 		$query = "insert into persona(nome, gender, immagine, data_nascita, data_morte)
 			values (?, ?, ?, ?, ?)";
 
@@ -483,7 +483,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function modificaPersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
+	public function updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
 		$query = "update persona
 			set nome = ?, gender = ?, immagine = ?, data_nascita = ?, data_morte = ?
 			where id = ?";
@@ -494,7 +494,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function modificaCollezione($id, $nome, $descrizione, $locandina) : bool {
+	public function updateCollezione($id, $nome, $descrizione, $locandina) : bool {
 		$query = "update collezione
 			set nome = ?, descrizione = ?, locandina = ?
 			where id = ?";
@@ -505,7 +505,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function modificaUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
+	public function updateUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
 		$query = "update utente
 			set username = ?, mail = ?, nome = ?, gender = ?, data_nascita = ?, password = ?
 			where id = ?";
@@ -516,7 +516,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function deleteList($list_id) : bool {
+	public function deleteLista($list_id) : bool {
 		$query = "delete from lista
 			where id = ?";
 
@@ -526,7 +526,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function modificaLista($list_id, $name) : bool {
+	public function updateLista($list_id, $name) : bool {
 		$query = "update lista
 			set nome = ?
 			where id = ?";
@@ -561,7 +561,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function addReview($user_id, $film_id, $voto, $testo) : bool {
+	public function addValutazione($user_id, $film_id, $voto, $testo) : bool {
 		$query = "insert into valutazione(utente, film, voto, testo)
 			values (?, ?, ?, ?)";
 
