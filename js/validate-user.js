@@ -13,15 +13,17 @@ function validateUserData() {
 }
 
 /*
- * Verifica che il nome utente (username) contenga solo lettere A~z
+ * Verifica che il nome utente (username) contenga solo lettere A~z o numeri
  */
 function validateUserUsername() {
+	var id = 'username';
 	var username = document.forms['update-user-data']['username'].value;
 	const allowedChars = /^[A-Za-z0-9]+$/; // lettere maiuscole e minuscole, numeri
 	if (!allowedChars.test(username)) {
-		alert('Nome utente non valido, usa solo lettere');
+		showErrorMessage(id, 'Nome utente non valido, usa solo lettere');
 		return false;
 	}
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -29,12 +31,14 @@ function validateUserUsername() {
  * Verifica che il nome dell'utente sia valido
  */
 function validateUserName() {
+	var id = 'nome';
 	var name = document.forms['update-user-data']['nome'].value;
 	const allowedChars = /^[A-Za-z\s'][^\d]*$/; // lettere, spazi, apostrofi
 	if (!allowedChars.test(name)) {
-		alert('Nome non valido');
+		showErrorMessage(id, 'Nome non valido');
 		return false;
 	}
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -49,12 +53,13 @@ function validateUserName() {
  *     Il browser utilizza il separatore "-".
  */
 function validateUserBirthday() {
+	var id = 'data';
 	var birthday = document.forms['update-user-data']['data'].value;
 	var today = new Date();
 
 	// Controlla che ci sia una stringa
 	if (birthday == null || birthday == '') {
-		alert('Data di nascita non inserita');
+		showErrorMessage(id, 'Data di nascita non inserita');
 		return false;
 	}
 
@@ -71,7 +76,7 @@ function validateUserBirthday() {
 			var dateOfBirth = new Date(parts[2], parts[1], parts[0]);
 		}
 		else {
-			alert('Formato della data non corretto. Usa dd/mm/yyyy');
+			showErrorMessage(id, 'Formato della data non corretto. Usa dd/mm/yyyy');
 			return false;
 		}
 	}
@@ -81,40 +86,29 @@ function validateUserBirthday() {
 
 	// controlla che l'utente abbia almeno 13 anni
 	if (age < 13) {
-		alert('Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
+		showErrorMessage(id, 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
 		return false;
 	}
 	// se la differenza è 13 potrebbe comunque non averli ancora compiuti
 	else if (age == 13) {
 		if (today.getMonth() < dateOfBirth.getMonth()) {
-			alert('Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
+			showErrorMessage(id, 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
 			return false;
 		}
 		else if (today.getMonth() == dateOfBirth.getMonth()) {
 			if (today.getDate() < dateOfBirth.getDate()) {
-				alert('Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
+				showErrorMessage(id, 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
 				return false;
 			}
 		}
 	}
 	// controlla che l'utente non abbia più di 100 anni
 	else if (age > 100) {
-		alert('Guarda, non è per fare i guastafeste, ma non ti sembra di essere in là con gli anni?');
+		showErrorMessage(id, 'Guarda, non è per fare i guastafeste, ma non ti sembra di essere in là con gli anni?');
 		return false;
 	}
-	return true;
-}
 
-/*
- * Controlla se il browser supporta <input type="date" />
- */
-function inputDateBrowserSupport() {
-	const fallbackTestElement = document.createElement('input');
-	try {
-		fallbackTestElement.type = 'date';
-	} catch (e) {
-		return false;
-	}
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -122,15 +116,18 @@ function inputDateBrowserSupport() {
  * Verifica che la stringa sia una mail
  */
 function validateUserEmail() {
+	var id = 'email';
 	var email = document.forms['update-user-data']['email'].value;
 	if (email == null || email == '') {
-		alert('Nessuna data inserita');
+		showErrorMessage(id, 'Nessuna data inserita');
 		return false;
 	}
 	if (!validateEmail(email)) {
-		alert('Non è una email');
+		showErrorMessage(id, 'Non è una email');
 		return false;
 	}
+	removeErrorMessage(id);
+	return true;
 }
 
 function validateEmail(email) {

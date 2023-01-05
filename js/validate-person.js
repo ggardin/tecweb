@@ -33,12 +33,13 @@ function validatePersonDateOfDeath() {
  *     Il browser utilizza il separatore "-".
  */
  function validatePersonDate(date, event) {
-	var dateLowerBound = new Date(document.forms['gestione']['data'].min);
-	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
+	var id = 'data_' + event;
+	var dateLowerBound = new Date(document.forms['gestione']['data_' + event].min);
+	var dateUpperBound = new Date(document.forms['gestione']['data_' + event].max);
 
 	// Controlla che ci sia una stringa
 	if (date == null || date == '') {
-		alert('Data di ' + event + ' non inserita');
+		showErrorMessage(id, 'Data di ' + event + ' non inserita.');
 		return false;
 	}
 
@@ -55,35 +56,23 @@ function validatePersonDateOfDeath() {
 			var dateOfEvent = new Date(parts[2], parts[1], parts[0]);
 		}
 		else {
-			alert('Formato della data di ' + event + ' non corretto. Usa dd/mm/yyyy');
+			showErrorMessage(id, 'Formato della data di ' + event + ' non corretto. Usa dd/mm/yyyy.');
 			return false;
 		}
 	}
 
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfEvent.getTime() < dateLowerBound.getTime()) {
-		alert('Data di ' + event + ' immessa antecedente al limite minimo');
+		showErrorMessage(id, 'Data di ' + event + ' immessa antecedente al limite minimo.');
 		return false;
 	}
 	// Controlla se la data è superiore al limite massimo
 	if (dateOfEvent.getTime() > dateUpperBound.getTime()) {
-		alert('Data di ' + event + ' immessa successiva al limite massimo');
+		showErrorMessage(id, 'Data di ' + event + ' immessa successiva al limite massimo.');
 		return false;
 	}
 
-	return true;
-}
-
-/*
- * Controlla se il browser supporta <input type="date" />
- */
-function inputDateBrowserSupport() {
-	const fallbackTestElement = document.createElement('input');
-	try {
-		fallbackTestElement.type = 'date';
-	} catch (e) {
-		return false;
-	}
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -93,6 +82,7 @@ function inputDateBrowserSupport() {
 function comparePersonDates() {
 	// Le date sono state entrambe inserite e validate
 	if (validatePersonDateOfBirth() && validatePersonDateOfDeath()) {
+		var id = 'data_morte';
 		var birth = document.forms['gestione']['data_nascita'].value;
 		var death = document.forms['gestione']['data_morte'].value;
 
@@ -109,11 +99,12 @@ function comparePersonDates() {
 
 		// Confronto le date
 		if (dateOfBirth.getTime() >= dateOfDeath.getTime()) {
-			alert('Le date non sono coerenti')
+			showErrorMessage(id, 'Le date non sono coerenti')
 			return false;
 		}
 	}
 
+	removeErrorMessage(id);
 	return true;
 }
 

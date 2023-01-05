@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( validateMovieReleaseDate() && validateMovieRuntime() ) {
+		if ( validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() ) {
 			event.preventDefault();
 		}
 	});
@@ -23,13 +23,14 @@ function validateMovie() {
  *     Il browser utilizza il separatore "-".
  */
  function validateMovieReleaseDate() {
+	var id = 'data';
 	var releaseDate = document.forms['gestione']['data'].value;
 	var dateLowerBound = new Date(document.forms['gestione']['data'].min);
 	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
 
 	// Controlla che ci sia una stringa
 	if (releaseDate == null || releaseDate == '') {
-		alert('Data di rilascio non inserita');
+		showErrorMessage(id, 'Data di rilascio non inserita.');
 		return false;
 	}
 
@@ -46,35 +47,23 @@ function validateMovie() {
 			var dateOfRelease = new Date(parts[2], parts[1], parts[0]);
 		}
 		else {
-			alert('Formato della data non corretto. Usa dd/mm/yyyy');
+			showErrorMessage(id, 'Formato della data non corretto. Usa dd/mm/yyyy.');
 			return false;
 		}
 	}
 
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfRelease.getTime() < dateLowerBound.getTime()) {
-		alert('Data immessa antecedente al limite minimo');
+		showErrorMessage(id, 'Data immessa antecedente al limite minimo.');
 		return false;
 	}
 	// Controlla se la data è superiore al limite massimo
 	if (dateOfRelease.getTime() > dateUpperBound.getTime()) {
-		alert('Data immessa successiva al limite massimo');
+		showErrorMessage(id, 'Data immessa successiva al limite massimo.');
 		return false;
 	}
 
-	return true;
-}
-
-/*
- * Controlla se il browser supporta <input type="date" />
- */
-function inputDateBrowserSupport() {
-	const fallbackTestElement = document.createElement('input');
-	try {
-		fallbackTestElement.type = 'date';
-	} catch (e) {
-		return false;
-	}
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -83,22 +72,21 @@ function inputDateBrowserSupport() {
  * Avvisa se la durata in minuti è troppo alta
  */
 function validateMovieRuntime() {
+	var id = 'durata';
 	var runtime = document.forms['gestione']['durata'].value;
 
 	// se durata negativa, segnala errore
 	if (runtime <= 0) {
-		alert('Durata in minuti inferiore a 0 minuti');
+		showErrorMessage(id, "Durata in minuti inferiore a 0 minuti.");
 		return false;
-	}
-	// se durata elevata, segnala possibile errore ma non blocca
-	else if ( runtime < 1000 && runtime > 240 ) {
-		alert('La cifra indicata in durata è elevata. Puoi verificare che il dato immesso sia corretto?');
 	}
 	// se durata oltre soglia, segnala errore
 	else if (runtime > 1000) {
-		alert('Durata in minuti superiore a 1000 minuti');
+		showErrorMessage(id, "Durata in minuti superiore a 1000 minuti.");
 		return false;
 	}
+
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -106,23 +94,26 @@ function validateMovieRuntime() {
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBudget() {
-	validateMoney("budget");
+	validateMoney('budget');
 }
 
 /*
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBoxOfficeEarnings() {
-	validateMoney("incassi");
+	validateMoney('incassi');
 }
 
 /*
- * Avvisa se la cifra indicata è oltre la soglia
+ * Valida la cifra
  */
-function validateMoney(name) {
-	if ( document.forms['gestione'][name].value > 1000000 ) {
-		alert('La cifra indicata in ' + name + ' è molto alta. Puoi verificare che il dato immesso sia corretto?');
+function validateMoney(id) {
+	if ( document.forms['gestione'][id].value <= 0 ) {
+		showErrorMessage(id, 'La cifra non può essere inferiore a 0.');
+		return false;
 	}
+	removeErrorMessage(id);
+	return true;
 }
 
 window.addEventListener('load', function () {
