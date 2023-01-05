@@ -20,12 +20,13 @@
 
 	<main id="content">
 		<form id="gestione" method="post">
+
 			<fieldset>
 				<legend>Persona</legend>
 				<label for="nome">Nome</label>
 				<input id="nome" name="nome" value="@@nome@@" />
 
-				<label for="gender">Gender</label>
+				<label for="gender"><span lang="en">Gender</span></label>
 				<input id="gender" name="gender" value="TODO" />
 
 				<label for="locandina">Locandina</label>
@@ -33,9 +34,12 @@
 
 				<label for="data_nascita">Data di nascita</label>
 				<input type="date" id="data_nascita" name="data" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
+				<p id="data_nascita-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data_morte">Data di morte</label>
 				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2999-12-31" value="@@data_morte@@" onblur="validatePersonDateOfDeath();comparePersonDates();" />
+				<p id="data_morte-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+
 			</fieldset>
 			<button type="submit" name="submit">@@submit@@</button>
 		</form>

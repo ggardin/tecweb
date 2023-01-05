@@ -20,6 +20,7 @@
 
 	<main id="content">
 		<form id="gestione" method="post">
+
 			<fieldset>
 				<legend>Informazioni principali</legend>
 				<label for="titolo">Titolo</label>
@@ -32,10 +33,12 @@
 				<textarea id="locandina" name="locandina">TODO</textarea>
 
 				<label for="data">Data rilascio</label>
-				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validaMovieReleaseDate();"/>
+				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />
+				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="durata">Durata in minuti</label>
-				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" onblur="validateMovieRuntime();"/>
+				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" onblur="validateMovieRuntime();" aria-describedby="durata-hint" />
+				<p id="durata-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 
 			<fieldset>
@@ -78,10 +81,12 @@
 				</select>
 
 				<label for="budget">Budget</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();"/>
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" />
+				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="incassi">Incassi</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();"/>
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" />
+				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
 				<input name="collezione" id="collezione" value="TODO" />

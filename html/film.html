@@ -124,13 +124,14 @@
 				</header>
 				<!-- add_review_start -->
 				<form id="add-review" method="post" action="post_add_review.php">
+
 					<input type="hidden" name="film_id" value="@@review_film_id@@" />
 					<fieldset>
 						<legend>Nuova recensione</legend>
 
-						<p>Voto</p>
+						<p>Voto<span class="required">(richiesto)</span></p>
 						<div class="rating-range">
-							<input type="radio" id="rating0" name="voto" value="0" hidden checked/>
+							<input type="radio" id="rating0" name="voto" value="0" hidden checked aria-describedby="rating0-hint" />
 
 							<div>
 								<label for="rating1">1</label>
@@ -173,10 +174,12 @@
 								<input type="radio" id="rating10" name="voto" value="10" />
 							</div>
 						</div>
+						<p id="rating0-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
-						<label for="review-text">Recensione</label>
+						<label for="review-text">Recensione<span class="required">(richiesto)</span></label>
 						<p id="review-chars">Hai a disposizione 1000 caratteri.</p>
-						<textarea name="testo" id="review-text" maxlength="1000" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();"></textarea>
+						<textarea name="testo" id="review-text" maxlength="1000" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();" required aria-describedby="review-chars review-text-hint"></textarea>
+						<p id="review-text-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 						<button type="submit">Pubblica la tua recensione</button>
 					</fieldset>
