@@ -346,7 +346,7 @@ SEARCH BAR
 
 .input-button-wrapper{
 	display: flex;
-	margin-top: 2em;
+	margin-top: 1.5em;
 }
 
 .searchTerm {
@@ -489,7 +489,12 @@ INDEX
 ==============
 */
 
-#hero {
+#hero h1 {
+	font-size: 3em;
+	text-align: center;
+}
+
+#hero p {
 	font-size: 1.5em;
 	text-align: center;
 }
