@@ -21,14 +21,16 @@
 			<h1><span lang="en">soundstage</span></h1>
 			<p>Non dimenticherai mai più un film</p>
 			<form method="get" action="cerca.php" class="search">
-				<label for="searchbar" aria-label="Barra di ricerca"></label>
-				<input type="text" id="searchbar" class="searchTerm" name="q" placeholder="Che film vuoi cercare?" />
-				<button type="submit" class="searchButton" aria-label="Avvia la ricerca">
-					<svg width="34" height="34" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-						<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="M25 49.98c13.68 0 25-11.35 25-25 0-13.68-11.35-25-25.02-25A25.16 25.16 0 0 0 0 24.98a25.2 25.2 0 0 0 25 25Zm0-4.17A20.73 20.73 0 0 1 4.2 24.98 20.71 20.71 0 0 1 24.97 4.14a20.77 20.77 0 0 1 20.85 20.84A20.75 20.75 0 0 1 25 45.8Zm-2.67-13.46c1.98 0 3.85-.58 5.42-1.56l6.27 6.25c.49.51 1.03.73 1.74.73 1.18 0 1.99-.86 1.99-2.08a2.2 2.2 0 0 0-.67-1.5l-6.32-6.35a10.08 10.08 0 0 0 1.76-5.68c0-5.61-4.58-10.2-10.2-10.2-5.6 0-10.19 4.61-10.19 10.2 0 5.59 4.59 10.2 10.2 10.2Zm0-3.33a6.91 6.91 0 0 1-6.86-6.86 6.91 6.91 0 0 1 6.86-6.86 6.88 6.88 0 0 1 6.84 6.86 6.9 6.9 0 0 1-6.84 6.86Z"/>
-					</svg>
-				</button>
-				<input type="hidden" name="t" value="film" />
+				<div class="input-button-wrapper">
+					<label for="searchbar" aria-label="Barra di ricerca"></label>
+					<input type="text" id="searchbar" class="searchTerm" name="q" placeholder="Che film vuoi cercare?" />
+					<button type="submit" class="searchButton" aria-label="Avvia la ricerca">
+						<svg width="34" height="34" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="M25 49.98c13.68 0 25-11.35 25-25 0-13.68-11.35-25-25.02-25A25.16 25.16 0 0 0 0 24.98a25.2 25.2 0 0 0 25 25Zm0-4.17A20.73 20.73 0 0 1 4.2 24.98 20.71 20.71 0 0 1 24.97 4.14a20.77 20.77 0 0 1 20.85 20.84A20.75 20.75 0 0 1 25 45.8Zm-2.67-13.46c1.98 0 3.85-.58 5.42-1.56l6.27 6.25c.49.51 1.03.73 1.74.73 1.18 0 1.99-.86 1.99-2.08a2.2 2.2 0 0 0-.67-1.5l-6.32-6.35a10.08 10.08 0 0 0 1.76-5.68c0-5.61-4.58-10.2-10.2-10.2-5.6 0-10.19 4.61-10.19 10.2 0 5.59 4.59 10.2 10.2 10.2Zm0-3.33a6.91 6.91 0 0 1-6.86-6.86 6.91 6.91 0 0 1 6.86-6.86 6.88 6.88 0 0 1 6.84 6.86 6.9 6.9 0 0 1-6.84 6.86Z"/>
+						</svg>
+					</button>
+					<input type="hidden" name="t" value="film" />
+				</div>
 			</form>
 		</div>
 
