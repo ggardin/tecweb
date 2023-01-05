@@ -835,10 +835,11 @@ AUTH
 #auth main {
 	background-color: var(--secondaryColor);
 	max-width: var(--auth-form-width);
-	margin: var(--content-padding) auto;
+	margin: var(--content-padding);
 	border-radius: var(--border-radius);
 	text-align: center;
 	padding: var(--content-padding);
+
 }
 
 #auth_message {
