@@ -1,4 +1,49 @@
 /*
+ * Mostra messaggio di errore a seguito di validazione
+ */
+function showErrorMessage(id, message) {
+	var element = document.getElementById(id);
+	var messageTarget = document.getElementById(id + '-hint');
+
+	removeErrorMessage(id);
+
+	element.setAttribute("aria-invalid", true);
+	element.classList.add('invalid');
+
+	messageTarget.classList.add("error-message");
+	messageTarget.innerHTML = message;
+	return;
+}
+
+/*
+ * Rimuove messaggio di errore a seguito di validazione
+ */
+function removeErrorMessage(id) {
+	var element = document.getElementById(id);
+	var messageTarget = document.getElementById(id + '-hint');
+
+	element.setAttribute("aria-invalid", false);
+	element.classList.remove('invalid');
+
+	messageTarget.classList.remove("error-message");
+	messageTarget.innerHTML = '';
+	return;
+}
+
+/*
+ * Controlla se il browser supporta <input type="date" />
+ */
+function inputDateBrowserSupport() {
+	const fallbackTestElement = document.createElement('input');
+	try {
+		fallbackTestElement.type = 'date';
+	} catch (e) {
+		return false;
+	}
+	return true;
+}
+
+/*
  * Gestisce interruttore hamburger menu
  */
 
