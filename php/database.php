@@ -516,11 +516,21 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function deleteLista($list_id) : bool {
+	public function deletePersona($id) : bool {
+		$query = "delete from persona
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function deleteLista($id) : bool {
 		$query = "delete from lista
 			where id = ?";
 
-		$params = [$list_id];
+		$params = [$id];
 		$types = "i";
 
 		return $this->preparedUpdates($query, $params, $types);
