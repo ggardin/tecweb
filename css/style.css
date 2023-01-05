@@ -337,36 +337,50 @@ SEARCH BAR
 ==============
 */
 
-#hero .search {
-	position: relative;
-	display: flex;
-	margin: 1.5em auto 2.5em;
-	max-width: 18em;
-}
-
 .search {
 	position: relative;
 	display: flex;
+	flex-direction: column;
+	max-width: 26em;
+	margin: 0 auto;
+}
+
+.input-button-wrapper {
+	display: flex;
+}
+
+.input-button-wrapper{
+	display: flex;
+	margin-top: 1.5em;
 }
 
 .searchTerm {
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
-	font-size: 0.8em;
-	/* outline: none; */
 }
 
 .searchButton {
 	width: auto;
-	/* background: var(--tertiaryColor); */
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
-	padding-left: .4em;
-	padding-right: .4em;
+	padding-left: .5em;
+	padding-right: .5em;
 }
 
 .searchButton svg {
 	color: var(--bgcolor);
 	width: 34px;
 	height: 34px;
+}
+
+
+/*
+==============
+SEARCH FILTER
+==============
+*/
+
+.searchFilter{
+	margin-top: .5em;
+	margin-bottom: .5em;
 }
 
 /*
@@ -476,7 +490,12 @@ INDEX
 ==============
 */
 
-#hero {
+#hero h1 {
+	font-size: 3em;
+	text-align: center;
+}
+
+#hero p {
 	font-size: 1.5em;
 	text-align: center;
 }
