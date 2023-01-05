@@ -60,7 +60,7 @@ body > #page-footer {
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	gap: 0.5em;
+	/*gap: 0.5em;*/
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
@@ -90,11 +90,11 @@ HEADER
 #page-header {
 	position: sticky;
 	top: 0;
-	color: var(--txtcolor);
+	/*color: var(--txtcolor);*/
 	background-color: var(--bgcolor);
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	/*align-items: center;*/
 	z-index: 10;
 	height: var(--header-height);
 }
@@ -133,12 +133,18 @@ HEADER
 }
 
 #page-header .actions {
+	border: 1px solid red;
 	display: flex;
 	gap: 0.5em;
 }
 
 #page-header button {
 	width: auto;
+}
+
+#page-header .logo{
+	width: 4em;
+	height: 2.5em;
 }
 
 .accountButton{
@@ -195,7 +201,14 @@ FOOTER
 	flex-flow: row wrap;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
-	padding: 1em;
+	padding: .5em 1em 1em;
+}
+
+#page-footer svg{
+	margin-right: 2em;
+	width: 7em;
+	height: 7em;
+
 }
 
 #page-footer > div:not(:last-child) {
@@ -217,7 +230,7 @@ FOOTER
 }
 
 #page-footer li {
-	padding: 0.2em 0;
+	padding: 0.5em 0;
 }
 
 #page-footer li a {
@@ -233,8 +246,9 @@ FOOTER
 	font-size: 0.8em;
 }
 
-#page-footer svg{
-	margin-right: 3em;
+#attribution{
+	font-size: .8em;
+	margin-top: 1.5em;
 }
 
 
@@ -284,13 +298,20 @@ TMDB ATTRIBUTION
 *, *::before, *::after {
 	box-sizing: border-box;
 }
+
 * {
 	margin: 0;
 }
-img, picture, svg {
+
+img, picture {
 	display: block;
 	max-width: 100%;
 }
+
+svg{
+	width: 2.37em;
+}
+
 input, button, textarea, select {
 	font: inherit;
 }
@@ -309,7 +330,6 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 #themeToggle svg {
-	/*width: 1.8em;*/ /*Commentato perché troncava l'icona*/
 	fill: none;
 }
 
@@ -345,13 +365,10 @@ SEARCH BAR
 	margin: 0 auto;
 }
 
-.input-button-wrapper {
-	display: flex;
-}
-
 .input-button-wrapper{
 	display: flex;
-	margin-top: 1.5em;
+	margin-top: 1em;
+	height: 3.5em;
 }
 
 .searchTerm {
@@ -381,6 +398,11 @@ SEARCH FILTER
 .searchFilter{
 	margin-top: .5em;
 	margin-bottom: .5em;
+}
+
+.resultMessage{
+	margin-bottom: 1em;
+	margin-top: 1em;
 }
 
 /*
@@ -498,6 +520,7 @@ INDEX
 #hero p {
 	font-size: 1.5em;
 	text-align: center;
+	margin-bottom: .5em;
 }
 
 .container {
