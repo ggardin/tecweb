@@ -450,7 +450,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function puoValutare($user_id, $film_id) : bool {
+	public function canValutare($user_id, $film_id) : bool {
 		$query = "select *
 			from valutazione
 			where utente = ? and film = ?";
