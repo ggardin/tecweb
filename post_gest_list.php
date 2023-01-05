@@ -24,9 +24,9 @@ try {
 	$connessione = new Database();
 	if ($submit == "aggiungi")
 		$res = $connessione->insertLista($user_id, $nome);
-	elseif ($submit == "modifica" && $connessione->isListaPropria($list_id, $user_id))
+	elseif ($submit == "modifica" && $connessione->isListaDiUtente($list_id, $user_id))
 		$res = $connessione->updateLista($list_id, $nome);
-	elseif ($submit == "elimina" && $connessione->isListaPropria($list_id, $user_id))
+	elseif ($submit == "elimina" && $connessione->isListaDiUtente($list_id, $user_id))
 		$res = $connessione->deleteLista($list_id);
 	else
 		$res = false;

@@ -17,7 +17,7 @@ if ($user_id == "") {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->isListaPropria($list_id, $user_id)) {
+	if ($connessione->isListaDiUtente($list_id, $user_id)) {
 		$own = true;
 		$res = $connessione->insertFilmInLista($list_id, $film_id);
 	}

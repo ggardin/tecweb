@@ -20,7 +20,7 @@ if ($id == "") {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->isListaPropria($id, $_SESSION["id"])) {
+	if ($connessione->isListaDiUtente($id, $_SESSION["id"])) {
 		$own = true;
 		$nome = $connessione->getNomeListaById($id);
 		$lista = $connessione->getFilmInLista($id);

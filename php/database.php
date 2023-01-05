@@ -382,7 +382,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function isListaPropria($list_id, $user_id) : bool {
+	public function isListaDiUtente($list_id, $user_id) : bool {
 		$query = "select nome
 			from lista
 			where id = ? and utente = ?";
@@ -450,7 +450,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function canValutare($user_id, $film_id) : bool {
+	public function canUtenteValutare($user_id, $film_id) : bool {
 		$query = "select *
 			from valutazione
 			where utente = ? and film = ?";
