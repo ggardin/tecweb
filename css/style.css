@@ -608,9 +608,9 @@ MOVIE PAGE
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
-	height: 4.5em;
+	height: 4em;
 	margin: 0.5em auto;
-	max-width: 18em;
+	max-width: 22em;
 }
 
 .modify-button a {
