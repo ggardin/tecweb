@@ -9,29 +9,32 @@ if (! isset($tipo)) {
 }
 
 $query = (isset($_GET["q"])) ? $_GET["q"] : "";
-// $tipo = (isset($_GET["t"])) ? $_GET["t"] : "film";
 $f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
 $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
+
+$limit = 15;
+$next = (isset($_GET["n"])) ? intval($_GET["n"]) : 0;
+$offset = $limit * $next;
 
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
 		if ($f_nome == "genere" && $f_val) {
-			$cerca = $connessione->searchFilmFilteredByGenere($query, $f_val);
+			$cerca = $connessione->searchFilmFilteredByGenere($query, $limit, $offset, $f_val);
 			$generi = $connessione->getGeneri();
 		}
 		elseif ($f_nome == "paese" && $f_val) {
-			$cerca = $connessione->searchFilmFilteredByPaese($query, $f_val);
+			$cerca = $connessione->searchFilmFilteredByPaese($query, $limit, $offset, $f_val);
 			$paesi = $connessione->getPaesi();
 		}
 		else {
-			$cerca = $connessione->searchFilm($query);
+			$cerca = $connessione->searchFilm($query, $limit, $offset);
 			$f_nome = "";
 		}
 	} elseif ($tipo == "collezione")
-		$cerca = $connessione->searchCollezione($query);
+		$cerca = $connessione->searchCollezione($query, $limit, $offset);
 	elseif ($tipo == "persona")
-		$cerca = $connessione->searchPersona($query);
+		$cerca = $connessione->searchPersona($query, $limit, $offset);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -83,7 +86,10 @@ Tools::replaceSection($page, "tipo", $res);
 if ($tipo != "film")
 	Tools::replaceSection($page, "filtri", "");
 
-if (!empty($cerca)) {
+if (!empty($cerca[0])) {
+	$shown = count($cerca[0]);
+	$tot = $cerca[1][0]["n"];
+	$cerca = $cerca[0];
 	Tools::toHtml($cerca);
 	$card = Tools::getSection($page, "card");
 	$r = "";
@@ -103,7 +109,15 @@ if (!empty($cerca)) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "card", $r);
-	Tools::replaceAnchor($page, "message", (count($cerca) . (count($cerca) != 1 ? " risultati" : " risultato")));
+	Tools::replaceAnchor($page, "message", ("Da " . ($offset+1) . " a " . ($offset+$shown) . " (su " . $tot . " trovati)"));
+	if ($next > 0)
+		Tools::replaceAnchor($page, "prev", "cerca_$tipo.php?q=$query&n=" . ($next-1));
+	else
+		Tools::replaceSection($page, "prev", "");
+	if ($tot > $offset + $shown)
+		Tools::replaceAnchor($page, "next", "cerca_$tipo.php?q=$query&n=" . ($next+1));
+	else
+		Tools::replaceSection($page, "next", "");
 } else {
 	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
 	Tools::replaceSection($page, "results", "");
