@@ -95,7 +95,7 @@ class Tools {
 	}
 
 	private static function deleteCircularLinks(&$page, $name) : void {
-		$from = '/<a href="' . $name . '\.php.*?">(.*?)<\/a>/';
+		$from = '/<a href="' . $name . '\.php.*?">(.*?)<\/a>/s';
 		$to = '<span class="active">${1}</span>';
 		$page = preg_replace($from, $to, $page);
 	}
