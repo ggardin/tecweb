@@ -114,6 +114,7 @@ class Tools {
 		} elseif ($type == "auth") {
 			$home = self::getSection($page, "header_home");
 			self::replaceSection($page, "header_li", $home);
+			self::replaceSection($page, "account", "");
 		}
 
 		self::deleteCircularLinks($page, ($active ?: $name));
