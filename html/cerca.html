@@ -33,14 +33,16 @@
 			<!-- filtri_start -->
 			<div class="searchFilter">
 				<label for="tipo-filtro">Filtra per:</label>
-				<select name="fn" id="tipo-filtro">
+				<select id="tipo-filtro">
+				<!-- <select name="fn" id="tipo-filtro"> -->
 					<option value=""></option>
 					<option value="paese">Nazione</option>
 					<option value="genere">Genere</option>
 				</select>
 
 				<label for="filtro-genere">Genere:</label>
-				<input list="genere" id="filtro-genere" name="filtro-genere" />
+				<input list="genere" id="filtro-genere" />
+				<!-- <input list="genere" id="filtro-genere" name="filtro-genere" /> -->
 				<datalist id="genere">
 					<!-- genere_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
@@ -48,7 +50,8 @@
 				</datalist>
 
 				<label for="filtro-paese">Paese di produzione:</label>
-				<input list="paese" id="filtro-paese" name="filtro-paese" />
+				<input list="paese" id="filtro-paese" />
+				<!-- <input list="paese" id="filtro-paese" name="filtro-paese" /> -->
 				<datalist id="paese">
 					<!-- paese_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
@@ -103,10 +106,10 @@
 		<!-- message_end -->
 		<!-- results_start -->
 		<!-- prev_start -->
-		<a href="@@prer_link@@">Precedenti</a>
+		<a href="@@prev@@">Precedenti</a>
 		<!-- prev_end -->
 		<!-- next_start -->
-		<a href="@@next_link@@">Prossimi</a>
+		<a href="@@next@@">Prossimi</a>
 		<!-- next_end -->
 		<ul class="cards">
 			<!-- card_start -->
