@@ -281,20 +281,28 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function searchFilm($str) : array {
-		$query = "select id, nome, locandina, data_rilascio
-			from film
+	public function searchFilm($str, $limit, $offset) : array {
+		$base = "from film
 			where nome like ?
 			order by data_rilascio is null, data_rilascio";
 
-		$params = [("%" . trim($str) . "%")];
+		$search = [];
 
-		return $this->preparedSelect($query, $params);
+		$q0 = "select id, nome, locandina, data_rilascio " . $base . " limit ? offset ?";
+		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "sii";
+		$search[0] = $this->preparedSelect($q0, $p0, $t0);
+
+		$q1 = "select count(*) as n " . $base;
+		$p1 = [("%" . trim($str) . "%")];
+		$t1 = "s";
+		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+
+		return $search;
 	}
 
-	public function searchFilmFilteredByGenere($str, $genere) : array {
-		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
-			from film as f
+	public function searchFilmFilteredByGenere($str, $limit, $offset, $genere) : array {
+		$base = "from film as f
 				join film_genere as fg
 					on f.id = fg.film
 				join genere as g
@@ -303,14 +311,23 @@ class Database {
 				and g.nome = ?
 			order by f.data_rilascio is null, f.data_rilascio";
 
-		$params = [("%" . trim($str) . "%"), $genere];
+		$search = [];
 
-		return $this->preparedSelect($query, $params);
+		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
+		$p0 = [("%" . trim($str) . "%"), $genere, $limit, $offset];
+		$t0 = "ssii";
+		$search[0] = $this->preparedSelect($q0, $p0, $t0);
+
+		$q1 = "select count(*) as n " . $base;
+		$p1 = [("%" . trim($str) . "%"), $genere];
+		$t1 = "ss";
+		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+
+		return $search;
 	}
 
-	public function searchFilmFilteredByPaese($str, $paese) : array {
-		$query = "select f.id, f.nome, f.locandina, f.data_rilascio
-			from film as f
+	public function searchFilmFilteredByPaese($str, $limit, $offset, $paese) : array {
+		$base = "from film as f
 				join film_paese as fp
 					on f.id = fp.film
 				join paese as p
@@ -319,29 +336,57 @@ class Database {
 				and p.nome = ?
 			order by f.data_rilascio is null, f.data_rilascio";
 
-		$params = [("%" . trim($str) . "%"), $paese];
+		$search = [];
 
-		return $this->preparedSelect($query, $params);
+		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
+		$p0 = [("%" . trim($str) . "%"), $paese, $limit, $offset];
+		$t0 = "ssii";
+		$search[0] = $this->preparedSelect($q0, $p0, $t0);
+
+		$q1 = "select count(*) as n " . $base;
+		$p1 = [("%" . trim($str) . "%"), $paese];
+		$t1 = "ss";
+		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+
+		return $search;
 	}
 
-	public function searchCollezione($str) : array {
-		$query = "select id, nome, locandina
-			from collezione
+	public function searchCollezione($str, $limit, $offset) : array {
+		$base = "from collezione
 			where nome like ?";
 
-		$params = [("%" . trim($str) . "%")];
+		$search = [];
 
-		return $this->preparedSelect($query, $params);
+		$q0 = "select id, nome, locandina " . $base . " limit ? offset ?";
+		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "sii";
+		$search[0] = $this->preparedSelect($q0, $p0, $t0);
+
+		$q1 = "select count(*) as n " . $base;
+		$p1 = [("%" . trim($str) . "%")];
+		$t1 = "s";
+		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+
+		return $search;
 	}
 
-	public function searchPersona($str) : array {
-		$query = "select id, nome, immagine
-			from persona
+	public function searchPersona($str, $limit, $offset) : array {
+		$base = "from persona
 			where nome like ?";
 
-		$params = [("%" . trim($str) . "%")];
+		$search = [];
 
-		return $this->preparedSelect($query, $params);
+		$q0 = "select id, nome, immagine " . $base . " limit ? offset ?";
+		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "sii";
+		$search[0] = $this->preparedSelect($q0, $p0, $t0);
+
+		$q1 = "select count(*) as n " . $base;
+		$p1 = [("%" . trim($str) . "%")];
+		$t1 = "s";
+		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+
+		return $search;
 	}
 
 	public function getUsernameByUtenteId($id) : array {
