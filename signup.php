@@ -10,7 +10,7 @@ if (isset($_SESSION["id"])) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"), "auth");
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"], "auth");
 
 Tools::showPage($page);
 

@@ -9,7 +9,7 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 Tools::showPage($page);
 

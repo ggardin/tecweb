@@ -25,7 +25,7 @@ try {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if ($id != "" && !empty($persona)) {
 	$persona = $persona[0];

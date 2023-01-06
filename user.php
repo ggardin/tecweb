@@ -20,7 +20,7 @@ try {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 Tools::replaceAnchor($page, "username", $username[0]["username"]);
 if ($_SESSION["is_admin"] == 0) Tools::replaceSection($page, "admin", "");
