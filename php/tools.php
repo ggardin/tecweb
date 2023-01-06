@@ -95,26 +95,28 @@ class Tools {
 	}
 
 	private static function setPageActiveHeader(&$page, $name) : void {
+		$active = self::getSection($page, "active");
 		$open = '<li><a href="' . $name . '.php">';
-		$pos = strpos($page, $open);
+		$pos = strpos($active, $open);
 		if ($pos !== false) {
 			$close = "</a></li>";
-			$bw = self::getStringBetween($page, $open, $close);
+			$bw = self::getStringBetween($active, $open, $close);
 			$len = strlen($open . $bw . $close);
 			$to = '<li class="active">' . $bw . '</li>';
-			$page = substr_replace($page, $to, $pos, $len);
+			$active = substr_replace($active, $to, $pos, $len);
+			self::replaceSection($page, "active", $active);
 		}
 	}
 
-	public static function buildPage($name, $type = "std", $setActive = false) : string {
+	public static function buildPage($name, $type = "std", $active = "") : string {
 		$page = file_get_contents(__DIR__ . "/../html/${name}.html");
 		$shared = file_get_contents(__DIR__ . "/../html/shared_${type}.html");
-
-		if ($setActive) self::setPageActiveHeader($shared, $name);
 
 		self::replacePageSection($page, $shared, "head");
 		self::replacePageSection($page, $shared, "header");
 		self::replacePageSection($page, $shared, "footer");
+
+		if ($active) self::setPageActiveHeader($page, $active);
 
 		return $page;
 	}
