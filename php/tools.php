@@ -5,7 +5,7 @@ require_once("ini.php");
 class Tools {
 	public static function errCode($num) : void {
 		http_response_code($num);
-		include ("${num}.php");
+		require ("${num}.php");
 	}
 
 	public static function getStringBetween(&$in, $start, $end) : string {
@@ -94,29 +94,29 @@ class Tools {
 		self::replaceAnchor($page, $name, self::getSection($shared, $name), true);
 	}
 
-	private static function setPageActiveHeader(&$page, $name) : void {
-		$active = self::getSection($page, "active");
-		$open = '<li><a href="' . $name . '.php">';
-		$pos = strpos($active, $open);
-		if ($pos !== false) {
-			$close = "</a></li>";
-			$bw = self::getStringBetween($active, $open, $close);
-			$len = strlen($open . $bw . $close);
-			$to = '<li class="active">' . $bw . '</li>';
-			$active = substr_replace($active, $to, $pos, $len);
-			self::replaceSection($page, "active", $active);
-		}
+	private static function deleteCircularLinks(&$page, $name) : void {
+		$from = '/<a href="' . $name . '\.php.*?">(.*?)<\/a>/';
+		$to = '<span class="active">${1}</span>';
+		$page = preg_replace($from, $to, $page);
 	}
 
 	public static function buildPage($name, $type = "std", $active = "") : string {
+		$name = basename($name, ".php");
+
 		$page = file_get_contents(__DIR__ . "/../html/${name}.html");
-		$shared = file_get_contents(__DIR__ . "/../html/shared_${type}.html");
+		$shared = file_get_contents(__DIR__ . "/../html/shared.html");
 
 		self::replacePageSection($page, $shared, "head");
 		self::replacePageSection($page, $shared, "header");
-		self::replacePageSection($page, $shared, "footer");
 
-		if ($active) self::setPageActiveHeader($page, $active);
+		if ($type == "std") {
+			self::replacePageSection($page, $shared, "footer");
+		} elseif ($type == "auth") {
+			$home = self::getSection($page, "header_home");
+			self::replaceSection($page, "header_li", $home);
+		}
+
+		self::deleteCircularLinks($page, ($active ?: $name));
 
 		return $page;
 	}
