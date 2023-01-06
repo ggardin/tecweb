@@ -32,29 +32,27 @@
 
 			<!-- filtri_start -->
 			<div class="searchFilter">
-				<label for="type-select">Filtra per:</label>
-				<select name="fn" id="type-select">
+				<label for="tipo-filtro">Filtra per:</label>
+				<select name="fn" id="tipo-filtro">
 					<option value=""></option>
 					<option value="paese">Nazione</option>
 					<option value="genere">Genere</option>
 				</select>
 
-				<label for="genre-choice">Genere:</label>
-				<input list="genre-list" id="genre-choice" name="genre-choice">
-				<datalist id="genre-list">
-					<option hidden>-- nome filtro --</option>
-					<!-- f_nome_start -->
+				<label for="filtro-genere">Genere:</label>
+				<input list="genere" id="filtro-genere" name="filtro-genere" />
+				<datalist id="genere">
+					<!-- genere_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
-					<!-- f_nome_end -->
+					<!-- genere_end -->
 				</datalist>
 
-				<label for="country-choice">Paese di produzione:</label>
-				<input list="country-list" id="country-choice" name="country-choice">
-				<datalist id="country-list">
-					<option hidden>-- valore filtro --</option>
-					<!-- f_val_start -->
+				<label for="filtro-paese">Paese di produzione:</label>
+				<input list="paese" id="filtro-paese" name="filtro-paese" />
+				<datalist id="paese">
+					<!-- paese_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
-					<!-- f_val_end -->
+					<!-- paese_end -->
 				</datalist>
 			</div>
 			<!-- filtri_end -->
