@@ -117,46 +117,102 @@ function validateMoney(id) {
 }
 
 window.addEventListener('load', function () {
+	initiateInstanceCount();
 	validateMovie();
 });
 
+/*
+ * =================================
+ * CREW MEMBERS
+ * =================================
+ */
+
 var instance = 0;
 
+/*
+ * Ottiene il numero di membri della crew già presenti
+ */
+function initiateInstanceCount() {
+	instance = document.querySelectorAll('.crew-member').length;
+}
+
+/*
+ * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
+ */
 function addNewCrewMember(element) {
-	// Create new input fields
-	var newNameLabel = document.createElement("label");
-	var newNameInput = document.createElement("input");
-	var newRoleLabel = document.createElement("label");
-	var newRoleSelect = document.createElement("select");
+	// Crea i nuovi elementi
+	var newCrewNameLabel = document.createElement("label");
+	var newCrewNameInput = document.createElement("input");
+	var newCrewRoleLabel = document.createElement("label");
+	var newCrewRoleSelect = document.createElement("select");
+	var newCrewRoleRegista = document.createElement("option");
+	var newCrewRoleSceneggiatore = document.createElement("option");
+	var newCrewRoleProduttore = document.createElement("option");
+	var newCrewRoleCompositore = document.createElement("option");
 
-	newNameInput.id = "crew-name" + instance;
-	newNameInput.name = "crew-name" + instance;
-	newNameInput.type = "text";
+	// <label for="crew-name0">Nome e cognome</label>
+	newCrewNameLabel.htmlFor = "crew-name" + instance;
+	newCrewNameLabel.innerHTML = "Nome e cognome";
+	newCrewNameLabel.classList.add('crew-member');
 
-	newRoleSelect.id = "crew-role" + instance;
-	newRoleSelect.name = "crew-role" + instance;
+	// <input id="crew-name0" name="crew-name0" type="text">
+	newCrewNameInput.id = "crew-name" + instance;
+	newCrewNameInput.name = "crew-name" + instance;
+	newCrewNameInput.type = "text";
 
-	newNameLabel.htmlFor = "crew-name" + instance;
-	newNameLabel.innerHTML = "Nome e cognome";
+	// <label for="crew-role0">Ruolo</label>
+	newCrewRoleLabel.htmlFor = "crew-role" + instance;
+	newCrewRoleLabel.innerHTML = "Ruolo";
 
-	newRoleLabel.htmlFor = "crew-role" + instance;
-	newRoleLabel.innerHTML = "Ruolo";
+	// <select id="crew-role0" name="crew-role0"></select>
+	newCrewRoleSelect.id = "crew-role" + instance;
+	newCrewRoleSelect.name = "crew-role" + instance;
+	newCrewRoleRegista.value = 0;
+	newCrewRoleRegista.text = "Regista";
+	newCrewRoleSceneggiatore.value = 1;
+	newCrewRoleSceneggiatore.text = "Sceneggiatore"
+	newCrewRoleProduttore.value = 2;
+	newCrewRoleProduttore.text = "Produttore";
+	newCrewRoleCompositore.value = 3;
+	newCrewRoleCompositore.text = "Compositore";
 
-	element.appendChild(newNameInput, element.previousSibling.previousSibling);
-	element.insertBefore(newNameLabel, newNameInput);
+	// Innesta gli elementi nel nodo padre
+	element.appendChild(newCrewNameInput, element.previousSibling.previousSibling);
+	element.insertBefore(newCrewNameLabel, newCrewNameInput);
 
-	element.appendChild(newRoleSelect, element.previousSibling.previousSibling);
-	element.insertBefore(newRoleLabel, newRoleSelect);
+	// Innesta gli elementi nel nodo padre
+	element.appendChild(newCrewRoleSelect, element.previousSibling.previousSibling);
+	var select = document.getElementById("crew-role" + instance);
+	select.add(newCrewRoleRegista);
+	select.add(newCrewRoleSceneggiatore);
+	select.add(newCrewRoleProduttore);
+	select.add(newCrewRoleCompositore);
+	element.insertBefore(newCrewRoleLabel, newCrewRoleSelect);
 
+	// Aggiorna il numero di istanze e il contatore
 	instance++;
+	updateCrewHint();
 }
 
 function removeLastCrewMember(element) {
+	// Cancella solo se ci sono istanze
+	if (instance > 0) {
+		element.removeChild(element.lastChild);
+		element.removeChild(element.lastChild);
+		element.removeChild(element.lastChild);
+		element.removeChild(element.lastChild);
+		instance--;
+	}
+	updateCrewHint();
+}
 
-	element.removeChild(element.lastChild);
-	element.removeChild(element.lastChild);
-	element.removeChild(element.lastChild);
-	element.removeChild(element.lastChild);
+function updateCrewHint() {
+	const hint = document.getElementById("crew-hint");
 
-	instance--;
+	if (instance == 0) {
+		hint.innerHTML = "Non è stato definito alcun membro della <span lang=\"en\">crew</span>.";
+	}
+	else {
+		hint.innerHTML = (instance > 1 ? instance + " membri." : instance + " membro.");
+	}
 }
