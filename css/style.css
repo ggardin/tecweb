@@ -87,6 +87,17 @@ img {
 
 /*
 ==============
+ACTIVE PAGE
+==============
+*/
+
+.active {
+	background-color: var(--bgcolor-off);
+	pointer-events: none;
+}
+
+/*
+==============
 HEADER
 ==============
 */
@@ -120,7 +131,7 @@ HEADER
 	text-decoration: none;
 }
 
-#page-header li.active {
+#page-header li .active {
 	font-weight: 600;
 	border-radius: var(--border-radius);
 	background-color: var(--secondaryColor);
@@ -128,11 +139,11 @@ HEADER
 }
 
 #page-header li a,
-#page-header li.active {
+#page-header li:has(> .active) {
 	padding: 0.5em 1em 0.3em;
 }
 
-#page-header li:hover:not(.active) {
+#page-header li:hover:not(:has(> .active)){
 	border-color: var(--txtcolor);
 }
 
