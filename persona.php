@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
 
 if ($id == "") {

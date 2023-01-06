@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (! isset($_SESSION["id"])) {
 	header ("location: login.php");
 	exit();

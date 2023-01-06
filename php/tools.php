@@ -2,6 +2,8 @@
 
 require_once("ini.php");
 
+session_start();
+
 class Tools {
 	public static function errCode($num) : void {
 		http_response_code($num);
@@ -118,6 +120,11 @@ class Tools {
 		}
 
 		self::deleteCircularLinks($page, ($active ?: $name));
+
+		if (! isset($_SESSION["id"]))
+			self::replaceSection($page, "header_user", "");
+		elseif ($_SESSION["is_admin"] == 0)
+				self::replaceSection($page, "header_admin", "");
 
 		return $page;
 	}
