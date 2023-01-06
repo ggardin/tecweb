@@ -204,7 +204,7 @@ FOOTER
 }
 
 #page-footer svg{
-	margin-right: 2em;
+	margin-right: 3.5em;
 	width: 7em;
 	height: 7em;
 
@@ -308,7 +308,7 @@ img, picture {
 }
 
 svg{
-	width: 2.37em;
+	width: 2.5em;
 }
 
 input, button, textarea, select {
@@ -841,9 +841,9 @@ AUTH
 	padding: var(--content-padding);
 }
 
-#content {
-	margin-left: 3em;
-}
+/*#content {*/
+/*	margin-left: 3em;*/
+/*}*/
 
 
 #auth_message {
