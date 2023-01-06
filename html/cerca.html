@@ -13,7 +13,7 @@
 	<!-- header -->
 
 	<nav id="breadcrumb">
-		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Cerca</p>
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; @@breadcrumb@@</p>
 	</nav>
 
 	<main id="content">
@@ -30,15 +30,15 @@
 				</button>
 			</div>
 
+			<!-- filtri_start -->
 			<div class="searchFilter">
 				<label for="type-select">Filtra per:</label>
 				<select name="fn" id="type-select">
-					<option value="">Niente, ma sai il niente?</option>
+					<option value=""></option>
 					<option value="paese">Nazione</option>
-					<option value="genere">Genere (DEL FILM)</option>
+					<option value="genere">Genere</option>
 				</select>
 
-				<!-- filtri_start -->
 				<label for="genre-choice">Genere:</label>
 				<input list="genre-list" id="genre-choice" name="genre-choice">
 				<datalist id="genre-list">
@@ -56,9 +56,8 @@
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
 					<!-- f_val_end -->
 				</datalist>
-				<!-- filtri_end -->
-
 			</div>
+			<!-- filtri_end -->
 		</form>
 
 		<!-- sidebar_start -->
