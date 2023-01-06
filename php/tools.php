@@ -116,7 +116,7 @@ class Tools {
 			if (! isset($_SESSION["id"]))
 				self::replaceSection($page, "header_user", "");
 			elseif ($_SESSION["is_admin"] == 0)
-					self::replaceSection($page, "header_admin", "");
+				self::replaceSection($page, "header_admin", "");
 		} elseif ($type == "auth") {
 			$home = self::getSection($page, "header_home");
 			self::replaceSection($page, "header_li", $home);
