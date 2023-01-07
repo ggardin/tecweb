@@ -624,27 +624,6 @@ CARDS / H-CARDS
 	color: var(--txtcolor);
 }
 
-/*
-==============
-SEARCH PAGE
-==============
-*/
-
-.results-page-button {
-	display: flex;
-	padding: var(--content-padding);
-	max-width: var(--content-width);
-	justify-content: space-between; /* This will evenly distribute the space between the elements */
-}
-
-.res-prev {
-	align-self: flex-start;
-}
-
-.res-next {
-	align-self: flex-end;
-}
-
 
 /*
 ==============
@@ -659,6 +638,7 @@ LINK BUTTONS
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
 	padding: .3em;
+	height: 4em;
 }
 
 .link-button p {
@@ -669,6 +649,34 @@ LINK BUTTONS
 .link-button svg {
 	color: var(--txtcolor);
 }
+
+/*
+==============
+SEARCH PAGE
+==============
+*/
+
+.results-page-button {
+	display: flex;
+	padding: var(--content-padding);
+	max-width: var(--content-width);
+	justify-content: space-between; /* This will evenly distribute the space between the elements */
+}
+
+.results-page-button svg {
+	color: inherit;
+}
+
+/* NON FUNZIONA
+
+.res-prev {
+	align-self: flex-start;
+}
+
+.res-next {
+	align-self: flex-end;
+}
+*/
 
 /*
 ==============
