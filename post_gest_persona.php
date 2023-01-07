@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 // controlli admin
 
 $user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";

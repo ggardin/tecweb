@@ -2,6 +2,6 @@
 
 $tipo = "persona";
 
-include ("cerca.php");
+require ("cerca.php");
 
 ?>

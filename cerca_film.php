@@ -2,6 +2,6 @@
 
 $tipo = "film";
 
-include ("cerca.php");
+require ("cerca.php");
 
 ?>

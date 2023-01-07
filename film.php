@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
 
 if ($id == "") {
@@ -39,7 +37,7 @@ if (empty($film)) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $film = $film[0];
 $title = $film["nome"] . " • Film"; Tools::toHtml($title, 0);
