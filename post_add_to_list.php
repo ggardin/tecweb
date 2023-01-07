@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
 $film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";

@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";

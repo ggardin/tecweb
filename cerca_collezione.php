@@ -2,6 +2,6 @@
 
 $tipo = "collezione";
 
-include ("cerca.php");
+require ("cerca.php");
 
 ?>

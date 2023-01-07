@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
 
 if ($id == "") {
@@ -29,7 +27,7 @@ if (empty($collezione)) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $collezione = $collezione[0];
 $title = $collezione["nome"] . " • Collezione"; Tools::toHtml($title, 0);

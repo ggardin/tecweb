@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	header ("location: login.php");
 	exit();
@@ -26,7 +24,7 @@ try {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if ($id != "" && !empty($film)) {
 	$film = $film[0];
