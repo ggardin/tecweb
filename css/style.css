@@ -674,10 +674,6 @@ SEARCH PAGE
 	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
 
-.results-page-button svg {
-	color: inherit;
-}
-
 /* NON FUNZIONA
 
 .res-prev {
