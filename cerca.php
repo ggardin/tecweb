@@ -3,8 +3,13 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
+if (! isset($tipo)) {
+	Tools::errCode("404");
+	exit();
+}
+
 $query = (isset($_GET["q"])) ? $_GET["q"] : "";
-$tipo = (isset($_GET["t"])) ? $_GET["t"] : "film";
+// $tipo = (isset($_GET["t"])) ? $_GET["t"] : "film";
 $f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
 $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 
@@ -39,12 +44,23 @@ if (!isset($cerca)) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
-$intestazione = "Cerca $tipo";
+$page = Tools::buildPage("cerca", "std", "cerca_$tipo");
+
+if ($tipo == "film") {
+	$breadcrumb = "Film";
+}
+elseif ($tipo == "collezione")
+	$breadcrumb = "Collezioni";
+else
+	$breadcrumb = "Persone";
+
+$intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome != "")
 	$intestazione .= " filtrati per $f_nome ($f_val)";
+
 $titolo = (($query != "") ? ($query . " • ") : "") . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);
+Tools::replaceAnchor($page, "breadcrumb", $breadcrumb);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
 Tools::replaceAnchor($page, "search_value", $query);
 Tools::replaceAnchor($page, "search_tipo", $tipo);
@@ -64,6 +80,8 @@ foreach (["film", "collezione", "persona"] as $k) {
 Tools::replaceSection($page, "tipo", $res);
 
 // TODO integrare filtri
+if ($tipo != "film")
+	Tools::replaceSection($page, "filtri", "");
 
 if (!empty($cerca)) {
 	Tools::toHtml($cerca);

@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (! isset($_SESSION["id"])) {
 	header ("location: login.php");
 	exit();
@@ -23,7 +21,7 @@ try {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if(empty($films)){
 	Tools::replaceAnchor($page, "message", "Aggiungi dei film alle tue liste per vedere le statistiche");
@@ -36,7 +34,7 @@ if(empty($films)){
 		$minuti = $minuti + $f["durata"];
 	}
 	Tools::replaceAnchor($page, "minutiVisti", $minuti);
-	
+
 	$i = 0;
 	foreach($films as $f){
 		if($i == 0){
@@ -52,7 +50,7 @@ if(empty($films)){
 		$i = $i + 1;
 		if($i == 3) break;
 	}
-	
+
 	Tools::replaceAnchor($page, "filmLungo", $longest);
 	Tools::replaceAnchor($page, "primoFilmLungo", $longest);
 	Tools::replaceAnchor($page, "durataFilmLungo", $longestTime);
@@ -101,8 +99,8 @@ if(empty($films)){
 		Tools::replaceAnchor($page, "terzoGenere", "Aggiungi altri film per vedere ulteriori statistiche");
 		Tools::replaceAnchor($page, "filmVistiTerzoGenere", "");
 	}
-	
 }
+
 Tools::showPage($page);
 
 ?>

@@ -16,10 +16,13 @@ function validateNewReview() {
  * Controlla che sia stato espresso un voto
  */
 function validateNewReviewRatingRadiobox() {
+	var id = 'rating0';
 	if ( document.forms['add-review']['rating0'].checked ) {
-		alert('Non hai espresso un voto');
+		showErrorMessage(id, 'Non hai espresso un voto');
 		return false;
 	}
+
+	removeErrorMessage(id);
 	return true;
 }
 
@@ -27,30 +30,39 @@ function validateNewReviewRatingRadiobox() {
  * Controlla che il testo della recensione sia lungo almeno 3 caratteri.
  */
 function validateNewReviewText() {
-	if ( document.forms['add-review']['review-text'].value.length < 2 ) {
-		alert('La recensione è troppo breve');
+	var id = 'review-text';
+	var element = document.forms['add-review']['review-text'];
+	const maxLength = element.getAttribute("maxlength");
+	const currentLength = element.value.length;
+
+	if ( currentLength < 2 ) {
+		showErrorMessage(id, 'La recensione è troppo breve');
 		return false;
 	}
+	else if ( currentLength > 1000 ) {
+		showErrorMessage(id, 'La recensione è troppo lunga');
+		return false;
+	}
+
+	removeErrorMessage(id);
 	return true;
 }
 
 /*
- * Controlla che la lunghezza della recensione non superi i 500 caratteri.
+ * Controlla che la lunghezza della recensione non superi i 1000 caratteri.
  */
 function checkNewReviewCharactersCounter() {
-	const textarea = document.forms['add-review']['review-text'];
+	var id = 'review-text';
+	const element = document.forms['add-review']['review-text'];
 	const charactersCounter = document.getElementById('review-chars');
-	const maxLength = textarea.getAttribute("maxlength");
-	const currentLength = textarea.value.length;
+	const maxLength = element.getAttribute("maxlength");
+	const currentLength = element.value.length;
 
 	if (currentLength >= maxLength) {
 		charactersCounter.innerHTML = "Hai raggiunto il limite massimo di caratteri (" + maxLength + ").";
-		return false;
 	}
 
 	charactersCounter.innerHTML = "Hai a disposizione " + (maxLength - currentLength) + " caratteri.";
-
-	return true;
 }
 
 window.addEventListener('load', function () {

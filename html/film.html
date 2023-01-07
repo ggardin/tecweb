@@ -8,19 +8,19 @@
 	<meta name="keywords" content="" />
 
 	<!-- head -->
-	<script src="js/validators.js"></script>
+	<script src="js/validate-review.js"></script>
 </head>
 <body>
 	<!-- header -->
 
 	<nav id="breadcrumb">
-		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca.php?q=&t=film"><span lang="en">Film</span></a> &gt;&gt; @@breadcrumb@@</p>
+		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca_film.php"><span lang="en">Film</span></a> &gt;&gt; @@breadcrumb@@</p>
 	</nav>
 
 	<main id="content" class="movie-page">
 		<div class="movie-details">
 
-			<a class="skip-to-content" href="#manage">Aggiungi film ad una lista</a>
+			<a href="#manage" class="skip-to-content">Aggiungi film ad una lista</a>
 
 			<h1>@@nome@@</h1>
 			<!-- sottotitolo_start -->
@@ -74,7 +74,7 @@
 				</header>
 				<ul class="pills">
 					<!-- genere_start -->
-					<li><a href="cerca.php?q=&t=film&fn=genere&fv=@@id@@">@@nome@@</a></li>
+					<li><a href="cerca_film.php?fn=genere&fv=@@id@@">@@nome@@</a></li>
 					<!-- genere_end -->
 				</ul>
 			</section>
@@ -87,7 +87,7 @@
 				</header>
 				<ul class="pills">
 					<!-- paese_start -->
-					<li><a href="cerca.php?q=&t=film&fn=paese&fv=@@id@@">@@nome@@</a></li>
+					<li><a href="cerca_film.php?fn=paese&fv=@@id@@">@@nome@@</a></li>
 					<!-- paese_end -->
 				</ul>
 			</section>
@@ -124,13 +124,14 @@
 				</header>
 				<!-- add_review_start -->
 				<form id="add-review" method="post" action="post_add_review.php">
+
 					<input type="hidden" name="film_id" value="@@review_film_id@@" />
 					<fieldset>
 						<legend>Nuova recensione</legend>
 
-						<p>Voto</p>
+						<p>Voto<span class="required">(richiesto)</span></p>
 						<div class="rating-range">
-							<input type="radio" id="rating0" name="voto" value="0" hidden checked/>
+							<input type="radio" id="rating0" name="voto" value="0" hidden checked aria-describedby="rating0-hint" />
 
 							<div>
 								<label for="rating1">1</label>
@@ -173,10 +174,12 @@
 								<input type="radio" id="rating10" name="voto" value="10" />
 							</div>
 						</div>
+						<p id="rating0-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
-						<label for="review-text">Recensione</label>
+						<label for="review-text">Recensione<span class="required">(richiesto)</span></label>
 						<p id="review-chars">Hai a disposizione 1000 caratteri.</p>
-						<textarea name="testo" id="review-text" maxlength="1000" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();"></textarea>
+						<textarea name="testo" id="review-text" maxlength="1000" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();" required aria-describedby="review-chars review-text-hint"></textarea>
+						<p id="review-text-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 						<button type="submit">Pubblica la tua recensione</button>
 					</fieldset>
@@ -213,13 +216,20 @@
 		</div>
 
 		<div class="movie-media">
-			<img src="@@locandina@@" alt=""/>
+			<img src="@@locandina@@" alt="" class="image-style"/>
 
 			<aside id="manage">
-				<h2 class="sr-only">Aggiunta ad una lista</h2>
+				<h2 class="sr-only">Aggiunta a una lista</h2>
+
 				<!-- admin_start -->
-				<a href="gest_film.php?id=@@gest_id@@">Modifica</a>
+				<div class="modify-button">
+					<svg viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modifica la lista">
+						<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="M22.5 45c12.03 0 22-9.97 22-22 0-12.02-9.99-22-22.03-22A22.16 22.16 0 0 0 .5 23c0 12.03 9.98 22 22 22Zm8.8-28.22-2.66-2.63 1.64-1.64c.74-.69 1.56-.77 2.22-.1l.5.51c.69.67.65 1.51-.09 2.25ZM15.38 32.64l-3.09 1.16a.63.63 0 0 1-.77-.86L12.77 30 27.3 15.47l2.65 2.65Z"/>
+					</svg>
+					<a href="gest_film.php?id=@@gest_id@@">Modifica</a>
+				</div>
 				<!-- admin_end -->
+
 				<!-- user_start -->
 				<form method="post" action="post_add_to_list.php">
 					<input type="hidden" name="film_id" value="@@list_film_id@@" />
@@ -228,7 +238,7 @@
 						<option value="@@id@@">@@nome@@</option>
 						<!-- lista_end -->
 					</select>
-					<button type="submit">Aggiungi alla lista</button>
+					<button type="submit" id="addListButton">Aggiungi alla lista</button>
 				</form>
 				<!-- user_end -->
 			</aside>

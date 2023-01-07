@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
 $film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
@@ -17,7 +15,7 @@ if ($user_id == "") {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->checkListOwnership($list_id, $user_id)) {
+	if ($connessione->isListaDiUtente($list_id, $user_id)) {
 		$own = true;
 		$res = $connessione->deleteFromList($list_id, $film_id);
 	}

@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (! isset($_SESSION["id"])) {
 	header ("location: login.php");
 	exit();
@@ -12,7 +10,7 @@ if (! isset($_SESSION["id"])) {
 
 try {
 	$connessione = new Database();
-	$username = $connessione->getUsernameByUserId($_SESSION["id"]);
+	$username = $connessione->getUsernameByUtenteId($_SESSION["id"]);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -20,7 +18,7 @@ try {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 Tools::replaceAnchor($page, "username", $username[0]["username"]);
 if ($_SESSION["is_admin"] == 0) Tools::replaceSection($page, "admin", "");

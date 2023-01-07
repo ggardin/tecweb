@@ -12,10 +12,12 @@
 	--anchorcolor: #110093;
 	--anchorcolor-alt: #D04637;
 
+	--form-required-field: #d50000;
+	--form-invalid: var(--form-required-field);
+
 	--content-width: 60em;
 	--content-padding: 1rem;
 	--border-radius: 8px;
-	--button-inactive: #20584F;
 	--auth-form-width: 35em;
 	--header-height: 4.5em;
 }
@@ -24,12 +26,17 @@
 	--bgcolor: #1A1A1A;
 	--bgcolor-alt: #242424;
 	--bgcolor-off: #434343;
+
 	--txtcolor: #E4DCD7;
+
 	--anchorcolor: #91E8FB;
 	--anchorcolor-alt: #da4635;
 
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
+
+	--form-required-field: #ff3030;
+	--form-invalid: var(--form-required-field);
 }
 
 @font-face {
@@ -57,7 +64,7 @@ body > #page-footer {
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	gap: 0.5em;
+	/*gap: 0.5em;*/
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
@@ -74,8 +81,24 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-img {
+/*img {
 	border-radius: var(--border-radius);
+}*/
+
+
+.image-style {
+	border-radius: var(--border-radius);
+}
+
+/*
+==============
+ACTIVE PAGE
+==============
+*/
+
+.active {
+	background-color: var(--bgcolor-off);
+	pointer-events: none;
 }
 
 /*
@@ -87,11 +110,11 @@ HEADER
 #page-header {
 	position: sticky;
 	top: 0;
-	color: var(--txtcolor);
+	/*color: var(--txtcolor);*/
 	background-color: var(--bgcolor);
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	/*align-items: center;*/
 	z-index: 10;
 	height: var(--header-height);
 }
@@ -104,6 +127,7 @@ HEADER
 
 #page-header li {
 	border-bottom: 0.2em solid transparent;
+	margin: 0 0.5em;
 }
 
 #page-header li a {
@@ -112,17 +136,19 @@ HEADER
 	text-decoration: none;
 }
 
-#page-header li.active {
+#page-header li .active {
+	font-weight: 600;
+	border-radius: var(--border-radius);
 	background-color: var(--secondaryColor);
-	cursor: default;
+	pointer-events:none;
 }
 
 #page-header li a,
-#page-header li.active {
+#page-header li:has(> .active) {
 	padding: 0.5em 1em 0.3em;
 }
 
-#page-header li:hover:not(.active) {
+#page-header li:hover:not(:has(> .active)){
 	border-color: var(--txtcolor);
 }
 
@@ -133,6 +159,10 @@ HEADER
 
 #page-header button {
 	width: auto;
+}
+
+#page-header .logo{
+	width: 3.2em;
 }
 
 .accountButton{
@@ -189,7 +219,13 @@ FOOTER
 	flex-flow: row wrap;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
-	padding: 1em;
+	padding: .5em 1em 1em;
+	margin-top: 2.5em;
+}
+
+#page-footer svg{
+	margin-right: 3.5em;
+	width: 7em;
 }
 
 #page-footer > div:not(:last-child) {
@@ -211,7 +247,7 @@ FOOTER
 }
 
 #page-footer li {
-	padding: 0.2em 0;
+	padding: 0.5em 0;
 }
 
 #page-footer li a {
@@ -227,8 +263,9 @@ FOOTER
 	font-size: 0.8em;
 }
 
-#page-footer svg{
-	margin-right: 3em;
+#attribution{
+	font-size: .8em;
+	margin-top: 1.5em;
 }
 
 
@@ -278,13 +315,20 @@ TMDB ATTRIBUTION
 *, *::before, *::after {
 	box-sizing: border-box;
 }
+
 * {
 	margin: 0;
 }
-img, picture, svg {
+
+img, picture {
 	display: block;
 	max-width: 100%;
 }
+
+svg{
+	width: 2.5em;
+}
+
 input, button, textarea, select {
 	font: inherit;
 }
@@ -303,7 +347,6 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 #themeToggle svg {
-	/*width: 1.8em;*/ /*Commentato perché troncava l'icona*/
 	fill: none;
 }
 
@@ -331,36 +374,52 @@ SEARCH BAR
 ==============
 */
 
-#hero .search {
-	position: relative;
-	display: flex;
-	margin: 1.5em auto 2.5em;
-	max-width: 18em;
-}
-
 .search {
 	position: relative;
 	display: flex;
+	flex-direction: column;
+	max-width: 26em;
+	margin: 2.5em auto;
+}
+
+.input-button-wrapper{
+	display: flex;
+	margin-top: 1em;
+	height: 3.5em;
 }
 
 .searchTerm {
 	border-radius: var(--border-radius) 0 0 var(--border-radius);
-	font-size: 0.8em;
-	/* outline: none; */
 }
 
 .searchButton {
 	width: auto;
-	/* background: var(--tertiaryColor); */
 	border-radius: 0 var(--border-radius) var(--border-radius) 0;
-	padding-left: .4em;
-	padding-right: .4em;
+	padding-left: .5em;
+	padding-right: .5em;
 }
 
 .searchButton svg {
 	color: var(--bgcolor);
 	width: 34px;
 	height: 34px;
+}
+
+
+/*
+==============
+SEARCH FILTER
+==============
+*/
+
+.searchFilter{
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+.resultMessage{
+	margin-bottom: 1em;
+	margin-top: 1em;
 }
 
 /*
@@ -470,9 +529,15 @@ INDEX
 ==============
 */
 
-#hero {
+#hero h1 {
+	font-size: 3em;
+	text-align: center;
+}
+
+#hero p {
 	font-size: 1.5em;
 	text-align: center;
+	margin-bottom: .5em;
 }
 
 .container {
@@ -483,8 +548,17 @@ INDEX
 	justify-content: center;
 	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
-	padding: 2em;
-	margin: 2em 0;
+	padding: 1.5em;
+	margin-top: 2.5em;
+}
+
+.hero-image {
+	background-image: url("../img/mockup_device_dark.webp");
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: 17em;
+	height: 34em;
+	width: 17em;
 }
 
 .container > .text {
@@ -582,8 +656,37 @@ MOVIE PAGE
 	flex: 0 1 300px; /* set to image width */
 }
 
+.modify-button {
+	display: flex;
+	text-align: center;
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	border: 2px solid var(--bgcolor-off);
+	padding: .5em;
+	height: 4em;
+	margin: 0.5em auto;
+	max-width: 22em;
+}
+
+.modify-button a {
+	align-self: center;
+	font-size: 1.2em;
+}
+
+.modify-button svg {
+	min-width: 2em;
+	min-height: 2em;
+	margin: auto 0.3em;
+}
+
+
+li .modify-button a {
+	margin-right: .5em;
+
+}
+
 .movie-media img {
-	margin-bottom: 1.5em;
+	margin-bottom: 1em;
 }
 
 .movie-details h1 {
@@ -747,6 +850,10 @@ button[type=submit] {
 	font-size: 1.2em;
 }
 
+#addListButton{
+	margin-top: 0.5em;
+}
+
 /*
 ==============
 AUTH
@@ -754,9 +861,9 @@ AUTH
 */
 
 #auth main {
-	background-color: var(--secondaryColor);
 	max-width: var(--auth-form-width);
-	margin: var(--content-padding) auto;
+	margin: 0 auto;
+	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	text-align: center;
 	padding: var(--content-padding);
@@ -767,7 +874,7 @@ AUTH
 }
 
 #auth_form {
-	margin-top: 2em;
+	margin-top: 1.5em;
 	text-align: left;
 }
 
@@ -878,43 +985,22 @@ USER LISTS PAGE
 
 #list-movies li {
 	margin-top: 1.5em;
+	display: flex;  /* Set the display property to flex to enable flexbox layout */
+	align-items: center;  /* Center the .button-container element vertically */
+	justify-content: center;  /* Center the .button-container element horizontally */
 }
 
-/*MODIFY LIST*/
-.modifyListButton{
-	/* margin-top: 1em; */
-	/* display: flex; */
-	/* background-color: var(--tertiaryColor); */
-	/* background-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 45 45' %3E%3C fill='currentcolor' path d='M 22.496094 44.996094 C 34.531387 44.996094 44.496094 35.031387 44.496094 22.996094 C 44.496094 10.982368 34.509819 0.996094 22.474525 0.996094 C 10.460799 0.996094 0.496094 10.982368 0.496094 22.996094 C 0.496094 35.031387 10.482368 44.996094 22.496094 44.996094 Z M 31.296093 16.784328 L 28.643152 14.152956 L 30.282368 12.513741 C 31.015701 11.823544 31.83531 11.73727 32.503937 12.405899 L 33.000015 12.923546 C 33.690212 13.592173 33.647076 14.433348 32.913742 15.166681 Z M 15.378447 32.637268 L 12.294133 33.801975 C 11.819623 33.974525 11.280408 33.500015 11.517662 32.939232 L 12.768642 30.005898 L 27.305897 15.468643 L 29.958839 18.121584 Z'/%3E%3C/svg%3E" ); */
-	/* background-repeat: no-repeat; */
-	/* background-position: left; */
-	/* cursor: pointer; */
-	/* font-size: 1.5em; */
-	height: 3.3em;
-	width: 3.3em;
-}
-
-/* .modifyListButton svg {
-	color: var(--bgcolor);
-} */
-
-/*DELETE CARD*/
-.deleteElementButton{
-	margin-top: .5em;
-	/* background-color: var(--tertiaryColor); */
-	/* border: none; */
-	/* color: var(--bgcolor); */
-	display: flex;
-	justify-content: space-around;
-	/* margin-left: auto; */
-	/* margin-right: 0; */
-	/* width: 100%; */
-	/* height: 3.5em; */
+.deleteElementButton {
+	margin-top: auto;
+	margin-right: .5em;
+	margin-left: .5em;
+	width: 3em;
+	height: 3em;
 }
 
 .deleteElementButton svg{
-	width: 2.5em;
-	height: 2.5em;
+	width: 2em;
+	height: 2em;
 }
 
 /*
@@ -940,6 +1026,10 @@ GESTIONE
 #gestione label {
 	font-size: 1.2em;
 	font-weight: 600;
+}
+
+#gestione #delete {
+	background-color: red;
 }
 
 /*
@@ -982,4 +1072,19 @@ PERSON/COLLECTION PAGE
 
 #collection-movies li {
 	margin-top: 1em;
+}
+
+/*
+==============
+FORMS
+==============
+*/
+
+form .required {
+	margin-left: 0.5ch;
+	color: var(--form-required-field);
+}
+
+form input.invalid {
+	outline: 0.15rem solid var(--form-invalid);
 }
