@@ -624,26 +624,33 @@ CARDS / H-CARDS
 	color: var(--txtcolor);
 }
 
-
 /*
 ==============
-MOVIE PAGE
+SEARCH PAGE
 ==============
 */
 
-.movie-page {
+.results-page-button {
 	display: flex;
-	flex-flow: row-reverse wrap;
-	gap: 2em;
+	padding: var(--content-padding);
+	max-width: var(--content-width);
+	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
 
-.movie-details {
-	flex: 1 1;
+.res-prev {
+	align-self: flex-start;
 }
 
-.movie-media {
-	flex: 0 1 300px; /* set to image width */
+.res-next {
+	align-self: flex-end;
 }
+
+
+/*
+==============
+LINK BUTTONS
+==============
+*/
 
 .modify-button {
 	display: flex;
@@ -668,34 +675,24 @@ MOVIE PAGE
 	margin: auto;
 }
 
+/*
+==============
+MOVIE PAGE
+==============
+*/
 
-li .modify-button a {
-	margin-right: .5em;
-
-}
-
-li .modify-button a {
-	margin-right: .5em;
-}
-
-
-.button-container {
-	margin-top: 1.5em;
-	max-width: var(--content-width);
+.movie-page {
 	display: flex;
-	justify-content: space-between; /* This will evenly distribute the space between the elements */
+	flex-flow: row-reverse wrap;
+	gap: 2em;
 }
 
-.button-position-l {
-	position: fixed;
-	bottom: 1em;
-	display: flex;
+.movie-details {
+	flex: 1 1;
 }
 
-.button-position-r {
-	position: fixed;
-	bottom: 1em;
-	display: flex;
+.movie-media {
+	flex: 0 1 300px; /* set to image width */
 }
 
 .movie-media img {
