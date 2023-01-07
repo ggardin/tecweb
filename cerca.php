@@ -61,7 +61,7 @@ $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome != "")
 	$intestazione .= " filtrati per $f_nome ($f_val)";
 
-$titolo = (($query != "") ? ($query . " • ") : "") . $intestazione;
+$titolo = (($query != "") ? ('"' . $query . '" • ') : "") . "Cerca " . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);
 Tools::replaceAnchor($page, "breadcrumb", $breadcrumb);
 Tools::replaceAnchor($page, "intestazione", $intestazione);
@@ -114,14 +114,12 @@ if (!empty($cerca[0])) {
 	if ($next > 0) {
 		$buttons = true;
 		Tools::replaceAnchor($page, "prev", "cerca_$tipo.php?q=$query" . ($next > 1 ? ("&n=" . ($next-1)): ""));
-	}
-	else
+	} else
 		Tools::replaceSection($page, "prev", "");
 	if ($tot > $offset + $shown) {
 		$buttons = true;
 		Tools::replaceAnchor($page, "next", "cerca_$tipo.php?q=$query&n=" . ($next+1));
-	}
-	else
+	} else
 		Tools::replaceSection($page, "next", "");
 	if ($buttons) {
 		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "res_buttons"), true);
