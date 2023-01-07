@@ -649,10 +649,10 @@ li .modify-button a {
 
 }
 
-
 li .modify-button a {
 	margin-right: .5em;
 }
+
 
 .button-container {
 	margin-top: 1.5em;
@@ -660,7 +660,6 @@ li .modify-button a {
 	display: flex;
 	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
-
 
 .button-position-l {
 	position: fixed;
@@ -671,7 +670,6 @@ li .modify-button a {
 .button-position-r {
 	position: fixed;
 	bottom: 1em;
-	right: 1em;
 	display: flex;
 }
 
