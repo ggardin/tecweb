@@ -211,8 +211,6 @@ FOOTER
 #page-footer svg{
 	margin-right: 3.5em;
 	width: 7em;
-	height: 7em;
-
 }
 
 #page-footer > div:not(:last-child) {
