@@ -638,6 +638,55 @@ CARDS / H-CARDS
 
 /*
 ==============
+LINK BUTTONS
+==============
+*/
+
+.link-button {
+	display: flex;
+	text-align: center;
+	background-color: var(--secondaryColor);
+	border-radius: var(--border-radius);
+	border: 2px solid var(--bgcolor-off);
+	padding: .3em;
+	height: 4em;
+}
+
+.link-button p {
+	font-size: 1.2em;
+	padding-left: .2em;
+}
+
+.link-button svg {
+	color: var(--txtcolor);
+}
+
+/*
+==============
+SEARCH PAGE
+==============
+*/
+
+.results-page-button {
+	display: flex;
+	padding: var(--content-padding);
+	max-width: var(--content-width);
+	justify-content: space-between; /* This will evenly distribute the space between the elements */
+}
+
+/* NON FUNZIONA
+
+.res-prev {
+	align-self: flex-start;
+}
+
+.res-next {
+	align-self: flex-end;
+}
+*/
+
+/*
+==============
 MOVIE PAGE
 ==============
 */
@@ -654,35 +703,6 @@ MOVIE PAGE
 
 .movie-media {
 	flex: 0 1 300px; /* set to image width */
-}
-
-.modify-button {
-	display: flex;
-	text-align: center;
-	background-color: var(--secondaryColor);
-	border-radius: var(--border-radius);
-	border: 2px solid var(--bgcolor-off);
-	padding: .5em;
-	height: 4em;
-	margin: 0.5em auto;
-	max-width: 22em;
-}
-
-.modify-button a {
-	align-self: center;
-	font-size: 1.2em;
-}
-
-.modify-button svg {
-	min-width: 2em;
-	min-height: 2em;
-	margin: auto 0.3em;
-}
-
-
-li .modify-button a {
-	margin-right: .5em;
-
 }
 
 .movie-media img {
