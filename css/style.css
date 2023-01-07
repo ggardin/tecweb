@@ -77,7 +77,12 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-img {
+/*img {
+	border-radius: var(--border-radius);
+}*/
+
+
+.image-style {
 	border-radius: var(--border-radius);
 }
 
