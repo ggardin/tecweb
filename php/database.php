@@ -73,6 +73,7 @@ class Database {
 	private function preparedUpdates(&$query, &$params, $types = "") : bool {
 		try {
 			$stmt = $this->preparedQuery($query, $params, $types);
+			$a_r = $stmt->affected_rows;
 			$stmt->close();
 		} catch (mysqli_sql_exception $e) {
 			if ($e->getCode() == 1062)
@@ -80,7 +81,7 @@ class Database {
 			else
 				throw new Exception(self::ERR);
 		}
-		return true;
+		return $a_r > 0;
 	}
 
 	public function getCollezioneById($id) : array {
