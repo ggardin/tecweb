@@ -125,7 +125,7 @@ if (!empty($cerca[0])) {
 		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "res_buttons"), true);
 	} else {
 		Tools::replaceSection($page, "res_buttons", "");
-		Tools::replaceAnchor($page, "res_buttons_bottom", "");
+		Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
 	}
 } else {
 	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
