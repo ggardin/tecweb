@@ -31,10 +31,6 @@ class Database {
 			$this->connection->close();
 	}
 
-	public function insertId() {
-		return $this->connection->insert_id;
-	}
-
 	// adattata da quella vista a lezione
 	private function pulisciInput(&$params) : void {
 		foreach ($params as &$p) {
@@ -642,8 +638,15 @@ class Database {
 			$status["id"] = $res[0]["id"];
 			$status["is_admin"] = $res[0]["is_admin"];
 		}
-	
+
 		return $status;
+	}
+
+	public function signup($username, $pass) : array {
+		if (insertUtente($username, $pass))
+			return [true, $this->connection->insert_id];
+		else
+			return [false, 0];
 	}
 
 	public function totalFilms($user_id) : array {
@@ -668,10 +671,10 @@ class Database {
 					on lf.film = f.id
 			where l.utente = ?
 			order by f.durata desc";
-						
+
 		$params = [$user_id];
 		$types = "i";
-	
+
 		return $this->preparedSelect($query, $params, $types);
 
 	}
@@ -687,14 +690,14 @@ class Database {
 						on f.id = fg.film
 					join genere as g
 						on fg.genere = g.id
-				where l.utente = ? 
+				where l.utente = ?
 				group by g.nome
 				order by count(*) desc";
 
-		
+
 				$params = [$user_id];
 				$types = "i";
-			
+
 				return $this->preparedSelect($query, $params, $types);
 	}
 }
