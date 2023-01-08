@@ -462,16 +462,6 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function insertUtente($username, $pass) : bool {
-		$query = "insert into utente(username, password, gender)
-			values (?, ?, 0)";
-
-		$pass = password_hash($pass, PASSWORD_DEFAULT);
-		$params = [$username, $pass];
-
-		return $this->preparedUpdates($query, $params);
-	}
-
 	public function insertLista($user_id, $list_name) : bool {
 		$query = "insert into lista(utente, nome)
 			values (?, ?)";
@@ -643,10 +633,13 @@ class Database {
 	}
 
 	public function signup($username, $pass) : array {
-		if (insertUtente($username, $pass))
-			return [true, $this->connection->insert_id];
-		else
-			return [false, 0];
+		$query = "insert into utente(username, password, gender)
+			values (?, ?, 0)";
+
+		$pass = password_hash($pass, PASSWORD_DEFAULT);
+		$params = [$username, $pass];
+
+		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
 	public function totalFilms($user_id) : array {
