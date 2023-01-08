@@ -613,7 +613,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function addValutazione($user_id, $film_id, $voto, $testo) : bool {
+	public function insertValutazione($user_id, $film_id, $voto, $testo) : bool {
 		$query = "insert into valutazione(utente, film, voto, testo)
 			values (?, ?, ?, ?)";
 
