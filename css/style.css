@@ -388,12 +388,12 @@ SEARCH BAR
 	display: flex;
 	flex-direction: column;
 	max-width: 26em;
-	margin: 2.5em auto;
+	margin: 1.5em auto 1em;
 }
 
 .input-button-wrapper{
 	display: flex;
-	margin-top: 1em;
+	/*margin-top: 1em;*/
 	height: 3.5em;
 }
 
@@ -427,110 +427,9 @@ SEARCH FILTER
 }
 
 .resultMessage{
-	margin-bottom: 1em;
-	margin-top: 1em;
+	margin-top: .5em;
 }
 
-/*
-==============
-SIDE BAR
-==============
-*/
-
-/*
-
-#sidebar{
-	display: block;
-}
-
-.sidebar {
-	user-select: none;
-	max-width: 15em;
-	border-right: 2px solid var(--secondaryColor);
-	// overflow: hidden;
-}
-
-.items {
-	max-height: 54vh;
-	overflow: auto;
-	padding: 0;
-	margin-right: .5em;
-}
-
-.item {
-	display: flex;
-	align-items: center;
-	padding: .5em;
-	border-radius: var(--border-radius);
-	cursor: pointer;
-	justify-content: flex-start;
-	margin-bottom: 0.5em;
-}
-
-.item .name {
-	color: var(--txtcolor);
-	font-weight: normal;
-	margin-left: 20px;
-}
-
-.item * {
-	pointer-events: none;
-}
-
-.item.active {
-	background: var(--secondaryColor);
-}
-
-.item:hover {
-	background: var(--secondaryColor);
-}
-
-hr.solid {
-	border: 1px solid var(--secondaryColor);
-}
-
-.item.new-list{
-	margin-top: 1em;
-	background: var(--tertiaryColor);
-}
-
-.item.new-list .name{
-	color: var(--bgcolor);
-}
-
-.new-item {
-	margin-top: 1em;
-	display: flex;
-	align-items: center;
-	padding: .5em;
-	border-radius: var(--border-radius);
-	cursor: pointer;
-	justify-content: flex-start;
-	margin-bottom: 0.5em;
-	background-color: greenyellow;
-	border: none;
-	width: 97%;
-}
-
-.new-item .name{
-	margin-left: 20px;
-	background-color: red;
-}
-
-.new-item .icon{
-	background-color: red;
-}
-
-#wrapper {
-	overflow: hidden
-}
-
-#c1 {
-	float: left;
-	margin-right: 1em;
-}
-
-*/
 
 /*
 ==============
@@ -659,7 +558,7 @@ LINK BUTTONS
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
 	height: 4.5em;
-	margin-top: 1em;
+	/*margin-top: 1em;*/
 }
 
 .link-button p {
@@ -684,7 +583,7 @@ SEARCH PAGE
 
 .results-page-button {
 	display: flex;
-	padding: var(--content-padding);
+	padding: 1em 0;
 	max-width: var(--content-width);
 	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
