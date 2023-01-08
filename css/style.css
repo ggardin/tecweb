@@ -99,8 +99,13 @@ ACTIVE PAGE
 .active {
 	background-color: var(--bgcolor-off);
 	pointer-events: none;
+	padding: .5em;
+	border-radius: var(--border-radius);
 }
 
+.active-account {
+	pointer-events: none;
+}
 /*
 ==============
 HEADER
@@ -145,7 +150,7 @@ HEADER
 
 #page-header li a,
 #page-header li:has(> .active) {
-	padding: 0.5em 1em 0.3em;
+	padding: 0.7em;
 }
 
 #page-header li:hover:not(:has(> .active)){
@@ -223,9 +228,13 @@ FOOTER
 	margin-top: 2.5em;
 }
 
-#page-footer svg{
+#page-footer .footer-logo{
 	margin-right: 3.5em;
 	width: 7em;
+}
+
+#page-footer .outer-link{
+	margin: 0;
 }
 
 #page-footer > div:not(:last-child) {
@@ -379,12 +388,12 @@ SEARCH BAR
 	display: flex;
 	flex-direction: column;
 	max-width: 26em;
-	margin: 2.5em auto;
+	margin: 1.5em auto 1em;
 }
 
 .input-button-wrapper{
 	display: flex;
-	margin-top: 1em;
+	/*margin-top: 1em;*/
 	height: 3.5em;
 }
 
@@ -418,110 +427,9 @@ SEARCH FILTER
 }
 
 .resultMessage{
-	margin-bottom: 1em;
-	margin-top: 1em;
+	margin-top: .5em;
 }
 
-/*
-==============
-SIDE BAR
-==============
-*/
-
-/*
-
-#sidebar{
-	display: block;
-}
-
-.sidebar {
-	user-select: none;
-	max-width: 15em;
-	border-right: 2px solid var(--secondaryColor);
-	// overflow: hidden;
-}
-
-.items {
-	max-height: 54vh;
-	overflow: auto;
-	padding: 0;
-	margin-right: .5em;
-}
-
-.item {
-	display: flex;
-	align-items: center;
-	padding: .5em;
-	border-radius: var(--border-radius);
-	cursor: pointer;
-	justify-content: flex-start;
-	margin-bottom: 0.5em;
-}
-
-.item .name {
-	color: var(--txtcolor);
-	font-weight: normal;
-	margin-left: 20px;
-}
-
-.item * {
-	pointer-events: none;
-}
-
-.item.active {
-	background: var(--secondaryColor);
-}
-
-.item:hover {
-	background: var(--secondaryColor);
-}
-
-hr.solid {
-	border: 1px solid var(--secondaryColor);
-}
-
-.item.new-list{
-	margin-top: 1em;
-	background: var(--tertiaryColor);
-}
-
-.item.new-list .name{
-	color: var(--bgcolor);
-}
-
-.new-item {
-	margin-top: 1em;
-	display: flex;
-	align-items: center;
-	padding: .5em;
-	border-radius: var(--border-radius);
-	cursor: pointer;
-	justify-content: flex-start;
-	margin-bottom: 0.5em;
-	background-color: greenyellow;
-	border: none;
-	width: 97%;
-}
-
-.new-item .name{
-	margin-left: 20px;
-	background-color: red;
-}
-
-.new-item .icon{
-	background-color: red;
-}
-
-#wrapper {
-	overflow: hidden
-}
-
-#c1 {
-	float: left;
-	margin-right: 1em;
-}
-
-*/
 
 /*
 ==============
@@ -584,7 +492,7 @@ CARDS / H-CARDS
 
 .cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 10.5em);
+	grid-template-columns: repeat(auto-fit, 11em);
 	gap: 1em;
 	justify-content: center;
 }
@@ -644,21 +552,27 @@ LINK BUTTONS
 
 .link-button {
 	display: flex;
-	text-align: center;
+	/*text-align: center;*/
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
-	padding: .3em;
-	height: 4em;
+	padding: .5em;
+	height: 4.5em;
+	/*margin-top: 1em;*/
 }
 
 .link-button p {
 	font-size: 1.2em;
-	padding-left: .2em;
+	padding-left: .5em;
+	margin: auto;
+	text-align: left;
 }
 
 .link-button svg {
 	color: var(--txtcolor);
+	height: 3em;
+	width: 3em;
+	margin: auto;
 }
 
 /*
@@ -669,7 +583,7 @@ SEARCH PAGE
 
 .results-page-button {
 	display: flex;
-	padding: var(--content-padding);
+	padding: 1em 0;
 	max-width: var(--content-width);
 	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
