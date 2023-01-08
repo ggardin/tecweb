@@ -293,7 +293,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -318,7 +318,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%"), $genere];
 		$t1 = "ss";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -343,7 +343,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%"), $paese];
 		$t1 = "ss";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -362,7 +362,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -381,7 +381,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
