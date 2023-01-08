@@ -15,7 +15,7 @@ if ($user_id == "") {
 
 try {
 	$connessione = new Database();
-	$res = $connessione->addValutazione($user_id, $film_id, $voto, $testo);
+	$res = $connessione->insertValutazione($user_id, $film_id, $voto, $testo);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

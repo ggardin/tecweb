@@ -88,7 +88,7 @@ if ($tipo != "film")
 
 if (!empty($cerca[0])) {
 	$shown = count($cerca[0]);
-	$tot = $cerca[1][0]["n"];
+	$tot = $cerca[1]["n"];
 	$cerca = $cerca[0];
 	Tools::toHtml($cerca);
 	$card = Tools::getSection($page, "card");

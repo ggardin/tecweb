@@ -31,10 +31,6 @@ class Database {
 			$this->connection->close();
 	}
 
-	public function insertId() {
-		return $this->connection->insert_id;
-	}
-
 	// adattata da quella vista a lezione
 	private function pulisciInput(&$params) : void {
 		foreach ($params as &$p) {
@@ -73,6 +69,7 @@ class Database {
 	private function preparedUpdates(&$query, &$params, $types = "") : bool {
 		try {
 			$stmt = $this->preparedQuery($query, $params, $types);
+			$a_r = $stmt->affected_rows;
 			$stmt->close();
 		} catch (mysqli_sql_exception $e) {
 			if ($e->getCode() == 1062)
@@ -80,7 +77,7 @@ class Database {
 			else
 				throw new Exception(self::ERR);
 		}
-		return true;
+		return $a_r > 0;
 	}
 
 	public function getCollezioneById($id) : array {
@@ -170,7 +167,7 @@ class Database {
 				join ruolo as r
 					on c.ruolo = r.id
 			where p.id = ?
-			order by f.data_rilascio is null, f.data_rilascio, f.id, r.id";
+			order by f.data_rilascio desc, f.id, r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -284,7 +281,7 @@ class Database {
 	public function searchFilm($str, $limit, $offset) : array {
 		$base = "from film
 			where nome like ?
-			order by data_rilascio is null, data_rilascio";
+			order by data_rilascio desc";
 
 		$search = [];
 
@@ -296,7 +293,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -309,7 +306,7 @@ class Database {
 					on fg.genere = g.id
 			where f.nome like ?
 				and g.nome = ?
-			order by f.data_rilascio is null, f.data_rilascio";
+			order by data_rilascio desc";
 
 		$search = [];
 
@@ -321,7 +318,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%"), $genere];
 		$t1 = "ss";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -334,7 +331,7 @@ class Database {
 					on fp.paese = p.iso_3166_1
 			where f.nome like ?
 				and p.nome = ?
-			order by f.data_rilascio is null, f.data_rilascio";
+			order by data_rilascio desc";
 
 		$search = [];
 
@@ -346,7 +343,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%"), $paese];
 		$t1 = "ss";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -365,7 +362,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -384,7 +381,7 @@ class Database {
 		$q1 = "select count(*) as n " . $base;
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
-		$search[1] = $this->preparedSelect($q1, $p1, $t1);
+		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
 
 		return $search;
 	}
@@ -616,7 +613,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function addValutazione($user_id, $film_id, $voto, $testo) : bool {
+	public function insertValutazione($user_id, $film_id, $voto, $testo) : bool {
 		$query = "insert into valutazione(utente, film, voto, testo)
 			values (?, ?, ?, ?)";
 
@@ -641,8 +638,15 @@ class Database {
 			$status["id"] = $res[0]["id"];
 			$status["is_admin"] = $res[0]["is_admin"];
 		}
-	
+
 		return $status;
+	}
+
+	public function signup($username, $pass) : array {
+		if (insertUtente($username, $pass))
+			return [true, $this->connection->insert_id];
+		else
+			return [false, 0];
 	}
 
 	public function totalFilms($user_id) : array {
@@ -667,10 +671,10 @@ class Database {
 					on lf.film = f.id
 			where l.utente = ?
 			order by f.durata desc";
-						
+
 		$params = [$user_id];
 		$types = "i";
-	
+
 		return $this->preparedSelect($query, $params, $types);
 
 	}
@@ -686,14 +690,14 @@ class Database {
 						on f.id = fg.film
 					join genere as g
 						on fg.genere = g.id
-				where l.utente = ? 
+				where l.utente = ?
 				group by g.nome
 				order by count(*) desc";
 
-		
+
 				$params = [$user_id];
 				$types = "i";
-			
+
 				return $this->preparedSelect($query, $params, $types);
 	}
 }
