@@ -228,9 +228,13 @@ FOOTER
 	margin-top: 2.5em;
 }
 
-#page-footer svg{
+#page-footer .footer-logo{
 	margin-right: 3.5em;
 	width: 7em;
+}
+
+#page-footer .outer-link{
+	margin: 0;
 }
 
 #page-footer > div:not(:last-child) {
