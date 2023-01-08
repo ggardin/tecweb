@@ -18,82 +18,63 @@
 
 	<main id="content">
 		<h1>Statistiche</h1>
+
 		<!-- message_start -->
 		<p>@@message@@</p>
 		<!-- message_end -->
-		<!-- stats_start-->
-		<table>
-			<caption>La tua collezione (i dati si riferiscono a tutte le tue liste)</caption>
-			<thead>
-			<tr>
-				<th scope="col">Film visti</th>
-				<th scope="col">Minuti visti</th>
-				<th scope="col">Film più lungo visto</th>
-			</tr>
-			</thead>
 
-			<tbody>
-			<tr>
-				<th scope="row" data-label="Film visti">@@numeroFilm@@</th>
-				<td data-label="Minuti visti" id="css">@@minutiVisti@@</td>
-				<td data-label="Film più lungo visto">@@filmLungo@@</td>
-			</tr>
-			</tbody>
-		</table>
+		<h2>Generali</h2>
+		<ul>
+			<li>Numero di liste: @@n_liste@@</li>
+			<li>Numero di film (distinti) collezionati: @@n_film@@</li>
+			<li>Durata totale dei film (distinti) collezionati: @@durata_tot@@</li>
+		</ul>
 
+		<!-- generi_start -->
+		<h2>Generi</h2>
 		<table>
 			<caption>I generi più collezionati</caption>
 			<thead>
-			<tr>
-				<th scope="col">Genere</th>
-				<th scope="col">Film visti</th>
-			</tr>
+				<tr>
+					<th scope="col">Genere</th>
+					<th scope="col">Numero film</th>
+				</tr>
 			</thead>
 
 			<tbody>
-			<tr>
-				<th scope="row" data-label="Genere">@@primoGenere@@</th>
-				<td data-label="Film visti">@@filmVistiPrimoGenere@@</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Genere">@@secondoGenere@@</th>
-				<td data-label="Film visti">@@filmVistiSecondoGenere@@</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Genere">@@terzoGenere@@</th>
-				<td data-label="Film visti">@@filmVistiTerzoGenere@@</td>
-			</tr>
+				<!-- genere_riga_start -->
+				<tr>
+					<th scope="row" data-label="Genere">@@genere@@</th>
+					<td data-label="Numero film">@@numero@@</td>
+				</tr>
+				<!-- genere_riga_end -->
 			</tbody>
 		</table>
+		<!-- generi_end -->
 
-
+		<!-- lunghi_start -->
+		<h2>Lunghi</h2>
 		<table>
-			<caption>I Film più lunghi che hai visto</caption>
+			<caption>I @@n_lunghi@@ film più lunghi collezionati</caption>
 
 			<thead>
-			<tr>
-				<th scope="col">Titolo</th>
-				<th scope="col">Durata(in minuti)</th>
-			</tr>
+				<tr>
+					<th scope="col">Titolo</th>
+					<th scope="col">Durata</th>
+				</tr>
 			</thead>
 
 			<tbody>
-			<tr>
-				<th scope="row" data-label="Titolo">@@primoFilmLungo@@</th>
-				<td data-label="Durata">@@durataFilmLungo@@</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Titolo">@@secondoFilmLungo@@</th>
-				<td data-label="Durata">@@durataSecondoFilmLungo@@</td>
-			</tr>
-
-			<tr>
-				<th scope="row" data-label="Titolo">@@terzoFilmLungo@@</th>
-				<td data-label="Durata">@@durataTerzoFilmLungo@@</td>
-			</tr>
-
+				<!-- lunghi_riga_start -->
+				<tr>
+					<th scope="row" data-label="Titolo">@@titolo@@</th>
+					<td data-label="Durata">@@durata@@</td>
+				</tr>
+				<!-- lunghi_riga_end -->
+			</tbody>
 		</table>
-		<!-- stats_end-->
+		<!-- lunghi_end -->
+
 	</main>
 
 	<!-- footer -->

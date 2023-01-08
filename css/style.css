@@ -985,7 +985,7 @@ table {
 
 table caption {
 	font-size: 1.5em;
-	margin: 1.7em auto .5em;
+	/* margin: 1.7em auto .5em; */
 }
 
 table th, td {
