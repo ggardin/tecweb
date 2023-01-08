@@ -103,6 +103,9 @@ ACTIVE PAGE
 	border-radius: var(--border-radius);
 }
 
+.active-account {
+	pointer-events: none;
+}
 /*
 ==============
 HEADER
@@ -586,7 +589,7 @@ CARDS / H-CARDS
 
 .cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 10.5em);
+	grid-template-columns: repeat(auto-fit, 11em);
 	gap: 1em;
 	justify-content: center;
 }
@@ -646,21 +649,27 @@ LINK BUTTONS
 
 .link-button {
 	display: flex;
-	text-align: center;
+	/*text-align: center;*/
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
-	padding: .3em;
-	height: 4em;
+	padding: .5em;
+	height: 4.5em;
+	margin-top: 1em;
 }
 
 .link-button p {
 	font-size: 1.2em;
-	padding-left: .2em;
+	padding-left: .5em;
+	margin: auto;
+	text-align: left;
 }
 
 .link-button svg {
 	color: var(--txtcolor);
+	height: 3em;
+	width: 3em;
+	margin: auto;
 }
 
 /*
