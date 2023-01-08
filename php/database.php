@@ -167,7 +167,7 @@ class Database {
 				join ruolo as r
 					on c.ruolo = r.id
 			where p.id = ?
-			order by f.data_rilascio is null, f.data_rilascio, f.id, r.id";
+			order by f.data_rilascio desc, f.id, r.id";
 
 		$params = [$id];
 		$types = "i";
@@ -281,7 +281,7 @@ class Database {
 	public function searchFilm($str, $limit, $offset) : array {
 		$base = "from film
 			where nome like ?
-			order by data_rilascio is null, data_rilascio";
+			order by data_rilascio desc";
 
 		$search = [];
 
@@ -306,7 +306,7 @@ class Database {
 					on fg.genere = g.id
 			where f.nome like ?
 				and g.nome = ?
-			order by f.data_rilascio is null, f.data_rilascio";
+			order by data_rilascio desc";
 
 		$search = [];
 
@@ -331,7 +331,7 @@ class Database {
 					on fp.paese = p.iso_3166_1
 			where f.nome like ?
 				and p.nome = ?
-			order by f.data_rilascio is null, f.data_rilascio";
+			order by data_rilascio desc";
 
 		$search = [];
 
