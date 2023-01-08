@@ -99,6 +99,8 @@ ACTIVE PAGE
 .active {
 	background-color: var(--bgcolor-off);
 	pointer-events: none;
+	padding: .5em;
+	border-radius: var(--border-radius);
 }
 
 /*
@@ -145,7 +147,7 @@ HEADER
 
 #page-header li a,
 #page-header li:has(> .active) {
-	padding: 0.5em 1em 0.3em;
+	padding: 0.7em;
 }
 
 #page-header li:hover:not(:has(> .active)){
