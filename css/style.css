@@ -532,7 +532,7 @@ CARDS / H-CARDS
 .card > a .details > .cardtitle,
 .h-card > a .details > .cardtitle {
 	text-decoration: underline;
-	font-size: 1.3em;
+	font-size: 1.5em;
 }
 
 .card > a .details > *:not(.cardtitle),
