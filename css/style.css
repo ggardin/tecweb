@@ -60,7 +60,7 @@ img, picture {
 	max-width: 15em;
 }
 
-svg{
+svg {
 	width: 2.25em;
 }
 
@@ -86,7 +86,7 @@ body > #page-footer {
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	/*gap: 0.5em;*/
+	gap: 0.5em;
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
@@ -190,7 +190,7 @@ HEADER
 }
 
 #page-header .logo{
-	width: 3.2em;
+	width: auto;
 }
 
 .accountButton{
@@ -559,7 +559,8 @@ LINK BUTTONS
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
-	height: 4.5em;
+	max-width: 26em;
+	height: 4em;
 	margin: .5em auto;
 }
 
@@ -573,8 +574,8 @@ LINK BUTTONS
 
 .link-button svg {
 	color: var(--txtcolor);
-	height: 3em;
-	width: 3em;
+	/*height: 3em;*/
+	/*width: 3em;*/
 }
 
 #edit-button{
