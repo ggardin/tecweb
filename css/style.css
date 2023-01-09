@@ -57,7 +57,7 @@
 
 img, picture {
 	display: block;
-	max-width: 100%;
+	max-width: 15em;
 }
 
 svg{
@@ -195,8 +195,6 @@ HEADER
 
 .accountButton{
 	cursor: pointer;
-	width: 2.75em;
-	height: 2.75em;
 }
 
 .accountButton path {
