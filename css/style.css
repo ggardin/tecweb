@@ -973,10 +973,6 @@ PERSON/COLLECTION PAGE
 ==============
 */
 
-#manage{
-	max-width: 15em;
-}
-
 #person-details,
 #collection-details {
 	display: flex;
