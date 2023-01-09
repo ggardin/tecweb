@@ -590,7 +590,7 @@ SEARCH PAGE
 
 .results-page-button {
 	display: flex;
-	padding: 1em 0;
+	padding: .5em 0;
 	max-width: var(--content-width);
 	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
