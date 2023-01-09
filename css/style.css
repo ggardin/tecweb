@@ -833,27 +833,25 @@ AUTH
 ==============
 */
 
-.error-404 .error-code {
+.error-icon .error-code {
 	display: flex;
 	justify-content: center;
 	font-size: 5em;
 	font-weight: 800;
 }
 
-.error-404 .error-code > span {
+.error-icon .error-code > span {
 	float: left;
 	transform: rotate(-30deg);
 }
 
-.error-404 .message {
+.error-icon .message {
 	text-align: center;
 }
 
 .monster{
 	width: 20em;
 	height: 20em;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .monster #surrounding {
