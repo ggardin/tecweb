@@ -47,7 +47,29 @@
 }
 
 * {
+	margin: 0;
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+img, picture {
+	display: block;
+	max-width: 100%;
+}
+
+svg{
+	width: 2.25em;
+}
+
+input, button, textarea, select {
+	font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
 }
 
 html {
@@ -159,6 +181,7 @@ HEADER
 
 #page-header .actions {
 	display: flex;
+	align-content: center;
 	gap: 0.5em;
 }
 
@@ -172,6 +195,8 @@ HEADER
 
 .accountButton{
 	cursor: pointer;
+	width: 2.75em;
+	height: 2.75em;
 }
 
 .accountButton path {
@@ -317,32 +342,6 @@ TMDB ATTRIBUTION
 	height: auto;
 	clip: auto;
 	padding: 0.5em;
-}
-
-/* CSS reset */
-
-*, *::before, *::after {
-	box-sizing: border-box;
-}
-
-* {
-	margin: 0;
-}
-
-img, picture {
-	display: block;
-	max-width: 100%;
-}
-
-svg{
-	width: 2.5em;
-}
-
-input, button, textarea, select {
-	font: inherit;
-}
-p, h1, h2, h3, h4, h5, h6 {
-	overflow-wrap: break-word;
 }
 
 /* ThemeToggle */
