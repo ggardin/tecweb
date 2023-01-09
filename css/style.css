@@ -618,7 +618,7 @@ MOVIE PAGE
 }
 
 .movie-media {
-	flex: 0 1 300px; /* set to image width */
+	flex: 0 1 15em; /* set to image width */
 }
 
 .movie-media img {
