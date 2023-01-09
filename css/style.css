@@ -573,9 +573,9 @@ LINK BUTTONS
 	width: 3em;
 }
 
-#persona-edit-button{
+#edit-button{
 	margin-top: .5em;
-	max-width: 15em;
+	max-width: 20em;
 }
 
 /*
@@ -974,6 +974,10 @@ GESTIONE
 PERSON/COLLECTION PAGE
 ==============
 */
+
+.manage{
+	max-width: 20em;
+}
 
 #person-details,
 #collection-details {
