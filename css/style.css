@@ -540,6 +540,10 @@ CARDS / H-CARDS
 	color: var(--txtcolor);
 }
 
+.h-card h2, dd{
+	padding-bottom: .5em;
+}
+
 
 /*
 ==============
