@@ -556,7 +556,7 @@ LINK BUTTONS
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
 	height: 4.5em;
-	/*margin-top: 1em;*/
+	margin: .5em auto;
 }
 
 .link-button p {
@@ -575,6 +575,7 @@ LINK BUTTONS
 
 #persona-edit-button{
 	margin-top: .5em;
+	max-width: 15em;
 }
 
 /*
@@ -622,7 +623,7 @@ MOVIE PAGE
 }
 
 .movie-media img {
-	margin-bottom: 1em;
+	margin: .5em auto;
 }
 
 .movie-details h1 {
@@ -980,7 +981,7 @@ PERSON/COLLECTION PAGE
 	flex-direction: row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
-	margin-bottom: 2em;
+	margin-bottom: .5em;
 }
 
 #person-details dl {
@@ -996,8 +997,8 @@ PERSON/COLLECTION PAGE
 #person-details img,
 #collection-details img {
 	flex: 0 1;
-	max-width: 300px;
-	align-self: center;
+	max-width: 15em;
+	margin: auto;
 }
 
 #person-movies {
