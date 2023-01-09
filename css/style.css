@@ -19,7 +19,7 @@
 	--content-padding: 1rem;
 	--border-radius: 8px;
 	--auth-form-width: 35em;
-	--header-height: 4.5em;
+	--header-height: 3.5em;
 }
 
 :root.dark {
@@ -172,7 +172,7 @@ HEADER
 
 #page-header li a,
 #page-header li:has(> .active) {
-	padding: 0.7em;
+	padding: 0.5em;
 }
 
 #page-header li:hover:not(:has(> .active)){
