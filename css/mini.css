@@ -85,6 +85,16 @@ main > h1, h2{
 
 /*
 ==============
+CARDS
+==============
+*/
+
+.cards.double {
+	grid-template-columns: 1fr;
+}
+
+/*
+==============
 PERSON/COLLECTION PAGE
 ==============
 */
@@ -94,11 +104,6 @@ PERSON/COLLECTION PAGE
 	flex-direction: column-reverse;
 	gap: 1em;
 }
-
-#person-movies {
-	grid-template-columns: none;
-}
-
 
 /*
 ==============

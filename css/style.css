@@ -572,66 +572,53 @@ INDEX
 
 /*
 ==============
-CARDS / H-CARDS
+CARDS
 ==============
 */
 
 
-.cards, .h-cards {
+.cards {
 	list-style-type: none;
 	padding: 0;
-}
-
-.cards {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 10.5em);
-	gap: 1em;
 	justify-content: center;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.5em;
 }
 
-.card, .h-card {
+.cards.double {
+	grid-template-columns: repeat(2, 1fr);
+	/* grid-template-columns: repeat(auto-fit, 10.5em); */
+	/* grid-template-columns: repeat(auto-fit, minmax(11em, 1fr)); */
+}
+
+.card {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	overflow: hidden;
 }
 
-.card > a,
-.h-card > a {
+.card > a {
 	display: flex;
 	text-decoration: none;
-}
-
-.card > a {
-	flex-direction: column;
-	height: 100%;
-}
-
-.h-card > a {
 	flex-direction: row;
 	width: 100%;
 }
 
 .card > a img {
-	height: 15.75em;
+	height: 11em;
 }
 
-.h-card > a img {
-	height: 13em;
-}
-
-.card > a .details,
-.h-card > a .details {
+.card > a .details {
 	padding: 0.5em;
 }
 
-.card > a .details > .cardtitle,
-.h-card > a .details > .cardtitle {
+.card > a .details > .title {
 	text-decoration: underline;
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 
-.card > a .details > *:not(.cardtitle),
-.h-card > a .details > *:not(.cardtitle) {
+.card > a .details > *:not(.title) {
 	color: var(--txtcolor);
 }
 
@@ -1003,8 +990,11 @@ USER LISTS PAGE
 ==============
 */
 
+#list-movies {
+	margin-top: 1em;
+}
+
 #list-movies li {
-	margin-top: 1.5em;
 	display: flex;  /* Set the display property to flex to enable flexbox layout */
 	align-items: center;  /* Center the .button-container element vertically */
 	justify-content: center;  /* Center the .button-container element horizontally */
@@ -1082,12 +1072,6 @@ PERSON/COLLECTION PAGE
 	flex: 0 1;
 	max-width: 300px;
 	align-self: center;
-}
-
-#person-movies {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 1em;
 }
 
 #collection-movies li {
