@@ -642,10 +642,10 @@ class Database {
 		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
-	public function totalFilms($user_id) : array {
-		$query = "select distinct(lf.film)
+	public function getNumeroFilmDistintiPerUtente($user_id) : array {
+		$query = "select distinct (lf.film)
 			from lista as l
-			join lista_film as lf
+				join lista_film as lf
 					on l.id = lf.lista
 			where l.utente = ?";
 
@@ -655,8 +655,19 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function FilmByTime($user_id) : array {
-		$query = "select distinct(f.id), f.durata, f.nome
+	public function getNumeroListePerUtente($user_id) : array {
+		$query = "select count(*)
+			from lista
+			where utente = ?";
+
+		$params = [$user_id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getFilmPiuLunghiPerUtente($user_id) : array {
+		$query = "select distinct f.id, f.durata, f.nome
 			from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
@@ -672,26 +683,26 @@ class Database {
 
 	}
 
-	public function Genre($user_id) : array {
-		$query = "select g.nome, count(*)
-				from lista as l
-					join lista_film as lf
-						on l.id = lf.lista
-					join film as f
-						on lf.film = f.id
-					join film_genere as fg
-						on f.id = fg.film
-					join genere as g
-						on fg.genere = g.id
-				where l.utente = ?
-				group by g.nome
-				order by count(*) desc";
+	public function getNumeroPerGenerePerUtente($user_id) : array {
+		$query = "select g.nome, count(*) as n
+			from lista as l
+				join lista_film as lf
+					on l.id = lf.lista
+				join film as f
+					on lf.film = f.id
+				join film_genere as fg
+					on f.id = fg.film
+				join genere as g
+					on fg.genere = g.id
+			where l.utente = ?
+			group by g.nome
+			order by count(*) desc";
 
 
-				$params = [$user_id];
-				$types = "i";
+		$params = [$user_id];
+		$types = "i";
 
-				return $this->preparedSelect($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 }
 
