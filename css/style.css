@@ -977,8 +977,8 @@ PERSON/COLLECTION PAGE
 ==============
 */
 
-.manage{
-	max-width: 20em;
+#manage{
+	max-width: 15em;
 }
 
 #person-details,
