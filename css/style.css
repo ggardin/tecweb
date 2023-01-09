@@ -849,16 +849,16 @@ AUTH
 	text-align: center;
 }
 
-.monster{
+.thing{
 	width: 20em;
 	height: 20em;
 }
 
-.monster #surrounding {
+.thing #surrounding {
 	fill: var(--txtcolor);
 }
 
-.monster #alien {
+.thing #alien {
 	fill: var(--tertiaryColor);
 }
 
