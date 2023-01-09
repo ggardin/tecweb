@@ -553,6 +553,7 @@ LINK BUTTONS
 .link-button {
 	display: flex;
 	/*text-align: center;*/
+	align-items: center;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
@@ -564,15 +565,19 @@ LINK BUTTONS
 .link-button p {
 	font-size: 1.2em;
 	padding-left: .5em;
-	margin: auto;
+	margin: auto 0;
 	text-align: left;
+	color: var(--txtcolor);
 }
 
 .link-button svg {
 	color: var(--txtcolor);
 	height: 3em;
 	width: 3em;
-	margin: auto;
+}
+
+#persona-edit-button{
+	margin-top: .5em;
 }
 
 /*
@@ -839,14 +844,14 @@ AUTH
 }
 
 .error-404 .message {
-	font-size: 1.2em;
 	text-align: center;
 }
 
-.monster {
+.monster{
 	width: 20em;
 	height: 20em;
-	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .monster #surrounding {
