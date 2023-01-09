@@ -12,7 +12,7 @@ $query = (isset($_GET["q"])) ? $_GET["q"] : "";
 $f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
 $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 
-$limit = 15;
+$limit = 16;
 $next = (isset($_GET["n"])) ? intval($_GET["n"]) : 0;
 $offset = $limit * $next;
 
