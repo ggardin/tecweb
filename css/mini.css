@@ -99,10 +99,10 @@ PERSON/COLLECTION PAGE
 ==============
 */
 
-#person-details,
-#collection-details {
+#person-data,
+#collection-data {
 	flex-direction: column-reverse;
-	gap: 1em;
+	align-items: center;
 }
 
 /*
