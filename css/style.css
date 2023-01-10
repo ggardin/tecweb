@@ -107,7 +107,6 @@ a:visited {
 	border-radius: var(--border-radius);
 }*/
 
-
 .image-style {
 	border-radius: var(--border-radius);
 }
@@ -644,6 +643,10 @@ MOVIE PAGE
 #movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
+}
+
+#add-movie{
+	margin-top: .5em;
 }
 
 /* .movie-media button {
