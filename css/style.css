@@ -19,7 +19,7 @@
 	--content-padding: 1rem;
 	--border-radius: 8px;
 	--auth-form-width: 35em;
-	--header-height: 4.5em;
+	--header-height: 3.5em;
 }
 
 :root.dark {
@@ -47,7 +47,29 @@
 }
 
 * {
+	margin: 0;
 	font-family: "Sora", ".AppleSystemUIFont", "Arial", sans-serif;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+img, picture {
+	display: block;
+	max-width: 15em;
+}
+
+svg {
+	width: 2.25em;
+}
+
+input, button, textarea, select {
+	font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
 }
 
 html {
@@ -64,7 +86,7 @@ body > #page-footer {
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	/*gap: 0.5em;*/
+	gap: 0.5em;
 	line-height: 1.5;
 	background-color: var(--bgcolor);
 	color: var(--txtcolor);
@@ -99,8 +121,13 @@ ACTIVE PAGE
 .active {
 	background-color: var(--bgcolor-off);
 	pointer-events: none;
+	padding: .5em;
+	border-radius: var(--border-radius);
 }
 
+.active-account {
+	pointer-events: none;
+}
 /*
 ==============
 HEADER
@@ -145,7 +172,7 @@ HEADER
 
 #page-header li a,
 #page-header li:has(> .active) {
-	padding: 0.5em 1em 0.3em;
+	padding: 0.5em;
 }
 
 #page-header li:hover:not(:has(> .active)){
@@ -154,6 +181,7 @@ HEADER
 
 #page-header .actions {
 	display: flex;
+	align-content: center;
 	gap: 0.5em;
 }
 
@@ -161,15 +189,12 @@ HEADER
 	width: auto;
 }
 
-#page-header .logo{
-	width: 3.2em;
+#logo {
+	width: auto;
 }
 
-.accountButton{
-	cursor: pointer;
-}
-
-.accountButton path {
+#logo path,
+#accountButton path {
 	fill: var(--txtcolor);
 }
 
@@ -223,7 +248,7 @@ FOOTER
 	margin-top: 2.5em;
 }
 
-#page-footer svg{
+#footer-logo{
 	margin-right: 3.5em;
 	width: 7em;
 }
@@ -310,32 +335,6 @@ TMDB ATTRIBUTION
 	padding: 0.5em;
 }
 
-/* CSS reset */
-
-*, *::before, *::after {
-	box-sizing: border-box;
-}
-
-* {
-	margin: 0;
-}
-
-img, picture {
-	display: block;
-	max-width: 100%;
-}
-
-svg{
-	width: 2.5em;
-}
-
-input, button, textarea, select {
-	font: inherit;
-}
-p, h1, h2, h3, h4, h5, h6 {
-	overflow-wrap: break-word;
-}
-
 /* ThemeToggle */
 
 #themeToggle {
@@ -379,12 +378,12 @@ SEARCH BAR
 	display: flex;
 	flex-direction: column;
 	max-width: 26em;
-	margin: 2.5em auto;
+	margin: 1.5em auto 1em;
 }
 
 .input-button-wrapper{
 	display: flex;
-	margin-top: 1em;
+	/*margin-top: 1em;*/
 	height: 3.5em;
 }
 
@@ -418,110 +417,9 @@ SEARCH FILTER
 }
 
 .resultMessage{
-	margin-bottom: 1em;
-	margin-top: 1em;
+	margin-top: .5em;
 }
 
-/*
-==============
-SIDE BAR
-==============
-*/
-
-/*
-
-#sidebar{
-	display: block;
-}
-
-.sidebar {
-	user-select: none;
-	max-width: 15em;
-	border-right: 2px solid var(--secondaryColor);
-	// overflow: hidden;
-}
-
-.items {
-	max-height: 54vh;
-	overflow: auto;
-	padding: 0;
-	margin-right: .5em;
-}
-
-.item {
-	display: flex;
-	align-items: center;
-	padding: .5em;
-	border-radius: var(--border-radius);
-	cursor: pointer;
-	justify-content: flex-start;
-	margin-bottom: 0.5em;
-}
-
-.item .name {
-	color: var(--txtcolor);
-	font-weight: normal;
-	margin-left: 20px;
-}
-
-.item * {
-	pointer-events: none;
-}
-
-.item.active {
-	background: var(--secondaryColor);
-}
-
-.item:hover {
-	background: var(--secondaryColor);
-}
-
-hr.solid {
-	border: 1px solid var(--secondaryColor);
-}
-
-.item.new-list{
-	margin-top: 1em;
-	background: var(--tertiaryColor);
-}
-
-.item.new-list .name{
-	color: var(--bgcolor);
-}
-
-.new-item {
-	margin-top: 1em;
-	display: flex;
-	align-items: center;
-	padding: .5em;
-	border-radius: var(--border-radius);
-	cursor: pointer;
-	justify-content: flex-start;
-	margin-bottom: 0.5em;
-	background-color: greenyellow;
-	border: none;
-	width: 97%;
-}
-
-.new-item .name{
-	margin-left: 20px;
-	background-color: red;
-}
-
-.new-item .icon{
-	background-color: red;
-}
-
-#wrapper {
-	overflow: hidden
-}
-
-#c1 {
-	float: left;
-	margin-right: 1em;
-}
-
-*/
 
 /*
 ==============
@@ -563,11 +461,6 @@ INDEX
 
 .container > .text {
 	flex: 1 0;
-}
-
-.container > img {
-	flex-grow: 0;
-	width: 300px; /* TODO: ridimensiona il png */
 }
 
 /*
@@ -622,7 +515,6 @@ CARDS
 	color: var(--txtcolor);
 }
 
-
 /*
 ==============
 LINK BUTTONS
@@ -631,21 +523,29 @@ LINK BUTTONS
 
 .link-button {
 	display: flex;
-	text-align: center;
+	/*text-align: center;*/
+	align-items: center;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
-	padding: .3em;
-	height: 4em;
+	padding: .5em;
+	max-width: 26em;
+	height: 4.5em;
+	margin: .5em auto;
 }
 
 .link-button p {
 	font-size: 1.2em;
-	padding-left: .2em;
+	padding-left: .5em;
+	margin: auto 0;
+	text-align: left;
+	color: var(--txtcolor);
 }
 
 .link-button svg {
 	color: var(--txtcolor);
+	/*height: 3em;*/
+	/*width: 3em;*/
 }
 
 /*
@@ -656,7 +556,7 @@ SEARCH PAGE
 
 .results-page-button {
 	display: flex;
-	padding: var(--content-padding);
+	padding: .5em 0;
 	max-width: var(--content-width);
 	justify-content: space-between; /* This will evenly distribute the space between the elements */
 }
@@ -684,59 +584,51 @@ MOVIE PAGE
 	gap: 2em;
 }
 
-.movie-details {
+#movie-details {
 	flex: 1 1;
 }
 
-.movie-media {
-	flex: 0 1 300px; /* set to image width */
-}
-
-.movie-media img {
-	margin-bottom: 1em;
-}
-
-.movie-details h1 {
+#movie-details h1 {
 	font-size: 2em;
 	font-weight: 700;
 	color: var(--txtcolor);
 }
 
-.movie-details section {
+#movie-details section {
 	margin: 2em 0;
 }
 
-.movie-details dl.info {
+#movie-details dl.info {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-gap: 0.5em 1em;
 }
 
-.movie-details dl.info dt::after {
+#movie-details dl.info dt::after {
 	content: ':';
 }
 
-.movie-details .pills dd,
-.movie-details .pills li {
+#movie-details .pills dd,
+#movie-details .pills li {
 	display: inline;
 	margin-right: 0.5em;
 	line-height: 3em;
 	white-space: nowrap;
 }
 
-.movie-details .pills dt:not(:first-of-type) {
+#movie-details .pills dt:not(:first-of-type) {
 	margin-top: 1em;
 }
 
-.movie-details .pills dd > a,
-.movie-details .pills li > a {
+#movie-details .pills dd > a,
+#movie-details .pills li > a {
 	padding: 0.5em;
 	border: 1px solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 	background-color: var(--bgcolor-alt);
 }
 
-.movie-page #subtitle {
+#movie-details #subtitle {
 	display: flex;
 	flex-wrap: wrap;
 	font-size: .9em;
@@ -744,12 +636,12 @@ MOVIE PAGE
 	margin: 0.5em 0;
 }
 
-.movie-page #subtitle dd:not(:first-of-type)::before {
+#movie-details #subtitle dd:not(:first-of-type)::before {
 	content: '\2022';
 	margin: 0 0.75em;
 }
 
-.movie-details ul {
+#movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
 }
@@ -899,34 +791,32 @@ AUTH
 ==============
 */
 
-.error-404 .error-code {
+.error-icon .error-code {
 	display: flex;
 	justify-content: center;
 	font-size: 5em;
 	font-weight: 800;
 }
 
-.error-404 .error-code > span {
+.error-icon .error-code > span {
 	float: left;
 	transform: rotate(-30deg);
 }
 
-.error-404 .message {
-	font-size: 1.2em;
+.error-icon .message {
 	text-align: center;
 }
 
-.monster {
+.thing{
 	width: 20em;
 	height: 20em;
-	margin: 0 auto;
 }
 
-.monster #surrounding {
+.thing #surrounding {
 	fill: var(--txtcolor);
 }
 
-.monster #alien {
+.thing #alien {
 	fill: var(--tertiaryColor);
 }
 
@@ -1054,7 +944,7 @@ PERSON/COLLECTION PAGE
 	flex-direction: row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
-	margin-bottom: 2em;
+	margin-bottom: .5em;
 }
 
 #person-details dl {
@@ -1067,11 +957,25 @@ PERSON/COLLECTION PAGE
 	content: ':';
 }
 
-#person-details img,
-#collection-details img {
+#person-movies {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1em;
+}
+
+#collection-movies li {
+	margin-top: 1em;
+}
+
+/*
+==============
+ASIDE IMAGE
+==============
+*/
+
+#aside-image {
 	flex: 0 1;
-	max-width: 300px;
-	align-self: center;
+	max-width: 15em;
 }
 
 /*
