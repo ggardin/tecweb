@@ -16,7 +16,7 @@
 	--form-invalid: var(--form-required-field);
 
 	--content-width: 60em;
-	--content-padding: 1rem;
+	--content-padding: 1em; /*1rem*/
 	--border-radius: 8px;
 	--auth-form-width: 35em;
 	--header-height: 3.5em;
@@ -538,7 +538,6 @@ LINK BUTTONS
 	padding-left: .5em;
 	margin: auto 0;
 	text-align: left;
-	color: var(--txtcolor);
 }
 
 .link-button svg {
@@ -546,6 +545,12 @@ LINK BUTTONS
 	/*height: 3em;*/
 	/*width: 3em;*/
 }
+
+#content ul{
+	list-style: none;
+	padding-left: 0;
+}
+
 
 /*
 ==============
