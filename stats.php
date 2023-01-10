@@ -10,10 +10,10 @@ if (! isset($_SESSION["id"])) {
 
 try {
 	$connessione = new Database();
-	$visti = $connessione->totalFilms($_SESSION["id"]);
-	$films = $connessione->FilmByTime($_SESSION["id"]);
-	$genere = $connessione->Genre($_SESSION["id"]);
-
+	$n_liste = $connessione->getNumeroListePerUtente($_SESSION["id"]);
+	$n_film = $connessione->getNumeroFilmPerUtente($_SESSION["id"]);
+	$generi = $connessione->getNumeroPerGenerePerUtente($_SESSION["id"]);
+	$lunghi = $connessione->getFilmPiuLunghiPerUtente($_SESSION["id"], 5);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -23,87 +23,45 @@ try {
 
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
-if(empty($films)){
-	Tools::replaceAnchor($page, "message", "Aggiungi dei film alle tue liste per vedere le statistiche");
-	Tools::replaceSection($page, "stats", "");
-} else {
-	Tools::replaceAnchor($page, "message", "");
-	Tools::replaceAnchor($page, "numeroFilm", count($visti));
-	$minuti = 0;
-	foreach($films as $f){
-		$minuti = $minuti + $f["durata"];
-	}
-	Tools::replaceAnchor($page, "minutiVisti", $minuti);
+Tools::replaceAnchor($page, "n_liste", $n_liste[0]["n"]);
+Tools::replaceAnchor($page, "n_film", $n_film[0]["n"]);
 
-	$i = 0;
-	foreach($films as $f){
-		if($i == 0){
-			$longest = $f["nome"];
-			$longestTime = $f["durata"];
-		} else if($i == 1){
-			$secondLongest = $f["nome"];
-			$secondLongestTime = $f["durata"];
-		} else if($i == 2){
-			$thirdLongest = $f["nome"];
-			$thirdLongestTime = $f["durata"];
-		}
-		$i = $i + 1;
-		if($i == 3) break;
-	}
+$mess = true;
 
-	Tools::replaceAnchor($page, "filmLungo", $longest);
-	Tools::replaceAnchor($page, "primoFilmLungo", $longest);
-	Tools::replaceAnchor($page, "durataFilmLungo", $longestTime);
-	if($secondLongest){
-		Tools::replaceAnchor($page, "secondoFilmLungo", $secondLongest);
-		Tools::replaceAnchor($page, "durataSecondoFilmLungo", $secondLongestTime);
-	} else {
-		Tools::replaceAnchor($page, "secondoFilmLungo", "Aggiungi altri film per vedere ulteriori statistiche");
-		Tools::replaceAnchor($page, "durataSecondoFilmLungo", "");
+if (! empty($generi)) {
+	$mess = false;
+	Tools::replaceAnchor($page, "n_generi", count($lunghi) < 5);
+	$ummagumma = Tools::getSection($page, "generi_riga", "");
+	$res = "";
+	foreach ($generi as $g) {
+		$t = $ummagumma;
+		Tools::replaceAnchor($t, "genere", $g["nome"]);
+		Tools::replaceAnchor($t, "numero", $g["n"]);
+		$res .= $t;
 	}
-	if($thirdLongest){
-		Tools::replaceAnchor($page, "terzoFilmLungo", $thirdLongest);
-		Tools::replaceAnchor($page, "durataTerzoFilmLungo", $thirdLongestTime);
-	} else {
-		Tools::replaceAnchor($page, "terzoFilmLungo", "Aggiungi altri film per vedere ulteriori statistiche");
-		Tools::replaceAnchor($page, "durataTerzoFilmLungo", "");
-	}
+	Tools::replaceSection($page, "generi_riga", $res);
+} else
+	Tools::replaceSection($page, "generi", "");
 
-	$i = 0;
-	foreach($genere as $g){
-		if($i == 0){
-			$firstGenre = $g["nome"];
-			$firstGenreCount = $g["count(*)"];
-		} else if($i == 1){
-			$secondGenre = $g["nome"];
-			$secondGenreCount = $g["count(*)"];
-		} else if($i == 2){
-			$thirdGenre = $g["nome"];
-			$thirdGenreCount = $g["count(*)"];
-		}
-		$i = $i + 1;
+if (! empty($lunghi)) {
+	$mess = false;
+	Tools::replaceAnchor($page, "n_lunghi", count($lunghi));
+	Tools::toHtml($lunghi);
+	$ummagumma = Tools::getSection($page, "lunghi_riga", "");
+	$res = "";
+	foreach ($lunghi as $l) {
+		$t = $ummagumma;
+		Tools::replaceAnchor($t, "nome", $l["nome"]);
+		Tools::replaceAnchor($t, "durata", Tools::minutiAStringa($l["durata"]));
+		$res .= $t;
 	}
-	Tools::replaceAnchor($page, "primoGenere", $firstGenre);
-	Tools::replaceAnchor($page, "filmVistiPrimoGenere", $firstGenreCount);
-	if($secondGenre){
-		Tools::replaceAnchor($page, "secondoGenere", $secondGenre);
-		Tools::replaceAnchor($page, "filmVistiSecondoGenere", $secondGenreCount);
-	} else {
-		Tools::replaceAnchor($page, "secondoGenere", "Aggiungi altri film per vedere ulteriori statistiche");
-		Tools::replaceAnchor($page, "filmVistiSecondoGenere", "");
-	}
-	if($thirdGenre){
-		Tools::replaceAnchor($page, "terzoGenere", $thirdGenre);
-		Tools::replaceAnchor($page, "filmVistiTerzoGenere", $thirdGenreCount);
-	} else {
-		Tools::replaceAnchor($page, "terzoGenere", "Aggiungi altri film per vedere ulteriori statistiche");
-		Tools::replaceAnchor($page, "filmVistiTerzoGenere", "");
-	}
-}
+	Tools::replaceSection($page, "lunghi_riga", $res);
+} else
+	Tools::replaceSection($page, "lunghi", "");
+
+if (! $mess)
+	Tools::replaceSection($page, "message", "");
 
 Tools::showPage($page);
 
 ?>
-
-
-

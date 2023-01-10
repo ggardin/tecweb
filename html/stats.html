@@ -23,13 +23,17 @@
 		<ul>
 			<li>Numero di liste: @@n_liste@@</li>
 			<li>Numero di film (distinti) collezionati: @@n_film@@</li>
-			<li>Durata totale dei film (distinti) collezionati: @@durata_tot@@</li>
 		</ul>
+
+		<!-- message_start -->
+		<h2>Tabelle bellissime</h2>
+		<p>Aggiungi almeno un film ad una lista per vederle</p>
+		<!-- message_end -->
 
 		<!-- generi_start -->
 		<h2>Generi</h2>
 		<table>
-			<caption>I @@n_generi@@ generi più collezionati</caption>
+			<caption>Numero di film collezionati per genere</caption>
 			<thead>
 				<tr>
 					<th scope="col">Genere</th>
@@ -38,12 +42,12 @@
 			</thead>
 
 			<tbody>
-				<!-- genere_riga_start -->
+				<!-- generi_riga_start -->
 				<tr>
 					<th scope="row" data-label="Genere">@@genere@@</th>
 					<td data-label="Numero film">@@numero@@</td>
 				</tr>
-				<!-- genere_riga_end -->
+				<!-- generi_riga_end -->
 			</tbody>
 		</table>
 		<!-- generi_end -->
@@ -51,7 +55,7 @@
 		<!-- lunghi_start -->
 		<h2>Lunghi</h2>
 		<table>
-			<caption>I @@n_lunghi@@ film più lunghi collezionati</caption>
+			<caption>Film più lunghi collezionati (@@n_lunghi@@)</caption>
 
 			<thead>
 				<tr>
@@ -63,7 +67,7 @@
 			<tbody>
 				<!-- lunghi_riga_start -->
 				<tr>
-					<th scope="row" data-label="Titolo">@@titolo@@</th>
+					<th scope="row" data-label="Titolo">@@nome@@</th>
 					<td data-label="Durata">@@durata@@</td>
 				</tr>
 				<!-- lunghi_riga_end -->
