@@ -16,7 +16,7 @@
 	--form-invalid: var(--form-required-field);
 
 	--content-width: 60em;
-	--content-padding: 1rem;
+	--content-padding: 1em; /*1rem*/
 	--border-radius: 8px;
 	--auth-form-width: 35em;
 	--header-height: 3.5em;
@@ -106,7 +106,6 @@ a:visited {
 /*img {
 	border-radius: var(--border-radius);
 }*/
-
 
 .image-style {
 	border-radius: var(--border-radius);
@@ -530,7 +529,7 @@ LINK BUTTONS
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
 	max-width: 26em;
-	height: 4.5em;
+	height: 4em;
 	margin: .5em auto;
 }
 
@@ -539,7 +538,6 @@ LINK BUTTONS
 	padding-left: .5em;
 	margin: auto 0;
 	text-align: left;
-	color: var(--txtcolor);
 }
 
 .link-button svg {
@@ -547,6 +545,12 @@ LINK BUTTONS
 	/*height: 3em;*/
 	/*width: 3em;*/
 }
+
+#content ul{
+	list-style: none;
+	padding-left: 0;
+}
+
 
 /*
 ==============
@@ -645,6 +649,10 @@ MOVIE PAGE
 #movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
+}
+
+#add-movie{
+	margin-top: .5em;
 }
 
 /* .movie-media button {
