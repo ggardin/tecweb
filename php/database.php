@@ -642,8 +642,8 @@ class Database {
 		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
-	public function getNumeroFilmDistintiPerUtente($user_id) : array {
-		$query = "select distinct (lf.film)
+	public function getNumeroFilmPerUtente($user_id) : array {
+		$query = "select count(distinct lf.film) as n
 			from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
@@ -656,7 +656,7 @@ class Database {
 	}
 
 	public function getNumeroListePerUtente($user_id) : array {
-		$query = "select count(*)
+		$query = "select count(*) as n
 			from lista
 			where utente = ?";
 
@@ -666,18 +666,20 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getFilmPiuLunghiPerUtente($user_id) : array {
-		$query = "select distinct f.id, f.durata, f.nome
+	public function getFilmPiuLunghiPerUtente($user_id, $limit) : array {
+		$query = "select distinct f.nome, f.durata
 			from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
 				join film as f
 					on lf.film = f.id
 			where l.utente = ?
-			order by f.durata desc";
+				and f.durata is not null
+			order by f.durata desc
+			limit ?";
 
-		$params = [$user_id];
-		$types = "i";
+		$params = [$user_id, $limit];
+		$types = "ii";
 
 		return $this->preparedSelect($query, $params, $types);
 
