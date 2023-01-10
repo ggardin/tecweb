@@ -189,15 +189,12 @@ HEADER
 	width: auto;
 }
 
-#page-header .logo{
+#logo {
 	width: auto;
 }
 
-.accountButton{
-	cursor: pointer;
-}
-
-.accountButton path {
+#logo path,
+#accountButton path {
 	fill: var(--txtcolor);
 }
 
@@ -251,13 +248,9 @@ FOOTER
 	margin-top: 2.5em;
 }
 
-#page-footer .footer-logo{
+#footer-logo{
 	margin-right: 3.5em;
 	width: 7em;
-}
-
-#page-footer .outer-link{
-	margin: 0;
 }
 
 #page-footer > div:not(:last-child) {
