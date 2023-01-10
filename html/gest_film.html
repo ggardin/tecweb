@@ -45,13 +45,13 @@
 			<fieldset id="crew">
 				<legend lang="en">Crew</legend>
 
-				<p id="crew-hint" role="status">Non è stato definito alcun membro della <span lang="en">crew</span>.</p>
-				<input type="button" onclick="addNewCrewMember(this.parentNode);" value="Aggiungi">
-				<input type="button" onclick="removeLastCrewMember(this.parentNode);" value="Rimuovi ultima aggiunta">
+				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
+				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
 			</fieldset>
 
-			<fieldset>
+			<fieldset class="checkbox-pills">
 				<legend>Generi</legend>
+				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
 
 				<div class="checkbox-pill">
 					<label for="genre-azione">Azione</label>
@@ -125,11 +125,9 @@
 
 			<fieldset>
 				<legend>Paesi di produzione</legend>
-				<label for="paesi">Paesi</label>
-				<input list="lista-paesi" id="paesi" name="paesi">
-				<input type="button" onclick="" />
-				<p role="status" id="selezione-paesi"></p>
 
+				<p id="nation-hint" role="status">Non è stato definito alcun Paese.</p>
+				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
 				<datalist id="lista-paesi">
 					<option value="AF">Afghanistan</option>
 					<option value="AL">Albania</option>
