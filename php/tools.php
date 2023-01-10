@@ -71,8 +71,7 @@ class Tools {
 
 	private static function convHelper(&$item, $key, $conv_level) : void {
 		if (! is_null($item)) {
-			if ($conv_level)
-				$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
+			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
 			if ($conv_level != 1) {
 				$strip = ($conv_level == 0);
 				$item = Tools::convLang($item, $strip);
@@ -82,7 +81,7 @@ class Tools {
 	}
 
 	// conv_level
-	// 0: keep specials, strip markers (for titles)
+	// 0: conv specials, strip markers (for titles)
 	// 1: conv specials, keep makers (for editing)
 	// 2: conv specials, conv markers (for normal pages), DEFAULT
 	public static function toHtml(&$in, $conv_level = 2) : void {
@@ -131,6 +130,17 @@ class Tools {
 		self::deleteAllSectionAnchors($page);
 		$page = preg_replace('/^\h*\v+/m', '', $page);
 		echo($page);
+	}
+
+	public static function minutiAStringa($minuti) : string {
+		$h = floor($minuti/60);
+		$m = $minuti%60;
+		$s = "";
+		if ($h)
+			$s .= $h . ($h>1 ? " ore" : " ora");
+		if ($m)
+			$s .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
+		return $s;
 	}
 }
 
