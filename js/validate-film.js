@@ -29,7 +29,7 @@ function validateMovie() {
 	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
 
 	// Controlla che ci sia una stringa
-	if (releaseDate == null || releaseDate == '') {
+	if (releaseDate == null) {
 		showErrorMessage(id, 'Data di rilascio non inserita.');
 		return false;
 	}
@@ -76,7 +76,7 @@ function validateMovieRuntime() {
 	var runtime = document.forms['gestione']['durata'].value;
 
 	// se durata negativa, segnala errore
-	if (runtime <= 0) {
+	if (runtime != "" && runtime <= 0) {
 		showErrorMessage(id, "Durata in minuti inferiore a 0 minuti.");
 		return false;
 	}
@@ -108,7 +108,7 @@ function validateMovieBoxOfficeEarnings() {
  * Valida la cifra
  */
 function validateMoney(id) {
-	if ( document.forms['gestione'][id].value <= 0 ) {
+	if ( document.forms['gestione'][id].value != "" && document.forms['gestione'][id].value <= 0 ) {
 		showErrorMessage(id, 'La cifra non può essere inferiore a 0.');
 		return false;
 	}
