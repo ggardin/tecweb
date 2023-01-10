@@ -586,6 +586,7 @@ MOVIE PAGE
 
 #movie-details {
 	flex: 1 1;
+	width: 100%;
 }
 
 #movie-details h1 {
@@ -938,13 +939,18 @@ PERSON/COLLECTION PAGE
 ==============
 */
 
-#person-details,
-#collection-details {
+#person-data,
+#collection-data {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
 	margin-bottom: .5em;
+}
+
+#person-details,
+#collection-details {
+	width: 100%;
 }
 
 #person-details dl {
@@ -955,12 +961,6 @@ PERSON/COLLECTION PAGE
 
 #person-details dl dt::after {
 	content: ':';
-}
-
-#person-movies {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 1em;
 }
 
 #collection-movies li {
