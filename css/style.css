@@ -140,7 +140,7 @@ HEADER
 	background-color: var(--bgcolor);
 	display: flex;
 	justify-content: space-between;
-	/*align-items: center;*/
+	align-items: center;
 	z-index: 10;
 	height: var(--header-height);
 }
@@ -544,11 +544,6 @@ LINK BUTTONS
 	color: var(--txtcolor);
 	/*height: 3em;*/
 	/*width: 3em;*/
-}
-
-#content ul{
-	list-style: none;
-	padding-left: 0;
 }
 
 

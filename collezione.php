@@ -57,10 +57,6 @@ if (!empty($film)) {
 			Tools::replaceAnchor($c, "data_rilascio", date_format(date_create_from_format('Y-m-d', $f["data_rilascio"]), 'd/m/Y'));
 		else
 			Tools::replaceSection($c, "data_rilascio", "");
-		if (isset($f["descrizione"]))
-			Tools::replaceAnchor($c, "descrizione", $f["descrizione"]);
-		else
-			Tools::replaceSection($c, "descrizione", "");
 		$immagine = (isset($f["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $f["locandina"]) : "img/placeholder.svg");
 		Tools::replaceAnchor($c, "immagine", $immagine);
 		$res .= $c;
