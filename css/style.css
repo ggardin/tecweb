@@ -1029,3 +1029,30 @@ form input.invalid {
 	border-top: 1px solid var(--bgcolor-off);
 	padding-top: 1em;
 }
+
+.checkbox-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+.checkbox-pills p {
+	width: 100%;
+}
+
+.checkbox-pill {
+	display: flex;
+	gap: 0.5em;
+	width: fit-content;
+	background-color: var(--bgcolor-alt);
+	border-radius: var(--border-radius);
+	border: 1px solid var(--bgcolor-off);
+}
+.checkbox-pill label {
+	padding: 0.5em 0 0.5em 1em;
+}
+.checkbox-pill input {
+	margin-right: 1em;
+}
+.checkbox-pill:has(input:checked) {
+	background-color: var(--bgcolor-off);
+}
