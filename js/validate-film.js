@@ -121,52 +121,58 @@ window.addEventListener('load', function () {
 	validateMovie();
 });
 
+var instanceCrew = 0;
+var instanceNations = 0;
+
+/*
+ * Ottiene il numero di membri della crew e nazioni già presenti
+ */
+function initiateInstanceCount() {
+	instanceCrew = document.querySelectorAll('.crew-member').length;
+	instanceNations = document.querySelectorAll('.nation').length;
+}
+
 /*
  * =================================
  * CREW MEMBERS
  * =================================
  */
 
-var instance = 0;
-
-/*
- * Ottiene il numero di membri della crew già presenti
- */
-function initiateInstanceCount() {
-	instance = document.querySelectorAll('.crew-member').length;
-}
 
 /*
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
  */
 function addNewCrewMember(element) {
-	// Crea i nuovi elementi
+	// Elementi per #nome
 	var newCrewNameLabel = document.createElement("label");
 	var newCrewNameInput = document.createElement("input");
+	// Elementi per #crew
 	var newCrewRoleLabel = document.createElement("label");
 	var newCrewRoleSelect = document.createElement("select");
 	var newCrewRoleRegista = document.createElement("option");
 	var newCrewRoleSceneggiatore = document.createElement("option");
 	var newCrewRoleProduttore = document.createElement("option");
 	var newCrewRoleCompositore = document.createElement("option");
+	// Elementi per tasto "elimina"
+	var newCrewDeleteInput = document.createElement("input");
 
 	// <label for="crew-name0">Nome e cognome</label>
-	newCrewNameLabel.htmlFor = "crew-name" + instance;
+	newCrewNameLabel.htmlFor = "crew-name" + instanceCrew;
 	newCrewNameLabel.innerHTML = "Nome e cognome";
 	newCrewNameLabel.classList.add('crew-member');
 
 	// <input id="crew-name0" name="crew-name0" type="text">
-	newCrewNameInput.id = "crew-name" + instance;
-	newCrewNameInput.name = "crew-name" + instance;
+	newCrewNameInput.id = "crew-name" + instanceCrew;
+	newCrewNameInput.name = "crew-name" + instanceCrew;
 	newCrewNameInput.type = "text";
 
 	// <label for="crew-role0">Ruolo</label>
-	newCrewRoleLabel.htmlFor = "crew-role" + instance;
+	newCrewRoleLabel.htmlFor = "crew-role" + instanceCrew;
 	newCrewRoleLabel.innerHTML = "Ruolo";
 
 	// <select id="crew-role0" name="crew-role0"></select>
-	newCrewRoleSelect.id = "crew-role" + instance;
-	newCrewRoleSelect.name = "crew-role" + instance;
+	newCrewRoleSelect.id = "crew-role" + instanceCrew;
+	newCrewRoleSelect.name = "crew-role" + instanceCrew;
 	newCrewRoleRegista.value = 0;
 	newCrewRoleRegista.text = "Regista";
 	newCrewRoleSceneggiatore.value = 1;
@@ -176,43 +182,128 @@ function addNewCrewMember(element) {
 	newCrewRoleCompositore.value = 3;
 	newCrewRoleCompositore.text = "Compositore";
 
-	// Innesta gli elementi nel nodo padre
-	element.appendChild(newCrewNameInput, element.previousSibling.previousSibling);
-	element.insertBefore(newCrewNameLabel, newCrewNameInput);
+	// <input id="crew-delete0" type="button" onclick="removeCrewMember(this);" value="Elimina" />
+	newCrewDeleteInput.id = "crew-delete" + instanceCrew;
+	newCrewDeleteInput.type = "button";
+	newCrewDeleteInput.value = "Elimina";
+	newCrewDeleteInput.onclick = function() { removeCrewMember(this); };
 
-	// Innesta gli elementi nel nodo padre
-	element.appendChild(newCrewRoleSelect, element.previousSibling.previousSibling);
-	var select = document.getElementById("crew-role" + instance);
+	// Innesta gli elementi di #crew-nome
+	console.log(element)
+	element.insertAdjacentElement('beforebegin', newCrewNameLabel);
+	element.insertAdjacentElement('beforebegin', newCrewNameInput);
+
+	// Innesta gli elementi di #crew-role
+	element.insertAdjacentElement('beforebegin', newCrewRoleLabel);
+	element.insertAdjacentElement('beforebegin', newCrewRoleSelect);
+	var select = document.getElementById("crew-role" + instanceCrew);
 	select.add(newCrewRoleRegista);
 	select.add(newCrewRoleSceneggiatore);
 	select.add(newCrewRoleProduttore);
 	select.add(newCrewRoleCompositore);
-	element.insertBefore(newCrewRoleLabel, newCrewRoleSelect);
+
+	// Innesta tasto per eliminare
+	element.insertAdjacentElement('beforebegin', newCrewDeleteInput);
 
 	// Aggiorna il numero di istanze e il contatore
-	instance++;
+	instanceCrew++;
 	updateCrewHint();
 }
 
-function removeLastCrewMember(element) {
-	// Cancella solo se ci sono istanze
-	if (instance > 0) {
-		element.removeChild(element.lastChild);
-		element.removeChild(element.lastChild);
-		element.removeChild(element.lastChild);
-		element.removeChild(element.lastChild);
-		instance--;
-	}
+/*
+ * Rimuove il membro della crew corrispondente.
+ */
+function removeCrewMember(element) {
+	element.previousSibling.remove();
+	element.previousSibling.remove();
+	element.previousSibling.remove();
+	element.previousSibling.remove();
+	element.remove();
+	instanceCrew--;
 	updateCrewHint();
 }
 
+/*
+ * Aggiorna il suggerimento che riporta il numero di membri della crew.
+ */
 function updateCrewHint() {
 	const hint = document.getElementById("crew-hint");
 
-	if (instance == 0) {
-		hint.innerHTML = "Non è stato definito alcun membro della <span lang=\"en\">crew</span>.";
+	if (instanceCrew == 0) {
+		hint.innerHTML = "Non è stato definito alcun membro.";
 	}
 	else {
-		hint.innerHTML = (instance > 1 ? instance + " membri." : instance + " membro.");
+		hint.innerHTML = (instanceCrew > 1 ? instanceCrew + " membri." : instanceCrew + " membro.");
+	}
+}
+
+/*
+ * =================================
+ * NATIONS
+ * =================================
+ */
+
+/*
+ * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
+ */
+function addNewNation(element) {
+	// Elementi per #nome
+	var newNationLabel = document.createElement("label");
+	var newNationInput = document.createElement("input");
+	// Elementi per tasto "elimina"
+	var newNationDeleteInput = document.createElement("input");
+
+	// <label for="nation-name0">Nome del Paese</label>
+	newNationLabel.htmlFor = "nation-name" + instanceNations;
+	newNationLabel.innerHTML = "Nome del Paese";
+	newNationLabel.classList.add('nation');
+
+	// <input id="nation-name0" name="nation-name0" type="text">
+	newNationInput.id = "nation-name" + instanceNations;
+	newNationInput.name = "nation-name" + instanceNations;
+	newNationInput.type = "text";
+	newNationInput.setAttribute("list", "lista-paesi");
+
+	// <input id="nation-delete0" type="button" onclick="removeNation(this);" value="Elimina" />
+	newNationDeleteInput.id = "nation-delete" + instanceNations;
+	newNationDeleteInput.type = "button";
+	newNationDeleteInput.value = "Elimina";
+	newNationDeleteInput.onclick = function() { removeNation(this); };
+
+	// Innesta gli elementi di #nation-nome
+	console.log(element)
+	element.insertAdjacentElement('beforebegin', newNationLabel);
+	element.insertAdjacentElement('beforebegin', newNationInput);
+
+	// Innesta tasto per eliminare
+	element.insertAdjacentElement('beforebegin', newNationDeleteInput);
+
+	// Aggiorna il numero di istanze e il contatore
+	instanceNations++;
+	updateNationHint();
+}
+
+/*
+ * Rimuove il membro della nation corrispondente.
+ */
+function removeNation(element) {
+	element.previousSibling.remove();
+	element.previousSibling.remove();
+	element.remove();
+	instanceNations--;
+	updateNationHint();
+}
+
+/*
+ * Aggiorna il suggerimento che riporta il numero di membri della nation.
+ */
+function updateNationHint() {
+	const hint = document.getElementById("nation-hint");
+
+	if (instanceNations == 0) {
+		hint.innerHTML = "Non è stato definito alcun Paese.";
+	}
+	else {
+		hint.innerHTML = (instanceNations > 1 ? instanceNations + " Paesi." : instanceNations + " Paese.");
 	}
 }
