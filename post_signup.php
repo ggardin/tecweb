@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (isset($_SESSION["id"])) {
 	header("location: user.php");
 	exit();
@@ -23,11 +21,12 @@ if (! $username || ! $password || ! $password_confirm || $password != $password_
 try {
 	$connessione = new Database();
 	// TODO : transaction
-	if ($connessione->insertUtente($username, $password)) {
-		$user_id = $connessione->insertId();
-		if ($connessione->insertLista($user_id, "Da vedere") &&
-			$connessione->insertLista($user_id, "Visti"));
-			$res = $connessione->login($username, $password);
+	$signup = $connessione->signup($username, $password);
+	if ($signup[0]) {
+		$user_id = $signup[1];
+		$connessione->insertLista($user_id, "Da vedere");
+		$connessione->insertLista($user_id, "Visti");
+		$res = $connessione->login($username, $password);
 	}
 	unset($connessione);
 } catch (Exception) {

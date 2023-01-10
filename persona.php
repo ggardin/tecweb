@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
 
 if ($id == "") {
@@ -17,6 +15,7 @@ try {
 	$persona = $connessione->getPersonaById($id);
 	if (!empty($persona)) {
 		$film = $connessione->getFilmByPersonaId($id);
+		$gender = $connessione->getGenderById($persona[0]["gender"]);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -30,7 +29,7 @@ if (empty($persona)) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $persona = $persona[0];
 $title = $persona["nome"] . " • Persona"; Tools::toHtml($title, 0);
@@ -38,7 +37,7 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($persona);
 Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 Tools::replaceAnchor($page, "nome", $persona["nome"]);
-Tools::replaceAnchor($page, "gender", $persona["gender"]);
+Tools::replaceAnchor($page, "gender", $gender[0]["nome"]);
 if (isset($persona["data_nascita"]))
 	Tools::replaceAnchor($page, "data_nascita", date_format(date_create_from_format('Y-m-d', $persona["data_nascita"]), 'd/m/Y'));
 else

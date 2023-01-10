@@ -19,112 +19,62 @@
 	<main id="content">
 		<h1>Statistiche</h1>
 
+		<h2>Generali</h2>
+		<ul>
+			<li>Numero di liste: @@n_liste@@</li>
+			<li>Numero di film (distinti) collezionati: @@n_film@@</li>
+		</ul>
+
+		<!-- message_start -->
+		<h2>Tabelle bellissime</h2>
+		<p>Aggiungi almeno un film ad una lista per vederle</p>
+		<!-- message_end -->
+
+		<!-- generi_start -->
+		<h2>Generi</h2>
 		<table>
-			<caption>La tua collezione</caption>
+			<caption>Numero di film collezionati per genere</caption>
 			<thead>
-			<tr>
-				<th scope="col">Film visti</th>
-				<th scope="col">Minuti visti</th>
-				<th scope="col">Collezioni completate</th>
-				<th scope="col">Collezione più lunga vista</th>
-				<th scope="col">Film più lungo visto</th>
-			</tr>
+				<tr>
+					<th scope="col">Genere</th>
+					<th scope="col">Numero film</th>
+				</tr>
 			</thead>
 
 			<tbody>
-			<tr>
-				<th scope="row" data-label="Film visti">9</th>
-				<td data-label="Minuti visti" id="css">1290 (21.5 ore)</td>
-				<td data-label="Collezioni completate">1</td>
-				<td data-label="Collezione più lunga vista"><span lang="en">Batman</span></td>
-				<td data-label="Film più lungo visto"><span lang="en">Avatar</span></td>
-			</tr>
+				<!-- generi_riga_start -->
+				<tr>
+					<th scope="row" data-label="Genere">@@genere@@</th>
+					<td data-label="Numero film">@@numero@@</td>
+				</tr>
+				<!-- generi_riga_end -->
 			</tbody>
 		</table>
+		<!-- generi_end -->
 
+		<!-- lunghi_start -->
+		<h2>Lunghi</h2>
 		<table>
-			<caption>I generi più collezionati</caption>
+			<caption>Film più lunghi collezionati (@@n_lunghi@@)</caption>
+
 			<thead>
-			<tr>
-				<th scope="col">Genere</th>
-				<th scope="col">Film visti</th>
-			</tr>
+				<tr>
+					<th scope="col">Titolo</th>
+					<th scope="col">Durata</th>
+				</tr>
 			</thead>
 
 			<tbody>
-			<tr>
-				<th scope="row" data-label="Genere">Drammatico</th>
-				<td data-label="Film visti">3</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Genere">Azione</th>
-				<td data-label="Film visti">5</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Genere">Avventura</th>
-				<td data-label="Film visti">1</td>
-			</tr>
+				<!-- lunghi_riga_start -->
+				<tr>
+					<th scope="row" data-label="Titolo">@@nome@@</th>
+					<td data-label="Durata">@@durata@@</td>
+				</tr>
+				<!-- lunghi_riga_end -->
 			</tbody>
 		</table>
+		<!-- lunghi_end -->
 
-
-		<table>
-			<caption>I Film più lunghi che hai visto</caption>
-
-			<thead>
-			<tr>
-				<th scope="col">Titolo</th>
-				<th scope="col">Durata</th>
-			</tr>
-			</thead>
-
-			<tbody>
-			<tr>
-				<th scope="row" data-label="Titolo">Avatar</th>
-				<td data-label="Durata">162 minuti</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Titolo">Avengers: Infinity War</th>
-				<td data-label="Durata">149</td>
-			</tr>
-
-			<tr>
-				<th scope="row" data-label="Titolo">Avengers: Infinity War</th>
-				<td data-label="Durata">149</td>
-			</tr>
-
-		</table>
-
-
-		<table>
-			<caption>Le collane più lunghe</caption>
-			<thead>
-			<tr>
-				<th scope="col">Titolo</th>
-				<th scope="col">Film</th>
-				<th scope="col">Durata totale</th>
-			</tr>
-			</thead>
-
-			<tbody>
-			<tr>
-				<th scope="row" data-label="Titolo">Lorem</th>
-				<td data-label="Film">9</td>
-				<td data-label="Durata totale">1290 minuti</td>
-			</tr>
-			<tr>
-				<th scope="row" data-label="Titolo">Ipsum</th>
-				<td data-label="Film">6</td>
-				<td data-label="Durata totale">149 minuti</td>
-			</tr>
-
-			<tr>
-				<th scope="row" data-label="Titolo">Dolor</th>
-				<td data-label="Film">3</td>
-				<td data-label="Durata totale">162 minuti</td>
-			</tr>
-
-		</table>
 	</main>
 
 	<!-- footer -->

@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (! isset($_SESSION["id"])) {
 	header ("location: login.php");
 	exit();
@@ -20,10 +18,10 @@ if ($id == "") {
 try {
 	$connessione = new Database();
 	$own = false;
-	if ($connessione->checkListOwnership($id, $_SESSION["id"])) {
+	if ($connessione->isListaDiUtente($id, $_SESSION["id"])) {
 		$own = true;
-		$nome = $connessione->getListNameById($id);
-		$lista = $connessione->getListItemsById($id);
+		$nome = $connessione->getNomeListaById($id);
+		$lista = $connessione->getFilmInLista($id);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -37,7 +35,7 @@ if (!$own) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $nome = $nome[0];
 $title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 0);
@@ -65,9 +63,9 @@ if (!empty($lista)) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "elemento", $r);
-	Tools::replaceAnchor($page, "message", (count($lista) . (count($lista) != 1 ? " elementi" : " elemento") . " in questa lista"));
+	Tools::replaceAnchor($page, "message", (count($lista) . " film in questa lista"));
 } else {
-	Tools::replaceAnchor($page, "message", "Questa lista non ha elementi");
+	Tools::replaceAnchor($page, "message", "Questa lista non contiene film");
 	Tools::replaceSection($page, "lista", "");
 }
 

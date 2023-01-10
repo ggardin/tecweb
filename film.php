@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 $id = (isset($_GET["id"]) ? ($_GET["id"]) : "");
 
 if ($id == "") {
@@ -16,14 +14,15 @@ try {
 	$connessione = new Database();
 	$film = $connessione->getFilmById($id);
 	if (!empty($film)) {
+		$stato = $connessione->getStatoById($film[0]["stato"]);
 		$collezione = $connessione->getCollezioneById($film[0]["collezione"]);
 		$crew = $connessione->getCrewByFilmId($id);
 		$genere = $connessione->getGenereByFilmId($id);
 		$paese = $connessione->getPaeseByFilmId($id);
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
-			$can_review = $connessione->canReview($_SESSION["id"], $id);
-			$lista = $connessione->getUserListsWithoutFilm($_SESSION["id"], $id);
+			$can_review = $connessione->canUtenteValutare($_SESSION["id"], $id);
+			$lista = $connessione->getListeSenzaFilm($_SESSION["id"], $id);
 		}
 	}
 	unset($connessione);
@@ -38,7 +37,7 @@ if (empty($film)) {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $film = $film[0];
 $title = $film["nome"] . " • Film"; Tools::toHtml($title, 0);
@@ -56,14 +55,7 @@ if (isset($film["data_rilascio"])) {
 	Tools::replaceSection($page, "data_rilascio", "");
 if (isset($film["durata"])) {
 	$sub = true;
-	$h = floor($film["durata"]/60);
-	$m = $film["durata"]%60;
-	$d = "";
-	if ($h)
-		$d .= $h . ($h>1 ? " ore" : " ora");
-	if ($m)
-		$d .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
-	Tools::replaceAnchor($page, "durata", $d);
+	Tools::replaceAnchor($page, "durata", Tools::minutiAStringa($film["durata"]));
 } else
 	Tools::replaceSection($page, "durata", "");
 if (isset($film["voto"])) {
@@ -125,7 +117,7 @@ if (!empty($paese)) {
 } else
 	Tools::replaceSection($page, "paesi", "");
 Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
-Tools::replaceAnchor($page, "stato", $film["stato"]);
+Tools::replaceAnchor($page, "stato", $stato[0]["nome"]);
 if (isset($film["budget"])) {
 	Tools::replaceAnchor($page, "budget", $film["budget"] . " $");
 } else

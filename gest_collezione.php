@@ -3,8 +3,6 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-session_start();
-
 if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	header ("location: login.php");
 	exit();
@@ -23,7 +21,7 @@ try {
 	exit();
 }
 
-$page = Tools::buildPage(basename($_SERVER["PHP_SELF"], ".php"));
+$page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if ($id != "" && !empty($collezione)) {
 	$collezione = $collezione[0];
@@ -33,14 +31,17 @@ if ($id != "" && !empty($collezione)) {
 	$bc_nome = $collezione["nome"]; Tools::toHtml($bc_nome, 2);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica collezione");
+	Tools::replaceAnchor($page, "gest_id", $id);
 	Tools::toHtml($collezione, 1);
 	Tools::replaceAnchor($page, "nome", $collezione["nome"]);
-	Tools::replaceAnchor($page, "descrizione", $collezione["descrizione"]);
+	Tools::replaceAnchor($page, "descrizione", (isset($collezione["descrizione"]) ? $collezione["descrizione"] : ""));
+	Tools::replaceAnchor($page, "submit_value", "modifica");
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi collezione");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi collezione");
+	Tools::replaceAnchor($page, "submit-value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 }
 
