@@ -462,16 +462,6 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function insertUtente($username, $pass) : bool {
-		$query = "insert into utente(username, password, gender)
-			values (?, ?, 0)";
-
-		$pass = password_hash($pass, PASSWORD_DEFAULT);
-		$params = [$username, $pass];
-
-		return $this->preparedUpdates($query, $params);
-	}
-
 	public function insertLista($user_id, $list_name) : bool {
 		$query = "insert into lista(utente, nome)
 			values (?, ?)";
@@ -643,16 +633,19 @@ class Database {
 	}
 
 	public function signup($username, $pass) : array {
-		if (insertUtente($username, $pass))
-			return [true, $this->connection->insert_id];
-		else
-			return [false, 0];
+		$query = "insert into utente(username, password, gender)
+			values (?, ?, 0)";
+
+		$pass = password_hash($pass, PASSWORD_DEFAULT);
+		$params = [$username, $pass];
+
+		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
-	public function totalFilms($user_id) : array {
-		$query = "select distinct(lf.film)
+	public function getNumeroFilmPerUtente($user_id) : array {
+		$query = "select count(distinct lf.film) as n
 			from lista as l
-			join lista_film as lf
+				join lista_film as lf
 					on l.id = lf.lista
 			where l.utente = ?";
 
@@ -662,43 +655,56 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function FilmByTime($user_id) : array {
-		$query = "select distinct(f.id), f.durata, f.nome
+	public function getNumeroListePerUtente($user_id) : array {
+		$query = "select count(*) as n
+			from lista
+			where utente = ?";
+
+		$params = [$user_id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getFilmPiuLunghiPerUtente($user_id, $limit) : array {
+		$query = "select distinct f.nome, f.durata
 			from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
 				join film as f
 					on lf.film = f.id
 			where l.utente = ?
-			order by f.durata desc";
+				and f.durata is not null
+			order by f.durata desc
+			limit ?";
 
-		$params = [$user_id];
-		$types = "i";
+		$params = [$user_id, $limit];
+		$types = "ii";
 
 		return $this->preparedSelect($query, $params, $types);
 
 	}
 
-	public function Genre($user_id) : array {
-		$query = "select g.nome, count(*)
-				from lista as l
-					join lista_film as lf
-						on l.id = lf.lista
-					join film as f
-						on lf.film = f.id
-					join film_genere as fg
-						on f.id = fg.film
-					join genere as g
-						on fg.genere = g.id
-				where l.utente = ?
-				group by g.nome
-				order by count(*) desc";
+	public function getNumeroPerGenerePerUtente($user_id) : array {
+		$query = "select g.nome, count(*) as n
+			from lista as l
+				join lista_film as lf
+					on l.id = lf.lista
+				join film as f
+					on lf.film = f.id
+				join film_genere as fg
+					on f.id = fg.film
+				join genere as g
+					on fg.genere = g.id
+			where l.utente = ?
+			group by g.nome
+			order by count(*) desc";
 
 
-				$params = [$user_id];
-				$types = "i";
+		$params = [$user_id];
+		$types = "i";
 
-				return $this->preparedSelect($query, $params, $types);
+		return $this->preparedSelect($query, $params, $types);
 	}
 }
 

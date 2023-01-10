@@ -12,7 +12,7 @@ $query = (isset($_GET["q"])) ? $_GET["q"] : "";
 $f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
 $f_val = (isset($_GET["fv"])) ? $_GET["fv"] : "";
 
-$limit = 15;
+$limit = 16;
 $next = (isset($_GET["n"])) ? intval($_GET["n"]) : 0;
 $offset = $limit * $next;
 
@@ -125,7 +125,7 @@ if (!empty($cerca[0])) {
 		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "res_buttons"), true);
 	} else {
 		Tools::replaceSection($page, "res_buttons", "");
-		Tools::replaceAnchor($page, "res_buttons_bottom", "");
+		Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
 	}
 } else {
 	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");

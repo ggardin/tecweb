@@ -63,9 +63,9 @@ if (!empty($lista)) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "elemento", $r);
-	Tools::replaceAnchor($page, "message", (count($lista) . (count($lista) != 1 ? " elementi" : " elemento") . " in questa lista"));
+	Tools::replaceAnchor($page, "message", (count($lista) . " film in questa lista"));
 } else {
-	Tools::replaceAnchor($page, "message", "Questa lista non ha elementi");
+	Tools::replaceAnchor($page, "message", "Questa lista non contiene film");
 	Tools::replaceSection($page, "lista", "");
 }
 

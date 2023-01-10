@@ -55,14 +55,7 @@ if (isset($film["data_rilascio"])) {
 	Tools::replaceSection($page, "data_rilascio", "");
 if (isset($film["durata"])) {
 	$sub = true;
-	$h = floor($film["durata"]/60);
-	$m = $film["durata"]%60;
-	$d = "";
-	if ($h)
-		$d .= $h . ($h>1 ? " ore" : " ora");
-	if ($m)
-		$d .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
-	Tools::replaceAnchor($page, "durata", $d);
+	Tools::replaceAnchor($page, "durata", Tools::minutiAStringa($film["durata"]));
 } else
 	Tools::replaceSection($page, "durata", "");
 if (isset($film["voto"])) {
