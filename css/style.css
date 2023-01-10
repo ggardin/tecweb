@@ -463,11 +463,6 @@ INDEX
 	flex: 1 0;
 }
 
-.container > img {
-	flex-grow: 0;
-	width: 300px; /* TODO: ridimensiona il png */
-}
-
 /*
 ==============
 CARDS / H-CARDS
@@ -607,59 +602,51 @@ MOVIE PAGE
 	gap: 2em;
 }
 
-.movie-details {
+#movie-details {
 	flex: 1 1;
 }
 
-.movie-media {
-	flex: 0 1 15em; /* set to image width */
-}
-
-.movie-media img {
-	margin: .5em auto;
-}
-
-.movie-details h1 {
+#movie-details h1 {
 	font-size: 2em;
 	font-weight: 700;
 	color: var(--txtcolor);
 }
 
-.movie-details section {
+#movie-details section {
 	margin: 2em 0;
 }
 
-.movie-details dl.info {
+#movie-details dl.info {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-gap: 0.5em 1em;
 }
 
-.movie-details dl.info dt::after {
+#movie-details dl.info dt::after {
 	content: ':';
 }
 
-.movie-details .pills dd,
-.movie-details .pills li {
+#movie-details .pills dd,
+#movie-details .pills li {
 	display: inline;
 	margin-right: 0.5em;
 	line-height: 3em;
 	white-space: nowrap;
 }
 
-.movie-details .pills dt:not(:first-of-type) {
+#movie-details .pills dt:not(:first-of-type) {
 	margin-top: 1em;
 }
 
-.movie-details .pills dd > a,
-.movie-details .pills li > a {
+#movie-details .pills dd > a,
+#movie-details .pills li > a {
 	padding: 0.5em;
 	border: 1px solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 	background-color: var(--bgcolor-alt);
 }
 
-.movie-page #subtitle {
+#movie-details #subtitle {
 	display: flex;
 	flex-wrap: wrap;
 	font-size: .9em;
@@ -667,12 +654,12 @@ MOVIE PAGE
 	margin: 0.5em 0;
 }
 
-.movie-page #subtitle dd:not(:first-of-type)::before {
+#movie-details #subtitle dd:not(:first-of-type)::before {
 	content: '\2022';
 	margin: 0 0.75em;
 }
 
-.movie-details ul {
+#movie-details ul {
 	list-style-type: none;
 	padding-left: 0;
 }
@@ -985,13 +972,6 @@ PERSON/COLLECTION PAGE
 	content: ':';
 }
 
-#person-details img,
-#collection-details img {
-	flex: 0 1;
-	max-width: 15em;
-	margin: auto;
-}
-
 #person-movies {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -1000,6 +980,17 @@ PERSON/COLLECTION PAGE
 
 #collection-movies li {
 	margin-top: 1em;
+}
+
+/*
+==============
+ASIDE IMAGE
+==============
+*/
+
+#aside-image {
+	flex: 0 1;
+	max-width: 15em;
 }
 
 /*
