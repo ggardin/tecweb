@@ -1,12 +1,12 @@
 /*
  * Richiama validatori del form di modifica dati utente
  */
-function validaUserSignup() {
+function validateUserSignup() {
 
 	let form = document.getElementById("auth_form");
 
 	form.addEventListener("submit", function (event) {
-		if ( validateNewUsername() ) {
+		if ( !(validateNewUsername() && validatePasswords()) && validatePasswordConfirm() ) {
 			event.preventDefault();
 		}
 	});
@@ -28,6 +28,41 @@ function validateNewUsername() {
 	return true;
 }
 
+function validatePassword() {
+	var id = 'password';
+	var password  = document.forms['auth_form']['password'].value;
+
+	// Requisito di lunghezza minima
+	if (password.length < 8) {
+		showErrorMessage(id, 'La password deve essere lunga almeno 8 caratteri.');
+		return false;
+	}
+
+	// Requisito di simboli
+	if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
+		showErrorMessage(id, 'La password deve contenere almeno una lettera e un numero.');
+		return false;
+	}
+
+	removeErrorMessage(id);
+	return true;
+}
+
+function validatePasswordConfirm() {
+	var id = 'password_confirm';
+	var first_password  = document.forms['auth_form']['password'].value;
+	var second_password = document.forms['auth_form']['password_confirm'].value;
+
+	if ((second_password != null || second_password != '') && first_password != second_password) {
+		showErrorMessage(id, 'Le password non corrispondono.');
+		return false;
+	}
+
+	removeErrorMessage(id);
+	return true;
+
+}
+
 window.addEventListener('load', function () {
-	validaUserSignup();
+	validateUserSignup();
 });
