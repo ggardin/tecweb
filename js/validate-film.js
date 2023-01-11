@@ -132,6 +132,7 @@ function initiateInstanceCount() {
 	instanceNations = document.querySelectorAll('.nation').length;
 	updateCrewCounter();
 	updateNationsCounter();
+	updateGenresCounter();
 }
 
 /*
@@ -139,7 +140,6 @@ function initiateInstanceCount() {
  * CREW MEMBERS
  * =================================
  */
-
 
 /*
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
@@ -328,4 +328,27 @@ function updateNationHint() {
 function updateNationsCounter() {
 	const counter = document.getElementById('nations-count');
 	counter.value = instanceNations;
+}
+
+/*
+ * =================================
+ * GENRES
+ * =================================
+ */
+
+/*
+ * Aggiorna il contatore dei generi selezionati.
+ */
+function updateGenresCounter() {
+	const counter = document.getElementById('genres-count');
+	const checkboxes = document.getElementsByName('genere');
+	var count = 0;
+
+	for (var i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked == true) {
+			count++;
+		}
+	}
+
+	counter.value = count;
 }
