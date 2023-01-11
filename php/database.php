@@ -349,17 +349,22 @@ class Database {
 	}
 
 	public function searchCollezione($str, $limit, $offset) : array {
-		$base = "from collezione
-			where nome like ?";
-
 		$search = [];
 
-		$q0 = "select id, nome, locandina " . $base . " limit ? offset ?";
+		$q0 = "select c.id, c.nome, c.locandina, count(*) as n_film
+			from collezione as c
+				join film as f
+					on c.id = f.collezione
+			where c.nome like ?
+			group by c.id
+			limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
 		$t0 = "sii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
-		$q1 = "select count(*) as n " . $base;
+		$q1 = "select count(*) as n
+			from collezione
+			where nome like ?";
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
 		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
@@ -368,17 +373,24 @@ class Database {
 	}
 
 	public function searchPersona($str, $limit, $offset) : array {
-		$base = "from persona
-			where nome like ?";
-
 		$search = [];
 
-		$q0 = "select id, nome, immagine " . $base . " limit ? offset ?";
+		$q0 = "select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
+			from persona as p
+				join crew as c
+					on p.id = c.persona
+				join film as f
+					on c.film = f.id
+			where p.nome like ?
+			group by p.id
+			limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
 		$t0 = "sii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
-		$q1 = "select count(*) as n " . $base;
+		$q1 = "select count(*) as n
+			from persona
+			where nome like ?";
 		$p1 = [("%" . trim($str) . "%")];
 		$t1 = "s";
 		$search[1] = $this->preparedSelect($q1, $p1, $t1)[0];
