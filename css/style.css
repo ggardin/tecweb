@@ -741,25 +741,25 @@ INPUT FIELD
 ==============
 */
 
-input, textarea, button, select {
-	width: 100%;
-	padding: 0.5em;
+fieldset, input, textarea, button, select {
 	border-radius: var(--border-radius);
-	background-color: var(--interactions-color);
-	border: none;
+	border: 1px solid var(--bgcolor-off);
+}
+
+input, textarea, button /*  ??  */, select {
+ 	width: 100%;
+  padding: 0.5em;
+  background-color: var(--interactions-color);
+  color: var(--txtcolor);
+}
+
+textarea:focus, input:focus {
+	color: var(--txtcolor); /*  ??  */
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: var(--interactions-text-placeholder-color);
 	opacity: 1; /* Firefox */
-}
-
-input, select, textarea{
-	color: var(--txtcolor);
-}
-
-textarea:focus, input:focus {
-	color: var(--txtcolor);
 }
 
 textarea {
@@ -912,9 +912,10 @@ USER LISTS PAGE
 }
 
 #list-movies li {
-	display: flex;  /* Set the display property to flex to enable flexbox layout */
-	align-items: center;  /* Center the .button-container element vertically */
-	justify-content: center;  /* Center the .button-container element horizontally */
+	margin-top: 1.5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .deleteElementButton {
@@ -957,7 +958,6 @@ GESTIONE
 }
 
 #gestione label {
-	font-size: 1.2em;
 	font-weight: 600;
 }
 
@@ -1023,4 +1023,44 @@ form .required {
 
 form input.invalid {
 	outline: 0.15rem solid var(--form-invalid);
+}
+
+@media (pointer: coarse) {
+	select[multiple] {
+		display: block;
+	}
+}
+
+.crew-member {
+	display: block;
+	margin-top: 1em;
+	border-top: 1px solid var(--bgcolor-off);
+	padding-top: 1em;
+}
+
+.checkbox-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+.checkbox-pills p {
+	width: 100%;
+}
+
+.checkbox-pill {
+	display: flex;
+	gap: 0.5em;
+	width: fit-content;
+	background-color: var(--bgcolor-alt);
+	border-radius: var(--border-radius);
+	border: 1px solid var(--bgcolor-off);
+}
+.checkbox-pill label {
+	padding: 0.5em 0 0.5em 1em;
+}
+.checkbox-pill input {
+	margin-right: 1em;
+}
+.checkbox-pill:has(input:checked) {
+	background-color: var(--bgcolor-off);
 }
