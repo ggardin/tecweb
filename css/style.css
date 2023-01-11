@@ -478,7 +478,7 @@ CARDS
 	justify-content: center;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 1em;
+	gap: 0.8em;
 }
 
 .cards.double {
@@ -922,11 +922,10 @@ USER LISTS PAGE
 */
 
 #list-movies {
-	margin-top: 1em;
+	margin-top: 1.5em;
 }
 
 #list-movies li {
-	margin-top: 1.5em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
