@@ -42,31 +42,34 @@
 				<p id="durata-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 
-			<fieldset>
+			<fieldset id="crew">
 				<legend lang="en">Crew</legend>
-				<label for="regista">Regista</label>
-				<textarea id="regista" name="regista">TODO</textarea>
 
-				<label for="sceneggiatore">Sceneggiatore</label>
-				<textarea id="sceneggiatore" name="sceneggiatore">TODO</textarea>
-
-				<label for="produttore">Produttore</label>
-				<textarea id="produttore" name="produttore">TODO</textarea>
-
-				<label for="compositore">Compositore</label>
-				<textarea id="compositore" name="compositore" >TODO</textarea>
+				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
+				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
+				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
 			</fieldset>
 
-			<fieldset>
+			<fieldset class="checkbox-pills">
 				<legend>Generi</legend>
-				<label for="generi">Generi</label>
-				<textarea id="generi" name="generi">TODO</textarea>
+
+				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
+				<div class="checkbox-pill">
+					<label for="genre-@@genere_id_input@@">@@genere_nome_label@@</label>
+					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onblur="updateGenresCounter();" />
+				</div>
+				<input type="hidden" id="genres-count" name="genres-count" value="-1" />
 			</fieldset>
 
 			<fieldset>
 				<legend>Paesi di produzione</legend>
-				<label for="paesi">Paesi</label>
-				<textarea id="paesi" name="paesi">TODO</textarea>
+
+				<p id="nation-hint" role="status">Non è stato definito alcun Paese.</p>
+				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
+				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
+				<datalist id="lista-paesi">
+					<option value="@@paese_id@@">@@paese_nome@@</option>
+				</datalist>
 			</fieldset>
 
 			<fieldset>
@@ -75,13 +78,13 @@
 				<input id="nome_originale" name="nome_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
-				<select name="stato" id="stato">
-					<!-- stato_start -->
-					<option value="@@id@@" @@sel@@>@@nome@@</option>
-					<!-- stato_end -->
+				<select id="stato" class="form-control">
+					<option value="-1" selected="selected">Bozza</option>
+					<option value="0">Rilasciato</option>
+					<option value="1">In produzione</option>
 				</select>
 
-				<label for="budget">Budget</label>
+				<label for="budget" lang="en">Budget</label>
 				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
