@@ -126,6 +126,7 @@ ACTIVE PAGE
 */
 
 .active {
+	font-weight: 600;
 	background-color: var(--bgcolor-off);
 	pointer-events: none;
 	padding: .5em;
