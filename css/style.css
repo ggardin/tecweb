@@ -478,7 +478,7 @@ CARDS
 	justify-content: center;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 0.5em;
+	gap: 1em;
 }
 
 .cards.double {
