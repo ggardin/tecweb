@@ -106,6 +106,10 @@ if (!empty($cerca[0])) {
 			Tools::replaceAnchor($t, "data", date_format(date_create_from_format('Y-m-d', $c["data_rilascio"]), 'd/m/Y'));
 		else
 			Tools::replaceSection($t, "data", "");
+		if (($tipo == "collezione" || $tipo == "persona") && isset($c["n_film"]))
+			Tools::replaceAnchor($t, "n_film", $c["n_film"]);
+		else
+			Tools::replaceSection($t, "n_film", "");
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "card", $r);
