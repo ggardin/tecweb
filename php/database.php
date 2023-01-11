@@ -474,16 +474,6 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function insertLista($user_id, $list_name) : bool {
-		$query = "insert into lista(utente, nome)
-			values (?, ?)";
-
-		$params = [$user_id, $list_name];
-		$types = "is";
-
-		return $this->preparedUpdates($query, $params, $types);
-	}
-
 	public function insertFilmInLista($list_id, $film_id) : bool {
 		$query = "insert into lista_film(lista, film)
 			values (?, ?)";
@@ -505,59 +495,136 @@ class Database {
 		return empty($this->preparedSelect($query, $params, $types));
 	}
 
-	public function updateFilm($film_id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : bool {
-		$query = "update film
-			set nome = ?, nome_originale = ?, durata = ?, locandina = ?, descrizione = ?,
-				stato = ?, data_rilascio = ?, budget = ?, incassi = ?, collezione = ?
-			where id = ?";
-
-		$params = [$nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione, $film_id];
-		$types = "ssissisiiii";
-
-		return $this->preparedUpdates($query, $params, $types);
+	private function optionalArgs(&$query, &$values, &$params, &$types, &$args) {
+		foreach ($args as $arg) {
+			if ($arg[0]) {
+				$query .= ", " . $arg[1];
+				if ($values)
+					$query .= " = ?";
+				else
+					$values .= ", ?";
+				$params.push($arg[0]);
+				$types .= $arg[2];
+			}
+		}
 	}
 
-	public function insertPersona($nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
-		$query = "insert into persona(nome, gender, immagine, data_nascita, data_morte)
-			values (?, ?, ?, ?, ?)";
+	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : bool {
+		if ($id) {
+			$query = "update film
+				set nome = ?, nome_originale = ?, stato = ?";
+			$values = null;
+		} else {
+			$query = "insert into film(nome, nome_originale, stato";
+			$values = "values (?, ?";
+		}
 
-		$params = [$nome, $gender, $immagine, $data_nascita, $data_morte];
-		$types = "sisss";
+		$params = [$nome, $nome_originale, $stato];
+		$types = "ssi";
 
-		return $this->preparedUpdates($query, $params, $types);
+		$opt = [
+			[$durata, "durata", "i"],
+			[$locandina, "locandina", "s"],
+			[$descrizione, "descrizione", "s"],
+			[$data_rilascio, "data_rilascio", "s"],
+			[$budget, "budget", "i"],
+			[$incassi, "incassi", "i"],
+			[$collezione, "collezione", "i"],
+			];
+
+		$this->optionalArgs($query, $values, $params, $types, $opt);
+
+		if ($id) {
+			$query .= " where id = ?";
+			$params.push($id);
+			$types .= "i";
+			return $this->preparedUpdates($query, $params, $types);
+		} else {
+			$query .= ") " . $values . ")";
+			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
+		}
 	}
 
-	public function updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
-		$query = "update persona
-			set nome = ?, gender = ?, immagine = ?, data_nascita = ?, data_morte = ?
+	public function deleteFilm($id) : bool {
+		$query = "delete from film
 			where id = ?";
 
-		$params = [$nome, $gender, $immagine, $data_nascita, $data_morte, $id];
-		$types = "sisssi";
+		$params = [$id];
+		$types = "i";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
 	public function updateCollezione($id, $nome, $descrizione, $locandina) : bool {
-		$query = "update collezione
-			set nome = ?, descrizione = ?, locandina = ?
+		if ($id) {
+			$query = "update collezione
+				set nome = ?";
+			$values = null;
+		} else {
+			$insert = "insert into collezione(nome)";
+			$values = "values (?";
+		}
+
+		$params = [$nome];
+		$types = "s";
+
+		$opt = [
+			[$descrizione, "descrizione", "s"],
+			[$locandina, "locandina", "s"]
+			];
+
+		$this->optionalArgs($query, $values, $params, $types, $opt);
+
+		if ($id) {
+			$query .= " where id = ?";
+			$params.push($id);
+			$types .= "i";
+			return $this->preparedUpdates($query, $params, $types);
+		} else {
+			$query .= ") " . $values . ")";
+			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
+		}
+	}
+
+	public function deleteCollezione($id) : bool {
+		$query = "delete from collezione
 			where id = ?";
 
-		$params = [$nome, $descrizione, $locandina, $id];
-		$types = "sssi";
+		$params = [$id];
+		$types = "i";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function updateUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
-		$query = "update utente
-			set username = ?, mail = ?, nome = ?, gender = ?, data_nascita = ?, password = ?
-			where id = ?";
+	public function updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
+		if ($id) {
+			$query = "update persona
+				set nome = ?, gender = ?";
+		} else {
+			$query = "insert into persona(nome, gender";
+			$values = "(?, ?";
+		}
 
-		$params = [$username, $mail, $nome, $gender, $data_nascita, $password, $id];
-		$types = "sssissi";
+		$params = [$nome, $gender];
+		$types = "si";
 
-		return $this->preparedUpdates($query, $params, $types);
+		$opt = [
+			[$immagine, "immagine", "s"],
+			[$data_nascita, "data_nascita", "s"],
+			[$data_morte, "data_morte", "s"]
+		];
+
+		$this->optionalArgs($query, $values, $params, $types, $opt);
+
+		if ($id) {
+			$query .= " where id = ?";
+			$params.push($id);
+			$types .= "i";
+			return $this->preparedUpdates($query, $params, $types);
+		} else {
+			$query .= ") " . $values . ")";
+			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
+		}
 	}
 
 	public function deletePersona($id) : bool {
@@ -570,12 +637,55 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function deleteLista($id) : bool {
-		$query = "delete from lista
+	public function updateUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
+		if ($id) {
+			$query = "update utente
+				set username = ?";
+		} else {
+			$insert = "insert into utente(nome)";
+			$values = "values (?";
+		}
+
+		$params = [$username];
+		$types = "s";
+
+		$typet = [
+			[$mail, "mail", "s"],
+			[$nome, "nome", "s"],
+			[$gender, "gender", "i"],
+			[$data_nascita, "data_nascita", "s"],
+			[$password, "password", "s"]
+			];
+
+		$this->optionalArgs($query, $values, $params, $types, $opt);
+
+		if ($id) {
+			$query .= " where id = ?";
+			$params.push($id);
+			$types .= "i";
+			return $this->preparedUpdates($query, $params, $types);
+		} else {
+			$query .= ") " . $values . ")";
+			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
+		}
+	}
+
+	public function deleteUtente($id) : bool {
+		$query = "delete from utente
 			where id = ?";
 
 		$params = [$id];
 		$types = "i";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function insertLista($user_id, $list_name) : bool {
+		$query = "insert into lista(utente, nome)
+			values (?, ?)";
+
+		$params = [$user_id, $list_name];
+		$types = "is";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
@@ -587,6 +697,16 @@ class Database {
 
 		$params = [$name, $list_id];
 		$types = "si";
+
+		return $this->preparedUpdates($query, $params, $types);
+	}
+
+	public function deleteLista($id) : bool {
+		$query = "delete from lista
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
 
 		return $this->preparedUpdates($query, $params, $types);
 	}
