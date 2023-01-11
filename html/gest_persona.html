@@ -20,7 +20,7 @@
 
 	<main id="content">
 		<h1>@@intestazione@@</h1>
-		<form id="gestione" method="post" action="post_gest_persona.php">
+		<form id="gestione" method="post" action="post_gest_persona.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni</legend>
@@ -35,7 +35,7 @@
 				</select>
 
 				<label for="immagine">Immagine</label>
-				<textarea id="immagine" name="immagine">TODO</textarea>
+				<input type="file" name="immagine" id="immagine" />
 
 				<label for="data_nascita">Data di nascita</label>
 				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
