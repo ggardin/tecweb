@@ -82,8 +82,18 @@ foreach (["film", "collezione", "persona"] as $k) {
 }
 Tools::replaceSection($page, "tipo", $res);
 
-// TODO integrare filtri
-if ($tipo != "film")
+if ($tipo == "film") {
+	$filter = Tools::getSection($page, "filter");
+	$res = "";
+	foreach (["genere", "paese"] as $t) {
+		$f = $filter;
+		Tools::replaceAnchor($f, "val", $t);
+		Tools::replaceAnchor($f, "nome", ucfirst($t));
+		Tools::replaceAnchor($f, "sel", (($f_nome == $t) ? "selected" : ""));
+		$res .= $f;
+	}
+	Tools::replaceSection($page, "filter", $res);
+} else
 	Tools::replaceSection($page, "filtri", "");
 
 if (!empty($cerca[0])) {
