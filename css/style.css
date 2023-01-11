@@ -188,9 +188,9 @@ HEADER
 	width: auto;
 }
 
-#logo {
-	width: auto;
-}
+/*#logo {*/
+/*	width: auto;*/
+/*}*/
 
 #logo path,
 #accountButton path {
@@ -542,7 +542,7 @@ LINK BUTTONS
 
 .link-button svg {
 	color: var(--txtcolor);
-	/*height: 3em;*/
+	height: 2.5em;
 	/*width: 3em;*/
 }
 
