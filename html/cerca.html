@@ -9,7 +9,7 @@
 
 	<!-- head -->
 </head>
-<body>
+<body onload="toggleRelevantSearchFilters();" >
 	<!-- header -->
 
 	<nav id="breadcrumb">
@@ -40,21 +40,19 @@
 					<!-- filter_end -->
 				</select>
 
-				<label id="filtro-genere-label" for="filtro-genere" hidden>Genere:</label>
-				<input list="genere" id="filtro-genere" hidden/>
-				<datalist id="genere">
+				<label id="filtro-genere-label">Genere:</label>
+				<select id="filtro-genere" name="fvg">
 					<!-- genere_start -->
-					<option value="@@val@@" @@sel@@>@@nome@@</option>
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- genere_end -->
-				</datalist>
+				</select>
 
-				<label id="filtro-paese-label" for="filtro-paese" hidden>Paese di produzione:</label>
-				<input list="paese" id="filtro-paese" hidden/>
-				<datalist id="paese">
+				<label id="filtro-paese-label">Paese di produzione:</label>
+				<select id="filtro-paese" name="fvp">
 					<!-- paese_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
 					<!-- paese_end -->
-				</datalist>
+				</select>
 			</div>
 			<!-- filtri_end -->
 		</form>
