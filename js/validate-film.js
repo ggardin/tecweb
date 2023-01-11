@@ -130,6 +130,8 @@ var instanceNations = 0;
 function initiateInstanceCount() {
 	instanceCrew = document.querySelectorAll('.crew-member').length;
 	instanceNations = document.querySelectorAll('.nation').length;
+	updateCrewCounter();
+	updateNationsCounter();
 }
 
 /*
@@ -207,6 +209,7 @@ function addNewCrewMember(element) {
 
 	// Aggiorna il numero di istanze e il contatore
 	instanceCrew++;
+	updateCrewCounter();
 	updateCrewHint();
 }
 
@@ -220,6 +223,7 @@ function removeCrewMember(element) {
 	element.previousSibling.remove();
 	element.remove();
 	instanceCrew--;
+	updateCrewCounter();
 	updateCrewHint();
 }
 
@@ -235,6 +239,14 @@ function updateCrewHint() {
 	else {
 		hint.innerHTML = (instanceCrew > 1 ? instanceCrew + " membri." : instanceCrew + " membro.");
 	}
+}
+
+/*
+ * Aggiorna il contatore dei membri.
+ */
+function updateCrewCounter() {
+	const counter = document.getElementById('crew-count');
+	counter.value = instanceCrew;
 }
 
 /*
@@ -280,6 +292,7 @@ function addNewNation(element) {
 
 	// Aggiorna il numero di istanze e il contatore
 	instanceNations++;
+	updateNationsCounter();
 	updateNationHint();
 }
 
@@ -291,6 +304,7 @@ function removeNation(element) {
 	element.previousSibling.remove();
 	element.remove();
 	instanceNations--;
+	updateNationsCounter();
 	updateNationHint();
 }
 
@@ -306,4 +320,12 @@ function updateNationHint() {
 	else {
 		hint.innerHTML = (instanceNations > 1 ? instanceNations + " Paesi." : instanceNations + " Paese.");
 	}
+}
+
+/*
+ * Aggiorna il contatore dei Paesi.
+ */
+function updateNationsCounter() {
+	const counter = document.getElementById('nations-count');
+	counter.value = instanceNations;
 }
