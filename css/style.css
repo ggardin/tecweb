@@ -132,9 +132,7 @@ ACTIVE PAGE
 	border-radius: var(--border-radius);
 }
 
-.active-account {
-	pointer-events: none;
-}
+
 /*
 ==============
 HEADER
@@ -168,13 +166,6 @@ HEADER
 	display: block;
 	color: inherit;
 	text-decoration: none;
-}
-
-#page-header li .active {
-	font-weight: 600;
-	border-radius: var(--border-radius);
-	background-color: var(--secondaryColor);
-	pointer-events:none;
 }
 
 #page-header li a,
