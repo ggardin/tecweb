@@ -40,16 +40,16 @@
 					<!-- filter_end -->
 				</select>
 
-				<label for="filtro-genere">Genere:</label>
-				<input list="genere" id="filtro-genere" />
+				<label id="filtro-genere-label" for="filtro-genere" hidden>Genere:</label>
+				<input list="genere" id="filtro-genere" hidden/>
 				<datalist id="genere" name="genere"> <!-- name va qui o su input (riga sopra)? -->
 					<!-- genere_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
 					<!-- genere_end -->
 				</datalist>
 
-				<label for="filtro-paese">Paese di produzione:</label>
-				<input list="paese" id="filtro-paese" />
+				<label id="filtro-paese-label" for="filtro-paese" hidden>Paese di produzione:</label>
+				<input list="paese" id="filtro-paese" hidden/>
 				<datalist id="paese" name="paese"> <!-- qui uguale, domanda sopra -->
 					<!-- paese_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
