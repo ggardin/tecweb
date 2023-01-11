@@ -746,16 +746,20 @@ fieldset, input, textarea, button, select {
 	border: 1px solid var(--bgcolor-off);
 }
 
-input, textarea, button /*  ??  */, select {
- 	width: 100%;
-  padding: 0.5em;
-  background-color: var(--interactions-color);
-  color: var(--txtcolor);
+input, textarea, button, select {
+	width: 100%;
+	padding: 0.5em;
 }
 
-textarea:focus, input:focus {
-	color: var(--txtcolor); /*  ??  */
+input, textarea, select {
+	background-color: var(--interactions-color);
+	color: var(--txtcolor);
 }
+
+/* ???
+textarea:focus, input:focus {
+	color: var(--txtcolor);
+} */
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: var(--interactions-text-placeholder-color);
