@@ -4,7 +4,7 @@ require_once("php/tools.php");
 require_once("php/database.php");
 
 if (! isset($tipo)) {
-	Tools::errCode("404");
+	Tools::errCode(404);
 	exit();
 }
 
