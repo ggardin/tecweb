@@ -126,7 +126,6 @@ ACTIVE PAGE
 */
 
 .active {
-	font-weight: 600;
 	background-color: var(--bgcolor-off);
 	pointer-events: none;
 	padding: .5em;
@@ -167,6 +166,10 @@ HEADER
 	display: block;
 	color: inherit;
 	text-decoration: none;
+}
+
+#page-header li .active {
+ 	font-weight: 600;
 }
 
 #page-header li a,
