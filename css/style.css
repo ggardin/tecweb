@@ -12,8 +12,12 @@
 	--anchorcolor: #110093;
 	--anchorcolor-alt: #D04637;
 
-	--form-required-field: #d50000;
+	--form-required-field: #D50000;
 	--form-invalid: var(--form-required-field);
+	--interactions-text-color: var(--txtcolor);
+	--interactions-text-placeholder-color: #4D4D4D;
+
+	--interactions-color: #FBFBFB;
 
 	--content-width: 60em;
 	--content-padding: 1em; /*1rem*/
@@ -35,8 +39,12 @@
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
 
-	--form-required-field: #ff3030;
+	--form-required-field: #FF3030;
 	--form-invalid: var(--form-required-field);
+
+	--interactions-color: #313131;
+	--interactions-text-color: var(--txtcolor);
+	--interactions-text-placeholder-color: #B6B6B6;
 }
 
 @font-face {
@@ -376,7 +384,7 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 26em;
+	max-width: 30em;
 	margin: 1.5em auto 1em;
 }
 
@@ -528,7 +536,7 @@ LINK BUTTONS
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
-	max-width: 26em;
+	max-width: 30em;
 	height: 4em;
 	margin: .5em auto;
 }
@@ -742,8 +750,21 @@ input, textarea, button, select {
 	width: 100%;
 	padding: 0.5em;
 	border-radius: var(--border-radius);
-	background-color: white;
+	background-color: var(--interactions-color);
 	border: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: var(--interactions-text-placeholder-color);
+	opacity: 1; /* Firefox */
+}
+
+input, select, textarea{
+	color: var(--txtcolor);
+}
+
+textarea:focus, input:focus {
+	color: var(--txtcolor);
 }
 
 textarea {
@@ -919,6 +940,12 @@ USER LISTS PAGE
 GESTIONE
 ==============
 */
+
+#gestione {
+	max-width: var(--auth-form-width);
+	margin: auto;
+
+}
 
 #gestione fieldset {
 	/* border: 0; */
