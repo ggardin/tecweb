@@ -96,3 +96,33 @@ const handleThemeSwitch = () => {
 // Aggiunge funzionalità al bottone
 const button = document.getElementById("themeToggle");
 if (button != null) button.addEventListener("click", handleThemeSwitch);
+
+/*
+ * Mostra filtri di ricerca solo quando necessario.
+ */
+function toggleRelevantSearchFilters() {
+	var type = document.getElementById('tipo-filtro').value;
+	var inputGenere = document.getElementById('filtro-genere');
+	var labelGenere = document.getElementById('filtro-genere-label');
+	var inputPaese = document.getElementById('filtro-paese');
+	var labelPaese = document.getElementById('filtro-paese-label');
+
+	if (type == '') {
+		inputGenere.hidden = true;
+		labelGenere.hidden = true;
+		inputPaese.hidden = true;
+		labelPaese.hidden = true;
+	}
+	if (type == 'genere') {
+		inputGenere.hidden = false;
+		labelGenere.hidden = false;
+		inputPaese.hidden = true;
+		labelPaese.hidden = true;
+	}
+	if (type == 'paese') {
+		inputPaese.hidden = false;
+		labelPaese.hidden = false;
+		inputGenere.hidden = true;
+		labelGenere.hidden = true;
+	}
+}
