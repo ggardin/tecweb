@@ -12,8 +12,12 @@
 	--anchorcolor: #110093;
 	--anchorcolor-alt: #D04637;
 
-	--form-required-field: #d50000;
+	--form-required-field: #D50000;
 	--form-invalid: var(--form-required-field);
+	--interactions-text-color: var(--txtcolor);
+	--interactions-text-placeholder-color: #4D4D4D;
+
+	--interactions-color: #FBFBFB;
 
 	--content-width: 60em;
 	--content-padding: 1em; /*1rem*/
@@ -35,8 +39,12 @@
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
 
-	--form-required-field: #ff3030;
+	--form-required-field: #FF3030;
 	--form-invalid: var(--form-required-field);
+
+	--interactions-color: #313131;
+	--interactions-text-color: var(--txtcolor);
+	--interactions-text-placeholder-color: #B6B6B6;
 }
 
 @font-face {
@@ -124,9 +132,7 @@ ACTIVE PAGE
 	border-radius: var(--border-radius);
 }
 
-.active-account {
-	pointer-events: none;
-}
+
 /*
 ==============
 HEADER
@@ -163,10 +169,7 @@ HEADER
 }
 
 #page-header li .active {
-	font-weight: 600;
-	border-radius: var(--border-radius);
-	background-color: var(--secondaryColor);
-	pointer-events:none;
+ 	font-weight: 600;
 }
 
 #page-header li a,
@@ -188,9 +191,9 @@ HEADER
 	width: auto;
 }
 
-#logo {
-	width: auto;
-}
+/*#logo {*/
+/*	width: auto;*/
+/*}*/
 
 #logo path,
 #accountButton path {
@@ -244,7 +247,7 @@ FOOTER
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
 	padding: .5em 1em 1em;
-	margin-top: 2.5em;
+	margin-top: 1.5em;
 }
 
 #footer-logo{
@@ -376,7 +379,7 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 26em;
+	max-width: 30em;
 	margin: 1.5em auto 1em;
 }
 
@@ -528,7 +531,7 @@ LINK BUTTONS
 	border-radius: var(--border-radius);
 	border: 2px solid var(--bgcolor-off);
 	padding: .5em;
-	max-width: 26em;
+	max-width: 30em;
 	height: 4em;
 	margin: .5em auto;
 }
@@ -542,8 +545,15 @@ LINK BUTTONS
 
 .link-button svg {
 	color: var(--txtcolor);
-	/*height: 3em;*/
+	height: 2.5em;
 	/*width: 3em;*/
+}
+
+
+#user-button{
+	list-style-type: none;
+	padding-left: 0;
+	margin-top: 1.5em;
 }
 
 
@@ -736,10 +746,20 @@ fieldset, input, textarea, button, select {
 	border: 1px solid var(--bgcolor-off);
 }
 
-input, textarea, button, select {
-	width: 100%;
-	padding: 0.5em;
-	background-color: white;
+input, textarea, button /*  ??  */, select {
+ 	width: 100%;
+  padding: 0.5em;
+  background-color: var(--interactions-color);
+  color: var(--txtcolor);
+}
+
+textarea:focus, input:focus {
+	color: var(--txtcolor); /*  ??  */
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: var(--interactions-text-placeholder-color);
+	opacity: 1; /* Firefox */
 }
 
 textarea {
@@ -916,6 +936,17 @@ USER LISTS PAGE
 GESTIONE
 ==============
 */
+
+#gestione {
+	max-width: var(--auth-form-width);
+	margin: auto;
+
+}
+
+#gestione fieldset {
+	/* border: 0; */
+	margin-top: 1.5em;
+}
 
 #gestione textarea#descrizione {
 	height: 15em;
