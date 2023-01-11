@@ -33,7 +33,7 @@
 			<!-- filtri_start -->
 			<div class="searchFilter">
 				<label for="tipo-filtro">Filtra per:</label>
-				<select name="fn" id="tipo-filtro">
+				<select name="fn" id="tipo-filtro" onchange="toggleRelevantSearchFilters();" >
 					<option value="">Nessun filtro</option>
 					<!-- filter_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
