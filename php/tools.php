@@ -167,8 +167,8 @@ class Tools {
 		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png")
 			return [false, "Solo JPG, JPEG e PNG supportati"];
 
-		$w0 = 100; $h0 = 150;
-		$w1 = 500; $h1 = 750;
+		$w0 = 200; $h0 = 1.5 * $w0;
+		$w1 = 500; $h1 = 1.5 * $w1;
 
 		do {
 			$filename = self::randString() . "." . $imageFileType;
