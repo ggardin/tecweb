@@ -6,7 +6,7 @@ function validatePerson() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates() ) {
+		if ( !(validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates()) ) {
 			event.preventDefault();
 		}
 	});

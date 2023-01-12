@@ -36,9 +36,16 @@
 
 				<label for="old_password"><span lang="en">Password</span> precedente<span class="required">(richiesto)</span></label>
 				<input type="password" id="old_password" name="old_password" value="@@old_password@@" required />
+				<p id="old_password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="new_password">Nuova <span lang="en">password</span><span class="required">(richiesto)</span></label>
-				<input type="password" id="new_password" name="new_password" value="@@new_password@@" required />
+				<input type="password" id="new_password" name="new_password" value="@@new_password@@" onblur="validatePassword();" required />
+				<p id="new_password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+
+				<label for="new_password_confirm">Conferma la nuova <span lang="en">password</span><span class="required">(richiesto)</span></label>
+				<input type="password" id="new_password_confirm" name="new_password_confirm" value="@@new_password@@" onblur="validatePasswordConfirm();" required />
+				<p id="new_password_confirm-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+
 			</fieldset>
 			<fieldset>
 				<legend>Ulteriori informazioni su di te</legend>
