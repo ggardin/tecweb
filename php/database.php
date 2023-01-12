@@ -522,10 +522,8 @@ class Database {
 	}
 
 	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : array {
-		if ($id) {
+		if ($id != "") {
 			$query = "update film
-			Salva
-
 				set";
 			$values = "";
 		} else {
@@ -551,7 +549,7 @@ class Database {
 
 		$this->updateArgs($query, $values, $params, $types, $args);
 
-		if ($id) {
+		if ($id != "") {
 			$query .= " where id = ?";
 			array_push($params, $id);
 			$types .= "i";
@@ -573,7 +571,7 @@ class Database {
 	}
 
 	public function updateCollezione($id, $nome, $descrizione, $locandina) : array {
-		if ($id) {
+		if ($id != "") {
 			$query = "update collezione
 				set";
 			$values = "";
@@ -593,7 +591,7 @@ class Database {
 
 		$this->updateArgs($query, $values, $params, $types, $args);
 
-		if ($id) {
+		if ($id != "") {
 			$query .= " where id = ?";
 			array_push($params, $id);
 			$types .= "i";
@@ -615,7 +613,7 @@ class Database {
 	}
 
 	public function updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : array {
-		if ($id) {
+		if ($id != "") {
 			$query = "update persona
 				set";
 			$values = "";
@@ -637,7 +635,7 @@ class Database {
 
 		$this->updateArgs($query, $values, $params, $types, $args);
 
-		if ($id) {
+		if ($id != "") {
 			$query .= " where id = ?";
 			array_push($params, $id);
 			$types .= "i";
@@ -658,7 +656,7 @@ class Database {
 	}
 
 	public function updateUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : array {
-		if ($id) {
+		if ($id != "") {
 			$query = "update utente
 				set";
 			$values = "";
@@ -681,7 +679,7 @@ class Database {
 
 		$this->optionalArgs($query, $values, $params, $types, $args);
 
-		if ($id) {
+		if ($id != "") {
 			$query .= " where id = ?";
 			array_push($params, $id);
 			$types .= "i";
