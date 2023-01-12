@@ -503,36 +503,45 @@ class Database {
 		return empty($this->preparedSelect($query, $params, $types));
 	}
 
-	private function optionalArgs(&$query, &$values, &$params, &$types, &$args) {
+	private function updateArgs(&$query, &$values, &$params, &$types, &$args) {
+		$q = "";
+		$v = "";
 		foreach ($args as $arg) {
-			if ($arg[0]) {
-				$query .= ", " . $arg[1];
-				if ($values)
-					$query .= " = ?";
+			if (sizeof($arg) == 3 || $arg[0]) {
+				$q .= ", " . $arg[1];
+				if (! $values)
+					$q .= " = ?";
 				else
-					$values .= ", ?";
-				$params.push($arg[0]);
+					$v .= ", ?";
+				array_push($params, ($arg[0] ?: null));
 				$types .= $arg[2];
 			}
 		}
+		$query .= substr($q, 1);
+		if ($values) $values .= substr($v, 1);
 	}
 
-	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : bool {
+	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : array {
 		if ($id) {
 			$query = "update film
-				set nome = ?, nome_originale = ?, stato = ?";
-			$values = null;
+			Salva
+
+				set";
+			$values = "";
 		} else {
-			$query = "insert into film(nome, nome_originale, stato";
-			$values = "values (?, ?";
+			$query = "insert into film(";
+			$values = "values (";
 		}
 
-		$params = [$nome, $nome_originale, $stato];
-		$types = "ssi";
+		$params = [];
+		$types = "";
 
-		$opt = [
+		$args = [
+			[$nome, "nome", "s"],
+			[$nome_originale, "nome_originale", "s"],
+			[$stato, "stato", "i"],
 			[$durata, "durata", "i"],
-			[$locandina, "locandina", "s"],
+			[$locandina, "locandina", "s", false],
 			[$descrizione, "descrizione", "s"],
 			[$data_rilascio, "data_rilascio", "s"],
 			[$budget, "budget", "i"],
@@ -540,17 +549,17 @@ class Database {
 			[$collezione, "collezione", "i"],
 			];
 
-		$this->optionalArgs($query, $values, $params, $types, $opt);
+		$this->updateArgs($query, $values, $params, $types, $args);
 
 		if ($id) {
 			$query .= " where id = ?";
-			$params.push($id);
+			array_push($params, $id);
 			$types .= "i";
-			return $this->preparedUpdates($query, $params, $types);
 		} else {
 			$query .= ") " . $values . ")";
-			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 		}
+
+		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
 	public function deleteFilm($id) : bool {
@@ -563,35 +572,36 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function updateCollezione($id, $nome, $descrizione, $locandina) : bool {
+	public function updateCollezione($id, $nome, $descrizione, $locandina) : array {
 		if ($id) {
 			$query = "update collezione
-				set nome = ?";
-			$values = null;
+				set";
+			$values = "";
 		} else {
-			$insert = "insert into collezione(nome)";
-			$values = "values (?";
+			$insert = "insert into collezione(";
+			$values = "values (";
 		}
 
-		$params = [$nome];
-		$types = "s";
+		$params = [];
+		$types = "";
 
-		$opt = [
+		$args = [
+			[$nome, "nome", "s"],
 			[$descrizione, "descrizione", "s"],
-			[$locandina, "locandina", "s"]
+			[$locandina, "locandina", "s", false]
 			];
 
-		$this->optionalArgs($query, $values, $params, $types, $opt);
+		$this->updateArgs($query, $values, $params, $types, $args);
 
 		if ($id) {
 			$query .= " where id = ?";
-			$params.push($id);
+			array_push($params, $id);
 			$types .= "i";
-			return $this->preparedUpdates($query, $params, $types);
 		} else {
 			$query .= ") " . $values . ")";
-			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 		}
+
+		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
 	public function deleteCollezione($id) : bool {
@@ -604,35 +614,37 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : bool {
+	public function updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte) : array {
 		if ($id) {
 			$query = "update persona
-				set nome = ?, gender = ?";
+				set";
+			$values = "";
 		} else {
-			$query = "insert into persona(nome, gender";
-			$values = "(?, ?";
+			$query = "insert into persona(";
+			$values = "values (";
 		}
 
-		$params = [$nome, $gender];
-		$types = "si";
+		$params = [];
+		$types = "";
 
-		$opt = [
-			[$immagine, "immagine", "s"],
+		$args = [
+			[$nome, "nome", "s"],
+			[$gender, "gender", "i"],
+			[$immagine, "immagine", "s", false],
 			[$data_nascita, "data_nascita", "s"],
 			[$data_morte, "data_morte", "s"]
 		];
 
-		$this->optionalArgs($query, $values, $params, $types, $opt);
+		$this->updateArgs($query, $values, $params, $types, $args);
 
 		if ($id) {
 			$query .= " where id = ?";
-			$params.push($id);
+			array_push($params, $id);
 			$types .= "i";
-			return $this->preparedUpdates($query, $params, $types);
-		} else {
+		} else
 			$query .= ") " . $values . ")";
-			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
-		}
+
+		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
 	public function deletePersona($id) : bool {
@@ -645,19 +657,21 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function updateUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : bool {
+	public function updateUtente($id, $username, $mail, $nome, $gender, $data_nascita, $password) : array {
 		if ($id) {
 			$query = "update utente
-				set username = ?";
+				set";
+			$values = "";
 		} else {
-			$insert = "insert into utente(nome)";
-			$values = "values (?";
+			$insert = "insert into utente(";
+			$values = "values (";
 		}
 
-		$params = [$username];
-		$types = "s";
+		$params = [];
+		$types = "";
 
-		$typet = [
+		$args = [
+			[$username, "username", "s"],
 			[$mail, "mail", "s"],
 			[$nome, "nome", "s"],
 			[$gender, "gender", "i"],
@@ -665,17 +679,17 @@ class Database {
 			[$password, "password", "s"]
 			];
 
-		$this->optionalArgs($query, $values, $params, $types, $opt);
+		$this->optionalArgs($query, $values, $params, $types, $args);
 
 		if ($id) {
 			$query .= " where id = ?";
-			$params.push($id);
+			array_push($params, $id);
 			$types .= "i";
-			return $this->preparedUpdates($query, $params, $types);
 		} else {
 			$query .= ") " . $values . ")";
-			return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 		}
+
+		return [$this->preparedUpdates($query, $params), $this->connection->insert_id];
 	}
 
 	public function deleteUtente($id) : bool {
