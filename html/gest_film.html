@@ -20,7 +20,7 @@
 
 	<main id="content">
 		<h1>@@intestazione@@</h1>
-		<form id="gestione" method="post" action="post_gest_film.php">
+		<form id="gestione" method="post" action="post_gest_film.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni principali</legend>
@@ -31,7 +31,7 @@
 				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
 
 				<label for="locandina">Locandina</label>
-				<textarea id="locandina" name="locandina">TODO</textarea>
+				<input type="file" name="locandina" id="locandina" />
 
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />

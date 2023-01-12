@@ -141,6 +141,69 @@ class Tools {
 			$s .= ($h ? " " : "") . $m . ($m>1 ? " minuti" : " minuto");
 		return $s;
 	}
+
+	private static function randString() : string {
+		// https://stackoverflow.com/a/31107425
+		$length = 32;
+		$keyspace = '0123456789abcdefghijklmnopqrstuvwxyz';
+		$length = strlen($keyspace) - 1;
+		$pieces = [];
+		for ($i = 0; $i < $length; ++$i)
+			$pieces []= $keyspace[random_int(0, $length)];
+		return implode('', $pieces);
+	}
+
+	public static function uploadImg($file) : array {
+		// https://www.w3schools.com/php/php_file_upload.asp
+		$target_dir = "pics/";
+		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+
+		if (! getimagesize($file["tmp_name"]))
+			return [false, "Non immagine"];
+
+		if ($file["size"] > 1000000)
+			return [false, "Troppo grande"];
+
+		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png")
+			return [false, "Solo JPG, JPEG e PNG supportati"];
+
+		$w0 = 200; $h0 = 1.5 * $w0;
+		$w1 = 500; $h1 = 1.5 * $w1;
+
+		do {
+			$filename = self::randString() . "." . $imageFileType;
+		} while (file_exists($target_dir . "${w0}_" . $filename));
+
+		$fn0 = $target_dir . "w${w0}_" . $filename;
+		$fn1 = $target_dir . "w${w1}_" . $filename;
+
+		if ($imageFileType == "jpg" || $imageFileType == "jpeg")
+			$source = imagecreatefromjpeg($file["tmp_name"]);
+		else
+			$source = imagecreatefrompng($file["tmp_name"]);
+
+		list($width, $height) = getimagesize($file["tmp_name"]);
+
+		$pic0 = imagecreatetruecolor($w0, $h0);
+		$pic1 = imagecreatetruecolor($w1, $h1);
+
+		imagecopyresampled($pic0, $source, 0, 0, 0, 0, $w0, $h0, $width, $height);
+		imagecopyresampled($pic1, $source, 0, 0, 0, 0, $w1, $h1, $width, $height);
+
+		if ($imageFileType == "jpg" || $imageFileType == "jpeg") {
+			imagejpeg($pic0, $fn0);
+			imagejpeg($pic1, $fn1);
+		}
+		else {
+			imagepng($pic0, $fn0);
+			imagepng($pic1, $fn1);
+		}
+
+		unlink ($file["tmp_name"]);
+
+		return [true, $filename];
+	}
+
 }
 
 ?>

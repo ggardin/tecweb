@@ -9,7 +9,7 @@
 
 	<!-- head -->
 </head>
-<body>
+<body onload="toggleRelevantSearchFilters();">
 	<!-- header -->
 
 	<nav id="breadcrumb">
@@ -42,21 +42,21 @@
 					<!-- filter_end -->
 				</select>
 
-				<label id="filtro-genere-label" for="filtro-genere" hidden>Genere:</label>
-				<input list="genere" id="filtro-genere" hidden/>
-				<datalist id="genere">
+				<label id="filtro-genere-label" hidden>Genere:</label>
+				<select id="filtro-genere" name="fvg" hidden>
+					<option value="">Nessun genere</option>
 					<!-- genere_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
 					<!-- genere_end -->
-				</datalist>
+				</select>
 
-				<label id="filtro-paese-label" for="filtro-paese" hidden>Paese di produzione:</label>
-				<input list="paese" id="filtro-paese" hidden/>
-				<datalist id="paese">
+				<label id="filtro-paese-label" hidden>Paese di produzione:</label>
+				<select id="filtro-paese" name="fvp" hidden>
+					<option value="">Nessun paese</option>
 					<!-- paese_start -->
 					<option value="@@val@@" @@sel@@>@@nome@@</option>
 					<!-- paese_end -->
-				</datalist>
+				</select>
 			</div>
 			<!-- filtri_end -->
 		</form>
@@ -98,6 +98,9 @@
 						<!-- data_start -->
 						<p><span class="sr-only">Rilasciato il </span>@@data@@</p>
 						<!-- data_end -->
+						<!-- n_film_start -->
+						<p>@@n_film@@ film</p>
+						<!-- n_film_end -->
 					</div>
 				</a>
 			</li>

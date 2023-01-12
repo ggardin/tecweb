@@ -45,8 +45,8 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 Tools::replaceAnchor($page, "nome", $film["nome"]);
-$locandina = (isset($film["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $film["locandina"]) : "img/placeholder.svg");
-Tools::replaceAnchor($page, "locandina", $locandina);
+$immagine = (isset($film["locandina"]) ? ("pics/w500_" . $film["locandina"]) : "img/placeholder.svg");
+Tools::replaceAnchor($page, "locandina", $immagine);
 $sub = false;
 if (isset($film["data_rilascio"])) {
 	$sub = true;
