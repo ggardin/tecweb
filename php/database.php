@@ -418,7 +418,8 @@ class Database {
 	public function getListeByUtenteId($id) : array {
 		$query = "select id, nome
 			from lista
-			where utente = ?";
+			where utente = ?
+			order by nome";
 
 		$params = [$id];
 		$types = "i";
@@ -434,7 +435,8 @@ class Database {
 				from lista as l
 				join lista_film as lf
 					on l.id = lf.lista
-				where lf.film = ?)";
+				where lf.film = ?)
+			order by nome";
 
 		$params = [$user_id, $film_id];
 		$types = "ii";
