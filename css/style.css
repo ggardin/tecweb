@@ -452,13 +452,30 @@ INDEX
 	margin-top: 2.5em;
 }
 
-.hero-image {
-	background-image: url("../img/mockup_device_dark.webp");
+.product-image {
 	background-repeat: no-repeat;
-	background-position: left;
-	background-size: 17em;
-	height: 34em;
-	width: 17em;
+	background-size: contain;
+	width: 15em;
+	height: 30em;
+}
+
+.product-image.search-bg {
+	background-image: url("../img/product/light_cerca.webp");
+}
+.product-image.movie-bg {
+	background-image: url("../img/product/light_film.webp");
+}
+.product-image.director-bg {
+	background-image: url("../img/product/light_regista.webp");
+}
+html.dark .product-image.search-bg {
+	background-image: url("../img/product/dark_cerca.webp");
+}
+html.dark .product-image.movie-bg {
+	background-image: url("../img/product/dark_film.webp");
+}
+html.dark .product-image.director-bg {
+	background-image: url("../img/product/dark_regista.webp");
 }
 
 .container > .text {
