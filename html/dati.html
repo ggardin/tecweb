@@ -39,6 +39,8 @@
 
 				<label for="new_password">Nuova <span lang="en">password</span><span class="required">(richiesto)</span></label>
 				<input type="password" id="new_password" name="new_password" value="@@new_password@@" required />
+				<label for="new_password_confirm">Conferma la nuova <span lang="en">password</span><span class="required">(richiesto)</span></label>
+				<input type="password" id="new_password_confirm" name="new_password_confirm" value="@@new_password@@" onblur="validatePasswordConfirm();" required />
 			</fieldset>
 			<fieldset>
 				<legend>Ulteriori informazioni su di te</legend>
