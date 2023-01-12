@@ -28,6 +28,9 @@ function validateNewUsername() {
 	return true;
 }
 
+/*
+ * Verifica che la password rispetti vincolo di lunghezza e simboli.
+ */
 function validatePassword() {
 	var id = 'password';
 	var password  = document.forms['auth_form']['password'].value;
@@ -48,6 +51,9 @@ function validatePassword() {
 	return true;
 }
 
+/*
+ * Verifica che la conferma della password corrisponda all'originale.
+ */
 function validatePasswordConfirm() {
 	var id = 'password_confirm';
 	var first_password  = document.forms['auth_form']['password'].value;
