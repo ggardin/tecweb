@@ -48,6 +48,11 @@
 				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
 				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
 				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
+				<datalist id="lista-persone">
+					<!-- persona_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- persona_end -->
+				</datalist>
 			</fieldset>
 
 			<fieldset class="checkbox-pills">
@@ -55,8 +60,10 @@
 
 				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
 				<div class="checkbox-pill">
-					<label for="genre-@@genere_id_input@@">@@genere_nome_label@@</label>
-					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onblur="updateGenresCounter();" />
+					<!-- genere_start -->
+					<label for="genre-@@genere_id_label@@">@@genere_nome_label@@</label>
+					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onblur="updateGenresCounter();" @@checked@@ />
+					<!-- genere_end -->
 				</div>
 				<input type="hidden" id="genres-count" name="genres-count" value="-1" />
 			</fieldset>
@@ -68,7 +75,9 @@
 				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
 				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
 				<datalist id="lista-paesi">
-					<option value="@@paese_id@@">@@paese_nome@@</option>
+					<!-- paese_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- paese_end -->
 				</datalist>
 			</fieldset>
 
@@ -79,9 +88,9 @@
 
 				<label for="stato">Stato</label>
 				<select id="stato" class="form-control">
-					<option value="-1" selected="selected">Bozza</option>
-					<option value="0">Rilasciato</option>
-					<option value="1">In produzione</option>
+					<!-- stato_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- stato_end -->
 				</select>
 
 				<label for="budget" lang="en">Budget</label>
@@ -94,7 +103,7 @@
 
 				<label for="collezione">Collezione</label>
 				<select name="collezione" id="collezione">
-					<option value="">-- NESSUNA --</option>
+					<option value="">Nessuna collezione</option>
 					<!-- collezione_start -->
 					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- collezione_end -->
