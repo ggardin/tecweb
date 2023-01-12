@@ -34,6 +34,11 @@ function validateUserName() {
 	var id = 'nome';
 	var name = document.forms['update-user-data']['nome'].value;
 	const allowedChars = /^[A-Za-z\s'][^\d]*$/; // lettere, spazi, apostrofi
+
+	if (name == null || name == '') {
+		removeErrorMessage(id);
+		return true;
+	}
 	if (!allowedChars.test(name)) {
 		showErrorMessage(id, 'Nome non valido');
 		return false;
@@ -100,8 +105,8 @@ function validateUserBirthday() {
 
 	// Controlla che ci sia una stringa
 	if (birthday == null || birthday == '') {
-		showErrorMessage(id, 'Data di nascita non inserita');
-		return false;
+		removeErrorMessage(id);
+		return true;
 	}
 
 	// Non c'è fallback
@@ -161,8 +166,8 @@ function validateUserEmail() {
 	var id = 'email';
 	var email = document.forms['update-user-data']['email'].value;
 	if (email == null || email == '') {
-		showErrorMessage(id, 'Nessuna data inserita');
-		return false;
+		removeErrorMessage(id);
+		return true;
 	}
 	if (!validateEmail(email)) {
 		showErrorMessage(id, 'Non è una email');
