@@ -124,21 +124,22 @@ function validateUserBirthday() {
 
 	// Ho a disposizione la data di nascita
 	var age = today.getFullYear() - dateOfBirth.getFullYear();
+	const underAgeErrorMessage = 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.';
 
 	// controlla che l'utente abbia almeno 13 anni
 	if (age < 13) {
-		showErrorMessage(id, 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
+		showErrorMessage(id, underAgeErrorMessage);
 		return false;
 	}
 	// se la differenza è 13 potrebbe comunque non averli ancora compiuti
 	else if (age == 13) {
 		if (today.getMonth() < dateOfBirth.getMonth()) {
-			showErrorMessage(id, 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
+			showErrorMessage(id, underAgeErrorMessage);
 			return false;
 		}
 		else if (today.getMonth() == dateOfBirth.getMonth()) {
 			if (today.getDate() < dateOfBirth.getDate()) {
-				showErrorMessage(id, 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.');
+				showErrorMessage(id, underAgeErrorMessage);
 				return false;
 			}
 		}
