@@ -20,7 +20,7 @@ function validateUserUsername() {
 	var username = document.forms['update-user-data']['username'].value;
 	const allowedChars = /^[A-Za-z0-9]+$/; // lettere maiuscole e minuscole, numeri
 	if (!allowedChars.test(username)) {
-		showErrorMessage(id, 'Nome utente non valido, usa solo lettere');
+		showErrorMessage(id, 'Nome utente non valido, usa solo lettere o numeri');
 		return false;
 	}
 	removeErrorMessage(id);
