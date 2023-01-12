@@ -260,18 +260,24 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getPaesi() : array {
-		$query = "select iso_3166_1 as id, nome
-			from paese";
+	public function getPaesiConFilm() : array {
+		$query = "select distinct p.iso_3166_1 as id, p.nome
+			from paese as p
+				join film_paese as fp
+					on p.iso_3166_1 = fp.paese
+			order by p.nome";
 
 		$params = [];
 
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function getGeneri() : array {
-		$query = "select id, nome
-			from genere";
+	public function getGeneriConFilm() : array {
+		$query = "select distinct g.id, g.nome
+			from genere as g
+				join film_genere as fg
+					on g.id = fg.genere
+			order by g.nome";
 
 		$params = [];
 
