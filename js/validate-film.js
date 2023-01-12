@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() ) {
+		if ( !(validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
 			event.preventDefault();
 		}
 	});
