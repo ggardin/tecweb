@@ -12,8 +12,8 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
+	$gender = $connessione->getGenders();
 	if ($id != "") {
-		$gender = $connessione->getGenders($id);
 		$persona = $connessione->getPersonaById($id);
 	}
 	unset($connessione);
@@ -40,8 +40,8 @@ if ($id != "" && !empty($persona)) {
 	$res = "";
 	foreach ($gender as $g) {
 		$t = $option;
-		Tools::replaceAnchor($t, "id", $g["id"]);
-		Tools::replaceAnchor($t, "nome", $g["nome"]);
+		Tools::replaceAnchor($t, "gender_id", $g["id"]);
+		Tools::replaceAnchor($t, "gender_nome", $g["nome"]);
 		Tools::replaceAnchor($t, "sel", (($g["id"] == $persona["gender"]) ? "selected" : ""));
 		$res .= $t;
 	}
@@ -53,6 +53,19 @@ if ($id != "" && !empty($persona)) {
 } else {
 	Tools::replaceAnchor($page, "title", "Aggiungi persona");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
+	Tools::replaceAnchor($page, "nome", "");
+	$option = Tools::getSection($page, "gender");
+	$res = "";
+	foreach ($gender as $g) {
+		$t = $option;
+		Tools::replaceAnchor($t, "gender_id", $g["id"]);
+		Tools::replaceAnchor($t, "gender_nome", $g["nome"]);
+		Tools::replaceAnchor($t, "sel", "");
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "gender", $res);
+	Tools::replaceAnchor($page, "data_nascita", "");
+	Tools::replaceAnchor($page, "data_morte", "");
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi persona");
 	Tools::replaceAnchor($page, "submit_value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
