@@ -175,6 +175,36 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getPaesi() : array {
+		$query = "select iso_3166_1 as id, nome
+			from paese
+			order by nome";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getRuoli() : array {
+		$query = "select id, nome
+			from ruolo
+			order by nome";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getPersone() : array {
+		$query = "select id, nome
+			from persona
+			order by nome";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
 	public function getStatoById($id) : array {
 		$query = "select id, nome
 			from stato
@@ -231,13 +261,14 @@ class Database {
 	}
 
 	public function getGenereByFilmId($id) : array {
-		$query = "select g.nome
+		$query = "select g.id, g.nome
 			from film as f
 				join film_genere as fg
 					on f.id = fg.film
 				join genere as g
 					on fg.genere = g.id
-			where f.id = ?";
+			where f.id = ?
+			order by g.nome";
 
 		$params = [$id];
 		$types = "i";
@@ -266,6 +297,16 @@ class Database {
 				join film_paese as fp
 					on p.iso_3166_1 = fp.paese
 			order by p.nome";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getGeneri() : array {
+		$query = "select id, nome
+			from genere
+			order by nome";
 
 		$params = [];
 
@@ -513,7 +554,7 @@ class Database {
 					$q .= " = ?";
 				else
 					$v .= ", ?";
-				array_push($params, ($arg[0] ?: null));
+				array_push($params, ($arg[0] != "" ? $arg[0] : null));
 				$types .= $arg[2];
 			}
 		}
