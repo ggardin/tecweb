@@ -40,6 +40,7 @@ if ($id != "" && !empty($lista)) {
 	Tools::replaceAnchor($page, "title", "Aggiungi lista");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi lista");
+	Tools::replaceAnchor($page, "gest_id", "");
 	Tools::replaceAnchor($page, "nome", "");
 	Tools::replaceSection($page, "delete", "");
 	Tools::replaceAnchor($page, "submit_value", "aggiungi");
