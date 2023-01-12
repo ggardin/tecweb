@@ -17,7 +17,8 @@ services:
     container_name: php-apache
     build: ./php-apache
     volumes:
-      - ./..:/var/www/html:ro,Z
+      - ./../progetto:/var/www/html:Z
+    user: "1000"
     restart: unless-stopped
   mariadb:
     container_name: mariadb
