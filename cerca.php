@@ -132,9 +132,9 @@ if (!empty($cerca[0])) {
 	foreach ($cerca as $c) {
 		$t = $card;
 		if ($tipo != "persona")
-			$immagine = (isset($c["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $c["locandina"]) : "img/placeholder.svg");
+			$immagine = (isset($c["locandina"]) ? ("pics/w200_" . $c["locandina"]) : "img/placeholder.svg");
 		else
-			$immagine = (isset($c["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $c["immagine"]) : "img/placeholder.svg");
+			$immagine = (isset($c["immagine"]) ? ("pics/w200_" . $c["immagine"]) : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 		Tools::replaceAnchor($t, "nome", $c["nome"]);

@@ -50,7 +50,7 @@ if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
 	Tools::replaceAnchor($page, "gest_id", $id);
 else
 	Tools::replaceSection($page, "admin", "");
-$immagine = (isset($persona["immagine"]) ? ("https://www.themoviedb.org/t/p/w300/" . $persona["immagine"]) : "img/placeholder.svg");
+$immagine = (isset($persona["immagine"]) ? ("pics/w500_" . $persona["immagine"]) : "img/placeholder.svg");
 Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {
 	Tools::toHtml($film);
@@ -66,7 +66,7 @@ if (!empty($film)) {
 			$res .= $last_film;
 			$c = $card;
 			Tools::replaceAnchor($c, "id", $f["id"]);
-			$immagine = (isset($f["locandina"]) ? ("https://www.themoviedb.org/t/p/w300/" . $f["locandina"]) : "img/placeholder.svg");
+			$immagine = (isset($f["locandina"]) ? ("pics/w200_" . $f["locandina"]) : "img/placeholder.svg");
 			Tools::replaceAnchor($c, "immagine", $immagine);
 			Tools::replaceAnchor($c, "nome", $f["nome"]);
 			if (isset($f["data_rilascio"]))
