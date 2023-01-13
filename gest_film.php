@@ -21,6 +21,7 @@ try {
 	if ($id != "") {
 		$film = $connessione->getFilmById($id);
 		$film_generi = $connessione->getGenereByFilmId($id);
+		$film_paesi = $connessione->getPaeseByFilmId($id);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -73,6 +74,27 @@ if ($id != "" && !empty($film)) {
 	}
 	Tools::replaceSection($page, "genere", $res);
 
+	$sample = Tools::getSection($page, "nation_sample");
+	$option = $sample;
+	Tools::replaceAnchor($sample, "value", "");
+	Tools::replaceSection($page, "nation_sample", $sample);
+
+	$t = Tools::getSection($page, "paesi_presenti");
+	Tools::replaceAnchor($t, "paese", $option, true);
+	$option = $t;
+
+	$res = "";
+	for ($i = 0; $i < count($film_paesi); $i++) {
+		$t = $option;
+		Tools::replaceAnchor($t, "paese_id_label", $i+1);
+		Tools::replaceAnchor($t, "paese_id_input", $i+1);
+		Tools::replaceAnchor($t, "value", ('value="' . $film_paesi[$i]["id"] . '"'));
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "paesi_presenti", $res);
+
+	Tools::replaceAnchor($page, "nations_count", count($film_paesi));
+
 	$option = Tools::getSection($page, "paese");
 	$res = "";
 	foreach ($paesi as $p) {
@@ -97,7 +119,7 @@ if ($id != "" && !empty($film)) {
 
 	Tools::replaceAnchor($page, "budget", (isset($film["budget"]) ? $film["budget"] : ""));
 	Tools::replaceAnchor($page, "incassi", (isset($film["incassi"]) ? $film["incassi"] : ""));
-	Tools::toHtml($collezioni);
+	Tools::toHtml($collezioni, 0);
 	$option = Tools::getSection($page, "collezione");
 	$res = "";
 	foreach ($collezioni as $c) {

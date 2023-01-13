@@ -246,13 +246,14 @@ class Database {
 	}
 
 	public function getPaeseByFilmId($id) : array {
-		$query = "select p.nome
+		$query = "select p.iso_3166_1 as id, p.nome
 			from film as f
 				join film_paese as fp
 					on f.id = fp.film
 				join paese as p
 					on fp.paese = p.iso_3166_1
-			where f.id = ?";
+			where f.id = ?
+			order by p.nome";
 
 		$params = [$id];
 		$types = "i";
