@@ -17,7 +17,7 @@ $limit = 16;
 $next = (isset($_GET["n"])) ? intval($_GET["n"]) : 0;
 $offset = $limit * $next;
 
-try {
+// try {
 	$connessione = new Database();
 	if ($tipo == "film") {
 		if ($f_nome == "genere" && $f_val_genere)
@@ -35,11 +35,11 @@ try {
 	elseif ($tipo == "persona")
 		$cerca = $connessione->searchPersona($query, $limit, $offset);
 	unset($connessione);
-} catch (Exception) {
-	unset($connessione);
-	Tools::errCode(500);
-	exit();
-}
+// } catch (Exception) {
+// 	unset($connessione);
+// 	Tools::errCode(500);
+// 	exit();
+// }
 
 if (!isset($cerca)) {
 	Tools::errCode(404);
@@ -149,7 +149,7 @@ if (!empty($cerca[0])) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "card", $r);
-	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . " (" . $tot . " risultati)"));
+	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit)));
 	$buttons = false;
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
 	if ($next > 0) {
