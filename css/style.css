@@ -600,12 +600,12 @@ SEARCH PAGE
 	margin: 0 auto 1em auto;
 }
 
-.results-navigation .res-prev { grid-column: 1; }
+.results-navigation .res-prev { grid-area: 1 / 1; }
 .results-navigation .resultMessage {
-	grid-column: 2;
+	grid-area: 1 / 2;
 	text-align: center;
 }
-.results-navigation .res-next { grid-column: 3; }
+.results-navigation .res-next { grid-area: 1 / 3; }
 
 /*
 ==============
