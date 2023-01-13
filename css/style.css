@@ -20,6 +20,7 @@
 	--interactions-color: #FBFBFB;
 
 	--content-width: 60em;
+	--search-form-width: 30em;
 	--content-padding: 1em; /*1rem*/
 	--border-radius: 8px;
 	--auth-form-width: 35em;
@@ -379,7 +380,7 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 30em;
+	max-width: var(--search-form-width);
 	margin: 1.5em auto 1em;
 }
 
@@ -573,23 +574,21 @@ SEARCH PAGE
 ==============
 */
 
-.results-page-button {
-	display: flex;
-	padding: .5em 0;
-	max-width: var(--content-width);
-	justify-content: space-between; /* This will evenly distribute the space between the elements */
+.results-navigation {
+	display: grid;
+	grid-template-columns: 4em 1fr 4em;
+	gap: 0.5em;
+	align-items: center;
+	max-width: var(--search-form-width);
+	margin: 0 auto 1em auto;
 }
 
-/* NON FUNZIONA
-
-.res-prev {
-	align-self: flex-start;
+.results-navigation .res-prev { grid-column: 1; }
+.results-navigation .resultMessage {
+	grid-column: 2;
+	text-align: center;
 }
-
-.res-next {
-	align-self: flex-end;
-}
-*/
+.results-navigation .res-next { grid-column: 3; }
 
 /*
 ==============
