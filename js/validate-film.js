@@ -145,71 +145,38 @@ function initiateInstanceCount() {
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
  */
 function addNewCrewMember(element) {
-	// Elementi per #nome
-	var newCrewNameLabel = document.createElement("label");
-	var newCrewNameInput = document.createElement("input");
-	// Elementi per #crew
-	var newCrewRoleLabel = document.createElement("label");
-	var newCrewRoleSelect = document.createElement("select");
-	var newCrewRoleRegista = document.createElement("option");
-	var newCrewRoleSceneggiatore = document.createElement("option");
-	var newCrewRoleProduttore = document.createElement("option");
-	var newCrewRoleCompositore = document.createElement("option");
-	// Elementi per tasto "elimina"
-	var newCrewDeleteInput = document.createElement("input");
+	// Elemento da duplicare
+	var original = document.getElementById('crew-sample');
 
-	// <label for="crew-name0">Nome e cognome</label>
-	newCrewNameLabel.htmlFor = "crew-name" + instanceCrew;
-	newCrewNameLabel.innerHTML = "Nome e cognome";
-	newCrewNameLabel.classList.add('crew-member');
+	// Duplicato
+	var clone = original.cloneNode(true);
+	var nameLabel = clone.getElementsByTagName('label')[0];
+	var nameInput = clone.getElementsByTagName('input')[0];
+	var roleLabel = clone.getElementsByTagName('label')[1];
+	var roleInput = clone.getElementsByTagName('input')[1];
 
-	// <input id="crew-name0" name="crew-name0" type="text">
-	newCrewNameInput.id = "crew-name" + instanceCrew;
-	newCrewNameInput.name = "crew-name" + instanceCrew;
-	newCrewNameInput.type = "text";
-	newCrewNameInput.setAttribute("list", "lista-persone");
-
-	// <label for="crew-role0">Ruolo</label>
-	newCrewRoleLabel.htmlFor = "crew-role" + instanceCrew;
-	newCrewRoleLabel.innerHTML = "Ruolo";
-
-	// <select id="crew-role0" name="crew-role0"></select>
-	newCrewRoleSelect.id = "crew-role" + instanceCrew;
-	newCrewRoleSelect.name = "crew-role" + instanceCrew;
-	newCrewRoleRegista.value = 0;
-	newCrewRoleRegista.text = "Regista";
-	newCrewRoleSceneggiatore.value = 1;
-	newCrewRoleSceneggiatore.text = "Sceneggiatore"
-	newCrewRoleProduttore.value = 2;
-	newCrewRoleProduttore.text = "Produttore";
-	newCrewRoleCompositore.value = 3;
-	newCrewRoleCompositore.text = "Compositore";
-
-	// <input id="crew-delete0" type="button" onclick="removeCrewMember(this);" value="Elimina" />
-	newCrewDeleteInput.id = "crew-delete" + instanceCrew;
-	newCrewDeleteInput.type = "button";
-	newCrewDeleteInput.value = "Elimina";
-	newCrewDeleteInput.onclick = function() { removeCrewMember(this); };
-
-	// Innesta gli elementi di #crew-nome
-	console.log(element)
-	element.insertAdjacentElement('beforebegin', newCrewNameLabel);
-	element.insertAdjacentElement('beforebegin', newCrewNameInput);
-
-	// Innesta gli elementi di #crew-role
-	element.insertAdjacentElement('beforebegin', newCrewRoleLabel);
-	element.insertAdjacentElement('beforebegin', newCrewRoleSelect);
-	var select = document.getElementById("crew-role" + instanceCrew);
-	select.add(newCrewRoleRegista);
-	select.add(newCrewRoleSceneggiatore);
-	select.add(newCrewRoleProduttore);
-	select.add(newCrewRoleCompositore);
-
-	// Innesta tasto per eliminare
-	element.insertAdjacentElement('beforebegin', newCrewDeleteInput);
-
-	// Aggiorna il numero di istanze e il contatore
+	// Incrementa contatore
 	instanceCrew++;
+
+	// Aggiorna id
+	clone.removeAttribute('id');
+	nameInput.id = 'crew-name' + instanceCrew;
+	roleInput.id = 'crew-role' + instanceCrew;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
+
+	// Aggiunge classe crew
+	clone.classList.add('crew');
+
+	// Aggiorna for
+	nameLabel.setAttribute('for', 'crew-name' + instanceCrew);
+	roleLabel.setAttribute('for', 'crew-role' + instanceCrew);
+
+	// Innesta
+	element.insertAdjacentElement('beforebegin', clone);
+
+	// Aggiorna il contatore
 	updateCrewCounter();
 	updateCrewHint();
 }
@@ -218,11 +185,7 @@ function addNewCrewMember(element) {
  * Rimuove il membro della crew corrispondente.
  */
 function removeCrewMember(element) {
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.remove();
+	element.parentNode.remove();
 	instanceCrew--;
 	updateCrewCounter();
 	updateCrewHint();
@@ -288,7 +251,7 @@ function addNewNation(element) {
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
 
-	// Aggiorna il numero di istanze e il contatore
+	// Aggiorna il contatore
 	updateNationsCounter();
 	updateNationHint();
 }

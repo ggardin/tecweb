@@ -46,6 +46,21 @@
 				<legend lang="en">Crew</legend>
 
 				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
+
+				<div id="crew-sample" hidden>
+					<!-- crew-sample_start -->
+					<label for="crew-name@@crew_name_label_id@@">Nome e cognome</label>
+					<input id="crew-name@@crew-name_input_id@@" name="crew-name@@crew-name_input_name@@" type="text" list="lista-persone" />
+
+					<label for="crew-role@@crew-role_select_label@@">Ruolo</label>
+					<select id="crew-role@@crew-role_select_id@@" name="crew-role@@crew-role_select_name@@"></select>
+
+					<input type="button" onclick="removeCrewMember(this);" value="Elimina" />
+					<!-- crew-sample_end -->
+				</div>
+
+				<!-- membricrew -->
+
 				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
 				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
 				<datalist id="lista-persone">
