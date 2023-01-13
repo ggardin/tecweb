@@ -12,10 +12,15 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 try {
 	$connessione = new Database();
+	$generi = $connessione->getGeneri();
+	$collezioni = $connessione->getCollezioni();
+	$stati = $connessione->getStati();
+	$paesi = $connessione->getPaesi();
+	$persone = $connessione->getPersone();
+	$ruoli = $connessione->getRuoli();
 	if ($id != "") {
 		$film = $connessione->getFilmById($id);
-		$collezioni = $connessione->getCollezioni($id);
-		$stati = $connessione->getStati($id);
+		$film_generi = $connessione->getGenereByFilmId($id);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -40,6 +45,44 @@ if ($id != "" && !empty($film)) {
 	Tools::replaceAnchor($page, "descrizione", (isset($film["descrizione"]) ? $film["descrizione"] : ""));
 	Tools::replaceAnchor($page, "data_rilascio", (isset($film["data_rilascio"]) ? $film["data_rilascio"] : ""));
 	Tools::replaceAnchor($page, "durata", (isset($film["durata"]) ? $film["durata"] : ""));
+
+	$option = Tools::getSection($page, "persona");
+	$res = "";
+	foreach ($persone as $p) {
+		$t = $option;
+		Tools::replaceAnchor($t, "nome", $p["id"]);
+		Tools::replaceAnchor($t, "id", $p["nome"]);
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "persona", $res);
+
+	$fg = [];
+	foreach ($film_generi as $t) {
+		array_push($fg, $t["id"]);
+	}
+	$option = Tools::getSection($page, "genere");
+	$res = "";
+	foreach ($generi as $g) {
+		$t = $option;
+		Tools::replaceAnchor($t, "genere_id_label", $g["id"]);
+		Tools::replaceAnchor($t, "genere_id_input", $g["id"]);
+		Tools::replaceAnchor($t, "genere_nome_label", $g["nome"]);
+		Tools::replaceAnchor($t, "checked", (in_array($g["id"], $fg) ? "checked" : ""));
+		Tools::replaceAnchor($t, "id", $g["id"]);
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "genere", $res);
+
+	$option = Tools::getSection($page, "paese");
+	$res = "";
+	foreach ($paesi as $p) {
+		$t = $option;
+		Tools::replaceAnchor($t, "id", $p["id"]);
+		Tools::replaceAnchor($t, "nome", $p["nome"]);
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "paese", $res);
+
 	Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
 	$option = Tools::getSection($page, "stato");
 	$res = "";
@@ -51,6 +94,7 @@ if ($id != "" && !empty($film)) {
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "stato", $res);
+
 	Tools::replaceAnchor($page, "budget", (isset($film["budget"]) ? $film["budget"] : ""));
 	Tools::replaceAnchor($page, "incassi", (isset($film["incassi"]) ? $film["incassi"] : ""));
 	Tools::toHtml($collezioni);
@@ -70,6 +114,35 @@ if ($id != "" && !empty($film)) {
 	Tools::replaceAnchor($page, "title", "Aggiungi film");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi film");
+	Tools::replaceAnchor($page, "gest_id", "");
+	Tools::replaceAnchor($page, "nome", "");
+	Tools::replaceAnchor($page, "descrizione", "");
+	Tools::replaceAnchor($page, "data_rilascio", "");
+	Tools::replaceAnchor($page, "durata", "");
+	Tools::replaceAnchor($page, "nome_originale", "");
+	$option = Tools::getSection($page, "stato");
+	$res = "";
+	foreach ($stati as $s) {
+		$t = $option;
+		Tools::replaceAnchor($t, "id", $s["id"]);
+		Tools::replaceAnchor($t, "nome", $s["nome"]);
+		Tools::replaceAnchor($t, "sel", "");
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "stato", $res);
+	Tools::replaceAnchor($page, "budget", "");
+	Tools::replaceAnchor($page, "incassi", "");
+	Tools::toHtml($collezioni);
+	$option = Tools::getSection($page, "collezione");
+	$res = "";
+	foreach ($collezioni as $c) {
+		$t = $option;
+		Tools::replaceAnchor($t, "id", $c["id"]);
+		Tools::replaceAnchor($t, "nome", $c["nome"]);
+		Tools::replaceAnchor($t, "sel", "");
+		$res .= $t;
+	}
+	Tools::replaceSection($page, "collezione", $res);
 	Tools::replaceAnchor($page, "submit-value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 }

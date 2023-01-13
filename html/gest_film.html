@@ -49,7 +49,9 @@
 				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
 				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
 				<datalist id="lista-persone">
-					<option value="@@persona_id@@">@@persona_nome@@</option>
+					<!-- persona_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- persona_end -->
 				</datalist>
 			</fieldset>
 
@@ -57,10 +59,12 @@
 				<legend>Generi</legend>
 
 				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
+				<!-- genere_start -->
 				<div class="checkbox-pill">
-					<label for="genre-@@genere_id_input@@">@@genere_nome_label@@</label>
-					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onblur="updateGenresCounter();" />
+					<label for="genre-@@genere_id_label@@">@@genere_nome_label@@</label>
+					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onblur="updateGenresCounter();" @@checked@@ />
 				</div>
+				<!-- genere_end -->
 				<input type="hidden" id="genres-count" name="genres-count" value="-1" />
 			</fieldset>
 
@@ -68,10 +72,23 @@
 				<legend>Paesi di produzione</legend>
 
 				<p id="nation-hint" role="status">Non è stato definito alcun Paese.</p>
+
+				<div id="nation-sample" hidden>
+					<!-- nation-sample_start -->
+					<label for="nation-name@@paese_id_label@@">Codice del Paese</label>
+					<input id="nation-name@@paese_id_input@@" type="text" list="lista-paesi" />
+					<input type="button" onclick="removeNation(this);" value="Elimina" />
+					<!-- nation-sample_end -->
+				</div>
+
+				<!-- paesi -->
+
 				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
 				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
 				<datalist id="lista-paesi">
-					<option value="@@paese_id@@">@@paese_nome@@</option>
+					<!-- paese_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- paese_end -->
 				</datalist>
 			</fieldset>
 
@@ -82,9 +99,9 @@
 
 				<label for="stato">Stato</label>
 				<select id="stato" class="form-control">
-					<option value="-1" selected="selected">Bozza</option>
-					<option value="0">Rilasciato</option>
-					<option value="1">In produzione</option>
+					<!-- stato_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- stato_end -->
 				</select>
 
 				<label for="budget" lang="en">Budget</label>
@@ -97,7 +114,7 @@
 
 				<label for="collezione">Collezione</label>
 				<select name="collezione" id="collezione">
-					<option value="">-- NESSUNA --</option>
+					<option value="">Nessuna collezione</option>
 					<!-- collezione_start -->
 					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- collezione_end -->
