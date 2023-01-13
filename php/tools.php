@@ -91,6 +91,18 @@ class Tools {
 			self::convHelper($in, null, $conv_level);
 	}
 
+	// adattata da quella vista a lezione
+	public static function pulisciInput(&$params) : void {
+		foreach ($params as &$p) {
+			if (is_string($p)) {
+				$p = trim($p);
+				$p = strip_tags($p);
+				// convertiamo in entità durante output, qui facciamo il contrario
+				$p = html_entity_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+			}
+		}
+	}
+
 	private static function replacePageSection(&$page, &$shared, $name) : void {
 		self::replaceAnchor($page, $name, self::getSection($shared, $name), true);
 	}

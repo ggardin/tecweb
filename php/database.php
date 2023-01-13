@@ -1,6 +1,7 @@
 <?php
 
 require_once("ini.php");
+require_once("tools.php");
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -31,21 +32,9 @@ class Database {
 			$this->connection->close();
 	}
 
-	// adattata da quella vista a lezione
-	private function pulisciInput(&$params) : void {
-		foreach ($params as &$p) {
-			if (is_string($p)) {
-				$p = trim($p);
-				$p = strip_tags($p);
-				// convertiamo in entità durante output, qui facciamo il contrario
-				$p = html_entity_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-			}
-		}
-	}
-
 	// see: https://phpdelusions.net/mysqli
 	private function preparedQuery(&$query, &$params, $types = "") : mysqli_stmt {
-		$this->pulisciInput($params);
+		Tools::pulisciInput($params);
 		$types = $types ?: str_repeat("s", count($params));
 		$stmt = $this->connection->prepare($query);
 		if (!empty($params)) $stmt->bind_param($types, ...$params);
@@ -399,15 +388,22 @@ class Database {
 	public function searchCollezione($str, $limit, $offset) : array {
 		$search = [];
 
-		$q0 = "select c.id, c.nome, c.locandina, count(*) as n_film
-			from collezione as c
-				join film as f
-					on c.id = f.collezione
-			where c.nome like ?
-			group by c.id
+		$q0 = "select t.id, t.nome, t.locandina, t.n_film from (
+				select c.id, c.nome, c.locandina, count(*) as n_film
+				from collezione as c
+					join film as f
+						on c.id = f.collezione
+				where c.nome like ?
+				group by c.id
+				union
+				select c.id, c.nome, c.locandina, 0 as n_film
+				from collezione as c
+				where c.nome like ?
+			) as t
+			group by t.id
 			limit ? offset ?";
-		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
-		$t0 = "sii";
+		$p0 = [("%" . trim($str) . "%"), ("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n
@@ -423,17 +419,24 @@ class Database {
 	public function searchPersona($str, $limit, $offset) : array {
 		$search = [];
 
-		$q0 = "select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
-			from persona as p
-				join crew as c
-					on p.id = c.persona
-				join film as f
-					on c.film = f.id
-			where p.nome like ?
-			group by p.id
+		$q0 = "select t.id, t.nome, t.immagine, t.n_film from (
+				select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
+				from persona as p
+					join crew as c
+						on p.id = c.persona
+					join film as f
+						on c.film = f.id
+				where p.nome like ?
+				group by p.id
+				union
+				select p.id, p.nome, p.immagine, 0 as n_film
+				from persona as p
+				where p.nome like ?
+			) as t
+			group by t.id
 			limit ? offset ?";
-		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
-		$t0 = "sii";
+		$p0 = [("%" . trim($str) . "%"), ("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n
