@@ -277,9 +277,7 @@ function addNewNation(element) {
 	input.id = 'nation-name' + instanceNations;
 
 	// Rimuove attributo hidden
-	label.removeAttribute('hidden');
-	input.removeAttribute('hidden');
-	button.removeAttribute('hidden');
+	clone.removeAttribute('hidden');
 
 	// Aggiunge classe nation
 	clone.classList.add('nation');
