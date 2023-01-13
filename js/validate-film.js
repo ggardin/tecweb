@@ -260,39 +260,37 @@ function updateCrewCounter() {
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
  */
 function addNewNation(element) {
-	// Elementi per #nome
-	var newNationLabel = document.createElement("label");
-	var newNationInput = document.createElement("input");
-	// Elementi per tasto "elimina"
-	var newNationDeleteInput = document.createElement("input");
+	// Elemento da duplicare
+	var original = document.getElementById('nation-sample');
 
-	// <label for="nation-name0">Nome del Paese</label>
-	newNationLabel.htmlFor = "nation-name" + instanceNations;
-	newNationLabel.innerHTML = "Nome del Paese";
-	newNationLabel.classList.add('nation');
+	// Duplicato
+	var clone = original.cloneNode(true);
+	var label = clone.getElementsByTagName('label')[0];
+	var input = clone.getElementsByTagName('input')[0];
+	var button = clone.getElementsByTagName('input')[1];
 
-	// <input id="nation-name0" name="nation-name0" type="text">
-	newNationInput.id = "nation-name" + instanceNations;
-	newNationInput.name = "nation-name" + instanceNations;
-	newNationInput.type = "text";
-	newNationInput.setAttribute("list", "lista-paesi");
+	// Incrementa contatore
+	instanceNations++;
 
-	// <input id="nation-delete0" type="button" onclick="removeNation(this);" value="Elimina" />
-	newNationDeleteInput.id = "nation-delete" + instanceNations;
-	newNationDeleteInput.type = "button";
-	newNationDeleteInput.value = "Elimina";
-	newNationDeleteInput.onclick = function() { removeNation(this); };
+	// Aggiorna id
+	clone.removeAttribute('id');
+	input.id = 'nation-name' + instanceNations;
 
-	// Innesta gli elementi di #nation-nome
-	console.log(element)
-	element.insertAdjacentElement('beforebegin', newNationLabel);
-	element.insertAdjacentElement('beforebegin', newNationInput);
+	// Rimuove attributo hidden
+	label.removeAttribute('hidden');
+	input.removeAttribute('hidden');
+	button.removeAttribute('hidden');
 
-	// Innesta tasto per eliminare
-	element.insertAdjacentElement('beforebegin', newNationDeleteInput);
+	// Aggiunge classe nation
+	clone.classList.add('nation');
+
+	// Aggiorna for
+	label.setAttribute('for', 'nation-name' + instanceNations);
+
+	// Innesta
+	element.insertAdjacentElement('beforebegin', clone);
 
 	// Aggiorna il numero di istanze e il contatore
-	instanceNations++;
 	updateNationsCounter();
 	updateNationHint();
 }
@@ -301,9 +299,7 @@ function addNewNation(element) {
  * Rimuove il membro della nation corrispondente.
  */
 function removeNation(element) {
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.remove();
+	element.parentNode.remove();
 	instanceNations--;
 	updateNationsCounter();
 	updateNationHint();
