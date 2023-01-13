@@ -167,6 +167,7 @@ function addNewCrewMember(element) {
 	newCrewNameInput.id = "crew-name" + instanceCrew;
 	newCrewNameInput.name = "crew-name" + instanceCrew;
 	newCrewNameInput.type = "text";
+	newCrewNameInput.setAttribute("list", "lista-persone");
 
 	// <label for="crew-role0">Ruolo</label>
 	newCrewRoleLabel.htmlFor = "crew-role" + instanceCrew;
