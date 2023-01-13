@@ -20,6 +20,7 @@
 	--interactions-color: #FBFBFB;
 
 	--content-width: 60em;
+	--search-form-width: 30em;
 	--content-padding: 1em; /*1rem*/
 	--border-radius: 8px;
 	--auth-form-width: 35em;
@@ -379,7 +380,7 @@ SEARCH BAR
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 30em;
+	max-width: var(--search-form-width);
 	margin: 1.5em auto 1em;
 }
 
@@ -448,17 +449,34 @@ INDEX
 	justify-content: center;
 	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
-	padding: 1.5em;
+	padding: 2em;
 	margin-top: 2.5em;
 }
 
-.hero-image {
-	background-image: url("../img/mockup_device_dark.webp");
+.product-image {
 	background-repeat: no-repeat;
-	background-position: left;
-	background-size: 17em;
-	height: 34em;
-	width: 17em;
+	background-size: contain;
+	width: 15em;
+	height: 30em;
+}
+
+.product-image.search-bg {
+	background-image: url("../img/product/light_cerca.webp");
+}
+.product-image.movie-bg {
+	background-image: url("../img/product/light_film.webp");
+}
+.product-image.director-bg {
+	background-image: url("../img/product/light_regista.webp");
+}
+html.dark .product-image.search-bg {
+	background-image: url("../img/product/dark_cerca.webp");
+}
+html.dark .product-image.movie-bg {
+	background-image: url("../img/product/dark_film.webp");
+}
+html.dark .product-image.director-bg {
+	background-image: url("../img/product/dark_regista.webp");
 }
 
 .container > .text {
@@ -573,23 +591,21 @@ SEARCH PAGE
 ==============
 */
 
-.results-page-button {
-	display: flex;
-	padding: .5em 0;
-	max-width: var(--content-width);
-	justify-content: space-between; /* This will evenly distribute the space between the elements */
+.results-navigation {
+	display: grid;
+	grid-template-columns: 4em 1fr 4em;
+	gap: 0.5em;
+	align-items: center;
+	max-width: var(--search-form-width);
+	margin: 0 auto 1em auto;
 }
 
-/* NON FUNZIONA
-
-.res-prev {
-	align-self: flex-start;
+.results-navigation .res-prev { grid-area: 1 / 1; }
+.results-navigation .resultMessage {
+	grid-area: 1 / 2;
+	text-align: center;
 }
-
-.res-next {
-	align-self: flex-end;
-}
-*/
+.results-navigation .res-next { grid-area: 1 / 3; }
 
 /*
 ==============
