@@ -73,13 +73,15 @@
 
 				<p id="nation-hint" role="status">Non è stato definito alcun Paese.</p>
 
-				<!-- paese_start -->
-				<div id="nation-sample" @@hidden@@ >
+				<div id="nation-sample" hidden>
+					<!-- nation-sample_start -->
 					<label for="nation-name@@paese_id_label@@">Codice del Paese</label>
 					<input id="nation-name@@paese_id_input@@" type="text" list="lista-paesi" />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
+					<!-- nation-sample_end -->
 				</div>
-				<!-- paese_end -->
+
+				<!-- paesi -->
 
 				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
 				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
