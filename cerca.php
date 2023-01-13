@@ -151,14 +151,15 @@ if (!empty($cerca[0])) {
 	Tools::replaceSection($page, "card", $r);
 	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . " (" . $tot . " risultati)"));
 	$buttons = false;
+	$query = "cerca_$tipo.php?q=$query" . ($f_nome ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
 	if ($next > 0) {
 		$buttons = true;
-		Tools::replaceAnchor($page, "prev", "cerca_$tipo.php?q=$query" . ($next > 1 ? ("&n=" . ($next-1)): ""));
+		Tools::replaceAnchor($page, "prev", ($query . "&n=" . ($next-1)));
 	} else
 		Tools::replaceSection($page, "prev", "");
 	if (($next + 1) < ceil($tot / $limit)) {
 		$buttons = true;
-		Tools::replaceAnchor($page, "next", "cerca_$tipo.php?q=$query&n=" . ($next+1));
+		Tools::replaceAnchor($page, "next", ($query . "&n=" . ($next+1)));
 	} else
 		Tools::replaceSection($page, "next", "");
 	if ($buttons) {
