@@ -132,7 +132,7 @@ function initiateInstanceCount() {
 	instanceNations = document.querySelectorAll('.nation').length;
 	updateCrewCounter();
 	updateNationsCounter();
-	updateGenresCounter();
+	updateGenresHint();
 }
 
 /*
@@ -332,10 +332,24 @@ function updateNationsCounter() {
  */
 
 /*
+ * Aggiorna il suggerimento che riporta il numero di generi selezionati.
+ */
+function updateGenresHint() {
+	const hint = document.getElementById('genre-hint');
+	var count = countGenres();
+
+	if (count == 0) {
+		hint.innerHTML = "Non è stato selezionato alcun genere cinematografico.";
+	}
+	else {
+		hint.innerHTML = (count > 1 ? count + " generi." : count + " genere.");
+	}
+}
+
+/*
  * Aggiorna il contatore dei generi selezionati.
  */
-function updateGenresCounter() {
-	const counter = document.getElementById('genres-count');
+function countGenres() {
 	const checkboxes = document.getElementsByName('genere');
 	var count = 0;
 
@@ -345,5 +359,5 @@ function updateGenresCounter() {
 		}
 	}
 
-	counter.value = count;
+	return count;
 }
