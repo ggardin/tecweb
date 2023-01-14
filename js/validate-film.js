@@ -167,7 +167,7 @@ function addNewCrewMember(element) {
 	clone.removeAttribute('hidden');
 
 	// Aggiunge classe crew
-	clone.classList.add('crew');
+	clone.classList.add('crew-member');
 
 	// Aggiorna for
 	nameLabel.setAttribute('for', 'crew-name' + instanceCrew);
