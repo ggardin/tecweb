@@ -50,10 +50,10 @@
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
 					<label for="crew-name@@crew_name_label_id@@">Nome e cognome</label>
-					<input id="crew-name@@crew_name_input_id@@" name="crew-name@@crew_name_input_name@@" type="text" list="lista-persone" @@value@@ />
+					<input id="crew-name@@crew_name_input_id@@" name="crew-name[]" type="text" list="lista-persone" @@value@@ />
 
 					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
-					<select id="crew-role@@crew_role_select_id@@" name="crew-role@@crew_role_select_name@@">
+					<select id="crew-role@@crew_role_select_id@@" name="crew-role[]">
 						<!-- ruolo_start -->
 						<option value="@@id@@" @@sel@@>@@nome@@</option>
 						<!-- ruolo_end -->
@@ -70,7 +70,7 @@
 				<!-- persone_presenti_end -->
 
 				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
-				<input type="hidden" id="crew-count" name="crew-count" value="@@crew_count@@" />
+				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
 				<datalist id="lista-persone">
 					<!-- persona_start -->
 					<option value="@@id@@">@@nome@@</option>
@@ -99,7 +99,7 @@
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
 					<label for="nation-name@@paese_label_id@@">Codice del Paese</label>
-					<input id="nation-name@@paese_input_id@@" name="nation-name@@paese_input_name@@" type="text" list="lista-paesi" @@value@@ />
+					<input id="nation-name@@paese_input_id@@" name="nation-name[]" type="text" list="lista-paesi" @@value@@ />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
 					<!-- nation_sample_end -->
 				</div>
@@ -111,7 +111,7 @@
 				<!-- paesi_presenti_end -->
 
 				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
-				<input type="hidden" id="nations-count" name="nations-count" value="@@nations_count@@" />
+				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
 				<datalist id="lista-paesi">
 					<!-- paese_start -->
 					<option value="@@id@@">@@nome@@</option>
