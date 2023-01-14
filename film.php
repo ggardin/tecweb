@@ -45,7 +45,7 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 Tools::replaceAnchor($page, "nome", $film["nome"]);
-$immagine = (isset($film["locandina"]) ? ("pics/w500_" . $film["locandina"]) : "img/placeholder.svg");
+$immagine = (isset($film["locandina"]) ? ("pics/w500_" . $film["locandina"] . ".webp") : "img/placeholder.svg");
 Tools::replaceAnchor($page, "locandina", $immagine);
 $sub = false;
 if (isset($film["data_rilascio"])) {
