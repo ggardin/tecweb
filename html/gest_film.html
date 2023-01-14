@@ -48,21 +48,29 @@
 				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
 
 				<div id="crew-sample" hidden>
-					<!-- crew-sample_start -->
+					<!-- crew_sample_start -->
 					<label for="crew-name@@crew_name_label_id@@">Nome e cognome</label>
-					<input id="crew-name@@crew-name_input_id@@" name="crew-name@@crew-name_input_name@@" type="text" list="lista-persone" />
+					<input id="crew-name@@crew_name_input_id@@" name="crew-name@@crew_name_input_name@@" type="text" list="lista-persone" @@value@@ />
 
-					<label for="crew-role@@crew-role_select_label@@">Ruolo</label>
-					<select id="crew-role@@crew-role_select_id@@" name="crew-role@@crew-role_select_name@@"></select>
+					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
+					<select id="crew-role@@crew_role_select_id@@" name="crew-role@@crew_role_select_name@@">
+						<!-- ruolo_start -->
+						<option value="@@id@@" @@sel@@>@@nome@@</option>
+						<!-- ruolo_end -->
+					</select>
 
 					<input type="button" onclick="removeCrewMember(this);" value="Elimina" />
-					<!-- crew-sample_end -->
+					<!-- crew_sample_end -->
 				</div>
 
-				<!-- membricrew -->
+				<!-- persone_presenti_start -->
+				<div class="person">
+					<!-- persona_presente -->
+				</div>
+				<!-- persone_presenti_end -->
 
 				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
-				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
+				<input type="hidden" id="crew-count" name="crew-count" value="@@crew_count@@" />
 				<datalist id="lista-persone">
 					<!-- persona_start -->
 					<option value="@@id@@">@@nome@@</option>
@@ -77,7 +85,7 @@
 				<!-- genere_start -->
 				<div class="checkbox-pill">
 					<label for="genre-@@genere_id_label@@">@@genere_nome_label@@</label>
-					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onclick="updateGenresHint();" @@checked@@ />
+					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere[]" value="@@id@@" onblur="updateGenresHint();" @@checked@@ />
 				</div>
 				<!-- genere_end -->
 				<input type="hidden" id="genres-count" name="genres-count" value="-1" />
@@ -98,7 +106,7 @@
 
 				<!-- paesi_presenti_start -->
 				<div class="nation">
-					<!-- paese -->
+					<!-- paese_presente -->
 				</div>
 				<!-- paesi_presenti_end -->
 
@@ -113,8 +121,8 @@
 
 			<fieldset>
 				<legend>Altri dettagli</legend>
-				<label for="nome_originale">Titolo originale</label>
-				<input id="nome_originale" name="nome_originale" value="@@nome_originale@@" />
+				<label for="titolo_originale">Titolo originale</label>
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
 				<select id="stato" class="form-control">
