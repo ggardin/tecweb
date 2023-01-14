@@ -217,7 +217,7 @@ class Database {
 	}
 
 	public function getCrewByFilmId($id) : array {
-		$query = "select r.nome as ruolo, p.id as p_id, p.nome as p_nome
+		$query = "select r.id as r_id, r.nome as r_nome, p.id as p_id, p.nome as p_nome
 			from film as f
 				join crew as c
 					on f.id = c.film
