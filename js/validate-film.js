@@ -77,12 +77,12 @@ function validateMovieRuntime() {
 
 	// se durata negativa, segnala errore
 	if (runtime != "" && runtime <= 0) {
-		showErrorMessage(id, "Durata in minuti inferiore a 0 minuti.");
+		showErrorMessage(id, "La durata del film non può valere meno di 1 minuto.");
 		return false;
 	}
 	// se durata oltre soglia, segnala errore
 	else if (runtime > 1000) {
-		showErrorMessage(id, "Durata in minuti superiore a 1000 minuti.");
+		showErrorMessage(id, "La durata del film non può superare i 1000 minuti.");
 		return false;
 	}
 
