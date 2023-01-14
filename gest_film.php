@@ -62,11 +62,11 @@ if ($id != "" && !empty($film)) {
 	$option = $sample;
 	Tools::replaceAnchor($sample, "crew_name_label_id", "");
 	Tools::replaceAnchor($sample, "crew_name_input_id", "");
-	Tools::replaceAnchor($sample, "crew_name_input_name", "");
+	// Tools::replaceAnchor($sample, "crew_name_input_name", "");
 	Tools::replaceAnchor($sample, "value", "");
 	Tools::replaceAnchor($sample, "crew_role_label_id", "");
 	Tools::replaceAnchor($sample, "crew_role_select_id", "");
-	Tools::replaceAnchor($sample, "crew_role_select_name", "");
+	// Tools::replaceAnchor($sample, "crew_role_select_name", "");
 	Tools::replaceSection($page, "crew_sample", $sample);
 
 	$t = Tools::getSection($page, "persone_presenti");
@@ -79,11 +79,11 @@ if ($id != "" && !empty($film)) {
 		$t = $option;
 		Tools::replaceAnchor($t, "crew_name_label_id", $i);
 		Tools::replaceAnchor($t, "crew_name_input_id", $i);
-		Tools::replaceAnchor($t, "crew_name_input_name", $i);
+		// Tools::replaceAnchor($t, "crew_name_input_name", $i);
 		Tools::replaceAnchor($t, "value", ('value="' . $crew[$i]["p_id"] . '"'));
 		Tools::replaceAnchor($t, "crew_role_label_id", $i);
 		Tools::replaceAnchor($t, "crew_role_select_id", $i);
-		Tools::replaceAnchor($t, "crew_role_select_name", $i);
+		// Tools::replaceAnchor($t, "crew_role_select_name", $i);
 
 		$ruolo = Tools::getSection($page, "ruolo");
 		$tmp = "";
@@ -100,7 +100,7 @@ if ($id != "" && !empty($film)) {
 	}
 	Tools::replaceSection($page, "persone_presenti", $res);
 
-	Tools::replaceAnchor($page, "crew_count", count($crew));
+	// Tools::replaceAnchor($page, "crew_count", count($crew));
 
 	Tools::toHtml($persone, 1);
 	$option = Tools::getSection($page, "persona");
@@ -147,7 +147,7 @@ if ($id != "" && !empty($film)) {
 	$option = $sample;
 	Tools::replaceAnchor($sample, "paese_label_id", "");
 	Tools::replaceAnchor($sample, "paese_input_id", "");
-	Tools::replaceAnchor($sample, "paese_input_name", "");
+	// Tools::replaceAnchor($sample, "paese_input_name", "");
 	Tools::replaceAnchor($sample, "value", "");
 	Tools::replaceSection($page, "nation_sample", $sample);
 
@@ -160,13 +160,13 @@ if ($id != "" && !empty($film)) {
 		$t = $option;
 		Tools::replaceAnchor($t, "paese_label_id", $i);
 		Tools::replaceAnchor($t, "paese_input_id", $i);
-		Tools::replaceAnchor($t, "paese_input_name", $i);
+		// Tools::replaceAnchor($t, "paese_input_name", $i);
 		Tools::replaceAnchor($t, "value", ('value="' . $film_paesi[$i]["id"] . '"'));
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "paesi_presenti", $res);
 
-	Tools::replaceAnchor($page, "nations_count", count($film_paesi));
+	// Tools::replaceAnchor($page, "nations_count", count($film_paesi));
 
 	$option = Tools::getSection($page, "paese");
 	$res = "";
