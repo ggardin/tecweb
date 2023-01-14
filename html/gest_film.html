@@ -84,8 +84,8 @@
 				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
 				<!-- genere_start -->
 				<div class="checkbox-pill">
-					<label for="genre-@@genere_id_label@@">@@genere_nome_label@@</label>
-					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere[]" value="@@id@@" onclick="updateGenresHint();" @@checked@@ />
+					<label for="genre-@@genere_label_id@@">@@genere_label_nome@@</label>
+					<input type="checkbox" id="genre-@@genere_input_id@@" name="genere[]" value="@@id@@" onclick="updateGenresHint();" @@checked@@ />
 				</div>
 				<!-- genere_end -->
 				<input type="hidden" id="genres-count" name="genres-count" value="-1" />
@@ -98,8 +98,8 @@
 
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
-					<label for="nation-name@@paese_id_label@@">Codice del Paese</label>
-					<input id="nation-name@@paese_id_input@@" type="text" list="lista-paesi" @@value@@ />
+					<label for="nation-name@@paese_label_id@@">Codice del Paese</label>
+					<input id="nation-name@@paese_input_id@@" name="nation-name@@paese_input_name@@" type="text" list="lista-paesi" @@value@@ />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
 					<!-- nation_sample_end -->
 				</div>

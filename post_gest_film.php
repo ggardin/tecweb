@@ -5,20 +5,22 @@ require_once("php/database.php");
 
 // TODO: controlli admin
 
-$user = isset($_SESSION["id"]) ? $_SESSION["id"] : ""; echo ($user);
-$id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";  echo($id);
-$titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : ""; echo($titolo);
-$descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : ""; echo($descrizione);
-$data = isset($_POST["data"]) ? $_POST["data"] : ""; echo($data);
-$durata = isset($_POST["durata"]) ? $_POST["durata"] : ""; echo($durata);
-$crew_count = isset($_POST["crew-count"]) ? $_POST["crew-count"] : ""; echo($crew_count);
-$genere = isset($_POST["genere[]"]) ? $_POST["genere[]"] : ""; echo($genere);
-$nations_count = isset($_POST["nations-count"]) ? $_POST["nations-count"] : ""; echo($nations_count);
-$titolo_originale = isset($_POST["titolo_originale"]) ? $_POST["titolo_originale"] : ""; echo($titolo_originale);
-$stato = isset($_POST["stato"]) ? $_POST["stato"] : ""; echo($stato);
-$budget = isset($_POST["budget"]) ? $_POST["budget"] : ""; echo($budget);
-$incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : ""; echo($incassi);
-$collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : ""; echo($collezione);
+$user = isset($_SESSION["id"]) ? $_SESSION["id"] : ""; echo "user:" . ($user) . "\n";
+$id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : ""; echo "id:" . ($id) . "\n";
+$titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : ""; echo "titolo:" . ($titolo) . "\n";
+$descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : ""; echo "descrizione:" . ($descrizione) . "\n";
+$data = isset($_POST["data"]) ? $_POST["data"] : ""; echo "data:" . ($data) . "\n";
+$durata = isset($_POST["durata"]) ? $_POST["durata"] : ""; echo "durata:" . ($durata) . "\n";
+$crew_count = isset($_POST["crew-count"]) ? $_POST["crew-count"] : ""; echo "crew_count:" . ($crew_count) . "\n";
+$genere = isset($_POST["genere"]) ? $_POST["genere"] : ""; echo ("genere:"); print_r ($genere ) ;echo ("\n");
+$nations_count = isset($_POST["nations-count"]) ? $_POST["nations-count"] : ""; echo "nations_count:" . ($nations_count) . "\n";
+$titolo_originale = isset($_POST["titolo_originale"]) ? $_POST["titolo_originale"] : ""; echo "titolo_originale:" . ($titolo_originale) . "\n";
+$stato = isset($_POST["stato"]) ? $_POST["stato"] : ""; echo "stato:" . ($stato) . "\n";
+$budget = isset($_POST["budget"]) ? $_POST["budget"] : ""; echo "budget:" . ($budget) . "\n";
+$incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : ""; echo "incassi:" . ($incassi) . "\n";
+$collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : ""; echo "collezione:" . ($collezione) . "\n";
+
+// print_r($genere);
 
 // for i < crew-count
 // 	crew-name$i
@@ -27,7 +29,18 @@ $collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : ""; echo($col
 // for i < nations-count
 // 	nation-name$i
 
-$submit = isset($_POST["submit"]) ? $_POST["submit"] : ""; echo($submit);
+
+for ($i = 0; $i < $crew_count; $i++) {
+	echo ("crew persona $i: " . $_POST["crew-name$i"] . "\n");
+	echo ("crew ruolo $i: " . $_POST["crew-role$i"] . "\n");
+}
+
+for ($i = 0; $i < $nations_count; $i++) {
+	echo ("nazione $i: " . $_POST["nation-name$i"] . "\n");
+}
+
+
+$submit = isset($_POST["submit"]) ? $_POST["submit"] : ""; echo( "submit:" . $submit);
 
 // echo ($submit);
 
