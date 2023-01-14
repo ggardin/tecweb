@@ -847,23 +847,28 @@ AUTH
 ==============
 */
 
-.error-icon .error-code {
+.error-page {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.error-page .error-code {
 	font-size: 5em;
 	font-weight: 800;
 }
 
-.error-icon .error-code > span {
+.error-page .error-code > span {
 	float: left;
 	transform: rotate(-30deg);
 }
 
-.error-icon .message {
+.error-page p {
 	text-align: center;
+	max-width: var(--search-form-width);
 }
 
-.thing{
+.thing {
 	width: 20em;
 	height: 20em;
 }
