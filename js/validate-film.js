@@ -313,7 +313,7 @@ function updateGenresHint() {
  * Aggiorna il contatore dei generi selezionati.
  */
 function countGenres() {
-	const checkboxes = document.getElementsByName('genere');
+	const checkboxes = document.getElementsByName('genere[]');
 	var count = 0;
 
 	for (var i = 0; i < checkboxes.length; i++) {
