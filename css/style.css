@@ -1023,6 +1023,7 @@ form input.invalid {
 	border: 1px solid var(--bgcolor-off);
 }
 .checkbox-pill label {
+	user-select: none;
 	padding: 0.5em 0 0.5em 1em;
 }
 .checkbox-pill input {

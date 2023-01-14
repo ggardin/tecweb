@@ -77,12 +77,12 @@ function validateMovieRuntime() {
 
 	// se durata negativa, segnala errore
 	if (runtime != "" && runtime <= 0) {
-		showErrorMessage(id, "Durata in minuti inferiore a 0 minuti.");
+		showErrorMessage(id, "La durata del film non può valere meno di 1 minuto.");
 		return false;
 	}
 	// se durata oltre soglia, segnala errore
 	else if (runtime > 1000) {
-		showErrorMessage(id, "Durata in minuti superiore a 1000 minuti.");
+		showErrorMessage(id, "La durata del film non può superare i 1000 minuti.");
 		return false;
 	}
 
@@ -94,21 +94,21 @@ function validateMovieRuntime() {
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBudget() {
-	validateMoney('budget');
+	return validateMoney('budget');
 }
 
 /*
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBoxOfficeEarnings() {
-	validateMoney('incassi');
+	return validateMoney('incassi');
 }
 
 /*
  * Valida la cifra
  */
 function validateMoney(id) {
-	if ( document.forms['gestione'][id].value != "" && document.forms['gestione'][id].value <= 0 ) {
+	if ( document.forms['gestione'][id].value != '' && document.forms['gestione'][id].value <= 0 ) {
 		showErrorMessage(id, 'La cifra non può essere inferiore a 0.');
 		return false;
 	}
@@ -123,15 +123,25 @@ window.addEventListener('load', function () {
 
 var instanceCrew = 0;
 var instanceNations = 0;
+var clicksOnAddButtonCrew = 0;
+var clicksOnAddButtonNation = 0;
 
 /*
  * Ottiene il numero di membri della crew e nazioni già presenti
  */
 function initiateInstanceCount() {
+	// Inizializza contatori per Crew member
 	instanceCrew = document.querySelectorAll('.crew-member').length;
+	clicksOnAddButtonCrew = document.querySelectorAll('.crew-member').length;
+	// Inizializza contatori per Nation
 	instanceNations = document.querySelectorAll('.nation').length;
+	clicksOnAddButtonNation = document.querySelectorAll('.nation').length;
+
+	// Aggiorna hint e contatori
 	updateCrewCounter();
 	updateNationsCounter();
+	updateCrewHint();
+	updateNationHint();
 	updateGenresHint();
 }
 
@@ -145,71 +155,39 @@ function initiateInstanceCount() {
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
  */
 function addNewCrewMember(element) {
-	// Elementi per #nome
-	var newCrewNameLabel = document.createElement("label");
-	var newCrewNameInput = document.createElement("input");
-	// Elementi per #crew
-	var newCrewRoleLabel = document.createElement("label");
-	var newCrewRoleSelect = document.createElement("select");
-	var newCrewRoleRegista = document.createElement("option");
-	var newCrewRoleSceneggiatore = document.createElement("option");
-	var newCrewRoleProduttore = document.createElement("option");
-	var newCrewRoleCompositore = document.createElement("option");
-	// Elementi per tasto "elimina"
-	var newCrewDeleteInput = document.createElement("input");
+	// Elemento da duplicare
+	var original = document.getElementById('crew-sample');
 
-	// <label for="crew-name0">Nome e cognome</label>
-	newCrewNameLabel.htmlFor = "crew-name" + instanceCrew;
-	newCrewNameLabel.innerHTML = "Nome e cognome";
-	newCrewNameLabel.classList.add('crew-member');
+	// Duplicato
+	var clone = original.cloneNode(true);
+	var nameLabel = clone.getElementsByTagName('label')[0];
+	var nameInput = clone.getElementsByTagName('input')[0];
+	var roleLabel = clone.getElementsByTagName('label')[1];
+	var roleInput = clone.getElementsByTagName('input')[1];
 
-	// <input id="crew-name0" name="crew-name0" type="text">
-	newCrewNameInput.id = "crew-name" + instanceCrew;
-	newCrewNameInput.name = "crew-name" + instanceCrew;
-	newCrewNameInput.type = "text";
-	newCrewNameInput.setAttribute("list", "lista-persone");
+	// Aggiorna id
+	clone.removeAttribute('id');
+	nameInput.id = 'crew-name' + clicksOnAddButtonCrew;
+	roleInput.id = 'crew-role' + clicksOnAddButtonCrew;
 
-	// <label for="crew-role0">Ruolo</label>
-	newCrewRoleLabel.htmlFor = "crew-role" + instanceCrew;
-	newCrewRoleLabel.innerHTML = "Ruolo";
+	// Aggiunge classe crew
+	clone.classList.add('crew-member');
 
-	// <select id="crew-role0" name="crew-role0"></select>
-	newCrewRoleSelect.id = "crew-role" + instanceCrew;
-	newCrewRoleSelect.name = "crew-role" + instanceCrew;
-	newCrewRoleRegista.value = 0;
-	newCrewRoleRegista.text = "Regista";
-	newCrewRoleSceneggiatore.value = 1;
-	newCrewRoleSceneggiatore.text = "Sceneggiatore"
-	newCrewRoleProduttore.value = 2;
-	newCrewRoleProduttore.text = "Produttore";
-	newCrewRoleCompositore.value = 3;
-	newCrewRoleCompositore.text = "Compositore";
+	// Aggiorna for
+	nameLabel.setAttribute('for', 'crew-name' + clicksOnAddButtonCrew);
+	roleLabel.setAttribute('for', 'crew-role' + clicksOnAddButtonCrew);
 
-	// <input id="crew-delete0" type="button" onclick="removeCrewMember(this);" value="Elimina" />
-	newCrewDeleteInput.id = "crew-delete" + instanceCrew;
-	newCrewDeleteInput.type = "button";
-	newCrewDeleteInput.value = "Elimina";
-	newCrewDeleteInput.onclick = function() { removeCrewMember(this); };
+	// Innesta
+	element.insertAdjacentElement('beforebegin', clone);
 
-	// Innesta gli elementi di #crew-nome
-	console.log(element)
-	element.insertAdjacentElement('beforebegin', newCrewNameLabel);
-	element.insertAdjacentElement('beforebegin', newCrewNameInput);
-
-	// Innesta gli elementi di #crew-role
-	element.insertAdjacentElement('beforebegin', newCrewRoleLabel);
-	element.insertAdjacentElement('beforebegin', newCrewRoleSelect);
-	var select = document.getElementById("crew-role" + instanceCrew);
-	select.add(newCrewRoleRegista);
-	select.add(newCrewRoleSceneggiatore);
-	select.add(newCrewRoleProduttore);
-	select.add(newCrewRoleCompositore);
-
-	// Innesta tasto per eliminare
-	element.insertAdjacentElement('beforebegin', newCrewDeleteInput);
-
-	// Aggiorna il numero di istanze e il contatore
+	// Incrementa contatori
 	instanceCrew++;
+	clicksOnAddButtonCrew++;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
+
+	// Aggiorna il contatore
 	updateCrewCounter();
 	updateCrewHint();
 }
@@ -218,11 +196,7 @@ function addNewCrewMember(element) {
  * Rimuove il membro della crew corrispondente.
  */
 function removeCrewMember(element) {
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.remove();
+	element.parentNode.remove();
 	instanceCrew--;
 	updateCrewCounter();
 	updateCrewHint();
@@ -267,28 +241,28 @@ function addNewNation(element) {
 	var clone = original.cloneNode(true);
 	var label = clone.getElementsByTagName('label')[0];
 	var input = clone.getElementsByTagName('input')[0];
-	var button = clone.getElementsByTagName('input')[1];
-
-	// Incrementa contatore
-	instanceNations++;
 
 	// Aggiorna id
 	clone.removeAttribute('id');
-	input.id = 'nation-name' + instanceNations;
-
-	// Rimuove attributo hidden
-	clone.removeAttribute('hidden');
+	input.id = 'nation-name' + clicksOnAddButtonNation;
 
 	// Aggiunge classe nation
 	clone.classList.add('nation');
 
 	// Aggiorna for
-	label.setAttribute('for', 'nation-name' + instanceNations);
+	label.setAttribute('for', 'nation-name' + clicksOnAddButtonNation);
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
 
-	// Aggiorna il numero di istanze e il contatore
+	// Incrementa contatori
+	instanceNations++;
+	clicksOnAddButtonNation++;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
+
+	// Aggiorna il contatore
 	updateNationsCounter();
 	updateNationHint();
 }
@@ -350,7 +324,7 @@ function updateGenresHint() {
  * Aggiorna il contatore dei generi selezionati.
  */
 function countGenres() {
-	const checkboxes = document.getElementsByName('genere');
+	const checkboxes = document.getElementsByName('genere[]');
 	var count = 0;
 
 	for (var i = 0; i < checkboxes.length; i++) {

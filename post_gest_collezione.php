@@ -3,24 +3,22 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-// controlli admin
+// TODO: controlli admin
 
 $user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
-$nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
-$gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
-$data_nascita = isset($_POST["data_nascita"]) ? $_POST["data_nascita"] : "";
-$data_morte = isset($_POST["data_morte"]) ? $_POST["data_morte"] : "";
+$titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
+$descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if (isset($_FILES["immagine"])) {
-	$img = Tools::uploadImg($_FILES['immagine']);
+if (isset($_FILES["locandina"])) {
+	$img = Tools::uploadImg($_FILES['locandina']);
 	if ($img[0])
-		$immagine = $img[1];
+		$locandina = $img[1];
 	else
-		$immagine = "";
+		$locandina = "";
 } else {
-	$immagine = "";
+	$locandina = "";
 }
 
 if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
@@ -28,17 +26,17 @@ if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || (
 	exit();
 }
 
-if ($nome == "") {
-	header("location: gest_persona.php?id=$id");
+if ($titolo == "") {
+	header("location: gest_collezione.php?id=$id");
 	exit();
 }
 
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit = "modifica")
-		$res = $connessione->updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte);
+		$res = $connessione->updateCollezione($id, $titolo, $descrizione, $locandina);
 	elseif ($submit == "elimina")
-		$res = $connessione->deletePersona($id);
+		$res = $connessione->deleteCollezione($id);
 	else
 		$res = false;
 	unset($connessione);
@@ -50,13 +48,13 @@ try {
 
 if ($res) {
 	if ($submit == "modifica")
-		header("location: gest_persona.php?id=" . $id);
+		header("location: gest_collezione.php?id=" . $id);
 	elseif ($submit == "aggiungi")
-		header("location: gest_persona.php?id=" . $res[1]);
+		header("location: gest_collezione.php?id=" . $res[1]);
 	elseif ($submit == "elimina")
-		header("location: cerca_persona.php");
+		header("location: cerca_collezione.php");
 } else {
-	header("location: gest_persona.php?id=$id");
+	header("location: gest_collezione.php?id=$id");
 	$_SESSION["error"] = "qualcosa è andato storto";
 }
 

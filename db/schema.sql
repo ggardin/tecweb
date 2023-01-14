@@ -1,8 +1,3 @@
-drop table if exists i_film;
-drop table if exists i_collezione;
-drop table if exists i_persona;
-drop table if exists i_genere;
-
 drop table if exists lista_film;
 drop table if exists lista;
 drop table if exists valutazione;
@@ -167,36 +162,4 @@ create table lista_film (
 	primary key (id),
 	foreign key (lista) references lista(id) on delete cascade,
 	foreign key (film) references film(id) on delete cascade
-);
-
-
-
-
-
-create table i_genere (
-	id smallint unsigned,
-	tmdb_id smallint unsigned,
-	primary key (id),
-	foreign key (id) references genere(id) on delete cascade
-);
-
-create table i_persona (
-	id int unsigned,
-	tmdb_id int unsigned,
-	primary key (id),
-	foreign key (id) references persona(id) on delete cascade
-);
-
-create table i_collezione (
-	id int unsigned,
-	tmdb_id int unsigned,
-	primary key (id),
-	foreign key (id) references collezione(id) on delete cascade
-);
-
-create table i_film (
-	id bigint unsigned,
-	tmdb_id bigint unsigned,
-	primary key (id),
-	foreign key (id) references film(id) on delete cascade
 );

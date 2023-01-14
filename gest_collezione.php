@@ -25,10 +25,10 @@ $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if ($id != "" && !empty($collezione)) {
 	$collezione = $collezione[0];
-	$title = $collezione["nome"] . " • Modifica collezione"; Tools::toHtml($title, 0);
+	$title = $collezione["nome"] . " • Modifica collezione"; Tools::toHtml($title, 1);
 	Tools::replaceAnchor($page, "title", $title);
 	Tools::replaceAnchor($page, "bc_id", $id);
-	$bc_nome = $collezione["nome"]; Tools::toHtml($bc_nome, 2);
+	$bc_nome = $collezione["nome"]; Tools::toHtml($bc_nome);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica collezione");
 	Tools::replaceAnchor($page, "gest_id", $id);

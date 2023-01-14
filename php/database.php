@@ -31,16 +31,21 @@ class Database {
 			$this->connection->close();
 	}
 
-	// adattata da quella vista a lezione
-	private function pulisciInput(&$params) : void {
-		foreach ($params as &$p) {
-			if (is_string($p)) {
-				$p = trim($p);
-				$p = strip_tags($p);
-				// convertiamo in entità durante output, qui facciamo il contrario
-				$p = html_entity_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-			}
+	private function pulisciInputHelper (&$item) {
+		if (is_string($item)) {
+			$item = trim($item);
+			$item = strip_tags($item);
+			// convertiamo in entità durante output, qui facciamo il contrario
+			$item = html_entity_decode($item, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 		}
+	}
+
+	// adattata da quella vista a lezione
+	private function pulisciInput(&$in) : void {
+		if (is_array($in))
+			array_walk_recursive($in, "self::pulisciInputHelper");
+		elseif (is_string($in))
+			$this->pulisciInputHelper($in);
 	}
 
 	// see: https://phpdelusions.net/mysqli
@@ -198,7 +203,7 @@ class Database {
 	public function getPersone() : array {
 		$query = "select id, nome
 			from persona
-			order by nome";
+			order by id";
 
 		$params = [];
 
@@ -228,7 +233,7 @@ class Database {
 	}
 
 	public function getCrewByFilmId($id) : array {
-		$query = "select r.nome as ruolo, p.id as p_id, p.nome as p_nome
+		$query = "select r.id as r_id, r.nome as r_nome, p.id as p_id, p.nome as p_nome
 			from film as f
 				join crew as c
 					on f.id = c.film
@@ -246,13 +251,14 @@ class Database {
 	}
 
 	public function getPaeseByFilmId($id) : array {
-		$query = "select p.nome
+		$query = "select p.iso_3166_1 as id, p.nome
 			from film as f
 				join film_paese as fp
 					on f.id = fp.film
 				join paese as p
 					on fp.paese = p.iso_3166_1
-			where f.id = ?";
+			where f.id = ?
+			order by p.nome";
 
 		$params = [$id];
 		$types = "i";
@@ -398,15 +404,22 @@ class Database {
 	public function searchCollezione($str, $limit, $offset) : array {
 		$search = [];
 
-		$q0 = "select c.id, c.nome, c.locandina, count(*) as n_film
-			from collezione as c
-				join film as f
-					on c.id = f.collezione
-			where c.nome like ?
-			group by c.id
+		$q0 = "select t.id, t.nome, t.locandina, t.n_film from (
+				select c.id, c.nome, c.locandina, count(*) as n_film
+				from collezione as c
+					join film as f
+						on c.id = f.collezione
+				where c.nome like ?
+				group by c.id
+				union
+				select c.id, c.nome, c.locandina, 0 as n_film
+				from collezione as c
+				where c.nome like ?
+			) as t
+			group by t.id
 			limit ? offset ?";
-		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
-		$t0 = "sii";
+		$p0 = [("%" . trim($str) . "%"), ("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n
@@ -422,17 +435,24 @@ class Database {
 	public function searchPersona($str, $limit, $offset) : array {
 		$search = [];
 
-		$q0 = "select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
-			from persona as p
-				join crew as c
-					on p.id = c.persona
-				join film as f
-					on c.film = f.id
-			where p.nome like ?
-			group by p.id
+		$q0 = "select t.id, t.nome, t.immagine, t.n_film from (
+				select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
+				from persona as p
+					join crew as c
+						on p.id = c.persona
+					join film as f
+						on c.film = f.id
+				where p.nome like ?
+				group by p.id
+				union
+				select p.id, p.nome, p.immagine, 0 as n_film
+				from persona as p
+				where p.nome like ?
+			) as t
+			group by t.id
 			limit ? offset ?";
-		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
-		$t0 = "sii";
+		$p0 = [("%" . trim($str) . "%"), ("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n

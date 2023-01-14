@@ -27,14 +27,14 @@ $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if ($id != "" && !empty($persona)) {
 	$persona = $persona[0];
-	$title = $persona["nome"] . " • Modifica persona"; Tools::toHtml($title, 0);
+	$title = $persona["nome"] . " • Modifica persona"; Tools::toHtml($title, 1);
 	Tools::replaceAnchor($page, "title", $title);
 	Tools::replaceAnchor($page, "bc_id", $id);
-	$bc_nome = $persona["nome"]; Tools::toHtml($bc_nome, 2);
+	$bc_nome = $persona["nome"]; Tools::toHtml($bc_nome);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica persona");
 	Tools::replaceAnchor($page, "gest_id", $id);
-	Tools::toHtml($persona, 1);
+	Tools::toHtml($persona, 0);
 	Tools::replaceAnchor($page, "nome", $persona["nome"]);
 	$option = Tools::getSection($page, "gender");
 	$res = "";

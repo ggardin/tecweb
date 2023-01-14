@@ -40,7 +40,7 @@ if (empty($film)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $film = $film[0];
-$title = $film["nome"] . " • Film"; Tools::toHtml($title, 0);
+$title = $film["nome"] . " • Film"; Tools::toHtml($title, 1);
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
@@ -76,11 +76,11 @@ if (!empty($crew)) {
 	$res = "";
 	$last_ruolo = "";
 	foreach ($crew as $c) {
-		if ($c["ruolo"] != $last_ruolo) {
+		if ($c["r_nome"] != $last_ruolo) {
 			$r = $ruolo;
-			Tools::replaceAnchor($r, "ruolo", $c["ruolo"]);
+			Tools::replaceAnchor($r, "ruolo", $c["r_nome"]);
 			$res .= $r;
-			$last_ruolo = $c["ruolo"];
+			$last_ruolo = $c["r_nome"];
 		}
 		$p = $persona;
 		Tools::replaceAnchor($p, "nome", $c["p_nome"]);

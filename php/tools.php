@@ -70,10 +70,10 @@ class Tools {
 	}
 
 	private static function convHelper(&$item, $key, $conv_level) : void {
-		if (! is_null($item)) {
+		if (is_string($item)) {
 			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
-			if ($conv_level != 1) {
-				$strip = ($conv_level == 0);
+			if ($conv_level != 0) {
+				$strip = ($conv_level == 1);
 				$item = Tools::convLang($item, $strip);
 				$item = Tools::convAbbr($item, $strip);
 			}
@@ -81,8 +81,8 @@ class Tools {
 	}
 
 	// conv_level
-	// 0: conv specials, strip markers (for titles)
-	// 1: conv specials, keep makers (for editing)
+	// 0: conv specials, keep makers (for editing)
+	// 1: conv specials, strip markers (for titles)
 	// 2: conv specials, conv markers (for normal pages), DEFAULT
 	public static function toHtml(&$in, $conv_level = 2) : void {
 		if (is_array($in))
@@ -154,6 +154,9 @@ class Tools {
 	}
 
 	public static function uploadImg($file) : array {
+		if (! (file_exists($file['tmp_name']) && is_uploaded_file($file['tmp_name'])))
+			return [false, "Errore durante l'upload"];
+
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
 		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
