@@ -123,13 +123,21 @@ window.addEventListener('load', function () {
 
 var instanceCrew = 0;
 var instanceNations = 0;
+var clicksOnAddButtonCrew = 0;
+var clicksOnAddButtonNation = 0;
 
 /*
  * Ottiene il numero di membri della crew e nazioni già presenti
  */
 function initiateInstanceCount() {
+	// Inizializza contatori per Crew member
 	instanceCrew = document.querySelectorAll('.crew-member').length;
+	clicksOnAddButtonCrew = document.querySelectorAll('.crew-member').length;
+	// Inizializza contatori per Nation
 	instanceNations = document.querySelectorAll('.nation').length;
+	clicksOnAddButtonNation = document.querySelectorAll('.nation').length;
+
+	// Aggiorna hint e contatori
 	updateCrewCounter();
 	updateNationsCounter();
 	updateCrewHint();
@@ -159,21 +167,22 @@ function addNewCrewMember(element) {
 
 	// Aggiorna id
 	clone.removeAttribute('id');
-	nameInput.id = 'crew-name' + instanceCrew;
-	roleInput.id = 'crew-role' + instanceCrew;
+	nameInput.id = 'crew-name' + clicksOnAddButtonCrew;
+	roleInput.id = 'crew-role' + clicksOnAddButtonCrew;
 
 	// Aggiunge classe crew
 	clone.classList.add('crew-member');
 
 	// Aggiorna for
-	nameLabel.setAttribute('for', 'crew-name' + instanceCrew);
-	roleLabel.setAttribute('for', 'crew-role' + instanceCrew);
+	nameLabel.setAttribute('for', 'crew-name' + clicksOnAddButtonCrew);
+	roleLabel.setAttribute('for', 'crew-role' + clicksOnAddButtonCrew);
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
 
-	// Incrementa contatore
+	// Incrementa contatori
 	instanceCrew++;
+	clicksOnAddButtonCrew++;
 
 	// Rimuove attributo hidden
 	clone.removeAttribute('hidden');
@@ -235,19 +244,20 @@ function addNewNation(element) {
 
 	// Aggiorna id
 	clone.removeAttribute('id');
-	input.id = 'nation-name' + instanceNations;
+	input.id = 'nation-name' + clicksOnAddButtonNation;
 
 	// Aggiunge classe nation
 	clone.classList.add('nation');
 
 	// Aggiorna for
-	label.setAttribute('for', 'nation-name' + instanceNations);
+	label.setAttribute('for', 'nation-name' + clicksOnAddButtonNation);
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
 
-	// Incrementa contatore
+	// Incrementa contatori
 	instanceNations++;
+	clicksOnAddButtonNation++;
 
 	// Rimuove attributo hidden
 	clone.removeAttribute('hidden');
