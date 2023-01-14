@@ -94,14 +94,14 @@ function validateMovieRuntime() {
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBudget() {
-	validateMoney('budget');
+	return validateMoney('budget');
 }
 
 /*
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBoxOfficeEarnings() {
-	validateMoney('incassi');
+	return validateMoney('incassi');
 }
 
 /*
