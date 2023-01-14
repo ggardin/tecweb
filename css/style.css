@@ -112,10 +112,6 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-/*img {
-	border-radius: var(--border-radius);
-}*/
-
 .image-style {
 	border-radius: var(--border-radius);
 }
@@ -132,7 +128,6 @@ ACTIVE PAGE
 	padding: .5em;
 	border-radius: var(--border-radius);
 }
-
 
 /*
 ==============
@@ -178,7 +173,7 @@ HEADER
 	padding: 0.5em;
 }
 
-#page-header li:hover:not(:has(> .active)){
+#page-header li:hover:not(:has(> .active)) {
 	border-color: var(--txtcolor);
 }
 
@@ -191,10 +186,6 @@ HEADER
 #page-header button {
 	width: auto;
 }
-
-/*#logo {*/
-/*	width: auto;*/
-/*}*/
 
 #logo path,
 #accountButton path {
@@ -214,27 +205,6 @@ BREADCRUMB
 	border-radius: var(--border-radius);
 	z-index: 5;
 }
-
-/*
-==============
-MAIN
-==============
-*/
-
-/*
-main > h1, h2{
-	text-align: center;
-}
-
-main > h2{
-	font-weight: 600;
-}
-*/
-
-/*main h1{
-	margin-left: .5em;
-	margin-right: .5em;
-}*/
 
 /*
 ==============
@@ -296,7 +266,6 @@ FOOTER
 	margin-top: 1.5em;
 }
 
-
 /*
 ==============
 TMDB ATTRIBUTION
@@ -313,7 +282,7 @@ TMDB ATTRIBUTION
 	margin-top: 0.4em;
 }
 
-/* Screen reader */
+/* Screen reader/KB users */
 
 .sr-only,
 .skip-to-content {
@@ -338,7 +307,7 @@ TMDB ATTRIBUTION
 	padding: 0.5em;
 }
 
-/* ThemeToggle */
+/* Theme toggle */
 
 #themeToggle {
 	padding: 0;
@@ -357,7 +326,6 @@ TMDB ATTRIBUTION
 
 html.dark #themeToggle svg .sun { fill: var(--tertiaryColor); }
 html.dark #themeToggle svg .moon { fill: transparent; }
-
 
 /*
 ==============
@@ -384,7 +352,7 @@ SEARCH BAR
 	margin: 1.5em auto 1em;
 }
 
-.input-button-wrapper{
+.input-button-wrapper {
 	display: flex;
 	/*margin-top: 1em;*/
 	height: 3.5em;
@@ -407,22 +375,20 @@ SEARCH BAR
 	height: 34px;
 }
 
-
 /*
 ==============
 SEARCH FILTER
 ==============
 */
 
-.searchFilter{
+.searchFilter {
 	margin-top: .5em;
 	margin-bottom: .5em;
 }
 
-.resultMessage{
+.resultMessage {
 	margin-top: .5em;
 }
-
 
 /*
 ==============
@@ -489,7 +455,6 @@ CARDS
 ==============
 */
 
-
 .cards {
 	list-style-type: none;
 	padding: 0;
@@ -501,8 +466,6 @@ CARDS
 
 .cards.double {
 	grid-template-columns: repeat(2, 1fr);
-	/* grid-template-columns: repeat(auto-fit, 10.5em); */
-	/* grid-template-columns: repeat(auto-fit, minmax(11em, 1fr)); */
 }
 
 .card {
@@ -542,7 +505,6 @@ LINK BUTTONS
 
 .link-button {
 	display: flex;
-	/*text-align: center;*/
 	align-items: center;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
@@ -681,30 +643,9 @@ MOVIE PAGE
 	padding-left: 0;
 }
 
-#add-movie{
+#add-movie {
 	margin-top: .5em;
 }
-
-/* .movie-media button {
-	font-size: 1.2em;
-	font-weight: 600;
-	width: 100%;
-	height: 2.5em;
-	margin-bottom: 1em;
-	cursor: pointer;
-	border-radius: var(--border-radius);
-	border: 3px solid var(--tertiaryColor);
-}
-
-.movie-media button.movie-viewed {
-	color: var(--bgcolor);
-	background: var(--tertiaryColor);
-} */
-
-/* .movie-media button.add-to-list {
-	color: var(--tertiaryColor);
-	background: transparent;
-} */
 
 /*
 ==============
@@ -781,11 +722,6 @@ input, textarea, select {
 	color: var(--txtcolor);
 }
 
-/* ???
-textarea:focus, input:focus {
-	color: var(--txtcolor);
-} */
-
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: var(--interactions-text-placeholder-color);
 	opacity: 1; /* Firefox */
@@ -805,7 +741,7 @@ button[type=submit] {
 	font-size: 1.2em;
 }
 
-#addListButton{
+#addListButton {
 	margin-top: 0.5em;
 }
 
@@ -843,7 +779,7 @@ AUTH
 
 /*
 ==============
-404 PAGE
+ERROR PAGE
 ==============
 */
 
@@ -880,7 +816,6 @@ AUTH
 .thing #alien {
 	fill: var(--tertiaryColor);
 }
-
 
 /*
 ==============
@@ -931,7 +866,7 @@ table th, td {
 	border: 2px solid var(--bgcolor-off);
 }
 
-tbody tr:nth-child(odd){
+tbody tr:nth-child(odd) {
 	background-color: var(--secondaryColor);
 }
 
@@ -959,7 +894,7 @@ USER LISTS PAGE
 	height: 3em;
 }
 
-.deleteElementButton svg{
+.deleteElementButton svg {
 	width: 2em;
 	height: 2em;
 }
@@ -977,7 +912,6 @@ GESTIONE
 }
 
 #gestione fieldset {
-	/* border: 0; */
 	margin-top: 1.5em;
 }
 
