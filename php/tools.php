@@ -171,11 +171,11 @@ class Tools {
 		$w1 = 500; $h1 = 1.5 * $w1;
 
 		do {
-			$filename = self::randString() . ".webp";
-		} while (file_exists($target_dir . "${w0}_" . $filename));
+			$filename = self::randString();
+		} while (file_exists($target_dir . "${w0}_" . $filename . ".webp"));
 
-		$fn0 = $target_dir . "w${w0}_" . $filename;
-		$fn1 = $target_dir . "w${w1}_" . $filename;
+		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
+		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
 
 		if ($imageFileType == "jpg" || $imageFileType == "jpeg")
 			$source = imagecreatefromjpeg($file["tmp_name"]);
