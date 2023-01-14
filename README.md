@@ -35,3 +35,17 @@ Ad ogni push su un qualsiasi branch:
 ## Licenza
 
 [MIT](LICENSE)
+
+## Dati dei film
+![TMDB attribution](img/tmdb.svg)
+Tutti i dati relativi ai film presenti sono forniti da TMDB.
+
+TMDB mette a disposizione tutti i dati presenti sul loro sito (Titoli, Autori, Immagini, descrizioni etc.) mediante API.
+
+Abbiamo scaricato nel nostro database locale gli N film più votati — con relativi metadati — tramite uno script Python.
+
+Tutti i marchi e/o nomi presenti su questo sito sono protetti dalle leggi internazionali di copyright/trademark e sono di esclusiva pertinenza dei proprietari.
+
+Questo progetto è stato creato a scopo educativo/universitario: non ha scopo di lucro. Tutto il codice è disponibile gratuitamente su GitHub.
+
+Non siamo sostenuti né certificati da TMDB.

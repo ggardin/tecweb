@@ -1,8 +1,8 @@
-/* NAVBAR */
-
-/* #sidebar{
-	display: none;
-} */
+/*
+==============
+NAVBAR
+==============
+*/
 
 #page-header #logo-icon,
 #page-header .actions {
@@ -74,17 +74,6 @@ MOVIE PAGE
 
 /*
 ==============
-MAIN
-==============
-*/
-/*
-main > h1, h2{
-	text-align: center;
-}
-*/
-
-/*
-==============
 CARDS
 ==============
 */
@@ -114,11 +103,6 @@ incl. Stats, Settings
 
 table thead {
 	display: none;
-	/*border: none;
-	clip: rect(0 0 0 0);
-	overflow: hidden;
-	position: absolute;
-	width: 0;*/
 }
 
 table td, th{

@@ -2,7 +2,6 @@
 	font-family: "Spectral";
 	src: url("../fonts/spectral") format("truetype");
 	font-weight: 200 800;
-	font-display: swap;
 }
 
 * {
@@ -34,7 +33,7 @@ img.dark {
 }
 
 main::after {
-	content: "Copyright site.com";
+	content: "soundstage";
 	display: block;
 	text-align: center;
 }
