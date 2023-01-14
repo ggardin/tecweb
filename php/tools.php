@@ -166,6 +166,9 @@ class Tools {
 	}
 
 	public static function uploadImg($file) : array {
+		if (! (file_exists($file['tmp_name']) && is_uploaded_file($file['tmp_name'])))
+			return [false, "Errore durante l'upload"];
+
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
 		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));

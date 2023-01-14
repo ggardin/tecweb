@@ -11,7 +11,7 @@ $titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
 $descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if (isset($_FILES["locandina"]) && file_exists($_FILES['locandina']['tmp_name']) && is_uploaded_file($_FILES['locandina']['tmp_name'])) {
+if (isset($_FILES["locandina"])) {
 	$img = Tools::uploadImg($_FILES['locandina']);
 	if ($img[0])
 		$locandina = $img[1];

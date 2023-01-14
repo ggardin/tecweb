@@ -13,7 +13,7 @@ $data_nascita = isset($_POST["data_nascita"]) ? $_POST["data_nascita"] : "";
 $data_morte = isset($_POST["data_morte"]) ? $_POST["data_morte"] : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if (isset($_FILES["immagine"]) && file_exists($_FILES['immagine']['tmp_name']) && is_uploaded_file($_FILES['immagine']['tmp_name'])) {
+if (isset($_FILES["immagine"])) {
 	$img = Tools::uploadImg($_FILES['immagine']);
 	if ($img[0])
 		$immagine = $img[1];
