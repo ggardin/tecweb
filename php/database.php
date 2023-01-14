@@ -1,7 +1,6 @@
 <?php
 
 require_once("ini.php");
-require_once("tools.php");
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -32,9 +31,26 @@ class Database {
 			$this->connection->close();
 	}
 
+	private function pulisciInputHelper (&$item) {
+		if (is_string($item)) {
+			$item = trim($item);
+			$item = strip_tags($item);
+			// convertiamo in entità durante output, qui facciamo il contrario
+			$item = html_entity_decode($item, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+		}
+	}
+
+	// adattata da quella vista a lezione
+	private function pulisciInput(&$in) : void {
+		if (is_array($in))
+			array_walk_recursive($in, "self::pulisciInputHelper");
+		elseif (is_string($in))
+			$this->pulisciInputHelper($in);
+	}
+
 	// see: https://phpdelusions.net/mysqli
 	private function preparedQuery(&$query, &$params, $types = "") : mysqli_stmt {
-		Tools::pulisciInput($params);
+		$this->pulisciInput($params);
 		$types = $types ?: str_repeat("s", count($params));
 		$stmt = $this->connection->prepare($query);
 		if (!empty($params)) $stmt->bind_param($types, ...$params);

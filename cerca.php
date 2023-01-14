@@ -8,26 +8,10 @@ if (! isset($tipo)) {
 	exit();
 }
 
-if (isset($_GET["q"])) {
-	$query = $_GET["q"];
-	Tools::pulisciInput($query);
-} else
-	$query = "";
-if (isset($_GET["fn"])) {
-	$f_nome = $_GET["fn"];
-	Tools::pulisciInput($f_nome);
-} else
-	$f_nome = "";
-if (isset($_GET["fvg"])) {
-	$f_val_genere = $_GET["fvg"];
-	Tools::pulisciInput($f_val_genere);
-} else
-	$f_val_genere = "";
-if (isset($_GET["fvp"])) {
-	$f_val_paese = $_GET["fvp"];
-	Tools::pulisciInput($f_val_paese);
-} else
-	$f_val_paese = "";
+$query = (isset($_GET["q"])) ? $_GET["q"] : "";
+$f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
+$f_val_genere = (isset($_GET["fvg"])) ? $_GET["fvg"] : "";
+$f_val_paese = (isset($_GET["fvp"])) ? $_GET["fvp"] : "";
 
 $limit = 16;
 $next = (isset($_GET["n"])) ? intval($_GET["n"]) : 0;
@@ -63,6 +47,11 @@ if (!isset($cerca)) {
 }
 
 $page = Tools::buildPage("cerca", "std", "cerca_$tipo");
+
+Tools::toHtml($query);
+Tools::toHtml($f_nome);
+Tools::toHtml($f_val_genere);
+Tools::toHtml($f_val_paese);
 
 if ($tipo == "film") {
 	$breadcrumb = "Film";

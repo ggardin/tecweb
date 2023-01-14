@@ -91,23 +91,6 @@ class Tools {
 			self::convHelper($in, null, $conv_level);
 	}
 
-	private static function pulisciInputHelper (&$item) {
-		if (is_string($item)) {
-			$item = trim($item);
-			$item = strip_tags($item);
-			// convertiamo in entità durante output, qui facciamo il contrario
-			$item = html_entity_decode($item, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-		}
-	}
-
-	// adattata da quella vista a lezione
-	public static function pulisciInput(&$in) : void {
-		if (is_array($in))
-			array_walk_recursive($in, "self::pulisciInputHelper");
-		elseif (is_string($in))
-			self::pulisciInputHelper($in);
-	}
-
 	private static function replacePageSection(&$page, &$shared, $name) : void {
 		self::replaceAnchor($page, $name, self::getSection($shared, $name), true);
 	}
