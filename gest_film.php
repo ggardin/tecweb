@@ -145,9 +145,9 @@ if ($id != "" && !empty($film)) {
 
 	$sample = Tools::getSection($page, "nation_sample");
 	$option = $sample;
-	Tools::replaceAnchor($sample, "paese_label_id", $i);
-	Tools::replaceAnchor($sample, "paese_input_id", $i);
-	Tools::replaceAnchor($sample, "paese_input_name", $i);
+	Tools::replaceAnchor($sample, "paese_label_id", "");
+	Tools::replaceAnchor($sample, "paese_input_id", "");
+	Tools::replaceAnchor($sample, "paese_input_name", "");
 	Tools::replaceAnchor($sample, "value", "");
 	Tools::replaceSection($page, "nation_sample", $sample);
 
