@@ -8,16 +8,32 @@ if (! isset($tipo)) {
 	exit();
 }
 
-$query = (isset($_GET["q"])) ? $_GET["q"] : "";
-$f_nome = (isset($_GET["fn"])) ? $_GET["fn"] : "";
-$f_val_genere = (isset($_GET["fvg"])) ? $_GET["fvg"] : "";
-$f_val_paese = (isset($_GET["fvp"])) ? $_GET["fvp"] : "";
+if (isset($_GET["q"])) {
+	$query = $_GET["q"];
+	Tools::pulisciInput($query);
+} else
+	$query = "";
+if (isset($_GET["fn"])) {
+	$f_nome = $_GET["fn"];
+	Tools::pulisciInput($f_nome);
+} else
+	$f_nome = "";
+if (isset($_GET["fvg"])) {
+	$f_val_genere = $_GET["fvg"];
+	Tools::pulisciInput($f_val_genere);
+} else
+	$f_val_genere = "";
+if (isset($_GET["fvp"])) {
+	$f_val_paese = $_GET["fvp"];
+	Tools::pulisciInput($f_val_paese);
+} else
+	$f_val_paese = "";
 
 $limit = 16;
 $next = (isset($_GET["n"])) ? intval($_GET["n"]) : 0;
 $offset = $limit * $next;
 
-// try {
+try {
 	$connessione = new Database();
 	if ($tipo == "film") {
 		if ($f_nome == "genere" && $f_val_genere)
@@ -35,11 +51,11 @@ $offset = $limit * $next;
 	elseif ($tipo == "persona")
 		$cerca = $connessione->searchPersona($query, $limit, $offset);
 	unset($connessione);
-// } catch (Exception) {
-// 	unset($connessione);
-// 	Tools::errCode(500);
-// 	exit();
-// }
+} catch (Exception) {
+	unset($connessione);
+	Tools::errCode(500);
+	exit();
+}
 
 if (!isset($cerca)) {
 	Tools::errCode(404);
