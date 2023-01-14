@@ -108,7 +108,7 @@ function validateMovieBoxOfficeEarnings() {
  * Valida la cifra
  */
 function validateMoney(id) {
-	if ( document.forms['gestione'][id].value != "" && document.forms['gestione'][id].value <= 0 ) {
+	if ( document.forms['gestione'][id].value != '' && document.forms['gestione'][id].value <= 0 ) {
 		showErrorMessage(id, 'La cifra non può essere inferiore a 0.');
 		return false;
 	}
@@ -132,6 +132,8 @@ function initiateInstanceCount() {
 	instanceNations = document.querySelectorAll('.nation').length;
 	updateCrewCounter();
 	updateNationsCounter();
+	updateCrewHint();
+	updateNationHint();
 	updateGenresHint();
 }
 
