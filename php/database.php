@@ -187,7 +187,7 @@ class Database {
 	public function getPersone() : array {
 		$query = "select id, nome
 			from persona
-			order by nome";
+			order by id";
 
 		$params = [];
 
