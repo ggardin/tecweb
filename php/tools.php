@@ -164,23 +164,25 @@ class Tools {
 		if ($file["size"] > 1000000)
 			return [false, "Troppo grande"];
 
-		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png")
-			return [false, "Solo JPG, JPEG e PNG supportati"];
+		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp")
+			return [false, "Solo JPG, JPEG, PNG, WEBP supportati"];
 
 		$w0 = 200; $h0 = 1.5 * $w0;
 		$w1 = 500; $h1 = 1.5 * $w1;
 
 		do {
-			$filename = self::randString() . "." . $imageFileType;
-		} while (file_exists($target_dir . "${w0}_" . $filename));
+			$filename = self::randString();
+		} while (file_exists($target_dir . "${w0}_" . $filename . ".webp"));
 
-		$fn0 = $target_dir . "w${w0}_" . $filename;
-		$fn1 = $target_dir . "w${w1}_" . $filename;
+		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
+		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
 
 		if ($imageFileType == "jpg" || $imageFileType == "jpeg")
 			$source = imagecreatefromjpeg($file["tmp_name"]);
-		else
+		elseif ($imageFileType == "png")
 			$source = imagecreatefrompng($file["tmp_name"]);
+		else
+			$source = imagecreatefromwebp($file["tmp_name"]);
 
 		list($width, $height) = getimagesize($file["tmp_name"]);
 
@@ -190,14 +192,8 @@ class Tools {
 		imagecopyresampled($pic0, $source, 0, 0, 0, 0, $w0, $h0, $width, $height);
 		imagecopyresampled($pic1, $source, 0, 0, 0, 0, $w1, $h1, $width, $height);
 
-		if ($imageFileType == "jpg" || $imageFileType == "jpeg") {
-			imagejpeg($pic0, $fn0);
-			imagejpeg($pic1, $fn1);
-		}
-		else {
-			imagepng($pic0, $fn0);
-			imagepng($pic1, $fn1);
-		}
+		imagewebp($pic0, $fn0);
+		imagewebp($pic1, $fn1);
 
 		unlink ($file["tmp_name"]);
 

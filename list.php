@@ -51,7 +51,7 @@ if (!empty($lista)) {
 	foreach ($lista as $l) {
 		$t = $elemento;
 		Tools::replaceAnchor($t, "id", $l["id"]);
-		$immagine = (isset($l["locandina"]) ? ("pics/w200_" . $l["locandina"]) : "img/placeholder.svg");
+		$immagine = (isset($l["locandina"]) ? ("pics/w200_" . $l["locandina"] . ".webp") : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "nome", $l["nome"]);
 		if (isset($l["data_rilascio"]))
