@@ -157,16 +157,10 @@ function addNewCrewMember(element) {
 	var roleLabel = clone.getElementsByTagName('label')[1];
 	var roleInput = clone.getElementsByTagName('input')[1];
 
-	// Incrementa contatore
-	instanceCrew++;
-
 	// Aggiorna id
 	clone.removeAttribute('id');
 	nameInput.id = 'crew-name' + instanceCrew;
 	roleInput.id = 'crew-role' + instanceCrew;
-
-	// Rimuove attributo hidden
-	clone.removeAttribute('hidden');
 
 	// Aggiunge classe crew
 	clone.classList.add('crew-member');
@@ -177,6 +171,12 @@ function addNewCrewMember(element) {
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
+
+	// Incrementa contatore
+	instanceCrew++;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
 
 	// Aggiorna il contatore
 	updateCrewCounter();
@@ -232,17 +232,10 @@ function addNewNation(element) {
 	var clone = original.cloneNode(true);
 	var label = clone.getElementsByTagName('label')[0];
 	var input = clone.getElementsByTagName('input')[0];
-	var button = clone.getElementsByTagName('input')[1];
-
-	// Incrementa contatore
-	instanceNations++;
 
 	// Aggiorna id
 	clone.removeAttribute('id');
 	input.id = 'nation-name' + instanceNations;
-
-	// Rimuove attributo hidden
-	clone.removeAttribute('hidden');
 
 	// Aggiunge classe nation
 	clone.classList.add('nation');
@@ -252,6 +245,12 @@ function addNewNation(element) {
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
+
+	// Incrementa contatore
+	instanceNations++;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
 
 	// Aggiorna il contatore
 	updateNationsCounter();
