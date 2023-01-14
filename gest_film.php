@@ -38,11 +38,11 @@ if ($id != "" && !empty($film)) {
 	$title = $film["nome"] . " • Modifica film"; Tools::toHtml($title, 0);
 	Tools::replaceAnchor($page, "title", $title);
 	Tools::replaceAnchor($page, "bc_id", $id);
-	$bc_nome = $film["nome"]; Tools::toHtml($bc_nome, 2);
+	$bc_nome = $film["nome"]; Tools::toHtml($bc_nome);
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica film");
 	Tools::replaceAnchor($page, "gest_id", $id);
-	Tools::toHtml($film, 1);
+	Tools::toHtml($film, 0);
 	Tools::replaceAnchor($page, "nome", $film["nome"]);
 	Tools::replaceAnchor($page, "descrizione", (isset($film["descrizione"]) ? $film["descrizione"] : ""));
 	Tools::replaceAnchor($page, "data_rilascio", (isset($film["data_rilascio"]) ? $film["data_rilascio"] : ""));
@@ -60,7 +60,13 @@ if ($id != "" && !empty($film)) {
 
 	$sample = Tools::getSection($page, "crew_sample");
 	$option = $sample;
+	Tools::replaceAnchor($sample, "crew_name_label_id", "");
+	Tools::replaceAnchor($sample, "crew_name_input_id", "");
+	Tools::replaceAnchor($sample, "crew_name_input_name", "");
 	Tools::replaceAnchor($sample, "value", "");
+	Tools::replaceAnchor($sample, "crew_role_label_id", "");
+	Tools::replaceAnchor($sample, "crew_role_select_id", "");
+	Tools::replaceAnchor($sample, "crew_role_select_name", "");
 	Tools::replaceSection($page, "crew_sample", $sample);
 
 	$t = Tools::getSection($page, "persone_presenti");
@@ -71,12 +77,12 @@ if ($id != "" && !empty($film)) {
 	$res = "";
 	for ($i = 0; $i < count($crew); $i++) {
 		$t = $option;
-		Tools::replaceAnchor($t, "crew_name_label_id", $i+1);
-		Tools::replaceAnchor($t, "crew_name_input_id", $i+1);
+		Tools::replaceAnchor($t, "crew_name_label_id", $i);
+		Tools::replaceAnchor($t, "crew_name_input_id", $i);
 		Tools::replaceAnchor($t, "crew_name_input_name", $i);
 		Tools::replaceAnchor($t, "value", ('value="' . $crew[$i]["p_id"] . '"'));
-		Tools::replaceAnchor($t, "crew_role_label_id", $i+1);
-		Tools::replaceAnchor($t, "crew_role_select_id", $i+1);
+		Tools::replaceAnchor($t, "crew_role_label_id", $i);
+		Tools::replaceAnchor($t, "crew_role_select_id", $i);
 		Tools::replaceAnchor($t, "crew_role_select_name", $i);
 
 		$ruolo = Tools::getSection($page, "ruolo");
@@ -96,6 +102,7 @@ if ($id != "" && !empty($film)) {
 
 	Tools::replaceAnchor($page, "crew_count", count($crew));
 
+	Tools::toHtml($persone, 1);
 	$option = Tools::getSection($page, "persona");
 	$res = "";
 	foreach ($persone as $p) {
@@ -127,9 +134,9 @@ if ($id != "" && !empty($film)) {
 	$res = "";
 	foreach ($generi as $g) {
 		$t = $option;
-		Tools::replaceAnchor($t, "genere_id_label", $g["id"]);
-		Tools::replaceAnchor($t, "genere_id_input", $g["id"]);
-		Tools::replaceAnchor($t, "genere_nome_label", $g["nome"]);
+		Tools::replaceAnchor($t, "genere_label_id", $g["id"]);
+		Tools::replaceAnchor($t, "genere_input_id", $g["id"]);
+		Tools::replaceAnchor($t, "genere_label_nome", $g["nome"]);
 		Tools::replaceAnchor($t, "checked", (in_array($g["id"], $fg) ? "checked" : ""));
 		Tools::replaceAnchor($t, "id", $g["id"]);
 		$res .= $t;
@@ -138,6 +145,9 @@ if ($id != "" && !empty($film)) {
 
 	$sample = Tools::getSection($page, "nation_sample");
 	$option = $sample;
+	Tools::replaceAnchor($sample, "paese_label_id", $i);
+	Tools::replaceAnchor($sample, "paese_input_id", $i);
+	Tools::replaceAnchor($sample, "paese_input_name", $i);
 	Tools::replaceAnchor($sample, "value", "");
 	Tools::replaceSection($page, "nation_sample", $sample);
 
@@ -148,8 +158,9 @@ if ($id != "" && !empty($film)) {
 	$res = "";
 	for ($i = 0; $i < count($film_paesi); $i++) {
 		$t = $option;
-		Tools::replaceAnchor($t, "paese_id_label", $i+1);
-		Tools::replaceAnchor($t, "paese_id_input", $i+1);
+		Tools::replaceAnchor($t, "paese_label_id", $i);
+		Tools::replaceAnchor($t, "paese_input_id", $i);
+		Tools::replaceAnchor($t, "paese_input_name", $i);
 		Tools::replaceAnchor($t, "value", ('value="' . $film_paesi[$i]["id"] . '"'));
 		$res .= $t;
 	}
@@ -181,7 +192,8 @@ if ($id != "" && !empty($film)) {
 
 	Tools::replaceAnchor($page, "budget", (isset($film["budget"]) ? $film["budget"] : ""));
 	Tools::replaceAnchor($page, "incassi", (isset($film["incassi"]) ? $film["incassi"] : ""));
-	Tools::toHtml($collezioni, 0);
+
+	Tools::toHtml($collezioni, 1);
 	$option = Tools::getSection($page, "collezione");
 	$res = "";
 	foreach ($collezioni as $c) {

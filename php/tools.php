@@ -72,8 +72,8 @@ class Tools {
 	private static function convHelper(&$item, $key, $conv_level) : void {
 		if (is_string($item)) {
 			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
-			if ($conv_level != 1) {
-				$strip = ($conv_level == 0);
+			if ($conv_level != 0) {
+				$strip = ($conv_level == 1);
 				$item = Tools::convLang($item, $strip);
 				$item = Tools::convAbbr($item, $strip);
 			}
@@ -81,8 +81,8 @@ class Tools {
 	}
 
 	// conv_level
-	// 0: conv specials, strip markers (for titles)
-	// 1: conv specials, keep makers (for editing)
+	// 0: conv specials, keep makers (for editing)
+	// 1: conv specials, strip markers (for titles)
 	// 2: conv specials, conv markers (for normal pages), DEFAULT
 	public static function toHtml(&$in, $conv_level = 2) : void {
 		if (is_array($in))
@@ -91,7 +91,7 @@ class Tools {
 			self::convHelper($in, null, $conv_level);
 	}
 
-	private static function pulisciHelper (&$item) {
+	private static function pulisciInputHelper (&$item) {
 		if (is_string($item)) {
 			$item = trim($item);
 			$item = strip_tags($item);
@@ -103,9 +103,9 @@ class Tools {
 	// adattata da quella vista a lezione
 	public static function pulisciInput(&$in) : void {
 		if (is_array($in))
-			array_walk_recursive($in, "self::pulisciHelper");
+			array_walk_recursive($in, "self::pulisciInputHelper");
 		elseif (is_string($in))
-			self::pulisciHelper($in);
+			self::pulisciInputHelper($in);
 	}
 
 	private static function replacePageSection(&$page, &$shared, $name) : void {
