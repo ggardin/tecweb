@@ -70,7 +70,7 @@ class Tools {
 	}
 
 	private static function convHelper(&$item, $key, $conv_level) : void {
-		if (! is_null($item)) {
+		if (is_string($item)) {
 			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
 			if ($conv_level != 1) {
 				$strip = ($conv_level == 0);
@@ -91,16 +91,21 @@ class Tools {
 			self::convHelper($in, null, $conv_level);
 	}
 
-	// adattata da quella vista a lezione
-	public static function pulisciInput(&$params) : void {
-		foreach ($params as &$p) {
-			if (is_string($p)) {
-				$p = trim($p);
-				$p = strip_tags($p);
-				// convertiamo in entità durante output, qui facciamo il contrario
-				$p = html_entity_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-			}
+	private static function pulisciHelper (&$item) {
+		if (is_string($item)) {
+			$item = trim($item);
+			$item = strip_tags($item);
+			// convertiamo in entità durante output, qui facciamo il contrario
+			$item = html_entity_decode($item, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 		}
+	}
+
+	// adattata da quella vista a lezione
+	public static function pulisciInput(&$in) : void {
+		if (is_array($in))
+			array_walk_recursive($in, "self::pulisciHelper");
+		elseif (is_string($in))
+			self::pulisciHelper($in);
 	}
 
 	private static function replacePageSection(&$page, &$shared, $name) : void {
