@@ -116,7 +116,7 @@ if (!empty($paese)) {
 	Tools::replaceSection($page, "paese", $r);
 } else
 	Tools::replaceSection($page, "paesi", "");
-Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
+Tools::replaceAnchor($page, "nome_originale", (isset($film["nome_originale"]) ? $film["nome_originale"] : ""));
 Tools::replaceAnchor($page, "stato", $stato[0]["nome"]);
 if (isset($film["budget"])) {
 	Tools::replaceAnchor($page, "budget", $film["budget"] . " $");

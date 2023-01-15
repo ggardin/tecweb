@@ -1105,7 +1105,7 @@ INSERT INTO `crew` (`film`, `persona`, `ruolo`) VALUES
 CREATE TABLE `film` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(200) NOT NULL,
-  `nome_originale` varchar(200) NOT NULL,
+  `nome_originale` varchar(200) DEFAULT NULL,
   `durata` smallint(5) UNSIGNED DEFAULT NULL,
   `locandina` varchar(100) DEFAULT NULL,
   `descrizione` varchar(10000) DEFAULT NULL,
