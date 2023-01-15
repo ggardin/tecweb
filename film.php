@@ -96,7 +96,7 @@ if (!empty($genere)) {
 	$r = "";
 	foreach ($genere as $g) {
 		$t = $list;
-		Tools::replaceAnchor($t, "id", $g["nome"]); // TODO
+		Tools::replaceAnchor($t, "id", $g["nome"]);
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
 		$r .= $t;
 	}
@@ -109,7 +109,7 @@ if (!empty($paese)) {
 	$r = "";
 	foreach ($paese as $p) {
 		$t = $list;
-		Tools::replaceAnchor($t, "id", $p["nome"]); // TODO
+		Tools::replaceAnchor($t, "id", $p["nome"]);
 		Tools::replaceAnchor($t, "nome", $p["nome"]);
 		$r .= $t;
 	}
