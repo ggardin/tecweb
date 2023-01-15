@@ -6,10 +6,33 @@ function validatePerson() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates()) ) {
+		if ( !(validatePersonName() && validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates()) ) {
 			event.preventDefault();
 		}
 	});
+}
+
+/*
+ * Valida il nome della persona
+ */
+function validatePersonName() {
+	var id = 'nome';
+	var title = document.forms['gestione'][id].value;
+
+	if (title == null || title == '') {
+		showErrorMessage(id, 'Nome è un campo richiesto.');
+		return false;
+	}
+	else {
+		const titleRegex = /^[\w\s\-\'\[\]\/\u00C0-\u017F]+$/;
+		if (! titleRegex.test(title)) {
+			showErrorMessage(id, 'Il titolo inserito contiene caratteri non ammessi.');
+			return false;
+		}
+	}
+
+	removeErrorMessage(id);
+	return true;
 }
 
 function validatePersonDateOfBirth() {
