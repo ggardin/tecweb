@@ -985,6 +985,20 @@ PERSON/COLLECTION PAGE
 	margin-top: 1em;
 }
 
+.person-page .pills {
+	display: flex;
+	flex-flow: row wrap;
+	list-style: none;
+	padding: 0;
+	gap: 0.5em;
+}
+
+.person-page .pill {
+	padding: 0.2em 0.5em;
+	border: 1px solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+}
+
 /*
 ==============
 ASIDE IMAGE
