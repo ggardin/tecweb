@@ -981,6 +981,17 @@ class Database {
 		return true;
 	}
 
+	public function getUtenteById($user_id) : array {
+		$query = "select *
+			from utente
+			where id = ?";
+
+		$params = [$user_id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 }
 
 ?>
