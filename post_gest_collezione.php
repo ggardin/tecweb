@@ -3,9 +3,11 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-// TODO: controlli admin
+if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
+	header ("location: login.php");
+	exit();
+}
 
-$user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
 $descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
@@ -21,7 +23,9 @@ if (isset($_FILES["locandina"])) {
 	$locandina = "";
 }
 
-if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
+// TODO controlli
+
+if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
 	header("location: index.php");
 	exit();
 }

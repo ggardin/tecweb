@@ -3,7 +3,10 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-// controlli admin
+if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
+	header ("location: login.php");
+	exit();
+}
 
 $user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
