@@ -138,11 +138,11 @@
 				</select>
 
 				<label for="budget" lang="en">Budget</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" />
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" oninput="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="incassi">Incassi</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" />
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" onblur="validateMovieBoxOfficeEarnings();" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
