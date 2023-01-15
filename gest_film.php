@@ -88,48 +88,6 @@ foreach ($paesi as $p) {
 }
 Tools::replaceSection($page, "paese", $res);
 
-$option = Tools::getSection($page, "stato");
-$res = "";
-foreach ($stati as $s) {
-	$t = $option;
-	Tools::replaceAnchor($t, "id", $s["id"]);
-	Tools::replaceAnchor($t, "nome", $s["nome"]);
-	Tools::replaceAnchor($t, "sel", ((($id != "" && isset($ilm["stato"]) && $s["id"] == $film["stato"]) ? "selected" : "")));
-	$res .= $t;
-}
-Tools::replaceSection($page, "stato", $res);
-
-Tools::toHtml($collezioni, 1);
-$tmp = Tools::getSection($page, "collezione");
-$res = "";
-foreach ($collezioni as $c) {
-	$t = $tmp;
-	Tools::replaceAnchor($t, "id", $c["id"]);
-	Tools::replaceAnchor($t, "nome", $c["nome"]);
-	Tools::replaceAnchor($t, "sel", ((($id != "" && isset($film["collezione"]) && $c["id"] == $film["collezione"]) ? "selected" : "")));
-	$res .= $t;
-}
-Tools::replaceSection($page, "collezione", $res);
-
-if ($id != "") {
-	$fg = [];
-	foreach ($film_generi as $t)
-		array_push($fg, $t["id"]);
-}
-
-$option = Tools::getSection($page, "genere");
-$res = "";
-foreach ($generi as $g) {
-	$t = $option;
-	Tools::replaceAnchor($t, "genere_label_id", $g["id"]);
-	Tools::replaceAnchor($t, "genere_input_id", $g["id"]);
-	Tools::replaceAnchor($t, "genere_label_nome", $g["nome"]);
-	Tools::replaceAnchor($t, "checked", ($id != "" && in_array($g["id"], $fg) ? "checked" : ""));
-	Tools::replaceAnchor($t, "id", $g["id"]);
-	$res .= $t;
-}
-Tools::replaceSection($page, "genere", $res);
-
 if ($id != "") {
 	$film = $film[0];
 	$title = $film["nome"] . " • Modifica film"; Tools::toHtml($title, 1);
@@ -200,6 +158,47 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 	Tools::replaceSection($page, "delete", "");
 }
+
+$option = Tools::getSection($page, "stato");
+$res = "";
+foreach ($stati as $s) {
+	$t = $option;
+	Tools::replaceAnchor($t, "id", $s["id"]);
+	Tools::replaceAnchor($t, "nome", $s["nome"]);
+	Tools::replaceAnchor($t, "sel", ((($id != "" && $s["id"] == $film["stato"]) ? "selected" : "")));
+	$res .= $t;
+}
+Tools::replaceSection($page, "stato", $res);
+
+Tools::toHtml($collezioni, 1);
+$tmp = Tools::getSection($page, "collezione");
+$res = "";
+foreach ($collezioni as $c) {
+	$t = $tmp;
+	Tools::replaceAnchor($t, "id", $c["id"]);
+	Tools::replaceAnchor($t, "nome", $c["nome"]);
+	Tools::replaceAnchor($t, "sel", ((($id != "" && isset($film["collezione"]) && $c["id"] == $film["collezione"]) ? "selected" : "")));
+	$res .= $t;
+}
+Tools::replaceSection($page, "collezione", $res);
+
+if ($id != "") {
+	$fg = [];
+	foreach ($film_generi as $t)
+		array_push($fg, $t["id"]);
+}
+$option = Tools::getSection($page, "genere");
+$res = "";
+foreach ($generi as $g) {
+	$t = $option;
+	Tools::replaceAnchor($t, "genere_label_id", $g["id"]);
+	Tools::replaceAnchor($t, "genere_input_id", $g["id"]);
+	Tools::replaceAnchor($t, "genere_label_nome", $g["nome"]);
+	Tools::replaceAnchor($t, "checked", ($id != "" && in_array($g["id"], $fg) ? "checked" : ""));
+	Tools::replaceAnchor($t, "id", $g["id"]);
+	$res .= $t;
+}
+Tools::replaceSection($page, "genere", $res);
 
 Tools::showPage($page);
 

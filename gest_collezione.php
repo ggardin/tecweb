@@ -49,7 +49,7 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "gest_id", "");
 	Tools::replaceAnchor($page, "nome", "");
 	Tools::replaceAnchor($page, "descrizione", "");
-	Tools::replaceAnchor($page, "submit_value", "modifica");
+	Tools::replaceAnchor($page, "submit_value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 	Tools::replaceSection($page, "delete", "");
 }
