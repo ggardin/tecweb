@@ -81,6 +81,7 @@ img, picture {
 	max-width: 15em;
 }
 
+/* regola problematica */
 svg {
 	width: 2.25em;
 }
@@ -124,9 +125,13 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-/* potrebbe essere applicato a img in generale */
-.card img,
-#aside-image img {
+img:not(.tmdb-logo) {
+	border-radius: var(--border-radius);
+}
+
+a:hover,
+a:focus {
+	outline: 2px solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 }
 
@@ -432,6 +437,10 @@ INDEX
 	margin-top: 2.5em;
 }
 
+.container > .text {
+	flex: 1 0;
+}
+
 .product-image {
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -515,11 +524,10 @@ LINK BUTTONS
 	align-items: center;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
-	border: 2px solid var(--bgcolor-off);
+	border: 1px solid var(--bgcolor-off);
 	padding: .5em;
-	max-width: 30em;
-	height: 4em;
-	margin: .5em auto;
+	min-height: 3em;
+	margin-top: 0.5em;
 }
 
 .link-button span {
@@ -572,11 +580,12 @@ SEARCH PAGE
 }
 
 .results-navigation .res-prev { grid-area: 1 / 1; }
+.results-navigation .res-next { grid-area: 1 / 3; }
+
 .results-navigation .resultMessage {
 	grid-area: 1 / 2;
 	text-align: center;
 }
-.results-navigation .res-next { grid-area: 1 / 3; }
 
 /*
 ==============
