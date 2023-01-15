@@ -41,11 +41,13 @@ $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 $tmp = Tools::getSection($page, "crew_sample");
 $crew_sample = Tools::getSection($page, "persone_presenti");
 Tools::replaceAnchor($crew_sample, "persona_presente", $tmp, true);
-Tools::replaceAnchor($tmp, "crew_name_label_id", "");
-Tools::replaceAnchor($tmp, "crew_name_input_id", "");
+Tools::replaceAnchor($tmp, "crew_person_label_id", "");
+Tools::replaceAnchor($tmp, "crew_person_input_id", "");
+Tools::replaceAnchor($tmp, "crew_person_input_name", "");
 Tools::replaceAnchor($tmp, "value", "");
 Tools::replaceAnchor($tmp, "crew_role_label_id", "");
 Tools::replaceAnchor($tmp, "crew_role_select_id", "");
+Tools::replaceAnchor($tmp, "crew_role_select_name", "");
 Tools::replaceSection($page, "crew_sample", $tmp);
 
 Tools::toHtml($persone, 1);
@@ -61,6 +63,7 @@ Tools::replaceSection($page, "persona", $res);
 
 Tools::toHtml($ruoli, 1);
 $tmp = Tools::getSection($page, "ruolo");
+$ruolo_sample = $tmp;
 $res = "";
 foreach ($ruoli as $r) {
 	$t = $tmp;
@@ -74,8 +77,9 @@ Tools::replaceSection($page, "ruolo", $res);
 $tmp = Tools::getSection($page, "nation_sample");
 $nation_sample = Tools::getSection($page, "paesi_presenti");
 Tools::replaceAnchor($nation_sample, "paese_presente", $tmp, true);
-Tools::replaceAnchor($tmp, "paese_label_id", "");
-Tools::replaceAnchor($tmp, "paese_input_id", "");
+Tools::replaceAnchor($tmp, "nation_label_id", "");
+Tools::replaceAnchor($tmp, "nation_input_id", "");
+Tools::replaceAnchor($tmp, "nation_input_name", "");
 Tools::replaceAnchor($tmp, "value", "");
 Tools::replaceSection($page, "nation_sample", $tmp);
 
@@ -108,15 +112,16 @@ if ($id != "") {
 	$res = "";
 	for ($i = 0; $i < count($crew); $i++) {
 		$t = $crew_sample;
-		Tools::replaceAnchor($t, "crew_name_label_id", $i);
-		Tools::replaceAnchor($t, "crew_name_input_id", $i);
+		Tools::replaceAnchor($t, "crew_person_label_id", $i);
+		Tools::replaceAnchor($t, "crew_person_input_id", $i);
+		Tools::replaceAnchor($t, "crew_person_input_name", "crew-person[]");
 		Tools::replaceAnchor($t, "value", $crew[$i]["p_id"]);
 		Tools::replaceAnchor($t, "crew_role_label_id", $i);
 		Tools::replaceAnchor($t, "crew_role_select_id", $i);
-		$ruolo = Tools::getSection($page, "ruolo");
+		Tools::replaceAnchor($t, "crew_role_select_name", "crew-role[]");
 		$tmp = "";
 		foreach ($ruoli as $r) {
-			$k = $ruolo;
+			$k = $ruolo_sample;
 			Tools::replaceAnchor($k, "id", $r["id"]);
 			Tools::replaceAnchor($k, "nome", $r["nome"]);
 			Tools::replaceAnchor($k, "sel", ($crew[$i]["r_id"] == $r["id"] ? "selected" : ""));
@@ -130,8 +135,9 @@ if ($id != "") {
 	$res = "";
 	for ($i = 0; $i < count($film_paesi); $i++) {
 		$t = $nation_sample;
-		Tools::replaceAnchor($t, "paese_label_id", $i);
-		Tools::replaceAnchor($t, "paese_input_id", $i);
+		Tools::replaceAnchor($t, "nation_label_id", $i);
+		Tools::replaceAnchor($t, "nation_input_id", $i);
+		Tools::replaceAnchor($t, "nation_input_name", "nation[]");
 		Tools::replaceAnchor($t, "value", $film_paesi[$i]["id"]);
 		$res .= $t;
 	}

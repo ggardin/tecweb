@@ -160,22 +160,26 @@ function addNewCrewMember(element) {
 
 	// Duplicato
 	var clone = original.cloneNode(true);
-	var nameLabel = clone.getElementsByTagName('label')[0];
-	var nameInput = clone.getElementsByTagName('input')[0];
+	var personLabel = clone.getElementsByTagName('label')[0];
+	var personInput = clone.getElementsByTagName('input')[0];
 	var roleLabel = clone.getElementsByTagName('label')[1];
-	var roleInput = clone.getElementsByTagName('input')[1];
+	var roleSelect = clone.getElementsByTagName('select')[0];
 
 	// Aggiorna id
 	clone.removeAttribute('id');
-	nameInput.id = 'crew-name' + clicksOnAddButtonCrew;
-	roleInput.id = 'crew-role' + clicksOnAddButtonCrew;
+	personInput.id = 'crew-person' + clicksOnAddButtonCrew;
+	roleSelect.id = 'crew-role' + clicksOnAddButtonCrew;
 
 	// Aggiunge classe crew
 	clone.classList.add('crew-member');
 
 	// Aggiorna for
-	nameLabel.setAttribute('for', 'crew-name' + clicksOnAddButtonCrew);
+	personLabel.setAttribute('for', 'crew-person' + clicksOnAddButtonCrew);
 	roleLabel.setAttribute('for', 'crew-role' + clicksOnAddButtonCrew);
+
+	// Imposta name per PHP
+	personInput.setAttribute('name', 'crew-person[]');
+	roleSelect.setAttribute('name', 'crew-role[]');
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
@@ -251,6 +255,9 @@ function addNewNation(element) {
 
 	// Aggiorna for
 	label.setAttribute('for', 'nation-name' + clicksOnAddButtonNation);
+
+	// Imposta name per PHP
+	input.setAttribute('name', 'nation[]');
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
