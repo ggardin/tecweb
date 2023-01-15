@@ -34,7 +34,8 @@
 				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();">@@descrizione@@</textarea>
+				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />

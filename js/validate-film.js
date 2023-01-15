@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateMovieTitle() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
+		if ( !(validateMovieTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
 			event.preventDefault();
 		}
 	});
@@ -34,6 +34,26 @@ function validateMovieTitle() {
 	removeErrorMessage(id);
 	return true;
 }
+
+/*
+ * Valida la descrizione del film
+ */
+function validateMovieDescription() {
+	var id = 'descrizione';
+	var description = document.forms['gestione'][id].value;
+
+	if (description != null || description != '') {
+		const descriptionRegex = /^[^<>{}]*$/;
+		if (! descriptionRegex.test(description)) {
+			showErrorMessage(id, 'La descrizione inserita contiene caratteri non ammessi.');
+			return false;
+		}
+	}
+
+	removeErrorMessage(id);
+	return true;
+}
+
 
 /*
  * Verifica che:
