@@ -30,6 +30,17 @@ if ($id != "" && empty($persona)) {
 
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
+$option = Tools::getSection($page, "gender");
+$res = "";
+foreach ($gender as $g) {
+	$t = $option;
+	Tools::replaceAnchor($t, "gender_id", $g["id"]);
+	Tools::replaceAnchor($t, "gender_nome", $g["nome"]);
+	Tools::replaceAnchor($t, "sel", ((($id != "" && $g["id"] == $persona["gender"]) ? "selected" : "")));
+	$res .= $t;
+}
+Tools::replaceSection($page, "gender", $res);
+
 if ($id != "") {
 	$persona = $persona[0];
 	$title = $persona["nome"] . " • Modifica persona"; Tools::toHtml($title, 1);
@@ -57,17 +68,6 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 	Tools::replaceSection($page, "delete", "");
 }
-
-$option = Tools::getSection($page, "gender");
-$res = "";
-foreach ($gender as $g) {
-	$t = $option;
-	Tools::replaceAnchor($t, "gender_id", $g["id"]);
-	Tools::replaceAnchor($t, "gender_nome", $g["nome"]);
-	Tools::replaceAnchor($t, "sel", ((($id != "" && $g["id"] == $persona["gender"]) ? "selected" : "")));
-	$res .= $t;
-}
-Tools::replaceSection($page, "gender", $res);
 
 Tools::showPage($page);
 
