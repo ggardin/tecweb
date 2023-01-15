@@ -35,6 +35,26 @@ function validateListTitle() {
 	return true;
 }
 
+/*
+ * Valida la descrizione della lista o collezione
+ */
+function validateListDescription() {
+	var id = 'descrizione';
+	var description = document.forms['gestione'][id].value;
+
+	if (description != null || description != '') {
+		const descriptionRegex = /^[^<>{}]*$/;
+		if (! descriptionRegex.test(description)) {
+			showErrorMessage(id, 'La descrizione inserita contiene caratteri non ammessi.');
+			return false;
+		}
+	}
+
+	removeErrorMessage(id);
+	return true;
+}
+
+
 window.addEventListener('load', function () {
 	validateList();
 });
