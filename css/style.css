@@ -402,9 +402,6 @@ SEARCH FILTER
 	margin-bottom: .5em;
 }
 
-.resultMessage {
-	margin-top: .5em;
-}
 
 /*
 ==============
@@ -459,10 +456,6 @@ html.dark .product-image.movie-bg {
 }
 html.dark .product-image.director-bg {
 	background-image: url("../img/product/dark_regista.webp");
-}
-
-.container > .text {
-	flex: 1 0;
 }
 
 /*
