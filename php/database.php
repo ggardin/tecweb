@@ -72,16 +72,16 @@ class Database {
 	}
 
 	private function preparedUpdates(&$query, &$params, $types = "") : bool {
-		// try {
+		try {
 			$stmt = $this->preparedQuery($query, $params, $types);
 			$a_r = $stmt->affected_rows;
 			$stmt->close();
-		// } catch (mysqli_sql_exception $e) {
-		// 	if ($e->getCode() == 1062)
-		// 		return false;
-		// 	else
-		// 		throw new Exception(self::ERR);
-		// }
+		} catch (mysqli_sql_exception $e) {
+			if ($e->getCode() == 1062)
+				return false;
+			else
+				throw new Exception(self::ERR);
+		}
 		return $a_r > 0;
 	}
 
@@ -652,7 +652,7 @@ class Database {
 				set";
 			$values = "";
 		} else {
-			$insert = "insert into collezione(";
+			$query = "insert into collezione(";
 			$values = "values (";
 		}
 
@@ -737,7 +737,7 @@ class Database {
 				set";
 			$values = "";
 		} else {
-			$insert = "insert into utente(";
+			$query = "insert into utente(";
 			$values = "values (";
 		}
 
