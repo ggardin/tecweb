@@ -82,7 +82,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 html {
-	scroll-padding-top: var(--header-height); /* fixes anchor links behind sticky header */
+	scroll-padding-top: var(--header-height); /* fix anchor links behind sticky header */
 	height: 100%;
 }
 
@@ -198,7 +198,7 @@ BREADCRUMB
 ==============
 */
 
-#breadcrumb{
+#breadcrumb {
 	background-color: var(--secondaryColor);
 	font-size: 0.9em;
 	padding: 0.5em var(--content-padding);
@@ -221,7 +221,7 @@ FOOTER
 	margin-top: 1.5em;
 }
 
-#footer-logo{
+#footer-logo {
 	margin-right: 3.5em;
 	width: 7em;
 }
@@ -261,7 +261,7 @@ FOOTER
 	font-size: 0.8em;
 }
 
-#attribution{
+#attribution {
 	font-size: .8em;
 	margin-top: 1.5em;
 }
