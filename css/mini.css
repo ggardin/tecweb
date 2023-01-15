@@ -78,7 +78,7 @@ CARDS
 ==============
 */
 
-.cards.double {
+.cards {
 	grid-template-columns: 1fr;
 }
 
