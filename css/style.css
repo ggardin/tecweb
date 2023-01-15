@@ -30,7 +30,7 @@ CSS VARIABLES
 	--content-padding: 1em; /*1rem*/
 	--border-radius: 8px;
 	--auth-form-width: 35em;
-	--header-height: 3.5em;
+	--header-height: 4em;
 }
 
 :root.dark {
@@ -188,7 +188,6 @@ HEADER
 }
 
 #page-header li {
-	border-bottom: 0.2em solid transparent;
 	margin: 0 0.5em;
 }
 
@@ -207,18 +206,10 @@ HEADER
 	padding: 0.5em;
 }
 
-#page-header li:hover:not(:has(> .active)) {
-	border-color: var(--txtcolor);
-}
-
 #page-header .actions {
 	display: flex;
 	align-content: center;
 	gap: 0.5em;
-}
-
-#page-header button {
-	width: auto;
 }
 
 #logo path,
