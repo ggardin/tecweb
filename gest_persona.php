@@ -13,9 +13,8 @@ $id = isset($_GET["id"]) ? $_GET["id"] : "";
 try {
 	$connessione = new Database();
 	$gender = $connessione->getGenders();
-	if ($id != "") {
+	if ($id != "")
 		$persona = $connessione->getPersonaById($id);
-	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -58,6 +57,7 @@ if ($id != "") {
 	Tools::replaceSection($page, "delete", "");
 }
 
+Tools::toHtml($gender, 1);
 $option = Tools::getSection($page, "gender");
 $res = "";
 foreach ($gender as $g) {

@@ -59,6 +59,7 @@ foreach ($persone as $p) {
 }
 Tools::replaceSection($page, "persona", $res);
 
+Tools::toHtml($ruoli, 1);
 $tmp = Tools::getSection($page, "ruolo");
 $res = "";
 foreach ($ruoli as $r) {
@@ -78,6 +79,7 @@ Tools::replaceAnchor($tmp, "paese_input_id", "");
 Tools::replaceAnchor($tmp, "value", "");
 Tools::replaceSection($page, "nation_sample", $tmp);
 
+Tools::toHtml($paesi, 1);
 $tmp = Tools::getSection($page, "paese");
 $res = "";
 foreach ($paesi as $p) {
@@ -159,6 +161,7 @@ if ($id != "") {
 	Tools::replaceSection($page, "delete", "");
 }
 
+Tools::toHtml($stati, 1);
 $option = Tools::getSection($page, "stato");
 $res = "";
 foreach ($stati as $s) {
@@ -187,6 +190,7 @@ if ($id != "") {
 	foreach ($film_generi as $t)
 		array_push($fg, $t["id"]);
 }
+Tools::toHtml($generi, 1);
 $option = Tools::getSection($page, "genere");
 $res = "";
 foreach ($generi as $g) {

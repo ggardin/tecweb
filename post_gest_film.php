@@ -59,9 +59,10 @@ try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit = "modifica") {
 		$res = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
+		if($submit == "aggiungi") $id = $res[1];
 		if (!empty($crew_persona))
 			$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
-		if (!empty($crew_persona))
+		if (!empty($genere))
 			$connessione->setFilmGeneri($id, $genere);
 		if (!empty($paese))
 			$connessione->setFilmPaesi($id, $paese);
