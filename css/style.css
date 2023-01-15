@@ -477,7 +477,7 @@ CARDS
 	justify-content: center;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 0.8em;
+	gap: 1.5em;
 }
 
 .cards.double {
@@ -496,21 +496,23 @@ CARDS
 	width: 100%;
 }
 
-.card > a img {
+.card img {
 	height: 11em;
 }
 
-.card > a .details {
-	padding: 0.5em;
+.card .details {
+	padding: 1em 0.5em;
+	margin-left: 0.5em;
 }
 
-.card > a .details > .title {
+.card .details > .title {
 	text-decoration: underline;
 	font-size: 1.2em;
 }
 
-.card > a .details > *:not(.title) {
+.card .details > *:not(.title) {
 	color: var(--txtcolor);
+	margin-top: 0.5em;
 }
 
 /*
@@ -574,7 +576,7 @@ SEARCH PAGE
 	gap: 0.5em;
 	align-items: center;
 	max-width: var(--search-form-width);
-	margin: 0 auto 1em auto;
+	margin: 1em auto;
 }
 
 .results-navigation .res-prev { grid-area: 1 / 1; }
@@ -773,7 +775,6 @@ AUTH
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	text-align: center;
-	padding: var(--content-padding);
 }
 
 #auth_message {
