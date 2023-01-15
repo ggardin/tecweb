@@ -124,6 +124,7 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
+/* potrebbe essere applicato a img in generale */
 .card img,
 #aside-image img {
 	border-radius: var(--border-radius);
@@ -131,15 +132,31 @@ a:visited {
 
 /*
 ==============
-ACTIVE PAGE
+SR/KB USERS
 ==============
 */
 
-.active {
-	background-color: var(--bgcolor-off);
-	pointer-events: none;
-	padding: .5em;
-	border-radius: var(--border-radius);
+.sr-only,
+.skip-to-content {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+.skip-to-content:focus {
+	color: var(--bgcolor);
+	background-color: var(--tertiaryColor);
+	z-index: 999;
+	width: auto;
+	height: auto;
+	clip: auto;
+	padding: 0.5em;
 }
 
 /*
@@ -203,6 +220,13 @@ HEADER
 #logo path,
 #accountButton path {
 	fill: var(--txtcolor);
+}
+
+.active {
+	background-color: var(--bgcolor-off);
+	pointer-events: none;
+	padding: .5em;
+	border-radius: var(--border-radius);
 }
 
 /*
@@ -295,32 +319,11 @@ TMDB ATTRIBUTION
 	margin-top: 0.4em;
 }
 
-/* Screen reader/KB users */
-
-.sr-only,
-.skip-to-content {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border-width: 0;
-}
-
-.skip-to-content:focus {
-	color: var(--bgcolor);
-	background-color: var(--tertiaryColor);
-	z-index: 999;
-	width: auto;
-	height: auto;
-	clip: auto;
-	padding: 0.5em;
-}
-
-/* Theme toggle */
+/*
+==============
+THEME TOGGLE
+==============
+*/
 
 #themeToggle {
 	padding: 0;
@@ -735,9 +738,9 @@ input, textarea, select {
 	color: var(--txtcolor);
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
 	color: var(--interactions-text-placeholder-color);
-	opacity: 1; /* Firefox */
+	opacity: 1;
 }
 
 textarea {
