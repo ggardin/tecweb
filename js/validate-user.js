@@ -54,16 +54,20 @@ function validatePassword() {
 	var id = 'new_password';
 	var password  = document.forms['gestione']['new_password'].value;
 
-	// Requisito di lunghezza minima
-	if (password.length < 8) {
-		showErrorMessage(id, 'La password deve essere lunga almeno 8 caratteri.');
-		return false;
-	}
+	if (password != null && password != '') {
 
-	// Requisito di simboli
-	if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-		showErrorMessage(id, 'La password deve contenere almeno una lettera e un numero.');
-		return false;
+		// Requisito di lunghezza minima
+		if (password.length < 8) {
+
+			showErrorMessage(id, 'La password deve essere lunga almeno 8 caratteri.');
+			return false;
+		}
+
+		// Requisito di simboli
+		if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
+			showErrorMessage(id, 'La password deve contenere almeno una lettera e un numero.');
+			return false;
+		}
 	}
 
 	removeErrorMessage(id);
@@ -78,9 +82,11 @@ function validatePasswordConfirm() {
 	var first_password  = document.forms['gestione']['new_password'].value;
 	var second_password = document.forms['gestione']['new_password_confirm'].value;
 
-	if ((second_password != null || second_password != '') && first_password != second_password) {
-		showErrorMessage(id, 'Le password non corrispondono.');
-		return false;
+	if ((first_password != null || first_password != '') && (second_password != null || second_password != '')) {
+		if ((second_password != null || second_password != '') && first_password != second_password) {
+			showErrorMessage(id, 'Le password non corrispondono.');
+			return false;
+		}
 	}
 
 	removeErrorMessage(id);
