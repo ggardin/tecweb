@@ -38,7 +38,7 @@ if ($nome == "") {
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi" || $submit = "modifica")
+	if ($submit == "aggiungi" || $submit == "modifica")
 		$res = $connessione->updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte);
 	elseif ($submit == "elimina")
 		$res = $connessione->deletePersona($id);
@@ -60,7 +60,7 @@ if ($res) {
 		header("location: cerca_persona.php");
 } else {
 	header("location: gest_persona.php?id" . $id);
-	$_SESSION["error"] = "qualcosa è andato storto";
+	$_SESSION["message"] = "qualcosa è andato storto";
 }
 
 ?>

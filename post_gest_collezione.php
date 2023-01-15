@@ -37,7 +37,7 @@ if ($titolo == "") {
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi" || $submit = "modifica")
+	if ($submit == "aggiungi" || $submit == "modifica")
 		$res = $connessione->updateCollezione($id, $titolo, $descrizione, $locandina);
 	elseif ($submit == "elimina")
 		$res = $connessione->deleteCollezione($id);
@@ -59,7 +59,7 @@ if ($res) {
 		header("location: cerca_collezione.php");
 } else {
 	header("location: gest_collezione.php?id" . $id);
-	$_SESSION["error"] = "qualcosa è andato storto";
+	$_SESSION["message"] = "qualcosa è andato storto";
 }
 
 ?>

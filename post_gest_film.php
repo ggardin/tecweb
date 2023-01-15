@@ -36,10 +36,9 @@ if (isset($_FILES["locandina"])) {
 
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi" || $submit = "modifica") {
+	if ($submit == "aggiungi" || $submit == "modifica") {
 		$res = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
 		if($submit == "aggiungi") $id = $res[1];
 		$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
@@ -66,7 +65,7 @@ if ($res) {
 		header("location: cerca_film.php");
 } else {
 	header("location: gest_film.php?id=" . $id);
-	$_SESSION["error"] = "qualcosa è andato storto";
+	$_SESSION["message"] = "qualcosa è andato storto";
 }
 
 ?>
