@@ -29,8 +29,9 @@
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni principali</legend>
-				<label for="titolo">Titolo</label>
-				<input id="titolo" name="titolo" value="@@nome@@" required />
+				<label for="titolo">Titolo<span class="required">(richiesto)</span></label>
+				<input id="titolo" name="titolo" value="@@nome@@" oninput="validateMovieTitle();" onblur="validateMovieTitle();" required />
+				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
 				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
@@ -127,7 +128,7 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="titolo_originale">Titolo originale</label>
-				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" required />
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" />
 
 				<label for="stato">Stato</label>
 				<select id="stato" name="stato" class="form-control">
