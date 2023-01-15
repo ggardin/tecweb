@@ -34,12 +34,17 @@ function validateNewReviewText() {
 	var element = document.forms['add-review']['review-text'];
 	const maxLength = element.getAttribute("maxlength");
 	const currentLength = element.value.length;
+	const reviewRegex = /^[^<>{}]*$/;
 
-	if ( currentLength < 2 ) {
+	if (! reviewRegex.test(element.value)) {
+		showErrorMessage(id, 'La recensione inserita contiene caratteri non ammessi.');
+		return false;
+	}
+	else if ( currentLength < 2 ) {
 		showErrorMessage(id, 'La recensione è troppo breve');
 		return false;
 	}
-	else if ( currentLength > 1000 ) {
+	else if ( currentLength > maxLength ) {
 		showErrorMessage(id, 'La recensione è troppo lunga');
 		return false;
 	}
