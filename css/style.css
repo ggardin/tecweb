@@ -30,7 +30,7 @@ CSS VARIABLES
 	--content-padding: 1em;
 	--border-radius: 8px;
 	--auth-form-width: 35em;
-	--header-height: 4em;
+	--header-height: 3.5em;
 }
 
 :root.dark {
