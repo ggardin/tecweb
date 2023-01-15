@@ -5,57 +5,38 @@ require_once("php/database.php");
 
 // TODO: controlli admin
 
-$user = isset($_SESSION["id"]) ? $_SESSION["id"] : ""; echo "user:" . ($user) . "\n";
-$id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : ""; echo "id:" . ($id) . "\n";
-$titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : ""; echo "titolo:" . ($titolo) . "\n";
-$descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : ""; echo "descrizione:" . ($descrizione) . "\n";
-$data = isset($_POST["data"]) ? $_POST["data"] : ""; echo "data:" . ($data) . "\n";
-$durata = isset($_POST["durata"]) ? $_POST["durata"] : ""; echo "durata:" . ($durata) . "\n";
-$crew_persona = isset($_POST["crew-person"]) ? $_POST["crew-person"] : ""; echo ("crew-person:"); print_r ($crew_persona ) ;echo ("\n");
-$crew_ruolo = isset($_POST["crew-role"]) ? $_POST["crew-role"] : ""; echo ("crew-role:"); print_r ($crew_ruolo ) ;echo ("\n");
-$genere = isset($_POST["genere"]) ? $_POST["genere"] : ""; echo ("genere:"); print_r ($genere ) ;echo ("\n");
-$paese = isset($_POST["nation"]) ? $_POST["nation"] : ""; echo ("nation:"); print_r ($paese ) ;echo ("\n");
-$titolo_originale = isset($_POST["titolo_originale"]) ? $_POST["titolo_originale"] : ""; echo "titolo_originale:" . ($titolo_originale) . "\n";
-$stato = isset($_POST["stato"]) ? $_POST["stato"] : ""; echo "stato:" . ($stato) . "\n";
-$budget = isset($_POST["budget"]) ? $_POST["budget"] : ""; echo "budget:" . ($budget) . "\n";
-$incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : ""; echo "incassi:" . ($incassi) . "\n";
-$collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : ""; echo "collezione:" . ($collezione) . "\n";
+$user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
+$titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
+$descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
+$data_rilascio = isset($_POST["data"]) ? $_POST["data"] : "";
+$durata = isset($_POST["durata"]) ? $_POST["durata"] : "";
+$crew_persona = isset($_POST["crew-person"]) ? $_POST["crew-person"] : "";
+$crew_ruolo = isset($_POST["crew-role"]) ? $_POST["crew-role"] : "";
+$genere = isset($_POST["genere"]) ? $_POST["genere"] : "";
+$paese = isset($_POST["nation"]) ? $_POST["nation"] : "";
+$titolo_originale = isset($_POST["titolo_originale"]) ? $_POST["titolo_originale"] : "";
+$stato = isset($_POST["stato"]) ? $_POST["stato"] : "";
+$budget = isset($_POST["budget"]) ? $_POST["budget"] : "";
+$incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : "";
+$collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : "";
 
-// print_r($genere);
+if (isset($_FILES["locandina"])) {
+	$img = Tools::uploadImg($_FILES['locandina']);
+	if ($img[0])
+		$locandina = $img[1];
+	else
+		$locandina = "";
+} else {
+	$locandina = "";
+}
 
-// for i < crew-count
-// 	crew-name$i
-// 	crew-role$i
+$submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-// for i < nations-count
-// 	nation-name$i
-
-
-// $crew_count = isset($_POST["crew-count"]) ? $_POST["crew-count"] : ""; echo "crew_count:" . ($crew_count) . "\n";
-// $nations_count = isset($_POST["nations-count"]) ? $_POST["nations-count"] : ""; echo "nations_count:" . ($nations_count) . "\n";
-// for ($i = 0; $i < $crew_count; $i++) {
-// 	echo ("crew persona $i: " . $_POST["crew-name$i"] . "\n");
-// 	echo ("crew ruolo $i: " . $_POST["crew-role$i"] . "\n");
-// }
-
-// for ($i = 0; $i < $nations_count; $i++) {
-// 	echo ("nazione $i: " . $_POST["nation-name$i"] . "\n");
-// }
-
-
-$submit = isset($_POST["submit"]) ? $_POST["submit"] : ""; echo( "submit:" . $submit);
-
-// echo ($submit);
-
-// if (isset($_FILES["locandina"])) {
-// 	$img = Tools::uploadImg($_FILES['locandina']);
-// 	if ($img[0])
-// 		$locandina = $img[1];
-// 	else
-// 		$locandina = "";
-// } else {
-// 	$locandina = "";
-// }
+// necessario per name usato da elemento hidden
+array_shift($crew_persona);
+array_shift($crew_ruolo);
+array_shift($paese);
 
 // if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
 // 	header("location: index.php");
@@ -67,20 +48,27 @@ $submit = isset($_POST["submit"]) ? $_POST["submit"] : ""; echo( "submit:" . $su
 // 	exit();
 // }
 
-// try {
-// 	$connessione = new Database();
-// 	if ($submit == "aggiungi" || $submit = "modifica")
-// 		$res = $connessione->updateCollezione($id, $titolo, $descrizione, $locandina);
-// 	elseif ($submit == "elimina")
-// 		$res = $connessione->deleteCollezione($id);
-// 	else
-// 		$res = false;
-// 	unset($connessione);
-// } catch (Exception) {
-// 	unset($connessione);
-// 	Tools::errCode(500);
-// 	exit();
-// }
+
+try {
+	$connessione = new Database();
+	if ($submit == "aggiungi" || $submit = "modifica") {
+		$res0 = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
+		$res1 = $connessione->setFilmGeneri($id, $genere);
+		$res2 = $connessione->setFilmPaesi($id, $paese);
+		$res3 = $connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
+	}
+	elseif ($submit == "elimina")
+		$res = $connessione->deleteFilm($id);
+	else
+		$res = false;
+	unset($connessione);
+} catch (Exception) {
+	unset($connessione);
+	Tools::errCode(500);
+	exit();
+}
+
+header("location: gest_film.php?id=" . $id);
 
 // if ($res) {
 // 	if ($submit == "modifica")
