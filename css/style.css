@@ -988,7 +988,8 @@ form .required {
 	color: var(--form-required-field);
 }
 
-form input.invalid {
+form input.invalid,
+form textarea.invalid {
 	outline: 0.15rem solid var(--form-invalid);
 }
 
