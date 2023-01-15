@@ -125,21 +125,12 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getGenderById($id) : array {
-		$query = "select *
-			from gender
-			where id = ?";
-
-		$params = [$id];
-		$types = "i";
-
-		return $this->preparedSelect($query, $params, $types);
-	}
-
 	public function getPersonaById($id) : array {
-		$query = "select *
-			from persona
-			where id = ?";
+		$query = "select p.id, p.nome, p.gender, p.immagine, p.data_nascita, p.data_morte, g.nome as gender_nome
+			from persona as p
+				join gender as g
+					on p.gender = g.id
+			where p.id = ?";
 
 		$params = [$id];
 		$types = "i";
