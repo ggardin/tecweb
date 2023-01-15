@@ -529,11 +529,8 @@ LINK BUTTONS
 	margin: .5em auto;
 }
 
-.link-button p {
-	font-size: 1.2em;
-	padding-left: .5em;
-	margin: auto 0;
-	text-align: left;
+.link-button span {
+	margin-left: .5em;
 }
 
 .link-button svg {
