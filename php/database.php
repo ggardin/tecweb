@@ -740,11 +740,11 @@ class Database {
 			[$mail, "mail", "s"],
 			[$nome, "nome", "s"],
 			[$gender, "gender", "i"],
-			[$data_nascita, "data_nascita", "s"],
-			[$password, "password", "s"]
+			[$data_nascita, "data_nascita", "s"]
+			// [$password, "password", "s", false]
 			];
 
-		$this->optionalArgs($query, $values, $params, $types, $args);
+		$this->updateArgs($query, $values, $params, $types, $args);
 
 		if ($id != "") {
 			$query .= " where id = ?";
