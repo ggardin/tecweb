@@ -19,16 +19,21 @@
 
 	<main id="content">
 		<h1>Dati personali</h1>
-		<form id="update-user-data">
+
+		<!-- message_start -->
+		<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">@@message@@</p>
+		<!-- message_end -->
+
+		<form id="gestione" method="post" action="post_dati.php">
 			<fieldset>
 				<legend>Informazioni di base</legend>
 
 				<label for="username"><span lang="en">Username</span><span class="required">(richiesto)</span></label>
-				<input type="text" id="username" name="username" value="@@form_username@@" required onblur="validateUserUsername();" aria-describedby="username-hint"/>
+				<input type="text" id="username" name="username" value="@@username@@" required onblur="validateUserUsername();" aria-describedby="username-hint"/>
 				<span id="username-hint">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</span>
 
 				<label for="email"><span lang="en">Email</span></label>
-				<input type="text" id="email" name="email" value="@@form_email@@" onblur="validateUserEmail();" />
+				<input type="text" id="email" name="email" value="@@email@@" onblur="validateUserEmail();" />
 				<p id="email-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
@@ -43,7 +48,7 @@
 				<p id="new_password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="new_password_confirm">Conferma la nuova <span lang="en">password</span><span class="required">(richiesto)</span></label>
-				<input type="password" id="new_password_confirm" name="new_password_confirm" value="@@new_password@@" onblur="validatePasswordConfirm();" required />
+				<input type="password" id="new_password_confirm" name="new_password_confirm" value="@@new_password_confirm@@" onblur="validatePasswordConfirm();" required />
 				<p id="new_password_confirm-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 			</fieldset>
@@ -51,19 +56,18 @@
 				<legend>Ulteriori informazioni su di te</legend>
 
 				<label for="nome">Nome</label>
-				<input type="text" id="nome" name="nome" value="@@form_nome@@" onblur="validateUserName();" />
+				<input type="text" id="nome" name="nome" value="@@nome@@" onblur="validateUserName();" />
 				<p id="nome-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data">Data di nascita</label>
-				<input type="date" id="data" name="data" value="@@form_data@@" min="1900-01-01" max="2099-12-31" pattern="\d{2}/\d{2}/\d{4}" onblur="validateUserBirthday();" />
+				<input type="date" id="data" name="data" value="@@data_nascita@@" min="1900-01-01" max="2099-12-31" pattern="\d{2}/\d{2}/\d{4}" onblur="validateUserBirthday();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="gender"><span lang="en">Gender</span></label>
 				<select id="gender" name="gender">
-					<option value="0">NS</option>
-					<option value="1">M</option>
-					<option value="2">F</option>
-					<option value="3">NB</option>
+					<!-- gender_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- gender_end -->
 				</select>
 
 				<button type="submit" name="submit">Salva</button>
