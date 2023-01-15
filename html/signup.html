@@ -26,16 +26,16 @@
 
 			<fieldset>
 				<label for="username">Nome utente<span class="required">(richiesto)</span></label>
-				<input type="text" id="username" name="username" required aria-describedby="username-hint" value="@@username@@" onblur="validateNewUsername();" />
+				<input type="text" id="username" name="username" required aria-describedby="username-hint" onblur="validateNewUsername();" />
 				<p id="username-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</p>
 
 				<label for="password"><span lang="en">Password</span><span class="required">(richiesto)</span></label>
 				<input type="password" id="password" name="password" onblur="validatePassword();" required />
-				<p id="password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals" value="@@password"></p>
+				<p id="password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="password_confirm">Conferma <span lang="en">Password</span><span class="required">(richiesto)</span></label>
 				<input type="password" id="password_confirm" name="password_confirm" onblur="validatePasswordConfirm();" required />
-				<p id="password_confirm-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals" value="@@password_confirm"></p>
+				<p id="password_confirm-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<button type="submit" name="submit">Registrati</button>
 			</fieldset>
