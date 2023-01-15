@@ -699,14 +699,6 @@ REVIEWS
 	margin-bottom: 1em;
 }
 
-#add-review fieldset > * {
-	margin-top: 0.5em;
-}
-
-#add-review textarea {
-	min-height: 7em;
-}
-
 #add-review .rating-range {
 	display: flex;
 }
@@ -716,50 +708,6 @@ REVIEWS
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-
-/*
-==============
-INPUT FIELD
-==============
-*/
-
-fieldset, input, textarea, button, select {
-	border-radius: var(--border-radius);
-	border: 1px solid var(--bgcolor-off);
-}
-
-input, textarea, button, select {
-	width: 100%;
-	padding: 0.5em;
-}
-
-input, textarea, select {
-	background-color: var(--interactions-color);
-	color: var(--txtcolor);
-}
-
-::placeholder {
-	color: var(--interactions-text-placeholder-color);
-	opacity: 1;
-}
-
-textarea {
-	min-height: 5em;
-	resize: vertical;
-}
-
-button[type=submit] {
-	color: var(--bgcolor);
-	background-color: var(--tertiaryColor);
-	cursor: pointer;
-	border: transparent;
-	font-weight: 600;
-	font-size: 1.2em;
-}
-
-#addListButton {
-	margin-top: 0.5em;
 }
 
 /*
@@ -935,15 +883,6 @@ GESTIONE
 	height: 15em;
 }
 
-#gestione legend {
-	font-size: 1.8em;
-	font-weight: 600;
-}
-
-#gestione label {
-	font-weight: 600;
-}
-
 #gestione #delete {
 	background-color: red;
 }
@@ -1028,7 +967,8 @@ form input.invalid {
 	}
 }
 
-.crew-member {
+.crew-member,
+.nation {
 	display: block;
 	margin-top: 1em;
 	border-top: 1px solid var(--bgcolor-off);
@@ -1061,4 +1001,62 @@ form input.invalid {
 }
 .checkbox-pill:has(input:checked) {
 	background-color: var(--bgcolor-off);
+}
+
+fieldset > * {
+	margin-top: 0.25em;
+}
+
+fieldset + fieldset {
+	margin-top: 1.5em;
+}
+
+fieldset > legend {
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	text-align: center;
+}
+
+fieldset > label {
+	font-weight: 600;
+	display: block;
+	margin-top: 1em;
+}
+
+fieldset, input, textarea, button, select {
+	border-radius: var(--border-radius);
+	border: 1px solid var(--bgcolor-off);
+}
+
+input, textarea, button, select {
+	width: 100%;
+	padding: 0.5em;
+}
+
+input, textarea, select {
+	background-color: var(--interactions-color);
+	color: var(--txtcolor);
+}
+
+::placeholder {
+	color: var(--interactions-text-placeholder-color);
+	opacity: 1;
+}
+
+textarea {
+	min-height: 5em;
+	resize: vertical;
+}
+
+button[type=submit] {
+	color: var(--bgcolor);
+	background-color: var(--tertiaryColor);
+	cursor: pointer;
+	border: transparent;
+	font-weight: 600;
+	font-size: 1.2em;
+}
+
+form#add-movie button[type=submit] {
+	margin-top: 0.5em;
 }
