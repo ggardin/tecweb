@@ -197,12 +197,16 @@ HEADER
 	text-decoration: none;
 }
 
+#page-header li a:hover {
+	background-color: var(--bgcolor-alt);
+}
+
 #page-header li .active {
+	display: block;
  	font-weight: 600;
 }
 
-#page-header li a,
-#page-header li:has(> .active) {
+#page-header li a {
 	padding: 0.5em;
 }
 
