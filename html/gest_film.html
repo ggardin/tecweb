@@ -129,7 +129,8 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="titolo_originale">Titolo originale</label>
-				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" />
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" onblur="validateMovieOriginalTitle();" oninput="validateMovieOriginalTitle();"/>
+				<p id="titolo_originale-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="stato">Stato</label>
 				<select id="stato" name="stato" class="form-control">
