@@ -6,7 +6,7 @@ function validateList() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateListTitle()) ) {
+		if ( !(validateListTitle() && validateListDescription()) ) {
 			event.preventDefault();
 		}
 	});
