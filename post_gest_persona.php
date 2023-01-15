@@ -59,7 +59,7 @@ if ($res) {
 	elseif ($submit == "elimina")
 		header("location: cerca_persona.php");
 } else {
-	header("location: gest_persona.php?id=$id");
+	header("location: gest_persona.php?id" . $id);
 	$_SESSION["error"] = "qualcosa è andato storto";
 }
 

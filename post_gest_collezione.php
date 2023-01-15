@@ -58,7 +58,7 @@ if ($res) {
 	elseif ($submit == "elimina")
 		header("location: cerca_collezione.php");
 } else {
-	header("location: gest_collezione.php?id=$id");
+	header("location: gest_collezione.php?id" . $id);
 	$_SESSION["error"] = "qualcosa è andato storto";
 }
 

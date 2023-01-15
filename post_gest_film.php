@@ -41,6 +41,9 @@ array_shift($crew_persona);
 array_shift($crew_ruolo);
 array_shift($paese);
 
+// if (count($crew_persona) != count($crew_ruolo))
+	// err
+
 // if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
 // 	header("location: index.php");
 // 	exit();
@@ -55,10 +58,13 @@ array_shift($paese);
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit = "modifica") {
-		$res0 = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
-		$res1 = $connessione->setFilmGeneri($id, $genere);
-		$res2 = $connessione->setFilmPaesi($id, $paese);
-		$res3 = $connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
+		$res = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
+		if (!empty($crew_persona))
+			$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
+		if (!empty($crew_persona))
+			$connessione->setFilmGeneri($id, $genere);
+		if (!empty($paese))
+			$connessione->setFilmPaesi($id, $paese);
 	}
 	elseif ($submit == "elimina")
 		$res = $connessione->deleteFilm($id);
@@ -71,18 +77,16 @@ try {
 	exit();
 }
 
-header("location: gest_film.php?id=" . $id);
-
-// if ($res) {
-// 	if ($submit == "modifica")
-// 		header("location: gest_collezione.php?id=" . $id);
-// 	elseif ($submit == "aggiungi")
-// 		header("location: gest_collezione.php?id=" . $res[1]);
-// 	elseif ($submit == "elimina")
-// 		header("location: cerca_collezione.php");
-// } else {
-// 	header("location: gest_collezione.php?id=$id");
-// 	$_SESSION["error"] = "qualcosa è andato storto";
-// }
+if ($res) {
+	if ($submit == "modifica")
+		header("location: gest_film.php?id=" . $id);
+	elseif ($submit == "aggiungi")
+		header("location: gest_film.php?id=" . $res[1]);
+	elseif ($submit == "elimina")
+		header("location: cerca_film.php");
+} else {
+	header("location: gest_film.php?id=" . $id);
+	$_SESSION["error"] = "qualcosa è andato storto";
+}
 
 ?>
