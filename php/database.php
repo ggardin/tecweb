@@ -90,7 +90,7 @@ class Database {
 			$stmt = null;
 			for ($i = 0; $i < count($params); $i++)
 				$stmt = $this->preparedQuery($query, $params[$i], $types, $stmt);
-			$stmt->close();
+			if (! is_null($stmt)) $stmt->close();
 		} catch (mysqli_sql_exception $e) {
 			if ($e->getCode() == 1062)
 				return false;
@@ -936,10 +936,12 @@ class Database {
 		$q1 = "insert into crew(film, persona, ruolo)
 			values (?, ?, ?)";
 		$p1 = [];
-		for ($i = 0; $i < count($persone); $i++)
-			array_push($p1, [$film_id, $persone[$i], $ruoli[$i]]);
+		for ($i = 0; $i < count($ruoli); $i++)
+			$persone[$i] != "" && $ruoli[$i] != "" &&
+				array_push($p1, [$film_id, $persone[$i], $ruoli[$i]]);
 		$t1 = "iii";
 		$this->preparedInsertMultiple($q1, $p1, $t1);
+
 		return true;
 	}
 
@@ -954,9 +956,10 @@ class Database {
 			values (?, ?)";
 		$p1 = [];
 		for ($i = 0; $i < count($paesi); $i++)
-			array_push($p1, [$film_id, $paesi[$i]]);
+			$paesi[$i] != "" && array_push($p1, [$film_id, $paesi[$i]]);
 		$t1 = "is";
 		$this->preparedInsertMultiple($q1, $p1, $t1);
+
 		return true;
 	}
 
@@ -971,9 +974,10 @@ class Database {
 			values (?, ?)";
 		$p1 = [];
 		for ($i = 0; $i < count($generi); $i++)
-			array_push($p1, [$film_id, $generi[$i]]);
+			$generi[$i] != "" && array_push($p1, [$film_id, $generi[$i]]);
 		$t1 = "ii";
 		$this->preparedInsertMultiple($q1, $p1, $t1);
+
 		return true;
 	}
 
