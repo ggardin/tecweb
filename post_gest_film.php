@@ -14,10 +14,10 @@ $titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
 $descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
 $data_rilascio = isset($_POST["data"]) ? $_POST["data"] : "";
 $durata = isset($_POST["durata"]) ? $_POST["durata"] : "";
-$crew_persona = isset($_POST["crew-person"]) ? $_POST["crew-person"] : "";
-$crew_ruolo = isset($_POST["crew-role"]) ? $_POST["crew-role"] : "";
-$genere = isset($_POST["genere"]) ? $_POST["genere"] : "";
-$paese = isset($_POST["nation"]) ? $_POST["nation"] : "";
+$crew_persona = isset($_POST["crew-person"]) ? $_POST["crew-person"] : [];
+$crew_ruolo = isset($_POST["crew-role"]) ? $_POST["crew-role"] : [];
+$genere = isset($_POST["genere"]) ? $_POST["genere"] : [];
+$paese = isset($_POST["nation"]) ? $_POST["nation"] : [];
 $titolo_originale = isset($_POST["titolo_originale"]) ? $_POST["titolo_originale"] : "";
 $stato = isset($_POST["stato"]) ? $_POST["stato"] : "";
 $budget = isset($_POST["budget"]) ? $_POST["budget"] : "";
@@ -36,36 +36,15 @@ if (isset($_FILES["locandina"])) {
 
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-// necessario per name usato da elemento hidden
-array_shift($crew_persona);
-array_shift($crew_ruolo);
-array_shift($paese);
-
-// if (count($crew_persona) != count($crew_ruolo))
-	// err
-
-// if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
-// 	header("location: index.php");
-// 	exit();
-// }
-
-// if ($titolo == "") {
-// 	header("location: gest_collezione.php?id=$id");
-// 	exit();
-// }
-
 
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit = "modifica") {
 		$res = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
 		if($submit == "aggiungi") $id = $res[1];
-		if (!empty($crew_persona))
-			$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
-		if (!empty($genere))
-			$connessione->setFilmGeneri($id, $genere);
-		if (!empty($paese))
-			$connessione->setFilmPaesi($id, $paese);
+		$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
+		$connessione->setFilmGeneri($id, $genere);
+		$connessione->setFilmPaesi($id, $paese);
 	}
 	elseif ($submit == "elimina")
 		$res = $connessione->deleteFilm($id);
