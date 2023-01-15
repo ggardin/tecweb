@@ -24,7 +24,7 @@ function validateMovieTitle() {
 		return false;
 	}
 	else {
-		const titleRegex = /^[\w\s\-\:\'\[\]\,\/\u00C0-\u017F]+$/;
+		const titleRegex = /^[\w\s\-\:\'\[\]\,\/\"\u00C0-\u017F]+$/;
 		if (! titleRegex.test(title)) {
 			showErrorMessage(id, 'Il titolo inserito contiene caratteri non ammessi.');
 			return false;
