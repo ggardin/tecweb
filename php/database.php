@@ -208,7 +208,7 @@ class Database {
 	public function getRuoli() : array {
 		$query = "select id, nome
 			from ruolo
-			order by nome";
+			order by id";
 
 		$params = [];
 
