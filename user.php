@@ -20,7 +20,9 @@ try {
 
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
+Tools::toHtml($username[0]["username"]);
 Tools::replaceAnchor($page, "username", $username[0]["username"]);
+
 if ($_SESSION["is_admin"] == 0) Tools::replaceSection($page, "admin", "");
 
 Tools::showPage($page);

@@ -3,7 +3,10 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-// controlli admin
+if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
+	header ("location: login.php");
+	exit();
+}
 
 $user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
@@ -56,7 +59,7 @@ if ($res) {
 	elseif ($submit == "elimina")
 		header("location: cerca_persona.php");
 } else {
-	header("location: gest_persona.php?id=$id");
+	header("location: gest_persona.php?id" . $id);
 	$_SESSION["error"] = "qualcosa è andato storto";
 }
 
