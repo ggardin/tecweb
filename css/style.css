@@ -1,3 +1,9 @@
+/*
+==============
+CSS VARIABLES
+==============
+*/
+
 :root {
 	--bgcolor: #E7E1DF;
 	--bgcolor-alt: var(--secondaryColor);
@@ -54,6 +60,12 @@
 	font-weight: 100 900;
 	font-display: swap;
 }
+
+/*
+==============
+COMMON STYLE
+==============
+*/
 
 * {
 	margin: 0;
@@ -112,7 +124,8 @@ a:visited {
 	color: var(--anchorcolor-alt);
 }
 
-.image-style {
+.card img,
+#aside-image img {
 	border-radius: var(--border-radius);
 }
 
