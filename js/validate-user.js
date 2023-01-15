@@ -3,7 +3,7 @@
  */
 function validateUserData() {
 
-	let form = document.getElementById("update-user-data");
+	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
 		if (!( validateUserUsername() && validateUserName() && validateUserEmail() && validateUserBirthday() && validatePassword() && validatePasswordConfirm() )) {
@@ -17,7 +17,7 @@ function validateUserData() {
  */
 function validateUserUsername() {
 	var id = 'username';
-	var username = document.forms['update-user-data']['username'].value;
+	var username = document.forms['gestione']['username'].value;
 	const allowedChars = /^[A-Za-z0-9]+$/; // lettere maiuscole e minuscole, numeri
 	if (!allowedChars.test(username)) {
 		showErrorMessage(id, 'Nome utente non valido, usa solo lettere o numeri');
@@ -32,7 +32,7 @@ function validateUserUsername() {
  */
 function validateUserName() {
 	var id = 'nome';
-	var name = document.forms['update-user-data']['nome'].value;
+	var name = document.forms['gestione']['nome'].value;
 	const allowedChars = /^[A-Za-z\s'][^\d]*$/; // lettere, spazi, apostrofi
 
 	if (name == null || name == '') {
@@ -52,7 +52,7 @@ function validateUserName() {
  */
 function validatePassword() {
 	var id = 'new_password';
-	var password  = document.forms['update-user-data']['new_password'].value;
+	var password  = document.forms['gestione']['new_password'].value;
 
 	// Requisito di lunghezza minima
 	if (password.length < 8) {
@@ -75,8 +75,8 @@ function validatePassword() {
  */
 function validatePasswordConfirm() {
 	var id = 'new_password_confirm';
-	var first_password  = document.forms['update-user-data']['new_password'].value;
-	var second_password = document.forms['update-user-data']['new_password_confirm'].value;
+	var first_password  = document.forms['gestione']['new_password'].value;
+	var second_password = document.forms['gestione']['new_password_confirm'].value;
 
 	if ((second_password != null || second_password != '') && first_password != second_password) {
 		showErrorMessage(id, 'Le password non corrispondono.');
@@ -100,7 +100,7 @@ function validatePasswordConfirm() {
  */
 function validateUserBirthday() {
 	var id = 'data';
-	var birthday = document.forms['update-user-data']['data'].value;
+	var birthday = document.forms['gestione']['data'].value;
 	var today = new Date();
 
 	// Controlla che ci sia una stringa
@@ -164,7 +164,7 @@ function validateUserBirthday() {
  */
 function validateUserEmail() {
 	var id = 'email';
-	var email = document.forms['update-user-data']['email'].value;
+	var email = document.forms['gestione']['email'].value;
 	if (email == null || email == '') {
 		removeErrorMessage(id);
 		return true;
