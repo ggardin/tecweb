@@ -25,7 +25,7 @@ $utente = $utente[0];
 Tools::toHtml($utente);
 
 Tools::replaceAnchor($page, "username", $utente["username"]);
-Tools::replaceAnchor($page, "email", (isset($utente["mail"]) ? $utente["mail"] : ""));
+Tools::replaceAnchor($page, "mail", (isset($utente["mail"]) ? $utente["mail"] : ""));
 Tools::replaceAnchor($page, "nome", (isset($utente["nome"]) ? $utente["nome"] : ""));
 Tools::replaceAnchor($page, "data_nascita", (isset($utente["data_nascita"]) ? $utente["data_nascita"] : ""));
 
