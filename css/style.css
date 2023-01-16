@@ -1025,7 +1025,8 @@ fieldset > legend {
 	text-align: center;
 }
 
-fieldset > label {
+fieldset > label,
+fieldset > .label {
 	font-weight: 600;
 	display: block;
 	margin-top: 1em;
