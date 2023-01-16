@@ -10,13 +10,13 @@ CSS VARIABLES
 	--bgcolor-off: #BBB2B1;
 
 	--txtcolor: #1A1A1A;
-	--txtcolor-alt: var(--txtcolor); /* ??? */
+	--txtcolor-alt: var(--txtcolor);
 
 	--secondaryColor: #DBD2CD;
 	--tertiaryColor: #0C443B;
 
-	--anchorcolor: #110093;
-	--anchorcolor-alt: #D04637;
+	--anchorcolor: #020093;
+	--anchorcolor-alt: #D03937;
 
 	--form-required-field: #D50000;
 	--form-invalid: var(--form-required-field);
@@ -40,8 +40,8 @@ CSS VARIABLES
 
 	--txtcolor: #E4DCD7;
 
-	--anchorcolor: #91E8FB;
-	--anchorcolor-alt: #da4635;
+	--anchorcolor: #91F6FB;
+	--anchorcolor-alt: #DA4635;
 
 	--secondaryColor: #242424;
 	--tertiaryColor: #BDDDAA;
