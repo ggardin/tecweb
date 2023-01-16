@@ -140,3 +140,13 @@ FORMS
 #add-movie > fieldset {
 	flex-direction: column;
 }
+
+/*
+==============
+SEARCH
+==============
+*/
+
+#search {
+	flex-direction: column;
+}

@@ -371,6 +371,23 @@ SEARCH BAR
 ==============
 */
 
+#search {
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 0.5em;
+}
+
+#search input {
+	flex: 2 0;
+}
+
+#search select {
+	flex: 1 0;
+}
+
+#search button[type=submit] {
+	flex: 0 1;
+}
 
 /*
 ==============
