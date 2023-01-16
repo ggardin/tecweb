@@ -501,7 +501,9 @@ CARDS
 }
 
 .card img {
-	height: 11em;
+	height: 12em;
+	width: 8em;
+	object-fit: cover;
 }
 
 .card .details {
