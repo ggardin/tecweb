@@ -43,14 +43,13 @@ if (! $valid) {
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit == "modifica") {
-		$res = $connessione->updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte);
-		if($submit == "aggiungi") $id = $res[1];
-		$res = $res[0];
+		$up = $connessione->updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte);
+		$res = $up[0];
+		if ($res && $submit == "aggiungi") $id = $up[1];
 	} elseif ($submit == "elimina") {
 		$res = $connessione->deletePersona($id);
 		$id = "";
-	} else
-		$res = false;
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

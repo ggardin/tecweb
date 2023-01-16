@@ -34,16 +34,15 @@ if (! $valid) {
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi") {
-		$res = $connessione->insertLista($user_id, $nome);
-		$id = $res[1];
-		$res = $res[0];
+		$up = $connessione->insertLista($user_id, $nome);
+		$res = $up[0];
+		if ($res) $id = $up[1];
 	} elseif ($submit == "modifica" && $connessione->isListaDiUtente($id, $user_id))
 		$res = $connessione->updateLista($id, $nome);
 	elseif ($submit == "elimina" && $connessione->isListaDiUtente($id, $user_id)) {
 		$res = $connessione->deleteLista($id);
 		$id = "";
-	} else
-		$res = false;
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);

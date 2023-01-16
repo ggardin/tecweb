@@ -29,13 +29,13 @@ if (! $valid) {
 
 try {
 	$connessione = new Database();
-	// TODO : transaction
 	$signup = $connessione->signup($username, $password);
-	if ($signup[0]) {
+	$res = $signup[0];
+	if ($res) {
 		$user_id = $signup[1];
 		$connessione->insertLista($user_id, "Da vedere");
 		$connessione->insertLista($user_id, "Visti");
-		$res = $connessione->login($username, $password);
+		$login = $connessione->login($username, $password);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -44,9 +44,9 @@ try {
 	exit();
 }
 
-if (isset($res) && !empty($res)) {
-	$_SESSION["id"] = $res["id"];
-	$_SESSION["is_admin"] = $res["is_admin"];
+if ($res && !empty($login)) {
+	$_SESSION["id"] = $login["id"];
+	$_SESSION["is_admin"] = $login["is_admin"];
 	header("location: user.php");
 	exit();
 } else {

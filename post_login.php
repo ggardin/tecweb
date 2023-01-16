@@ -28,7 +28,7 @@ if (! $valid) {
 
 try {
 	$connessione = new Database();
-	$res = $connessione->login($username, $password);
+	$login = $connessione->login($username, $password);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -36,9 +36,9 @@ try {
 	exit();
 }
 
-if (! empty($res)) {
-	$_SESSION["id"] = $res["id"];
-	$_SESSION["is_admin"] = $res["is_admin"];
+if (! empty($login)) {
+	$_SESSION["id"] = $login["id"];
+	$_SESSION["is_admin"] = $login["is_admin"];
 	header("location: user.php");
 	exit();
 } else {
