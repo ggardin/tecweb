@@ -8,31 +8,35 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	exit();
 }
 
-$user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 $data_nascita = isset($_POST["data_nascita"]) ? $_POST["data_nascita"] : "";
 $data_morte = isset($_POST["data_morte"]) ? $_POST["data_morte"] : "";
+$immagine = "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if (isset($_FILES["immagine"])) {
-	$img = Tools::uploadImg($_FILES['immagine']);
-	if ($img[0])
-		$immagine = $img[1];
-	else
-		$immagine = "";
-} else {
-	$immagine = "";
-}
-
-if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
-	header("location: index.php");
+if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
+	Tools::errCode(500);
 	exit();
 }
 
-if ($nome == "") {
-	header("location: gest_persona.php?id=$id");
+$valid = true;
+
+if (isset($_FILES["immagine"])) {
+	$img = Tools::uploadImg($_FILES["immagine"]);
+	if ($img[0]) $immagine = $img[1];
+	else {
+		$valid = false;
+		$_SESSION["message"] = $img[1];
+	}
+} elseif (strlen($nome) <= 3) {
+	$valid = false;
+	$_SESSION["message"] = "Nome troppo corto";
+}
+
+if (! $valid) {
+	header("location: gest_persona.php?id=" . $id);
 	exit();
 }
 

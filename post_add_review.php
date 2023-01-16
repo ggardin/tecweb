@@ -4,14 +4,15 @@ require_once("php/tools.php");
 require_once("php/database.php");
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
-$film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
-$voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
-$testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
 if ($user_id == "") {
 	header("location: login.php");
 	exit();
 }
+
+$film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
+$voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
+$testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
 try {
 	$connessione = new Database();

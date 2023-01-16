@@ -11,27 +11,30 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
 $descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
+$locandina = "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if (isset($_FILES["locandina"])) {
-	$img = Tools::uploadImg($_FILES['locandina']);
-	if ($img[0])
-		$locandina = $img[1];
-	else
-		$locandina = "";
-} else {
-	$locandina = "";
-}
-
-// TODO controlli
-
 if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
-	header("location: index.php");
+	Tools::errCode(500);
 	exit();
 }
 
-if ($titolo == "") {
-	header("location: gest_collezione.php?id=$id");
+$valid = true;
+
+if (isset($_FILES["locandina"])) {
+	$img = Tools::uploadImg($_FILES["locandina"]);
+	if ($img[0]) $locandina = $img[1];
+	else {
+		$valid = false;
+		$_SESSION["message"] = $img[1];
+	}
+} elseif (strlen($titolo) <= 3) {
+	$valid = false;
+	$_SESSION["message"] = "Il titolo deve avere almeno 3 caratteri";
+}
+
+if (! $valid) {
+	header("location: gest_collezione.php?id=" . $id);
 	exit();
 }
 

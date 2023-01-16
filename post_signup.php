@@ -8,12 +8,21 @@ if (isset($_SESSION["id"])) {
 	exit();
 }
 
-// TODO controlli
 $username = isset($_POST["username"]) ? $_POST["username"] : "";
 $password = isset($_POST["password"]) ? $_POST["password"] : "";
 $password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
 
-if (! $username || ! $password || ! $password_confirm || $password != $password_confirm) {
+$valid = true;
+
+if (empty($username)) {
+	$valid = false;
+	$_SESSION["message"] = "Username non valido.";
+} elseif (empty($password) || $password != $password_confirm) {
+	$valid = false;
+	$_SESSION["message"] = "Le password non coincidono.";
+}
+
+if (! $valid) {
 	header("location: signup.php");
 	exit();
 }
@@ -41,16 +50,9 @@ if (isset($res) && !empty($res)) {
 	header("location: user.php");
 	exit();
 } else {
+	$_SESSION["message"] = "Questo username è già stato preso. Scegline un'altro.";
 	header("location: signup.php");
 	exit();
 }
-
-
-// } else
-// Tools::replaceAnchor($page, "message", "Errore: Utente già registrato");
-// } else
-// Tools::replaceAnchor($page, "message", "Errore: Le password non coincidono");
-// } else
-// Tools::replaceSection($page, "message", "");
 
 ?>
