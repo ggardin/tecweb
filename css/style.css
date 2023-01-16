@@ -388,6 +388,7 @@ SEARCH BAR
 #search button[type=submit] {
 	flex: 0 1;
 	display: flex;
+	gap: 0.5em;
 	align-items: center;
 	font-size: 1em;
 }
