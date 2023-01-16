@@ -48,6 +48,7 @@ NAVBAR
 #dropdown-link-container ul {
 	display: flex;
 	flex-direction: column;
+	gap: 0.5em
 }
 
 #dropdown-link-container li {
