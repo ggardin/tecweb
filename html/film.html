@@ -50,6 +50,19 @@
 			<p>@@descrizione@@</p>
 			<!-- descrizione_end -->
 
+			<!-- user_start -->
+			<h2 class="sr-only">Aggiungi a una lista</h2>
+			<form method="post" action="post_add_to_list.php" id="add-movie">
+				<input type="hidden" name="film_id" value="@@list_film_id@@" />
+				<select name="list_id">
+					<!-- lista_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- lista_end -->
+				</select>
+				<button type="submit" id="addListButton">Aggiungi alla lista</button>
+			</form>
+			<!-- user_end -->
+
 			<!-- admin_start -->
 			<h2 class="sr-only">Modifica il film</h2>
 			<a href="gest_film.php?id=@@gest_id@@" class="link-button">
@@ -226,18 +239,6 @@
 
 		<div id="hero-image">
 			<img src="@@locandina@@" alt=""/>
-			<!-- user_start -->
-			<h2 class="sr-only">Aggiunta a una lista</h2>
-			<form method="post" action="post_add_to_list.php" id="add-movie">
-				<input type="hidden" name="film_id" value="@@list_film_id@@" />
-				<select name="list_id">
-					<!-- lista_start -->
-					<option value="@@id@@">@@nome@@</option>
-					<!-- lista_end -->
-				</select>
-				<button type="submit" id="addListButton">Aggiungi alla lista</button>
-			</form>
-			<!-- user_end -->
 		</div>
 	</main>
 
