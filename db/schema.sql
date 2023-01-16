@@ -152,7 +152,7 @@ create table lista (
 	nome varchar(50),
 	primary key (id),
 	foreign key (utente) references utente(id) on delete cascade,
-	constraint no_stesso_nome unique (utente, nome)
+	constraint no_stesso_nome_lista unique (utente, nome)
 );
 
 create table lista_film (
@@ -161,5 +161,6 @@ create table lista_film (
 	film bigint unsigned,
 	primary key (id),
 	foreign key (lista) references lista(id) on delete cascade,
-	foreign key (film) references film(id) on delete cascade
+	foreign key (film) references film(id) on delete cascade,
+	constraint no_stesso_film_lista unique (lista, film)
 );

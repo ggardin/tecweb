@@ -3370,7 +3370,7 @@ ALTER TABLE `genere`
 --
 ALTER TABLE `lista`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `no_stesso_nome` (`utente`,`nome`);
+  ADD UNIQUE KEY `no_stesso_nome_lista` (`utente`,`nome`);
 
 --
 -- Indexes for table `lista_film`
@@ -3378,7 +3378,8 @@ ALTER TABLE `lista`
 ALTER TABLE `lista_film`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lista` (`lista`),
-  ADD KEY `film` (`film`);
+  ADD KEY `film` (`film`),
+  ADD UNIQUE KEY `no_stesso_film_lista` (`lista`,`film`);
 
 --
 -- Indexes for table `paese`
