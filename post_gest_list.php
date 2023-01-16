@@ -51,8 +51,13 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["success"] = "Nessuna modifica apportata.";
-	header("location: list.php?id=" . $id);
+	if ($submit = "aggiungi") {
+		$_SESSION["error"] = "Esiste già una lista con questo nome";
+		header("location: gest_list.php");
+	} else {
+		$_SESSION["success"] = "Nessuna modifica apportata.";
+		header("location: list.php?id=" . $id);
+	}
 } elseif ($submit == "aggiungi") {
 	$_SESSION["success"] = "Lista aggiunta correttamente.";
 	header("location: list.php?id=" . $id);

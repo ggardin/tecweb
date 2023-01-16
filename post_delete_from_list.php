@@ -20,11 +20,8 @@ if ($film_id == "" || $list_id == "") {
 
 try {
 	$connessione = new Database();
-	$own = false;
-	if ($connessione->isListaDiUtente($list_id, $user_id)) {
-		$own = true;
-		$res = $connessione->deleteFromList($list_id, $film_id);
-	}
+	$res = $connessione->isListaDiUtente($list_id, $user_id);
+	if ($res) $res = $connessione->deleteFromList($list_id, $film_id);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -33,7 +30,7 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["error"] = "Errore durante l'eliminazione dalla lista.";
+	$_SESSION["error"] = "Errore durante la rimozione dalla lista.";
 	header("location: list.php?id=$list_id");
 } else {
 	$_SESSION["success"] = "Rimosso correttamente dalla lista.";
