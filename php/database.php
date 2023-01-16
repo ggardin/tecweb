@@ -33,10 +33,10 @@ class Database {
 
 	private function pulisciInputHelper (&$item) {
 		if (is_string($item)) {
-			$item = trim($item);
-			$item = strip_tags($item);
 			// convertiamo in entità durante output, qui facciamo il contrario
 			$item = html_entity_decode($item, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+			$item = trim($item);
+			$item = strip_tags($item);
 		}
 	}
 
