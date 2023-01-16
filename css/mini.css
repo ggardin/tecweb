@@ -48,6 +48,7 @@ NAVBAR
 #dropdown-link-container ul {
 	display: flex;
 	flex-direction: column;
+	gap: 0.5em
 }
 
 #dropdown-link-container li {
@@ -78,7 +79,7 @@ CARDS
 ==============
 */
 
-.cards.double {
+.cards {
 	grid-template-columns: 1fr;
 }
 
@@ -128,4 +129,14 @@ table td::before {
 	float: left;
 	font-weight: 600;
 	border-collapse: collapse;
+}
+
+/*
+==============
+FORMS
+==============
+*/
+
+#add-movie > fieldset {
+	flex-direction: column;
 }

@@ -21,7 +21,7 @@
 	<main id="content" class="movie-page">
 		<div id="movie-details">
 
-			<a href="#manage" class="skip-to-content">Aggiungi film ad una lista</a>
+			<a href="#add-movie" class="skip-to-content">Aggiungi film ad una lista</a>
 
 			<h1>@@nome@@</h1>
 			<!-- sottotitolo_start -->
@@ -49,6 +49,33 @@
 			<!-- descrizione_start -->
 			<p>@@descrizione@@</p>
 			<!-- descrizione_end -->
+
+			<!-- user_start -->
+			<h2 class="sr-only">Aggiungi a una lista</h2>
+			<form method="post" action="post_add_to_list.php" id="add-movie">
+				<fieldset>
+					<legend>Aggiungi il film ad una lista</legend>
+
+					<input type="hidden" name="film_id" value="@@list_film_id@@" />
+					<select name="list_id">
+						<!-- lista_start -->
+						<option value="@@id@@">@@nome@@</option>
+						<!-- lista_end -->
+					</select>
+					<button type="submit" id="addListButton">Aggiungi alla lista</button>
+				</fieldset>
+			</form>
+			<!-- user_end -->
+
+			<!-- admin_start -->
+			<h2 class="sr-only">Modifica il film</h2>
+			<a href="gest_film.php?id=@@gest_id@@" class="link-button">
+				<svg viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modifica la lista">
+					<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="M22.5 45c12.03 0 22-9.97 22-22 0-12.02-9.99-22-22.03-22A22.16 22.16 0 0 0 .5 23c0 12.03 9.98 22 22 22Zm8.8-28.22-2.66-2.63 1.64-1.64c.74-.69 1.56-.77 2.22-.1l.5.51c.69.67.65 1.51-.09 2.25ZM15.38 32.64l-3.09 1.16a.63.63 0 0 1-.77-.86L12.77 30 27.3 15.47l2.65 2.65Z"/>
+				</svg>
+				<span>Modifica</span>
+			</a>
+			<!-- admin_end -->
 
 			<!-- crew_start -->
 			<section>
@@ -130,52 +157,51 @@
 					<fieldset>
 						<legend>Nuova recensione</legend>
 
-						<p>Voto<span class="required">(richiesto)</span></p>
-						<div class="rating-range">
-							<input type="radio" id="rating0" name="voto" value="0" hidden checked aria-describedby="rating0-hint" />
+						<p class="label">Voto<span class="required">(richiesto)</span></p>
 
-							<div>
+						<div id="ratings">
+							<div class="rating">
 								<label for="rating1">1</label>
 								<input type="radio" id="rating1" name="voto" value="1" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating2">2</label>
 								<input type="radio" id="rating2" name="voto" value="2" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating3">3</label>
 								<input type="radio" id="rating3" name="voto" value="3" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating4">4</label>
 								<input type="radio" id="rating4" name="voto" value="4" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating5">5</label>
 								<input type="radio" id="rating5" name="voto" value="5" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating6">6</label>
 								<input type="radio" id="rating6" name="voto" value="6" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating7">7</label>
 								<input type="radio" id="rating7" name="voto" value="7" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating8">8</label>
 								<input type="radio" id="rating8" name="voto" value="8"/>
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating9">9</label>
 								<input type="radio" id="rating9" name="voto" value="9" />
 							</div>
-							<div>
+							<div class="rating">
 								<label for="rating10">10</label>
 								<input type="radio" id="rating10" name="voto" value="10" />
 							</div>
 						</div>
-						<p id="rating0-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+						<p id="ratings-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 						<label for="review-text">Recensione<span class="required">(richiesto)</span></label>
 						<p id="review-chars">Hai a disposizione 1000 caratteri.</p>
@@ -213,34 +239,11 @@
 				<!-- valutazioni_end -->
 			</section>
 			<!-- sect_valutazioni_end -->
-
 		</div>
 
-		<aside id="aside-image">
-			<img src="@@locandina@@" alt="" class="image-style"/>
-			<!-- admin_start -->
-			<h2 class="sr-only">Modifica il film</h2>
-			<a href="gest_film.php?id=@@gest_id@@" class="link-button">
-				<svg viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modifica la lista">
-					<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="M22.5 45c12.03 0 22-9.97 22-22 0-12.02-9.99-22-22.03-22A22.16 22.16 0 0 0 .5 23c0 12.03 9.98 22 22 22Zm8.8-28.22-2.66-2.63 1.64-1.64c.74-.69 1.56-.77 2.22-.1l.5.51c.69.67.65 1.51-.09 2.25ZM15.38 32.64l-3.09 1.16a.63.63 0 0 1-.77-.86L12.77 30 27.3 15.47l2.65 2.65Z"/>
-				</svg>
-				<p>Modifica</p>
-			</a>
-			<!-- admin_end -->
-
-			<!-- user_start -->
-			<h2 class="sr-only">Aggiunta a una lista</h2>
-			<form method="post" action="post_add_to_list.php" id="add-movie">
-				<input type="hidden" name="film_id" value="@@list_film_id@@" />
-				<select name="list_id">
-					<!-- lista_start -->
-					<option value="@@id@@">@@nome@@</option>
-					<!-- lista_end -->
-				</select>
-				<button type="submit" id="addListButton">Aggiungi alla lista</button>
-			</form>
-			<!-- user_end -->
-		</aside>
+		<div id="hero-image">
+			<img src="@@locandina@@" alt=""/>
+		</div>
 	</main>
 
 	<!-- footer -->
