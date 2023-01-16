@@ -8,7 +8,7 @@ $list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
 $film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
 
 if ($user_id == "") {
-	header("location: index.php");
+	header("location: login.php");
 	exit();
 }
 

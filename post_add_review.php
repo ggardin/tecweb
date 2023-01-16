@@ -9,7 +9,7 @@ $voto = isset($_POST["voto"]) ? $_POST["voto"] : "";
 $testo = isset($_POST["testo"]) ? $_POST["testo"] : "";
 
 if ($user_id == "") {
-	header("location: index.php");
+	header("location: login.php");
 	exit();
 }
 
