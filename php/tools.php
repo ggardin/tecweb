@@ -155,20 +155,26 @@ class Tools {
 
 	public static function uploadImg($file) : array {
 		if (! (file_exists($file['tmp_name']) && is_uploaded_file($file['tmp_name'])))
-			return [false, "Errore durante l'upload"];
+			return [false, "Errore durante l'upload dell'immagine."];
 
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
 		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
 
-		if (! getimagesize($file["tmp_name"]))
-			return [false, "Non immagine"];
+		if (! getimagesize($file["tmp_name"])) {
+			unlink ($file["tmp_name"]);
+			return [false, "Il file caricato non sembra essere un immagine."];
+		}
 
-		if ($file["size"] > 1000000)
-			return [false, "Troppo grande"];
+		if ($file["size"] > 2100000) {
+			unlink ($file["tmp_name"]);
+			return [false, "Questa immagine pesa troppo. Dimensione massima: 2MB."];
+		}
 
-		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp")
-			return [false, "Solo JPG, JPEG, PNG, WEBP supportati"];
+		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp") {
+			unlink ($file["tmp_name"]);
+			return [false, "Formato immagine non supportato. Carica uno tra: JPG, JPEG, PNG, WEBP."];
+		}
 
 		$w0 = 200; $h0 = 1.5 * $w0;
 		$w1 = 500; $h1 = 1.5 * $w1;
