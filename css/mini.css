@@ -130,3 +130,13 @@ table td::before {
 	font-weight: 600;
 	border-collapse: collapse;
 }
+
+/*
+==============
+FORMS
+==============
+*/
+
+#add-movie > fieldset {
+	flex-direction: column;
+}

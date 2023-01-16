@@ -669,7 +669,12 @@ MOVIE PAGE
 }
 
 #add-movie {
-	margin-top: 0.5em;
+	margin: 1.5em 0;
+}
+
+#add-movie > fieldset {
+	display: flex;
+	gap: 1em;
 }
 
 /*
@@ -1066,8 +1071,4 @@ button[type=submit] {
 	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
-}
-
-form#add-movie button[type=submit] {
-	margin-top: 0.5em;
 }
