@@ -707,12 +707,12 @@ REVIEWS
 	margin-bottom: 1em;
 }
 
-#add-review .rating-range {
+#add-review #ratings {
 	display: flex;
 }
 
-#add-review .rating-range > div {
-	flex: 1 1 10%;
+#add-review #ratings .rating {
+	flex: 1 0 10%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -965,8 +965,10 @@ form .required {
 	color: var(--form-required-field);
 }
 
+form div.invalid,
 form input.invalid {
 	outline: 0.15rem solid var(--form-invalid);
+	border-radius: var(--border-radius);
 }
 
 @media (pointer: coarse) {

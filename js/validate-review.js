@@ -6,20 +6,32 @@ function validateNewReview() {
 	let form = document.getElementById("add-review");
 
 	if (form != null) {
-	form.addEventListener("submit", function (event) {
-		if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
-			event.preventDefault();
-		}
-	});
-}
+		form.addEventListener("submit", function (event) {
+			if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
+				event.preventDefault();
+			}
+		});
+	}
 }
 
 /*
  * Controlla che sia stato espresso un voto
  */
 function validateNewReviewRatingRadiobox() {
-	var id = 'rating0';
-	if ( document.forms['add-review']['rating0'].checked ) {
+	var id = 'ratings';
+	var ratings = document.getElementsByName('voto');
+	var ratingFound = false;
+
+	if (ratings != null) {
+		for (const rating of ratings) {
+			if (rating.checked) {
+				ratingFound = true;
+				break;
+			}
+		}
+	}
+
+	if ( !ratingFound ) {
 		showErrorMessage(id, 'Non hai espresso un voto');
 		return false;
 	}
