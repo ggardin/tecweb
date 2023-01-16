@@ -7,8 +7,10 @@ function showErrorMessage(id, message) {
 
 	removeErrorMessage(id);
 
-	element.setAttribute("aria-invalid", true);
 	element.classList.add('invalid');
+	if (element.tagName != 'DIV') {
+		element.setAttribute("aria-invalid", true);
+	}
 
 	messageTarget.classList.add("error-message");
 	messageTarget.innerHTML = message;
@@ -22,8 +24,10 @@ function removeErrorMessage(id) {
 	var element = document.getElementById(id);
 	var messageTarget = document.getElementById(id + '-hint');
 
-	element.setAttribute("aria-invalid", false);
 	element.classList.remove('invalid');
+	if (element.tagName != 'DIV') {
+		element.setAttribute("aria-invalid", false);
+	}
 
 	messageTarget.classList.remove("error-message");
 	messageTarget.innerHTML = '';
