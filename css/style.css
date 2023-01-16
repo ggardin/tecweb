@@ -371,36 +371,6 @@ SEARCH BAR
 ==============
 */
 
-.search {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	max-width: var(--search-form-width);
-	margin: 1.5em auto 1em;
-}
-
-.input-button-wrapper {
-	display: flex;
-	/*margin-top: 1em;*/
-	height: 3.5em;
-}
-
-.searchTerm {
-	border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
-
-.searchButton {
-	width: auto;
-	border-radius: 0 var(--border-radius) var(--border-radius) 0;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-}
-
-.searchButton svg {
-	color: var(--bgcolor);
-	width: 34px;
-	height: 34px;
-}
 
 /*
 ==============
