@@ -252,6 +252,9 @@ function addNewCrewMember(element) {
 	// Rimuove attributo hidden
 	clone.removeAttribute('hidden');
 
+	// Imposta il focus
+	personInput.focus();
+
 	// Aggiorna il contatore
 	updateCrewCounter();
 	updateCrewHint();
@@ -329,6 +332,9 @@ function addNewNation(element) {
 
 	// Rimuove attributo hidden
 	clone.removeAttribute('hidden');
+
+	// Imposta il focus
+	input.focus();
 
 	// Aggiorna il contatore
 	updateNationsCounter();
