@@ -5,19 +5,34 @@ function validateNewReview() {
 
 	let form = document.getElementById("add-review");
 
-	form.addEventListener("submit", function (event) {
-		if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
-			event.preventDefault();
-		}
-	});
+	if (form != null) {
+		form.addEventListener("submit", function (event) {
+			if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
+				event.preventDefault();
+			}
+		});
+	}
+
 }
 
 /*
  * Controlla che sia stato espresso un voto
  */
 function validateNewReviewRatingRadiobox() {
-	var id = 'rating0';
-	if ( document.forms['add-review']['rating0'].checked ) {
+	var id = 'ratings';
+	var ratings = document.getElementsByName('voto');
+	var ratingFound = false;
+
+	if (ratings != null) {
+		for (const rating of ratings) {
+			if (rating.checked) {
+				ratingFound = true;
+				break;
+			}
+		}
+	}
+
+	if ( !ratingFound ) {
 		showErrorMessage(id, 'Non hai espresso un voto');
 		return false;
 	}
@@ -34,12 +49,17 @@ function validateNewReviewText() {
 	var element = document.forms['add-review']['review-text'];
 	const maxLength = element.getAttribute("maxlength");
 	const currentLength = element.value.length;
+	const reviewRegex = /^[^<>{}]*$/;
 
-	if ( currentLength < 2 ) {
+	if (! reviewRegex.test(element.value)) {
+		showErrorMessage(id, 'La recensione inserita contiene caratteri non ammessi.');
+		return false;
+	}
+	else if ( currentLength < 2 ) {
 		showErrorMessage(id, 'La recensione è troppo breve');
 		return false;
 	}
-	else if ( currentLength > 1000 ) {
+	else if ( currentLength > maxLength ) {
 		showErrorMessage(id, 'La recensione è troppo lunga');
 		return false;
 	}

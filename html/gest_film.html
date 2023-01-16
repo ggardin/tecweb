@@ -29,11 +29,13 @@
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni principali</legend>
-				<label for="titolo">Titolo</label>
-				<input id="titolo" name="titolo" value="@@nome@@" />
+				<label for="titolo">Titolo<span class="required">(richiesto)</span></label>
+				<input id="titolo" name="titolo" value="@@nome@@" oninput="validateMovieTitle();" onblur="validateMovieTitle();" required />
+				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();">@@descrizione@@</textarea>
+				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />
@@ -127,7 +129,8 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="titolo_originale">Titolo originale</label>
-				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" />
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" onblur="validateMovieOriginalTitle();" oninput="validateMovieOriginalTitle();"/>
+				<p id="titolo_originale-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="stato">Stato</label>
 				<select id="stato" name="stato" class="form-control">
@@ -137,11 +140,11 @@
 				</select>
 
 				<label for="budget" lang="en">Budget</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" />
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" oninput="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="incassi">Incassi</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" />
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" oninput="validateMovieBoxOfficeEarnings();" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
