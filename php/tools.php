@@ -127,7 +127,7 @@ class Tools {
 
 	public static function showPage(&$page) : void {
 		if (isset($_SESSION["message"])) {
-			self::toHtml($page, $_SESSION["message"]);
+			self::toHtml($_SESSION["message"]);
 			self::replaceAnchor($page, "server_message", $_SESSION["message"]);
 			unset($_SESSION["message"]);
 		} else

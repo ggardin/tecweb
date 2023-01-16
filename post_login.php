@@ -11,6 +11,8 @@ if (isset($_SESSION["id"])) {
 $username = isset($_POST["username"]) ? $_POST["username"] : "";
 $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
+$valid = true;
+
 if (empty($username)) {
 	$valid = false;
 	$_SESSION["message"] = "[en]Username[/en] non valido.";
