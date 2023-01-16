@@ -1036,6 +1036,7 @@ fieldset > legend {
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	text-align: center;
+	font-size: 0.9em;
 }
 
 fieldset > label,
