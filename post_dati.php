@@ -24,13 +24,13 @@ $valid = true;
 
 if (strlen($username) <= 3) {
 	$valid = false;
-	$_SESSION["message"] = "[en]Username[/en] deve avere almeno 3 caratteri.";
+	$_SESSION["error"] = "[en]Username[/en] deve avere almeno 3 caratteri.";
 } elseif (!empty($nome) && strlen($nome) <= 3) {
 	$valid = false;
-	$_SESSION["message"] = "Il nome deve avere almeno 3 caratteri.";
+	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
 } elseif (! empty($new_password) && $new_password != $new_password_confirm) {
 	$valid = false;
-	$_SESSION["message"] = "Le nuove [en]password[/en] non coincidono.";
+	$_SESSION["error"] = "Le nuove [en]password[/en] non coincidono.";
 }
 
 if (! $valid) {
@@ -49,10 +49,10 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Nessuna modifica apportata.";
+	$_SESSION["success"] = "Nessuna modifica apportata.";
 	header("location: dati.php");
 } else {
-	$_SESSION["message"] = "Dati aggiornati correttamente.";
+	$_SESSION["success"] = "Dati aggiornati correttamente.";
 	header("location: dati.php");
 }
 

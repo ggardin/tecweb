@@ -15,10 +15,10 @@ $valid = true;
 
 if (empty($username)) {
 	$valid = false;
-	$_SESSION["message"] = "[en]Username[/en] non valido.";
+	$_SESSION["error"] = "[en]Username[/en] non valido.";
 } elseif (empty($password)) {
 	$valid = false;
-	$_SESSION["message"] = "La [en]password[/en] non è valida.";
+	$_SESSION["error"] = "La [en]password[/en] non è valida.";
 }
 
 if (! $valid) {
@@ -42,7 +42,7 @@ if (! empty($login)) {
 	header("location: user.php");
 	exit();
 } else {
-	$_SESSION["message"] = "Credenziali errate. Riprova.";
+	$_SESSION["error"] = "Credenziali errate. Riprova.";
 	header("location: login.php");
 	exit();
 }

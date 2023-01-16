@@ -33,10 +33,10 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Errore durante l'eliminazione dalla lista.";
+	$_SESSION["error"] = "Errore durante l'eliminazione dalla lista.";
 	header("location: list.php?id=$list_id");
 } else {
-	$_SESSION["message"] = "Rimosso correttamente dalla lista.";
+	$_SESSION["success"] = "Rimosso correttamente dalla lista.";
 	header("location: list.php?id=$list_id");
 }
 

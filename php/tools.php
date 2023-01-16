@@ -126,10 +126,16 @@ class Tools {
 	}
 
 	public static function showPage(&$page) : void {
-		if (isset($_SESSION["message"])) {
-			self::toHtml($_SESSION["message"]);
-			self::replaceAnchor($page, "server_message", $_SESSION["message"]);
-			unset($_SESSION["message"]);
+		if (isset($_SESSION["success"])) {
+			self::toHtml($_SESSION["success"]);
+			self::replaceAnchor($page, "message_type", "success");
+			self::replaceAnchor($page, "server_message", $_SESSION["success"]);
+			unset($_SESSION["success"]);
+		} elseif (isset($_SESSION["error"])) {
+			self::toHtml($_SESSION["error"]);
+			self::replaceAnchor($page, "message_type", "error");
+			self::replaceAnchor($page, "server_message", $_SESSION["error"]);
+			unset($_SESSION["error"]);
 		} else
 			self::replaceSection($page, "server_message", "");
 		self::deleteAllSectionAnchors($page);

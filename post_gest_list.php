@@ -23,7 +23,7 @@ $valid = true;
 
 if (strlen($nome) <= 3) {
 	$valid = false;
-	$_SESSION["message"] = "Il nome deve avere almeno 3 caratteri.";
+	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
 }
 
 if (! $valid) {
@@ -51,16 +51,16 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Nessuna modifica apportata.";
+	$_SESSION["success"] = "Nessuna modifica apportata.";
 	header("location: list.php?id=" . $id);
 } elseif ($submit == "aggiungi") {
-	$_SESSION["message"] = "Lista aggiunta correttamente.";
+	$_SESSION["success"] = "Lista aggiunta correttamente.";
 	header("location: list.php?id=" . $id);
 } elseif ($submit == "modifica") {
-	$_SESSION["message"] = "Lista modificata correttamente.";
+	$_SESSION["success"] = "Lista modificata correttamente.";
 	header("location: list.php?id=" . $id);
 } else {
-	$_SESSION["message"] = "Lista eliminata correttamente.";
+	$_SESSION["success"] = "Lista eliminata correttamente.";
 	header("location: lists.php");
 }
 

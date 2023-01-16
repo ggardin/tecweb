@@ -25,13 +25,13 @@ $valid = true;
 
 if (strlen($nome) <= 3) {
 	$valid = false;
-	$_SESSION["message"] = "Nome troppo corto";
+	$_SESSION["error"] = "Nome troppo corto";
 } elseif (isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["immagine"]);
 	if ($img[0]) $immagine = $img[1];
 	else {
 		$valid = false;
-		$_SESSION["message"] = $img[1];
+		$_SESSION["error"] = $img[1];
 	}
 }
 
@@ -58,16 +58,16 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Nessuna modifica apportata.";
+	$_SESSION["success"] = "Nessuna modifica apportata.";
 	header("location: persona.php?id=" . $id);
 } elseif ($submit == "aggiungi") {
-	$_SESSION["message"] = "Persona aggiunta correttamente.";
+	$_SESSION["success"] = "Persona aggiunta correttamente.";
 	header("location: persona.php?id=" . $id);
 } elseif ($submit == "modifica") {
-	$_SESSION["message"] = "Persona modificata correttamente.";
+	$_SESSION["success"] = "Persona modificata correttamente.";
 	header("location: persona.php?id=" . $id);
 } else {
-	$_SESSION["message"] = "Persona eliminata correttamente. Aggiungine un'altra.";
+	$_SESSION["success"] = "Persona eliminata correttamente. Aggiungine un'altra.";
 	header("location: gest_persona.php");
 }
 

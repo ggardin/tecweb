@@ -23,10 +23,10 @@ $valid = true;
 
 if (intval($voto) < 1 || intval($voto) > 10) {
 	$valid = false;
-	$_SESSION["message"] = "Voto non valido.";
+	$_SESSION["error"] = "Voto non valido.";
 } elseif (strlen($testo) < 3 || strlen($testo) > 1000) {
 	$valid = false;
-	$_SESSION["message"] = "Il testo non è valido.";
+	$_SESSION["error"] = "Il testo non è valido.";
 }
 
 if (! $valid) {
@@ -45,10 +45,10 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Errore durante l'inserimento della recensione.";
+	$_SESSION["error"] = "Errore durante l'inserimento della recensione.";
 	header("location: film.php?id=" . $film_id);
 } else {
-	$_SESSION["message"] = "Recensione inserita correttamente.";
+	$_SESSION["success"] = "Recensione inserita correttamente.";
 	header("location: film.php?id=" . $film_id);
 }
 

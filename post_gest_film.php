@@ -34,13 +34,13 @@ $valid = true;
 
 if (strlen($titolo) <= 3) {
 	$valid = false;
-	$_SESSION["message"] = "Il titolo deve avere almeno 3 caratteri";
+	$_SESSION["error"] = "Il titolo deve avere almeno 3 caratteri";
 } elseif (isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
 		$valid = false;
-		$_SESSION["message"] = $img[1];
+		$_SESSION["error"] = $img[1];
 	}
 }
 
@@ -72,16 +72,16 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Nessuna modifica apportata.";
+	$_SESSION["success"] = "Nessuna modifica apportata.";
 	header("location: film.php?id=" . $id);
 } elseif ($submit == "aggiungi") {
-	$_SESSION["message"] = "Film aggiunto correttamente.";
+	$_SESSION["success"] = "Film aggiunto correttamente.";
 	header("location: film.php?id=" . $id);
 } elseif ($submit == "modifica") {
-	$_SESSION["message"] = "Film modificato correttamente.";
+	$_SESSION["success"] = "Film modificato correttamente.";
 	header("location: film.php?id=" . $id);
 } else {
-	$_SESSION["message"] = "Film eliminato correttamente. Aggiungine un altro.";
+	$_SESSION["success"] = "Film eliminato correttamente. Aggiungine un altro.";
 	header("location: gest_film.php");
 }
 

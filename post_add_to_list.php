@@ -33,10 +33,10 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["message"] = "Errore durante l'inserimento nella lista.";
+	$_SESSION["error"] = "Errore durante l'inserimento nella lista.";
 	header("location: film.php?id=" . $film_id);
 } else {
-	$_SESSION["message"] = "Aggiunto correttamente alla lista.";
+	$_SESSION["success"] = "Aggiunto correttamente alla lista.";
 	header("location: film.php?id=" . $film_id);
 }
 
