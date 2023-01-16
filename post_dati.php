@@ -24,17 +24,17 @@ $valid = true;
 
 if (strlen($username) <= 3) {
 	$valid = false;
-	$_SESSION["message"] = "Username deve avere almeno 3 caratteri.";
-} elseif (strlen($nome) <= 3) {
+	$_SESSION["message"] = "[en]Username[/en] deve avere almeno 3 caratteri.";
+} elseif (!empty($nome) && strlen($nome) <= 3) {
 	$valid = false;
 	$_SESSION["message"] = "Il nome deve avere almeno 3 caratteri.";
 } elseif (! empty($new_password) && $new_password != $new_password_confirm) {
 	$valid = false;
-	$_SESSION["message"] = "Le password non coincidono.";
+	$_SESSION["message"] = "Le nuove [en]password[/en] non coincidono.";
 }
 
 if (! $valid) {
-	header("location: gest_list.php?id=" . $id);
+	header("location: dati.php");
 	exit();
 }
 
@@ -48,11 +48,12 @@ try {
 	exit();
 }
 
-if ($res) {
-	$_SESSION["message"] = "Dati modificati correttamente";
-} else {
-	$_SESSION["message"] = "Qualcosa è andato storto";
+if (! $res) {
+	Tools::errCode(500);
+	exit();
 }
+
+$_SESSION["message"] = "Dati aggiornati correttamente.";
 
 header("location: dati.php");
 

@@ -33,13 +33,16 @@ if (! $valid) {
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi")
+	if ($submit == "aggiungi") {
 		$res = $connessione->insertLista($user_id, $nome);
-	elseif ($submit == "modifica" && $connessione->isListaDiUtente($id, $user_id))
+		$id = $res[1];
+		$res = $res[0];
+	} elseif ($submit == "modifica" && $connessione->isListaDiUtente($id, $user_id))
 		$res = $connessione->updateLista($id, $nome);
-	elseif ($submit == "elimina" && $connessione->isListaDiUtente($id, $user_id))
+	elseif ($submit == "elimina" && $connessione->isListaDiUtente($id, $user_id)) {
 		$res = $connessione->deleteLista($id);
-	else
+		$id = "";
+	} else
 		$res = false;
 	unset($connessione);
 } catch (Exception) {
@@ -48,15 +51,18 @@ try {
 	exit();
 }
 
-if ($res) {
-	if ($submit == "modifica")
-		header("location: gest_list.php?id=$id");
-	else
-		header("location: lists.php");
+if (! $res) {
+	Tools::errCode(500);
 	exit();
-} else {
-	// nome duplicato o altro, dare errore
-	header("location: lists.php");
 }
+
+if ($submit == "aggiungi")
+	$_SESSION["message"] = "Lista aggiunta correttamente.";
+elseif ($submit == "modifica")
+	$_SESSION["message"] = "Lista modificata correttamente.";
+else
+	$_SESSION["message"] = "Lista eliminata correttamente. Aggiungine un'altra.";
+
+header("location: gest_list.php?id=" . $id);
 
 ?>

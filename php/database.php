@@ -774,7 +774,7 @@ class Database {
 		$params = [$user_id, $list_name];
 		$types = "is";
 
-		return $this->preparedUpdates($query, $params, $types);
+		return [$this->preparedUpdates($query, $params, $types), $this->connection->insert_id];
 	}
 
 	public function updateLista($list_id, $name) : bool {
@@ -785,7 +785,7 @@ class Database {
 		$params = [$name, $list_id];
 		$types = "si";
 
-		return $this->preparedUpdates($query, $params, $types);
+		return [$this->preparedUpdates($query, $params, $types), false];
 	}
 
 	public function deleteLista($id) : bool {

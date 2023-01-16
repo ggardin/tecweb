@@ -42,11 +42,14 @@ if (! $valid) {
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi" || $submit == "modifica")
+	if ($submit == "aggiungi" || $submit == "modifica") {
 		$res = $connessione->updatePersona($id, $nome, $gender, $immagine, $data_nascita, $data_morte);
-	elseif ($submit == "elimina")
+		if($submit == "aggiungi") $id = $res[1];
+		$res = $res[0];
+	} elseif ($submit == "elimina") {
 		$res = $connessione->deletePersona($id);
-	else
+		$id = "";
+	} else
 		$res = false;
 	unset($connessione);
 } catch (Exception) {
@@ -55,16 +58,18 @@ try {
 	exit();
 }
 
-if ($res) {
-	if ($submit == "modifica")
-		header("location: gest_persona.php?id=" . $id);
-	elseif ($submit == "aggiungi")
-		header("location: gest_persona.php?id=" . $res[1]);
-	elseif ($submit == "elimina")
-		header("location: cerca_persona.php");
-} else {
-	header("location: gest_persona.php?id" . $id);
-	$_SESSION["message"] = "qualcosa è andato storto";
+if (! $res) {
+	Tools::errCode(500);
+	exit();
 }
+
+if ($submit == "aggiungi")
+	$_SESSION["message"] = "Persona aggiunta correttamente.";
+elseif ($submit == "modifica")
+	$_SESSION["message"] = "Persona modificata correttamente.";
+else
+	$_SESSION["message"] = "Persona eliminata correttamente. Aggiungine un'altra.";
+
+header("location: gest_persona.php?id=" . $id);
 
 ?>

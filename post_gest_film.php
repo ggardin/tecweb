@@ -55,13 +55,14 @@ try {
 	if ($submit == "aggiungi" || $submit = "modifica") {
 		$res = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
 		if($submit == "aggiungi") $id = $res[1];
+		$res = $res[0];
 		$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
 		$connessione->setFilmGeneri($id, $genere);
 		$connessione->setFilmPaesi($id, $paese);
-	}
-	elseif ($submit == "elimina")
+	} elseif ($submit == "elimina") {
 		$res = $connessione->deleteFilm($id);
-	else
+		$id = "";
+	} else
 		$res = false;
 	unset($connessione);
 } catch (Exception) {
@@ -70,16 +71,18 @@ try {
 	exit();
 }
 
-if ($res) {
-	if ($submit == "modifica")
-		header("location: gest_film.php?id=" . $id);
-	elseif ($submit == "aggiungi")
-		header("location: gest_film.php?id=" . $res[1]);
-	elseif ($submit == "elimina")
-		header("location: cerca_film.php");
-} else {
-	header("location: gest_film.php?id=" . $id);
-	$_SESSION["message"] = "qualcosa è andato storto";
+if (! $res) {
+	Tools::errCode(500);
+	exit();
 }
+
+if ($submit == "aggiungi")
+	$_SESSION["message"] = "Film aggiunto correttamente.";
+elseif ($submit == "modifica")
+	$_SESSION["message"] = "Film modificato correttamente.";
+else
+	$_SESSION["message"] = "Film eliminato correttamente. Aggiungine un altro.";
+
+header("location: gest_film.php?id=" . $id);
 
 ?>

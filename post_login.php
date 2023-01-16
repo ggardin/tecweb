@@ -13,10 +13,10 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
 if (empty($username)) {
 	$valid = false;
-	$_SESSION["message"] = "Username non valido.";
+	$_SESSION["message"] = "[en]Username[/en] non valido.";
 } elseif (empty($password)) {
 	$valid = false;
-	$_SESSION["message"] = "La password non è valida.";
+	$_SESSION["message"] = "La [en]password[/en] non è valida.";
 }
 
 if (! $valid) {

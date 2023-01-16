@@ -13,6 +13,11 @@ if ($user_id == "") {
 $list_id = isset($_POST["list_id"]) ? $_POST["list_id"] : "";
 $film_id = isset($_POST["film_id"]) ? $_POST["film_id"] : "";
 
+if ($film_id == "" || $list_id == "") {
+	Tools::errCode(500);
+	exit();
+}
+
 try {
 	$connessione = new Database();
 	$own = false;
@@ -27,7 +32,14 @@ try {
 	exit();
 }
 
-header("location: film.php?id=$film_id");
-exit();
+if (! $res) {
+	Tools::errCode(500);
+	exit();
+}
+
+$_SESSION["message"] = "Aggiunto correttamente alla lista.";
+
+header("location: film.php?id=" . $film_id);
+
 
 ?>

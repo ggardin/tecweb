@@ -40,11 +40,14 @@ if (! $valid) {
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi" || $submit == "modifica")
+	if ($submit == "aggiungi" || $submit == "modifica") {
 		$res = $connessione->updateCollezione($id, $titolo, $descrizione, $locandina);
-	elseif ($submit == "elimina")
+		if($submit == "aggiungi") $id = $res[1];
+		$res = $res[0];
+	} elseif ($submit == "elimina") {
 		$res = $connessione->deleteCollezione($id);
-	else
+		$id = "";
+	} else
 		$res = false;
 	unset($connessione);
 } catch (Exception) {
@@ -53,16 +56,18 @@ try {
 	exit();
 }
 
-if ($res) {
-	if ($submit == "modifica")
-		header("location: gest_collezione.php?id=" . $id);
-	elseif ($submit == "aggiungi")
-		header("location: gest_collezione.php?id=" . $res[1]);
-	elseif ($submit == "elimina")
-		header("location: cerca_collezione.php");
-} else {
-	header("location: gest_collezione.php?id" . $id);
-	$_SESSION["message"] = "qualcosa è andato storto";
+if (! $res) {
+	Tools::errCode(500);
+	exit();
 }
+
+if ($submit == "aggiungi")
+	$_SESSION["message"] = "Collezione aggiunta correttamente.";
+elseif ($submit == "modifica")
+	$_SESSION["message"] = "Collezione modificata correttamente.";
+else
+	$_SESSION["message"] = "Collezione eliminata correttamente. Aggiungine un altro.";
+
+header("location: gest_collezione.php?id=" . $id);
 
 ?>

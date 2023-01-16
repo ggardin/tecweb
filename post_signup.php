@@ -16,10 +16,10 @@ $valid = true;
 
 if (empty($username)) {
 	$valid = false;
-	$_SESSION["message"] = "Username non valido.";
+	$_SESSION["message"] = "[en]Username[/en] non valido.";
 } elseif (empty($password) || $password != $password_confirm) {
 	$valid = false;
-	$_SESSION["message"] = "Le password non coincidono.";
+	$_SESSION["message"] = "Le [en]password[/en] non coincidono.";
 }
 
 if (! $valid) {
@@ -50,7 +50,7 @@ if (isset($res) && !empty($res)) {
 	header("location: user.php");
 	exit();
 } else {
-	$_SESSION["message"] = "Questo username è già stato preso. Scegline un'altro.";
+	$_SESSION["message"] = "Questo [en]username[/en] è in uso da un altro utente. Scegline uno diverso.";
 	header("location: signup.php");
 	exit();
 }
