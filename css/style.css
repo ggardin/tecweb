@@ -959,6 +959,11 @@ ASIDE IMAGE
 	max-width: 15em;
 }
 
+#hero-image img {
+	position: sticky;
+	top: var(--header-height);
+}
+
 /*
 ==============
 FORMS
