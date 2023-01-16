@@ -18,11 +18,11 @@
 	</nav>
 
 	<main id="content">
-		<h1>@@intestazione@@</h1>
-
 		<!-- server_message_start -->
-		<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">@@server_message@@</p>
+		<p id="server-message" class="error" aria-role="status">@@server_message@@</p>
 		<!-- server_message_end -->
+
+		<h1>@@intestazione@@</h1>
 
 		<form id="gestione" method="post" action="post_gest_collezione.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
