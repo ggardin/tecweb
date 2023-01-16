@@ -5,11 +5,13 @@ function validateNewReview() {
 
 	let form = document.getElementById("add-review");
 
+	if (form != null) {
 	form.addEventListener("submit", function (event) {
 		if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
 			event.preventDefault();
 		}
 	});
+}
 }
 
 /*
