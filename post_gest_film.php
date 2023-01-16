@@ -32,16 +32,16 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 
 $valid = true;
 
-if (isset($_FILES["locandina"])) {
+if (strlen($titolo) <= 3) {
+	$valid = false;
+	$_SESSION["message"] = "Il titolo deve avere almeno 3 caratteri";
+} elseif (isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
 		$valid = false;
 		$_SESSION["message"] = $img[1];
 	}
-} elseif (strlen($titolo) <= 3) {
-	$valid = false;
-	$_SESSION["message"] = "Il titolo deve avere almeno 3 caratteri";
 }
 
 if (! $valid) {
@@ -72,17 +72,18 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
+	$_SESSION["message"] = "Nessuna modifica apportata.";
+	header("location: film.php?id=" . $id);
+} elseif ($submit == "aggiungi") {
+	$_SESSION["message"] = "Film aggiunto correttamente.";
+	header("location: film.php?id=" . $id);
+} elseif ($submit == "modifica") {
+	$_SESSION["message"] = "Film modificato correttamente.";
+	header("location: film.php?id=" . $id);
+} else {
+	$_SESSION["message"] = "Film eliminato correttamente. Aggiungine un altro.";
+	header("location: gest_film.php");
 }
 
-if ($submit == "aggiungi")
-	$_SESSION["message"] = "Film aggiunto correttamente.";
-elseif ($submit == "modifica")
-	$_SESSION["message"] = "Film modificato correttamente.";
-else
-	$_SESSION["message"] = "Film eliminato correttamente. Aggiungine un altro.";
-
-header("location: gest_film.php?id=" . $id);
 
 ?>

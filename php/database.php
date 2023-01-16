@@ -767,7 +767,7 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function insertLista($user_id, $list_name) : bool {
+	public function insertLista($user_id, $list_name) : array {
 		$query = "insert into lista(utente, nome)
 			values (?, ?)";
 
@@ -785,7 +785,7 @@ class Database {
 		$params = [$name, $list_id];
 		$types = "si";
 
-		return [$this->preparedUpdates($query, $params, $types), false];
+		return $this->preparedUpdates($query, $params, $types);
 	}
 
 	public function deleteLista($id) : bool {

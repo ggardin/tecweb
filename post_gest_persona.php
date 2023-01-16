@@ -23,16 +23,16 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 
 $valid = true;
 
-if (isset($_FILES["immagine"])) {
+if (strlen($nome) <= 3) {
+	$valid = false;
+	$_SESSION["message"] = "Nome troppo corto";
+} elseif (isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["immagine"]);
 	if ($img[0]) $immagine = $img[1];
 	else {
 		$valid = false;
 		$_SESSION["message"] = $img[1];
 	}
-} elseif (strlen($nome) <= 3) {
-	$valid = false;
-	$_SESSION["message"] = "Nome troppo corto";
 }
 
 if (! $valid) {
@@ -59,17 +59,18 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
+	$_SESSION["message"] = "Nessuna modifica apportata.";
+	header("location: persona.php?id=" . $id);
+} elseif ($submit == "aggiungi") {
+	$_SESSION["message"] = "Persona aggiunta correttamente.";
+	header("location: persona.php?id=" . $id);
+} elseif ($submit == "modifica") {
+	$_SESSION["message"] = "Persona modificata correttamente.";
+	header("location: persona.php?id=" . $id);
+} else {
+	$_SESSION["message"] = "Persona eliminata correttamente. Aggiungine un'altra.";
+	header("location: gest_persona.php");
 }
 
-if ($submit == "aggiungi")
-	$_SESSION["message"] = "Persona aggiunta correttamente.";
-elseif ($submit == "modifica")
-	$_SESSION["message"] = "Persona modificata correttamente.";
-else
-	$_SESSION["message"] = "Persona eliminata correttamente. Aggiungine un'altra.";
-
-header("location: gest_persona.php?id=" . $id);
 
 ?>

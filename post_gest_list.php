@@ -52,17 +52,17 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
-}
-
-if ($submit == "aggiungi")
+	$_SESSION["message"] = "Nessuna modifica apportata.";
+	header("location: list.php?id=" . $id);
+} elseif ($submit == "aggiungi") {
 	$_SESSION["message"] = "Lista aggiunta correttamente.";
-elseif ($submit == "modifica")
+	header("location: list.php?id=" . $id);
+} elseif ($submit == "modifica") {
 	$_SESSION["message"] = "Lista modificata correttamente.";
-else
-	$_SESSION["message"] = "Lista eliminata correttamente. Aggiungine un'altra.";
-
-header("location: gest_list.php?id=" . $id);
+	header("location: list.php?id=" . $id);
+} else {
+	$_SESSION["message"] = "Lista eliminata correttamente.";
+	header("location: lists.php");
+}
 
 ?>

@@ -33,12 +33,11 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
+	$_SESSION["message"] = "Errore durante l'eliminazione dalla lista.";
+	header("location: list.php?id=$list_id");
+} else {
+	$_SESSION["message"] = "Rimosso correttamente dalla lista.";
+	header("location: list.php?id=$list_id");
 }
-
-$_SESSION["message"] = "Rimosso correttamente dalla lista.";
-
-header("location: list.php?id=$list_id");
 
 ?>

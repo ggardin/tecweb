@@ -33,13 +33,11 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
+	$_SESSION["message"] = "Errore durante l'inserimento nella lista.";
+	header("location: film.php?id=" . $film_id);
+} else {
+	$_SESSION["message"] = "Aggiunto correttamente alla lista.";
+	header("location: film.php?id=" . $film_id);
 }
-
-$_SESSION["message"] = "Aggiunto correttamente alla lista.";
-
-header("location: film.php?id=" . $film_id);
-
 
 ?>

@@ -45,12 +45,11 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
+	$_SESSION["message"] = "Errore durante l'inserimento della recensione.";
+	header("location: film.php?id=" . $film_id);
+} else {
+	$_SESSION["message"] = "Recensione inserita correttamente.";
+	header("location: film.php?id=" . $film_id);
 }
-
-$_SESSION["message"] = "Recensione inserita correttamente.";
-
-header("location: film.php?id=" . $film_id);
 
 ?>

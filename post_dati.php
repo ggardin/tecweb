@@ -49,12 +49,11 @@ try {
 }
 
 if (! $res) {
-	Tools::errCode(500);
-	exit();
+	$_SESSION["message"] = "Nessuna modifica apportata.";
+	header("location: dati.php");
+} else {
+	$_SESSION["message"] = "Dati aggiornati correttamente.";
+	header("location: dati.php");
 }
-
-$_SESSION["message"] = "Dati aggiornati correttamente.";
-
-header("location: dati.php");
 
 ?>
