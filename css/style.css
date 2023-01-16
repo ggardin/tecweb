@@ -907,7 +907,7 @@ PERSON/COLLECTION PAGE
 	flex-direction: row-reverse;
 	justify-content: flex-end;
 	gap: 2em;
-	margin-bottom: .5em;
+	margin-bottom: 2em;
 }
 
 #person-details,
