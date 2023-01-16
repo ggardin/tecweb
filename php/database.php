@@ -49,10 +49,10 @@ class Database {
 	}
 
 	// see: https://phpdelusions.net/mysqli
-	private function preparedQuery(&$query, &$params, $types = "") : mysqli_stmt {
+	private function preparedQuery(&$query, &$params, $types = "", $stmt = null) : mysqli_stmt {
 		$this->pulisciInput($params);
 		$types = $types ?: str_repeat("s", count($params));
-		$stmt = $this->connection->prepare($query);
+		if (is_null($stmt)) $stmt = $this->connection->prepare($query);
 		if (!empty($params)) $stmt->bind_param($types, ...$params);
 		$stmt->execute();
 		return $stmt;
@@ -85,6 +85,21 @@ class Database {
 		return $a_r > 0;
 	}
 
+	private function preparedInsertMultiple(&$query, &$params, $types = "") : bool {
+		try {
+			$stmt = null;
+			for ($i = 0; $i < count($params); $i++)
+				$stmt = $this->preparedQuery($query, $params[$i], $types, $stmt);
+			if (! is_null($stmt)) $stmt->close();
+		} catch (mysqli_sql_exception $e) {
+			if ($e->getCode() == 1062)
+				return false;
+			else
+				throw new Exception(self::ERR);
+		}
+		return true;
+	}
+
 	public function getCollezioneById($id) : array {
 		$query = "select *
 			from collezione
@@ -110,21 +125,12 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getGenderById($id) : array {
-		$query = "select *
-			from gender
-			where id = ?";
-
-		$params = [$id];
-		$types = "i";
-
-		return $this->preparedSelect($query, $params, $types);
-	}
-
 	public function getPersonaById($id) : array {
-		$query = "select *
-			from persona
-			where id = ?";
+		$query = "select p.id, p.nome, p.gender, p.immagine, p.data_nascita, p.data_morte, g.nome as gender_nome
+			from persona as p
+				join gender as g
+					on p.gender = g.id
+			where p.id = ?";
 
 		$params = [$id];
 		$types = "i";
@@ -193,7 +199,7 @@ class Database {
 	public function getRuoli() : array {
 		$query = "select id, nome
 			from ruolo
-			order by nome";
+			order by id";
 
 		$params = [];
 
@@ -637,7 +643,7 @@ class Database {
 				set";
 			$values = "";
 		} else {
-			$insert = "insert into collezione(";
+			$query = "insert into collezione(";
 			$values = "values (";
 		}
 
@@ -722,7 +728,7 @@ class Database {
 				set";
 			$values = "";
 		} else {
-			$insert = "insert into utente(";
+			$query = "insert into utente(";
 			$values = "values (";
 		}
 
@@ -919,6 +925,62 @@ class Database {
 
 		return $this->preparedSelect($query, $params, $types);
 	}
+
+	public function setFilmCrew($film_id, $persone, $ruoli) : bool {
+		$q0 = "delete from crew
+			where film = ?";
+		$p0 = [$film_id];
+		$t0 = "i";
+		$this->preparedUpdates($q0, $p0, $t0);
+
+		$q1 = "insert into crew(film, persona, ruolo)
+			values (?, ?, ?)";
+		$p1 = [];
+		for ($i = 0; $i < count($ruoli); $i++)
+			$persone[$i] != "" && $ruoli[$i] != "" &&
+				array_push($p1, [$film_id, $persone[$i], $ruoli[$i]]);
+		$t1 = "iii";
+		$this->preparedInsertMultiple($q1, $p1, $t1);
+
+		return true;
+	}
+
+	public function setFilmPaesi($film_id, $paesi) : bool {
+		$q0 = "delete from film_paese
+			where film = ?";
+		$p0 = [$film_id];
+		$t0 = "i";
+		$this->preparedUpdates($q0, $p0, $t0);
+
+		$q1 = "insert into film_paese(film, paese)
+			values (?, ?)";
+		$p1 = [];
+		for ($i = 0; $i < count($paesi); $i++)
+			$paesi[$i] != "" && array_push($p1, [$film_id, $paesi[$i]]);
+		$t1 = "is";
+		$this->preparedInsertMultiple($q1, $p1, $t1);
+
+		return true;
+	}
+
+	public function setFilmGeneri($film_id, $generi) : bool {
+		$q0 = "delete from film_genere
+			where film = ?";
+		$p0 = [$film_id];
+		$t0 = "i";
+		$this->preparedUpdates($q0, $p0, $t0);
+
+		$q1 = "insert into film_genere(film, genere)
+			values (?, ?)";
+		$p1 = [];
+		for ($i = 0; $i < count($generi); $i++)
+			$generi[$i] != "" && array_push($p1, [$film_id, $generi[$i]]);
+		$t1 = "ii";
+		$this->preparedInsertMultiple($q1, $p1, $t1);
+
+		return true;
+	}
+
 }
 
 ?>

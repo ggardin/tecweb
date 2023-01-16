@@ -30,6 +30,7 @@ $mess = true;
 
 if (! empty($generi)) {
 	$mess = false;
+	Tools::toHtml($generi);
 	Tools::replaceAnchor($page, "n_generi", count($lunghi) < 5);
 	$ummagumma = Tools::getSection($page, "generi_riga", "");
 	$res = "";

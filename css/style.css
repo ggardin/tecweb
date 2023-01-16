@@ -971,7 +971,8 @@ form .required {
 }
 
 form div.invalid,
-form input.invalid {
+form input.invalid,
+form textarea.invalid {
 	outline: 0.15rem solid var(--form-invalid);
 	border-radius: var(--border-radius);
 }

@@ -21,9 +21,14 @@ try {
 	exit();
 }
 
+if ($id != "" && empty($collezione)) {
+	Tools::errCode(404);
+	exit();
+}
+
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
-if ($id != "" && !empty($collezione)) {
+if ($id != "") {
 	$collezione = $collezione[0];
 	$title = $collezione["nome"] . " • Modifica collezione"; Tools::toHtml($title, 1);
 	Tools::replaceAnchor($page, "title", $title);
@@ -32,7 +37,7 @@ if ($id != "" && !empty($collezione)) {
 	Tools::replaceAnchor($page, "bc_nome", $bc_nome);
 	Tools::replaceAnchor($page, "intestazione", "Modifica collezione");
 	Tools::replaceAnchor($page, "gest_id", $id);
-	Tools::toHtml($collezione, 1);
+	Tools::toHtml($collezione, 0);
 	Tools::replaceAnchor($page, "nome", $collezione["nome"]);
 	Tools::replaceAnchor($page, "descrizione", (isset($collezione["descrizione"]) ? $collezione["descrizione"] : ""));
 	Tools::replaceAnchor($page, "submit_value", "modifica");
@@ -41,8 +46,12 @@ if ($id != "" && !empty($collezione)) {
 	Tools::replaceAnchor($page, "title", "Aggiungi collezione");
 	Tools::replaceSection($page, "breadcrumb", "Aggiungi");
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi collezione");
-	Tools::replaceAnchor($page, "submit-value", "aggiungi");
+	Tools::replaceAnchor($page, "gest_id", "");
+	Tools::replaceAnchor($page, "nome", "");
+	Tools::replaceAnchor($page, "descrizione", "");
+	Tools::replaceAnchor($page, "submit_value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
+	Tools::replaceSection($page, "delete", "");
 }
 
 Tools::showPage($page);

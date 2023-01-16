@@ -20,15 +20,22 @@
 
 	<main id="content">
 		<h1>@@intestazione@@</h1>
+
+		<!-- message_start -->
+		<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">@@message@@</p>
+		<!-- message_end -->
+
 		<form id="gestione" method="post" action="post_gest_film.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni principali</legend>
-				<label for="titolo">Titolo</label>
-				<input id="titolo" name="titolo" value="@@nome@@" />
+				<label for="titolo">Titolo<span class="required">(richiesto)</span></label>
+				<input id="titolo" name="titolo" value="@@nome@@" oninput="validateMovieTitle();" onblur="validateMovieTitle();" required />
+				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();">@@descrizione@@</textarea>
+				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />
@@ -49,11 +56,11 @@
 
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
-					<label for="crew-name@@crew_name_label_id@@">Nome e cognome</label>
-					<input id="crew-name@@crew_name_input_id@@" name="crew-person[]" type="text" list="lista-persone" @@value@@ />
+					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
+					<input id="crew-person@@crew_person_input_id@@" name="@@crew_person_input_name@@" type="text" list="lista-persone" value="@@value@@" />
 
 					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
-					<select id="crew-role@@crew_role_select_id@@" name="crew-role[]">
+					<select id="crew-role@@crew_role_select_id@@" name="@@crew_role_select_name@@">
 						<!-- ruolo_start -->
 						<option value="@@id@@" @@sel@@>@@nome@@</option>
 						<!-- ruolo_end -->
@@ -98,8 +105,8 @@
 
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
-					<label for="nation-name@@paese_label_id@@">Codice del Paese</label>
-					<input id="nation-name@@paese_input_id@@" name="nation[]" type="text" list="lista-paesi" @@value@@ />
+					<label for="nation-name@@nation_label_id@@">Codice del Paese</label>
+					<input id="nation-name@@nation_input_id@@" name="@@nation_input_name@@" type="text" list="lista-paesi" value="@@value@@" />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
 					<!-- nation_sample_end -->
 				</div>
@@ -122,21 +129,22 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="titolo_originale">Titolo originale</label>
-				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" />
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" onblur="validateMovieOriginalTitle();" oninput="validateMovieOriginalTitle();"/>
+				<p id="titolo_originale-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="stato">Stato</label>
-				<select id="stato" class="form-control">
+				<select id="stato" name="stato" class="form-control">
 					<!-- stato_start -->
 					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- stato_end -->
 				</select>
 
 				<label for="budget" lang="en">Budget</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" />
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" oninput="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="incassi">Incassi</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" />
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" oninput="validateMovieBoxOfficeEarnings();" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>

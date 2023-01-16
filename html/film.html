@@ -205,7 +205,7 @@
 
 						<label for="review-text">Recensione<span class="required">(richiesto)</span></label>
 						<p id="review-chars">Hai a disposizione 1000 caratteri.</p>
-						<textarea name="testo" id="review-text" maxlength="1000" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();" required aria-describedby="review-chars review-text-hint"></textarea>
+						<textarea name="testo" id="review-text" maxlength="1000" onblur="validateNewReviewText();" oninput="checkNewReviewCharactersCounter();validateNewReviewText();" required aria-describedby="review-chars review-text-hint"></textarea>
 						<p id="review-text-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 						<button type="submit">Pubblica la tua recensione</button>
