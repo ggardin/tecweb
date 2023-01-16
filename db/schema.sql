@@ -74,7 +74,7 @@ create table collezione (
 create table film (
 	id bigint unsigned,
 	nome varchar(200) not null,
-	nome_originale varchar(200) not null,
+	nome_originale varchar(200),
 	durata smallint unsigned,
 	locandina varchar(100) unique,
 	descrizione varchar(10000),
