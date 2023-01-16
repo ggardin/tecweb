@@ -66,7 +66,7 @@ if ($submit == "aggiungi")
 elseif ($submit == "modifica")
 	$_SESSION["message"] = "Collezione modificata correttamente.";
 else
-	$_SESSION["message"] = "Collezione eliminata correttamente. Aggiungine un altro.";
+	$_SESSION["message"] = "Collezione eliminata correttamente. Aggiungine un'altra.";
 
 header("location: gest_collezione.php?id=" . $id);
 
