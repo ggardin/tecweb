@@ -56,6 +56,9 @@ function validatePassword() {
 
 	if (password != null && password != '') {
 
+		// Imposta il campo vecchia password come obbligatorio
+		document.forms['gestione']['old_password'].required = true;
+
 		// Requisito di lunghezza minima
 		if (password.length < 8) {
 
@@ -68,6 +71,10 @@ function validatePassword() {
 			showErrorMessage(id, 'La password deve contenere almeno una lettera e un numero.');
 			return false;
 		}
+	}
+
+	if (password == '') {
+		document.forms['gestione']['old_password'].required = false;
 	}
 
 	removeErrorMessage(id);
