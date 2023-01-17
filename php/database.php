@@ -283,7 +283,7 @@ class Database {
 				join genere as g
 					on fg.genere = g.id
 			where f.id = ?
-			order by g.nome";
+			order by g.id";
 
 		$params = [$id];
 		$types = "i";
@@ -321,7 +321,7 @@ class Database {
 	public function getGeneri() : array {
 		$query = "select id, nome
 			from genere
-			order by nome";
+			order by id";
 
 		$params = [];
 
@@ -333,7 +333,7 @@ class Database {
 			from genere as g
 				join film_genere as fg
 					on g.id = fg.genere
-			order by g.nome";
+			order by g.id";
 
 		$params = [];
 
@@ -923,7 +923,7 @@ class Database {
 					on fg.genere = g.id
 			where l.utente = ?
 			group by g.nome
-			order by count(*) desc, g.nome";
+			order by count(*) desc, g.id";
 
 
 		$params = [$user_id];
