@@ -497,7 +497,7 @@ CARDS
 
 .card:hover,
 .card:focus-within {
-	transform: scale(1.05);
+	transform: scale(1.04);
 }
 
 .card > a {
@@ -569,6 +569,11 @@ USER PAGE
 
 #user-actions li {
 	margin-bottom: 1em;
+}
+
+#user-actions li:hover,
+#user-actions li:focus-within {
+	transform: scale(1.04);
 }
 
 #create-list-button {
