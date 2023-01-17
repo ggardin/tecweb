@@ -1090,21 +1090,14 @@ SERVER MESSAGES
 */
 
 #server-message {
-	margin-top: 1em;
-	margin-bottom: 1em;
-	padding: 1em 0.5em 1em 3em;
+	margin: 1em 0;
+	padding: 1em;
 	border: 1px solid var(--server-message-color);
 	border-radius: var(--border-radius);
-	background: var(--server-message-icon)/*, var(--bgcolor-off)*/;
-	background-repeat: no-repeat;
-	background-size: 2em;
-	background-position: 0.5em center;
 }
 #server-message.success {
 	--server-message-color: green;
-	--server-message-icon: url(/img/error.svg);
 }
 #server-message.error {
 	--server-message-color: red;
-	--server-message-icon: url(/img/error.svg);
 }
