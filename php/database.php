@@ -367,14 +367,14 @@ class Database {
 				join genere as g
 					on fg.genere = g.id
 			where f.nome like ?
-				and g.nome = ?
+				and g.id = ?
 			order by data_rilascio desc";
 
 		$search = [];
 
-		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
+		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio, g.nome as fv_nome " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $genere, $limit, $offset];
-		$t0 = "ssii";
+		$t0 = "siii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n " . $base;
@@ -392,12 +392,12 @@ class Database {
 				join paese as p
 					on fp.paese = p.iso_3166_1
 			where f.nome like ?
-				and p.nome = ?
+				and p.iso_3166_1 = ?
 			order by data_rilascio desc";
 
 		$search = [];
 
-		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
+		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio, p.nome as fv_nome " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $paese, $limit, $offset];
 		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);

@@ -64,10 +64,11 @@ else
 $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome) {
 	$intestazione .= " filtrati per $f_nome (";
-	if ($f_nome == "genere")
-		$intestazione .= $f_val_genere;
-	elseif ($f_nome == "paese")
-		$intestazione .= $f_val_paese;
+	if (!empty($cerca[0]) && ($f_nome == "genere" || $f_nome == "paese")) {
+		$f_val_nome = $cerca[0][0]["fv_nome"];
+		Tools::toHtml($f_val_nome);
+		$intestazione .= $f_val_nome;
+	}
 	$intestazione .= ")";
 }
 
@@ -104,13 +105,14 @@ if ($tipo == "film") {
 	}
 	Tools::replaceSection($page, "filter", $res);
 
+	Tools::toHtml($generi, 1);
 	$option = Tools::getSection($page, "genere");
 	$res = "";
 	foreach ($generi as $g) {
 		$t = $option;
-		Tools::replaceAnchor($t, "val", $g["nome"]);
+		Tools::replaceAnchor($t, "val", $g["id"]);
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
-		Tools::replaceAnchor($t, "sel", (($g["nome"] == $f_val_genere) ? "selected" : ""));
+		Tools::replaceAnchor($t, "sel", (($g["id"] == $f_val_genere) ? "selected" : ""));
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "genere", $res);
@@ -119,9 +121,9 @@ if ($tipo == "film") {
 	$res = "";
 	foreach ($paesi as $p) {
 		$t = $option;
-		Tools::replaceAnchor($t, "val", $p["nome"]);
+		Tools::replaceAnchor($t, "val", $p["id"]);
 		Tools::replaceAnchor($t, "nome", $p["nome"]);
-		Tools::replaceAnchor($t, "sel", (($p["nome"] == $f_val_paese) ? "selected" : ""));
+		Tools::replaceAnchor($t, "sel", (($p["id"] == $f_val_paese) ? "selected" : ""));
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "paese", $res);

@@ -2265,19 +2265,19 @@ INSERT INTO `genere` (`id`, `nome`) VALUES
 (2, 'Avventura'),
 (0, 'Azione'),
 (6, 'Commedia'),
-(4, 'Crime'),
+(4, '[en]Crime[/en]'),
 (3, 'Dramma'),
 (12, 'Famiglia'),
 (1, 'Fantascienza'),
-(9, 'Fantasy'),
+(9, '[en]Fantasy[/en]'),
 (11, 'Guerra'),
-(16, 'Horror'),
+(16, '[en]Horror[/en]'),
 (10, 'Mistero'),
 (14, 'Musica'),
-(7, 'Romance'),
+(7, '[en]Romance[/en]'),
 (15, 'Storia'),
-(5, 'Thriller'),
-(8, 'Western');
+(5, '[en]Thriller[/en]'),
+(8, '[en]Western[/en]');
 
 -- --------------------------------------------------------
 
