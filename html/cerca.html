@@ -22,34 +22,33 @@
 		<h1>@@intestazione@@</h1>
 
 		<form method="get" id="search">
-			<label for="searchbar" class="sr-only">Termine di ricerca</label>
-			<input type="text" id="searchbar" name="q" value="@@search_value@@" placeholder="Che @@search_tipo@@ stai cercando?" />
-
-			<!-- filtri_start -->
-			<label for="tipo-filtro" class="sr-only">Filtra per</label>
-			<select name="fn" id="tipo-filtro" onchange="toggleRelevantSearchFilters();" >
-				<option value="">Nessun filtro</option>
-				<!-- filter_start -->
-				<option value="@@val@@" @@sel@@>@@nome@@</option>
-				<!-- filter_end -->
-			</select>
-
-			<label id="filtro-genere-label" class="sr-only" hidden>Genere</label>
-			<select id="filtro-genere" name="fvg" hidden>
-				<option value="">Nessun genere</option>
-				<!-- genere_start -->
-				<option value="@@val@@" @@sel@@>@@nome@@</option>
-				<!-- genere_end -->
-			</select>
-
-			<label id="filtro-paese-label" class="sr-only" hidden>Paese di produzione</label>
-			<select id="filtro-paese" name="fvp" hidden>
-				<option value="">Nessun paese</option>
-				<!-- paese_start -->
-				<option value="@@val@@" @@sel@@>@@nome@@</option>
-				<!-- paese_end -->
-			</select>
-			<!-- filtri_end -->
+			<div class="controls">
+				<label for="searchbar" class="sr-only">Termine di ricerca</label>
+				<input type="text" id="searchbar" name="q" value="@@search_value@@" placeholder="Che @@search_tipo@@ stai cercando?" />
+				<!-- filtri_start -->
+				<label for="tipo-filtro" class="sr-only">Filtra per</label>
+				<select name="fn" id="tipo-filtro" onchange="toggleRelevantSearchFilters();" >
+					<option value="">Nessun filtro</option>
+					<!-- filter_start -->
+					<option value="@@val@@" @@sel@@>@@nome@@</option>
+					<!-- filter_end -->
+				</select>
+				<label id="filtro-genere-label" class="sr-only" hidden>Genere</label>
+				<select id="filtro-genere" name="fvg" hidden>
+					<option value="">Nessun genere</option>
+					<!-- genere_start -->
+					<option value="@@val@@" @@sel@@>@@nome@@</option>
+					<!-- genere_end -->
+				</select>
+				<label id="filtro-paese-label" class="sr-only" hidden>Paese di produzione</label>
+				<select id="filtro-paese" name="fvp" hidden>
+					<option value="">Nessun paese</option>
+					<!-- paese_start -->
+					<option value="@@val@@" @@sel@@>@@nome@@</option>
+					<!-- paese_end -->
+				</select>
+				<!-- filtri_end -->
+			</div>
 
 			<button type="submit">
 				<span>Cerca</span>

@@ -147,6 +147,16 @@ SEARCH
 ==============
 */
 
-#search {
+#search,
+#search .controls {
 	flex-direction: column;
+}
+
+#search .controls > * {
+	min-height: 3em;
+}
+
+#search select {
+	border-left: 0;
+	border-top: var(--search-input-border);
 }
