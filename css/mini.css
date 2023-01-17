@@ -147,7 +147,7 @@ SEARCH
 ==============
 */
 
-#search,
+body:not(.homepage) #search,
 #search .controls {
 	flex-direction: column;
 }

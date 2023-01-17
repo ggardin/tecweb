@@ -377,6 +377,11 @@ SEARCH BAR
 	width: 100%;
 }
 
+.homepage #search {
+	max-width: var(--content-reduced-width);
+	margin: 2em auto 0;
+}
+
 #search .controls {
 	flex-grow: 1;
 	display: flex;
