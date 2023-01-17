@@ -20,10 +20,14 @@ $offset = $limit * $next;
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
-		if ($f_nome == "genere" && $f_val_genere)
+		if ($f_nome == "genere" && $f_val_genere) {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $limit, $offset, $f_val_genere);
-		elseif ($f_nome == "paese" && $f_val_paese)
+			$f_val_nome = $connessione->getGenereById($f_val_genere);
+		}
+		elseif ($f_nome == "paese" && $f_val_paese) {
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $limit, $offset, $f_val_paese);
+			$f_val_nome = $connessione->getPaeseById($f_val_paese);
+		}
 		else {
 			$cerca = $connessione->searchFilm($query, $limit, $offset);
 			$f_nome = "";
@@ -64,10 +68,9 @@ else
 $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome) {
 	$intestazione .= " filtrati per $f_nome (";
-	if (!empty($cerca[0]) && ($f_nome == "genere" || $f_nome == "paese")) {
-		$f_val_nome = $cerca[0][0]["fv_nome"];
+	if (!empty($f_val_nome) && ($f_nome == "genere" || $f_nome == "paese")) {
 		Tools::toHtml($f_val_nome);
-		$intestazione .= $f_val_nome;
+		$intestazione .= $f_val_nome[0]["nome"];
 	}
 	$intestazione .= ")";
 }

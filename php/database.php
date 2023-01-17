@@ -219,6 +219,28 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
+	public function setGenereById($id) : array {
+		$query = "select nome
+			from genere
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getPaeseById($id) : array {
+		$query = "select nome
+			from paese
+			where iso_3166_1 = ?";
+
+		$params = [$id];
+		$types = "s";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function getStatoById($id) : array {
 		$query = "select id, nome
 			from stato
@@ -372,7 +394,7 @@ class Database {
 
 		$search = [];
 
-		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio, g.nome as fv_nome " . $base . " limit ? offset ?";
+		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $genere, $limit, $offset];
 		$t0 = "siii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
@@ -397,7 +419,7 @@ class Database {
 
 		$search = [];
 
-		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio, p.nome as fv_nome " . $base . " limit ? offset ?";
+		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $paese, $limit, $offset];
 		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
