@@ -9,7 +9,6 @@ Disallow: /gest_list.php
 Disallow: /gest_persona.php
 Disallow: /list.php
 Disallow: /lists.php
-Disallow: /login.php
 Disallow: /logout.php
 Disallow: /post_add_review.php
 Disallow: /post_add_to_list.php
@@ -18,6 +17,5 @@ Disallow: /post_gest_list.php
 Disallow: /post_gest_persona.php
 Disallow: /post_login.php
 Disallow: /post_signup.php
-Disallow: /signup.php
 Disallow: /stats.php
 Disallow: /user.php
