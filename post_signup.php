@@ -8,25 +8,34 @@ if (isset($_SESSION["id"])) {
 	exit();
 }
 
-// TODO controlli
 $username = isset($_POST["username"]) ? $_POST["username"] : "";
 $password = isset($_POST["password"]) ? $_POST["password"] : "";
 $password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
 
-if (! $username || ! $password || ! $password_confirm || $password != $password_confirm) {
+$valid = true;
+
+if (empty($username)) {
+	$valid = false;
+	$_SESSION["error"] = "[en]Username[/en] non valido.";
+} elseif (empty($password) || $password != $password_confirm) {
+	$valid = false;
+	$_SESSION["error"] = "Le [en]password[/en] non coincidono.";
+}
+
+if (! $valid) {
 	header("location: signup.php");
 	exit();
 }
 
 try {
 	$connessione = new Database();
-	// TODO : transaction
 	$signup = $connessione->signup($username, $password);
-	if ($signup[0]) {
+	$res = $signup[0];
+	if ($res) {
 		$user_id = $signup[1];
 		$connessione->insertLista($user_id, "Da vedere");
 		$connessione->insertLista($user_id, "Visti");
-		$res = $connessione->login($username, $password);
+		$login = $connessione->login($username, $password);
 	}
 	unset($connessione);
 } catch (Exception) {
@@ -35,22 +44,15 @@ try {
 	exit();
 }
 
-if (isset($res) && !empty($res)) {
-	$_SESSION["id"] = $res["id"];
-	$_SESSION["is_admin"] = $res["is_admin"];
+if ($res && !empty($login)) {
+	$_SESSION["id"] = $login["id"];
+	$_SESSION["is_admin"] = $login["is_admin"];
 	header("location: user.php");
 	exit();
 } else {
+	$_SESSION["error"] = "Questo [en]username[/en] è in uso da un altro utente. Scegline uno diverso.";
 	header("location: signup.php");
 	exit();
 }
-
-
-// } else
-// Tools::replaceAnchor($page, "message", "Errore: Utente già registrato");
-// } else
-// Tools::replaceAnchor($page, "message", "Errore: Le password non coincidono");
-// } else
-// Tools::replaceSection($page, "message", "");
 
 ?>

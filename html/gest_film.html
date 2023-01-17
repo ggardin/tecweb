@@ -19,11 +19,11 @@
 	</nav>
 
 	<main id="content">
-		<h1>@@intestazione@@</h1>
+		<!-- server_message_start -->
+		<p id="server-message" class="@@message_type@@" aria-role="status">@@server_message@@</p>
+		<!-- server_message_end -->
 
-		<!-- message_start -->
-		<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">@@message@@</p>
-		<!-- message_end -->
+		<h1>@@intestazione@@</h1>
 
 		<form id="gestione" method="post" action="post_gest_film.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
@@ -39,6 +39,11 @@
 
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />
+
+				<div class="checkbox-pill">
+					<label for="elimina-locandina">Elimina locandina</label>
+					<input type="checkbox" id="elimina-locandina" name="elimina-locandina" />
+				</div>
 
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />

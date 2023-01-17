@@ -8,7 +8,6 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 	exit();
 }
 
-$user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
 $descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
@@ -23,33 +22,48 @@ $stato = isset($_POST["stato"]) ? $_POST["stato"] : "";
 $budget = isset($_POST["budget"]) ? $_POST["budget"] : "";
 $incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : "";
 $collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : "";
-
-if (isset($_FILES["locandina"])) {
-	$img = Tools::uploadImg($_FILES['locandina']);
-	if ($img[0])
-		$locandina = $img[1];
-	else
-		$locandina = "";
-} else {
-	$locandina = "";
-}
-
+$locandina = isset($_POST["elimina-locandina"]) ? null : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
+if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
+	Tools::errCode(500);
+	exit();
+}
+
+$valid = true;
+
+if (strlen($titolo) <= 3) {
+	$valid = false;
+	$_SESSION["error"] = "Il titolo deve avere almeno 3 caratteri";
+} elseif (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
+	$img = Tools::uploadImg($_FILES["locandina"]);
+	if ($img[0]) $locandina = $img[1];
+	else {
+		$valid = false;
+		$_SESSION["error"] = $img[1];
+	}
+}
+
+if (! $valid) {
+	header("location: gest_film.php?id=" . $id);
+	exit();
+}
 
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit = "modifica") {
-		$res = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
-		if($submit == "aggiungi") $id = $res[1];
-		$connessione->setFilmCrew($id, $crew_persona, $crew_ruolo);
-		$connessione->setFilmGeneri($id, $genere);
-		$connessione->setFilmPaesi($id, $paese);
-	}
-	elseif ($submit == "elimina")
+		$up = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
+		$res = $up[0];
+		if ($up) {
+			if($submit == "aggiungi") $id = $up[1];
+			$res = $connessione->setFilmCrew($id, $crew_persona, $crew_ruolo) || $res;
+			$res = $connessione->setFilmGeneri($id, $genere) || $res;
+			$res = $connessione->setFilmPaesi($id, $paese) || $res;
+		}
+	} elseif ($submit == "elimina") {
 		$res = $connessione->deleteFilm($id);
-	else
-		$res = false;
+		$id = "";
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -57,16 +71,18 @@ try {
 	exit();
 }
 
-if ($res) {
-	if ($submit == "modifica")
-		header("location: gest_film.php?id=" . $id);
-	elseif ($submit == "aggiungi")
-		header("location: gest_film.php?id=" . $res[1]);
-	elseif ($submit == "elimina")
-		header("location: cerca_film.php");
+if (! $res) {
+	$_SESSION["success"] = "Nessuna modifica apportata.";
+	header("location: film.php?id=" . $id);
+} elseif ($submit == "aggiungi") {
+	$_SESSION["success"] = "Film aggiunto correttamente.";
+	header("location: film.php?id=" . $id);
+} elseif ($submit == "modifica") {
+	$_SESSION["success"] = "Film modificato correttamente.";
+	header("location: film.php?id=" . $id);
 } else {
-	header("location: gest_film.php?id=" . $id);
-	$_SESSION["error"] = "qualcosa è andato storto";
+	$_SESSION["success"] = "Film eliminato correttamente. Aggiungine un altro.";
+	header("location: gest_film.php");
 }
 
 ?>

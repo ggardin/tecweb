@@ -126,6 +126,18 @@ class Tools {
 	}
 
 	public static function showPage(&$page) : void {
+		if (isset($_SESSION["success"])) {
+			self::toHtml($_SESSION["success"]);
+			self::replaceAnchor($page, "message_type", "success");
+			self::replaceAnchor($page, "server_message", $_SESSION["success"]);
+			unset($_SESSION["success"]);
+		} elseif (isset($_SESSION["error"])) {
+			self::toHtml($_SESSION["error"]);
+			self::replaceAnchor($page, "message_type", "error");
+			self::replaceAnchor($page, "server_message", $_SESSION["error"]);
+			unset($_SESSION["error"]);
+		} else
+			self::replaceSection($page, "server_message", "");
 		self::deleteAllSectionAnchors($page);
 		$page = preg_replace('/^\h*\v+/m', '', $page);
 		echo($page);
@@ -155,20 +167,26 @@ class Tools {
 
 	public static function uploadImg($file) : array {
 		if (! (file_exists($file['tmp_name']) && is_uploaded_file($file['tmp_name'])))
-			return [false, "Errore durante l'upload"];
+			return [false, "Errore durante l'upload dell'immagine."];
 
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
 		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
 
-		if (! getimagesize($file["tmp_name"]))
-			return [false, "Non immagine"];
+		if (! getimagesize($file["tmp_name"])) {
+			unlink ($file["tmp_name"]);
+			return [false, "Il file caricato non sembra essere un immagine."];
+		}
 
-		if ($file["size"] > 1000000)
-			return [false, "Troppo grande"];
+		if ($file["size"] > 1600000) {
+			unlink ($file["tmp_name"]);
+			return [false, "Questa immagine pesa troppo. Dimensione massima: 1.5MB."];
+		}
 
-		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp")
-			return [false, "Solo JPG, JPEG, PNG, WEBP supportati"];
+		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp") {
+			unlink ($file["tmp_name"]);
+			return [false, "Formato immagine non supportato. Carica uno tra: JPG, JPEG, PNG, WEBP."];
+		}
 
 		$w0 = 200; $h0 = 1.5 * $w0;
 		$w1 = 500; $h1 = 1.5 * $w1;

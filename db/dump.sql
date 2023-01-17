@@ -1105,7 +1105,7 @@ INSERT INTO `crew` (`film`, `persona`, `ruolo`) VALUES
 CREATE TABLE `film` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(200) NOT NULL,
-  `nome_originale` varchar(200) NOT NULL,
+  `nome_originale` varchar(200) DEFAULT NULL,
   `durata` smallint(5) UNSIGNED DEFAULT NULL,
   `locandina` varchar(100) DEFAULT NULL,
   `descrizione` varchar(10000) DEFAULT NULL,
@@ -2265,19 +2265,19 @@ INSERT INTO `genere` (`id`, `nome`) VALUES
 (2, 'Avventura'),
 (0, 'Azione'),
 (6, 'Commedia'),
-(4, 'Crime'),
+(4, '[en]Crime[/en]'),
 (3, 'Dramma'),
 (12, 'Famiglia'),
 (1, 'Fantascienza'),
-(9, 'Fantasy'),
+(9, '[en]Fantasy[/en]'),
 (11, 'Guerra'),
-(16, 'Horror'),
+(16, '[en]Horror[/en]'),
 (10, 'Mistero'),
 (14, 'Musica'),
-(7, 'Romance'),
+(7, '[en]Romance[/en]'),
 (15, 'Storia'),
-(5, 'Thriller'),
-(8, 'Western');
+(5, '[en]Thriller[/en]'),
+(8, '[en]Western[/en]');
 
 -- --------------------------------------------------------
 
@@ -3370,7 +3370,7 @@ ALTER TABLE `genere`
 --
 ALTER TABLE `lista`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `no_stesso_nome` (`utente`,`nome`);
+  ADD UNIQUE KEY `no_stesso_nome_lista` (`utente`,`nome`);
 
 --
 -- Indexes for table `lista_film`
@@ -3378,7 +3378,8 @@ ALTER TABLE `lista`
 ALTER TABLE `lista_film`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lista` (`lista`),
-  ADD KEY `film` (`film`);
+  ADD KEY `film` (`film`),
+  ADD UNIQUE KEY `no_stesso_film_lista` (`lista`,`film`);
 
 --
 -- Indexes for table `paese`

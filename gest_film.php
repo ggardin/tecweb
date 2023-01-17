@@ -143,7 +143,7 @@ if ($id != "") {
 	}
 	Tools::replaceSection($page, "paesi_presenti", $res);
 
-	Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
+	Tools::replaceAnchor($page, "nome_originale", (isset($film["nome_originale"]) ? $film["nome_originale"] : ""));
 	Tools::replaceAnchor($page, "budget", (isset($film["budget"]) ? $film["budget"] : ""));
 	Tools::replaceAnchor($page, "incassi", (isset($film["incassi"]) ? $film["incassi"] : ""));
 	Tools::replaceAnchor($page, "submit_value", "modifica");

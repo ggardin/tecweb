@@ -18,11 +18,11 @@
 	</nav>
 
 	<main id="content">
-		<h1>Dati personali</h1>
+		<!-- server_message_start -->
+		<p id="server-message" class="@@message_type@@" aria-role="status">@@server_message@@</p>
+		<!-- server_message_end -->
 
-		<!-- message_start -->
-		<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">@@message@@</p>
-		<!-- message_end -->
+		<h1>Dati personali</h1>
 
 		<form id="gestione" method="post" action="post_dati.php">
 			<fieldset>
@@ -33,13 +33,13 @@
 				<span id="username-hint">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</span>
 
 				<label for="email"><span lang="en">Email</span></label>
-				<input type="text" id="email" name="email" value="@@email@@" onblur="validateUserEmail();" oninput="validateUserEmail();" />
+				<input type="text" id="email" name="mail" value="@@mail@@" onblur="validateUserEmail();" oninput="validateUserEmail();" />
 				<p id="email-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
 				<legend>Cambia la tua <span lang="en">password</span></legend>
 
-				<label for="old_password"><span lang="en">Password</span> precedente</label>
+				<label for="old_password"><span lang="en">Password</span> corrente</label>
 				<input type="password" id="old_password" name="old_password" />
 				<p id="old_password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
@@ -60,7 +60,7 @@
 				<p id="nome-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data">Data di nascita</label>
-				<input type="date" id="data" name="data" value="@@data_nascita@@" min="1900-01-01" max="2099-12-31" pattern="\d{2}/\d{2}/\d{4}" onblur="validateUserBirthday();" />
+				<input type="date" id="data" name="data_nascita" value="@@data_nascita@@" min="1900-01-01" max="2099-12-31" pattern="\d{2}/\d{2}/\d{4}" onblur="validateUserBirthday();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="gender"><span lang="en">Gender</span></label>
@@ -69,8 +69,10 @@
 					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- gender_end -->
 				</select>
-
-				<button type="submit" name="submit">Salva</button>
+			</fieldset>
+			<fieldset>
+				<legend>Salva</legend>
+				<button type="submit" name="submit">Modifica</button>
 			</fieldset>
 		</form>
 	</main>
