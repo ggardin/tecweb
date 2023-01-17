@@ -44,7 +44,7 @@
 				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
-				<label for="durata">Durata in minuti</label>
+				<label for="durata">Durata (in minuti)</label>
 				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" onblur="validateMovieRuntime();" aria-describedby="durata-hint" />
 				<p id="durata-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
@@ -139,11 +139,11 @@
 					<!-- stato_end -->
 				</select>
 
-				<label for="budget" lang="en">Budget</label>
+				<label for="budget"><span lang="en">Budget</span> (in Euro)</label>
 				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" oninput="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
-				<label for="incassi">Incassi</label>
+				<label for="incassi">Incassi (in Euro)</label>
 				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" oninput="validateMovieBoxOfficeEarnings();" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
