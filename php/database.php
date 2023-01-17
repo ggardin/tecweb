@@ -738,13 +738,16 @@ class Database {
 		$params = [];
 		$types = "";
 
+		if ($password != "")
+			$password = password_hash($password, PASSWORD_DEFAULT);
+
 		$args = [
 			[$username, "username", "s"],
 			[$mail, "mail", "s"],
 			[$nome, "nome", "s"],
 			[$gender, "gender", "i"],
-			[$data_nascita, "data_nascita", "s"]
-			// [$password, "password", "s", false]
+			[$data_nascita, "data_nascita", "s"],
+			[$password, "password", "s", false]
 			];
 
 		$this->updateArgs($query, $values, $params, $types, $args);
@@ -920,7 +923,7 @@ class Database {
 					on fg.genere = g.id
 			where l.utente = ?
 			group by g.nome
-			order by count(*) desc";
+			order by count(*) desc, g.nome";
 
 
 		$params = [$user_id];

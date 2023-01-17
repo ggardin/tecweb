@@ -51,7 +51,7 @@ try {
 }
 
 if (! $res) {
-	if ($submit = "aggiungi") {
+	if ($submit == "aggiungi") {
 		$_SESSION["error"] = "Esiste già una lista con questo nome";
 		header("location: gest_list.php");
 	} else {
