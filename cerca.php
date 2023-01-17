@@ -20,10 +20,14 @@ $offset = $limit * $next;
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
-		if ($f_nome == "genere" && $f_val_genere)
+		if ($f_nome == "genere" && $f_val_genere != "") {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $limit, $offset, $f_val_genere);
-		elseif ($f_nome == "paese" && $f_val_paese)
+			$f_val_nome = $connessione->getGenereById($f_val_genere);
+		}
+		elseif ($f_nome == "paese" && $f_val_paese != "") {
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $limit, $offset, $f_val_paese);
+			$f_val_nome = $connessione->getPaeseById($f_val_paese);
+		}
 		else {
 			$cerca = $connessione->searchFilm($query, $limit, $offset);
 			$f_nome = "";
@@ -64,10 +68,9 @@ else
 $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome) {
 	$intestazione .= " filtrati per $f_nome (";
-	if (!empty($cerca[0]) && ($f_nome == "genere" || $f_nome == "paese")) {
-		$f_val_nome = $cerca[0][0]["fv_nome"];
+	if (!empty($f_val_nome) && ($f_nome == "genere" || $f_nome == "paese")) {
 		Tools::toHtml($f_val_nome);
-		$intestazione .= $f_val_nome;
+		$intestazione .= $f_val_nome[0]["nome"];
 	}
 	$intestazione .= ")";
 }
@@ -156,7 +159,7 @@ if (!empty($cerca[0])) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "card", $r);
-	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit)));
+	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
 	$buttons = false;
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
 	if ($next > 0) {
@@ -170,13 +173,15 @@ if (!empty($cerca[0])) {
 	} else
 		Tools::replaceSection($page, "next", "");
 	if ($buttons) {
-		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "res_buttons"), true);
+		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "results_navigation"), true);
 	} else {
 		Tools::replaceSection($page, "res_buttons", "");
 		Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
 	}
 } else {
 	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
+	Tools::replaceSection($page, "res_buttons", "");
+	Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
 	Tools::replaceSection($page, "results", "");
 }
 
