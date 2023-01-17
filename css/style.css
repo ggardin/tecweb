@@ -5,22 +5,18 @@ CSS VARIABLES
 */
 
 :root {
-	--bgcolor: #E7E1DF;
-	--bgcolor-alt: var(--secondaryColor);
-	--bgcolor-off: #BBB2B1;
+	--bgcolor: #F0F0F0;
+	--bgcolor-off: #C8C8C8;
 
-	--txtcolor: #1A1A1A;
-	--txtcolor-alt: var(--txtcolor); /* ??? */
-
-	--secondaryColor: #DBD2CD;
+	--secondaryColor: #E6E6E6;
 	--tertiaryColor: #0C443B;
 
-	--anchorcolor: #110093;
-	--anchorcolor-alt: #D04637;
+	--txtcolor: #0F0F0F;
 
-	--form-required-field: #D50000;
-	--form-invalid: var(--form-required-field);
-	--interactions-text-color: var(--txtcolor);
+	--anchorcolor: #00016a;
+	--anchorcolor-alt: #676b00;
+
+	--error-required: #c20000;
 	--interactions-text-placeholder-color: #4D4D4D;
 
 	--interactions-color: #FBFBFB;
@@ -34,23 +30,20 @@ CSS VARIABLES
 }
 
 :root.dark {
-	--bgcolor: #1A1A1A;
-	--bgcolor-alt: #242424;
-	--bgcolor-off: #434343;
+	--bgcolor: #0F0F0F;
+	--bgcolor-off: #424242;
 
-	--txtcolor: #E4DCD7;
-
-	--anchorcolor: #91E8FB;
-	--anchorcolor-alt: #da4635;
-
-	--secondaryColor: #242424;
+	--secondaryColor: #191919;
 	--tertiaryColor: #BDDDAA;
 
-	--form-required-field: #FF3030;
-	--form-invalid: var(--form-required-field);
+	--txtcolor: #F0F0F0;
+
+	--anchorcolor: #0e8aff;
+	--anchorcolor-alt: #feff6f;
+
+	--error-required: #ff5757;
 
 	--interactions-color: #313131;
-	--interactions-text-color: var(--txtcolor);
 	--interactions-text-placeholder-color: #B6B6B6;
 }
 
@@ -200,7 +193,7 @@ HEADER
 
 #page-header li a:hover,
 #accountButton:hover {
-	background-color: var(--bgcolor-alt);
+	background-color: var(--secondaryColor);
 }
 
 #page-header li .active,
@@ -439,7 +432,7 @@ INDEX
 	gap: 2em;
 	align-items: center;
 	justify-content: center;
-	background-color: var(--bgcolor-alt);
+	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	padding: 2em;
 	margin-top: 2.5em;
@@ -491,7 +484,7 @@ CARDS
 }
 
 .card {
-	background-color: var(--bgcolor-alt);
+	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 }
 
@@ -659,7 +652,7 @@ MOVIE PAGE
 	padding: 0.5em;
 	border: 1px solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
-	background-color: var(--bgcolor-alt);
+	background-color: var(--secondaryColor);
 }
 
 #movie-details #subtitle {
@@ -984,13 +977,13 @@ FORMS
 
 form .required {
 	margin-left: 0.5ch;
-	color: var(--form-required-field);
+	color: var(--error-required);
 }
 
 form div.invalid,
 form input.invalid,
 form textarea.invalid {
-	outline: 0.15rem solid var(--form-invalid);
+	outline: 0.15rem solid var(--error-required);
 	border-radius: var(--border-radius);
 }
 
@@ -1021,7 +1014,7 @@ form textarea.invalid {
 	display: flex;
 	gap: 0.5em;
 	width: fit-content;
-	background-color: var(--bgcolor-alt);
+	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 1px solid var(--bgcolor-off);
 }
