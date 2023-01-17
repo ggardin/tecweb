@@ -178,9 +178,9 @@ class Tools {
 			return [false, "Il file caricato non sembra essere un immagine."];
 		}
 
-		if ($file["size"] > 2100000) {
+		if ($file["size"] > 1600000) {
 			unlink ($file["tmp_name"]);
-			return [false, "Questa immagine pesa troppo. Dimensione massima: 2MB."];
+			return [false, "Questa immagine pesa troppo. Dimensione massima: 1.5MB."];
 		}
 
 		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp") {

@@ -13,7 +13,7 @@ $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 $data_nascita = isset($_POST["data_nascita"]) ? $_POST["data_nascita"] : "";
 $data_morte = isset($_POST["data_morte"]) ? $_POST["data_morte"] : "";
-$immagine = "";
+$immagine = isset($_POST["elimina-immagine"]) ? null : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
 if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
@@ -26,7 +26,7 @@ $valid = true;
 if (strlen($nome) <= 3) {
 	$valid = false;
 	$_SESSION["error"] = "Nome troppo corto";
-} elseif (isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
+} elseif (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["immagine"]);
 	if ($img[0]) $immagine = $img[1];
 	else {

@@ -22,7 +22,7 @@ $stato = isset($_POST["stato"]) ? $_POST["stato"] : "";
 $budget = isset($_POST["budget"]) ? $_POST["budget"] : "";
 $incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : "";
 $collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : "";
-$locandina = "";
+$locandina = isset($_POST["elimina-locandina"]) ? null : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
 if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
@@ -35,7 +35,7 @@ $valid = true;
 if (strlen($titolo) <= 3) {
 	$valid = false;
 	$_SESSION["error"] = "Il titolo deve avere almeno 3 caratteri";
-} elseif (isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
+} elseif (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
@@ -84,6 +84,5 @@ if (! $res) {
 	$_SESSION["success"] = "Film eliminato correttamente. Aggiungine un altro.";
 	header("location: gest_film.php");
 }
-
 
 ?>

@@ -11,7 +11,7 @@ if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $titolo = isset($_POST["titolo"]) ? $_POST["titolo"] : "";
 $descrizione = isset($_POST["descrizione"]) ? $_POST["descrizione"] : "";
-$locandina = "";
+$locandina = isset($_POST["elimina-locandina"]) ? null : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
 if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
@@ -24,7 +24,7 @@ $valid = true;
 if (strlen($titolo) <= 3) {
 	$valid = false;
 	$_SESSION["error"] = "Il titolo deve avere almeno 3 caratteri";
-} elseif (isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
+} elseif (!is_null($locandina) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {

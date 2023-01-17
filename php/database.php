@@ -577,7 +577,7 @@ class Database {
 		$q = "";
 		$v = "";
 		foreach ($args as $arg) {
-			if (sizeof($arg) == 3 || $arg[0]) {
+			if (sizeof($arg) == 3 || ! empty($arg[0]) || is_null($arg[0])) {
 				$q .= ", " . $arg[1];
 				if (! $values)
 					$q .= " = ?";

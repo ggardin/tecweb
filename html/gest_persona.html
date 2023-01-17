@@ -43,6 +43,11 @@
 				<label for="immagine">Immagine</label>
 				<input type="file" name="immagine" id="immagine" />
 
+				<div class="checkbox-pill">
+					<label for="elimina-immagine">Elimina immagine</label>
+					<input type="checkbox" id="elimina-immagine" name="elimina-immagine" />
+				</div>
+
 				<label for="data_nascita">Data di nascita</label>
 				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
 				<p id="data_nascita-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>

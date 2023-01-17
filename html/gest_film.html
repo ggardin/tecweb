@@ -40,6 +40,11 @@
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />
 
+				<div class="checkbox-pill">
+					<label for="elimina-locandina">Elimina locandina</label>
+					<input type="checkbox" id="elimina-locandina" name="elimina-locandina" />
+				</div>
+
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
