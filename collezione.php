@@ -30,7 +30,7 @@ if (empty($collezione)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $collezione = $collezione[0];
-$title = $collezione["nome"] . " • Collezione"; Tools::toHtml($title, 0);
+$title = $collezione["nome"] . " • Collezione"; Tools::toHtml($title, 1);
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($collezione);
 Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
@@ -43,7 +43,7 @@ if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
 	Tools::replaceAnchor($page, "gest_id", $id);
 else
 	Tools::replaceSection($page, "admin", "");
-$immagine = (isset($collezione["locandina"]) ? ("pics/w500_" . $collezione["locandina"]) : "img/placeholder.svg");
+$immagine = (isset($collezione["locandina"]) ? ("pics/w500_" . $collezione["locandina"] . ".webp") : "img/placeholder.svg");
 Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {
 	Tools::toHtml($film);
@@ -57,7 +57,7 @@ if (!empty($film)) {
 			Tools::replaceAnchor($c, "data_rilascio", date_format(date_create_from_format('Y-m-d', $f["data_rilascio"]), 'd/m/Y'));
 		else
 			Tools::replaceSection($c, "data_rilascio", "");
-		$immagine = (isset($f["locandina"]) ? ("pics/w200_" . $f["locandina"]) : "img/placeholder.svg");
+		$immagine = (isset($f["locandina"]) ? ("pics/w200_" . $f["locandina"] . ".webp") : "img/placeholder.svg");
 		Tools::replaceAnchor($c, "immagine", $immagine);
 		$res .= $c;
 	}

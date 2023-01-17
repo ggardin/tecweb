@@ -19,25 +19,37 @@
 	</nav>
 
 	<main id="content">
+		<!-- server_message_start -->
+		<p id="server-message" class="@@message_type@@" role="alert">@@server_message@@</p>
+		<!-- server_message_end -->
+
 		<h1>@@intestazione@@</h1>
+
 		<form id="gestione" method="post" action="post_gest_film.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni principali</legend>
-				<label for="titolo">Titolo</label>
-				<input id="titolo" name="titolo" value="@@nome@@" />
+				<label for="titolo">Titolo<span class="required">(richiesto)</span></label>
+				<input id="titolo" name="titolo" value="@@nome@@" oninput="validateMovieTitle();" onblur="validateMovieTitle();" required />
+				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();">@@descrizione@@</textarea>
+				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />
+
+				<div class="checkbox-pill">
+					<label for="elimina-locandina">Elimina locandina</label>
+					<input type="checkbox" id="elimina-locandina" name="elimina-locandina" />
+				</div>
 
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
-				<label for="durata">Durata in minuti</label>
+				<label for="durata">Durata (in minuti)</label>
 				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" onblur="validateMovieRuntime();" aria-describedby="durata-hint" />
 				<p id="durata-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
@@ -46,18 +58,48 @@
 				<legend lang="en">Crew</legend>
 
 				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
+
+				<div id="crew-sample" hidden>
+					<!-- crew_sample_start -->
+					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
+					<input id="crew-person@@crew_person_input_id@@" @@crew_person_input_name@@ type="text" list="lista-persone" value="@@value@@" />
+
+					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
+					<select id="crew-role@@crew_role_select_id@@" @@crew_role_select_name@@>
+						<!-- ruolo_start -->
+						<option value="@@id@@" @@sel@@>@@nome@@</option>
+						<!-- ruolo_end -->
+					</select>
+
+					<input type="button" onclick="removeCrewMember(this);" value="Elimina" />
+					<!-- crew_sample_end -->
+				</div>
+
+				<!-- persone_presenti_start -->
+				<div class="crew-member">
+					<!-- persona_presente -->
+				</div>
+				<!-- persone_presenti_end -->
+
 				<input type="button" onclick="addNewCrewMember(this);" value="Aggiungi" />
 				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
+				<datalist id="lista-persone">
+					<!-- persona_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- persona_end -->
+				</datalist>
 			</fieldset>
 
 			<fieldset class="checkbox-pills">
 				<legend>Generi</legend>
 
 				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
+				<!-- genere_start -->
 				<div class="checkbox-pill">
-					<label for="genre-@@genere_id_input@@">@@genere_nome_label@@</label>
-					<input type="checkbox" id="genre-@@genere_id_input@@" name="genere" value="@@id@@" onblur="updateGenresCounter();" />
+					<label for="genre-@@genere_label_id@@">@@genere_label_nome@@</label>
+					<input type="checkbox" id="genre-@@genere_input_id@@" name="genere[]" value="@@id@@" onclick="updateGenresHint();" @@checked@@ />
 				</div>
+				<!-- genere_end -->
 				<input type="hidden" id="genres-count" name="genres-count" value="-1" />
 			</fieldset>
 
@@ -65,36 +107,54 @@
 				<legend>Paesi di produzione</legend>
 
 				<p id="nation-hint" role="status">Non è stato definito alcun Paese.</p>
+
+				<div id="nation-sample" hidden>
+					<!-- nation_sample_start -->
+					<label for="nation-name@@nation_label_id@@">Codice del Paese</label>
+					<input id="nation-name@@nation_input_id@@" @@nation_input_name@@ type="text" list="lista-paesi" value="@@value@@" />
+					<input type="button" onclick="removeNation(this);" value="Elimina" />
+					<!-- nation_sample_end -->
+				</div>
+
+				<!-- paesi_presenti_start -->
+				<div class="nation">
+					<!-- paese_presente -->
+				</div>
+				<!-- paesi_presenti_end -->
+
 				<input type="button" onclick="addNewNation(this);" value="Aggiungi Paese" />
 				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
 				<datalist id="lista-paesi">
-					<option value="@@paese_id@@">@@paese_nome@@</option>
+					<!-- paese_start -->
+					<option value="@@id@@">@@nome@@</option>
+					<!-- paese_end -->
 				</datalist>
 			</fieldset>
 
 			<fieldset>
 				<legend>Altri dettagli</legend>
-				<label for="nome_originale">Titolo originale</label>
-				<input id="nome_originale" name="nome_originale" value="@@nome_originale@@" />
+				<label for="titolo_originale">Titolo originale</label>
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" onblur="validateMovieOriginalTitle();" oninput="validateMovieOriginalTitle();"/>
+				<p id="titolo_originale-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="stato">Stato</label>
-				<select id="stato" class="form-control">
-					<option value="-1" selected="selected">Bozza</option>
-					<option value="0">Rilasciato</option>
-					<option value="1">In produzione</option>
+				<select id="stato" name="stato" class="form-control">
+					<!-- stato_start -->
+					<option value="@@id@@" @@sel@@>@@nome@@</option>
+					<!-- stato_end -->
 				</select>
 
-				<label for="budget" lang="en">Budget</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" />
+				<label for="budget"><span lang="en">Budget</span> (in Euro)</label>
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" oninput="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
-				<label for="incassi">Incassi</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" />
+				<label for="incassi">Incassi (in Euro)</label>
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" oninput="validateMovieBoxOfficeEarnings();" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
 				<select name="collezione" id="collezione">
-					<option value="">-- NESSUNA --</option>
+					<option value="">NESSUNA COLLEZIONE</option>
 					<!-- collezione_start -->
 					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- collezione_end -->

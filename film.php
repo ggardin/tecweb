@@ -40,12 +40,12 @@ if (empty($film)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $film = $film[0];
-$title = $film["nome"] . " • Film"; Tools::toHtml($title, 0);
+$title = $film["nome"] . " • Film"; Tools::toHtml($title, 1);
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 Tools::replaceAnchor($page, "nome", $film["nome"]);
-$immagine = (isset($film["locandina"]) ? ("pics/w500_" . $film["locandina"]) : "img/placeholder.svg");
+$immagine = (isset($film["locandina"]) ? ("pics/w500_" . $film["locandina"] . ".webp") : "img/placeholder.svg");
 Tools::replaceAnchor($page, "locandina", $immagine);
 $sub = false;
 if (isset($film["data_rilascio"])) {
@@ -76,11 +76,11 @@ if (!empty($crew)) {
 	$res = "";
 	$last_ruolo = "";
 	foreach ($crew as $c) {
-		if ($c["ruolo"] != $last_ruolo) {
+		if ($c["r_nome"] != $last_ruolo) {
 			$r = $ruolo;
-			Tools::replaceAnchor($r, "ruolo", $c["ruolo"]);
+			Tools::replaceAnchor($r, "ruolo", $c["r_nome"]);
 			$res .= $r;
-			$last_ruolo = $c["ruolo"];
+			$last_ruolo = $c["r_nome"];
 		}
 		$p = $persona;
 		Tools::replaceAnchor($p, "nome", $c["p_nome"]);
@@ -96,7 +96,7 @@ if (!empty($genere)) {
 	$r = "";
 	foreach ($genere as $g) {
 		$t = $list;
-		Tools::replaceAnchor($t, "id", $g["nome"]); // TODO
+		Tools::replaceAnchor($t, "id", $g["id"]);
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
 		$r .= $t;
 	}
@@ -109,14 +109,14 @@ if (!empty($paese)) {
 	$r = "";
 	foreach ($paese as $p) {
 		$t = $list;
-		Tools::replaceAnchor($t, "id", $p["nome"]); // TODO
+		Tools::replaceAnchor($t, "id", $p["id"]);
 		Tools::replaceAnchor($t, "nome", $p["nome"]);
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "paese", $r);
 } else
 	Tools::replaceSection($page, "paesi", "");
-Tools::replaceAnchor($page, "nome_originale", $film["nome_originale"]);
+Tools::replaceAnchor($page, "nome_originale", (isset($film["nome_originale"]) ? $film["nome_originale"] : ""));
 Tools::replaceAnchor($page, "stato", $stato[0]["nome"]);
 if (isset($film["budget"])) {
 	Tools::replaceAnchor($page, "budget", $film["budget"] . " $");
@@ -138,8 +138,10 @@ $val = false;
 if (isset($_SESSION["id"]) && $can_review) {
 	$val = true;
 	Tools::replaceAnchor($page, "review_film_id", $id);
-} else
+} else {
 	Tools::replaceSection($page, "add_review", "");
+	Tools::replaceSection($page, "skip_add_review", "");
+}
 if (!empty($valutazione)) {
 	$val = true;
 	Tools::toHtml($valutazione);
@@ -172,8 +174,10 @@ if (isset($_SESSION["id"]) && !empty($lista)) {
 	}
 	Tools::replaceSection($page, "lista", $r);
 	Tools::replaceAnchor($page, "list_film_id", $id);
-} else
+} else {
 	Tools::replaceSection($page, "user", "");
+	Tools::replaceSection($page, "skip_add_movie", "");
+}
 if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
 	Tools::replaceAnchor($page, "gest_id", $id);
 else

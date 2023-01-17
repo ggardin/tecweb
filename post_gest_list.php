@@ -3,31 +3,46 @@
 require_once("php/tools.php");
 require_once("php/database.php");
 
-$user = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+$user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
+
+if ($user_id == "") {
+	header("location: login.php");
+	exit();
+}
+
 $id = isset($_POST["gest_id"]) ? $_POST["gest_id"] : "";
 $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
 
-if ($user == "" || ! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
-	header("location: index.php");
+if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "aggiungi" && $id == "")) {
+	Tools::errCode(500);
 	exit();
 }
 
-if ($nome == "") {
-	header("location: gest_list.php?id=$id");
+$valid = true;
+
+if (strlen($nome) <= 3) {
+	$valid = false;
+	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
+}
+
+if (! $valid) {
+	header("location: gest_list.php?id=" . $id);
 	exit();
 }
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi")
-		$res = $connessione->insertLista($user, $nome);
-	elseif ($submit == "modifica" && $connessione->isListaDiUtente($id, $user))
+	if ($submit == "aggiungi") {
+		$up = $connessione->insertLista($user_id, $nome);
+		$res = $up[0];
+		if ($res) $id = $up[1];
+	} elseif ($submit == "modifica" && $connessione->isListaDiUtente($id, $user_id))
 		$res = $connessione->updateLista($id, $nome);
-	elseif ($submit == "elimina" && $connessione->isListaDiUtente($id, $user))
+	elseif ($submit == "elimina" && $connessione->isListaDiUtente($id, $user_id)) {
 		$res = $connessione->deleteLista($id);
-	else
-		$res = false;
+		$id = "";
+	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -35,14 +50,22 @@ try {
 	exit();
 }
 
-if ($res) {
-	if ($submit == "modifica")
-		header("location: list.php?id=$id");
-	else
-		header("location: lists.php");
-	exit();
+if (! $res) {
+	if ($submit == "aggiungi") {
+		$_SESSION["error"] = "Esiste già una lista con questo nome";
+		header("location: gest_list.php");
+	} else {
+		$_SESSION["success"] = "Nessuna modifica apportata.";
+		header("location: list.php?id=" . $id);
+	}
+} elseif ($submit == "aggiungi") {
+	$_SESSION["success"] = "Lista aggiunta correttamente.";
+	header("location: list.php?id=" . $id);
+} elseif ($submit == "modifica") {
+	$_SESSION["success"] = "Lista modificata correttamente.";
+	header("location: list.php?id=" . $id);
 } else {
-	// nome duplicato o altro, dare errore
+	$_SESSION["success"] = "Lista eliminata correttamente.";
 	header("location: lists.php");
 }
 

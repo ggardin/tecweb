@@ -6,10 +6,71 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
+		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
 			event.preventDefault();
 		}
 	});
+}
+
+/*
+ * Valida il titolo del film
+ */
+function validateMovieTitle() {
+	var id = 'titolo';
+	var title = document.forms['gestione'][id].value;
+
+	if (title == null || title == '') {
+		showErrorMessage(id, 'Titolo è un campo richiesto.');
+		return false;
+	}
+	else {
+		const titleRegex = /^[\w\s\-\:\'\[\]\,\/\"\u00C0-\u017F]+$/;
+		if (! titleRegex.test(title)) {
+			showErrorMessage(id, 'Il titolo inserito contiene caratteri non ammessi.');
+			return false;
+		}
+	}
+
+	removeErrorMessage(id);
+	return true;
+}
+
+/*
+ * Valida il titolo originale del film
+ */
+function validateMovieOriginalTitle() {
+	var id = 'titolo_originale';
+	var title = document.forms['gestione'][id].value;
+
+	if (title != null || title != '') {
+		const titleRegex = /^[^<>{}]*$/;
+		if (! titleRegex.test(title)) {
+			showErrorMessage(id, 'Il titolo inserito contiene caratteri non ammessi.');
+			return false;
+		}
+	}
+
+	removeErrorMessage(id);
+	return true;
+}
+
+/*
+ * Valida la descrizione del film
+ */
+function validateMovieDescription() {
+	var id = 'descrizione';
+	var description = document.forms['gestione'][id].value;
+
+	if (description != null || description != '') {
+		const descriptionRegex = /^[^<>{}]*$/;
+		if (! descriptionRegex.test(description)) {
+			showErrorMessage(id, 'La descrizione inserita contiene caratteri non ammessi.');
+			return false;
+		}
+	}
+
+	removeErrorMessage(id);
+	return true;
 }
 
 /*
@@ -77,12 +138,12 @@ function validateMovieRuntime() {
 
 	// se durata negativa, segnala errore
 	if (runtime != "" && runtime <= 0) {
-		showErrorMessage(id, "Durata in minuti inferiore a 0 minuti.");
+		showErrorMessage(id, "La durata del film non può valere meno di 1 minuto.");
 		return false;
 	}
 	// se durata oltre soglia, segnala errore
 	else if (runtime > 1000) {
-		showErrorMessage(id, "Durata in minuti superiore a 1000 minuti.");
+		showErrorMessage(id, "La durata del film non può superare i 1000 minuti.");
 		return false;
 	}
 
@@ -94,21 +155,21 @@ function validateMovieRuntime() {
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBudget() {
-	validateMoney('budget');
+	return validateMoney('budget');
 }
 
 /*
  * Avvisa se il budget indicato è oltre la soglia
  */
 function validateMovieBoxOfficeEarnings() {
-	validateMoney('incassi');
+	return validateMoney('incassi');
 }
 
 /*
  * Valida la cifra
  */
 function validateMoney(id) {
-	if ( document.forms['gestione'][id].value != "" && document.forms['gestione'][id].value <= 0 ) {
+	if ( document.forms['gestione'][id].value != '' && document.forms['gestione'][id].value <= 0 ) {
 		showErrorMessage(id, 'La cifra non può essere inferiore a 0.');
 		return false;
 	}
@@ -123,16 +184,26 @@ window.addEventListener('load', function () {
 
 var instanceCrew = 0;
 var instanceNations = 0;
+var clicksOnAddButtonCrew = 0;
+var clicksOnAddButtonNation = 0;
 
 /*
  * Ottiene il numero di membri della crew e nazioni già presenti
  */
 function initiateInstanceCount() {
+	// Inizializza contatori per Crew member
 	instanceCrew = document.querySelectorAll('.crew-member').length;
+	clicksOnAddButtonCrew = document.querySelectorAll('.crew-member').length;
+	// Inizializza contatori per Nation
 	instanceNations = document.querySelectorAll('.nation').length;
+	clicksOnAddButtonNation = document.querySelectorAll('.nation').length;
+
+	// Aggiorna hint e contatori
 	updateCrewCounter();
 	updateNationsCounter();
-	updateGenresCounter();
+	updateCrewHint();
+	updateNationHint();
+	updateGenresHint();
 }
 
 /*
@@ -145,70 +216,46 @@ function initiateInstanceCount() {
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
  */
 function addNewCrewMember(element) {
-	// Elementi per #nome
-	var newCrewNameLabel = document.createElement("label");
-	var newCrewNameInput = document.createElement("input");
-	// Elementi per #crew
-	var newCrewRoleLabel = document.createElement("label");
-	var newCrewRoleSelect = document.createElement("select");
-	var newCrewRoleRegista = document.createElement("option");
-	var newCrewRoleSceneggiatore = document.createElement("option");
-	var newCrewRoleProduttore = document.createElement("option");
-	var newCrewRoleCompositore = document.createElement("option");
-	// Elementi per tasto "elimina"
-	var newCrewDeleteInput = document.createElement("input");
+	// Elemento da duplicare
+	var original = document.getElementById('crew-sample');
 
-	// <label for="crew-name0">Nome e cognome</label>
-	newCrewNameLabel.htmlFor = "crew-name" + instanceCrew;
-	newCrewNameLabel.innerHTML = "Nome e cognome";
-	newCrewNameLabel.classList.add('crew-member');
+	// Duplicato
+	var clone = original.cloneNode(true);
+	var personLabel = clone.getElementsByTagName('label')[0];
+	var personInput = clone.getElementsByTagName('input')[0];
+	var roleLabel = clone.getElementsByTagName('label')[1];
+	var roleSelect = clone.getElementsByTagName('select')[0];
 
-	// <input id="crew-name0" name="crew-name0" type="text">
-	newCrewNameInput.id = "crew-name" + instanceCrew;
-	newCrewNameInput.name = "crew-name" + instanceCrew;
-	newCrewNameInput.type = "text";
+	// Aggiorna id
+	clone.removeAttribute('id');
+	personInput.id = 'crew-person' + clicksOnAddButtonCrew;
+	roleSelect.id = 'crew-role' + clicksOnAddButtonCrew;
 
-	// <label for="crew-role0">Ruolo</label>
-	newCrewRoleLabel.htmlFor = "crew-role" + instanceCrew;
-	newCrewRoleLabel.innerHTML = "Ruolo";
+	// Aggiunge classe crew
+	clone.classList.add('crew-member');
 
-	// <select id="crew-role0" name="crew-role0"></select>
-	newCrewRoleSelect.id = "crew-role" + instanceCrew;
-	newCrewRoleSelect.name = "crew-role" + instanceCrew;
-	newCrewRoleRegista.value = 0;
-	newCrewRoleRegista.text = "Regista";
-	newCrewRoleSceneggiatore.value = 1;
-	newCrewRoleSceneggiatore.text = "Sceneggiatore"
-	newCrewRoleProduttore.value = 2;
-	newCrewRoleProduttore.text = "Produttore";
-	newCrewRoleCompositore.value = 3;
-	newCrewRoleCompositore.text = "Compositore";
+	// Aggiorna for
+	personLabel.setAttribute('for', 'crew-person' + clicksOnAddButtonCrew);
+	roleLabel.setAttribute('for', 'crew-role' + clicksOnAddButtonCrew);
 
-	// <input id="crew-delete0" type="button" onclick="removeCrewMember(this);" value="Elimina" />
-	newCrewDeleteInput.id = "crew-delete" + instanceCrew;
-	newCrewDeleteInput.type = "button";
-	newCrewDeleteInput.value = "Elimina";
-	newCrewDeleteInput.onclick = function() { removeCrewMember(this); };
+	// Imposta name per PHP
+	personInput.setAttribute('name', 'crew-person[]');
+	roleSelect.setAttribute('name', 'crew-role[]');
 
-	// Innesta gli elementi di #crew-nome
-	console.log(element)
-	element.insertAdjacentElement('beforebegin', newCrewNameLabel);
-	element.insertAdjacentElement('beforebegin', newCrewNameInput);
+	// Innesta
+	element.insertAdjacentElement('beforebegin', clone);
 
-	// Innesta gli elementi di #crew-role
-	element.insertAdjacentElement('beforebegin', newCrewRoleLabel);
-	element.insertAdjacentElement('beforebegin', newCrewRoleSelect);
-	var select = document.getElementById("crew-role" + instanceCrew);
-	select.add(newCrewRoleRegista);
-	select.add(newCrewRoleSceneggiatore);
-	select.add(newCrewRoleProduttore);
-	select.add(newCrewRoleCompositore);
-
-	// Innesta tasto per eliminare
-	element.insertAdjacentElement('beforebegin', newCrewDeleteInput);
-
-	// Aggiorna il numero di istanze e il contatore
+	// Incrementa contatori
 	instanceCrew++;
+	clicksOnAddButtonCrew++;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
+
+	// Imposta il focus
+	personInput.focus();
+
+	// Aggiorna il contatore
 	updateCrewCounter();
 	updateCrewHint();
 }
@@ -217,11 +264,7 @@ function addNewCrewMember(element) {
  * Rimuove il membro della crew corrispondente.
  */
 function removeCrewMember(element) {
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.remove();
+	element.parentNode.remove();
 	instanceCrew--;
 	updateCrewCounter();
 	updateCrewHint();
@@ -259,39 +302,41 @@ function updateCrewCounter() {
  * Aggiunge i campi usati per l'inserimento dei dati di un nuovo membro
  */
 function addNewNation(element) {
-	// Elementi per #nome
-	var newNationLabel = document.createElement("label");
-	var newNationInput = document.createElement("input");
-	// Elementi per tasto "elimina"
-	var newNationDeleteInput = document.createElement("input");
+	// Elemento da duplicare
+	var original = document.getElementById('nation-sample');
 
-	// <label for="nation-name0">Nome del Paese</label>
-	newNationLabel.htmlFor = "nation-name" + instanceNations;
-	newNationLabel.innerHTML = "Nome del Paese";
-	newNationLabel.classList.add('nation');
+	// Duplicato
+	var clone = original.cloneNode(true);
+	var label = clone.getElementsByTagName('label')[0];
+	var input = clone.getElementsByTagName('input')[0];
 
-	// <input id="nation-name0" name="nation-name0" type="text">
-	newNationInput.id = "nation-name" + instanceNations;
-	newNationInput.name = "nation-name" + instanceNations;
-	newNationInput.type = "text";
-	newNationInput.setAttribute("list", "lista-paesi");
+	// Aggiorna id
+	clone.removeAttribute('id');
+	input.id = 'nation-name' + clicksOnAddButtonNation;
 
-	// <input id="nation-delete0" type="button" onclick="removeNation(this);" value="Elimina" />
-	newNationDeleteInput.id = "nation-delete" + instanceNations;
-	newNationDeleteInput.type = "button";
-	newNationDeleteInput.value = "Elimina";
-	newNationDeleteInput.onclick = function() { removeNation(this); };
+	// Aggiunge classe nation
+	clone.classList.add('nation');
 
-	// Innesta gli elementi di #nation-nome
-	console.log(element)
-	element.insertAdjacentElement('beforebegin', newNationLabel);
-	element.insertAdjacentElement('beforebegin', newNationInput);
+	// Aggiorna for
+	label.setAttribute('for', 'nation-name' + clicksOnAddButtonNation);
 
-	// Innesta tasto per eliminare
-	element.insertAdjacentElement('beforebegin', newNationDeleteInput);
+	// Imposta name per PHP
+	input.setAttribute('name', 'nation[]');
 
-	// Aggiorna il numero di istanze e il contatore
+	// Innesta
+	element.insertAdjacentElement('beforebegin', clone);
+
+	// Incrementa contatori
 	instanceNations++;
+	clicksOnAddButtonNation++;
+
+	// Rimuove attributo hidden
+	clone.removeAttribute('hidden');
+
+	// Imposta il focus
+	input.focus();
+
+	// Aggiorna il contatore
 	updateNationsCounter();
 	updateNationHint();
 }
@@ -300,9 +345,7 @@ function addNewNation(element) {
  * Rimuove il membro della nation corrispondente.
  */
 function removeNation(element) {
-	element.previousSibling.remove();
-	element.previousSibling.remove();
-	element.remove();
+	element.parentNode.remove();
 	instanceNations--;
 	updateNationsCounter();
 	updateNationHint();
@@ -337,11 +380,25 @@ function updateNationsCounter() {
  */
 
 /*
+ * Aggiorna il suggerimento che riporta il numero di generi selezionati.
+ */
+function updateGenresHint() {
+	const hint = document.getElementById('genre-hint');
+	var count = countGenres();
+
+	if (count == 0) {
+		hint.innerHTML = "Non è stato selezionato alcun genere cinematografico.";
+	}
+	else {
+		hint.innerHTML = (count > 1 ? count + " generi." : count + " genere.");
+	}
+}
+
+/*
  * Aggiorna il contatore dei generi selezionati.
  */
-function updateGenresCounter() {
-	const counter = document.getElementById('genres-count');
-	const checkboxes = document.getElementsByName('genere');
+function countGenres() {
+	const checkboxes = document.getElementsByName('genere[]');
 	var count = 0;
 
 	for (var i = 0; i < checkboxes.length; i++) {
@@ -350,5 +407,5 @@ function updateGenresCounter() {
 		}
 	}
 
-	counter.value = count;
+	return count;
 }

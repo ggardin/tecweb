@@ -70,10 +70,10 @@ class Tools {
 	}
 
 	private static function convHelper(&$item, $key, $conv_level) : void {
-		if (! is_null($item)) {
+		if (is_string($item)) {
 			$item = htmlspecialchars($item, ENT_QUOTES | ENT_SUBSTITUTE| ENT_HTML5);
-			if ($conv_level != 1) {
-				$strip = ($conv_level == 0);
+			if ($conv_level != 0) {
+				$strip = ($conv_level == 1);
 				$item = Tools::convLang($item, $strip);
 				$item = Tools::convAbbr($item, $strip);
 			}
@@ -81,8 +81,8 @@ class Tools {
 	}
 
 	// conv_level
-	// 0: conv specials, strip markers (for titles)
-	// 1: conv specials, keep makers (for editing)
+	// 0: conv specials, keep makers (for editing)
+	// 1: conv specials, strip markers (for titles)
 	// 2: conv specials, conv markers (for normal pages), DEFAULT
 	public static function toHtml(&$in, $conv_level = 2) : void {
 		if (is_array($in))
@@ -126,6 +126,18 @@ class Tools {
 	}
 
 	public static function showPage(&$page) : void {
+		if (isset($_SESSION["success"])) {
+			self::toHtml($_SESSION["success"]);
+			self::replaceAnchor($page, "message_type", "success");
+			self::replaceAnchor($page, "server_message", $_SESSION["success"]);
+			unset($_SESSION["success"]);
+		} elseif (isset($_SESSION["error"])) {
+			self::toHtml($_SESSION["error"]);
+			self::replaceAnchor($page, "message_type", "error");
+			self::replaceAnchor($page, "server_message", $_SESSION["error"]);
+			unset($_SESSION["error"]);
+		} else
+			self::replaceSection($page, "server_message", "");
 		self::deleteAllSectionAnchors($page);
 		$page = preg_replace('/^\h*\v+/m', '', $page);
 		echo($page);
@@ -154,33 +166,44 @@ class Tools {
 	}
 
 	public static function uploadImg($file) : array {
+		if (! (file_exists($file['tmp_name']) && is_uploaded_file($file['tmp_name'])))
+			return [false, "Errore durante l'upload dell'immagine."];
+
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
 		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
 
-		if (! getimagesize($file["tmp_name"]))
-			return [false, "Non immagine"];
+		if (! getimagesize($file["tmp_name"])) {
+			unlink ($file["tmp_name"]);
+			return [false, "Il file caricato non sembra essere un immagine."];
+		}
 
-		if ($file["size"] > 1000000)
-			return [false, "Troppo grande"];
+		if ($file["size"] > 1600000) {
+			unlink ($file["tmp_name"]);
+			return [false, "Questa immagine pesa troppo. Dimensione massima: 1.5MB."];
+		}
 
-		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png")
-			return [false, "Solo JPG, JPEG e PNG supportati"];
+		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp") {
+			unlink ($file["tmp_name"]);
+			return [false, "Formato immagine non supportato. Carica uno tra: JPG, JPEG, PNG, WEBP."];
+		}
 
 		$w0 = 200; $h0 = 1.5 * $w0;
 		$w1 = 500; $h1 = 1.5 * $w1;
 
 		do {
-			$filename = self::randString() . "." . $imageFileType;
-		} while (file_exists($target_dir . "${w0}_" . $filename));
+			$filename = self::randString();
+		} while (file_exists($target_dir . "${w0}_" . $filename . ".webp"));
 
-		$fn0 = $target_dir . "w${w0}_" . $filename;
-		$fn1 = $target_dir . "w${w1}_" . $filename;
+		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
+		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
 
 		if ($imageFileType == "jpg" || $imageFileType == "jpeg")
 			$source = imagecreatefromjpeg($file["tmp_name"]);
-		else
+		elseif ($imageFileType == "png")
 			$source = imagecreatefrompng($file["tmp_name"]);
+		else
+			$source = imagecreatefromwebp($file["tmp_name"]);
 
 		list($width, $height) = getimagesize($file["tmp_name"]);
 
@@ -190,14 +213,8 @@ class Tools {
 		imagecopyresampled($pic0, $source, 0, 0, 0, 0, $w0, $h0, $width, $height);
 		imagecopyresampled($pic1, $source, 0, 0, 0, 0, $w1, $h1, $width, $height);
 
-		if ($imageFileType == "jpg" || $imageFileType == "jpeg") {
-			imagejpeg($pic0, $fn0);
-			imagejpeg($pic1, $fn1);
-		}
-		else {
-			imagepng($pic0, $fn0);
-			imagepng($pic1, $fn1);
-		}
+		imagewebp($pic0, $fn0);
+		imagewebp($pic1, $fn1);
 
 		unlink ($file["tmp_name"]);
 

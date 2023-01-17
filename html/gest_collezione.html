@@ -8,6 +8,7 @@
 	<meta name="keywords" content="soundstage, collezione, gestione, modifica, aggiorna, elimina, titolo, descrizione, locandina" />
 
 	<!-- head -->
+	<script src="js/validate-list.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -18,19 +19,31 @@
 	</nav>
 
 	<main id="content">
+		<!-- server_message_start -->
+		<p id="server-message" class="@@message_type@@" role="alert">@@server_message@@</p>
+		<!-- server_message_end -->
+
 		<h1>@@intestazione@@</h1>
+
 		<form id="gestione" method="post" action="post_gest_collezione.php" enctype="multipart/form-data">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni</legend>
 				<label for="titolo">Titolo</label>
-				<input id="titolo" name="titolo" value="@@nome@@" />
+				<input id="titolo" name="titolo" value="@@nome@@" onblur="validateListTitle();" oninput="validateListTitle();" required />
+				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione">@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" onblur="validateListDescription();" oninput="validateListDescription();">@@descrizione@@</textarea>
+				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="locandina">Locandina</label>
 				<input type="file" name="locandina" id="locandina" />
+
+				<div class="checkbox-pill">
+					<label for="elimina-locandina">Elimina locandina</label>
+					<input type="checkbox" id="elimina-locandina" name="elimina-locandina" />
+				</div>
 			</fieldset>
 			<fieldset>
 				<legend>Salva</legend>

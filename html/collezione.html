@@ -19,22 +19,26 @@
 	<main id="content">
 		<div id="collection-data">
 			<div id="collection-details">
+				<!-- server_message_start -->
+				<p id="server-message" class="@@message_type@@" role="alert">@@server_message@@</p>
+				<!-- server_message_end -->
+
 				<h1>@@nome@@</h1>
 				<!-- descrizione_start -->
 				<p>@@descrizione@@</p>
 				<!-- descrizione_end -->
-			</div>
-			<aside id="aside-image">
-				<img src="@@immagine@@" alt="" class="image-style"/>
 				<!-- admin_start -->
 				<h2 class="sr-only">Modifica la collezione</h2>
 				<a href="gest_collezione.php?id=@@gest_id@@" class="link-button">
-					<svg viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modifica la lista">
+					<svg viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg">
 						<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="M22.5 45c12.03 0 22-9.97 22-22 0-12.02-9.99-22-22.03-22A22.16 22.16 0 0 0 .5 23c0 12.03 9.98 22 22 22Zm8.8-28.22-2.66-2.63 1.64-1.64c.74-.69 1.56-.77 2.22-.1l.5.51c.69.67.65 1.51-.09 2.25ZM15.38 32.64l-3.09 1.16a.63.63 0 0 1-.77-.86L12.77 30 27.3 15.47l2.65 2.65Z"/>
 					</svg>
-					<p>Modifica</p>
+					<span>Modifica</span>
 				</a>
 				<!-- admin_end -->
+			</div>
+			<aside id="hero-image">
+				<img src="@@immagine@@" alt=""/>
 			</aside>
 		</div>
 		<!-- film_start -->
@@ -42,7 +46,7 @@
 			<!-- card_start -->
 			<li class="card">
 				<a href="film.php?id=@@id@@">
-					<img src="@@immagine@@" alt="" class="image-style"/>
+					<img src="@@immagine@@" alt=""/>
 					<div class="details">
 						<h2 class="title">@@nome@@</h2>
 						<dl>
@@ -57,7 +61,6 @@
 			<!-- card_end -->
 		</ul>
 		<!-- film_end -->
-	</main>
 	</main>
 
 	<!-- footer -->

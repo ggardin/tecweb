@@ -31,23 +31,28 @@ class Database {
 			$this->connection->close();
 	}
 
-	// adattata da quella vista a lezione
-	private function pulisciInput(&$params) : void {
-		foreach ($params as &$p) {
-			if (is_string($p)) {
-				$p = trim($p);
-				$p = strip_tags($p);
-				// convertiamo in entità durante output, qui facciamo il contrario
-				$p = html_entity_decode($p, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-			}
+	private function pulisciInputHelper (&$item) {
+		if (is_string($item)) {
+			// convertiamo in entità durante output, qui facciamo il contrario
+			$item = html_entity_decode($item, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+			$item = trim($item);
+			$item = strip_tags($item);
 		}
 	}
 
+	// adattata da quella vista a lezione
+	private function pulisciInput(&$in) : void {
+		if (is_array($in))
+			array_walk_recursive($in, "self::pulisciInputHelper");
+		elseif (is_string($in))
+			$this->pulisciInputHelper($in);
+	}
+
 	// see: https://phpdelusions.net/mysqli
-	private function preparedQuery(&$query, &$params, $types = "") : mysqli_stmt {
+	private function preparedQuery(&$query, &$params, $types = "", $stmt = null) : mysqli_stmt {
 		$this->pulisciInput($params);
 		$types = $types ?: str_repeat("s", count($params));
-		$stmt = $this->connection->prepare($query);
+		if (is_null($stmt)) $stmt = $this->connection->prepare($query);
 		if (!empty($params)) $stmt->bind_param($types, ...$params);
 		$stmt->execute();
 		return $stmt;
@@ -69,7 +74,7 @@ class Database {
 	private function preparedUpdates(&$query, &$params, $types = "") : bool {
 		try {
 			$stmt = $this->preparedQuery($query, $params, $types);
-			$a_r = $stmt->affected_rows;
+			$ar = $stmt->affected_rows;
 			$stmt->close();
 		} catch (mysqli_sql_exception $e) {
 			if ($e->getCode() == 1062)
@@ -77,7 +82,25 @@ class Database {
 			else
 				throw new Exception(self::ERR);
 		}
-		return $a_r > 0;
+		return $ar > 0;
+	}
+
+	private function preparedInsertMultiple(&$query, &$params, $types = "") : bool {
+		try {
+			$stmt = null;
+			$ar = 0;
+			for ($i = 0; $i < count($params); $i++) {
+				$stmt = $this->preparedQuery($query, $params[$i], $types, $stmt);
+				$ar += $stmt->affected_rows;
+			}
+			if (! is_null($stmt)) $stmt->close();
+		} catch (mysqli_sql_exception $e) {
+			if ($e->getCode() == 1062)
+				return false;
+			else
+				throw new Exception(self::ERR);
+		}
+		return $ar > 0;
 	}
 
 	public function getCollezioneById($id) : array {
@@ -105,21 +128,12 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getGenderById($id) : array {
-		$query = "select *
-			from gender
-			where id = ?";
-
-		$params = [$id];
-		$types = "i";
-
-		return $this->preparedSelect($query, $params, $types);
-	}
-
 	public function getPersonaById($id) : array {
-		$query = "select *
-			from persona
-			where id = ?";
+		$query = "select p.id, p.nome, p.gender, p.immagine, p.data_nascita, p.data_morte, g.nome as gender_nome
+			from persona as p
+				join gender as g
+					on p.gender = g.id
+			where p.id = ?";
 
 		$params = [$id];
 		$types = "i";
@@ -175,6 +189,58 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	public function getPaesi() : array {
+		$query = "select iso_3166_1 as id, nome
+			from paese
+			order by nome";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getRuoli() : array {
+		$query = "select id, nome
+			from ruolo
+			order by id";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getPersone() : array {
+		$query = "select id, nome
+			from persona
+			order by id";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
+	public function getGenereById($id) : array {
+		$query = "select nome
+			from genere
+			where id = ?";
+
+		$params = [$id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getPaeseById($id) : array {
+		$query = "select nome
+			from paese
+			where iso_3166_1 = ?";
+
+		$params = [$id];
+		$types = "s";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 	public function getStatoById($id) : array {
 		$query = "select id, nome
 			from stato
@@ -198,7 +264,7 @@ class Database {
 	}
 
 	public function getCrewByFilmId($id) : array {
-		$query = "select r.nome as ruolo, p.id as p_id, p.nome as p_nome
+		$query = "select r.id as r_id, r.nome as r_nome, p.id as p_id, p.nome as p_nome
 			from film as f
 				join crew as c
 					on f.id = c.film
@@ -216,13 +282,14 @@ class Database {
 	}
 
 	public function getPaeseByFilmId($id) : array {
-		$query = "select p.nome
+		$query = "select p.iso_3166_1 as id, p.nome
 			from film as f
 				join film_paese as fp
 					on f.id = fp.film
 				join paese as p
 					on fp.paese = p.iso_3166_1
-			where f.id = ?";
+			where f.id = ?
+			order by p.nome";
 
 		$params = [$id];
 		$types = "i";
@@ -231,13 +298,14 @@ class Database {
 	}
 
 	public function getGenereByFilmId($id) : array {
-		$query = "select g.nome
+		$query = "select g.id, g.nome
 			from film as f
 				join film_genere as fg
 					on f.id = fg.film
 				join genere as g
 					on fg.genere = g.id
-			where f.id = ?";
+			where f.id = ?
+			order by g.id";
 
 		$params = [$id];
 		$types = "i";
@@ -272,12 +340,22 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
+	public function getGeneri() : array {
+		$query = "select id, nome
+			from genere
+			order by id";
+
+		$params = [];
+
+		return $this->preparedSelect($query, $params);
+	}
+
 	public function getGeneriConFilm() : array {
 		$query = "select distinct g.id, g.nome
 			from genere as g
 				join film_genere as fg
 					on g.id = fg.genere
-			order by g.nome";
+			order by g.id";
 
 		$params = [];
 
@@ -311,14 +389,14 @@ class Database {
 				join genere as g
 					on fg.genere = g.id
 			where f.nome like ?
-				and g.nome = ?
+				and g.id = ?
 			order by data_rilascio desc";
 
 		$search = [];
 
 		$q0 = "select f.id, f.nome, f.locandina, f.data_rilascio " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $genere, $limit, $offset];
-		$t0 = "ssii";
+		$t0 = "siii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n " . $base;
@@ -336,7 +414,7 @@ class Database {
 				join paese as p
 					on fp.paese = p.iso_3166_1
 			where f.nome like ?
-				and p.nome = ?
+				and p.iso_3166_1 = ?
 			order by data_rilascio desc";
 
 		$search = [];
@@ -357,15 +435,22 @@ class Database {
 	public function searchCollezione($str, $limit, $offset) : array {
 		$search = [];
 
-		$q0 = "select c.id, c.nome, c.locandina, count(*) as n_film
-			from collezione as c
-				join film as f
-					on c.id = f.collezione
-			where c.nome like ?
-			group by c.id
+		$q0 = "select t.id, t.nome, t.locandina, t.n_film from (
+				select c.id, c.nome, c.locandina, count(*) as n_film
+				from collezione as c
+					join film as f
+						on c.id = f.collezione
+				where c.nome like ?
+				group by c.id
+				union
+				select c.id, c.nome, c.locandina, 0 as n_film
+				from collezione as c
+				where c.nome like ?
+			) as t
+			group by t.id
 			limit ? offset ?";
-		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
-		$t0 = "sii";
+		$p0 = [("%" . trim($str) . "%"), ("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n
@@ -381,17 +466,24 @@ class Database {
 	public function searchPersona($str, $limit, $offset) : array {
 		$search = [];
 
-		$q0 = "select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
-			from persona as p
-				join crew as c
-					on p.id = c.persona
-				join film as f
-					on c.film = f.id
-			where p.nome like ?
-			group by p.id
+		$q0 = "select t.id, t.nome, t.immagine, t.n_film from (
+				select p.id, p.nome, p.immagine, count(distinct f.id) as n_film
+				from persona as p
+					join crew as c
+						on p.id = c.persona
+					join film as f
+						on c.film = f.id
+				where p.nome like ?
+				group by p.id
+				union
+				select p.id, p.nome, p.immagine, 0 as n_film
+				from persona as p
+				where p.nome like ?
+			) as t
+			group by t.id
 			limit ? offset ?";
-		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
-		$t0 = "sii";
+		$p0 = [("%" . trim($str) . "%"), ("%" . trim($str) . "%"), $limit, $offset];
+		$t0 = "ssii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
 
 		$q1 = "select count(*) as n
@@ -507,13 +599,13 @@ class Database {
 		$q = "";
 		$v = "";
 		foreach ($args as $arg) {
-			if (sizeof($arg) == 3 || $arg[0]) {
+			if (sizeof($arg) == 3 || ! empty($arg[0]) || is_null($arg[0])) {
 				$q .= ", " . $arg[1];
 				if (! $values)
 					$q .= " = ?";
 				else
 					$v .= ", ?";
-				array_push($params, ($arg[0] ?: null));
+				array_push($params, ($arg[0] != "" ? $arg[0] : null));
 				$types .= $arg[2];
 			}
 		}
@@ -576,7 +668,7 @@ class Database {
 				set";
 			$values = "";
 		} else {
-			$insert = "insert into collezione(";
+			$query = "insert into collezione(";
 			$values = "values (";
 		}
 
@@ -661,12 +753,15 @@ class Database {
 				set";
 			$values = "";
 		} else {
-			$insert = "insert into utente(";
+			$query = "insert into utente(";
 			$values = "values (";
 		}
 
 		$params = [];
 		$types = "";
+
+		if ($password != "")
+			$password = password_hash($password, PASSWORD_DEFAULT);
 
 		$args = [
 			[$username, "username", "s"],
@@ -674,10 +769,10 @@ class Database {
 			[$nome, "nome", "s"],
 			[$gender, "gender", "i"],
 			[$data_nascita, "data_nascita", "s"],
-			[$password, "password", "s"]
+			[$password, "password", "s", false]
 			];
 
-		$this->optionalArgs($query, $values, $params, $types, $args);
+		$this->updateArgs($query, $values, $params, $types, $args);
 
 		if ($id != "") {
 			$query .= " where id = ?";
@@ -700,14 +795,14 @@ class Database {
 		return $this->preparedUpdates($query, $params, $types);
 	}
 
-	public function insertLista($user_id, $list_name) : bool {
+	public function insertLista($user_id, $list_name) : array {
 		$query = "insert into lista(utente, nome)
 			values (?, ?)";
 
 		$params = [$user_id, $list_name];
 		$types = "is";
 
-		return $this->preparedUpdates($query, $params, $types);
+		return [$this->preparedUpdates($query, $params, $types), $this->connection->insert_id];
 	}
 
 	public function updateLista($list_id, $name) : bool {
@@ -850,7 +945,7 @@ class Database {
 					on fg.genere = g.id
 			where l.utente = ?
 			group by g.nome
-			order by count(*) desc";
+			order by count(*) desc, g.id";
 
 
 		$params = [$user_id];
@@ -858,6 +953,73 @@ class Database {
 
 		return $this->preparedSelect($query, $params, $types);
 	}
+
+	public function setFilmCrew($film_id, $persone, $ruoli) : bool {
+		$q0 = "delete from crew
+			where film = ?";
+		$p0 = [$film_id];
+		$t0 = "i";
+		$ar0 = $this->preparedUpdates($q0, $p0, $t0);
+
+		$q1 = "insert into crew(film, persona, ruolo)
+			values (?, ?, ?)";
+		$p1 = [];
+		for ($i = 0; $i < count($ruoli); $i++)
+			$persone[$i] != "" && $ruoli[$i] != "" &&
+				array_push($p1, [$film_id, $persone[$i], $ruoli[$i]]);
+		$t1 = "iii";
+		$ar1 = $this->preparedInsertMultiple($q1, $p1, $t1);
+
+		return $ar0 != $ar1;
+	}
+
+	public function setFilmPaesi($film_id, $paesi) : bool {
+		$q0 = "delete from film_paese
+			where film = ?";
+		$p0 = [$film_id];
+		$t0 = "i";
+		$ar0 = $this->preparedUpdates($q0, $p0, $t0);
+
+		$q1 = "insert into film_paese(film, paese)
+			values (?, ?)";
+		$p1 = [];
+		for ($i = 0; $i < count($paesi); $i++)
+			$paesi[$i] != "" && array_push($p1, [$film_id, $paesi[$i]]);
+		$t1 = "is";
+		$ar1 = $this->preparedInsertMultiple($q1, $p1, $t1);
+
+		return $ar0 != $ar1;
+	}
+
+	public function setFilmGeneri($film_id, $generi) : bool {
+		$q0 = "delete from film_genere
+			where film = ?";
+		$p0 = [$film_id];
+		$t0 = "i";
+		$ar0 = $this->preparedUpdates($q0, $p0, $t0);
+
+		$q1 = "insert into film_genere(film, genere)
+			values (?, ?)";
+		$p1 = [];
+		for ($i = 0; $i < count($generi); $i++)
+			$generi[$i] != "" && array_push($p1, [$film_id, $generi[$i]]);
+		$t1 = "ii";
+		$ar1 = $this->preparedInsertMultiple($q1, $p1, $t1);
+
+		return $ar0 != $ar1;
+	}
+
+	public function getUtenteById($user_id) : array {
+		$query = "select *
+			from utente
+			where id = ?";
+
+		$params = [$user_id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
 }
 
 ?>

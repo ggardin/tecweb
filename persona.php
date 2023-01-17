@@ -13,10 +13,8 @@ if ($id == "") {
 try {
 	$connessione = new Database();
 	$persona = $connessione->getPersonaById($id);
-	if (!empty($persona)) {
+	if (!empty($persona))
 		$film = $connessione->getFilmByPersonaId($id);
-		$gender = $connessione->getGenderById($persona[0]["gender"]);
-	}
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -32,12 +30,12 @@ if (empty($persona)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $persona = $persona[0];
-$title = $persona["nome"] . " • Persona"; Tools::toHtml($title, 0);
+$title = $persona["nome"] . " • Persona"; Tools::toHtml($title, 1);
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($persona);
 Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);
 Tools::replaceAnchor($page, "nome", $persona["nome"]);
-Tools::replaceAnchor($page, "gender", $gender[0]["nome"]);
+Tools::replaceAnchor($page, "gender", $persona["gender_nome"]);
 if (isset($persona["data_nascita"]))
 	Tools::replaceAnchor($page, "data_nascita", date_format(date_create_from_format('Y-m-d', $persona["data_nascita"]), 'd/m/Y'));
 else
@@ -50,7 +48,7 @@ if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
 	Tools::replaceAnchor($page, "gest_id", $id);
 else
 	Tools::replaceSection($page, "admin", "");
-$immagine = (isset($persona["immagine"]) ? ("pics/w500_" . $persona["immagine"]) : "img/placeholder.svg");
+$immagine = (isset($persona["immagine"]) ? ("pics/w500_" . $persona["immagine"] . ".webp") : "img/placeholder.svg");
 Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {
 	Tools::toHtml($film);
@@ -66,7 +64,7 @@ if (!empty($film)) {
 			$res .= $last_film;
 			$c = $card;
 			Tools::replaceAnchor($c, "id", $f["id"]);
-			$immagine = (isset($f["locandina"]) ? ("pics/w200_" . $f["locandina"]) : "img/placeholder.svg");
+			$immagine = (isset($f["locandina"]) ? ("pics/w200_" . $f["locandina"] . ".webp") : "img/placeholder.svg");
 			Tools::replaceAnchor($c, "immagine", $immagine);
 			Tools::replaceAnchor($c, "nome", $f["nome"]);
 			if (isset($f["data_rilascio"]))

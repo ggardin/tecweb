@@ -8,6 +8,7 @@
 	<meta name="keywords" content="soundstage, film, lista, modifica, elimina, aggiorna, nome" />
 
 	<!-- head -->
+	<script src="js/validate-list.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -18,13 +19,19 @@
 	</nav>
 
 	<main id="content">
+		<!-- server_message_start -->
+		<p id="server-message" class="@@message_type@@" role="alert">@@server_message@@</p>
+		<!-- server_message_end -->
+
 		<h1>@@intestazione@@</h1>
+
 		<form id="gestione" method="post" action="post_gest_list.php">
 			<input type="hidden" name="gest_id" value="@@gest_id@@" />
 			<fieldset>
 				<legend>Informazioni</legend>
-				<label for="nome">Nome</label>
-				<input id="nome" name="nome" value="@@nome@@" />
+				<label for="titolo">Nome</label>
+				<input id="titolo" name="nome" value="@@nome@@" onblur="validateListTitle();" oninput="validateListTitle();" required />
+				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
 				<legend>Salva</legend>

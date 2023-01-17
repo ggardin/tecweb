@@ -7,8 +7,10 @@ function showErrorMessage(id, message) {
 
 	removeErrorMessage(id);
 
-	element.setAttribute("aria-invalid", true);
 	element.classList.add('invalid');
+	if (element.tagName != 'DIV') {
+		element.setAttribute("aria-invalid", true);
+	}
 
 	messageTarget.classList.add("error-message");
 	messageTarget.innerHTML = message;
@@ -22,8 +24,10 @@ function removeErrorMessage(id) {
 	var element = document.getElementById(id);
 	var messageTarget = document.getElementById(id + '-hint');
 
-	element.setAttribute("aria-invalid", false);
 	element.classList.remove('invalid');
+	if (element.tagName != 'DIV') {
+		element.setAttribute("aria-invalid", false);
+	}
 
 	messageTarget.classList.remove("error-message");
 	messageTarget.innerHTML = '';
@@ -101,28 +105,31 @@ if (button != null) button.addEventListener("click", handleThemeSwitch);
  * Mostra filtri di ricerca solo quando necessario.
  */
 function toggleRelevantSearchFilters() {
-	var type = document.getElementById('tipo-filtro').value;
-	var inputGenere = document.getElementById('filtro-genere');
-	var labelGenere = document.getElementById('filtro-genere-label');
-	var inputPaese = document.getElementById('filtro-paese');
-	var labelPaese = document.getElementById('filtro-paese-label');
 
-	if (type == '') {
-		inputGenere.hidden = true;
-		labelGenere.hidden = true;
-		inputPaese.hidden = true;
-		labelPaese.hidden = true;
-	}
-	if (type == 'genere') {
-		inputGenere.hidden = false;
-		labelGenere.hidden = false;
-		inputPaese.hidden = true;
-		labelPaese.hidden = true;
-	}
-	if (type == 'paese') {
-		inputPaese.hidden = false;
-		labelPaese.hidden = false;
-		inputGenere.hidden = true;
-		labelGenere.hidden = true;
+	if ( document.getElementById('tipo-filtro') ) {
+		var type = document.getElementById('tipo-filtro').value;
+		var inputGenere = document.getElementById('filtro-genere');
+		var labelGenere = document.getElementById('filtro-genere-label');
+		var inputPaese = document.getElementById('filtro-paese');
+		var labelPaese = document.getElementById('filtro-paese-label');
+
+		if (type == '') {
+			inputGenere.hidden = true;
+			labelGenere.hidden = true;
+			inputPaese.hidden = true;
+			labelPaese.hidden = true;
+		}
+		if (type == 'genere') {
+			inputGenere.hidden = false;
+			labelGenere.hidden = false;
+			inputPaese.hidden = true;
+			labelPaese.hidden = true;
+		}
+		if (type == 'paese') {
+			inputPaese.hidden = false;
+			labelPaese.hidden = false;
+			inputGenere.hidden = true;
+			labelGenere.hidden = true;
+		}
 	}
 }

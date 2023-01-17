@@ -38,7 +38,7 @@ if (!$own) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $nome = $nome[0];
-$title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 0);
+$title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 1);
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($nome);
 Tools::replaceAnchor($page, "breadcrumb", $nome["nome"]);
@@ -51,7 +51,7 @@ if (!empty($lista)) {
 	foreach ($lista as $l) {
 		$t = $elemento;
 		Tools::replaceAnchor($t, "id", $l["id"]);
-		$immagine = (isset($l["locandina"]) ? ("pics/w200_" . $l["locandina"]) : "img/placeholder.svg");
+		$immagine = (isset($l["locandina"]) ? ("pics/w200_" . $l["locandina"] . ".webp") : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "nome", $l["nome"]);
 		if (isset($l["data_rilascio"]))

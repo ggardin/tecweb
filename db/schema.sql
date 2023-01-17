@@ -1,8 +1,3 @@
-drop table if exists i_film;
-drop table if exists i_collezione;
-drop table if exists i_persona;
-drop table if exists i_genere;
-
 drop table if exists lista_film;
 drop table if exists lista;
 drop table if exists valutazione;
@@ -79,7 +74,7 @@ create table collezione (
 create table film (
 	id bigint unsigned,
 	nome varchar(200) not null,
-	nome_originale varchar(200) not null,
+	nome_originale varchar(200),
 	durata smallint unsigned,
 	locandina varchar(100) unique,
 	descrizione varchar(10000),
@@ -157,7 +152,7 @@ create table lista (
 	nome varchar(50),
 	primary key (id),
 	foreign key (utente) references utente(id) on delete cascade,
-	constraint no_stesso_nome unique (utente, nome)
+	constraint no_stesso_nome_lista unique (utente, nome)
 );
 
 create table lista_film (
@@ -166,37 +161,6 @@ create table lista_film (
 	film bigint unsigned,
 	primary key (id),
 	foreign key (lista) references lista(id) on delete cascade,
-	foreign key (film) references film(id) on delete cascade
-);
-
-
-
-
-
-create table i_genere (
-	id smallint unsigned,
-	tmdb_id smallint unsigned,
-	primary key (id),
-	foreign key (id) references genere(id) on delete cascade
-);
-
-create table i_persona (
-	id int unsigned,
-	tmdb_id int unsigned,
-	primary key (id),
-	foreign key (id) references persona(id) on delete cascade
-);
-
-create table i_collezione (
-	id int unsigned,
-	tmdb_id int unsigned,
-	primary key (id),
-	foreign key (id) references collezione(id) on delete cascade
-);
-
-create table i_film (
-	id bigint unsigned,
-	tmdb_id bigint unsigned,
-	primary key (id),
-	foreign key (id) references film(id) on delete cascade
+	foreign key (film) references film(id) on delete cascade,
+	constraint no_stesso_film_lista unique (lista, film)
 );

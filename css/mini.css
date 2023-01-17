@@ -1,8 +1,8 @@
-/* NAVBAR */
-
-/* #sidebar{
-	display: none;
-} */
+/*
+==============
+NAVBAR
+==============
+*/
 
 #page-header #logo-icon,
 #page-header .actions {
@@ -48,6 +48,7 @@
 #dropdown-link-container ul {
 	display: flex;
 	flex-direction: column;
+	gap: 0.5em
 }
 
 #dropdown-link-container li {
@@ -74,22 +75,11 @@ MOVIE PAGE
 
 /*
 ==============
-MAIN
-==============
-*/
-/*
-main > h1, h2{
-	text-align: center;
-}
-*/
-
-/*
-==============
 CARDS
 ==============
 */
 
-.cards.double {
+.cards {
 	grid-template-columns: 1fr;
 }
 
@@ -114,11 +104,6 @@ incl. Stats, Settings
 
 table thead {
 	display: none;
-	/*border: none;
-	clip: rect(0 0 0 0);
-	overflow: hidden;
-	position: absolute;
-	width: 0;*/
 }
 
 table td, th{
@@ -144,4 +129,34 @@ table td::before {
 	float: left;
 	font-weight: 600;
 	border-collapse: collapse;
+}
+
+/*
+==============
+FORMS
+==============
+*/
+
+#add-movie > fieldset {
+	flex-direction: column;
+}
+
+/*
+==============
+SEARCH
+==============
+*/
+
+body:not(.homepage) #search,
+#search .controls {
+	flex-direction: column;
+}
+
+#search .controls > * {
+	min-height: 3em;
+}
+
+#search select {
+	border-left: 0;
+	border-top: var(--search-input-border);
 }

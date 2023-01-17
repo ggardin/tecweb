@@ -20,10 +20,14 @@ $offset = $limit * $next;
 try {
 	$connessione = new Database();
 	if ($tipo == "film") {
-		if ($f_nome == "genere" && $f_val_genere)
+		if ($f_nome == "genere" && $f_val_genere != "") {
 			$cerca = $connessione->searchFilmFilteredByGenere($query, $limit, $offset, $f_val_genere);
-		elseif ($f_nome == "paese" && $f_val_paese)
+			$f_val_nome = $connessione->getGenereById($f_val_genere);
+		}
+		elseif ($f_nome == "paese" && $f_val_paese != "") {
 			$cerca = $connessione->searchFilmFilteredByPaese($query, $limit, $offset, $f_val_paese);
+			$f_val_nome = $connessione->getPaeseById($f_val_paese);
+		}
 		else {
 			$cerca = $connessione->searchFilm($query, $limit, $offset);
 			$f_nome = "";
@@ -48,6 +52,11 @@ if (!isset($cerca)) {
 
 $page = Tools::buildPage("cerca", "std", "cerca_$tipo");
 
+Tools::toHtml($query);
+Tools::toHtml($f_nome);
+Tools::toHtml($f_val_genere);
+Tools::toHtml($f_val_paese);
+
 if ($tipo == "film") {
 	$breadcrumb = "Film";
 }
@@ -59,10 +68,10 @@ else
 $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome) {
 	$intestazione .= " filtrati per $f_nome (";
-	if ($f_nome == "genere")
-		$intestazione .= $f_val_genere;
-	elseif ($f_nome == "paese")
-		$intestazione .= $f_val_paese;
+	if (!empty($f_val_nome) && ($f_nome == "genere" || $f_nome == "paese")) {
+		Tools::toHtml($f_val_nome);
+		$intestazione .= $f_val_nome[0]["nome"];
+	}
 	$intestazione .= ")";
 }
 
@@ -99,13 +108,14 @@ if ($tipo == "film") {
 	}
 	Tools::replaceSection($page, "filter", $res);
 
+	Tools::toHtml($generi, 1);
 	$option = Tools::getSection($page, "genere");
 	$res = "";
 	foreach ($generi as $g) {
 		$t = $option;
-		Tools::replaceAnchor($t, "val", $g["nome"]);
+		Tools::replaceAnchor($t, "val", $g["id"]);
 		Tools::replaceAnchor($t, "nome", $g["nome"]);
-		Tools::replaceAnchor($t, "sel", (($g["nome"] == $f_val_genere) ? "selected" : ""));
+		Tools::replaceAnchor($t, "sel", (($g["id"] == $f_val_genere) ? "selected" : ""));
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "genere", $res);
@@ -114,9 +124,9 @@ if ($tipo == "film") {
 	$res = "";
 	foreach ($paesi as $p) {
 		$t = $option;
-		Tools::replaceAnchor($t, "val", $p["nome"]);
+		Tools::replaceAnchor($t, "val", $p["id"]);
 		Tools::replaceAnchor($t, "nome", $p["nome"]);
-		Tools::replaceAnchor($t, "sel", (($p["nome"] == $f_val_paese) ? "selected" : ""));
+		Tools::replaceAnchor($t, "sel", (($p["id"] == $f_val_paese) ? "selected" : ""));
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "paese", $res);
@@ -132,9 +142,9 @@ if (!empty($cerca[0])) {
 	foreach ($cerca as $c) {
 		$t = $card;
 		if ($tipo != "persona")
-			$immagine = (isset($c["locandina"]) ? ("pics/w200_" . $c["locandina"]) : "img/placeholder.svg");
+			$immagine = (isset($c["locandina"]) ? ("pics/w200_" . $c["locandina"] . ".webp") : "img/placeholder.svg");
 		else
-			$immagine = (isset($c["immagine"]) ? ("pics/w200_" . $c["immagine"]) : "img/placeholder.svg");
+			$immagine = (isset($c["immagine"]) ? ("pics/w200_" . $c["immagine"] . ".webp") : "img/placeholder.svg");
 		Tools::replaceAnchor($t, "immagine", $immagine);
 		Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 		Tools::replaceAnchor($t, "nome", $c["nome"]);
@@ -149,26 +159,29 @@ if (!empty($cerca[0])) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "card", $r);
-	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . " (" . $tot . " risultati)"));
+	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
 	$buttons = false;
+	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
 	if ($next > 0) {
 		$buttons = true;
-		Tools::replaceAnchor($page, "prev", "cerca_$tipo.php?q=$query" . ($next > 1 ? ("&n=" . ($next-1)): ""));
+		Tools::replaceAnchor($page, "prev", ($query . "&n=" . ($next-1)));
 	} else
 		Tools::replaceSection($page, "prev", "");
 	if (($next + 1) < ceil($tot / $limit)) {
 		$buttons = true;
-		Tools::replaceAnchor($page, "next", "cerca_$tipo.php?q=$query&n=" . ($next+1));
+		Tools::replaceAnchor($page, "next", ($query . "&n=" . ($next+1)));
 	} else
 		Tools::replaceSection($page, "next", "");
 	if ($buttons) {
-		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "res_buttons"), true);
+		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "results_navigation"), true);
 	} else {
 		Tools::replaceSection($page, "res_buttons", "");
 		Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
 	}
 } else {
 	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
+	Tools::replaceSection($page, "res_buttons", "");
+	Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
 	Tools::replaceSection($page, "results", "");
 }
 
