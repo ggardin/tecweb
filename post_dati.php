@@ -30,7 +30,7 @@ if (strlen($username) <= 3) {
 } elseif ($new_password != "") {
 	if ($old_password == "") {
 		$valid = false;
-		$_SESSION["error"] = "La vecchia password non rispetta i vincoli.";
+		$_SESSION["error"] = "Per cambiare password devi inserire la corrente.";
 	} elseif ($new_password != $new_password_confirm) {
 		$valid = false;
 		$_SESSION["error"] = "Le nuove [en]password[/en] non coincidono.";
