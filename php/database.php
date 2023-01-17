@@ -219,7 +219,7 @@ class Database {
 		return $this->preparedSelect($query, $params);
 	}
 
-	public function setGenereById($id) : array {
+	public function getGenereById($id) : array {
 		$query = "select nome
 			from genere
 			where id = ?";
