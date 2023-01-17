@@ -1031,7 +1031,6 @@ form textarea.invalid {
 	border: 1px solid var(--bgcolor-off);
 }
 .checkbox-pill label {
-	user-select: none;
 	padding: 0.5em 0 0.5em 1em;
 }
 .checkbox-pill input {
@@ -1058,6 +1057,7 @@ fieldset > legend {
 
 fieldset > label,
 fieldset > .label {
+	user-select: none;
 	font-weight: 600;
 	display: block;
 	margin-top: 1em;
