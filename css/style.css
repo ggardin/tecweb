@@ -13,10 +13,10 @@ CSS VARIABLES
 
 	--txtcolor: #0F0F0F;
 
-	--anchorcolor: #00016a;
-	--anchorcolor-alt: #676b00;
+	--anchorcolor: #000162;
+	--anchorcolor-alt: #747900;
 
-	--error-required: #c20000;
+	--error-required: #C20000;
 	--interactions-text-placeholder-color: #4D4D4D;
 
 	--interactions-color: #FBFBFB;
@@ -38,10 +38,10 @@ CSS VARIABLES
 
 	--txtcolor: #F0F0F0;
 
-	--anchorcolor: #0e8aff;
-	--anchorcolor-alt: #feff6f;
+	--anchorcolor: #7270FF;
+	--anchorcolor-alt: #F5E990;
 
-	--error-required: #ff5757;
+	--error-required: #FF5757;
 
 	--interactions-color: #313131;
 	--interactions-text-placeholder-color: #B6B6B6;
