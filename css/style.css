@@ -1040,6 +1040,12 @@ form textarea.invalid {
 	background-color: var(--bgcolor-off);
 }
 
+.checkbox-pill.delete {
+	width: 100%;
+	justify-content: space-between;
+}
+.checkbox-pill.delete input { width: unset; }
+
 fieldset > * {
 	margin-top: 0.25em;
 }
