@@ -375,11 +375,12 @@ SEARCH BAR
 	display: flex;
 	gap: 0.5em;
 	width: 100%;
+	margin: 1.5em auto
 }
 
 .homepage #search {
 	max-width: var(--content-reduced-width);
-	margin: 2em auto 0;
+	margin: 2.5em auto 0;
 }
 
 #search .controls {
