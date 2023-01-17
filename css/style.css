@@ -491,8 +491,13 @@ CARDS
 }
 
 .card {
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor-alt);
 	border-radius: var(--border-radius);
+}
+
+.card:hover,
+.card:focus-within {
+	transform: scale(1.05);
 }
 
 .card > a {
