@@ -20,7 +20,7 @@
 
 	<main id="content">
 		<!-- server_message_start -->
-		<p id="server-message" class="@@message_type@@" aria-role="status">@@server_message@@</p>
+		<p id="server-message" class="@@message_type@@" role="status">@@server_message@@</p>
 		<!-- server_message_end -->
 
 		<h1>@@intestazione@@</h1>
@@ -62,10 +62,10 @@
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
 					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
-					<input id="crew-person@@crew_person_input_id@@" name="@@crew_person_input_name@@" type="text" list="lista-persone" value="@@value@@" />
+					<input id="crew-person@@crew_person_input_id@@" @@crew_person_input_name@@ type="text" list="lista-persone" value="@@value@@" />
 
 					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
-					<select id="crew-role@@crew_role_select_id@@" name="@@crew_role_select_name@@">
+					<select id="crew-role@@crew_role_select_id@@" @@crew_role_select_name@@>
 						<!-- ruolo_start -->
 						<option value="@@id@@" @@sel@@>@@nome@@</option>
 						<!-- ruolo_end -->
@@ -111,7 +111,7 @@
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
 					<label for="nation-name@@nation_label_id@@">Codice del Paese</label>
-					<input id="nation-name@@nation_input_id@@" name="@@nation_input_name@@" type="text" list="lista-paesi" value="@@value@@" />
+					<input id="nation-name@@nation_input_id@@" @@nation_input_name@@ type="text" list="lista-paesi" value="@@value@@" />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
 					<!-- nation_sample_end -->
 				</div>
@@ -154,7 +154,7 @@
 
 				<label for="collezione">Collezione</label>
 				<select name="collezione" id="collezione">
-					<option value="">Nessuna collezione</option>
+					<option value="">NESSUNA COLLEZIONE</option>
 					<!-- collezione_start -->
 					<option value="@@id@@" @@sel@@>@@nome@@</option>
 					<!-- collezione_end -->

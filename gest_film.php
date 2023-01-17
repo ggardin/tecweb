@@ -114,11 +114,11 @@ if ($id != "") {
 		$t = $crew_sample;
 		Tools::replaceAnchor($t, "crew_person_label_id", $i);
 		Tools::replaceAnchor($t, "crew_person_input_id", $i);
-		Tools::replaceAnchor($t, "crew_person_input_name", "crew-person[]");
+		Tools::replaceAnchor($t, "crew_person_input_name", 'name="crew-person[]"');
 		Tools::replaceAnchor($t, "value", $crew[$i]["p_id"]);
 		Tools::replaceAnchor($t, "crew_role_label_id", $i);
 		Tools::replaceAnchor($t, "crew_role_select_id", $i);
-		Tools::replaceAnchor($t, "crew_role_select_name", "crew-role[]");
+		Tools::replaceAnchor($t, "crew_role_select_name", 'name="crew-role[]"');
 		$tmp = "";
 		foreach ($ruoli as $r) {
 			$k = $ruolo_sample;
@@ -137,7 +137,7 @@ if ($id != "") {
 		$t = $nation_sample;
 		Tools::replaceAnchor($t, "nation_label_id", $i);
 		Tools::replaceAnchor($t, "nation_input_id", $i);
-		Tools::replaceAnchor($t, "nation_input_name", "nation[]");
+		Tools::replaceAnchor($t, "nation_input_name", 'name="nation[]"');
 		Tools::replaceAnchor($t, "value", $film_paesi[$i]["id"]);
 		$res .= $t;
 	}
@@ -196,7 +196,7 @@ if ($id != "") {
 	foreach ($film_generi as $t)
 		array_push($fg, $t["id"]);
 }
-Tools::toHtml($generi, 1);
+Tools::toHtml($generi, 2);
 $option = Tools::getSection($page, "genere");
 $res = "";
 foreach ($generi as $g) {
