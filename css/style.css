@@ -1102,3 +1102,22 @@ button[type=submit] {
 	font-weight: 600;
 	font-size: 1.2em;
 }
+
+/*
+==============
+SERVER MESSAGES
+==============
+*/
+
+#server-message {
+	margin: 1em 0;
+	padding: 1em;
+	border: 1px solid var(--server-message-color);
+	border-radius: var(--border-radius);
+}
+#server-message.success {
+	--server-message-color: green;
+}
+#server-message.error {
+	--server-message-color: red;
+}
