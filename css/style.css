@@ -569,11 +569,15 @@ USER PAGE
 	transform: scale(1.04);
 }
 
-#create-list-button {
+#user-additional-actions {
 	border-top: 1px solid var(--bgcolor-off);
 	padding-top: 1.5em;
 	margin: 1.5em auto;
 	max-width: var(--content-reduced-width);
+	text-align: center;
+}
+#user-additional-actions a:not(:last-child) {
+	margin-bottom: 1em;
 }
 
 /*
