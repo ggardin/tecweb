@@ -42,7 +42,7 @@ else
 if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
 	Tools::replaceAnchor($page, "gest_id", $id);
 else
-	Tools::replaceSection($page, "admin", "");
+	Tools::replaceSection($page, "edit", "");
 $immagine = (isset($collezione["locandina"]) ? ("pics/w500_" . $collezione["locandina"] . ".webp") : "img/placeholder.svg");
 Tools::replaceAnchor($page, "immagine", $immagine);
 if (!empty($film)) {

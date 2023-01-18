@@ -139,8 +139,8 @@ if (isset($_SESSION["id"]) && $can_review) {
 	$val = true;
 	Tools::replaceAnchor($page, "review_film_id", $id);
 } else {
-	Tools::replaceSection($page, "add_review", "");
 	Tools::replaceSection($page, "skip_add_review", "");
+	Tools::replaceSection($page, "add_review", "");
 }
 if (!empty($valutazione)) {
 	$val = true;
@@ -175,13 +175,13 @@ if (isset($_SESSION["id"]) && !empty($lista)) {
 	Tools::replaceSection($page, "lista", $r);
 	Tools::replaceAnchor($page, "list_film_id", $id);
 } else {
-	Tools::replaceSection($page, "user", "");
 	Tools::replaceSection($page, "skip_add_movie", "");
+	Tools::replaceSection($page, "add_movie", "");
 }
 if (isset($_SESSION["id"]) && $_SESSION["is_admin"] != 0)
 	Tools::replaceAnchor($page, "gest_id", $id);
 else
-	Tools::replaceSection($page, "admin", "");
+	Tools::replaceSection($page, "edit", "");
 
 Tools::showPage($page);
 
