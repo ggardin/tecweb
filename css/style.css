@@ -1061,11 +1061,14 @@ form textarea.invalid {
 
 .checkbox-pill {
 	display: flex;
-	gap: 0.5em;
 	width: fit-content;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 1px solid var(--bgcolor-off);
+	padding-left: 0.5em;
+}
+
+.checkbox-pill label {
 	padding: 0.5em;
 }
 
@@ -1073,9 +1076,9 @@ form textarea.invalid {
 	background-color: var(--bgcolor-off);
 }
 
-.checkbox-pill.delete {
+.checkbox-pill.delete,
+.checkbox-pill.delete label {
 	width: 100%;
-	/* justify-content: space-between; */
 }
 .checkbox-pill.delete input { width: unset; }
 
@@ -1094,10 +1097,14 @@ fieldset > legend {
 	font-size: 0.9em;
 }
 
-fieldset > label,
-fieldset > .label {
+fieldset label,
+fieldset .label {
 	user-select: none;
 	font-weight: 600;
+}
+
+fieldset > label,
+fieldset > .label {
 	display: block;
 	margin-top: 1em;
 }
