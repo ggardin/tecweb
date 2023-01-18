@@ -538,6 +538,10 @@ LINK BUTTONS
 	margin-top: 0.5em;
 }
 
+.link-button.edit {
+	width: fit-content;
+}
+
 .link-button span {
 	margin-left: 0.5em;
 }
