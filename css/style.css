@@ -576,6 +576,7 @@ USER PAGE
 	max-width: var(--content-reduced-width);
 	text-align: center;
 }
+
 #user-additional-actions a:not(:last-child) {
 	margin-bottom: 1em;
 }
@@ -841,15 +842,19 @@ STATS PAGE
 */
 
 table {
-	/*table-layout: fixed;*/
 	width: 100%;
+	max-width: var(--content-reduced-width);
+	margin: 0 auto;
 	text-align: center;
 	border-collapse: collapse;
 }
 
 table caption {
-	font-size: 1.5em;
-	/* margin: 1.7em auto 0.5em; */
+	font-size: 1em;
+	margin-top: -0.5em;
+	margin-bottom: 1em;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
 }
 
 table th, td {
@@ -859,6 +864,37 @@ table th, td {
 
 tbody tr:nth-child(odd) {
 	background-color: var(--secondaryColor);
+}
+
+#stats-summary {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+
+#stats-summary li {
+	flex: 1 0 15em;
+	display: flex;
+	flex-direction: column-reverse;
+	align-content: center;
+	border: 1px solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+	padding: 1em;
+	background-color: var(--secondaryColor);
+	text-align: center;
+}
+
+#stats-summary .number {
+	font-size: 3em;
+	font-weight: 600;
+}
+
+.stats-page h2 {
+	margin-top: 1.5em;
+	margin-bottom: 0.5em;
+	text-align: center;
 }
 
 /*
