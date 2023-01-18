@@ -1191,6 +1191,7 @@ BACK TO TOP
 	}
 }
 
+#back-to-top:focus,
 #back-to-top.show {
 	opacity: 1;
 	transform: scale(1);
