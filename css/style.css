@@ -1137,6 +1137,10 @@ BACK TO TOP
 	justify-content: center;
 }
 
+#back-to-top:hover {
+	outline: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	#back-to-top {
 		transition: all .2s ease-in-out;
