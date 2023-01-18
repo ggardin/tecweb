@@ -1158,3 +1158,40 @@ SERVER MESSAGES
 #server-message.error {
 	--server-message-color: red;
 }
+
+/*
+==============
+BACK TO TOP
+==============
+*/
+
+#back-to-top {
+	width: 4em;
+	height: 4em;
+	border-radius: 100%;
+	background-color: var(--tertiaryColor);
+	color: var(--secondaryColor);
+	position: fixed;
+	right: var(--content-padding);
+	bottom: var(--content-padding);
+	opacity: 0;
+	z-index: 50;
+	transform: scale(0);
+	display: flex;
+	justify-content: center;
+}
+
+#back-to-top:hover {
+	outline: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	#back-to-top {
+		transition: all .2s ease-in-out;
+	}
+}
+
+#back-to-top.show {
+	opacity: 1;
+	transform: scale(1);
+}

@@ -61,6 +61,37 @@ function toggleMenu() {
 }
 
 /*
+ * Gestisce botton back to top
+ */
+
+let previousScrollPosition = 10;
+
+function isScrollingDown() {
+	let goingDown = false;
+	let scrollPosition = window.pageYOffset;
+	if (scrollPosition > previousScrollPosition) { goingDown = true };
+	previousScrollPosition = scrollPosition;
+	return goingDown;
+}
+
+function handleScroll() {
+	let backToTopLink = document.getElementById("back-to-top");
+	if (backToTopLink != null) {
+		let viewportHeight = window.innerHeight;
+		let scrollPosition = window.pageYOffset;
+
+		if (isScrollingDown() || scrollPosition == 0) {
+			backToTopLink.classList.remove('show');
+		} else if (isScrollingDown() === false && scrollPosition > viewportHeight/5) {
+			backToTopLink.classList.add('show');
+		}
+	}
+};
+
+window.addEventListener("scroll", handleScroll);
+
+
+/*
  * Gestisce cambio tema alternando chiaro e scuro.
  * Dà priorità al tema dell'utente, se definito.
  */
