@@ -1066,20 +1066,16 @@ form textarea.invalid {
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
 	border: 1px solid var(--bgcolor-off);
+	padding: 0.5em;
 }
-.checkbox-pill label {
-	padding: 0.5em 0 0.5em 1em;
-}
-.checkbox-pill input {
-	margin-right: 1em;
-}
+
 .checkbox-pill:has(input:checked) {
 	background-color: var(--bgcolor-off);
 }
 
 .checkbox-pill.delete {
 	width: 100%;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 }
 .checkbox-pill.delete input { width: unset; }
 
