@@ -46,7 +46,6 @@ if (! empty($generi)) {
 
 if (! empty($lunghi)) {
 	$mess = false;
-	Tools::replaceAnchor($page, "n_lunghi", count($lunghi));
 	Tools::toHtml($lunghi);
 	$ummagumma = Tools::getSection($page, "lunghi_riga", "");
 	$res = "";
