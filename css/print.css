@@ -42,3 +42,10 @@ main::after {
 	margin: 2cm;
 	size: A4;
 }
+
+.sr-only {
+	display: none;
+}
+.skip-to-content {
+	display: none;
+}
