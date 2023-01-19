@@ -171,7 +171,7 @@ class Tools {
 
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
-		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+		$imagetype = mime_content_type($file["tmp_name"]);
 
 		if (! getimagesize($file["tmp_name"])) {
 			unlink ($file["tmp_name"]);
@@ -183,7 +183,7 @@ class Tools {
 			return [false, "Questa immagine pesa troppo. Dimensione massima: 1.5MB."];
 		}
 
-		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp") {
+		if ($imagetype != "image/jpeg" && $imagetype != "image/png" && $imagetype != "image/webp") {
 			unlink ($file["tmp_name"]);
 			return [false, "Formato immagine non supportato. Carica uno tra: JPG, JPEG, PNG, WEBP."];
 		}
@@ -198,9 +198,9 @@ class Tools {
 		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
 		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
 
-		if ($imageFileType == "jpg" || $imageFileType == "jpeg")
+		if ($imagetype == "image/jpeg")
 			$source = imagecreatefromjpeg($file["tmp_name"]);
-		elseif ($imageFileType == "png")
+		elseif ($imagetype == "image/png")
 			$source = imagecreatefrompng($file["tmp_name"]);
 		else
 			$source = imagecreatefromwebp($file["tmp_name"]);
