@@ -20,8 +20,19 @@ img, svg {
 }
 
 img.print, svg.print {
-	display: block;
+	display: block !important;
 	max-width: 100%;
+}
+.movie-page{
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+}
+#hero-image{
+	display: grid;
+	padding-top: 7em;
+}
+#movie-details{
+	display: grid;
 }
 
 #page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
