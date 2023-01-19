@@ -34,7 +34,9 @@ img.print, svg.print {
 #movie-details{
 	display: grid;
 }
-
+#auth_form{
+	display: block !important;
+}
 #page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
 	display: none;
 }
