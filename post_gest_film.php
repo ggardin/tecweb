@@ -54,12 +54,10 @@ try {
 	if ($submit == "aggiungi" || $submit = "modifica") {
 		$up = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
 		$res = $up[0];
-		if ($up) {
-			if($submit == "aggiungi") $id = $up[1];
-			$res = $connessione->setFilmCrew($id, $crew_persona, $crew_ruolo) || $res;
-			$res = $connessione->setFilmGeneri($id, $genere) || $res;
-			$res = $connessione->setFilmPaesi($id, $paese) || $res;
-		}
+		if($submit == "aggiungi") $id = $up[1];
+		$res = $connessione->setFilmCrew($id, $crew_persona, $crew_ruolo) || $res;
+		$res = $connessione->setFilmGeneri($id, $genere) || $res;
+		$res = $connessione->setFilmPaesi($id, $paese) || $res;
 	} elseif ($submit == "elimina") {
 		$res = $connessione->deleteFilm($id);
 		$id = "";

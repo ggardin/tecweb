@@ -44,7 +44,6 @@ try {
 		$up = $connessione->updateCollezione($id, $titolo, $descrizione, $locandina);
 		$res = $up[0];
 		if ($res && $submit == "aggiungi") $id = $up[1];
-
 	} elseif ($submit == "elimina") {
 		$res = $connessione->deleteCollezione($id);
 		$id = "";

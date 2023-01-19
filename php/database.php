@@ -955,11 +955,20 @@ class Database {
 	}
 
 	public function setFilmCrew($film_id, $persone, $ruoli) : bool {
+		$qc = "select film, persona, ruolo
+			from crew
+			where film = ?
+			order by film, persona, ruolo";
+		$pc = [$film_id];
+		$tc = "i";
+
+		$pre = $this->preparedSelect($qc, $pc, $tc);
+
 		$q0 = "delete from crew
 			where film = ?";
 		$p0 = [$film_id];
 		$t0 = "i";
-		$ar0 = $this->preparedUpdates($q0, $p0, $t0);
+		$this->preparedUpdates($q0, $p0, $t0);
 
 		$q1 = "insert into crew(film, persona, ruolo)
 			values (?, ?, ?)";
@@ -968,17 +977,28 @@ class Database {
 			$persone[$i] != "" && $ruoli[$i] != "" &&
 				array_push($p1, [$film_id, $persone[$i], $ruoli[$i]]);
 		$t1 = "iii";
-		$ar1 = $this->preparedInsertMultiple($q1, $p1, $t1);
+		$this->preparedInsertMultiple($q1, $p1, $t1);
 
-		return $ar0 != $ar1;
+		$post = $this->preparedSelect($qc, $pc, $tc);
+
+		return $pre !== $post;
 	}
 
 	public function setFilmPaesi($film_id, $paesi) : bool {
+		$qc = "select *
+			from film_paese
+			where film = ?
+			order by film, paese";
+		$pc = [$film_id];
+		$tc = "i";
+
+		$pre = $this->preparedSelect($qc, $pc, $tc);
+
 		$q0 = "delete from film_paese
 			where film = ?";
 		$p0 = [$film_id];
 		$t0 = "i";
-		$ar0 = $this->preparedUpdates($q0, $p0, $t0);
+		$this->preparedUpdates($q0, $p0, $t0);
 
 		$q1 = "insert into film_paese(film, paese)
 			values (?, ?)";
@@ -986,17 +1006,28 @@ class Database {
 		for ($i = 0; $i < count($paesi); $i++)
 			$paesi[$i] != "" && array_push($p1, [$film_id, $paesi[$i]]);
 		$t1 = "is";
-		$ar1 = $this->preparedInsertMultiple($q1, $p1, $t1);
+		$this->preparedInsertMultiple($q1, $p1, $t1);
 
-		return $ar0 != $ar1;
+		$post = $this->preparedSelect($qc, $pc, $tc);
+
+		return $pre !== $post;
 	}
 
 	public function setFilmGeneri($film_id, $generi) : bool {
+		$qc = "select *
+			from film_genere
+			where film = ?
+			order by film, genere";
+		$pc = [$film_id];
+		$tc = "i";
+
+		$pre = $this->preparedSelect($qc, $pc, $tc);
+
 		$q0 = "delete from film_genere
 			where film = ?";
 		$p0 = [$film_id];
 		$t0 = "i";
-		$ar0 = $this->preparedUpdates($q0, $p0, $t0);
+		$this->preparedUpdates($q0, $p0, $t0);
 
 		$q1 = "insert into film_genere(film, genere)
 			values (?, ?)";
@@ -1004,9 +1035,11 @@ class Database {
 		for ($i = 0; $i < count($generi); $i++)
 			$generi[$i] != "" && array_push($p1, [$film_id, $generi[$i]]);
 		$t1 = "ii";
-		$ar1 = $this->preparedInsertMultiple($q1, $p1, $t1);
+		$this->preparedInsertMultiple($q1, $p1, $t1);
 
-		return $ar0 != $ar1;
+		$post = $this->preparedSelect($qc, $pc, $tc);
+
+		return $pre !== $post;
 	}
 
 	public function getUtenteById($user_id) : array {
