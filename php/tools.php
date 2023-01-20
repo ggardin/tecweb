@@ -188,8 +188,9 @@ class Tools {
 			return [false, "Formato immagine non supportato. Carica uno tra: JPG, JPEG, PNG, WEBP."];
 		}
 
-		$w0 = 200; $h0 = 1.5 * $r;
-		$w1 = 500; $h1 = 1.5 * $r;
+		$r = 1.5;
+		$w0 = 200; $h0 = $w0 * $r;
+		$w1 = 500; $h1 = $w1 * $r;
 
 		do {
 			$filename = self::randString();
@@ -203,23 +204,25 @@ class Tools {
 			$source = imagecreatefromwebp($file["tmp_name"]);
 
 		list($width, $height) = getimagesize($file["tmp_name"]);
-		$r = $width/$height;
 
-		// https://www.php.net/manual/en/function.imagecopyresampled.php#example-2711
-
-		if ($w0/$h0 > $r) {
-			$w0 = $h0 * $r;
-			$w1 = $h1 * $r;
+		if(($width/$w0) > ($height/$h0)) {
+			$y = 0;
+			$x = intval(($width - ($height / $r)) / 2);
+			$width -= 2 * $x;
 		} else {
-			$h0 = $w0 / $r;
-			$h1 = $w1 / $r;
+			$x = 0;
+			$y = intval(($height - ($width * $r)) / 2);
+			$height -= 2 * $y;
 		}
 
 		$pic0 = imagecreatetruecolor($w0, $h0);
 		$pic1 = imagecreatetruecolor($w1, $h1);
 
-		imagecopyresampled($pic0, $source, 0, 0, 0, 0, $w0, $h0, $width, $height);
-		imagecopyresampled($pic1, $source, 0, 0, 0, 0, $w1, $h1, $width, $height);
+		imagecopyresampled($pic0, $source, 0, 0, $x, $y, $w0, $h0, $width, $height);
+		imagecopyresampled($pic1, $source, 0, 0, $x, $y, $w1, $h1, $width, $height);
+
+		echo (strval($x) . "\n");
+		echo (strval($y) . "\n");
 
 		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
 		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
