@@ -221,9 +221,6 @@ class Tools {
 		imagecopyresampled($pic0, $source, 0, 0, $x, $y, $w0, $h0, $width, $height);
 		imagecopyresampled($pic1, $source, 0, 0, $x, $y, $w1, $h1, $width, $height);
 
-		echo (strval($x) . "\n");
-		echo (strval($y) . "\n");
-
 		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
 		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
 
