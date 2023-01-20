@@ -137,10 +137,10 @@ if (!empty($cerca[0])) {
 	$tot = $cerca[1]["n"];
 	$cerca = $cerca[0];
 	Tools::toHtml($cerca);
-	$card = Tools::getSection($page, "card");
+	$results = Tools::getSection($page, "results");
 	$r = "";
 	foreach ($cerca as $c) {
-		$t = $card;
+		$t = $results;
 		if ($tipo != "persona")
 			$immagine = (isset($c["locandina"]) ? ("pics/w200_" . $c["locandina"] . ".webp") : "img/placeholder.svg");
 		else
@@ -158,7 +158,7 @@ if (!empty($cerca[0])) {
 			Tools::replaceSection($t, "n_film", "");
 		$r .= $t;
 	}
-	Tools::replaceSection($page, "card", $r);
+	Tools::replaceSection($page, "results", $r);
 	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
 	$buttons = false;
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
