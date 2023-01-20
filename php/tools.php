@@ -205,7 +205,7 @@ class Tools {
 
 		list($width, $height) = getimagesize($file["tmp_name"]);
 
-		if(($width/$w0) > ($height/$h0)) {
+		if(($height / $width) < $r) {
 			$y = 0;
 			$x = intval(($width - ($height / $r)) / 2);
 			$width -= 2 * $x;
