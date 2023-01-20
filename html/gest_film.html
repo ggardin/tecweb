@@ -13,7 +13,7 @@
 <body>
 	<!-- header -->
 
-	<nav id="breadcrumb">
+	<nav id="breadcrumb" aria-label="Percorso di navigazione">
 		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca_film.php"><span lang="en">Film</span></a> &gt;&gt;
 			<!-- breadcrumb_start --> <a href="film.php?id=@@bc_id@@">@@bc_nome@@</a> &gt;&gt; Modifica <!-- breadcrumb_end --></p>
 	</nav>
@@ -41,12 +41,12 @@
 				<input type="file" name="locandina" id="locandina" />
 
 				<div class="checkbox-pill delete">
-					<label for="elimina-locandina">Elimina locandina</label>
 					<input type="checkbox" id="elimina-locandina" name="elimina-locandina" />
+					<label for="elimina-locandina">Elimina locandina</label>
 				</div>
 
 				<label for="data">Data rilascio</label>
-				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" pattern="\d{2}/\d{2}/\d{4}" onblur="validateMovieReleaseDate();" />
+				<input type="date" id="data" name="data" min="1850-01-01" max="2999-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="durata">Durata (in minuti)</label>
@@ -96,8 +96,8 @@
 				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
 				<!-- genere_start -->
 				<div class="checkbox-pill">
-					<label for="genre-@@genere_label_id@@">@@genere_label_nome@@</label>
 					<input type="checkbox" id="genre-@@genere_input_id@@" name="genere[]" value="@@id@@" onclick="updateGenresHint();" @@checked@@ />
+					<label for="genre-@@genere_label_id@@">@@genere_label_nome@@</label>
 				</div>
 				<!-- genere_end -->
 				<input type="hidden" id="genres-count" name="genres-count" value="-1" />

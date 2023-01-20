@@ -13,7 +13,7 @@
 <body>
 	<!-- header -->
 
-	<nav id="breadcrumb">
+	<nav id="breadcrumb" aria-label="Percorso di navigazione">
 		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="cerca_persona.php">Persone</a> &gt;&gt;
 			<!-- breadcrumb_start --> <a href="persona.php?id=@@bc_id@@">@@bc_nome@@</a> &gt;&gt; Modifica <!-- breadcrumb_end --></p>
 	</nav>
@@ -44,16 +44,16 @@
 				<input type="file" name="immagine" id="immagine" />
 
 				<div class="checkbox-pill delete">
-					<label for="elimina-immagine">Elimina immagine</label>
 					<input type="checkbox" id="elimina-immagine" name="elimina-immagine" />
+					<label for="elimina-immagine">Elimina immagine</label>
 				</div>
 
 				<label for="data_nascita">Data di nascita</label>
-				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" pattern="\d{2}/\d{2}/\d{4}" onblur="validatePersonDateOfBirth();comparePersonDates();" />
+				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
 				<p id="data_nascita-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data_morte">Data di morte</label>
-				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2999-12-31" value="@@data_morte@@" pattern="\d{2}/\d{2}/\d{4}" onblur="validatePersonDateOfDeath();comparePersonDates();" />
+				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2999-12-31" value="@@data_morte@@" onblur="validatePersonDateOfDeath();comparePersonDates();" />
 				<p id="data_morte-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 			</fieldset>
