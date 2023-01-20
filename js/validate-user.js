@@ -40,7 +40,7 @@ function validateUserName() {
 		return true;
 	}
 	if (!allowedChars.test(name)) {
-		showErrorMessage(id, 'Nome non valido');
+		showErrorMessage(id, 'Nome non valido.');
 		return false;
 	}
 	removeErrorMessage(id);
@@ -62,13 +62,13 @@ function validatePassword() {
 		// Requisito di lunghezza minima
 		if (password.length < 8) {
 
-			showErrorMessage(id, 'La password deve essere lunga almeno 8 caratteri.');
+			showErrorMessage(id, 'La <span lang="en">password</span> deve essere lunga almeno 8 caratteri.');
 			return false;
 		}
 
 		// Requisito di simboli
 		if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-			showErrorMessage(id, 'La password deve contenere almeno una lettera e un numero.');
+			showErrorMessage(id, 'La <span lang="en">password</span> deve contenere almeno una lettera e un numero.');
 			return false;
 		}
 	}
@@ -91,7 +91,7 @@ function validatePasswordConfirm() {
 
 	if ((first_password != null || first_password != '') && (second_password != null || second_password != '')) {
 		if ((second_password != null || second_password != '') && first_password != second_password) {
-			showErrorMessage(id, 'Le password non corrispondono.');
+			showErrorMessage(id, 'Le <span lang="en">password</span> non corrispondono.');
 			return false;
 		}
 	}
@@ -135,14 +135,14 @@ function validateUserBirthday() {
 			var dateOfBirth = new Date(parts[2], parts[1], parts[0]);
 		}
 		else {
-			showErrorMessage(id, 'Formato della data non corretto. Usa dd/mm/yyyy');
+			showErrorMessage(id, 'Formato della data non corretto. Usa dd/mm/yyyy.');
 			return false;
 		}
 	}
 
 	// Ho a disposizione la data di nascita
 	var age = today.getFullYear() - dateOfBirth.getFullYear();
-	const underAgeErrorMessage = 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano TikTok.';
+	const underAgeErrorMessage = 'Devi avere almeno 13 anni. Aspetta di crescere, oppure fingi come tutti i minorenni che usano <span lang="en">TikTok</span>.';
 
 	// controlla che l'utente abbia almeno 13 anni
 	if (age < 13) {
@@ -183,7 +183,7 @@ function validateUserEmail() {
 		return true;
 	}
 	if (!validateEmail(email)) {
-		showErrorMessage(id, 'Non è una email');
+		showErrorMessage(id, 'Non un indirizzo <span lang="en">email</span> valido.');
 		return false;
 	}
 	removeErrorMessage(id);

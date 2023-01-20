@@ -33,7 +33,7 @@ function validateNewReviewRatingRadiobox() {
 	}
 
 	if ( !ratingFound ) {
-		showErrorMessage(id, 'Non hai espresso un voto');
+		showErrorMessage(id, 'Non hai espresso un voto.');
 		return false;
 	}
 
@@ -56,11 +56,11 @@ function validateNewReviewText() {
 		return false;
 	}
 	else if ( currentLength < 2 ) {
-		showErrorMessage(id, 'La recensione è troppo breve');
+		showErrorMessage(id, 'La recensione è troppo breve.');
 		return false;
 	}
 	else if ( currentLength > maxLength ) {
-		showErrorMessage(id, 'La recensione è troppo lunga');
+		showErrorMessage(id, 'La recensione è troppo lunga.');
 		return false;
 	}
 

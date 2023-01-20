@@ -26,6 +26,8 @@
 		<form id="auth_form" method="post" action="post_signup.php">
 
 			<fieldset>
+				<legend class="sr-only">Dati di registrazione</legend>
+
 				<label for="username">Nome utente<span class="required">(richiesto)</span></label>
 				<input type="text" id="username" name="username" required aria-describedby="username-hint" onblur="validateNewUsername();" />
 				<p id="username-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</p>
