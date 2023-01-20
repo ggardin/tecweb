@@ -37,13 +37,13 @@ function validatePassword() {
 
 	// Requisito di lunghezza minima
 	if (password.length < 8) {
-		showErrorMessage(id, 'La password deve essere lunga almeno 8 caratteri.');
+		showErrorMessage(id, 'La <span lang="en">password</span> deve essere lunga almeno 8 caratteri.');
 		return false;
 	}
 
 	// Requisito di simboli
 	if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-		showErrorMessage(id, 'La password deve contenere almeno una lettera e un numero.');
+		showErrorMessage(id, 'La <span lang="en">password</span> deve contenere almeno una lettera e un numero.');
 		return false;
 	}
 
@@ -60,7 +60,7 @@ function validatePasswordConfirm() {
 	var second_password = document.forms['auth_form']['password_confirm'].value;
 
 	if ((second_password != null || second_password != '') && first_password != second_password) {
-		showErrorMessage(id, 'Le password non corrispondono.');
+		showErrorMessage(id, 'Le <span lang="en">password</span> non corrispondono.');
 		return false;
 	}
 
