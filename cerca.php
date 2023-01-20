@@ -59,11 +59,14 @@ Tools::toHtml($f_val_paese);
 
 if ($tipo == "film") {
 	$breadcrumb = "Film";
-}
-elseif ($tipo == "collezione")
+	$desc = "Trova il film perfetto per te, filtrando i risultati per genere o paese.";
+} elseif ($tipo == "collezione") {
 	$breadcrumb = "Collezioni";
-else
+	$desc = "Esplora le collezioni di film presenti su soundstage.";
+} else {
 	$breadcrumb = "Persone";
+	$desc = "Esplora le persone e la loro storia cinematografica su soundstage.";
+}
 
 $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome) {
@@ -74,6 +77,9 @@ if ($tipo == "film" && $f_nome) {
 	}
 	$intestazione .= ")";
 }
+
+Tools::replaceAnchor($page, "desc_tiporicerca", $desc);
+Tools::replaceAnchor($page, "keys_tiporicerca", $tipo);
 
 $titolo = (($query != "") ? ('"' . $query . '" • ') : "") . "Cerca " . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);

@@ -30,7 +30,10 @@ if (empty($persona)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $persona = $persona[0];
-$title = $persona["nome"] . " • Persona"; Tools::toHtml($title, 1);
+$meta = $persona["nome"]; Tools::toHtml($meta, 1);
+Tools::replaceAnchor($page, "desc_nomepersona", $meta);
+Tools::replaceAnchor($page, "keys_nomepersona", $meta);
+$title = $meta . " • Persona";
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($persona);
 Tools::replaceAnchor($page, "breadcrumb", $persona["nome"]);

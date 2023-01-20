@@ -30,7 +30,10 @@ if (empty($collezione)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $collezione = $collezione[0];
-$title = $collezione["nome"] . " • Collezione"; Tools::toHtml($title, 1);
+$meta = $collezione["nome"]; Tools::toHtml($meta, 1);
+Tools::replaceAnchor($page, "desc_nomecollezione", $meta);
+Tools::replaceAnchor($page, "keys_nomecollezione", $meta);
+$title = $meta . " • Collezione";
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($collezione);
 Tools::replaceAnchor($page, "breadcrumb", $collezione["nome"]);
