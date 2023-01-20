@@ -170,12 +170,12 @@ if (!empty($cerca[0])) {
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
 	if ($next > 0) {
 		$buttons = true;
-		Tools::replaceAnchor($page, "prev", ($query . "&n=" . ($next-1)));
+		Tools::replaceAnchor($page, "prev", ($query . "&n=" . ($next-1) . "#search-results"));
 	} else
 		Tools::replaceSection($page, "prev", "");
 	if (($next + 1) < ceil($tot / $limit)) {
 		$buttons = true;
-		Tools::replaceAnchor($page, "next", ($query . "&n=" . ($next+1)));
+		Tools::replaceAnchor($page, "next", ($query . "&n=" . ($next+1) . "#search-results"));
 	} else
 		Tools::replaceSection($page, "next", "");
 	if ($buttons) {
