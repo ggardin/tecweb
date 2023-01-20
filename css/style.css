@@ -5,16 +5,16 @@ CSS VARIABLES
 */
 
 :root {
-	--bgcolor: #F0F0F0;
+	--bgcolor: #efefef;
 	--bgcolor-off: #C8C8C8;
 
-	--secondaryColor: #E6E6E6;
-	--tertiaryColor: #0C443B;
+	--secondaryColor: #fbfbfb;
+	--tertiaryColor: #0e5e51;
 
 	--txtcolor: #0F0F0F;
 
-	--anchorcolor: #000162;
-	--anchorcolor-alt: #747900;
+	--anchorcolor: #af5a4f;
+	--anchorcolor-alt: #006f89;
 
 	--error-required: #C20000;
 	--interactions-text-placeholder-color: #4D4D4D;
@@ -34,12 +34,12 @@ CSS VARIABLES
 	--bgcolor-off: #424242;
 
 	--secondaryColor: #191919;
-	--tertiaryColor: #BDDDAA;
+	--tertiaryColor: #c6dc47;
 
 	--txtcolor: #F0F0F0;
 
-	--anchorcolor: #7270FF;
-	--anchorcolor-alt: #F5E990;
+	--anchorcolor: #d37c71;
+	--anchorcolor-alt: #258ea8;
 
 	--error-required: #FF5757;
 
