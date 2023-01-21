@@ -43,7 +43,7 @@ function validateListDescription() {
 	var description = document.forms['gestione'][id].value;
 
 	if (description != null || description != '') {
-		const descriptionRegex = /^[^<>]*$/;
+		const descriptionRegex = /^[\w\s\-\:\'\[\]\,\/\"\u00C0-\u017F]+$/;
 		if (! descriptionRegex.test(description)) {
 			showErrorMessage(id, 'La descrizione inserita contiene caratteri non ammessi.');
 			return false;
