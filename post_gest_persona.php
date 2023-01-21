@@ -37,7 +37,7 @@ if (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tm
 	if ($img[0]) $immagine = $img[1];
 	else {
 		$valid = false;
-		$_SESSION["error"] = $img[1];
+		$err .= $img[1];
 	}
 }
 

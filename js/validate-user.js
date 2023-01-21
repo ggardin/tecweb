@@ -33,7 +33,7 @@ function validateUserUsername() {
 function validateUserName() {
 	var id = 'nome';
 	var name = document.forms['gestione']['nome'].value;
-	const allowedChars = /^[A-Za-z\s'][^\d]*$/; // lettere, spazi, apostrofi
+	const allowedChars = /^[A-Za-z\s']*$/; // lettere, spazi, apostrofi
 
 	if (name == null || name == '') {
 		removeErrorMessage(id);

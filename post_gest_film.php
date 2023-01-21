@@ -37,6 +37,7 @@ if ($titolo == "") {
 	$valid = false;
 	$err .= "Titolo è un campo richesto. ";
 } elseif (! preg_match("/^[^<>{}]*$/", $titolo)) {
+	$valid = false;
 	$err .= "Il titolo inserito contiene caratteri non ammessi. ";
 }
 if (! preg_match("/^[^<>]*$/", $descrizione)) {

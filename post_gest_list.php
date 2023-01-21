@@ -26,6 +26,7 @@ if ($nome == "") {
 	$valid = false;
 	$err .= "Nome è un campo richesto. ";
 } elseif (! preg_match("/^[^<>{}]*$/", $nome)) {
+	$valid = false;
 	$err .= "Il nome inserito contiene caratteri non ammessi. ";
 }
 
