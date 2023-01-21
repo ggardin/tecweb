@@ -16,26 +16,28 @@ html, body {
 }
 
 img, svg {
-	display: none !important;
+	display: none;
 }
 
 img.print, svg.print {
-	display: block !important;
+	display: block;
 	max-width: 100%;
 }
 .movie-page{
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 }
-#hero-image{
+#hero-image  > img{
 	display: grid;
 	padding-top: 7em;
+	width: 100%;
 }
+
 #movie-details{
 	display: grid;
 }
 #auth_form{
-	display: block !important;
+	display: block;
 }
 #page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
 	display: none;
