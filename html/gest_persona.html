@@ -40,13 +40,16 @@
 					<!-- gender_end -->
 				</select>
 
-				<label for="immagine">Immagine</label>
-				<input type="file" name="immagine" id="immagine" />
-
+				<!-- immagine_start -->
+				<img src="@@immagine@@" alt="" />
 				<div class="checkbox-pill delete">
 					<input type="checkbox" id="elimina-immagine" name="elimina-immagine" />
-					<label for="elimina-immagine">Elimina immagine</label>
+					<label for="elimina-immagine">Elimina immagine presente</label>
 				</div>
+				<!-- immagine_end -->
+
+				<label for="immagine">Nuova immagine</label>
+				<input type="file" name="immagine" id="immagine" />
 
 				<label for="data_nascita">Data di nascita</label>
 				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2999-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
