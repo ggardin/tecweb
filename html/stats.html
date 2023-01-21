@@ -40,7 +40,7 @@
 
 		<!-- generi_start -->
 		<h2>Generi</h2>
-		<table summary="Nella tabella vengono fornite le informazioni sul numero dei film presenti nella propria collezione suddivisi per genere">
+		<table aria-describedby="TabellaGeneri">
 			<caption>Numero di film collezionati per genere</caption>
 			<thead>
 				<tr>
@@ -58,11 +58,14 @@
 				<!-- generi_riga_end -->
 			</tbody>
 		</table>
+		<div id="TabellaGeneri">
+			Nella tabella a due colonne vengono forniti in ordine a partire dal genere più visto per ogni riga il nome del genere e il numero dei film appartenenti a quel genere		
+		</div>
 		<!-- generi_end -->
 
 		<!-- lunghi_start -->
 		<h2>Classifica per durata</h2>
-		<table summary="Nella tabella vengono forniti in ordine per lunghezza il nome e la durata dei film presenti nelle proprie liste">
+		<table aria-describedby="TabellaLunghezze">			
 			<caption>Film più lunghi in lista</caption>
 
 			<thead>
@@ -81,6 +84,9 @@
 				<!-- lunghi_riga_end -->
 			</tbody>
 		</table>
+		<div id="TabellaLunghezze">
+			Nella tabella a due colonne vengono forniti in ordine per lunghezza per ogni riga il nome e la durata dei film presenti nelle proprie liste
+		</div>
 		<!-- lunghi_end -->
 
 		<div id="user-additional-actions">
