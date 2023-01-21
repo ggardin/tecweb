@@ -183,6 +183,7 @@ foreach ($stati as $s) {
 Tools::replaceSection($page, "stato", $res);
 
 Tools::toHtml($collezioni, 1);
+usort($collezioni, fn($a, $b) => $a['nome'] <=> $b['nome']);
 $tmp = Tools::getSection($page, "collezione");
 $res = "";
 foreach ($collezioni as $c) {
