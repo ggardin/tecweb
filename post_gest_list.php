@@ -20,13 +20,17 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 }
 
 $valid = true;
+$err = "";
 
-if (strlen($nome) <= 3) {
+if ($nome == "") {
 	$valid = false;
-	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
+	$err .= "Nome è un campo richesto. ";
+} elseif (! preg_match("/^[^<>{}]*$/", $nome)) {
+	$err .= "Il nome inserito contiene caratteri non ammessi. ";
 }
 
 if (! $valid) {
+	$_SESSION["error"] = $err;
 	header("location: gest_list.php?id=" . $id);
 	exit();
 }

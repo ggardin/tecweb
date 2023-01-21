@@ -20,16 +20,23 @@ if ($film_id == "") {
 }
 
 $valid = true;
+$err = "";
 
 if (intval($voto) < 1 || intval($voto) > 10) {
 	$valid = false;
-	$_SESSION["error"] = "Voto non valido.";
-} elseif (strlen($testo) < 3 || strlen($testo) > 1000) {
+	$err .= "Devi esprimere un voto da 1 a 10. ";
+}
+if (strlen($testo) < 3 || strlen($testo) > 1000) {
 	$valid = false;
-	$_SESSION["error"] = "Il testo non è valido.";
+	$err .= "La recensione deve contenere tra i 3 e i 1000 caratteri. ";
+}
+if (! preg_match("/^[^<>{}]*$/", $testo)) {
+	$valid = false;
+	$err .= "La recensione contiene caratteri non ammessi. ";
 }
 
 if (! $valid) {
+	$_SESSION["error"] = $err;
 	header("location: film.php?id=" . $film_id);
 	exit();
 }

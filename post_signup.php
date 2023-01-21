@@ -13,16 +13,27 @@ $password = isset($_POST["password"]) ? $_POST["password"] : "";
 $password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm"] : "";
 
 $valid = true;
+$err = "";
 
-if (empty($username)) {
+if (! preg_replace("/^[A-Za-z0-9]+$/", $username)) {
 	$valid = false;
-	$_SESSION["error"] = "[en]Username[/en] non valido.";
-} elseif (empty($password) || $password != $password_confirm) {
+	$err .= "[en]Username[/en] non valido, usa solo lettere o numeri. ";
+}
+if (strlen($password) < 8) {
 	$valid = false;
-	$_SESSION["error"] = "Le [en]password[/en] non coincidono.";
+	$err .= "La [en]password[/en] deve essere lunga almeno 8 caratteri. ";
+}
+if (! $preg_match("/\d/", $password) || ! $preg_match("/[a-zA-Z]/", $password)) {
+	$valid = false;
+	$err .= "La [en]password[/en] deve contenere almeno una lettera e un numero. ";
+}
+if ($password != "" || $password != $password_confirm) {
+	$valid = false;
+	$err .= "Le [en]password[/en] non coincidono. ";
 }
 
 if (! $valid) {
+	$_SESSION["error"] = $err;
 	header("location: signup.php");
 	exit();
 }

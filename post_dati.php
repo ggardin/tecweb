@@ -20,24 +20,39 @@ $new_password_confirm = isset($_POST["new_password_confirm"]) ? $_POST["new_pass
 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 
 $valid = true;
+$err = "";
 
-if (strlen($username) <= 3) {
+if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
 	$valid = false;
-	$_SESSION["error"] = "[en]Username[/en] deve avere almeno 3 caratteri.";
-} elseif ($nome != "" && strlen($nome) <= 3) {
-	$valid = false;
-	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
-} elseif ($new_password != "") {
-	if ($old_password == "") {
-		$valid = false;
-		$_SESSION["error"] = "Per cambiare password devi inserire la corrente.";
-	} elseif ($new_password != $new_password_confirm) {
-		$valid = false;
-		$_SESSION["error"] = "Le nuove [en]password[/en] non coincidono.";
-	}
+	$err .= "[en]Username[/en] non valido, usa solo lettere o numeri. ";
 }
+if ($mail != "" && ! preg_match("/^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/", $mail)) {
+	$valid = false;
+	$err .= "Non è un indirizzo [en]email[/en] valido. ";
+}
+if ($new_password != "" && $old_password == "") {
+	$err .= "Devi inserire la vecchia [en]password[/en] per impostarne una nuova. ";
+}
+if (strlen($new_password) < 8) {
+	$valid = false;
+	$err .= "La nuova [en]password[/en] deve essere lunga almeno 8 caratteri. ";
+}
+if ($new_password != "" && (! $preg_match("/\d/", $new_password) || ! $preg_match("/[a-zA-Z]/", $new_password))) {
+	$valid = false;
+	$err .= "La nuova [en]password[/en] deve contenere almeno una lettera e un numero. ";
+}
+if ($new_password != "" || $new_password != $new_password_confirm) {
+	$valid = false;
+	$err .= "Le nuova [en]password[/en] non coincidono. ";
+}
+if ($nome != "" && ! preg_match("/^[A-Za-z\s'][^\d]*$/", $nome)) {
+	$valid = false;
+	$err = "Nome non valido. ";
+}
+// TODO: data
 
 if (! $valid) {
+	$_SESSION["error"] = $err;
 	header("location: dati.php");
 	exit();
 }

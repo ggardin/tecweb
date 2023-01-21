@@ -20,20 +20,29 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 }
 
 $valid = true;
+$err = "";
 
-if (strlen($titolo) <= 3) {
+if ($titolo == "") {
 	$valid = false;
-	$_SESSION["error"] = "Il titolo deve avere almeno 3 caratteri";
-} elseif (!is_null($locandina) && $_FILES["locandina"]["tmp_name"]) {
+	$err .= "Titolo è un campo richesto. ";
+} elseif (! preg_match("/^[^<>{}]*$/", $titolo)) {
+	$err .= "Il titolo inserito contiene caratteri non ammessi. ";
+}
+if (! preg_match("/^[^<>]*$/", $descrizione)) {
+	$valid = false;
+	$err .= "La descrizione inserita contiene caratteri non ammessi. ";
+}
+if (!is_null($locandina) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
 		$valid = false;
-		$_SESSION["error"] = $img[1];
+		$err .= $img[1];
 	}
 }
 
 if (! $valid) {
+	$_SESSION["error"] = $err;
 	header("location: gest_collezione.php?id=" . $id);
 	exit();
 }
@@ -58,17 +67,14 @@ try {
 
 if (! $res) {
 	$_SESSION["success"] = "Nessuna modifica apportata.";
-	header("location: collezione.php?id=" . $id);
 } elseif ($submit == "aggiungi") {
 	$_SESSION["success"] = "Collezione aggiunta correttamente.";
-	header("location: collezione.php?id=" . $id);
 } elseif ($submit == "modifica") {
 	$_SESSION["success"] = "Collezione modificata correttamente.";
-	header("location: collezione.php?id=" . $id);
 } else {
 	$_SESSION["success"] = "Collezione eliminata correttamente. Aggiungine un'altra.";
-	header("location: gest_collezione.php");
 }
 
+header("location: gest_collezione.php" . ($id != "" ? "?id=$id": "" ));
 
 ?>

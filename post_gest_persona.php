@@ -22,11 +22,17 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 }
 
 $valid = true;
+$err = "";
 
-if (strlen($nome) <= 3) {
+if ($nome == "") {
 	$valid = false;
-	$_SESSION["error"] = "Nome troppo corto";
-} elseif (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
+	$err .= "Nome è un campo richesto. ";
+} elseif (! preg_match("/^[^<>{}]*$/", $nome)) {
+	$valid = false;
+	$err .= "Il nome inserito contiene caratteri non ammessi. ";
+}
+// TODO: date
+if (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["immagine"]);
 	if ($img[0]) $immagine = $img[1];
 	else {
@@ -36,6 +42,7 @@ if (strlen($nome) <= 3) {
 }
 
 if (! $valid) {
+	$_SESSION["error"] = $err;
 	header("location: gest_persona.php?id=" . $id);
 	exit();
 }
@@ -59,17 +66,14 @@ try {
 
 if (! $res) {
 	$_SESSION["success"] = "Nessuna modifica apportata.";
-	header("location: persona.php?id=" . $id);
 } elseif ($submit == "aggiungi") {
 	$_SESSION["success"] = "Persona aggiunta correttamente.";
-	header("location: persona.php?id=" . $id);
 } elseif ($submit == "modifica") {
 	$_SESSION["success"] = "Persona modificata correttamente.";
-	header("location: persona.php?id=" . $id);
 } else {
 	$_SESSION["success"] = "Persona eliminata correttamente. Aggiungine un'altra.";
-	header("location: gest_persona.php");
 }
 
+header("location: gest_persona.php" . ($id != "" ? "?id=$id": "" ));
 
 ?>
