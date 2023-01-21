@@ -151,10 +151,7 @@ if (!empty($valutazione)) {
 		$t = $list;
 		Tools::replaceAnchor($t, "utente", $v["utente"]);
 		Tools::replaceAnchor($t, "voto", $v["voto"]);
-		if (isset($v["testo"])) {
-			Tools::replaceAnchor($t, "testo", $v["testo"]);
-		} else
-			Tools::replaceSection($t, "testo", "");
+		Tools::replaceAnchor($t, "testo", $v["testo"]);
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "valutazione", $r);
