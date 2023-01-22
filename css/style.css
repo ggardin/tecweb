@@ -227,7 +227,7 @@ HEADER
 }
 
 .active {
-	background-color: var(--bgcolor-off);
+	background-color: var(--secondaryColor);
 	pointer-events: none;
 	padding: 0.5em;
 	border-radius: var(--border-radius);
