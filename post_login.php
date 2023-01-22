@@ -27,7 +27,7 @@ if (! empty($login)) {
 	header("location: user.php");
 	exit();
 } else {
-	$_SESSION["error"] = "Credenziali errate. Riprova.";
+	$_SESSION["error"] = ["Credenziali errate. Riprova."];
 	header("location: login.php");
 	exit();
 }

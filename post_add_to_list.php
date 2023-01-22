@@ -29,12 +29,11 @@ try {
 	exit();
 }
 
-if (! $res) {
-	$_SESSION["error"] = "Errore durante l'inserimento nella lista.";
-	header("location: film.php?id=" . $film_id);
-} else {
-	$_SESSION["success"] = "Aggiunto correttamente alla lista.";
-	header("location: film.php?id=" . $film_id);
-}
+if (! $res)
+	$_SESSION["error"] = ["Errore durante l'inserimento nella lista."];
+else
+	$_SESSION["success"] = ["Aggiunto correttamente alla lista."];
+
+header("location: film.php?id=" . $film_id);
 
 ?>

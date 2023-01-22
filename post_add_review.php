@@ -19,16 +19,16 @@ if ($film_id == "") {
 	exit();
 }
 
-$err = "";
+$err = [];
 
 if (intval($voto) < 1 || intval($voto) > 10) {
-	$err .= "Devi esprimere un voto da 1 a 10. ";
+	array_push($err, "Devi esprimere un voto da 1 a 10.");
 }
 if (strlen($testo) < 3 || strlen($testo) > 1000) {
-	$err .= "La recensione deve contenere tra i 3 e i 1000 caratteri. ";
+	array_push($err, "La recensione deve contenere tra i 3 e i 1000 caratteri.");
 }
 if (! preg_match("/^[^<>{}]*$/", $testo)) {
-	$err .= "La recensione contiene caratteri non ammessi. ";
+	array_push($err, "La recensione contiene caratteri non ammessi.");
 }
 
 if ($err) {
@@ -47,12 +47,11 @@ try {
 	exit();
 }
 
-if (! $res) {
-	$_SESSION["error"] = "Errore durante l'inserimento della recensione.";
-	header("location: film.php?id=" . $film_id);
-} else {
-	$_SESSION["success"] = "Recensione inserita correttamente.";
-	header("location: film.php?id=" . $film_id);
-}
+if (! $res)
+	$_SESSION["error"] = ["Errore durante l'inserimento della recensione."];
+else
+	$_SESSION["success"] = ["Recensione inserita correttamente."];
+
+header("location: film.php?id=" . $film_id);
 
 ?>

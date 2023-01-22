@@ -29,12 +29,11 @@ try {
 	exit();
 }
 
-if (! $res) {
-	$_SESSION["error"] = "Errore durante la rimozione dalla lista.";
-	header("location: list.php?id=$list_id");
-} else {
-	$_SESSION["success"] = "Rimosso correttamente dalla lista.";
-	header("location: list.php?id=$list_id");
-}
+if (! $res)
+	$_SESSION["error"] = ["Errore durante la rimozione dalla lista."];
+else
+	$_SESSION["success"] = ["Rimosso correttamente dalla lista."];
+
+header("location: list.php?id=$list_id");
 
 ?>

@@ -21,18 +21,18 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$err = "";
+$err = [];
 
 if ($nome == "") {
-	$err .= "Nome è un campo richesto. ";
+	array_push($err, "Nome è un campo richesto.");
 } elseif (! preg_match("/^[a-zA-Z\.\s\-\'\[\]\/\x{00C0}-\x{017F}]+$/u", $nome)) {
-	$err .= "Il nome inserito contiene caratteri non ammessi. ";
+	array_push($err, "Il nome inserito contiene caratteri non ammessi.");
 }
 if (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["immagine"]);
 	if ($img[0]) $immagine = $img[1];
 	else {
-		$err .= $img[1];
+		array_push($err, $img[1]);
 	}
 }
 $dn = false;
@@ -44,11 +44,11 @@ if ($data_nascita != "") {
 		$min = date_create_immutable("1800-01-01");
 		$now = date_create_immutable("now");
 		if ($date < $min)
-			$err .= "Data di nascita può partire dal 1800.";
+			array_push($err, "Data di nascita può partire dal 1800.");
 		elseif ($date > $now)
-			$err .= "Data di nascita deve essere antecedente ad oggi.";
+			array_push($err, "Data di nascita deve essere antecedente ad oggi.");
 	} else
-		$err .= "La data di nascita deve essere nel formato YYYY-MM-DD.";
+		array_push($err, "La data di nascita deve essere nel formato YYYY-MM-DD.");
 }
 if ($data_morte != "") {
 	if (preg_match("/^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_morte)) {
@@ -57,20 +57,20 @@ if ($data_morte != "") {
 		$min = date_create_immutable("1800-01-01");
 		$now = date_create_immutable("now");
 		if ($date < $min)
-			$err .= "Data di morte può partire dal 1800.";
+			array_push($err, "Data di morte può partire dal 1800.");
 		elseif ($date > $now)
-			$err .= "Data di morte deve essere antecedente ad oggi.";
+			array_push($err, "Data di morte deve essere antecedente ad oggi.");
 	} else
-		$err .= "La data di morte deve essere nel formato YYYY-MM-DD.";
+		array_push($err, "La data di morte deve essere nel formato YYYY-MM-DD.");
 }
 if ($dn && $dm) {
 	$date_n = date_create_immutable($data_nascita);
 	$date_m = date_create_immutable($data_morte);
 	$diff = date_diff($date_n, $date_m);
 	if ($date_n >= $date_m)
-		$err .= "Le data di nascita deve essere antecedente a quella di morte.";
+		array_push($err, "Le data di nascita deve essere antecedente a quella di morte.");
 	elseif (intval($diff->format("%r%y")) > 120)
-		$err .= "Le date devono differire per un massimo di 120 anni.";
+		array_push($err, "Le date devono differire per un massimo di 120 anni.");
 }
 
 if ($err) {
@@ -97,13 +97,13 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["success"] = "Nessuna modifica apportata.";
+	$_SESSION["success"] = ["Nessuna modifica apportata."];
 } elseif ($submit == "aggiungi") {
-	$_SESSION["success"] = "Persona aggiunta correttamente.";
+	$_SESSION["success"] = ["Persona aggiunta correttamente."];
 } elseif ($submit == "modifica") {
-	$_SESSION["success"] = "Persona modificata correttamente.";
+	$_SESSION["success"] = ["Persona modificata correttamente."];
 } else {
-	$_SESSION["success"] = "Persona eliminata correttamente. Aggiungine un'altra.";
+	$_SESSION["success"] = ["Persona eliminata correttamente. Aggiungine un'altra."];
 }
 
 header("location: gest_persona.php" . ($id != "" ? "?id=$id": "" ));
