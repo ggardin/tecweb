@@ -240,7 +240,7 @@ BREADCRUMB
 */
 
 #breadcrumb {
-	background-color: var(--bgcolor);
+	background-color: var(--secondaryColor);
 	font-size: 0.9em;
 	padding: 0.5em var(--content-padding);
 	border-radius: var(--border-radius);
