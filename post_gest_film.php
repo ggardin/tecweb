@@ -40,17 +40,11 @@ if ($titolo == "") {
 if (! preg_match("/^[^<>]*$/", $descrizione)) {
 	$err .= "La descrizione inserita contiene caratteri non ammessi. ";
 }
-if (! preg_match("/^[^<>{}]*$/", $titolo_originale)) {
-	$err .= "Il titolo originale inserito contiene caratteri non ammessi. ";
+if ($data_rilascio != "" && !preg_match("/^((18|19|20)\d\d)\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_rilascio)) {
+	$err .= "Inserisci la data nel formato YYYY-MM-DD, entro i secoli 19-21. ";
 }
 if ($durata != "" && (intval($durata) <= 0 || intval($durata) > 1000)) {
 	$err .= "La durata deve essere tra 1 e 1000 minuti. ";
-}
-if ($budget != "" && (intval($budget) <= 0)) {
-	$err .= "Il [en]budget[/en] deve essere superiore a 0. ";
-}
-if ($incassi != "" && (intval($incassi) <= 0)) {
-	$err .= "Gli incassi devono essere superiori a 0. ";
 }
 if (!empty($crew_persona)) {
 	$v = true;
@@ -70,6 +64,15 @@ if (!empty($paese)) {
 		$err .= "Gli identificativi dei paesi devono essere due lettere maiuscole. ";
 	}
 }
+if (! preg_match("/^[^<>{}]*$/", $titolo_originale)) {
+	$err .= "Il titolo originale inserito contiene caratteri non ammessi. ";
+}
+if ($budget != "" && (intval($budget) <= 0)) {
+	$err .= "Il [en]budget[/en] deve essere superiore a 0. ";
+}
+if ($incassi != "" && (intval($incassi) <= 0)) {
+	$err .= "Gli incassi devono essere superiori a 0. ";
+}
 if (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
@@ -77,7 +80,6 @@ if (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"][
 		$err .= $img[1];
 	}
 }
-// TODO: date
 
 if ($err) {
 	$_SESSION["error"] = $err;
