@@ -55,7 +55,7 @@ function validateNewReviewText() {
 		showErrorMessage(id, 'La recensione inserita contiene caratteri non ammessi.');
 		return false;
 	}
-	else if ( currentLength < 2 ) {
+	else if ( currentLength < 5 ) {
 		showErrorMessage(id, 'La recensione è troppo breve.');
 		return false;
 	}
