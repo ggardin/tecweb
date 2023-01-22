@@ -6,7 +6,7 @@ CSS VARIABLES
 
 :root {
 	--bgcolor: #efefef;
-	--bgcolor-off: #C8C8C8;
+	--bgcolor-off: #e0e0e0;
 
 	--secondaryColor: #fbfbfb;
 	--tertiaryColor: #0e5e51;
@@ -38,7 +38,7 @@ CSS VARIABLES
 
 	--txtcolor: #efefef;
 
-	--anchorcolor: #978726;
+	--anchorcolor: #968729;
 	--anchorcolor-alt: #9d64ff;
 
 	--error-required: #FF5757;
@@ -227,7 +227,8 @@ HEADER
 }
 
 .active {
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor-off);
+	color: var(--txtcolor);
 	pointer-events: none;
 	padding: 0.5em;
 	border-radius: var(--border-radius);
@@ -240,7 +241,7 @@ BREADCRUMB
 */
 
 #breadcrumb {
-	background-color: var(--secondaryColor);
+	background-color: var(--bgcolor);
 	font-size: 0.9em;
 	padding: 0.5em var(--content-padding);
 	border-radius: var(--border-radius);
