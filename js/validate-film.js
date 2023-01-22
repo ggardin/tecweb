@@ -428,3 +428,23 @@ function countGenres() {
 
 	return count;
 }
+
+/*
+ * Mostra il nome della persona al posto dell'ID
+ */
+function showPersonFullName(element) {
+	var list = element.getAttribute('list');
+	var people = document.querySelectorAll('#' + list + ' option');
+	var hiddenID = document.getElementById(element.getAttribute('id') + '-id');
+
+	for(var i = 0; i < people.length; i++) {
+		if(people[i].innerText === element.value) {
+			hiddenID.value = people[i].getAttribute('data-value');
+			break;
+		}
+		else {
+			// Imposta un valore che segnala l'assenza di match
+			hiddenID.value = -1;
+		}
+	}
+}

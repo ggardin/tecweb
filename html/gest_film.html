@@ -62,7 +62,8 @@
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
 					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
-					<input id="crew-person@@crew_person_input_id@@" @@crew_person_input_name@@ type="text" list="lista-persone" value="@@value@@" />
+					<input id="crew-person@@crew_person_input_id@@" @@crew_person_input_name@@ type="text" list="lista-persone" value="@@value@@" oninput="showPersonFullName(this);" />
+					<input id="crew-person@@crew_person_input_hidden@@-id" name="person-id" type="hidden" value="-1"/>
 
 					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
 					<select id="crew-role@@crew_role_select_id@@" @@crew_role_select_name@@>
@@ -85,7 +86,7 @@
 				<input type="hidden" id="crew-count" name="crew-count" value="-1" />
 				<datalist id="lista-persone">
 					<!-- persona_start -->
-					<option value="@@id@@">@@nome@@</option>
+					<option data-value="@@id@@">@@nome@@</option>
 					<!-- persona_end -->
 				</datalist>
 			</fieldset>
