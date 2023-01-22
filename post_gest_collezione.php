@@ -25,7 +25,7 @@ $err = "";
 if ($titolo == "") {
 	$valid = false;
 	$err .= "Titolo è un campo richesto. ";
-} elseif (! preg_match("/^[\w\s\-\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $titolo)) {
+} elseif (! preg_match("/^[\w\s\-\.\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $titolo)) {
 	$valid = false;
 	$err .= "Il titolo inserito contiene caratteri non ammessi. ";
 }

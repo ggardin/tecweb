@@ -27,7 +27,7 @@ $err = "";
 if ($nome == "") {
 	$valid = false;
 	$err .= "Nome è un campo richesto. ";
-} elseif (! preg_match("/^[\w\s\-\'\[\]\/\x{00C0}-\x{017F}]+$/u", $nome)) {
+} elseif (! preg_match("/^[a-zA-Z\.\s\-\'\[\]\/\x{00C0}-\x{017F}]+$/u", $nome)) {
 	$valid = false;
 	$err .= "Il nome inserito contiene caratteri non ammessi. ";
 }

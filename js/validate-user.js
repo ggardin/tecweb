@@ -40,7 +40,7 @@ function validateUserName() {
 		return true;
 	}
 	if (!allowedChars.test(name)) {
-		showErrorMessage(id, 'Nome non valido.');
+		showErrorMessage(id, 'Nome può contenere solo lettere, spazi e apostrofi.');
 		return false;
 	}
 	removeErrorMessage(id);

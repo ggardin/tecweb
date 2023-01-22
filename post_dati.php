@@ -28,7 +28,7 @@ if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
 }
 if ($mail != "" && ! filter_var($mail, FILTER_VALIDATE_EMAIL)) {
 	$valid = false;
-	$err .= "Non è un indirizzo [en]email[/en] valido. ";
+	$err .= "L'indirizzo [en]email[/en] non è valido. ";
 }
 if ($new_password != "") {
 	if ($old_password == "") {
@@ -50,7 +50,7 @@ if ($new_password != "") {
 }
 if (! preg_match("/^[A-Za-z\s']*$/", $nome)) {
 	$valid = false;
-	$err .= "Nome non valido. ";
+	$err .= "Nome può contenere solo lettere, spazi e apostrofi. ";
 }
 // TODO: data
 

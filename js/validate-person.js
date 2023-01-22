@@ -24,7 +24,7 @@ function validatePersonName() {
 		return false;
 	}
 	else {
-		const titleRegex = /^[\w\s\-\'\[\]\/\u00C0-\u017F]+$/;
+		const titleRegex = /^[a-zA-Z\.\s\-\'\[\]\/\u00C0-\u017F]+$/;
 		if (! titleRegex.test(title)) {
 			showErrorMessage(id, 'Il nome inserito contiene caratteri non ammessi.');
 			return false;
