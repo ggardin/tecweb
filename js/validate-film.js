@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
+		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateNationCode() ) ) {
 			event.preventDefault();
 		}
 	});
@@ -149,6 +149,25 @@ function validateMovieRuntime() {
 
 	removeErrorMessage(id);
 	return true;
+}
+
+/*
+ * Valida il codice paese
+ */
+function validateNationCode(element) {
+	var id = element.getAttribute('id');
+	var nations = document.querySelectorAll('#' + element.getAttribute('list') + ' option');
+
+	for(var i = 0; i < nations.length; i++) {
+		if(element.value === "" || nations[i].value === element.value) {
+			removeErrorMessage(id);
+			return true;
+		}
+	}
+
+	// Non ha trovato corrispondenze e il contenuto non è vuoto
+	showErrorMessage(id, "Il codice paese indicato non è valido.");
+	return false;
 }
 
 /*

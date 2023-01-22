@@ -111,7 +111,8 @@
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
 					<label for="nation-name@@nation_label_id@@">Codice del Paese</label>
-					<input id="nation-name@@nation_input_id@@" @@nation_input_name@@ type="text" list="lista-paesi" value="@@value@@" />
+					<input id="nation-name@@nation_input_id@@" @@nation_input_name@@ type="text" list="lista-paesi" value="@@value@@" oninput="validateNationCode(this);" />
+					<p id="nation-name@@nation_input_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
 					<!-- nation_sample_end -->
 				</div>
