@@ -2261,23 +2261,23 @@ CREATE TABLE `genere` (
 --
 
 INSERT INTO `genere` (`id`, `nome`) VALUES
-(0, 'Animazione'),
-(1, 'Avventura'),
-(2, 'Azione'),
-(3, 'Commedia'),
+(13, 'Animazione'),
+(2, 'Avventura'),
+(0, 'Azione'),
+(6, 'Commedia'),
 (4, '[en]Crime[/en]'),
-(5, 'Dramma'),
-(6, 'Famiglia'),
-(7, 'Fantascienza'),
-(8, '[en]Fantasy[/en]'),
-(9, 'Guerra'),
-(10, '[en]Horror[/en]'),
-(11, 'Mistero'),
-(12, 'Musica'),
-(13, '[en]Romance[/en]'),
-(14, 'Storia'),
-(15, '[en]Thriller[/en]'),
-(16, '[en]Western[/en]');
+(3, 'Dramma'),
+(12, 'Famiglia'),
+(1, 'Fantascienza'),
+(9, '[en]Fantasy[/en]'),
+(11, 'Guerra'),
+(16, '[en]Horror[/en]'),
+(10, 'Mistero'),
+(14, 'Musica'),
+(7, '[en]Romance[/en]'),
+(15, 'Storia'),
+(5, '[en]Thriller[/en]'),
+(8, '[en]Western[/en]');
 
 -- --------------------------------------------------------
 

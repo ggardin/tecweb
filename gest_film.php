@@ -196,14 +196,17 @@ if ($id != "") {
 	foreach ($film_generi as $t)
 		array_push($fg, $t["id"]);
 }
+$generi_sorted = $generi;
+Tools::toHtml($generi_sorted, 1);
+usort($generi_sorted, fn($a, $b) => $a['nome'] <=> $b['nome']);
 Tools::toHtml($generi, 2);
 $option = Tools::getSection($page, "genere");
 $res = "";
-foreach ($generi as $g) {
+foreach ($generi_sorted as $g) {
 	$t = $option;
 	Tools::replaceAnchor($t, "genere_label_id", $g["id"]);
 	Tools::replaceAnchor($t, "genere_input_id", $g["id"]);
-	Tools::replaceAnchor($t, "genere_label_nome", $g["nome"]);
+	Tools::replaceAnchor($t, "genere_label_nome", $generi[$g["id"]]["nome"]);
 	Tools::replaceAnchor($t, "checked", ($id != "" && in_array($g["id"], $fg) ? "checked" : ""));
 	Tools::replaceAnchor($t, "id", $g["id"]);
 	$res .= $t;
