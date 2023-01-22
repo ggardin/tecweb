@@ -15,36 +15,27 @@ html, body {
 	line-height: 1.5em;
 }
 
-img, svg {
-	display: none;
-}
-
 img.print, svg.print {
 	display: block;
 	max-width: 100%;
 }
-.movie-page {
-	display: grid;
-	grid-template-columns: 2fr 1fr;
-}
+
 #hero-image > img {
-	display: grid;
-	padding-top: 7em;
-	width: 100%;
-}
-#desc-generi, #desc-durate {
-	display: none;
+	display: block;
+	width: 50%;
 }
 
-#movie-details {
-	display: grid;
+table, td, th{
+	border: 1px solid;
+	border-collapse: collapse;
 }
 
-#auth_form
+#auth_form, #gestione{
 	display: block;
 }
 
-#page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
+img, svg, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
+.skip-to-content {
 	display: none;
 }
 
@@ -57,9 +48,4 @@ main::after {
 @page {
 	margin: 2cm;
 	size: A4;
-}
-
-.sr-only,
-.skip-to-content {
-	display: none;
 }
