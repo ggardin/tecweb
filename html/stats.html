@@ -40,12 +40,12 @@
 
 		<!-- generi_start -->
 		<h2>Generi</h2>
-		<table>
+		<table aria-describedby="desc-generi">
 			<caption>Numero di film collezionati per genere</caption>
 			<thead>
 				<tr>
 					<th scope="col">Genere</th>
-					<th scope="col">Numero film</th>
+					<th scope="col" abbr="n film">Numero film</th>
 				</tr>
 			</thead>
 
@@ -58,11 +58,14 @@
 				<!-- generi_riga_end -->
 			</tbody>
 		</table>
+		<p id="desc-generi" class="sr-only">
+			La tabella, composta da due colonne, fornisce in ordine decrescente il genere e il numero dei film presenti nelle liste dell'utente e appartenenti a quel genere.
+		</p>
 		<!-- generi_end -->
 
 		<!-- lunghi_start -->
 		<h2>Classifica per durata</h2>
-		<table>
+		<table aria-describedby="desc-durate">
 			<caption>Film più lunghi in lista</caption>
 
 			<thead>
@@ -81,6 +84,9 @@
 				<!-- lunghi_riga_end -->
 			</tbody>
 		</table>
+		<p id="desc-durate" class="sr-only">
+			La tabella, composta da due colonne, fornisce in ordine decrescente il nome e la durata dei film più lunghi presenti nelle liste dell'utente.
+		</p>
 		<!-- lunghi_end -->
 
 		<div id="user-additional-actions">
