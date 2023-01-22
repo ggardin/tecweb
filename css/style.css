@@ -176,7 +176,7 @@ HEADER
 
 #page-header ul {
 	display: flex;
-	list-style: none;
+	list-style-type: none;
 	padding: 0;
 }
 
@@ -281,7 +281,7 @@ FOOTER
 }
 
 #page-footer ul {
-	list-style: none;
+	list-style-type: none;
 	padding: 0;
 }
 
@@ -987,7 +987,7 @@ PERSON/COLLECTION PAGE
 .person-page .pills {
 	display: flex;
 	flex-flow: row wrap;
-	list-style: none;
+	list-style-type: none;
 	padding: 0;
 	gap: 0.5em;
 }
@@ -1150,6 +1150,7 @@ SERVER MESSAGES
 	padding: 1em;
 	border: 1px solid var(--server-message-color);
 	border-radius: var(--border-radius);
+	list-style-type: none;
 }
 #server-message.success {
 	--server-message-color: green;
