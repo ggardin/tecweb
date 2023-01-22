@@ -68,7 +68,7 @@ if (!empty($crew_persona)) {
 		! preg_match("/^[\d]+$/", $crew_persona[$i]) && $v = false;
 	}
 	if (!$v) {
-		array_push($err, "Gli identificativi delle persone devono essere dei numeri.");
+		array_push($err, "Gli identificativi delle persone non sono impostati. Attiva [en]Javascript[/en].");
 	}
 }
 if (!empty($paese)) {
@@ -77,7 +77,7 @@ if (!empty($paese)) {
 		! preg_match("/^[A-Z]{2}$/", $paese[$i]) && $v = false;
 	}
 	if (!$v) {
-		array_push($err, "Gli identificativi dei paesi devono essere due lettere maiuscole.");
+		array_push($err, "Gli identificativi dei paesi non sono impostati. Attiva [en]Javascript[/en].");
 	}
 }
 if (! preg_match("/^[^<>{}]*$/", $titolo_originale)) {
