@@ -20,7 +20,7 @@ function validateUserUsername() {
 	var username = document.forms['gestione']['username'].value;
 	const allowedChars = /^[A-Za-z0-9]+$/; // lettere maiuscole e minuscole, numeri
 	if (!allowedChars.test(username)) {
-		showErrorMessage(id, 'Nome utente non valido, usa solo lettere o numeri');
+		showErrorMessage(id, '<span lang="en">Username</span> non valido, usa solo lettere o numeri.');
 		return false;
 	}
 	removeErrorMessage(id);
@@ -33,14 +33,14 @@ function validateUserUsername() {
 function validateUserName() {
 	var id = 'nome';
 	var name = document.forms['gestione']['nome'].value;
-	const allowedChars = /^[A-Za-z\s'][^\d]*$/; // lettere, spazi, apostrofi
+	const allowedChars = /^[A-Za-z\s']*$/; // lettere, spazi, apostrofi
 
 	if (name == null || name == '') {
 		removeErrorMessage(id);
 		return true;
 	}
 	if (!allowedChars.test(name)) {
-		showErrorMessage(id, 'Nome non valido.');
+		showErrorMessage(id, 'Nome può contenere solo lettere, spazi e apostrofi.');
 		return false;
 	}
 	removeErrorMessage(id);
@@ -122,23 +122,16 @@ function validateUserBirthday() {
 		return true;
 	}
 
-	// Non c'è fallback
-	if (inputDateBrowserSupport()) {
-		var dateOfBirth = new Date(birthday);
-	}
-	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
-	else {
-		const yearRegex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
-		// Controllo che sia nel formato dd/mm/yyyy
-		if (yearRegex.test(birthday)) {
-			var parts = birthday.split("/");
-			var dateOfBirth = new Date(parts[2], parts[1], parts[0]);
-		}
-		else {
-			showErrorMessage(id, 'Formato della data non corretto. Usa dd/mm/yyyy.');
+	// Non c'è supporto data, controllo formato
+	if (! inputDateBrowserSupport()) {
+		const yearRegex = /^[\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+		if (! yearRegex.test(birthday)) {
+			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
+
+	var dateOfBirth = new Date(birthday);
 
 	// Ho a disposizione la data di nascita
 	var age = today.getFullYear() - dateOfBirth.getFullYear();

@@ -31,7 +31,7 @@ if (!empty($liste)) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "lista", $r);
-	Tools::replaceAnchor($page, "message", ("Hai " . count($liste) . " liste"));
+	Tools::replaceAnchor($page, "message", ("Hai " . count($liste) . (count($liste) > 1 ? " liste" : " lista")));
 } else {
 	Tools::replaceAnchor($page, "message", "Non hai nessuna lista, inizia creandone una");
 	Tools::replaceSection($page, "liste", "");

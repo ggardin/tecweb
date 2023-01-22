@@ -62,7 +62,7 @@ function validateMovieDescription() {
 	var description = document.forms['gestione'][id].value;
 
 	if (description != null || description != '') {
-		const descriptionRegex = /^[^<>{}]*$/;
+		const descriptionRegex = /^[^<>]*$/;
 		if (! descriptionRegex.test(description)) {
 			showErrorMessage(id, 'La descrizione inserita contiene caratteri non ammessi.');
 			return false;
@@ -90,28 +90,21 @@ function validateMovieDescription() {
 	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
 
 	// Controlla che ci sia una stringa
-	if (releaseDate == null) {
+	if (releaseDate == null || releaseDate == "") {
 		showErrorMessage(id, 'Data di rilascio non inserita.');
 		return false;
 	}
 
-	// Non c'è fallback
-	if (inputDateBrowserSupport()) {
-		var dateOfRelease = new Date(releaseDate);
-	}
-	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
-	else {
-		const yearRegex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
-		// Controllo che sia nel formato dd/mm/yyyy
-		if (yearRegex.test(releaseDate)) {
-			var parts = releaseDate.split("/");
-			var dateOfRelease = new Date(parts[2], parts[1], parts[0]);
-		}
-		else {
-			showErrorMessage(id, 'Formato della data non corretto. Usa dd/mm/yyyy.');
+	// Non c'è supporto data, controllo formato
+	if (! inputDateBrowserSupport()) {
+		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+		if (! yearRegex.test(releaseDate)) {
+			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
+
+	var dateOfRelease = new Date(releaseDate);
 
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfRelease.getTime() < dateLowerBound.getTime()) {

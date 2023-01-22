@@ -125,19 +125,28 @@ class Tools {
 		return $page;
 	}
 
+	private static function showMessage(&$page, $name, $intro) : void {
+		self::replaceAnchor($page, "server_message_intro", $intro);
+		self::replaceAnchor($page, "server_message_type", $name);
+		self::toHtml($_SESSION[$name]);
+		$tmp = self::getSection($page, "server_message");
+		$res = "";
+		foreach ($_SESSION[$name] as $s) {
+			$t = $tmp;
+			self::replaceAnchor($t, "server_message", $s);
+			$res .= $t;
+		}
+		self::replaceSection($page, "server_message", $res);
+		unset($_SESSION[$name]);
+	}
+
 	public static function showPage(&$page) : void {
-		if (isset($_SESSION["success"])) {
-			self::toHtml($_SESSION["success"]);
-			self::replaceAnchor($page, "message_type", "success");
-			self::replaceAnchor($page, "server_message", $_SESSION["success"]);
-			unset($_SESSION["success"]);
-		} elseif (isset($_SESSION["error"])) {
-			self::toHtml($_SESSION["error"]);
-			self::replaceAnchor($page, "message_type", "error");
-			self::replaceAnchor($page, "server_message", $_SESSION["error"]);
-			unset($_SESSION["error"]);
-		} else
-			self::replaceSection($page, "server_message", "");
+		if (isset($_SESSION["success"]))
+			self::showMessage($page, "success", "Successo.");
+		elseif (isset($_SESSION["error"]))
+			self::showMessage($page, "error", "Errore.");
+		else
+			self::replaceSection($page, "server_section", "");
 		self::deleteAllSectionAnchors($page);
 		$page = preg_replace('/^\h*\v+/m', '', $page);
 		echo($page);

@@ -5,20 +5,20 @@ CSS VARIABLES
 */
 
 :root {
-	--bgcolor: #F0F0F0;
-	--bgcolor-off: #C8C8C8;
+	--bgcolor: #efefef;
+	--bgcolor-off: #e0e0e0;
 
-	--secondaryColor: #E6E6E6;
-	--tertiaryColor: #0C443B;
+	--secondaryColor: #fbfbfb;
+	--tertiaryColor: #0e5e51;
 
-	--txtcolor: #0F0F0F;
+	--txtcolor: #101010;
 
-	--anchorcolor: #000162;
-	--anchorcolor-alt: #747900;
+	--anchorcolor: #001289;
+	--anchorcolor-alt: #B54835;
 
 	--error-required: #C20000;
-	--interactions-text-placeholder-color: #4D4D4D;
 
+	--interactions-text-placeholder-color: #4D4D4D;
 	--interactions-color: #FBFBFB;
 
 	--content-width: 60em;
@@ -30,16 +30,16 @@ CSS VARIABLES
 }
 
 :root.dark {
-	--bgcolor: #0F0F0F;
-	--bgcolor-off: #424242;
+	--bgcolor: #101010;
+	--bgcolor-off: #373737;
 
-	--secondaryColor: #191919;
-	--tertiaryColor: #BDDDAA;
+	--secondaryColor: #1c1c1c;
+	--tertiaryColor: #c6dc47;
 
-	--txtcolor: #F0F0F0;
+	--txtcolor: #efefef;
 
-	--anchorcolor: #7270FF;
-	--anchorcolor-alt: #F5E990;
+	--anchorcolor: #9d64ff;
+	--anchorcolor-alt: #968729;
 
 	--error-required: #FF5757;
 
@@ -187,8 +187,8 @@ HEADER
 #page-header li a,
 #accountButton {
 	display: block;
-	color: inherit;
-	text-decoration: none;
+	/*color: inherit;*/
+	/*text-decoration: none;*/
 }
 
 #page-header li a:hover,
@@ -287,10 +287,6 @@ FOOTER
 
 #page-footer li {
 	padding: 0.5em 0;
-}
-
-#page-footer li a {
-	color: var(--txtcolor);
 }
 
 #page-footer .tmdb-attribution {
@@ -908,7 +904,7 @@ USER LISTS PAGE
 */
 
 #list-movies {
-	margin-top: 1.5em;
+	margin: 1.5em 0;
 }
 
 #list-movies li {

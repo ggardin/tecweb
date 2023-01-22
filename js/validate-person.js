@@ -24,9 +24,9 @@ function validatePersonName() {
 		return false;
 	}
 	else {
-		const titleRegex = /^[\w\s\-\'\[\]\/\u00C0-\u017F]+$/;
+		const titleRegex = /^[a-zA-Z\.\s\-\'\[\]\/\u00C0-\u017F]+$/;
 		if (! titleRegex.test(title)) {
-			showErrorMessage(id, 'Il titolo inserito contiene caratteri non ammessi.');
+			showErrorMessage(id, 'Il nome inserito contiene caratteri non ammessi.');
 			return false;
 		}
 	}
@@ -59,6 +59,7 @@ function validatePersonDateOfDeath() {
 	var id = 'data_' + event;
 	var dateLowerBound = new Date(document.forms['gestione']['data_' + event].min);
 	var dateUpperBound = new Date(document.forms['gestione']['data_' + event].max);
+	var today = new Date();
 
 	// Controlla che ci sia una stringa
 	if (date == null || date == '') {
@@ -66,27 +67,25 @@ function validatePersonDateOfDeath() {
 		return true;
 	}
 
-	// Non c'è fallback
-	if (inputDateBrowserSupport()) {
-		var dateOfEvent = new Date(date);
-	}
-	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
-	else {
-		const yearRegex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
-		// Controllo che sia nel formato dd/mm/yyyy
-		if (yearRegex.test(date)) {
-			var parts = date.split("/");
-			var dateOfEvent = new Date(parts[2], parts[1], parts[0]);
-		}
-		else {
-			showErrorMessage(id, 'Formato della data di ' + event + ' non corretto. Usa dd/mm/yyyy.');
+	// Non c'è supporto data, controllo formato
+	if (! inputDateBrowserSupport()) {
+		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+		if (! yearRegex.test(date)) {
+			showErrorMessage(id, 'Data di ' + event + ' non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
 
+	var dateOfEvent = new Date(date);
+
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfEvent.getTime() < dateLowerBound.getTime()) {
 		showErrorMessage(id, 'Data di ' + event + ' immessa antecedente al limite minimo.');
+		return false;
+	}
+	// Controlla se la data è superiore ad oggi
+	if (dateOfEvent.getTime() > today.getTime()) {
+		showErrorMessage(id, 'Data di ' + event + ' successiva alla data odierna.');
 		return false;
 	}
 	// Controlla se la data è superiore al limite massimo
@@ -111,16 +110,8 @@ function comparePersonDates() {
 		var death = document.forms['gestione']['data_morte'].value;
 		var lifeExpectancy = 120;
 
-		// Non c'è fallback, procedo
-		if (inputDateBrowserSupport()) {
-			var dateOfBirth = new Date(birth);
-			var dateOfDeath = new Date(death);
-		}
-		// Se c'è fallback, splitto la stringa
-		else {
-			var dateOfBirth = new Date(birth.split("/")[2], birth.split("/")[1], birth.split("/")[0]);
-			var dateOfDeath = new Date(death.split("/")[2], death.split("/")[1], death.split("/")[0]);
-		}
+		var dateOfBirth = new Date(birth);
+		var dateOfDeath = new Date(death);
 
 		// Confronto le date
 		if (dateOfBirth.getTime() >= dateOfDeath.getTime()) {

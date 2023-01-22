@@ -115,6 +115,7 @@ if ($tipo == "film") {
 	Tools::replaceSection($page, "filter", $res);
 
 	Tools::toHtml($generi, 1);
+	usort($generi, fn($a, $b) => $a['nome'] <=> $b['nome']);
 	$option = Tools::getSection($page, "genere");
 	$res = "";
 	foreach ($generi as $g) {

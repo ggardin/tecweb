@@ -19,17 +19,20 @@ if ($film_id == "") {
 	exit();
 }
 
-$valid = true;
+$err = [];
 
 if (intval($voto) < 1 || intval($voto) > 10) {
-	$valid = false;
-	$_SESSION["error"] = "Voto non valido.";
-} elseif (strlen($testo) < 3 || strlen($testo) > 1000) {
-	$valid = false;
-	$_SESSION["error"] = "Il testo non è valido.";
+	array_push($err, "Devi esprimere un voto da 1 a 10.");
+}
+if (strlen($testo) < 3 || strlen($testo) > 1000) {
+	array_push($err, "La recensione deve contenere tra i 3 e i 1000 caratteri.");
+}
+if (! preg_match("/^[^<>{}]*$/", $testo)) {
+	array_push($err, "La recensione contiene caratteri non ammessi.");
 }
 
-if (! $valid) {
+if ($err) {
+	$_SESSION["error"] = $err;
 	header("location: film.php?id=" . $film_id);
 	exit();
 }
@@ -44,12 +47,11 @@ try {
 	exit();
 }
 
-if (! $res) {
-	$_SESSION["error"] = "Errore durante l'inserimento della recensione.";
-	header("location: film.php?id=" . $film_id);
-} else {
-	$_SESSION["success"] = "Recensione inserita correttamente.";
-	header("location: film.php?id=" . $film_id);
-}
+if (! $res)
+	$_SESSION["error"] = ["Errore durante l'inserimento della recensione."];
+else
+	$_SESSION["success"] = ["Recensione inserita correttamente."];
+
+header("location: film.php?id=" . $film_id);
 
 ?>

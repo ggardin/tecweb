@@ -18,9 +18,16 @@
 	</nav>
 
 	<main id="content">
-		<!-- server_message_start -->
-		<p id="server-message" class="@@message_type@@" role="alert">@@server_message@@</p>
-		<!-- server_message_end -->
+		<!-- server_section_start -->
+		<div role="alert">
+			<p class="sr-only">@@server_message_intro@@</p>
+			<ul id="server-message" class="@@server_message_type@@">
+				<!-- server_message_start -->
+				<li>@@server_message@@</li>
+				<!-- server_message_end -->
+			</ul>
+		</div>
+		<!-- server_section_end -->
 
 		<h1>Dati personali</h1>
 
@@ -33,7 +40,7 @@
 				<span id="username-hint">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</span>
 
 				<label for="email"><span lang="en">Email</span></label>
-				<input type="text" id="email" name="mail" value="@@mail@@" onblur="validateUserEmail();" oninput="validateUserEmail();" />
+				<input type="text" id="email" name="mail" value="@@mail@@" onblur="validateUserEmail();" />
 				<p id="email-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
