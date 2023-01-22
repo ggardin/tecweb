@@ -114,7 +114,7 @@ a, li {
 	color: var(--anchorcolor);
 }
 
-a:visited, li:visited {
+a:visited {
 	color: var(--anchorcolor-alt);
 }
 
