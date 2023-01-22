@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateNationCode() ) ) {
+		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateNationCode() && validatePersonName()) ) {
 			event.preventDefault();
 		}
 	});
@@ -242,12 +242,16 @@ function addNewCrewMember(element) {
 	var clone = original.cloneNode(true);
 	var personLabel = clone.getElementsByTagName('label')[0];
 	var personInput = clone.getElementsByTagName('input')[0];
+	var personHint = clone.getElementsByTagName('p')[0];
+	var personHidden = clone.getElementsByTagName('input')[1];
 	var roleLabel = clone.getElementsByTagName('label')[1];
 	var roleSelect = clone.getElementsByTagName('select')[0];
 
 	// Aggiorna id
 	clone.removeAttribute('id');
 	personInput.id = 'crew-person' + clicksOnAddButtonCrew;
+	personHint.id = 'crew-person' + clicksOnAddButtonCrew + '-hint';
+	personHidden.id = 'crew-person' + clicksOnAddButtonCrew + '-id';
 	roleSelect.id = 'crew-role' + clicksOnAddButtonCrew;
 
 	// Aggiunge classe crew
@@ -258,7 +262,7 @@ function addNewCrewMember(element) {
 	roleLabel.setAttribute('for', 'crew-role' + clicksOnAddButtonCrew);
 
 	// Imposta name per PHP
-	personInput.setAttribute('name', 'crew-person[]');
+	personHidden.setAttribute('name', 'crew-person[]');
 	roleSelect.setAttribute('name', 'crew-role[]');
 
 	// Innesta
@@ -430,21 +434,29 @@ function countGenres() {
 }
 
 /*
- * Mostra il nome della persona al posto dell'ID
+ * Controlla che il nome inserito della persona sia presente nella datalist. Se NON c'è mostra messaggio e ritorna false.
  */
-function showPersonFullName(element) {
+function validatePersonName(element) {
+	var id = element.getAttribute('id');
 	var list = element.getAttribute('list');
 	var people = document.querySelectorAll('#' + list + ' option');
 	var hiddenID = document.getElementById(element.getAttribute('id') + '-id');
 
-	for(var i = 0; i < people.length; i++) {
+	found = false;
+
+	for(var i = 0; !found && i < people.length; i++) {
 		if(people[i].innerText === element.value) {
 			hiddenID.value = people[i].getAttribute('data-value');
-			break;
-		}
-		else {
-			// Imposta un valore che segnala l'assenza di match
-			hiddenID.value = -1;
+			found = true;
+			removeErrorMessage(id);
 		}
 	}
+
+	if (!found) {
+		hiddenID.value = -1;
+		showErrorMessage(id, "Il nome della persona non è valido.");
+		return false;
+	}
+
+	return true;
 }

@@ -62,8 +62,9 @@
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
 					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
-					<input id="crew-person@@crew_person_input_id@@" @@crew_person_input_name@@ type="text" list="lista-persone" value="@@value@@" oninput="showPersonFullName(this);" />
-					<input id="crew-person@@crew_person_input_hidden@@-id" name="person-id" type="hidden" value="-1"/>
+					<input id="crew-person@@crew_person_input_id@@" type="text" list="lista-persone" value="@@crew_person_input_value@@" oninput="validatePersonName(this);" />
+					<p id="crew-person@@crew_person_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+					<input id="crew-person@@crew_person_hidden_id@@-id" @@crew_person_hidden_name@@ type="hidden" value="@@crew_person_hidden_value@@"/>
 
 					<label for="crew-role@@crew_role_label_id@@">Ruolo</label>
 					<select id="crew-role@@crew_role_select_id@@" @@crew_role_select_name@@>

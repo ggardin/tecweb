@@ -43,9 +43,11 @@ $crew_sample = Tools::getSection($page, "persone_presenti");
 Tools::replaceAnchor($crew_sample, "persona_presente", $tmp, true);
 Tools::replaceAnchor($tmp, "crew_person_label_id", "");
 Tools::replaceAnchor($tmp, "crew_person_input_id", "");
-Tools::replaceAnchor($tmp, "crew_person_input_hidden", "");
-Tools::replaceAnchor($tmp, "crew_person_input_name", "");
-Tools::replaceAnchor($tmp, "value", "");
+Tools::replaceAnchor($tmp, "crew_person_input_value", "");
+Tools::replaceAnchor($tmp, "crew_person_hint", "");
+Tools::replaceAnchor($tmp, "crew_person_hidden_id", "");
+Tools::replaceAnchor($tmp, "crew_person_hidden_name", "");
+Tools::replaceAnchor($tmp, "crew_person_hidden_value", "");
 Tools::replaceAnchor($tmp, "crew_role_label_id", "");
 Tools::replaceAnchor($tmp, "crew_role_select_id", "");
 Tools::replaceAnchor($tmp, "crew_role_select_name", "");
@@ -111,14 +113,17 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "data_rilascio", (isset($film["data_rilascio"]) ? $film["data_rilascio"] : ""));
 	Tools::replaceAnchor($page, "durata", (isset($film["durata"]) ? $film["durata"] : ""));
 
+	Tools::toHtml($crew, 1);
 	$res = "";
 	for ($i = 0; $i < count($crew); $i++) {
 		$t = $crew_sample;
 		Tools::replaceAnchor($t, "crew_person_label_id", $i);
 		Tools::replaceAnchor($t, "crew_person_input_id", $i);
-		Tools::replaceAnchor($t, "crew_person_input_hidden", $i);
-		Tools::replaceAnchor($t, "crew_person_input_name", 'name="crew-person[]"');
-		Tools::replaceAnchor($t, "value", $crew[$i]["p_id"]);
+		Tools::replaceAnchor($t, "crew_person_input_value", $crew[$i]["p_nome"]);
+		Tools::replaceAnchor($t, "crew_person_hint", $i);
+		Tools::replaceAnchor($t, "crew_person_hidden_id", $i);
+		Tools::replaceAnchor($t, "crew_person_hidden_name", 'name="crew-person[]"');
+		Tools::replaceAnchor($t, "crew_person_hidden_value", $crew[$i]["p_id"]);
 		Tools::replaceAnchor($t, "crew_role_label_id", $i);
 		Tools::replaceAnchor($t, "crew_role_select_id", $i);
 		Tools::replaceAnchor($t, "crew_role_select_name", 'name="crew-role[]"');
