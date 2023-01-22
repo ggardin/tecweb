@@ -110,11 +110,11 @@ body {
 	min-height: 100%;
 }
 
-a {
+a, li {
 	color: var(--anchorcolor);
 }
 
-a:visited {
+a:visited, li:visited {
 	color: var(--anchorcolor-alt);
 }
 
