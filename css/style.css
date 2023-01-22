@@ -187,8 +187,8 @@ HEADER
 #page-header li a,
 #accountButton {
 	display: block;
-	color: inherit;
-	text-decoration: none;
+	/*color: inherit;*/
+	/*text-decoration: none;*/
 }
 
 #page-header li a:hover,
