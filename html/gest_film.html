@@ -112,9 +112,10 @@
 
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
-					<label for="nation-name@@nation_label_id@@">Codice del Paese</label>
-					<input id="nation-name@@nation_input_id@@" @@nation_input_name@@ type="text" list="lista-paesi" value="@@value@@" oninput="validateNationCode(this);" />
-					<p id="nation-name@@nation_input_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+					<label for="nation@@nation_label_id@@">Codice del Paese</label>
+					<input id="nation@@nation_input_id@@" type="text" list="lista-paesi" value="@@nation_input_value@@" oninput="validateNationName(this);" />
+					<p id="nation@@nation_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
+					<input id="nation@@nation_hidden_id@@-id" @@nation_hidden_name@@ type="hidden" value="@@nation_hidden_value@@" />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
 					<!-- nation_sample_end -->
 				</div>
@@ -129,7 +130,7 @@
 				<input type="hidden" id="nations-count" name="nations-count" value="-1" />
 				<datalist id="lista-paesi">
 					<!-- paese_start -->
-					<option value="@@id@@">@@nome@@</option>
+					<option data-value="@@id@@">@@nome@@</option>
 					<!-- paese_end -->
 				</datalist>
 			</fieldset>

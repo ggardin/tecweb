@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateNationCode() && validatePersonName()) ) {
+		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings()) ) {
 			event.preventDefault();
 		}
 	});
@@ -149,25 +149,6 @@ function validateMovieRuntime() {
 
 	removeErrorMessage(id);
 	return true;
-}
-
-/*
- * Valida il codice paese
- */
-function validateNationCode(element) {
-	var id = element.getAttribute('id');
-	var nations = document.querySelectorAll('#' + element.getAttribute('list') + ' option');
-
-	for(var i = 0; i < nations.length; i++) {
-		if(element.value === "" || nations[i].value === element.value) {
-			removeErrorMessage(id);
-			return true;
-		}
-	}
-
-	// Non ha trovato corrispondenze e il contenuto non è vuoto
-	showErrorMessage(id, "Il codice paese indicato non è valido.");
-	return false;
 }
 
 /*
@@ -332,19 +313,23 @@ function addNewNation(element) {
 	var clone = original.cloneNode(true);
 	var label = clone.getElementsByTagName('label')[0];
 	var input = clone.getElementsByTagName('input')[0];
+	var hint = clone.getElementsByTagName('p')[0];
+	var hidden = clone.getElementsByTagName('input')[1];
 
 	// Aggiorna id
 	clone.removeAttribute('id');
-	input.id = 'nation-name' + clicksOnAddButtonNation;
+	input.id = 'nation' + clicksOnAddButtonNation;
+	hint.id = 'nation' + clicksOnAddButtonNation + '-hint';
+	hidden.id = 'nation' + clicksOnAddButtonNation + '-id';
 
 	// Aggiunge classe nation
 	clone.classList.add('nation');
 
 	// Aggiorna for
-	label.setAttribute('for', 'nation-name' + clicksOnAddButtonNation);
+	label.setAttribute('for', 'nation' + clicksOnAddButtonNation);
 
 	// Imposta name per PHP
-	input.setAttribute('name', 'nation[]');
+	hidden.setAttribute('name', 'nation[]');
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
@@ -434,9 +419,9 @@ function countGenres() {
 }
 
 /*
- * Controlla che il nome inserito della persona sia presente nella datalist. Se NON c'è mostra messaggio e ritorna false.
+ * Controlla che il nome inserito della sia presente nella datalist. Se NON c'è mostra messaggio e ritorna false.
  */
-function validatePersonName(element) {
+function validateFromDatalist(element, name) {
 	var id = element.getAttribute('id');
 	var list = element.getAttribute('list');
 	var people = document.querySelectorAll('#' + list + ' option');
@@ -453,10 +438,18 @@ function validatePersonName(element) {
 	}
 
 	if (!found) {
-		hiddenID.value = -1;
-		showErrorMessage(id, "Il nome della persona non è valido.");
+		hiddenID.value = null;
+		showErrorMessage(id, "Il nome della " + name + " non è valido.");
 		return false;
 	}
 
 	return true;
+}
+
+function validatePersonName(element) {
+	return validateFromDatalist(element, "persona");
+}
+
+function validateNationName(element) {
+	return validateFromDatalist(element, "nazione");
 }
