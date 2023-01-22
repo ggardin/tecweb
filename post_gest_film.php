@@ -30,34 +30,26 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$valid = true;
 $err = "";
 
 if ($titolo == "") {
-	$valid = false;
 	$err .= "Titolo è un campo richesto. ";
 } elseif (! preg_match("/^[^<>{}]*$/", $titolo)) {
-	$valid = false;
 	$err .= "Il titolo inserito contiene caratteri non ammessi. ";
 }
 if (! preg_match("/^[^<>]*$/", $descrizione)) {
-	$valid = false;
 	$err .= "La descrizione inserita contiene caratteri non ammessi. ";
 }
 if (! preg_match("/^[^<>{}]*$/", $titolo_originale)) {
-	$valid = false;
 	$err .= "Il titolo originale inserito contiene caratteri non ammessi. ";
 }
 if ($durata != "" && (intval($durata) <= 0 || intval($durata) > 1000)) {
-	$valid = false;
 	$err .= "La durata deve essere tra 1 e 1000 minuti. ";
 }
 if ($budget != "" && (intval($budget) <= 0)) {
-	$valid = false;
 	$err .= "Il [en]budget[/en] deve essere superiore a 0. ";
 }
 if ($incassi != "" && (intval($incassi) <= 0)) {
-	$valid = false;
 	$err .= "Gli incassi devono essere superiori a 0. ";
 }
 if (!empty($crew_persona)) {
@@ -66,7 +58,6 @@ if (!empty($crew_persona)) {
 		! preg_match("/^[\d]+$/", $crew_persona[$i]) && $v = false;
 	}
 	if (!$v) {
-		$valid = false;
 		$err .= "Gli identificativi delle persone devono essere dei numeri. ";
 	}
 }
@@ -76,7 +67,6 @@ if (!empty($paese)) {
 		! preg_match("/^[A-Z]{2}$/", $paese[$i]) && $v = false;
 	}
 	if (!$v) {
-		$valid = false;
 		$err .= "Gli identificativi dei paesi devono essere due lettere maiuscole. ";
 	}
 }
@@ -84,13 +74,12 @@ if (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"][
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
-		$valid = false;
 		$err .= $img[1];
 	}
 }
-// TODO: data
+// TODO: date
 
-if (! $valid) {
+if ($err) {
 	$_SESSION["error"] = $err;
 	header("location: gest_film.php?id=" . $id);
 	exit();

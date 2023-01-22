@@ -19,30 +19,25 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$valid = true;
 $err = "";
 
 if ($titolo == "") {
-	$valid = false;
 	$err .= "Titolo è un campo richesto. ";
 } elseif (! preg_match("/^[\w\s\-\.\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $titolo)) {
-	$valid = false;
 	$err .= "Il titolo inserito contiene caratteri non ammessi. ";
 }
 if (! preg_match("/^[^<>]*$/", $descrizione)) {
-	$valid = false;
 	$err .= "La descrizione inserita contiene caratteri non ammessi. ";
 }
 if (!is_null($locandina) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
-		$valid = false;
 		$err .= $img[1];
 	}
 }
 
-if (! $valid) {
+if ($err) {
 	$_SESSION["error"] = $err;
 	header("location: gest_collezione.php?id=" . $id);
 	exit();

@@ -19,18 +19,15 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$valid = true;
 $err = "";
 
 if ($nome == "") {
-	$valid = false;
 	$err .= "Nome è un campo richesto. ";
 } elseif (! preg_match("/^[\w\s\-\.\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $nome)) {
-	$valid = false;
 	$err .= "Il nome inserito contiene caratteri non ammessi. ";
 }
 
-if (! $valid) {
+if ($err) {
 	$_SESSION["error"] = $err;
 	header("location: gest_list.php?id=" . $id);
 	exit();

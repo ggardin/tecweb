@@ -19,42 +19,34 @@ $new_password = isset($_POST["new_password"]) ? $_POST["new_password"] : "";
 $new_password_confirm = isset($_POST["new_password_confirm"]) ? $_POST["new_password_confirm"] : "";
 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 
-$valid = true;
 $err = "";
 
 if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
-	$valid = false;
 	$err .= "[en]Username[/en] non valido, usa solo lettere o numeri. ";
 }
 if ($mail != "" && ! filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-	$valid = false;
 	$err .= "L'indirizzo [en]email[/en] non è valido. ";
 }
 if ($new_password != "") {
 	if ($old_password == "") {
-		$valid = false;
 		$err .= "Devi inserire la vecchia [en]password[/en] per impostarne una nuova. ";
 	}
 	if (strlen($new_password) < 8) {
-		$valid = false;
 		$err .= "La nuova [en]password[/en] deve essere lunga almeno 8 caratteri. ";
 	}
 	if (! preg_match("/\d/", $new_password) || ! preg_match("/[a-zA-Z]/", $new_password)) {
-		$valid = false;
 		$err .= "La nuova [en]password[/en] deve contenere almeno una lettera e un numero. ";
 	}
 	if ($new_password != $new_password_confirm) {
-		$valid = false;
 		$err .= "Le nuove [en]password[/en] non coincidono. ";
 	}
 }
 if (! preg_match("/^[A-Za-z\s']*$/", $nome)) {
-	$valid = false;
 	$err .= "Nome può contenere solo lettere, spazi e apostrofi. ";
 }
-// TODO: data
+// TODO: date
 
-if (! $valid) {
+if ($err) {
 	$_SESSION["error"] = $err;
 	header("location: dati.php");
 	exit();

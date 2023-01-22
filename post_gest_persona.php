@@ -21,14 +21,11 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$valid = true;
 $err = "";
 
 if ($nome == "") {
-	$valid = false;
 	$err .= "Nome è un campo richesto. ";
 } elseif (! preg_match("/^[a-zA-Z\.\s\-\'\[\]\/\x{00C0}-\x{017F}]+$/u", $nome)) {
-	$valid = false;
 	$err .= "Il nome inserito contiene caratteri non ammessi. ";
 }
 // TODO: date
@@ -36,12 +33,11 @@ if (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tm
 	$img = Tools::uploadImg($_FILES["immagine"]);
 	if ($img[0]) $immagine = $img[1];
 	else {
-		$valid = false;
 		$err .= $img[1];
 	}
 }
 
-if (! $valid) {
+if ($err) {
 	$_SESSION["error"] = $err;
 	header("location: gest_persona.php?id=" . $id);
 	exit();
