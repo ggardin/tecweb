@@ -23,24 +23,24 @@ img.print, svg.print {
 	display: block;
 	max-width: 100%;
 }
-.movie-page{
+.movie-page {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 }
-#hero-image > img{
+#hero-image > img {
 	display: grid;
 	padding-top: 7em;
 	width: 100%;
 }
-#TabellaLunghezze, #TabellaGeneri{
+#desc-generi, #desc-durate {
 	display: none;
 }
 
-#movie-details{
+#movie-details {
 	display: grid;
 }
 
-#auth_form{
+#auth_form
 	display: block;
 }
 
