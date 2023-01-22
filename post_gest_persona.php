@@ -46,7 +46,7 @@ if ($data_nascita != "") {
 		if ($date < $min)
 			array_push($err, "Data di nascita può partire dal 1800.");
 		elseif ($date > $now)
-			array_push($err, "Data di nascita deve essere antecedente ad oggi.");
+			array_push($err, "Data di nascita deve essere antecedente alla data odierna.");
 	} else
 		array_push($err, "La data di nascita deve essere nel formato YYYY-MM-DD.");
 }
@@ -59,7 +59,7 @@ if ($data_morte != "") {
 		if ($date < $min)
 			array_push($err, "Data di morte può partire dal 1800.");
 		elseif ($date > $now)
-			array_push($err, "Data di morte deve essere antecedente ad oggi.");
+			array_push($err, "Data di morte deve essere antecedente alla data odierna.");
 	} else
 		array_push($err, "La data di morte deve essere nel formato YYYY-MM-DD.");
 }
