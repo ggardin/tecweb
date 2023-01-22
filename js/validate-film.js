@@ -216,12 +216,16 @@ function addNewCrewMember(element) {
 	var clone = original.cloneNode(true);
 	var personLabel = clone.getElementsByTagName('label')[0];
 	var personInput = clone.getElementsByTagName('input')[0];
+	var personHint = clone.getElementsByTagName('p')[0];
+	var personHidden = clone.getElementsByTagName('input')[1];
 	var roleLabel = clone.getElementsByTagName('label')[1];
 	var roleSelect = clone.getElementsByTagName('select')[0];
 
 	// Aggiorna id
 	clone.removeAttribute('id');
 	personInput.id = 'crew-person' + clicksOnAddButtonCrew;
+	personHint.id = 'crew-person' + clicksOnAddButtonCrew + '-hint';
+	personHidden.id = 'crew-person' + clicksOnAddButtonCrew + '-id';
 	roleSelect.id = 'crew-role' + clicksOnAddButtonCrew;
 
 	// Aggiunge classe crew
@@ -232,7 +236,7 @@ function addNewCrewMember(element) {
 	roleLabel.setAttribute('for', 'crew-role' + clicksOnAddButtonCrew);
 
 	// Imposta name per PHP
-	personInput.setAttribute('name', 'crew-person[]');
+	personHidden.setAttribute('name', 'crew-person[]');
 	roleSelect.setAttribute('name', 'crew-role[]');
 
 	// Innesta
@@ -302,19 +306,23 @@ function addNewNation(element) {
 	var clone = original.cloneNode(true);
 	var label = clone.getElementsByTagName('label')[0];
 	var input = clone.getElementsByTagName('input')[0];
+	var hint = clone.getElementsByTagName('p')[0];
+	var hidden = clone.getElementsByTagName('input')[1];
 
 	// Aggiorna id
 	clone.removeAttribute('id');
-	input.id = 'nation-name' + clicksOnAddButtonNation;
+	input.id = 'nation' + clicksOnAddButtonNation;
+	hint.id = 'nation' + clicksOnAddButtonNation + '-hint';
+	hidden.id = 'nation' + clicksOnAddButtonNation + '-id';
 
 	// Aggiunge classe nation
 	clone.classList.add('nation');
 
 	// Aggiorna for
-	label.setAttribute('for', 'nation-name' + clicksOnAddButtonNation);
+	label.setAttribute('for', 'nation' + clicksOnAddButtonNation);
 
 	// Imposta name per PHP
-	input.setAttribute('name', 'nation[]');
+	hidden.setAttribute('name', 'nation[]');
 
 	// Innesta
 	element.insertAdjacentElement('beforebegin', clone);
@@ -401,4 +409,40 @@ function countGenres() {
 	}
 
 	return count;
+}
+
+/*
+ * Controlla che il nome inserito della sia presente nella datalist. Se NON c'è mostra messaggio e ritorna false.
+ */
+function validateFromDatalist(element, name) {
+	var id = element.getAttribute('id');
+	var list = element.getAttribute('list');
+	var people = document.querySelectorAll('#' + list + ' option');
+	var hiddenID = document.getElementById(element.getAttribute('id') + '-id');
+
+	found = false;
+
+	for(var i = 0; !found && i < people.length; i++) {
+		if(people[i].innerText === element.value) {
+			hiddenID.value = people[i].getAttribute('data-value');
+			found = true;
+			removeErrorMessage(id);
+		}
+	}
+
+	if (!found) {
+		hiddenID.value = null;
+		showErrorMessage(id, "Il nome della " + name + " non è valido.");
+		return false;
+	}
+
+	return true;
+}
+
+function validatePersonName(element) {
+	return validateFromDatalist(element, "persona");
+}
+
+function validateNationName(element) {
+	return validateFromDatalist(element, "nazione");
 }
