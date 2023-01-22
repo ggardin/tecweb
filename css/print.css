@@ -61,9 +61,7 @@ main::after {
 	size: A4;
 }
 
-.sr-only {
-	display: none;
-}
+.sr-only,
 .skip-to-content {
 	display: none;
 }
