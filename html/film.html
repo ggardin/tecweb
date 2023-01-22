@@ -20,9 +20,16 @@
 
 	<main id="content" class="movie-page">
 		<div id="movie-details">
-			<!-- server_message_start -->
-			<p id="server-message" class="@@message_type@@" role="alert">@@server_message@@</p>
-			<!-- server_message_end -->
+			<!-- server_section_start -->
+			<div id="server-message" role="alert">
+				<p class="sr-only">@@server_message_intro@@</p>
+				<ul class="@@server_message_type@@">
+					<!-- server_message_start -->
+					<li>@@server_message@@</li>
+					<!-- server_message_end -->
+				</ul>
+			</div>
+			<!-- server_section_end -->
 
 			<!-- skip_add_movie_start -->
 			<a href="#add-movie" class="skip-to-content">Aggiungi film ad una lista</a>
