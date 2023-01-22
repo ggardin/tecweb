@@ -27,7 +27,7 @@ img.print, svg.print {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 }
-#hero-image  > img{
+#hero-image > img{
 	display: grid;
 	padding-top: 7em;
 	width: 100%;
@@ -39,9 +39,11 @@ img.print, svg.print {
 #movie-details{
 	display: grid;
 }
+
 #auth_form{
 	display: block;
 }
+
 #page-header, #page-footer, #breadcrumb, form, iframe, .menu, .hero, .adslot {
 	display: none;
 }
