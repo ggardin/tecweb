@@ -62,24 +62,6 @@ if ($data_rilascio != "") {
 if ($durata != "" && (intval($durata) <= 0 || intval($durata) > 1000)) {
 	array_push($err, "La durata deve essere tra 1 e 1000 minuti.");
 }
-if (!empty($crew_persona)) {
-	$v = true;
-	for ($i = 0; $v && $i < count($crew_persona); $i++) {
-		! preg_match("/^[\d]+$/", $crew_persona[$i]) && $v = false;
-	}
-	if (!$v) {
-		array_push($err, "Gli identificativi delle persone non sono impostati. Attiva [en]Javascript[/en].");
-	}
-}
-if (!empty($paese)) {
-	$v = true;
-	for ($i = 0; $v && $i < count($paese); $i++) {
-		! preg_match("/^[A-Z]{2}$/", $paese[$i]) && $v = false;
-	}
-	if (!$v) {
-		array_push($err, "Gli identificativi dei paesi non sono impostati. Attiva [en]Javascript[/en].");
-	}
-}
 if (! preg_match("/^[^<>{}]*$/", $titolo_originale)) {
 	array_push($err, "Il titolo originale inserito contiene caratteri non ammessi.");
 }
