@@ -878,6 +878,10 @@ tbody tr:nth-child(odd) {
 	gap: 1em;
 }
 
+#TabellaLunghezze, #TabellaGeneri{
+	display: none;
+}
+
 #stats-summary li {
 	flex: 1 0 15em;
 	display: flex;
