@@ -59,6 +59,7 @@ function validatePersonDateOfDeath() {
 	var id = 'data_' + event;
 	var dateLowerBound = new Date(document.forms['gestione']['data_' + event].min);
 	var dateUpperBound = new Date(document.forms['gestione']['data_' + event].max);
+	var today = new Date();
 
 	// Controlla che ci sia una stringa
 	if (date == null || date == '') {
@@ -80,6 +81,11 @@ function validatePersonDateOfDeath() {
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfEvent.getTime() < dateLowerBound.getTime()) {
 		showErrorMessage(id, 'Data di ' + event + ' immessa antecedente al limite minimo.');
+		return false;
+	}
+	// Controlla se la data è superiore ad oggi
+	if (dateOfEvent.getTime() > today.getTime()) {
+		showErrorMessage(id, 'Data di ' + event + ' successiva ad oggi.');
 		return false;
 	}
 	// Controlla se la data è superiore al limite massimo
