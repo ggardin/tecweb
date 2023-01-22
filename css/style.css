@@ -11,14 +11,14 @@ CSS VARIABLES
 	--secondaryColor: #fbfbfb;
 	--tertiaryColor: #0e5e51;
 
-	--txtcolor: #0F0F0F;
+	--txtcolor: #101010;
 
-	--anchorcolor: #0010ff;
-	--anchorcolor-alt: #9d6107;
+	--anchorcolor: #001289;
+	--anchorcolor-alt: #B54835;
 
 	--error-required: #C20000;
-	--interactions-text-placeholder-color: #4D4D4D;
 
+	--interactions-text-placeholder-color: #4D4D4D;
 	--interactions-color: #FBFBFB;
 
 	--content-width: 60em;
@@ -30,16 +30,16 @@ CSS VARIABLES
 }
 
 :root.dark {
-	--bgcolor: #0F0F0F;
-	--bgcolor-off: #424242;
+	--bgcolor: #101010;
+	--bgcolor-off: #373737;
 
-	--secondaryColor: #191919;
+	--secondaryColor: #1c1c1c;
 	--tertiaryColor: #c6dc47;
 
-	--txtcolor: #F0F0F0;
+	--txtcolor: #efefef;
 
-	--anchorcolor: #ffe552;
-	--anchorcolor-alt: #9a60ff;
+	--anchorcolor: #978726;
+	--anchorcolor-alt: #9d64ff;
 
 	--error-required: #FF5757;
 
