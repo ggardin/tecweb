@@ -85,7 +85,7 @@ function validatePersonDateOfDeath() {
 	}
 	// Controlla se la data è superiore ad oggi
 	if (dateOfEvent.getTime() > today.getTime()) {
-		showErrorMessage(id, 'Data di ' + event + ' successiva ad oggi.');
+		showErrorMessage(id, 'Data di ' + event + ' successiva alla data odierna.');
 		return false;
 	}
 	// Controlla se la data è superiore al limite massimo
