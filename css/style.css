@@ -290,10 +290,6 @@ FOOTER
 	padding: 0.5em 0;
 }
 
-/*#page-footer li a {*/
-/*	color: var(--txtcolor);*/
-/*}*/
-
 #page-footer .tmdb-attribution {
 	display: flex;
 	flex-flow: row wrap;
