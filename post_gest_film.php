@@ -40,8 +40,24 @@ if ($titolo == "") {
 if (! preg_match("/^[^<>]*$/", $descrizione)) {
 	$err .= "La descrizione inserita contiene caratteri non ammessi. ";
 }
-if ($data_rilascio != "" && !preg_match("/^((18|19|20)\d\d)\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_rilascio)) {
-	$err .= "Inserisci la data nel formato YYYY-MM-DD, entro i secoli 19-21. ";
+if (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
+	$img = Tools::uploadImg($_FILES["locandina"]);
+	if ($img[0]) $locandina = $img[1];
+	else {
+		$err .= $img[1];
+	}
+}
+if ($data_rilascio != "") {
+	if (preg_match("/^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_rilascio)) {
+		$date = date_create_immutable($data_rilascio);
+		$min = date_create_immutable("1800-01-01");
+		$max = date_create_immutable("2099-12-31");
+		if ($date < $min)
+			$err .= "Data di rilascio può partire dal 1800.";
+		elseif ($date > $max)
+			$err .= "Data di rilascio può arrivare fino al 2099.";
+	} else
+		$err .= "La data di rilascio deve essere nel formato YYYY-MM-DD.";
 }
 if ($durata != "" && (intval($durata) <= 0 || intval($durata) > 1000)) {
 	$err .= "La durata deve essere tra 1 e 1000 minuti. ";
@@ -72,13 +88,6 @@ if ($budget != "" && (intval($budget) <= 0)) {
 }
 if ($incassi != "" && (intval($incassi) <= 0)) {
 	$err .= "Gli incassi devono essere superiori a 0. ";
-}
-if (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
-	$img = Tools::uploadImg($_FILES["locandina"]);
-	if ($img[0]) $locandina = $img[1];
-	else {
-		$err .= $img[1];
-	}
 }
 
 if ($err) {

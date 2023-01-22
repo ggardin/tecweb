@@ -44,7 +44,19 @@ if ($new_password != "") {
 if (! preg_match("/^[A-Za-z\s']*$/", $nome)) {
 	$err .= "Nome può contenere solo lettere, spazi e apostrofi. ";
 }
-// TODO: date
+if ($data_nascita != "") {
+	if (preg_match("/^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_nascita)) {
+		$date = date_create_immutable($data_nascita);
+		$min = date_create_immutable("1900-01-01");
+		$now = date_create_immutable("now");
+		$diff = date_diff($date, $now);
+		if ($date < $min)
+			$err .= "Data di dascita può partire dal 1900.";
+		elseif ($diff->format("%r%y") < 13 || $diff->format("%r%y") > 100)
+			$err .= "Devi avere tra i 13 e i 100 anni. Modifica la data di nascita.";
+	} else
+		$err .= "La data di nascita deve essere nel formato YYYY-MM-DD.";
+}
 
 if ($err) {
 	$_SESSION["error"] = $err;
