@@ -97,7 +97,7 @@ function validateMovieDescription() {
 
 	// Non c'è supporto data, controllo formato
 	if (! inputDateBrowserSupport()) {
-		const yearRegex = /^((18|19|20)\d\d)\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 		if (! yearRegex.test(releaseDate)) {
 			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
