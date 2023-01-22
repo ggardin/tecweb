@@ -122,18 +122,16 @@ function validateUserBirthday() {
 		return true;
 	}
 
-	// Non c'è fallback
-	if (inputDateBrowserSupport()) {
-		var dateOfBirth = new Date(birthday);
-	}
-	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
-	else {
+	// Non c'è supporto data, controllo formato
+	if (! inputDateBrowserSupport()) {
 		const yearRegex = /^((19|20)\d\d)\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 		if (! yearRegex.test(birthday)) {
 			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
+
+	var dateOfBirth = new Date(birthday);
 
 	// Ho a disposizione la data di nascita
 	var age = today.getFullYear() - dateOfBirth.getFullYear();

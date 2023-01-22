@@ -66,18 +66,16 @@ function validatePersonDateOfDeath() {
 		return true;
 	}
 
-	// Non c'è fallback
-	if (inputDateBrowserSupport()) {
-		var dateOfEvent = new Date(date);
-	}
-	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
-	else {
+	// Non c'è supporto data, controllo formato
+	if (! inputDateBrowserSupport()) {
 		const yearRegex = /^((18|19|20)\d\d)\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 		if (! yearRegex.test(date)) {
 			showErrorMessage(id, 'Data di ' + event + ' non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
+
+	var dateOfEvent = new Date(date);
 
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfEvent.getTime() < dateLowerBound.getTime()) {
@@ -106,16 +104,8 @@ function comparePersonDates() {
 		var death = document.forms['gestione']['data_morte'].value;
 		var lifeExpectancy = 120;
 
-		// Non c'è fallback, procedo
-		if (inputDateBrowserSupport()) {
-			var dateOfBirth = new Date(birth);
-			var dateOfDeath = new Date(death);
-		}
-		// Se c'è fallback, splitto la stringa
-		else {
-			var dateOfBirth = new Date(birth.split("/")[2], birth.split("/")[1], birth.split("/")[0]);
-			var dateOfDeath = new Date(death.split("/")[2], death.split("/")[1], death.split("/")[0]);
-		}
+		var dateOfBirth = new Date(birth);
+		var dateOfDeath = new Date(death);
 
 		// Confronto le date
 		if (dateOfBirth.getTime() >= dateOfDeath.getTime()) {
