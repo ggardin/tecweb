@@ -32,6 +32,9 @@ img.print, svg.print {
 	padding-top: 7em;
 	width: 100%;
 }
+#TabellaLunghezze, #TabellaGeneri{
+	display: none;
+}
 
 #movie-details{
 	display: grid;
