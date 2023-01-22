@@ -40,6 +40,8 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "gest_id", $id);
 	Tools::toHtml($persona, 0);
 	Tools::replaceAnchor($page, "nome", $persona["nome"]);
+	$immagine = (isset($persona["immagine"]) ? ("pics/w200_" . $persona["immagine"] . ".webp") : "img/placeholder.svg");
+	Tools::replaceAnchor($page, "immagine", $immagine);
 	Tools::replaceAnchor($page, "data_nascita", (isset($persona["data_nascita"]) ? $persona["data_nascita"] : ""));
 	Tools::replaceAnchor($page, "data_morte", (isset($persona["data_morte"]) ? $persona["data_morte"] : ""));
 	Tools::replaceAnchor($page, "submit_value", "modifica");
@@ -50,6 +52,7 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "intestazione", "Aggiungi persona");
 	Tools::replaceAnchor($page, "gest_id", $id);
 	Tools::replaceAnchor($page, "nome", "");
+	Tools::replaceSection($page, "immagine", "");
 	Tools::replaceAnchor($page, "data_nascita", "");
 	Tools::replaceAnchor($page, "data_morte", "");
 	Tools::replaceAnchor($page, "submit_value", "aggiungi");

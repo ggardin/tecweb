@@ -3306,7 +3306,7 @@ CREATE TABLE `valutazione` (
   `utente` bigint(20) UNSIGNED NOT NULL,
   `film` bigint(20) UNSIGNED NOT NULL,
   `voto` smallint(5) UNSIGNED NOT NULL,
-  `testo` varchar(1000) DEFAULT NULL
+  `testo` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

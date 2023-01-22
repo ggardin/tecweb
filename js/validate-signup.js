@@ -21,7 +21,7 @@ function validateNewUsername() {
 
 	const allowedChars = /^[A-Za-z0-9]+$/; // lettere maiuscole e minuscole, numeri
 	if (!allowedChars.test(username)) {
-		showErrorMessage(id, 'Nome utente non valido, usa solo lettere o numeri.');
+		showErrorMessage(id, '<span lang="en">Username</span> non valido, usa solo lettere o numeri.');
 		return false;
 	}
 	removeErrorMessage(id);
@@ -60,7 +60,7 @@ function validatePasswordConfirm() {
 	var second_password = document.forms['auth_form']['password_confirm'].value;
 
 	if ((second_password != null || second_password != '') && first_password != second_password) {
-		showErrorMessage(id, 'Le <span lang="en">password</span> non corrispondono.');
+		showErrorMessage(id, 'Le <span lang="en">password</span> non coincidono.');
 		return false;
 	}
 

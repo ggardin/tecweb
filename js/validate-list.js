@@ -24,7 +24,7 @@ function validateListTitle() {
 		return false;
 	}
 	else {
-		const titleRegex = /^[\w\s\-\:\'\[\]\,\/\"\u00C0-\u017F]+$/;
+		const titleRegex = /^[\w\s\-\.\:\'\[\]\,\/\"\u00C0-\u017F]+$/;
 		if (! titleRegex.test(title)) {
 			showErrorMessage(id, 'Il titolo inserito contiene caratteri non ammessi.');
 			return false;
@@ -43,7 +43,7 @@ function validateListDescription() {
 	var description = document.forms['gestione'][id].value;
 
 	if (description != null || description != '') {
-		const descriptionRegex = /^[^<>{}]*$/;
+		const descriptionRegex = /^[^<>]*$/;
 		if (! descriptionRegex.test(description)) {
 			showErrorMessage(id, 'La descrizione inserita contiene caratteri non ammessi.');
 			return false;

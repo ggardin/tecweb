@@ -140,7 +140,7 @@ create table valutazione (
 	utente bigint unsigned,
 	film bigint unsigned,
 	voto smallint unsigned not null,
-	testo varchar(1000),
+	testo varchar(1000) not null,
 	primary key (utente, film),
 	foreign key (utente) references utente(id) on delete cascade,
 	foreign key (film) references film(id) on delete cascade

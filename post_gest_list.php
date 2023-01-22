@@ -19,14 +19,16 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$valid = true;
+$err = [];
 
-if (strlen($nome) <= 3) {
-	$valid = false;
-	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
+if ($nome == "") {
+	array_push($err, "Nome è un campo richesto.");
+} elseif (! preg_match("/^[\w\s\-\.\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $nome)) {
+	array_push($err, "Il nome inserito contiene caratteri non ammessi.");
 }
 
-if (! $valid) {
+if ($err) {
+	$_SESSION["error"] = $err;
 	header("location: gest_list.php?id=" . $id);
 	exit();
 }
@@ -52,20 +54,20 @@ try {
 
 if (! $res) {
 	if ($submit == "aggiungi") {
-		$_SESSION["error"] = "Esiste già una lista con questo nome";
+		$_SESSION["error"] = ["Esiste già una lista con questo nome"];
 		header("location: gest_list.php");
 	} else {
-		$_SESSION["success"] = "Nessuna modifica apportata.";
+		$_SESSION["success"] = ["Nessuna modifica apportata."];
 		header("location: list.php?id=" . $id);
 	}
 } elseif ($submit == "aggiungi") {
-	$_SESSION["success"] = "Lista aggiunta correttamente.";
+	$_SESSION["success"] = ["Lista aggiunta correttamente."];
 	header("location: list.php?id=" . $id);
 } elseif ($submit == "modifica") {
-	$_SESSION["success"] = "Lista modificata correttamente.";
+	$_SESSION["success"] = ["Lista modificata correttamente."];
 	header("location: list.php?id=" . $id);
 } else {
-	$_SESSION["success"] = "Lista eliminata correttamente.";
+	$_SESSION["success"] = ["Lista eliminata correttamente."];
 	header("location: lists.php");
 }
 
