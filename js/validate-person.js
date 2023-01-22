@@ -72,14 +72,9 @@ function validatePersonDateOfDeath() {
 	}
 	// Se c'è fallback, sto ricevendo una stringa potenzialmente non formattata
 	else {
-		const yearRegex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
-		// Controllo che sia nel formato dd/mm/yyyy
-		if (yearRegex.test(date)) {
-			var parts = date.split("/");
-			var dateOfEvent = new Date(parts[2], parts[1], parts[0]);
-		}
-		else {
-			showErrorMessage(id, 'Formato della data di ' + event + ' non corretto. Usa dd/mm/yyyy.');
+		const yearRegex = /^((18|19|20)\d\d)\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+		if (! yearRegex.test(date)) {
+			showErrorMessage(id, 'Data di ' + event + ' non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
