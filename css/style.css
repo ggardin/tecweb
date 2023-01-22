@@ -110,7 +110,7 @@ body {
 	min-height: 100%;
 }
 
-a, li {
+a {
 	color: var(--anchorcolor);
 }
 
@@ -228,7 +228,6 @@ HEADER
 
 .active {
 	background-color: var(--bgcolor-off);
-	color: var(--txtcolor);
 	pointer-events: none;
 	padding: 0.5em;
 	border-radius: var(--border-radius);
@@ -997,7 +996,6 @@ PERSON/COLLECTION PAGE
 	padding: 0.2em 0.5em;
 	border: 1px solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
-	color: var(--txtcolor);
 }
 
 /*
