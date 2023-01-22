@@ -19,25 +19,47 @@ $new_password = isset($_POST["new_password"]) ? $_POST["new_password"] : "";
 $new_password_confirm = isset($_POST["new_password_confirm"]) ? $_POST["new_password_confirm"] : "";
 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 
-$valid = true;
+$err = [];
 
-if (strlen($username) <= 3) {
-	$valid = false;
-	$_SESSION["error"] = "[en]Username[/en] deve avere almeno 3 caratteri.";
-} elseif ($nome != "" && strlen($nome) <= 3) {
-	$valid = false;
-	$_SESSION["error"] = "Il nome deve avere almeno 3 caratteri.";
-} elseif ($new_password != "") {
+if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
+	array_push($err, "[en]Username[/en] non valido, usa solo lettere o numeri.");
+}
+if ($mail != "" && ! filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+	array_push($err, "L'indirizzo [en]email[/en] non è valido.");
+}
+if ($new_password != "") {
 	if ($old_password == "") {
-		$valid = false;
-		$_SESSION["error"] = "Per cambiare password devi inserire la corrente.";
-	} elseif ($new_password != $new_password_confirm) {
-		$valid = false;
-		$_SESSION["error"] = "Le nuove [en]password[/en] non coincidono.";
+		array_push($err, "Devi inserire la vecchia [en]password[/en] per impostarne una nuova.");
+	}
+	if (strlen($new_password) < 8) {
+		array_push($err, "La nuova [en]password[/en] deve essere lunga almeno 8 caratteri.");
+	}
+	if (! preg_match("/\d/", $new_password) || ! preg_match("/[a-zA-Z]/", $new_password)) {
+		array_push($err, "La nuova [en]password[/en] deve contenere almeno una lettera e un numero.");
+	}
+	if ($new_password != $new_password_confirm) {
+		array_push($err, "Le nuove [en]password[/en] non coincidono.");
 	}
 }
+if (! preg_match("/^[A-Za-z\s']*$/", $nome)) {
+	array_push($err, "Nome può contenere solo lettere, spazi e apostrofi.");
+}
+if ($data_nascita != "") {
+	if (preg_match("/^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_nascita)) {
+		$date = date_create_immutable($data_nascita);
+		$min = date_create_immutable("1900-01-01");
+		$now = date_create_immutable("now");
+		$diff = date_diff($date, $now);
+		if ($date < $min)
+			array_push($err, "Data di dascita può partire dal 1900.");
+		elseif ($diff->format("%r%y") < 13 || $diff->format("%r%y") > 100)
+			array_push($err, "Devi avere tra i 13 e i 100 anni. Modifica la data di nascita.");
+	} else
+		array_push($err, "La data di nascita deve essere nel formato YYYY-MM-DD.");
+}
 
-if (! $valid) {
+if ($err) {
+	$_SESSION["error"] = $err;
 	header("location: dati.php");
 	exit();
 }
@@ -56,15 +78,13 @@ try {
 	exit();
 }
 
-if ($pw_err) {
-	$_SESSION["error"] = "Password corrente errata. Nessuna modifica apportata.";
-	header("location: dati.php");
-} elseif (! $res) {
-	$_SESSION["success"] = "Nessuna modifica apportata.";
-	header("location: dati.php");
-} else {
-	$_SESSION["success"] = "Dati aggiornati correttamente.";
-	header("location: dati.php");
-}
+if ($pw_err)
+	$_SESSION["error"] = ["Password corrente errata. Nessuna modifica apportata."];
+elseif (! $res)
+	$_SESSION["success"] = ["Nessuna modifica apportata."];
+else
+	$_SESSION["success"] = ["Dati aggiornati correttamente."];
+
+header("location: dati.php");
 
 ?>

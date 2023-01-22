@@ -30,28 +30,75 @@ if (! in_array($submit, ["aggiungi", "modifica", "elimina"]) || ($submit != "agg
 	exit();
 }
 
-$valid = true;
+$err = [];
 
-if (strlen($titolo) <= 3) {
-	$valid = false;
-	$_SESSION["error"] = "Il titolo deve avere almeno 3 caratteri";
-} elseif (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
+if ($titolo == "") {
+	array_push($err, "Titolo è un campo richesto.");
+} elseif (! preg_match("/^[^<>{}]*$/", $titolo)) {
+	array_push($err, "Il titolo inserito contiene caratteri non ammessi.");
+}
+if (! preg_match("/^[^<>]*$/", $descrizione)) {
+	array_push($err, "La descrizione inserita contiene caratteri non ammessi.");
+}
+if (!is_null($locandina) && isset($_FILES["locandina"]) && $_FILES["locandina"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["locandina"]);
 	if ($img[0]) $locandina = $img[1];
 	else {
-		$valid = false;
-		$_SESSION["error"] = $img[1];
+		array_push($err, $img[1]);
 	}
 }
+if ($data_rilascio != "") {
+	if (preg_match("/^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/", $data_rilascio)) {
+		$date = date_create_immutable($data_rilascio);
+		$min = date_create_immutable("1800-01-01");
+		$max = date_create_immutable("2099-12-31");
+		if ($date < $min)
+			array_push($err, "Data di rilascio può partire dal 1800.");
+		elseif ($date > $max)
+			array_push($err, "Data di rilascio può arrivare fino al 2099.");
+	} else
+		array_push($err, "La data di rilascio deve essere nel formato YYYY-MM-DD.");
+}
+if ($durata != "" && (intval($durata) <= 0 || intval($durata) > 1000)) {
+	array_push($err, "La durata deve essere tra 1 e 1000 minuti.");
+}
+if (!empty($crew_persona)) {
+	$v = true;
+	for ($i = 0; $v && $i < count($crew_persona); $i++) {
+		! preg_match("/^[\d]+$/", $crew_persona[$i]) && $v = false;
+	}
+	if (!$v) {
+		array_push($err, "Gli identificativi delle persone devono essere dei numeri.");
+	}
+}
+if (!empty($paese)) {
+	$v = true;
+	for ($i = 0; $v && $i < count($paese); $i++) {
+		! preg_match("/^[A-Z]{2}$/", $paese[$i]) && $v = false;
+	}
+	if (!$v) {
+		array_push($err, "Gli identificativi dei paesi devono essere due lettere maiuscole.");
+	}
+}
+if (! preg_match("/^[^<>{}]*$/", $titolo_originale)) {
+	array_push($err, "Il titolo originale inserito contiene caratteri non ammessi.");
+}
+if ($budget != "" && (intval($budget) <= 0)) {
+	array_push($err, "Il [en]budget[/en] deve essere superiore a 0.");
+}
+if ($incassi != "" && (intval($incassi) <= 0)) {
+	array_push($err, "Gli incassi devono essere superiori a 0.");
+}
 
-if (! $valid) {
+if ($err) {
+	$_SESSION["error"] = $err;
 	header("location: gest_film.php?id=" . $id);
 	exit();
 }
 
 try {
 	$connessione = new Database();
-	if ($submit == "aggiungi" || $submit = "modifica") {
+	if ($submit == "aggiungi" || $submit == "modifica") {
 		$up = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
 		$res = $up[0];
 		if ($up) {
@@ -72,17 +119,15 @@ try {
 }
 
 if (! $res) {
-	$_SESSION["success"] = "Nessuna modifica apportata.";
-	header("location: film.php?id=" . $id);
+	$_SESSION["success"] = ["Nessuna modifica apportata."];
 } elseif ($submit == "aggiungi") {
-	$_SESSION["success"] = "Film aggiunto correttamente.";
-	header("location: film.php?id=" . $id);
+	$_SESSION["success"] = ["Film aggiunto correttamente."];
 } elseif ($submit == "modifica") {
-	$_SESSION["success"] = "Film modificato correttamente.";
-	header("location: film.php?id=" . $id);
+	$_SESSION["success"] = ["Film modificato correttamente."];
 } else {
-	$_SESSION["success"] = "Film eliminato correttamente. Aggiungine un altro.";
-	header("location: gest_film.php");
+	$_SESSION["success"] = ["Film eliminato correttamente. Aggiungine un altro."];
 }
+
+header("location: gest_film.php" . ($id != "" ? "?id=$id": "" ));
 
 ?>

@@ -106,6 +106,8 @@ if ($id != "") {
 	Tools::toHtml($film, 0);
 	Tools::replaceAnchor($page, "nome", $film["nome"]);
 	Tools::replaceAnchor($page, "descrizione", (isset($film["descrizione"]) ? $film["descrizione"] : ""));
+	$immagine = (isset($film["locandina"]) ? ("pics/w200_" . $film["locandina"] . ".webp") : "img/placeholder.svg");
+	Tools::replaceAnchor($page, "locandina", $immagine);
 	Tools::replaceAnchor($page, "data_rilascio", (isset($film["data_rilascio"]) ? $film["data_rilascio"] : ""));
 	Tools::replaceAnchor($page, "durata", (isset($film["durata"]) ? $film["durata"] : ""));
 
@@ -155,6 +157,7 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "gest_id", "");
 	Tools::replaceAnchor($page, "nome", "");
 	Tools::replaceAnchor($page, "descrizione", "");
+	Tools::replaceSection($page, "locandina", "");
 	Tools::replaceAnchor($page, "data_rilascio", "");
 	Tools::replaceAnchor($page, "durata", "");
 	Tools::replaceSection($page, "persone_presenti", "");
@@ -180,6 +183,7 @@ foreach ($stati as $s) {
 Tools::replaceSection($page, "stato", $res);
 
 Tools::toHtml($collezioni, 1);
+usort($collezioni, fn($a, $b) => $a['nome'] <=> $b['nome']);
 $tmp = Tools::getSection($page, "collezione");
 $res = "";
 foreach ($collezioni as $c) {

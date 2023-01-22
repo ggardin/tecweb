@@ -11,21 +11,6 @@ if (isset($_SESSION["id"])) {
 $username = isset($_POST["username"]) ? $_POST["username"] : "";
 $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
-$valid = true;
-
-if (empty($username)) {
-	$valid = false;
-	$_SESSION["error"] = "[en]Username[/en] non valido.";
-} elseif (empty($password)) {
-	$valid = false;
-	$_SESSION["error"] = "La [en]password[/en] non è valida.";
-}
-
-if (! $valid) {
-	header("location: login.php");
-	exit();
-}
-
 try {
 	$connessione = new Database();
 	$login = $connessione->login($username, $password);
@@ -42,7 +27,7 @@ if (! empty($login)) {
 	header("location: user.php");
 	exit();
 } else {
-	$_SESSION["error"] = "Credenziali errate. Riprova.";
+	$_SESSION["error"] = ["Credenziali errate. Riprova."];
 	header("location: login.php");
 	exit();
 }
