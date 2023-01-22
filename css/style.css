@@ -904,7 +904,7 @@ USER LISTS PAGE
 */
 
 #list-movies {
-	margin-top: 1.5em;
+	margin: 1.5em 0;
 }
 
 #list-movies li {
