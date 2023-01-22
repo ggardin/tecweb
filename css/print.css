@@ -30,7 +30,11 @@ table, td, th{
 	border-collapse: collapse;
 }
 
-img, svg, #page-header, #page-footer, #breadcrumb, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
+#auth_form, #gestione{
+	display: block;
+}
+
+img, svg, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
 .skip-to-content {
 	display: none;
 }
