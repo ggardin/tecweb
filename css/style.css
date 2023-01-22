@@ -951,6 +951,7 @@ PERSON/COLLECTION PAGE
 	padding: 0.2em 0.5em;
 	border: 1px solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
+	color: var(--txtcolor);
 }
 
 /*
