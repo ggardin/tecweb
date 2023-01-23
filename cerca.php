@@ -165,48 +165,33 @@ if (!empty($cerca[0])) {
 		$r .= $t;
 	}
 	Tools::replaceSection($page, "card", $r);
+
 	$nav = Tools::getSection($page, "res_nav");
+	$nav_bottom = Tools::getSection($page, "res_nav_bottom");
+
 	$message = ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot);
 	Tools::replaceAnchor($nav, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
+	Tools::replaceAnchor($nav_bottom, "message_bottom", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
+
 	$is_prev = false;
 	$is_next = false;
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
+
 	if ($next > 0) {
 		$is_prev = true;
-		Tools::replaceAnchor($nav, "prev", ($query . "&n=" . ($next-1) . "#results_nav"));
+		Tools::replaceAnchor($nav_bottom, "prev", ($query . "&n=" . ($next-1) . "#results_nav"));
 	} else
-		Tools::replaceSection($nav, "prev", "");
+		Tools::replaceSection($nav_bottom, "prev", "");
 	if (($next + 1) < ceil($tot / $limit)) {
 		$is_next = true;
-		Tools::replaceAnchor($nav, "next", ($query . "&n=" . ($next+1) . "#results_nav"));
+		Tools::replaceAnchor($nav_bottom, "next", ($query . "&n=" . ($next+1) . "#results_nav"));
 	} else
-		Tools::replaceSection($nav, "next", "");
-	$nav_bottom = $nav;
-	if ($is_prev) {
-		Tools::replaceAnchor($nav, "prev_hidden", "true");
-		Tools::replaceAnchor($nav, "prev_index", "-1");
-		Tools::replaceAnchor($nav_bottom, "prev_hidden", "false");
-		Tools::replaceAnchor($nav_bottom, "prev_index", "");
-	}
-	if ($is_next) {
-		Tools::replaceAnchor($nav, "next_hidden", "true");
-		Tools::replaceAnchor($nav, "next_index", "-1");
-		Tools::replaceAnchor($nav_bottom, "next_hidden", "false");
-		Tools::replaceAnchor($nav_bottom, "next_index", "");
-	}
-	Tools::replaceAnchor($nav, "res_nav_id", "results_nav");
-	Tools::replaceAnchor($nav, "res_aria_label", "Indicazione numero di pagina");
-	Tools::replaceAnchor($nav, "message_hidden", "false");
+		Tools::replaceSection($nav_bottom, "next", "");
 	Tools::replaceSection($page, "res_nav", $nav, true);
-	Tools::replaceAnchor($nav_bottom, "res_nav_id", "results_nav_bottom");
-	Tools::replaceAnchor($nav_bottom, "res_aria_label", "Naviga tra i risultati di ricerca");
-	Tools::replaceAnchor($nav_bottom, "message_hidden", "true");
-	Tools::replaceAnchor($page, "res_nav_bottom", $nav_bottom, true);
+	Tools::replaceSection($page, "res_nav_bottom", $nav_bottom, true);
 } else {
 	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
-	Tools::replaceSection($page, "prev", "");
-	Tools::replaceSection($page, "next", "");
-	Tools::replaceAnchor($page, "res_nav_bottom", "", true);
+	Tools::replaceSection($page, "res_nav_bottom", "");
 	Tools::replaceSection($page, "results", "");
 }
 
