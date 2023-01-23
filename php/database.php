@@ -934,19 +934,18 @@ class Database {
 
 	public function getNumeroPerGenerePerUtente($user_id) : array {
 		$query = "select g.nome, count(*) as n
-			from lista as l
-				join lista_film as lf
-					on l.id = lf.lista
-				join film as f
-					on lf.film = f.id
+			from film as f
 				join film_genere as fg
 					on f.id = fg.film
 				join genere as g
 					on fg.genere = g.id
-			where l.utente = ?
-			group by g.nome
-			order by count(*) desc, g.id";
-
+			where f.id in
+				(select film
+				from lista as l
+					join lista_film as lf
+						on l.id = lf.lista
+				where l.utente = ?)
+			group by g.nome";
 
 		$params = [$user_id];
 		$types = "i";
