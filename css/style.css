@@ -16,6 +16,10 @@ CSS VARIABLES
 	--anchorcolor: #001289;
 	--anchorcolor-alt: #B54835;
 
+	--hover-anchor: #0101c9;
+	--hover-anchor-alt: #b43a24;
+
+	--success-color: #007400;
 	--error-required: #C20000;
 
 	--interactions-text-placeholder-color: #4D4D4D;
@@ -41,6 +45,10 @@ CSS VARIABLES
 	--anchorcolor: #9d64ff;
 	--anchorcolor-alt: #968729;
 
+	--hover-anchor: #a57af1;
+	--hover-anchor-alt: #948b4f;
+
+	--success-color: #03B680;
 	--error-required: #FF5757;
 
 	--interactions-color: #313131;
@@ -1148,16 +1156,19 @@ SERVER MESSAGES
 #server-message {
 	margin: 1em 0;
 	padding: 1em;
-	border: 1px solid var(--server-message-color);
+	border: 2px solid var(--server-message-color);
 	border-radius: var(--border-radius);
 	list-style-type: none;
 }
+
 #server-message.success {
-	--server-message-color: green;
+	--server-message-color: var(--success-color)
 }
+
 #server-message.error {
-	--server-message-color: red;
+	--server-message-color: var(--error-required);
 }
+
 
 /*
 ==============
