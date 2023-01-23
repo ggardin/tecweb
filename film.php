@@ -119,11 +119,11 @@ if (!empty($paese)) {
 Tools::replaceAnchor($page, "nome_originale", (isset($film["nome_originale"]) ? $film["nome_originale"] : ""));
 Tools::replaceAnchor($page, "stato", $stato[0]["nome"]);
 if (isset($film["budget"])) {
-	Tools::replaceAnchor($page, "budget", $film["budget"] . " $");
+	Tools::replaceAnchor($page, "budget", number_format($film["budget"],0,',','.') . " $");
 } else
 	Tools::replaceSection($page, "budget", "");
 if (isset($film["incassi"])) {
-	Tools::replaceAnchor($page, "incassi", $film["incassi"] . " $");
+	Tools::replaceAnchor($page, "incassi", number_format($film["incassi"],0,',','.') . " $");
 } else
 	Tools::replaceSection($page, "incassi", "");
 if (!empty($collezione)) {
