@@ -20,6 +20,10 @@ img.print, svg.print {
 	max-width: 100%;
 }
 
+#movie-details > p{
+	break-inside: avoid;	
+}
+
 #hero-image > img {
 	display: block;
 	width: 50%;
