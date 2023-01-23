@@ -112,10 +112,14 @@ class Tools {
 
 		if ($type == "std") {
 			self::replacePageSection($page, $shared, "footer");
-			if (! isset($_SESSION["id"]))
+			if (isset($_SESSION["id"])) {
+				self::replaceAnchor($page, "account_button", "Utente");
+				if ($_SESSION["is_admin"] == 0)
+					self::replaceSection($page, "header_admin", "");
+			} else {
 				self::replaceSection($page, "header_user", "");
-			elseif ($_SESSION["is_admin"] == 0)
-				self::replaceSection($page, "header_admin", "");
+				self::replaceAnchor($page, "account_button", "Accedi");
+			}
 		} elseif ($type == "auth") {
 			self::replaceSection($page, "header_user", "");
 			self::replaceSection($page, "account", "");
