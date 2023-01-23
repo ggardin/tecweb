@@ -16,7 +16,13 @@ CSS VARIABLES
 	--anchorcolor: #001289;
 	--anchorcolor-alt: #B54835;
 
+	--hover-anchor: #2525ea;
+	--hover-anchor-alt: #e16049;
+
+	--success-color: #007400;
+	--success-color-bg: #0074002e;
 	--error-required: #C20000;
+	--error-required-bg: #C200002e;
 
 	--interactions-text-placeholder-color: #4D4D4D;
 	--interactions-color: #FBFBFB;
@@ -41,6 +47,10 @@ CSS VARIABLES
 	--anchorcolor: #9d64ff;
 	--anchorcolor-alt: #968729;
 
+	--hover-anchor: #a888ee;
+	--hover-anchor-alt: #b9ad55;
+
+	--success-color: #03B680;
 	--error-required: #FF5757;
 
 	--interactions-color: #313131;
@@ -114,19 +124,26 @@ a {
 	color: var(--anchorcolor);
 }
 
+a:hover,
+a:focus {
+	outline: 2px solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+	color: var(--hover-anchor);
+}
+
 a:visited {
 	color: var(--anchorcolor-alt);
+}
+
+a:visited:hover,
+a:visited:focus {
+	color: var(--hover-anchor-alt);
 }
 
 img:not(.tmdb-logo) {
 	border-radius: var(--border-radius);
 }
 
-a:hover,
-a:focus {
-	outline: 2px solid var(--bgcolor-off);
-	border-radius: var(--border-radius);
-}
 
 /*
 ==============
@@ -1148,16 +1165,21 @@ SERVER MESSAGES
 #server-message {
 	margin: 1em 0;
 	padding: 1em;
-	border: 1px solid var(--server-message-color);
+	border: 2px solid;
 	border-radius: var(--border-radius);
 	list-style-type: none;
 }
+
 #server-message.success {
-	--server-message-color: green;
+	border-color: var(--success-color);
+	background-color: var(--success-color-bg);
 }
+
 #server-message.error {
-	--server-message-color: red;
+	border-color: var(--error-required);
+	background-color: var(--error-required-bg);
 }
+
 
 /*
 ==============
