@@ -1169,11 +1169,11 @@ SERVER MESSAGES
 }
 
 #server-message.success {
-	--server-message-color: var(--success-color)
+	border-color: var(--success-color);
 }
 
 #server-message.error {
-	--server-message-color: var(--error-required);
+	border-color: var(--error-required);
 }
 
 
