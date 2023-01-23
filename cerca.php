@@ -170,27 +170,23 @@ if (!empty($cerca[0])) {
 	$nav_bottom = Tools::getSection($page, "res_nav_bottom");
 
 	$message = ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot);
-	Tools::replaceAnchor($nav, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
-	Tools::replaceAnchor($nav_bottom, "message_bottom", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
+	Tools::replaceAnchor($nav, "res_message", $message);
+	Tools::replaceAnchor($nav_bottom, "res_message_bottom", $message);
 
-	$is_prev = false;
-	$is_next = false;
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
-
-	if ($next > 0) {
-		$is_prev = true;
+	if ($next > 0)
 		Tools::replaceAnchor($nav_bottom, "prev", ($query . "&n=" . ($next-1) . "#results_nav"));
-	} else
+	else
 		Tools::replaceSection($nav_bottom, "prev", "");
-	if (($next + 1) < ceil($tot / $limit)) {
-		$is_next = true;
+	if (($next + 1) < ceil($tot / $limit))
 		Tools::replaceAnchor($nav_bottom, "next", ($query . "&n=" . ($next+1) . "#results_nav"));
-	} else
+	else
 		Tools::replaceSection($nav_bottom, "next", "");
+
 	Tools::replaceSection($page, "res_nav", $nav, true);
 	Tools::replaceSection($page, "res_nav_bottom", $nav_bottom, true);
 } else {
-	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
+	Tools::replaceAnchor($page, "res_message", "Questa ricerca non ha prodotto risultati");
 	Tools::replaceSection($page, "res_nav_bottom", "");
 	Tools::replaceSection($page, "results", "");
 }
