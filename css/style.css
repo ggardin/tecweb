@@ -20,7 +20,9 @@ CSS VARIABLES
 	--hover-anchor-alt: #e16049;
 
 	--success-color: #007400;
+	--success-color-bg: #0074002e;
 	--error-required: #C20000;
+	--error-required-bg: #C200002e;
 
 	--interactions-text-placeholder-color: #4D4D4D;
 	--interactions-color: #FBFBFB;
@@ -1163,17 +1165,19 @@ SERVER MESSAGES
 #server-message {
 	margin: 1em 0;
 	padding: 1em;
-	border: 2px solid var(--server-message-color);
+	border: 2px solid;
 	border-radius: var(--border-radius);
 	list-style-type: none;
 }
 
 #server-message.success {
 	border-color: var(--success-color);
+	background-color: var(--success-color-bg);
 }
 
 #server-message.error {
 	border-color: var(--error-required);
+	background-color: var(--error-required-bg);
 }
 
 
