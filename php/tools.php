@@ -146,12 +146,6 @@ class Tools {
 	}
 
 	public static function showPage(&$page) : void {
-		if (isset($_SESSION["success"]))
-			self::showMessage($page, "success", "Successo.");
-		elseif (isset($_SESSION["error"]))
-			self::showMessage($page, "error", "Errore.");
-		else
-			self::replaceSection($page, "server", "");
 		self::deleteAllSectionAnchors($page);
 		$page = preg_replace('/^\h*\v+/m', '', $page);
 		echo($page);
