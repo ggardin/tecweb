@@ -16,8 +16,8 @@ CSS VARIABLES
 	--anchorcolor: #001289;
 	--anchorcolor-alt: #B54835;
 
-	--hover-anchor: #0101c9;
-	--hover-anchor-alt: #b43a24;
+	--hover-anchor: #2525ea;
+	--hover-anchor-alt: #e16049;
 
 	--success-color: #007400;
 	--error-required: #C20000;
@@ -45,8 +45,8 @@ CSS VARIABLES
 	--anchorcolor: #9d64ff;
 	--anchorcolor-alt: #968729;
 
-	--hover-anchor: #a57af1;
-	--hover-anchor-alt: #948b4f;
+	--hover-anchor: #a888ee;
+	--hover-anchor-alt: #b9ad55;
 
 	--success-color: #03B680;
 	--error-required: #FF5757;
@@ -122,19 +122,26 @@ a {
 	color: var(--anchorcolor);
 }
 
+a:hover,
+a:focus {
+	outline: 2px solid var(--bgcolor-off);
+	border-radius: var(--border-radius);
+	color: var(--hover-anchor);
+}
+
 a:visited {
 	color: var(--anchorcolor-alt);
+}
+
+a:visited:hover,
+a:visited:focus {
+	color: var(--hover-anchor-alt);
 }
 
 img:not(.tmdb-logo) {
 	border-radius: var(--border-radius);
 }
 
-a:hover,
-a:focus {
-	outline: 2px solid var(--bgcolor-off);
-	border-radius: var(--border-radius);
-}
 
 /*
 ==============
