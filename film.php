@@ -40,7 +40,10 @@ if (empty($film)) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $film = $film[0];
-$title = $film["nome"] . " • Film"; Tools::toHtml($title, 1);
+$meta = $film["nome"]; Tools::toHtml($meta, 1);
+Tools::replaceAnchor($page, "desc_nomefilm", $meta);
+Tools::replaceAnchor($page, "keys_nomefilm", $meta);
+$title = $meta. " • Film";
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);

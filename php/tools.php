@@ -180,7 +180,6 @@ class Tools {
 
 		// https://www.w3schools.com/php/php_file_upload.asp
 		$target_dir = "pics/";
-		$imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
 
 		if (! getimagesize($file["tmp_name"])) {
 			unlink ($file["tmp_name"]);
@@ -192,35 +191,47 @@ class Tools {
 			return [false, "Questa immagine pesa troppo. Dimensione massima: 1.5MB."];
 		}
 
-		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "webp") {
+		$imagetype = mime_content_type($file["tmp_name"]);
+		if ($imagetype != "image/jpeg" && $imagetype != "image/png" && $imagetype != "image/webp") {
 			unlink ($file["tmp_name"]);
 			return [false, "Formato immagine non supportato. Carica uno tra: JPG, JPEG, PNG, WEBP."];
 		}
 
-		$w0 = 200; $h0 = 1.5 * $w0;
-		$w1 = 500; $h1 = 1.5 * $w1;
+		$r = 1.5;
+		$w0 = 200; $h0 = $w0 * $r;
+		$w1 = 500; $h1 = $w1 * $r;
 
 		do {
 			$filename = self::randString();
 		} while (file_exists($target_dir . "${w0}_" . $filename . ".webp"));
 
-		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
-		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
-
-		if ($imageFileType == "jpg" || $imageFileType == "jpeg")
+		if ($imagetype == "image/jpeg")
 			$source = imagecreatefromjpeg($file["tmp_name"]);
-		elseif ($imageFileType == "png")
+		elseif ($imagetype == "image/png")
 			$source = imagecreatefrompng($file["tmp_name"]);
 		else
 			$source = imagecreatefromwebp($file["tmp_name"]);
 
 		list($width, $height) = getimagesize($file["tmp_name"]);
 
+		if(($height / $width) < $r) {
+			$y = 0;
+			$x = intval(($width - ($height / $r)) / 2);
+			$width -= 2 * $x;
+		} else {
+			$x = 0;
+			$y = intval(($height - ($width * $r)) / 2);
+			$height -= 2 * $y;
+		}
+
 		$pic0 = imagecreatetruecolor($w0, $h0);
 		$pic1 = imagecreatetruecolor($w1, $h1);
 
-		imagecopyresampled($pic0, $source, 0, 0, 0, 0, $w0, $h0, $width, $height);
-		imagecopyresampled($pic1, $source, 0, 0, 0, 0, $w1, $h1, $width, $height);
+		imagecopyresampled($pic0, $source, 0, 0, $x, $y, $w0, $h0, $width, $height);
+		imagecopyresampled($pic1, $source, 0, 0, $x, $y, $w1, $h1, $width, $height);
+
+		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
+		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
 
 		imagewebp($pic0, $fn0);
 		imagewebp($pic1, $fn1);

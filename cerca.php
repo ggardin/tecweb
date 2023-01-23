@@ -59,11 +59,14 @@ Tools::toHtml($f_val_paese);
 
 if ($tipo == "film") {
 	$breadcrumb = "Film";
-}
-elseif ($tipo == "collezione")
+	$desc = "Trova il film perfetto per te, filtrando i risultati per genere o paese.";
+} elseif ($tipo == "collezione") {
 	$breadcrumb = "Collezioni";
-else
+	$desc = "Esplora le collezioni di film presenti su soundstage.";
+} else {
 	$breadcrumb = "Persone";
+	$desc = "Esplora le persone e la loro storia cinematografica su soundstage.";
+}
 
 $intestazione = $breadcrumb;
 if ($tipo == "film" && $f_nome) {
@@ -74,6 +77,9 @@ if ($tipo == "film" && $f_nome) {
 	}
 	$intestazione .= ")";
 }
+
+Tools::replaceAnchor($page, "desc_tiporicerca", $desc);
+Tools::replaceAnchor($page, "keys_tiporicerca", $tipo);
 
 $titolo = (($query != "") ? ('"' . $query . '" • ') : "") . "Cerca " . $intestazione;
 Tools::replaceAnchor($page, "title", $titolo);
@@ -138,10 +144,10 @@ if (!empty($cerca[0])) {
 	$tot = $cerca[1]["n"];
 	$cerca = $cerca[0];
 	Tools::toHtml($cerca);
-	$results = Tools::getSection($page, "results");
+	$card = Tools::getSection($page, "card");
 	$r = "";
 	foreach ($cerca as $c) {
-		$t = $results;
+		$t = $card;
 		if ($tipo != "persona")
 			$immagine = (isset($c["locandina"]) ? ("pics/w200_" . $c["locandina"] . ".webp") : "img/placeholder.svg");
 		else
@@ -159,30 +165,30 @@ if (!empty($cerca[0])) {
 			Tools::replaceSection($t, "n_film", "");
 		$r .= $t;
 	}
-	Tools::replaceSection($page, "results", $r);
-	Tools::replaceAnchor($page, "message", ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot));
-	$buttons = false;
+	Tools::replaceSection($page, "card", $r);
+
+	$nav = Tools::getSection($page, "res_nav");
+	$nav_bottom = Tools::getSection($page, "res_nav_bottom");
+
+	$message = ("Pagina " . ($next+1) . " su " . ceil($tot / $limit) . ". Risultati totali: " . $tot);
+	Tools::replaceAnchor($nav, "res_message", $message);
+	Tools::replaceAnchor($nav_bottom, "res_message_bottom", $message);
+
 	$query = "cerca_$tipo.php?q=$query" . (($tipo == "film" && $f_nome) ? ("&fn=" . $f_nome . "&fvg=" . $f_val_genere . "&fvp=" . $f_val_paese) : "");
-	if ($next > 0) {
-		$buttons = true;
-		Tools::replaceAnchor($page, "prev", ($query . "&n=" . ($next-1)));
-	} else
-		Tools::replaceSection($page, "prev", "");
-	if (($next + 1) < ceil($tot / $limit)) {
-		$buttons = true;
-		Tools::replaceAnchor($page, "next", ($query . "&n=" . ($next+1)));
-	} else
-		Tools::replaceSection($page, "next", "");
-	if ($buttons) {
-		Tools::replaceAnchor($page, "res_buttons_bottom", Tools::getSection($page, "results_navigation"), true);
-	} else {
-		Tools::replaceSection($page, "res_buttons", "");
-		Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
-	}
+	if ($next > 0)
+		Tools::replaceAnchor($nav_bottom, "prev", ($query . "&n=" . ($next-1) . "#results_nav"));
+	else
+		Tools::replaceSection($nav_bottom, "prev", "");
+	if (($next + 1) < ceil($tot / $limit))
+		Tools::replaceAnchor($nav_bottom, "next", ($query . "&n=" . ($next+1) . "#results_nav"));
+	else
+		Tools::replaceSection($nav_bottom, "next", "");
+
+	Tools::replaceSection($page, "res_nav", $nav, true);
+	Tools::replaceSection($page, "res_nav_bottom", $nav_bottom, true);
 } else {
-	Tools::replaceAnchor($page, "message", "Questa ricerca non ha prodotto risultati");
-	Tools::replaceSection($page, "res_buttons", "");
-	Tools::replaceAnchor($page, "res_buttons_bottom", "", true);
+	Tools::replaceAnchor($page, "res_message", "Questa ricerca non ha prodotto risultati");
+	Tools::replaceSection($page, "res_nav_bottom", "");
 	Tools::replaceSection($page, "results", "");
 }
 

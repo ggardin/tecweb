@@ -38,7 +38,9 @@ if (!$own) {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 $nome = $nome[0];
-$title = $nome["nome"] . " • Lista"; Tools::toHtml($title, 1);
+$meta = $nome["nome"]; Tools::toHtml($meta, 1);
+Tools::replaceAnchor($page, "desc_nomelista", $meta);
+$title = $meta . " • Lista";
 Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($nome);
 Tools::replaceAnchor($page, "breadcrumb", $nome["nome"]);

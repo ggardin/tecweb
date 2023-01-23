@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 
 	<title>@@title@@ | soundstage</title>
-	<meta name="description" content="Trova il film perfetto per te, filtrando i risultati per genere o paese." />
-	<meta name="keywords" content="soundstage, ricerca, filtra risultati, film, genere, paese" />
+	<meta name="description" content="@@desc_tiporicerca@@" />
+	<meta name="keywords" content="soundstage, @@keys_tiporicerca@@, ricerca, filtra risultati, film, genere, paese" />
 
 	<!-- head -->
 </head>
@@ -18,7 +18,7 @@
 
 	<main id="content">
 		<a href="#searchbar" class="skip-to-content">Vai ai filtri di ricerca</a>
-		<a href="#search-results" class="skip-to-content">Salta ai risultati di ricerca</a>
+		<a href="#results_nav" class="skip-to-content">Salta ai risultati di ricerca</a>
 		<h1>@@intestazione@@</h1>
 
 		<form method="get" id="search">
@@ -58,34 +58,15 @@
 			</button>
 		</form>
 
-		<!-- results_navigation_start -->
-		<nav class="results-navigation" aria-label="Naviga tra le pagine dei risultati">
-			<!-- message_start -->
-			<p role="status" class="resultMessage">@@message@@</p>
-			<!-- message_end -->
-			<!-- res_buttons_start -->
-			<!-- prev_start -->
-			<a href="@@prev@@" class="link-button res-prev">
-				<svg viewBox="0 0 41 41" xmlns="http://www.w3.org/2000/svg">
-					<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="m20.496 40.977c10.941 0 20-9.0784 20-20 0-10.941-9.0784-20-20.02-20-10.922 0-19.98 9.0588-19.98 20 0 10.922 9.0784 20 20 20zm0-3.3333c-9.2549 0-16.647-7.4118-16.647-16.667 0-9.2549 7.3725-16.667 16.627-16.667s16.686 7.4118 16.686 16.667c0 9.2549-7.4118 16.667-16.667 16.667zm-10.078-16.686c0 0.43137 0.19608 0.78431 0.54902 1.1373l6.6275 6.6471c0.2549 0.2549 0.60784 0.41177 1.0196 0.41177 0.80392 0 1.4118-0.62745 1.4118-1.4314 0-0.43137-0.15686-0.78431-0.43137-1.0392l-2.451-2.4314-2.3725-1.9804 4.1569 0.13726h10.216c0.86275 0 1.4706-0.60784 1.4706-1.451 0-0.86274-0.62745-1.4706-1.4706-1.4706h-10.216l-4.1373 0.15686 2.3529-1.9804 2.451-2.4314c0.2549-0.27451 0.43137-0.62745 0.43137-1.0588 0-0.80392-0.60784-1.4118-1.4118-1.4118-0.41176 0-0.76471 0.13725-1.0196 0.39216l-6.6275 6.6667c-0.39216 0.39216-0.54902 0.70588-0.54902 1.1373z" />
-				</svg>
-				<span class="sr-only">Pagina precedente dei risultati di ricerca</span>
-			</a>
-			<!-- prev_end -->
-			<!-- next_start -->
-			<a href="@@next@@" class="link-button res-next">
-				<svg viewBox="0 0 41 41" xmlns="http://www.w3.org/2000/svg">
-					<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="m20.496 40.977c10.941 0 20-9.0784 20-20 0-10.941-9.0784-20-20.02-20-10.922 0-19.98 9.0588-19.98 20 0 10.922 9.0784 20 20 20zm0-3.3333c-9.2549 0-16.647-7.4118-16.647-16.667 0-9.2549 7.3725-16.667 16.627-16.667s16.686 7.4118 16.686 16.667c0 9.2549-7.4118 16.667-16.667 16.667zm10.059-16.686c0-0.43137-0.15686-0.7451-0.54902-1.1373l-6.6275-6.6667c-0.2549-0.2549-0.60784-0.39216-1.0196-0.39216-0.80392 0-1.4118 0.60784-1.4118 1.4118 0 0.43137 0.17647 0.78431 0.43137 1.0588l2.451 2.4314 2.3725 1.9804-4.1373-0.15686h-10.235c-0.84314 0-1.4706 0.60784-1.4706 1.4706 0 0.84314 0.62745 1.451 1.4706 1.451h10.235l4.1373-0.13726-2.3725 1.9804-2.451 2.4314c-0.27451 0.2549-0.43137 0.60784-0.43137 1.0392 0 0.80392 0.60784 1.4314 1.4118 1.4314 0.41176 0 0.76471-0.15686 1.0196-0.41177l6.6275-6.6471c0.37255-0.35294 0.54902-0.70588 0.54902-1.1373z" />
-				</svg>
-				<span class="sr-only">Pagina successiva dei risultati di ricerca</span>
-			</a>
-			<!-- next_end -->
-			<!-- res_buttons_end -->
+		<!-- res_nav_start -->
+		<nav id="results_nav" class="results-navigation" aria-label="Indicazione numero di pagina">
+			<p role="status" class="resultMessage">@@res_message@@</p>
 		</nav>
-		<!-- results_navigation_end -->
+		<!-- res_nav_end -->
 
-		<ul id="search-results" class="cards">
-			<!-- results_start -->
+		<!-- results_start -->
+		<ul class="cards">
+			<!-- card_start -->
 			<li class="card">
 				<a href="@@link@@">
 					<img src="@@immagine@@" alt=""/>
@@ -100,12 +81,29 @@
 					</div>
 				</a>
 			</li>
-			<!-- results_end -->
+			<!-- card_end -->
 		</ul>
-
-		<!-- res_buttons_bottom -->
-
 		<!-- results_end -->
+
+		<!-- res_nav_bottom_start -->
+		<nav id="results_nav_bottom" class="results-navigation" aria-label="Naviga tra i risultati di ricerca">
+			<p class="resultMessage" aria-hidden="true">@@res_message_bottom@@</p>
+			<!-- prev_start -->
+			<a href="@@prev@@" class="link-button res-prev" title="Pagina precedente dei risultati di ricerca">
+				<svg viewBox="0 0 41 41" xmlns="http://www.w3.org/2000/svg">
+					<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="m20.496 40.977c10.941 0 20-9.0784 20-20 0-10.941-9.0784-20-20.02-20-10.922 0-19.98 9.0588-19.98 20 0 10.922 9.0784 20 20 20zm0-3.3333c-9.2549 0-16.647-7.4118-16.647-16.667 0-9.2549 7.3725-16.667 16.627-16.667s16.686 7.4118 16.686 16.667c0 9.2549-7.4118 16.667-16.667 16.667zm-10.078-16.686c0 0.43137 0.19608 0.78431 0.54902 1.1373l6.6275 6.6471c0.2549 0.2549 0.60784 0.41177 1.0196 0.41177 0.80392 0 1.4118-0.62745 1.4118-1.4314 0-0.43137-0.15686-0.78431-0.43137-1.0392l-2.451-2.4314-2.3725-1.9804 4.1569 0.13726h10.216c0.86275 0 1.4706-0.60784 1.4706-1.451 0-0.86274-0.62745-1.4706-1.4706-1.4706h-10.216l-4.1373 0.15686 2.3529-1.9804 2.451-2.4314c0.2549-0.27451 0.43137-0.62745 0.43137-1.0588 0-0.80392-0.60784-1.4118-1.4118-1.4118-0.41176 0-0.76471 0.13725-1.0196 0.39216l-6.6275 6.6667c-0.39216 0.39216-0.54902 0.70588-0.54902 1.1373z" />
+				</svg>
+			</a>
+			<!-- prev_end -->
+			<!-- next_start -->
+			<a href="@@next@@" class="link-button res-next" title="Pagina successiva dei risultati di ricerca">
+				<svg viewBox="0 0 41 41" xmlns="http://www.w3.org/2000/svg">
+					<path fill="currentcolor" fill-rule="evenodd" stroke="none" d="m20.496 40.977c10.941 0 20-9.0784 20-20 0-10.941-9.0784-20-20.02-20-10.922 0-19.98 9.0588-19.98 20 0 10.922 9.0784 20 20 20zm0-3.3333c-9.2549 0-16.647-7.4118-16.647-16.667 0-9.2549 7.3725-16.667 16.627-16.667s16.686 7.4118 16.686 16.667c0 9.2549-7.4118 16.667-16.667 16.667zm10.059-16.686c0-0.43137-0.15686-0.7451-0.54902-1.1373l-6.6275-6.6667c-0.2549-0.2549-0.60784-0.39216-1.0196-0.39216-0.80392 0-1.4118 0.60784-1.4118 1.4118 0 0.43137 0.17647 0.78431 0.43137 1.0588l2.451 2.4314 2.3725 1.9804-4.1373-0.15686h-10.235c-0.84314 0-1.4706 0.60784-1.4706 1.4706 0 0.84314 0.62745 1.451 1.4706 1.451h10.235l4.1373-0.13726-2.3725 1.9804-2.451 2.4314c-0.27451 0.2549-0.43137 0.60784-0.43137 1.0392 0 0.80392 0.60784 1.4314 1.4118 1.4314 0.41176 0 0.76471-0.15686 1.0196-0.41177l6.6275-6.6471c0.37255-0.35294 0.54902-0.70588 0.54902-1.1373z" />
+				</svg>
+			</a>
+			<!-- next_end -->
+		</nav>
+		<!-- res_nav_bottom_end -->
 	</main>
 
 	<!-- footer -->
