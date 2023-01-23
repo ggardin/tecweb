@@ -91,10 +91,6 @@ class Tools {
 			self::convHelper($in, null, $conv_level);
 	}
 
-	private static function replacePageSection(&$page, &$shared, $name) : void {
-		self::replaceAnchor($page, $name, self::getSection($shared, $name), true);
-	}
-
 	private static function deleteCircularLinks(&$page, $name) : void {
 		$from = '/<a href="' . $name . '\.php.*?"([^>]*?)>(.*?)<\/a>/s';
 		$to = '<span class="active"${1}>${2}</span>';
@@ -107,11 +103,20 @@ class Tools {
 		$page = file_get_contents(__DIR__ . "/../html/${name}.html");
 		$shared = file_get_contents(__DIR__ . "/../html/shared.html");
 
-		self::replacePageSection($page, $shared, "head");
-		self::replacePageSection($page, $shared, "header");
+		self::replaceAnchor($page, "head", self::getSection($shared, "head"), true);
+		self::replaceAnchor($page, "header", self::getSection($shared, "header"), true);
+
+		if (isset($_SESSION["success"]) || isset($_SESSION["error"])) {
+			$server = self::getSection($shared, "server_messages");
+			if (isset($_SESSION["success"]))
+				self::buildMessages($server, "success", "Successo.");
+			elseif (isset($_SESSION["error"]))
+				self::buildMessages($server, "error", "Errore.");
+			self::replaceAnchor($page, "server_messages", $server, true);
+		}
 
 		if ($type == "std") {
-			self::replacePageSection($page, $shared, "footer");
+			self::replaceAnchor($page, "footer", self::getSection($shared, "footer"), true);
 			if (! isset($_SESSION["id"]))
 				self::replaceSection($page, "header_user", "");
 			elseif ($_SESSION["is_admin"] == 0)
@@ -125,28 +130,22 @@ class Tools {
 		return $page;
 	}
 
-	private static function showMessage(&$page, $name, $intro) : void {
-		self::replaceAnchor($page, "server_message_intro", $intro);
-		self::replaceAnchor($page, "server_message_type", $name);
+	private static function buildMessages(&$in, $name, $intro) : void {
+		self::replaceAnchor($in, "server_message_intro", $intro);
+		self::replaceAnchor($in, "server_message_type", $name);
 		self::toHtml($_SESSION[$name]);
-		$tmp = self::getSection($page, "server_message");
+		$tmp = self::getSection($in, "server_message");
 		$res = "";
 		foreach ($_SESSION[$name] as $s) {
 			$t = $tmp;
 			self::replaceAnchor($t, "server_message", $s);
 			$res .= $t;
 		}
-		self::replaceSection($page, "server_message", $res);
+		self::replaceSection($in, "server_message", $res);
 		unset($_SESSION[$name]);
 	}
 
 	public static function showPage(&$page) : void {
-		if (isset($_SESSION["success"]))
-			self::showMessage($page, "success", "Successo.");
-		elseif (isset($_SESSION["error"]))
-			self::showMessage($page, "error", "Errore.");
-		else
-			self::replaceSection($page, "server_section", "");
 		self::deleteAllSectionAnchors($page);
 		$page = preg_replace('/^\h*\v+/m', '', $page);
 		echo($page);
