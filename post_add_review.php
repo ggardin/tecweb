@@ -24,8 +24,8 @@ $err = [];
 if (intval($voto) < 1 || intval($voto) > 10) {
 	array_push($err, "Devi esprimere un voto da 1 a 10.");
 }
-if (strlen($testo) < 3 || strlen($testo) > 1000) {
-	array_push($err, "La recensione deve contenere tra i 3 e i 1000 caratteri.");
+if (strlen($testo) < 5 || strlen($testo) > 1000) {
+	array_push($err, "La recensione deve contenere tra i 5 e i 1000 caratteri.");
 }
 if (! preg_match("/^[^<>{}]*$/", $testo)) {
 	array_push($err, "La recensione contiene caratteri non ammessi.");

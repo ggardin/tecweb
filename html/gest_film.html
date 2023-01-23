@@ -72,7 +72,7 @@
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
 					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
-					<input id="crew-person@@crew_person_input_id@@" type="text" list="lista-persone" value="@@crew_person_input_value@@" oninput="validatePersonName(this);" />
+					<input autocomplete="off" id="crew-person@@crew_person_input_id@@" type="text" list="lista-persone" value="@@crew_person_input_value@@" oninput="validatePersonName(this);" />
 					<p id="crew-person@@crew_person_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 					<input id="crew-person@@crew_person_hidden_id@@-id" @@crew_person_hidden_name@@ type="hidden" value="@@crew_person_hidden_value@@"/>
 
@@ -123,7 +123,7 @@
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
 					<label for="nation@@nation_label_id@@">Codice del Paese</label>
-					<input id="nation@@nation_input_id@@" type="text" list="lista-paesi" value="@@nation_input_value@@" oninput="validateNationName(this);" />
+					<input autocomplete="off" id="nation@@nation_input_id@@" type="text" list="lista-paesi" value="@@nation_input_value@@" oninput="validateNationName(this);" />
 					<p id="nation@@nation_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 					<input id="nation@@nation_hidden_id@@-id" @@nation_hidden_name@@ type="hidden" value="@@nation_hidden_value@@" />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
