@@ -6,7 +6,7 @@ function validateUserSignup() {
 	let form = document.getElementById("auth_form");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateNewUsername() && validatePasswords()) && validatePasswordConfirm() ) {
+		if (! (validateNewUsername() && validatePassword() && validatePasswordConfirm()) ) {
 			event.preventDefault();
 		}
 	});
@@ -59,7 +59,7 @@ function validatePasswordConfirm() {
 	var first_password  = document.forms['auth_form']['password'].value;
 	var second_password = document.forms['auth_form']['password_confirm'].value;
 
-	if ((second_password != null || second_password != '') && first_password != second_password) {
+	if (first_password != second_password) {
 		showErrorMessage(id, 'Le <span lang="en">password</span> non coincidono.');
 		return false;
 	}
