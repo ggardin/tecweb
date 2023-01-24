@@ -14,16 +14,16 @@ $password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm
 
 $err = [];
 
-if (! preg_replace("/^[A-Za-z0-9]+$/", $username)) {
+if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
 	array_push($err, "[en]Username[/en] non valido, usa solo lettere o numeri.");
 }
 if (strlen($password) < 8) {
 	array_push($err, "La [en]password[/en] deve essere lunga almeno 8 caratteri.");
 }
-if (! $preg_match("/\d/", $password) || ! $preg_match("/[a-zA-Z]/", $password)) {
+if (! preg_match("/\d/", $password) || ! preg_match("/[a-zA-Z]/", $password)) {
 	array_push($err, "La [en]password[/en] deve contenere almeno una lettera e un numero.");
 }
-if ($password != "" || $password != $password_confirm) {
+if ($password != $password_confirm) {
 	array_push($err, "Le [en]password[/en] non coincidono.");
 }
 
