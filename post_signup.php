@@ -14,6 +14,9 @@ $password_confirm = isset($_POST["password_confirm"]) ? $_POST["password_confirm
 
 $err = [];
 
+if (strlen($username) > 30) {
+	array_push($err, "[en]Username[/en] deve essere lungo al massimo 30 caratteri.");
+}
 if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
 	array_push($err, "[en]Username[/en] non valido, usa solo lettere o numeri.");
 }
