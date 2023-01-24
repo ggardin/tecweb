@@ -25,8 +25,11 @@ $err = [];
 
 if ($nome == "") {
 	array_push($err, "Nome è un campo richesto.");
-} elseif (! preg_match("/^[a-zA-Z\.\s\-\'\[\]\/\x{00C0}-\x{017F}]+$/u", $nome)) {
-	array_push($err, "Il nome inserito contiene caratteri non ammessi.");
+} else {
+	if (strlen($nome) > 50)
+		array_push($err, "Il nome deve essere lungo al massimo 50 caratteri.");
+	if (! preg_match("/^[a-zA-Z\.\s\-\'\[\]\/\x{00C0}-\x{017F}]+$/u", $nome))
+		array_push($err, "Il nome inserito contiene caratteri non ammessi.");
 }
 if (!is_null($immagine) && isset($_FILES["immagine"]) && $_FILES["immagine"]["tmp_name"]) {
 	$img = Tools::uploadImg($_FILES["immagine"]);

@@ -21,11 +21,17 @@ $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 
 $err = [];
 
+if (strlen($username) > 50) {
+	array_push($err, "[en]Username[/en] può essere lungo al massimo 30 caratteri.");
+}
 if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
 	array_push($err, "[en]Username[/en] non valido, usa solo lettere o numeri.");
 }
-if ($mail != "" && ! filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-	array_push($err, "L'indirizzo [en]email[/en] non è valido.");
+if ($mail != "") {
+	if (strlen($mail) > 100)
+		array_push($err, "L'indirizzo [en]email[/en] può essere lunga al massimo 100 caratteri.");
+	if (! filter_var($mail, FILTER_VALIDATE_EMAIL))
+		array_push($err, "L'indirizzo [en]email[/en] non è valido.");
 }
 if ($new_password != "") {
 	if ($old_password == "") {
@@ -40,6 +46,9 @@ if ($new_password != "") {
 	if ($new_password != $new_password_confirm) {
 		array_push($err, "Le nuove [en]password[/en] non coincidono.");
 	}
+}
+if (strlen($nome) > 50) {
+	array_push($err, "Nome può essere lungo al massimo 50 caratteri.");
 }
 if (! preg_match("/^[A-Za-z\s']*$/", $nome)) {
 	array_push($err, "Nome può contenere solo lettere, spazi e apostrofi.");

@@ -23,8 +23,14 @@ $err = [];
 
 if ($titolo == "") {
 	array_push($err, "Titolo è un campo richesto.");
-} elseif (! preg_match("/^[\w\s\-\.\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $titolo)) {
-	array_push($err, "Il titolo inserito contiene caratteri non ammessi.");
+} else {
+	if (strlen($titolo) > 200)
+		array_push($err, "Il titolo deve essere lungo al massimo 200 caratteri.");
+	if (! preg_match("/^[\w\s\-\.\:\'\[\]\,\/\"\x{00C0}-\x{017F}]+$/u", $titolo))
+		array_push($err, "Il titolo inserito contiene caratteri non ammessi.");
+}
+if (strlen($descrizione) > 10000) {
+	array_push($err, "La descrizione deve essere lunga al massimo 10.000 caratteri.");
 }
 if (! preg_match("/^[^<>]*$/", $descrizione)) {
 	array_push($err, "La descrizione inserita contiene caratteri non ammessi.");
