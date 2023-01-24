@@ -36,11 +36,11 @@
 				<legend>Informazioni di base</legend>
 
 				<label for="username"><span lang="en">Username</span><span class="required">(richiesto)</span></label>
-				<input type="text" id="username" name="username" value="@@username@@" required onblur="validateUserUsername();" oninput="validateUserUsername();" aria-describedby="username-hint" autocomplete="username" />
+				<input type="text" id="username" name="username" value="@@username@@" required onblur="validateUserUsername();" oninput="validateUserUsername();" aria-describedby="username-hint" autocomplete="username" maxlength="30" />
 				<span id="username-hint">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</span>
 
 				<label for="email"><span lang="en">Email</span></label>
-				<input type="text" id="email" name="mail" value="@@mail@@" onblur="validateUserEmail();" autocomplete="email" />
+				<input type="text" id="email" name="mail" value="@@mail@@" onblur="validateUserEmail();" autocomplete="email" maxlength="100" />
 				<p id="email-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
@@ -63,7 +63,7 @@
 				<legend>Ulteriori informazioni su di te</legend>
 
 				<label for="nome">Nome</label>
-				<input type="text" id="nome" name="nome" value="@@nome@@" onblur="validateUserName();" oninput="validateUserName();" autocomplete="name" />
+				<input type="text" id="nome" name="nome" value="@@nome@@" onblur="validateUserName();" oninput="validateUserName();" autocomplete="name" maxlength="50" />
 				<p id="nome-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data">Data di nascita</label>

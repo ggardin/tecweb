@@ -36,7 +36,7 @@
 				<legend class="sr-only">Dati di registrazione</legend>
 
 				<label for="username">Nome utente<span class="required">(richiesto)</span></label>
-				<input type="text" id="username" name="username" required aria-describedby="username-hint" onblur="validateNewUsername();" />
+				<input type="text" id="username" name="username" required aria-describedby="username-hint" onblur="validateNewUsername();" maxlength="30" />
 				<p id="username-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</p>
 
 				<label for="password"><span lang="en">Password</span><span class="required">(richiesto)</span></label>
