@@ -89,11 +89,10 @@ function validatePasswordConfirm() {
 	var first_password  = document.forms['gestione']['new_password'].value;
 	var second_password = document.forms['gestione']['new_password_confirm'].value;
 
-	if ((first_password != null || first_password != '') && (second_password != null || second_password != '')) {
-		if ((second_password != null || second_password != '') && first_password != second_password) {
-			showErrorMessage(id, 'Le <span lang="en">password</span> non corrispondono.');
-			return false;
-		}
+	if (((first_password != null || first_password != '') || (second_password != null || second_password != '')) &&
+		(first_password != second_password)) {
+		showErrorMessage(id, 'Le <span lang="en">password</span> non corrispondono.');
+		return false;
 	}
 
 	removeErrorMessage(id);
@@ -124,7 +123,7 @@ function validateUserBirthday() {
 
 	// Non c'è supporto data, controllo formato
 	if (! inputDateBrowserSupport()) {
-		const yearRegex = /^[\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 		if (! yearRegex.test(birthday)) {
 			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
