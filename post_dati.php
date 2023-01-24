@@ -21,7 +21,7 @@ $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 
 $err = [];
 
-if (strlen($username) > 50) {
+if (strlen($username) > 30) {
 	array_push($err, "[en]Username[/en] può essere lungo al massimo 30 caratteri.");
 }
 if (! preg_match("/^[A-Za-z0-9]+$/", $username)) {
