@@ -187,8 +187,6 @@ function validateEmail(email) {
 	return emailRegex.test(String(email).toLowerCase());
 }
 
-function validateUserDisplayName() {}
-
 window.addEventListener('load', function () {
 	validateUserData();
 });
