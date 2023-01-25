@@ -561,6 +561,11 @@ LINK BUTTONS
 	margin-top: 0.5em;
 }
 
+.link-button:hover,
+.link-button:focus {
+	background-color: var(--secondaryColor-off);
+}
+
 .link-button.edit {
 	width: fit-content;
 }
