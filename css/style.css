@@ -9,6 +9,8 @@ CSS VARIABLES
 	--bgcolor-off: #e0e0e0;
 
 	--secondaryColor: #fbfbfb;
+	--secondaryColor-off: #d0d0d0;
+
 	--tertiaryColor: #0e5e51;
 
 	--txtcolor: #101010;
@@ -21,7 +23,10 @@ CSS VARIABLES
 
 	--success-color: #007400;
 	--success-color-bg: #0074002e;
+
 	--error-required: #C20000;
+	--error-required-off: #820000;
+
 	--error-required-bg: #C200002e;
 
 	--interactions-text-placeholder-color: #4D4D4D;
@@ -36,10 +41,12 @@ CSS VARIABLES
 }
 
 :root.dark {
-	--bgcolor: #101010;
-	--bgcolor-off: #373737;
+	--bgcolor: #040404;
+	--bgcolor-off: #1f1f1f;
 
-	--secondaryColor: #1c1c1c;
+	--secondaryColor: #101010;
+	--secondaryColor-off: #3b3b3b;
+
 	--tertiaryColor: #c6dc47;
 
 	--txtcolor: #efefef;
@@ -51,7 +58,8 @@ CSS VARIABLES
 	--hover-anchor-alt: #b9ad55;
 
 	--success-color: #03B680;
-	--error-required: #FF5757;
+	--error-required: #ff4c4c;
+	--error-required-off: #ff6c6c;
 
 	--interactions-color: #313131;
 	--interactions-text-placeholder-color: #B6B6B6;
