@@ -44,7 +44,8 @@
 				<!-- locandina_end -->
 
 				<label for="locandina">Nuova locandina</label>
-				<input type="file" name="locandina" id="locandina" />
+				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" onchange="validateFileUpload();" />
+				<p id="locandina-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
 				<legend>Azioni</legend>

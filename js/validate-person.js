@@ -6,7 +6,7 @@ function validatePerson() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validatePersonName() && validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates()) ) {
+		if ( !(validatePersonName() && validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates() && validateFileUpload()) ) {
 			event.preventDefault();
 		}
 	});
@@ -127,6 +127,34 @@ function comparePersonDates() {
 		removeErrorMessage(id);
 	}
 
+	return true;
+}
+
+/*
+ * Valida l'immagine caricata.
+ */
+function validateFileUpload() {
+	var id = 'immagine';
+	var input = document.forms['gestione'][id];
+	const maxUploadSize = 1572864; // 1.5 MB (base 2)
+	const allowedMimeTypes = ["image/jpeg", "image/png", "image/webp"];
+
+	if (input.files.length > 0) {
+		var file = input.files[0];
+		// Filtro MIME type per <input> non ha supporto completo. Controlla MIME
+		if (! allowedMimeTypes.includes(file.type) ) {
+			showErrorMessage(id, "Il <span lang=\"en\">file</span> selezionato non è un'immagine <abbr>JPG</abbr>, <abbr>PNG</abbr> o <abbr>WEBP</abbr>." );
+			return false;
+		}
+
+		// È un'immagine. Controlla dimensioni
+		var size = file.size;
+		if (size > maxUploadSize) {
+			showErrorMessage(id, "L'immagine caricata ha dimensione di " + returnFileSize(file.size) + ". Il limite massimo di caricamento è " + returnFileSize(maxUploadSize) + "." );
+			return false;
+		}
+	}
+	removeErrorMessage(id);
 	return true;
 }
 
