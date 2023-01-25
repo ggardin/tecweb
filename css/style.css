@@ -365,9 +365,13 @@ THEME TOGGLE
 }
 
 #themeToggle svg .sun { fill: transparent; }
-#themeToggle svg .moon { fill: var(--tertiaryColor);  }
+#themeToggle svg .moon { fill: var(--tertiaryColor); }
+#themeToggle:hover svg .moon { fill: var(--tertiaryColor-off); }
+#themeToggle:focus svg .moon { fill: var(--tertiaryColor-off); }
 
 html.dark #themeToggle svg .sun { fill: var(--tertiaryColor); }
+html.dark #themeToggle:hover svg .sun { fill: var(--tertiaryColor-off); }
+html.dark #themeToggle:focus svg .sun { fill: var(--tertiaryColor-off); }
 html.dark #themeToggle svg .moon { fill: transparent; }
 
 /*
