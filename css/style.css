@@ -987,7 +987,7 @@ PERSON/COLLECTION/LIST PAGES
 #gestione .delete:not(.checkbox-pill):hover,
 #gestione .delete:not(.checkbox-pill):focus {
 	color: var(--secondaryColor);
-	background-color: var(--error-required);
+	background-color: var(--error-required-off);
 }
 
 #gestione .add:hover,
