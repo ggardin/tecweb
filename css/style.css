@@ -958,16 +958,17 @@ USER LISTS PAGE
 	height: 2em;
 }
 
+
+
 /*
 ==============
-GESTIONE
+PERSON/COLLECTION/LIST PAGES
 ==============
 */
 
 #gestione {
 	max-width: var(--auth-form-width);
 	margin: auto;
-
 }
 
 #gestione fieldset {
@@ -979,14 +980,21 @@ GESTIONE
 }
 
 #gestione #delete {
-	background-color: red;
+	background-color: var(--error-required);
+}
+#gestione #delete:hover,
+#gestione #delete:focus,
+#gestione .delete:not(.checkbox-pill):hover,
+#gestione .delete:not(.checkbox-pill):focus {
+	color: var(--secondaryColor);
+	background-color: var(--error-required);
 }
 
-/*
-==============
-PERSON/COLLECTION PAGE
-==============
-*/
+#gestione .add:hover,
+#gestione .add:focus {
+	color: var(--secondaryColor);
+	background-color: var(--success-color);
+}
 
 #person-data,
 #collection-data {
@@ -1030,6 +1038,26 @@ PERSON/COLLECTION PAGE
 	border-radius: var(--border-radius);
 }
 
+.nation > *:not(:last-child),
+.crew-member > *:not(:last-child) {
+	margin-bottom: 0.25em;
+}
+
+.crew-member,
+.nation {
+	display: block;
+	margin-top: 1em;
+	border-top: 1px solid var(--bgcolor-off);
+	padding-top: 1em;
+}
+
+#crew .crew-member:last-of-type,
+#nations .nation:last-of-type {
+	margin-bottom: 1em;
+	border-bottom: 1px solid var(--bgcolor-off);
+	padding-bottom: 1em;
+}
+
 /*
 ==============
 ASIDE IMAGE
@@ -1068,14 +1096,6 @@ form textarea.invalid {
 	select[multiple] {
 		display: block;
 	}
-}
-
-.crew-member,
-.nation {
-	display: block;
-	margin-top: 1em;
-	border-top: 1px solid var(--bgcolor-off);
-	padding-top: 1em;
 }
 
 .checkbox-pills {
