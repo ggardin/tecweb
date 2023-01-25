@@ -360,10 +360,6 @@ THEME TOGGLE
 	cursor: pointer;
 }
 
-#themeToggle svg {
-	fill: none;
-}
-
 #themeToggle svg .sun { fill: transparent; }
 #themeToggle svg .moon { fill: var(--tertiaryColor); }
 #themeToggle:hover svg .moon { fill: var(--tertiaryColor-off); }
