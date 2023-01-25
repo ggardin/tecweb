@@ -1164,12 +1164,17 @@ textarea {
 }
 
 button[type=submit] {
-	color: var(--bgcolor);
+	color: var(--secondaryColor);
 	background-color: var(--tertiaryColor);
 	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
 }
+button[type=submit]:hover,
+button[type=submit]:focus {
+	background-color: var(--tertiaryColor-off);
+}
+
 
 /*
 ==============
