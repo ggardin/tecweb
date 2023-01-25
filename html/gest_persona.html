@@ -28,7 +28,7 @@
 			<fieldset>
 				<legend>Informazioni</legend>
 				<label for="nome">Nome</label>
-				<input id="nome" name="nome" value="@@nome@@" onblur="validatePersonName();" oninput="validatePersonName();" required autocomplete="off" maxlength="50" />
+				<input id="nome" name="nome" value="@@nome@@" oninput="validatePersonName();" required autocomplete="off" maxlength="50" />
 				<p id="nome-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="gender"><span lang="en">Gender</span></label>
@@ -50,11 +50,11 @@
 				<input type="file" name="immagine" id="immagine" />
 
 				<label for="data_nascita">Data di nascita</label>
-				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2099-12-31" value="@@data_nascita@@" onblur="validatePersonDateOfBirth();comparePersonDates();" />
+				<input type="date" id="data_nascita" name="data_nascita" min="1800-01-01" max="2099-12-31" value="@@data_nascita@@" onchange="validatePersonDateOfBirth();comparePersonDates();" />
 				<p id="data_nascita-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data_morte">Data di morte</label>
-				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2099-12-31" value="@@data_morte@@" onblur="validatePersonDateOfDeath();comparePersonDates();" />
+				<input type="date" id="data_morte" name="data_morte" min="1800-01-01" max="2099-12-31" value="@@data_morte@@" onchange="validatePersonDateOfDeath();comparePersonDates();" />
 				<p id="data_morte-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 			</fieldset>
