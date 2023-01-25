@@ -139,7 +139,7 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="titolo_originale">Titolo originale</label>
-				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" onblur="validateMovieOriginalTitle();" oninput="validateMovieOriginalTitle();" maxlength="200" />
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" oninput="validateMovieOriginalTitle();" maxlength="200" />
 				<p id="titolo_originale-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="stato">Stato</label>
@@ -150,11 +150,11 @@
 				</select>
 
 				<label for="budget"><span lang="en">Budget</span> (in Dollari)</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" onblur="validateMovieBudget();" oninput="validateMovieBudget();" />
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" oninput="validateMovieBudget();" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="incassi">Incassi (in Dollari)</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" onblur="validateMovieBoxOfficeEarnings();" oninput="validateMovieBoxOfficeEarnings();" />
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" oninput="validateMovieBoxOfficeEarnings();" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
