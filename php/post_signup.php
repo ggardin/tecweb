@@ -1,10 +1,10 @@
 <?php
 
-require_once("php/tools.php");
-require_once("php/database.php");
+require_once("tools.php");
+require_once("database.php");
 
 if (isset($_SESSION["id"])) {
-	header("location: user.php");
+	header("location: ../user.php");
 	exit();
 }
 
@@ -32,7 +32,7 @@ if ($password != $password_confirm) {
 
 if ($err) {
 	$_SESSION["error"] = $err;
-	header("location: signup.php");
+	header("location: ../signup.php");
 	exit();
 }
 
@@ -56,11 +56,11 @@ try {
 if ($res && !empty($login)) {
 	$_SESSION["id"] = $login["id"];
 	$_SESSION["is_admin"] = $login["is_admin"];
-	header("location: user.php");
+	header("location: ../user.php");
 	exit();
 } else {
 	$_SESSION["error"] = ["Questo [en]username[/en] è in uso da un altro utente. Scegline uno diverso."];
-	header("location: signup.php");
+	header("location: ../signup.php");
 	exit();
 }
 

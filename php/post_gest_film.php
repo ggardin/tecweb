@@ -1,10 +1,10 @@
 <?php
 
-require_once("php/tools.php");
-require_once("php/database.php");
+require_once("tools.php");
+require_once("database.php");
 
 if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
-	header ("location: login.php");
+	header ("location: ../login.php");
 	exit();
 }
 
@@ -83,7 +83,7 @@ if ($incassi != "" && (intval($incassi) <= 0)) {
 
 if ($err) {
 	$_SESSION["error"] = $err;
-	header("location: gest_film.php?id=" . $id);
+	header("location: ../gest_film.php?id=" . $id);
 	exit();
 }
 
@@ -117,6 +117,6 @@ if (! $res) {
 	$_SESSION["success"] = ["Film eliminato correttamente. Aggiungine un altro."];
 }
 
-header("location: gest_film.php" . ($id != "" ? "?id=$id": "" ));
+header("location: ../gest_film.php" . ($id != "" ? "?id=$id": "" ));
 
 ?>
