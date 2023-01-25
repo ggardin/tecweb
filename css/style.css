@@ -1213,8 +1213,10 @@ BACK TO TOP
 	justify-content: center;
 }
 
-#back-to-top:hover {
+#back-to-top.show:hover {
 	outline: none;
+	transform: scale(1.1);
+	background-color: var(--tertiaryColor-off);
 }
 
 @media (prefers-reduced-motion: no-preference) {
