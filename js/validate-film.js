@@ -90,7 +90,7 @@ function validateMovieDescription() {
 	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
 
 	// Controlla che ci sia una stringa
-	if (releaseDate == null || releaseDate == "") {
+	if (releaseDate != null || releaseDate != "") {
 		// Non c'è supporto data, controllo formato
 		if (! inputDateBrowserSupport()) {
 			const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
