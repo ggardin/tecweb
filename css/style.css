@@ -12,6 +12,7 @@ CSS VARIABLES
 	--secondaryColor-off: #d0d0d0;
 
 	--tertiaryColor: #0e5e51;
+	--tertiaryColor-off: #0a3c34;
 
 	--txtcolor: #101010;
 
@@ -48,6 +49,7 @@ CSS VARIABLES
 	--secondaryColor-off: #3b3b3b;
 
 	--tertiaryColor: #c6dc47;
+	--tertiaryColor-off: #e8ff64;
 
 	--txtcolor: #efefef;
 
@@ -358,14 +360,14 @@ THEME TOGGLE
 	cursor: pointer;
 }
 
-#themeToggle svg {
-	fill: none;
-}
-
 #themeToggle svg .sun { fill: transparent; }
-#themeToggle svg .moon { fill: var(--tertiaryColor);  }
+#themeToggle svg .moon { fill: var(--tertiaryColor); }
+#themeToggle:hover svg .moon { fill: var(--tertiaryColor-off); }
+#themeToggle:focus svg .moon { fill: var(--tertiaryColor-off); }
 
 html.dark #themeToggle svg .sun { fill: var(--tertiaryColor); }
+html.dark #themeToggle:hover svg .sun { fill: var(--tertiaryColor-off); }
+html.dark #themeToggle:focus svg .sun { fill: var(--tertiaryColor-off); }
 html.dark #themeToggle svg .moon { fill: transparent; }
 
 /*
@@ -557,6 +559,11 @@ LINK BUTTONS
 	padding: 0.5em;
 	min-height: 3em;
 	margin-top: 0.5em;
+}
+
+.link-button:hover,
+.link-button:focus {
+	background-color: var(--secondaryColor-off);
 }
 
 .link-button.edit {
@@ -951,16 +958,17 @@ USER LISTS PAGE
 	height: 2em;
 }
 
+
+
 /*
 ==============
-GESTIONE
+PERSON/COLLECTION/LIST PAGES
 ==============
 */
 
 #gestione {
 	max-width: var(--auth-form-width);
 	margin: auto;
-
 }
 
 #gestione fieldset {
@@ -972,14 +980,21 @@ GESTIONE
 }
 
 #gestione #delete {
-	background-color: red;
+	background-color: var(--error-required);
+}
+#gestione #delete:hover,
+#gestione #delete:focus,
+#gestione .delete:not(.checkbox-pill):hover,
+#gestione .delete:not(.checkbox-pill):focus {
+	color: var(--secondaryColor);
+	background-color: var(--error-required-off);
 }
 
-/*
-==============
-PERSON/COLLECTION PAGE
-==============
-*/
+#gestione .add:hover,
+#gestione .add:focus {
+	color: var(--secondaryColor);
+	background-color: var(--success-color);
+}
 
 #person-data,
 #collection-data {
@@ -1023,6 +1038,26 @@ PERSON/COLLECTION PAGE
 	border-radius: var(--border-radius);
 }
 
+.nation > *:not(:last-child),
+.crew-member > *:not(:last-child) {
+	margin-bottom: 0.25em;
+}
+
+.crew-member,
+.nation {
+	display: block;
+	margin-top: 1em;
+	border-top: 1px solid var(--bgcolor-off);
+	padding-top: 1em;
+}
+
+#crew .crew-member:last-of-type,
+#nations .nation:last-of-type {
+	margin-bottom: 1em;
+	border-bottom: 1px solid var(--bgcolor-off);
+	padding-bottom: 1em;
+}
+
 /*
 ==============
 ASIDE IMAGE
@@ -1063,14 +1098,6 @@ form textarea.invalid {
 	}
 }
 
-.crew-member,
-.nation {
-	display: block;
-	margin-top: 1em;
-	border-top: 1px solid var(--bgcolor-off);
-	padding-top: 1em;
-}
-
 .checkbox-pills {
 	display: flex;
 	flex-wrap: wrap;
@@ -1088,6 +1115,8 @@ form textarea.invalid {
 	border: 1px solid var(--bgcolor-off);
 	padding-left: 0.5em;
 }
+
+.checkbox-pill > * { cursor: pointer; }
 
 .checkbox-pill label {
 	padding: 0.5em;
@@ -1150,19 +1179,27 @@ input, textarea, select {
 	opacity: 1;
 }
 
+button, input[type=button] {
+	cursor: pointer;
+}
+
 textarea {
 	min-height: 5em;
 	resize: vertical;
 }
 
 button[type=submit] {
-	color: var(--bgcolor);
+	color: var(--secondaryColor);
 	background-color: var(--tertiaryColor);
-	cursor: pointer;
 	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
 }
+button[type=submit]:hover,
+button[type=submit]:focus {
+	background-color: var(--tertiaryColor-off);
+}
+
 
 /*
 ==============
@@ -1211,8 +1248,10 @@ BACK TO TOP
 	justify-content: center;
 }
 
-#back-to-top:hover {
+#back-to-top.show:hover {
 	outline: none;
+	transform: scale(1.1);
+	background-color: var(--tertiaryColor-off);
 }
 
 @media (prefers-reduced-motion: no-preference) {
