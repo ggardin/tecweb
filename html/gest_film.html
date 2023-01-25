@@ -47,11 +47,11 @@
 				<input type="file" name="locandina" id="locandina" />
 
 				<label for="data">Data rilascio</label>
-				<input type="date" id="data" name="data" min="1800-01-01" max="2099-12-31" value="@@data_rilascio@@" onblur="validateMovieReleaseDate();" />
+				<input type="date" id="data" name="data" min="1800-01-01" max="2099-12-31" value="@@data_rilascio@@" onchange="validateMovieReleaseDate();" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="durata">Durata (in minuti)</label>
-				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" onblur="validateMovieRuntime();" aria-describedby="durata-hint" />
+				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" oninput="validateMovieRuntime();" aria-describedby="durata-hint" />
 				<p id="durata-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 
@@ -63,7 +63,7 @@
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
 					<label for="crew-person@@crew_person_label_id@@">Nome e cognome</label>
-					<input autocomplete="off" id="crew-person@@crew_person_input_id@@" type="text" list="lista-persone" value="@@crew_person_input_value@@" oninput="validatePersonName(this);" />
+					<input autocomplete="off" id="crew-person@@crew_person_input_id@@" type="text" list="lista-persone" value="@@crew_person_input_value@@" onchange="validatePersonName(this);" />
 					<p id="crew-person@@crew_person_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 					<input id="crew-person@@crew_person_hidden_id@@-id" @@crew_person_hidden_name@@ type="hidden" value="@@crew_person_hidden_value@@"/>
 
@@ -99,7 +99,7 @@
 				<p id="genre-hint" role="status">Non è stato selezionato alcun genere.</p>
 				<!-- genere_start -->
 				<div class="checkbox-pill">
-					<input type="checkbox" id="genre-@@genere_input_id@@" name="genere[]" value="@@id@@" onclick="updateGenresHint();" @@checked@@ />
+					<input type="checkbox" id="genre-@@genere_input_id@@" name="genere[]" value="@@id@@" onchange="updateGenresHint();" @@checked@@ />
 					<label for="genre-@@genere_label_id@@">@@genere_label_nome@@</label>
 				</div>
 				<!-- genere_end -->
@@ -114,7 +114,7 @@
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->
 					<label for="nation@@nation_label_id@@">Codice del Paese</label>
-					<input autocomplete="off" id="nation@@nation_input_id@@" type="text" list="lista-paesi" value="@@nation_input_value@@" oninput="validateNationName(this);" />
+					<input autocomplete="off" id="nation@@nation_input_id@@" type="text" list="lista-paesi" value="@@nation_input_value@@" onchange="validateNationName(this);" />
 					<p id="nation@@nation_hint@@-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 					<input id="nation@@nation_hidden_id@@-id" @@nation_hidden_name@@ type="hidden" value="@@nation_hidden_value@@" />
 					<input type="button" onclick="removeNation(this);" value="Elimina" />
