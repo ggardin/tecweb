@@ -61,7 +61,7 @@ function toggleMenu() {
 }
 
 /*
- * Gestisce botton back to top
+ * Gestisce bottone back to top
  */
 
 let previousScrollPosition = 10;
