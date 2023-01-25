@@ -452,7 +452,7 @@ INDEX
 }
 
 .container > .text {
-	flex: 1 0;
+	flex: 1 0 15em;
 }
 
 .product-image {
