@@ -91,30 +91,27 @@ function validateMovieDescription() {
 
 	// Controlla che ci sia una stringa
 	if (releaseDate == null || releaseDate == "") {
-		showErrorMessage(id, 'Data di rilascio non inserita.');
-		return false;
-	}
+		// Non c'è supporto data, controllo formato
+		if (! inputDateBrowserSupport()) {
+			const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
+			if (! yearRegex.test(releaseDate)) {
+				showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
+				return false;
+			}
+		}
 
-	// Non c'è supporto data, controllo formato
-	if (! inputDateBrowserSupport()) {
-		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
-		if (! yearRegex.test(releaseDate)) {
-			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
+		var dateOfRelease = new Date(releaseDate);
+
+		// Controlla se la data è inferiore al limite minimo
+		if (dateOfRelease.getTime() < dateLowerBound.getTime()) {
+			showErrorMessage(id, 'Data immessa antecedente al limite minimo.');
 			return false;
 		}
-	}
-
-	var dateOfRelease = new Date(releaseDate);
-
-	// Controlla se la data è inferiore al limite minimo
-	if (dateOfRelease.getTime() < dateLowerBound.getTime()) {
-		showErrorMessage(id, 'Data immessa antecedente al limite minimo.');
-		return false;
-	}
-	// Controlla se la data è superiore al limite massimo
-	if (dateOfRelease.getTime() > dateUpperBound.getTime()) {
-		showErrorMessage(id, 'Data immessa successiva al limite massimo.');
-		return false;
+		// Controlla se la data è superiore al limite massimo
+		if (dateOfRelease.getTime() > dateUpperBound.getTime()) {
+			showErrorMessage(id, 'Data immessa successiva al limite massimo.');
+			return false;
+		}
 	}
 
 	removeErrorMessage(id);
