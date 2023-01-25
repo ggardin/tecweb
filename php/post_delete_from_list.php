@@ -1,12 +1,12 @@
 <?php
 
-require_once("php/tools.php");
-require_once("php/database.php");
+require_once("tools.php");
+require_once("database.php");
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 
 if ($user_id == "") {
-	header("location: login.php");
+	header("location: ../login.php");
 	exit();
 }
 
@@ -21,7 +21,7 @@ if ($film_id == "" || $list_id == "") {
 try {
 	$connessione = new Database();
 	$res = $connessione->isListaDiUtente($list_id, $user_id);
-	if ($res) $res = $connessione->insertFilmInLista($list_id, $film_id);
+	if ($res) $res = $connessione->deleteFromList($list_id, $film_id);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -30,10 +30,10 @@ try {
 }
 
 if (! $res)
-	$_SESSION["error"] = ["Errore durante l'inserimento nella lista."];
+	$_SESSION["error"] = ["Errore durante la rimozione dalla lista."];
 else
-	$_SESSION["success"] = ["Aggiunto correttamente alla lista."];
+	$_SESSION["success"] = ["Rimosso correttamente dalla lista."];
 
-header("location: film.php?id=" . $film_id);
+header("location: ../list.php?id=$list_id");
 
 ?>

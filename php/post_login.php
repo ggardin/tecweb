@@ -1,10 +1,10 @@
 <?php
 
-require_once("php/tools.php");
-require_once("php/database.php");
+require_once("tools.php");
+require_once("database.php");
 
 if (isset($_SESSION["id"])) {
-	header("location: user.php");
+	header("location: ../user.php");
 	exit();
 }
 
@@ -24,11 +24,11 @@ try {
 if (! empty($login)) {
 	$_SESSION["id"] = $login["id"];
 	$_SESSION["is_admin"] = $login["is_admin"];
-	header("location: user.php");
+	header("location: ../user.php");
 	exit();
 } else {
 	$_SESSION["error"] = ["Credenziali errate. Riprova."];
-	header("location: login.php");
+	header("location: ../login.php");
 	exit();
 }
 

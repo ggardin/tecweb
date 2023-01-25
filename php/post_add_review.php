@@ -1,12 +1,12 @@
 <?php
 
-require_once("php/tools.php");
-require_once("php/database.php");
+require_once("tools.php");
+require_once("database.php");
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 
 if ($user_id == "") {
-	header("location: login.php");
+	header("location: ../login.php");
 	exit();
 }
 
@@ -33,7 +33,7 @@ if (! preg_match("/^[^<>{}]*$/", $testo)) {
 
 if ($err) {
 	$_SESSION["error"] = $err;
-	header("location: film.php?id=" . $film_id);
+	header("location: ../film.php?id=" . $film_id);
 	exit();
 }
 
@@ -52,6 +52,6 @@ if (! $res)
 else
 	$_SESSION["success"] = ["Recensione inserita correttamente."];
 
-header("location: film.php?id=" . $film_id);
+header("location: ../film.php?id=" . $film_id);
 
 ?>
