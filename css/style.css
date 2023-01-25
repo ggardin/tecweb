@@ -1091,6 +1091,8 @@ form textarea.invalid {
 	padding-left: 0.5em;
 }
 
+.checkbox-pill > * { cursor: pointer; }
+
 .checkbox-pill label {
 	padding: 0.5em;
 }
@@ -1152,6 +1154,10 @@ input, textarea, select {
 	opacity: 1;
 }
 
+button, input[type=button] {
+	cursor: pointer;
+}
+
 textarea {
 	min-height: 5em;
 	resize: vertical;
@@ -1160,7 +1166,6 @@ textarea {
 button[type=submit] {
 	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
-	cursor: pointer;
 	border: transparent;
 	font-weight: 600;
 	font-size: 1.2em;
