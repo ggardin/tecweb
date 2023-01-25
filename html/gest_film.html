@@ -44,7 +44,8 @@
 				<!-- locandina_end -->
 
 				<label for="locandina">Nuova locandina</label>
-				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" />
+				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" onchange="validateFileUpload();" />
+				<p id="locandina-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data">Data rilascio</label>
 				<input type="date" id="data" name="data" min="1800-01-01" max="2099-12-31" value="@@data_rilascio@@" onchange="validateMovieReleaseDate();" />
