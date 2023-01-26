@@ -112,8 +112,10 @@ if ($id != "") {
 	Tools::toHtml($film, 0);
 	Tools::replaceAnchor($page, "nome", $film["nome"]);
 	Tools::replaceAnchor($page, "descrizione", (isset($film["descrizione"]) ? $film["descrizione"] : ""));
-	$immagine = (isset($film["locandina"]) ? ("pics/w200_" . $film["locandina"] . ".webp") : "img/placeholder.svg");
-	Tools::replaceAnchor($page, "locandina", $immagine);
+	if (isset($film["locandina"]))
+		Tools::replaceAnchor($page, "locandina", ("pics/w200_" . $film["locandina"] . ".webp"));
+	else
+		Tools::replaceSection($page, "locandina", "");
 	Tools::replaceAnchor($page, "data_rilascio", (isset($film["data_rilascio"]) ? $film["data_rilascio"] : ""));
 	Tools::replaceAnchor($page, "durata", (isset($film["durata"]) ? $film["durata"] : ""));
 

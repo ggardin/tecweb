@@ -40,8 +40,10 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "gest_id", $id);
 	Tools::toHtml($persona, 0);
 	Tools::replaceAnchor($page, "nome", $persona["nome"]);
-	$immagine = (isset($persona["immagine"]) ? ("pics/w200_" . $persona["immagine"] . ".webp") : "img/placeholder.svg");
-	Tools::replaceAnchor($page, "immagine", $immagine);
+	if (isset($persona["immagine"]))
+		Tools::replaceAnchor($page, "immagine", ("pics/w200_" . $persona["immagine"] . ".webp"));
+	else
+		Tools::replaceSection($page, "immagine", "");
 	Tools::replaceAnchor($page, "data_nascita", (isset($persona["data_nascita"]) ? $persona["data_nascita"] : ""));
 	Tools::replaceAnchor($page, "data_morte", (isset($persona["data_morte"]) ? $persona["data_morte"] : ""));
 	Tools::replaceAnchor($page, "submit_value", "modifica");

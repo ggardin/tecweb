@@ -40,8 +40,10 @@ if ($id != "") {
 	Tools::toHtml($collezione, 0);
 	Tools::replaceAnchor($page, "nome", $collezione["nome"]);
 	Tools::replaceAnchor($page, "descrizione", (isset($collezione["descrizione"]) ? $collezione["descrizione"] : ""));
-	$immagine = (isset($collezione["locandina"]) ? ("pics/w200_" . $collezione["locandina"] . ".webp") : "img/placeholder.svg");
-	Tools::replaceAnchor($page, "locandina", $immagine);
+	if (isset($collezione["locandina"]))
+		Tools::replaceAnchor($page, "locandina", ("pics/w200_" . $collezione["locandina"] . ".webp"));
+	else
+		Tools::replaceSection($page, "locandina", "");
 	Tools::replaceAnchor($page, "submit_value", "modifica");
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
