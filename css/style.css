@@ -183,6 +183,9 @@ SR/KB USERS
 	clip: auto;
 	padding: 0.5em;
 }
+.skip-to-content:hover {
+	background-color: var(--tertiaryColor-off);
+}
 
 /*
 ==============
