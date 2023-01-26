@@ -36,7 +36,7 @@ CSS VARIABLES
 	--content-width: 60em;
 	--content-reduced-width: 30em;
 	--content-padding: 1em;
-	--border-radius: 8px;
+	--border-radius: 0.5rem;
 	--auth-form-width: 35em;
 	--header-height: 3.5em;
 }
@@ -136,7 +136,7 @@ a {
 
 a:hover,
 a:focus {
-	outline: 2px solid var(--bgcolor-off);
+	outline: 0.2rem solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 	color: var(--hover-anchor);
 }
@@ -306,7 +306,7 @@ FOOTER
 
 #page-footer > div:not(:last-child) {
 	flex: 1 0 auto;
-	width: 200px;
+	width: 12.5em;
 	padding: 1em 0;
 }
 
@@ -347,7 +347,7 @@ TMDB ATTRIBUTION
 */
 
 .tmdb-attribution p {
-	flex: 1 0 100px;
+	flex: 1 0 6.25em;
 }
 
 .tmdb-attribution img {
@@ -414,7 +414,7 @@ SEARCH BAR
 	display: flex;
 	border-radius: var(--border-radius);
 	overflow: hidden;
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 }
 
 #search input,
@@ -428,7 +428,7 @@ SEARCH BAR
 }
 
 #search select {
-	--search-input-border: 1px solid var(--bgcolor-off);
+	--search-input-border: 0.2rem solid var(--bgcolor-off);
 	flex: 1 0;
 	border-left: var(--search-input-border);
 }
@@ -565,7 +565,7 @@ LINK BUTTONS
 	align-items: center;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 	padding: 0.5em;
 	min-height: 3em;
 	margin-top: 0.5em;
@@ -612,7 +612,7 @@ USER PAGE
 }
 
 #user-additional-actions {
-	border-top: 1px solid var(--bgcolor-off);
+	border-top: 0.2em solid var(--bgcolor-off);
 	padding-top: 1.5em;
 	margin: 1.5em auto;
 	max-width: var(--content-reduced-width);
@@ -702,7 +702,7 @@ MOVIE PAGE
 #movie-details .pills dd > a,
 #movie-details .pills li > a {
 	padding: 0.5em;
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 	background-color: var(--secondaryColor);
 }
@@ -901,7 +901,7 @@ table caption {
 
 table th, td {
 	padding: 0.5em;
-	border: 2px solid var(--bgcolor-off);
+	border: 0.4em solid var(--bgcolor-off);
 }
 
 tbody tr:nth-child(odd) {
@@ -921,7 +921,7 @@ tbody tr:nth-child(odd) {
 	display: flex;
 	flex-direction: column-reverse;
 	align-content: center;
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 	padding: 1em;
 	background-color: var(--secondaryColor);
@@ -1044,7 +1044,7 @@ PERSON/COLLECTION/LIST PAGES
 
 .person-page .pill {
 	padding: 0.2em 0.5em;
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 	border-radius: var(--border-radius);
 }
 
@@ -1057,14 +1057,14 @@ PERSON/COLLECTION/LIST PAGES
 .nation {
 	display: block;
 	margin-top: 1em;
-	border-top: 1px solid var(--bgcolor-off);
+	border-top: 0.2em solid var(--bgcolor-off);
 	padding-top: 1em;
 }
 
 #crew .crew-member:last-of-type,
 #nations .nation:last-of-type {
 	margin-bottom: 1em;
-	border-bottom: 1px solid var(--bgcolor-off);
+	border-bottom: 0.2em solid var(--bgcolor-off);
 	padding-bottom: 1em;
 }
 
@@ -1122,7 +1122,7 @@ form textarea.invalid {
 	width: fit-content;
 	background-color: var(--secondaryColor);
 	border-radius: var(--border-radius);
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 	padding-left: 0.5em;
 }
 
@@ -1171,7 +1171,7 @@ fieldset > .label {
 
 fieldset, input, textarea, button, select {
 	border-radius: var(--border-radius);
-	border: 1px solid var(--bgcolor-off);
+	border: 0.2rem solid var(--bgcolor-off);
 }
 
 input, textarea, button, select {
@@ -1220,7 +1220,7 @@ SERVER MESSAGES
 #server-message {
 	margin: 1em 0;
 	padding: 1em;
-	border: 2px solid;
+	border: 0.4em solid;
 	border-radius: var(--border-radius);
 	list-style-type: none;
 }
