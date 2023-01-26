@@ -182,7 +182,7 @@ class Tools {
 			return [false, "Errore durante l'upload dell'immagine."];
 
 		// https://www.w3schools.com/php/php_file_upload.asp
-		$target_dir = "pics/";
+		$target_dir = __DIR__ . "/../pics/";
 
 		if (! getimagesize($file["tmp_name"])) {
 			unlink ($file["tmp_name"]);
