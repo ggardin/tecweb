@@ -253,6 +253,11 @@ HEADER
 	padding: 0 0 0 0.5em;
 }
 
+#page-header #logo {
+	padding: 0.5em;
+	margin: -0.5em;
+}
+
 #logo path,
 #accountButton path {
 	fill: var(--txtcolor);
