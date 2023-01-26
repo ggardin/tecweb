@@ -137,10 +137,8 @@ if ($tipo == "film") {
 		$res .= $t;
 	}
 	Tools::replaceSection($page, "paese", $res);
-}  else {
+} else
 	Tools::replaceSection($page, "filtri", "");
-	Tools::replaceSection($page, "filtrisr", "");
-}
 
 if (!empty($cerca[0])) {
 	$tot = $cerca[1]["n"];
