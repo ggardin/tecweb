@@ -175,13 +175,18 @@ SR/KB USERS
 }
 
 .skip-to-content:focus {
-	color: var(--bgcolor);
 	background-color: var(--tertiaryColor);
 	z-index: 999;
 	width: auto;
 	height: auto;
 	clip: auto;
 	padding: 0.5em;
+}
+.skip-to-content:focus:visited {
+	color: var(--secondaryColor);
+}
+.skip-to-content:hover {
+	background-color: var(--tertiaryColor-off);
 }
 
 /*
