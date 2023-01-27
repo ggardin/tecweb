@@ -21,7 +21,7 @@ img.print, svg.print {
 }
 
 #movie-details > p{
-	break-inside: avoid;	
+	break-inside: avoid;
 }
 
 #hero-image > img {
@@ -30,7 +30,7 @@ img.print, svg.print {
 }
 
 table, td, th{
-	border: 1px solid;
+	border: 0.05em solid;
 	border-collapse: collapse;
 }
 
