@@ -176,6 +176,7 @@ SR/KB USERS
 }
 
 .skip-to-content:focus {
+	color: var(--secondaryColor);
 	background-color: var(--tertiaryColor);
 	z-index: 999;
 	width: auto;
