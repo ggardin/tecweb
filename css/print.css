@@ -21,7 +21,7 @@ img.print, svg.print {
 }
 
 #movie-details > p{
-	break-inside: avoid;	
+	break-inside: avoid;
 }
 
 #hero-image > img {
@@ -38,18 +38,25 @@ table, td, th{
 	display: block;
 }
 
-img, svg, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
-.skip-to-content {
-	display: none;
-}
-
-main::after {
+main::before {
 	content: "soundstage";
 	display: block;
-	text-align: center;
 }
 
+img.print, svg.print {
+	page-break-inside: avoid;
+	break-inside: avoid;
+}
+
+@media print {
+	#auth_form, #gestione, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
+	.skip-to-content, #back-to-top {
+		display: none;
+	}
+}
+
+
 @page {
-	margin: 2cm;
+	margin: 1cm;
 	size: A4;
 }
