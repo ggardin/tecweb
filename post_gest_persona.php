@@ -1,10 +1,10 @@
 <?php
 
-require_once("tools.php");
-require_once("database.php");
+require_once("php/tools.php");
+require_once("php/database.php");
 
 if (! isset($_SESSION["id"]) || $_SESSION["is_admin"] == 0) {
-	header ("location: ../login.php");
+	header ("location: login.php");
 	exit();
 }
 
@@ -78,7 +78,7 @@ if ($dn && $dm) {
 
 if ($err) {
 	$_SESSION["error"] = $err;
-	header("location: ../gest_persona.php?id=" . $id);
+	header("location: gest_persona.php?id=" . $id);
 	exit();
 }
 
@@ -109,6 +109,6 @@ if (! $res) {
 	$_SESSION["success"] = ["Persona eliminata correttamente. Aggiungine un'altra."];
 }
 
-header("location: ../gest_persona.php" . ($id != "" ? "?id=$id": "" ));
+header("location: gest_persona.php" . ($id != "" ? "?id=$id": "" ));
 
 ?>
