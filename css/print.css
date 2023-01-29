@@ -1,32 +1,31 @@
 @font-face {
-	font-family: "Spectral";
-	src: url("../fonts/spectral") format("truetype");
-	font-weight: 200 800;
+	font-family: "Frank Ruhl Libre";
+	src: url("../fonts/FrankRuhlLibre-Variable.ttf") format("truetype");
+	font-weight: 100 900;
 }
 
 * {
-	background-image: none !important;
+	font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+	line-height: 1.5em;
+	text-decoration: none;
+	color: black;
+	background-image: none;
 	break-before: avoid;
 }
 
-html, body {
-	font-size: 12pt;
-	font-family: "Spectral", "Times New Roman", serif;
-	line-height: 1.5em;
-}
-
-img.print, svg.print {
-	display: block;
-	max-width: 100%;
-}
-
 #movie-details > p{
-	break-inside: avoid;	
+	break-inside: avoid;
 }
 
-#hero-image > img {
+img {
+	width: 25%;
 	display: block;
-	width: 50%;
+	page-break-inside: avoid;
+	break-inside: avoid;
+}
+
+svg {
+	display: none;
 }
 
 table, td, th{
@@ -34,22 +33,34 @@ table, td, th{
 	border-collapse: collapse;
 }
 
-#auth_form, #gestione{
-	display: block;
+a:after {
+	content: " [" attr(href) "]";
+	font-size: 9pt;
 }
 
-img, svg, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
-.skip-to-content {
-	display: none;
+main::before {
+	content: url(../img/logo.svg);
+	display: block;
+	width: 1.5cm;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 main::after {
 	content: "soundstage";
 	display: block;
-	text-align: center;
 }
 
+#auth_form, #gestione, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate,
+.skip-to-content, #back-to-top {
+	display: none;
+}
+
+/*.sr-only {*/
+/*	display: block;*/
+/*}*/
+
 @page {
-	margin: 2cm;
+	margin: 1cm;
 	size: A4;
 }
