@@ -21,7 +21,7 @@ img.print, svg.print {
 }
 
 #movie-details > p{
-	break-inside: avoid;	
+	break-inside: avoid;
 }
 
 #hero-image > img {
