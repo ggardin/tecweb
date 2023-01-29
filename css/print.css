@@ -6,8 +6,8 @@
 
 * {
 	font-family: "Frank Ruhl Libre", "Times New Roman", serif;
-	/*font-size: 12pt;*/
 	line-height: 1.5em;
+	text-decoration: none;
 	color: black;
 	background-image: none;
 	break-before: avoid;
@@ -43,6 +43,14 @@ a:after {
 }
 
 main::before {
+	content: url(../img/logo.svg);
+	display: block;
+	width: 1.5cm;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+main::after {
 	content: "soundstage";
 	display: block;
 }
