@@ -1221,10 +1221,13 @@ SERVER MESSAGES
 
 #server-message {
 	margin: 1em 0;
-	padding: 1em;
-	border: 0.4em solid;
+	border: 0.2em solid;
 	border-radius: var(--border-radius);
 	list-style-type: none;
+}
+
+#server-message li {
+	padding: 0.5em;
 }
 
 #server-message.success {
