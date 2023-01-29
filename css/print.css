@@ -38,10 +38,6 @@ a:after {
 	font-size: 9pt;
 }
 
-#auth_form, #gestione{
-	display: block;
-}
-
 main::before {
 	content: url(../img/logo.svg);
 	display: block;
@@ -55,10 +51,14 @@ main::after {
 	display: block;
 }
 
-#auth_form, #gestione, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate, .sr-only,
+#auth_form, #gestione, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate,
 .skip-to-content, #back-to-top {
 	display: none;
 }
+
+/*.sr-only {*/
+/*	display: block;*/
+/*}*/
 
 @page {
 	margin: 1cm;
