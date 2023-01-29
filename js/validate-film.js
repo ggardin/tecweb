@@ -6,7 +6,7 @@ function validateMovie() {
 	let form = document.getElementById("gestione");
 
 	form.addEventListener("submit", function (event) {
-		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateFileUpload()) ) {
+		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateFileUpload() && invalidInstanceCrew == 0 && invalidInstanceNations == 0) ) {
 			event.preventDefault();
 		}
 	});
@@ -176,6 +176,8 @@ var instanceCrew = 0;
 var instanceNations = 0;
 var clicksOnAddButtonCrew = 0;
 var clicksOnAddButtonNation = 0;
+var invalidInstanceCrew = 0;
+var invalidInstanceNations = 0;
 
 /*
  * Ottiene il numero di membri della crew e nazioni già presenti
@@ -258,6 +260,8 @@ function addNewCrewMember(element) {
  * Rimuove il membro della crew corrispondente.
  */
 function removeCrewMember(element) {
+	if (element.parentNode.getElementsByTagName('input')[1].value == -1)
+		invalidInstanceCrew -= 1;
 	element.parentNode.remove();
 	instanceCrew--;
 	updateCrewCounter();
@@ -343,6 +347,8 @@ function addNewNation(element) {
  * Rimuove il membro della nation corrispondente.
  */
 function removeNation(element) {
+	if (element.parentNode.getElementsByTagName('input')[1].value == -1)
+		invalidInstanceNations -= 1;
 	element.parentNode.remove();
 	instanceNations--;
 	updateNationsCounter();
@@ -428,7 +434,7 @@ function validateFromDatalist(element, name) {
 	}
 
 	if (!found) {
-		hiddenID.value = null;
+		hiddenID.value = -1;
 		showErrorMessage(id, "Il nome della " + name + " non è valido.");
 		return false;
 	}
@@ -437,11 +443,17 @@ function validateFromDatalist(element, name) {
 }
 
 function validatePersonName(element) {
-	return validateFromDatalist(element, "persona");
+	if (document.getElementById(element.getAttribute('id') + '-id').value == -1)
+		invalidInstanceCrew -= 1;
+	if (! validateFromDatalist(element, "persona"))
+		invalidInstanceCrew += 1;
 }
 
 function validateNationName(element) {
-	return validateFromDatalist(element, "nazione");
+	if (document.getElementById(element.getAttribute('id') + '-id').value == -1)
+		invalidInstanceNations -= 1;
+	if (! validateFromDatalist(element, "nazione"))
+		invalidInstanceNations += 1;
 }
 
 /*
