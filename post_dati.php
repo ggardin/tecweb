@@ -1,12 +1,12 @@
 <?php
 
-require_once("tools.php");
-require_once("database.php");
+require_once("php/tools.php");
+require_once("php/database.php");
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 
 if ($user_id == "") {
-	header("location: ../login.php");
+	header("location: login.php");
 	exit();
 }
 
@@ -69,7 +69,7 @@ if ($data_nascita != "") {
 
 if ($err) {
 	$_SESSION["error"] = $err;
-	header("location: ../dati.php");
+	header("location: dati.php");
 	exit();
 }
 
@@ -94,6 +94,6 @@ elseif (! $res)
 else
 	$_SESSION["success"] = ["Dati aggiornati correttamente."];
 
-header("location: ../dati.php");
+header("location: dati.php");
 
 ?>

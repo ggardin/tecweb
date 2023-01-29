@@ -1,12 +1,12 @@
 <?php
 
-require_once("tools.php");
-require_once("database.php");
+require_once("php/tools.php");
+require_once("php/database.php");
 
 $user_id = isset($_SESSION["id"]) ? $_SESSION["id"] : "";
 
 if ($user_id == "") {
-	header("location: ../login.php");
+	header("location: login.php");
 	exit();
 }
 
@@ -32,7 +32,7 @@ if ($nome == "") {
 
 if ($err) {
 	$_SESSION["error"] = $err;
-	header("location: ../gest_list.php?id=" . $id);
+	header("location: gest_list.php?id=" . $id);
 	exit();
 }
 
@@ -58,20 +58,20 @@ try {
 if (! $res) {
 	if ($submit == "aggiungi") {
 		$_SESSION["error"] = ["Esiste già una lista con questo nome"];
-		header("location: ../gest_list.php");
+		header("location: gest_list.php");
 	} else {
 		$_SESSION["success"] = ["Nessuna modifica apportata."];
-		header("location: ../list.php?id=" . $id);
+		header("location: list.php?id=" . $id);
 	}
 } elseif ($submit == "aggiungi") {
 	$_SESSION["success"] = ["Lista aggiunta correttamente."];
-	header("location: ../list.php?id=" . $id);
+	header("location: list.php?id=" . $id);
 } elseif ($submit == "modifica") {
 	$_SESSION["success"] = ["Lista modificata correttamente."];
-	header("location: ../list.php?id=" . $id);
+	header("location: list.php?id=" . $id);
 } else {
 	$_SESSION["success"] = ["Lista eliminata correttamente."];
-	header("location: ../lists.php");
+	header("location: lists.php");
 }
 
 ?>
