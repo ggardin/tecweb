@@ -115,12 +115,12 @@ table td, th{
 	text-align: right;
 }
 
-table th::before{
+table th::before {
 	content: attr(data-label) ": ";
 	float: left;
 }
 
-table th::after{
+table th::after {
 	text-align: right;
 }
 
