@@ -110,29 +110,29 @@ table thead {
 	display: none;
 }
 
-table td, th{
+table th,
+table td {
 	display: block;
 	text-align: right;
+	border: 0;
 }
 
-table th::before{
+table tr {
+	border: 0.2rem solid var(--bgcolor-off);
+}
+
+table th::before {
 	content: attr(data-label) ": ";
 	float: left;
 }
 
-table th::after{
+table th::after {
 	text-align: right;
 }
 
 table td::before {
-	/*
-	* aria-label has no advantage, it won't be read inside a table
-	content: attr(aria-label);
-	*/
 	content: attr(data-label) ": ";
 	float: left;
-	font-weight: 600;
-	border-collapse: collapse;
 }
 
 /*

@@ -896,7 +896,8 @@ table caption {
 	letter-spacing: 0.05em;
 }
 
-table th, td {
+table th,
+table td {
 	padding: 0.5em;
 	border: 0.2rem solid var(--bgcolor-off);
 }
