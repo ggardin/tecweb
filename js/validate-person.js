@@ -46,10 +46,10 @@ function validatePersonName() {
  * NB: la data divisa da "/" è un formato di localizzazione.
  *     Il browser utilizza il separatore "-".
  */
- function validatePersonDate(date, event) {
-	var id = 'data_' + event;
-	var dateLowerBound = new Date(document.forms['gestione']['data_' + event].min);
-	var dateUpperBound = new Date(document.forms['gestione']['data_' + event].max);
+ function validatePersonDate(date, eventName) {
+	var id = 'data_' + eventName;
+	var dateLowerBound = new Date(document.forms['gestione']['data_' + eventName].min);
+	var dateUpperBound = new Date(document.forms['gestione']['data_' + eventName].max);
 	var today = new Date();
 
 	// Controlla che ci sia una stringa
@@ -62,7 +62,7 @@ function validatePersonName() {
 	if (! inputDateBrowserSupport()) {
 		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 		if (! yearRegex.test(date)) {
-			showErrorMessage(id, 'Data di ' + event + ' non corretta. Usa il formato YYYY-MM-DD.');
+			showErrorMessage(id, 'Data di ' + eventName + ' non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
@@ -71,17 +71,17 @@ function validatePersonName() {
 
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfEvent.getTime() < dateLowerBound.getTime()) {
-		showErrorMessage(id, 'Data di ' + event + ' immessa antecedente al limite minimo.');
+		showErrorMessage(id, 'Data di ' + eventName + ' immessa antecedente al limite minimo.');
 		return false;
 	}
 	// Controlla se la data è superiore ad oggi
 	if (dateOfEvent.getTime() > today.getTime()) {
-		showErrorMessage(id, 'Data di ' + event + ' successiva alla data odierna.');
+		showErrorMessage(id, 'Data di ' + eventName + ' successiva alla data odierna.');
 		return false;
 	}
 	// Controlla se la data è superiore al limite massimo
 	if (dateOfEvent.getTime() > dateUpperBound.getTime()) {
-		showErrorMessage(id, 'Data di ' + event + ' immessa successiva al limite massimo.');
+		showErrorMessage(id, 'Data di ' + eventName + ' immessa successiva al limite massimo.');
 		return false;
 	}
 
