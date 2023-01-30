@@ -912,6 +912,7 @@ tbody tr:nth-child(odd) {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1em;
+	margin-bottom: 1.5em;
 }
 
 #stats-summary li {
@@ -929,6 +930,10 @@ tbody tr:nth-child(odd) {
 #stats-summary .number {
 	font-size: 3em;
 	font-weight: 600;
+}
+
+.stats-page p {
+	text-align: center;
 }
 
 .stats-page h2 {
