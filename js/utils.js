@@ -188,3 +188,15 @@ function returnFileSize(number) {
 		return `${(number / 1048576).toFixed(1)} MB`;
 	}
 }
+
+/*
+ * Helper function per registrare event listeners.
+ */
+function registerRequiredListeners() {
+	for (var id in listeners) {
+		if (!document.getElementById(id)) {
+			continue;
+		}
+		document.getElementById(id).addEventListener(listeners[id][0], listeners[id][1]);
+	}
+}
