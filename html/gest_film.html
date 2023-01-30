@@ -32,7 +32,7 @@
 				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();"maxlength="10000" >@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();" maxlength="10000" >@@descrizione@@</textarea>
 				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<!-- locandina_start -->
@@ -64,7 +64,7 @@
 			<fieldset id="crew">
 				<legend lang="en">Crew</legend>
 
-				<p id="crew-hint" role="status">Non è stato definito alcun membro.</p>
+				<p id="crew-count-hint" role="status">Non è stato definito alcun membro.</p>
 
 				<div id="crew-sample" hidden>
 					<!-- crew_sample_start -->
@@ -115,7 +115,7 @@
 			<fieldset id="nations">
 				<legend>Paesi di produzione</legend>
 
-				<p id="nation-hint" role="status">Non è stato definito alcun Paese.</p>
+				<p id="nation-count-hint" role="status">Non è stato definito alcun Paese.</p>
 
 				<div id="nation-sample" hidden>
 					<!-- nation_sample_start -->

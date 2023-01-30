@@ -273,7 +273,7 @@ function removeCrewMember(element) {
  * Aggiorna il suggerimento che riporta il numero di membri della crew.
  */
 function updateCrewHint() {
-	const hint = document.getElementById("crew-hint");
+	const hint = document.getElementById("crew-count-hint");
 
 	if (instanceCrew == 0) {
 		hint.innerHTML = "Non è stato definito alcun membro.";
@@ -360,7 +360,7 @@ function removeNation(element) {
  * Aggiorna il suggerimento che riporta il numero di membri della nation.
  */
 function updateNationHint() {
-	const hint = document.getElementById("nation-hint");
+	const hint = document.getElementById("nation-count-hint");
 
 	if (instanceNations == 0) {
 		hint.innerHTML = "Non è stato definito alcun Paese.";
