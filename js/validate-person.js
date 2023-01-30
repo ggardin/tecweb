@@ -159,6 +159,16 @@ function validateFileUpload() {
 	return true;
 }
 
+const listeners = {
+	"nome" : ["input", validatePersonName ],
+	"immagine" : ["change", validateFileUpload ],
+	"data_nascita" : ["change", validatePersonDateOfBirth ],
+	"data_nascita" : ["change", comparePersonDates ],
+	"data_morte" : ["change", validatePersonDateOfDeath ],
+	"data_morte" : ["change", comparePersonDates ],
+};
+
 window.addEventListener('load', function () {
+	registerRequiredListeners();
 	validatePerson();
 });
