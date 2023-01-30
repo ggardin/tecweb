@@ -36,16 +36,6 @@ function validatePersonName() {
 	return true;
 }
 
-function validatePersonDateOfBirth() {
-	var birth = document.forms['gestione']['data_nascita'].value;
-	return validatePersonDate(birth, 'nascita');
-}
-
-function validatePersonDateOfDeath() {
-	var death = document.forms['gestione']['data_morte'].value;
-	return validatePersonDate(death, 'morte');
-}
-
 /*
  * Verifica che:
 *	1. la data fornita sia una data valida
@@ -97,6 +87,16 @@ function validatePersonDateOfDeath() {
 
 	removeErrorMessage(id);
 	return true;
+}
+
+function validatePersonDateOfBirth() {
+	var birth = document.forms['gestione']['data_nascita'].value;
+	return validatePersonDate(birth, 'nascita');
+}
+
+function validatePersonDateOfDeath() {
+	var death = document.forms['gestione']['data_morte'].value;
+	return validatePersonDate(death, 'morte');
 }
 
 /*
