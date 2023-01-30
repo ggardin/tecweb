@@ -132,8 +132,6 @@ table td::before {
 	*/
 	content: attr(data-label) ": ";
 	float: left;
-	font-weight: 600;
-	border-collapse: collapse;
 }
 
 /*
