@@ -168,11 +168,6 @@ function validateMoney(id) {
 	return true;
 }
 
-window.addEventListener('load', function () {
-	initiateInstanceCount();
-	validateMovie();
-});
-
 var instanceCrew = 0;
 var instanceNations = 0;
 var clicksOnAddButtonCrew = 0;
@@ -484,3 +479,9 @@ function validateFileUpload() {
 	removeErrorMessage(id);
 	return true;
 }
+
+
+window.addEventListener('load', function () {
+	initiateInstanceCount();
+	validateMovie();
+});
