@@ -124,7 +124,7 @@ class Tools {
 				self::replaceSection($page, "header_user", "");
 				self::replaceAnchor($page, "account_button", "Accedi");
 			}
-      self::replaceAnchor($page, "footer", self::getSection($shared, "footer"), true);
+			self::replaceAnchor($page, "footer", self::getSection($shared, "footer"), true);
 		} elseif ($type == "auth") {
 			self::replaceSection($page, "header_user", "");
 			self::replaceSection($page, "account", "");
@@ -233,11 +233,13 @@ class Tools {
 		imagecopyresampled($pic0, $source, 0, 0, $x, $y, $w0, $h0, $width, $height);
 		imagecopyresampled($pic1, $source, 0, 0, $x, $y, $w1, $h1, $width, $height);
 
-		$fn0 = $target_dir . "w${w0}_" . $filename . ".webp";
-		$fn1 = $target_dir . "w${w1}_" . $filename . ".webp";
+		$fn0 = $target_dir . "w${w0}_" . $filename;
+		$fn1 = $target_dir . "w${w1}_" . $filename;
 
-		imagewebp($pic0, $fn0);
-		imagewebp($pic1, $fn1);
+		imagewebp($pic0, $fn0 . ".webp");
+		imagejpeg($pic0, $fn0 . ".jpg");
+		imagewebp($pic1, $fn1 . ".webp");
+		imagejpeg($pic1, $fn1 . ".jpg");
 
 		unlink ($file["tmp_name"]);
 

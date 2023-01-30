@@ -148,11 +148,15 @@ if (!empty($cerca[0])) {
 	$r = "";
 	foreach ($cerca as $c) {
 		$t = $card;
-		if ($tipo != "persona")
-			$immagine = (isset($c["locandina"]) ? ("pics/w200_" . $c["locandina"] . ".webp") : "img/placeholder.svg");
-		else
-			$immagine = (isset($c["immagine"]) ? ("pics/w200_" . $c["immagine"] . ".webp") : "img/placeholder.svg");
-		Tools::replaceAnchor($t, "immagine", $immagine);
+		if ($tipo != "persona") $nome_immagine = "locandina";
+		else $nome_immagine = "immagine";
+		if (isset($c[$nome_immagine])) {
+			Tools::replaceAnchor($t, "immagine_webp", "pics/w200_" . $c[$nome_immagine] . ".webp");
+			Tools::replaceAnchor($t, "immagine", "pics/w200_" . $c[$nome_immagine] . ".jpg");
+		} else {
+			Tools::replaceSection($t, "pic_source", "");
+			Tools::replaceAnchor($t, "immagine", "img/placeholder.svg");
+		}
 		Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 		Tools::replaceAnchor($t, "nome", $c["nome"]);
 		if ($tipo == "film" && isset($c["data_rilascio"]))
