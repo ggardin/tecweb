@@ -39,7 +39,10 @@
 				</select>
 
 				<!-- immagine_start -->
-				<img src="@@immagine@@" alt="" />
+				<picture>
+					<source srcset="@@immagine_webp@@" type="image/webp" />
+					<img src="@@immagine@@" alt=""/>
+				</picture>
 				<div class="checkbox-pill delete">
 					<input type="checkbox" id="elimina-immagine" name="elimina-immagine" />
 					<label for="elimina-immagine">Elimina immagine presente</label>

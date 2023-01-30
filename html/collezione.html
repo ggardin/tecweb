@@ -36,15 +36,20 @@
 				<!-- edit_end -->
 			</div>
 			<aside id="hero-image">
-				<img src="@@immagine@@" alt=""/>
-			</aside>
+				<picture>
+					<source srcset="@@immagine_webp@@" type="image/webp" />
+					<img src="@@immagine@@" alt=""/>
+				</picture>			</aside>
 		</div>
 		<!-- film_start -->
 		<ol class="cards">
 			<!-- card_start -->
 			<li class="card">
 				<a href="film.php?id=@@id@@">
-					<img src="@@immagine@@" alt=""/>
+					<picture>
+						<source srcset="@@immagine_webp@@" type="image/webp" />
+						<img src="@@immagine@@" alt=""/>
+					</picture>
 					<div class="details">
 						<h2 class="title">@@nome@@</h2>
 						<dl>
