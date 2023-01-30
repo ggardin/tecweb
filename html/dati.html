@@ -27,11 +27,11 @@
 				<legend>Informazioni di base</legend>
 
 				<label for="username"><span lang="en">Username</span><span class="required">(richiesto)</span></label>
-				<input type="text" id="username" name="username" value="@@username@@" required onblur="validateUserUsername();" oninput="validateUserUsername();" aria-describedby="username-hint" autocomplete="username" maxlength="30" />
+				<input type="text" id="username" name="username" value="@@username@@" required aria-describedby="username-hint" autocomplete="username" maxlength="30" />
 				<span id="username-hint">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</span>
 
 				<label for="email"><span lang="en">Email</span></label>
-				<input type="text" id="email" name="mail" value="@@mail@@" onblur="validateUserEmail();" autocomplete="email" maxlength="100" />
+				<input type="text" id="email" name="mail" value="@@mail@@" autocomplete="email" maxlength="100" />
 				<p id="email-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>
@@ -42,11 +42,11 @@
 				<p id="old_password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="new_password">Nuova <span lang="en">password</span></label>
-				<input type="password" id="new_password" name="new_password" onblur="validatePassword();" autocomplete="new-password" />
+				<input type="password" id="new_password" name="new_password" autocomplete="new-password" />
 				<p id="new_password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="new_password_confirm">Conferma la nuova <span lang="en">password</span></label>
-				<input type="password" id="new_password_confirm" name="new_password_confirm" onblur="validatePasswordConfirm();" autocomplete="new-password" />
+				<input type="password" id="new_password_confirm" name="new_password_confirm" autocomplete="new-password" />
 				<p id="new_password_confirm-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 			</fieldset>
@@ -54,11 +54,11 @@
 				<legend>Ulteriori informazioni su di te</legend>
 
 				<label for="nome">Nome</label>
-				<input type="text" id="nome" name="nome" value="@@nome@@" onblur="validateUserName();" oninput="validateUserName();" autocomplete="name" maxlength="50" />
+				<input type="text" id="nome" name="nome" value="@@nome@@" autocomplete="name" maxlength="50" />
 				<p id="nome-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data">Data di nascita</label>
-				<input type="date" id="data" name="data_nascita" value="@@data_nascita@@" min="1900-01-01" max="2099-12-31" onblur="validateUserBirthday();" />
+				<input type="date" id="data" name="data_nascita" value="@@data_nascita@@" min="1900-01-01" max="2099-12-31" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="gender"><span lang="en">Gender</span></label>
