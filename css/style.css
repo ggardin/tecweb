@@ -1216,6 +1216,7 @@ SERVER MESSAGES
 
 #server-message {
 	margin: 1em 0;
+	padding: 0;
 	border: 0.2em solid;
 	border-radius: var(--border-radius);
 	list-style-type: none;
