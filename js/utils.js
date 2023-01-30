@@ -52,25 +52,12 @@ function inputDateBrowserSupport() {
  */
 
 var isOpen = false;
-var linksTabIndex = 0;
-var linksTabIndex = 0;
-
 function toggleMenu() {
 	var btn = document.getElementById("dropdown-menu-toggle");
 	var links = document.getElementById("dropdown-link-container");
 	isOpen = !isOpen;
-	linksTabIndex = isOpen ? 1 : -1;
-	btnTabIndex = isOpen ? 1 : 0;
 	btn.setAttribute("data-open", isOpen);
 	links.setAttribute("data-open", isOpen);
-	links.setAttribute("aria-hidden", !isOpen);
-	links.setAttribute("tabindex", linksTabIndex);
-	if (isOpen) {
-		links.focus();
-	}
-	else {
-		btn.focus();
-	}
 }
 
 /*
