@@ -110,7 +110,8 @@ table thead {
 	display: none;
 }
 
-table td, th{
+table th,
+table td {
 	display: block;
 	text-align: right;
 }
