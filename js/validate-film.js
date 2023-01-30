@@ -480,8 +480,31 @@ function validateFileUpload() {
 	return true;
 }
 
+const listeners = {
+	"titolo" : ["input", validateMovieTitle ],
+	"descrizione" : ["input", validateMovieDescription ],
+	"locandina" : ["change", validateFileUpload ],
+	"data" : ["change", validateMovieReleaseDate ],
+	"durata" : ["input", validateMovieRuntime ],
+	"titolo_originale" : ["input", validateMovieOriginalTitle ],
+	"budget" : ["input", validateMovieBudget ],
+	"incassi" : ["input", validateMovieBoxOfficeEarnings ],
+};
+
+/*
+ * Helper function per registrare event listeners.
+ */
+function registerRequiredListeners() {
+	for (var id in listeners) {
+		if (!document.getElementById(id)) {
+			continue;
+		}
+		document.getElementById(id).addEventListener(listeners[id][0], listeners[id][1]);
+	}
+}
 
 window.addEventListener('load', function () {
 	initiateInstanceCount();
+	registerRequiredListeners();
 	validateMovie();
 });

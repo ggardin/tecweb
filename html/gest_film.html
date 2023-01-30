@@ -28,11 +28,11 @@
 			<fieldset>
 				<legend>Informazioni principali</legend>
 				<label for="titolo">Titolo<span class="required">(richiesto)</span></label>
-				<input id="titolo" name="titolo" value="@@nome@@" oninput="validateMovieTitle();" onblur="validateMovieTitle();" required autocomplete="off" maxlength="200" />
+				<input id="titolo" name="titolo" value="@@nome@@" required autocomplete="off" maxlength="200" />
 				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione" onblur="validateMovieDescription();" oninput="validateMovieDescription();"maxlength="10000" >@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" maxlength="10000" >@@descrizione@@</textarea>
 				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<!-- locandina_start -->
@@ -49,15 +49,15 @@
 				<!-- locandina_end -->
 
 				<label for="locandina">Nuova locandina</label>
-				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" onchange="validateFileUpload();" />
+				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" />
 				<p id="locandina-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="data">Data rilascio</label>
-				<input type="date" id="data" name="data" min="1800-01-01" max="2099-12-31" value="@@data_rilascio@@" onchange="validateMovieReleaseDate();" />
+				<input type="date" id="data" name="data" min="1800-01-01" max="2099-12-31" value="@@data_rilascio@@" />
 				<p id="data-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="durata">Durata (in minuti)</label>
-				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" oninput="validateMovieRuntime();" aria-describedby="durata-hint" />
+				<input type="number" id="durata" name="durata" min="0" max="1000" value="@@durata@@" aria-describedby="durata-hint" />
 				<p id="durata-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 
@@ -145,7 +145,7 @@
 			<fieldset>
 				<legend>Altri dettagli</legend>
 				<label for="titolo_originale">Titolo originale</label>
-				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" oninput="validateMovieOriginalTitle();" maxlength="200" />
+				<input id="titolo_originale" name="titolo_originale" value="@@nome_originale@@" maxlength="200" />
 				<p id="titolo_originale-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="stato">Stato</label>
@@ -156,11 +156,11 @@
 				</select>
 
 				<label for="budget"><span lang="en">Budget</span> (in Dollari)</label>
-				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" oninput="validateMovieBudget();" />
+				<input type="number" id="budget" name="budget" min="0" value="@@budget@@" />
 				<p id="budget-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="incassi">Incassi (in Dollari)</label>
-				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" oninput="validateMovieBoxOfficeEarnings();" />
+				<input type="number" id="incassi" name="incassi" min="0" value="@@incassi@@" />
 				<p id="incassi-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="collezione">Collezione</label>
