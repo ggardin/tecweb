@@ -27,15 +27,15 @@
 				<legend class="sr-only">Dati di registrazione</legend>
 
 				<label for="username">Nome utente<span class="required">(richiesto)</span></label>
-				<input type="text" id="username" name="username" required aria-describedby="username-hint" oninput="validateNewUsername();" maxlength="30" />
+				<input type="text" id="username" name="username" required aria-describedby="username-hint" maxlength="30" />
 				<p id="username-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals">Il nome utente può contenere una combinazione di lettere maiuscole, minuscole e numeri.</p>
 
 				<label for="password"><span lang="en">Password</span><span class="required">(richiesto)</span></label>
-				<input type="password" id="password" name="password" onchange="validatePassword();" required />
+				<input type="password" id="password" name="password" required />
 				<p id="password-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="password_confirm">Conferma <span lang="en">Password</span><span class="required">(richiesto)</span></label>
-				<input type="password" id="password_confirm" name="password_confirm" onchange="validatePasswordConfirm();" required />
+				<input type="password" id="password_confirm" name="password_confirm" required />
 				<p id="password_confirm-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<button type="submit" name="submit">Registrati</button>
