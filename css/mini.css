@@ -114,6 +114,11 @@ table th,
 table td {
 	display: block;
 	text-align: right;
+	border: 0;
+}
+
+table tr {
+	border: 0.2rem solid var(--bgcolor-off);
 }
 
 table th::before {
