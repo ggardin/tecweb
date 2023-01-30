@@ -36,7 +36,12 @@
 				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<!-- locandina_start -->
-				<img src="@@locandina@@" alt="" />
+				<picture>
+					<!-- pic_source_start -->
+					<source srcset="@@immagine_webp@@" type="image/webp" />
+					<!-- pic_source_end -->
+					<img src="@@immagine@@" alt=""/>
+				</picture>
 				<div class="checkbox-pill delete">
 					<input type="checkbox" id="elimina-locandina" name="elimina-locandina" />
 					<label for="elimina-locandina">Elimina locandina presente</label>

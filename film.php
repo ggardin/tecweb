@@ -48,8 +48,13 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 Tools::replaceAnchor($page, "nome", $film["nome"]);
-$immagine = (isset($film["locandina"]) ? ("pics/w500_" . $film["locandina"] . ".webp") : "img/placeholder.svg");
-Tools::replaceAnchor($page, "locandina", $immagine);
+if (isset($film["locandina"])) {
+	Tools::replaceAnchor($page, "immagine_webp", "pics/w500_" . $film["locandina"] . ".webp");
+	Tools::replaceAnchor($page, "immagine", "pics/w500_" . $film["locandina"] . ".jpg");
+} else {
+	Tools::replaceSection($page, "pic_source", "");
+	Tools::replaceAnchor($page, "immagine", "img/placeholder.svg");
+}
 $sub = false;
 if (isset($film["data_rilascio"])) {
 	$sub = true;
