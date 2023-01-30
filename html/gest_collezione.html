@@ -28,11 +28,11 @@
 			<fieldset>
 				<legend>Informazioni</legend>
 				<label for="titolo">Titolo</label>
-				<input id="titolo" name="titolo" value="@@nome@@" oninput="validateListTitle();" required autocomplete="off" maxlength="200" />
+				<input id="titolo" name="titolo" value="@@nome@@" required autocomplete="off" maxlength="200" />
 				<p id="titolo-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<label for="descrizione">Descrizione</label>
-				<textarea id="descrizione" name="descrizione" oninput="validateListDescription();" maxlength="10000" >@@descrizione@@</textarea>
+				<textarea id="descrizione" name="descrizione" maxlength="10000" >@@descrizione@@</textarea>
 				<p id="descrizione-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 
 				<!-- locandina_start -->
@@ -49,7 +49,7 @@
 				<!-- locandina_end -->
 
 				<label for="locandina">Nuova locandina</label>
-				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" onchange="validateFileUpload();" />
+				<input type="file" name="locandina" id="locandina" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" />
 				<p id="locandina-hint" class="error-message" aria-live="assertive" aria-relevant="additions removals"></p>
 			</fieldset>
 			<fieldset>

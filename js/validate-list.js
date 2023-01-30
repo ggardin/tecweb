@@ -83,6 +83,13 @@ function validateFileUpload() {
 	return true;
 }
 
+const listeners = {
+	"titolo" : ["input", validateListTitle ],
+	"descrizione" : ["input", validateListDescription ],
+	"locandina" : ["change", validateFileUpload ],
+};
+
 window.addEventListener('load', function () {
+	registerRequiredListeners();
 	validateList();
 });
