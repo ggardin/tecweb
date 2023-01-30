@@ -35,6 +35,17 @@ function removeErrorMessage(id) {
 }
 
 /*
+ * Pone il focus sul primo errore del form.
+ */
+function focusOnTopmostError() {
+	var invalidFields = document.getElementsByClassName('invalid');
+	if (invalidFields) {
+		invalidFields[0].focus();
+	}
+	return;
+}
+
+/*
  * Controlla se il browser supporta <input type="date" />
  */
 function inputDateBrowserSupport() {

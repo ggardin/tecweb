@@ -7,6 +7,7 @@ function validateMovie() {
 
 	form.addEventListener("submit", function (event) {
 		if ( !(validateMovieTitle() && validateMovieOriginalTitle() && validateMovieDescription() && validateMovieReleaseDate() && validateMovieRuntime() && validateMovieBudget() && validateMovieBoxOfficeEarnings() && validateFileUpload() && invalidInstanceCrew == 0 && invalidInstanceNations == 0) ) {
+			focusOnTopmostError();
 			event.preventDefault();
 		}
 	});

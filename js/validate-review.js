@@ -8,6 +8,7 @@ function validateNewReview() {
 	if (form != null) {
 		form.addEventListener("submit", function (event) {
 			if ( !( validateNewReviewRatingRadiobox() && validateNewReviewText() )) {
+				focusOnTopmostError();
 				event.preventDefault();
 			}
 		});

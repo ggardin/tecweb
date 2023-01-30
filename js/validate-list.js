@@ -7,6 +7,7 @@ function validateList() {
 
 	form.addEventListener("submit", function (event) {
 		if ( !(validateListTitle() && validateListDescription() && validateFileUpload()) ) {
+			focusOnTopmostError();
 			event.preventDefault();
 		}
 	});
