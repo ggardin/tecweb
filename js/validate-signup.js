@@ -70,6 +70,13 @@ function validatePasswordConfirm() {
 
 }
 
+const listeners = {
+	"username" : ["input", validateNewUsername ],
+	"password" : ["change", validatePassword ],
+	"password_confirm" : ["change", validatePasswordConfirm ],
+};
+
 window.addEventListener('load', function () {
+	registerRequiredListeners();
 	validateUserSignup();
 });
