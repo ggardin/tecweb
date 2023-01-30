@@ -7,6 +7,7 @@ function validatePerson() {
 
 	form.addEventListener("submit", function (event) {
 		if ( !(validatePersonName() && validatePersonDateOfBirth() && validatePersonDateOfDeath() && comparePersonDates() && validateFileUpload()) ) {
+			focusOnTopmostError();
 			event.preventDefault();
 		}
 	});

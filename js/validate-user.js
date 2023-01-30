@@ -7,6 +7,7 @@ function validateUserData() {
 
 	form.addEventListener("submit", function (event) {
 		if (!( validateUserUsername() && validateUserName() && validateUserEmail() && validateUserBirthday() && validatePassword() && validatePasswordConfirm() )) {
+			focusOnTopmostError();
 			event.preventDefault();
 		}
 	});
