@@ -61,15 +61,11 @@ CSS VARIABLES
 	--hover-anchor-alt: #b9ad55;
 
 	--success-color: #03B680;
-	--success-color-bg: #03B6802D;
 
 	--error-required: #ff4c4c;
 	--error-required-off: #ff6c6c;
 
-	--error-required-bg: #FF2B2B2D;
-
 	--interactions-text-placeholder-color: #B6B6B6;
-	--interactions-color: #313131;
 }
 
 @font-face {
