@@ -86,6 +86,12 @@ function checkNewReviewCharactersCounter() {
 	charactersCounter.innerHTML = "Hai a disposizione " + (maxLength - currentLength) + " caratteri.";
 }
 
+const listeners = {
+	"review-text" : ["input", checkNewReviewCharactersCounter ],
+	"review-text" : ["input", validateNewReviewText ],
+};
+
 window.addEventListener('load', function () {
+	registerRequiredListeners();
 	validateNewReview();
 });
