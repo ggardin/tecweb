@@ -19,7 +19,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v3
       - name: A11y Evaluation
-        uses: a11ywatch/github-actions@v1.12.3
+        uses: a11ywatch/github-actions@v1.13.0
         with:
           WEBSITE_URL: ${{ secrets.WEBSITE_URL }}/${{ inputs.target-branch }}/index.php
           SITE_WIDE: true
