@@ -188,6 +188,16 @@ function validateEmail(email) {
 	return emailRegex.test(String(email).toLowerCase());
 }
 
+const listeners = {
+	"username" : ["input", validateUserUsername ],
+	"email" : ["blur", validateUserEmail ],
+	"new_password" : ["blur", validatePassword ],
+	"new_password_confirm" : ["blur", validatePasswordConfirm ],
+	"nome" : ["input", validateUserName ],
+	"data" : ["input", validateUserBirthday ],
+};
+
 window.addEventListener('load', function () {
+	registerRequiredListeners();
 	validateUserData();
 });
