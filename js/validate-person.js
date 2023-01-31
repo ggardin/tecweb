@@ -48,26 +48,28 @@ function validatePersonName() {
  */
  function validatePersonDate(date, eventName) {
 	var id = 'data_' + eventName;
-	var dateLowerBound = new Date(document.forms['gestione']['data_' + eventName].min);
-	var dateUpperBound = new Date(document.forms['gestione']['data_' + eventName].max);
+	var date = document.forms['gestione'][id];
+	var dateVal = date.value;
+	var dateLowerBound = new Date(date.min);
+	var dateUpperBound = new Date(date.max);
 	var today = new Date();
 
 	// Controlla che ci sia una stringa
-	if (date == null || date == '') {
+	if (dateVal == null || dateVal == '') {
 		removeErrorMessage(id);
 		return true;
 	}
 
 	// Non c'è supporto data, controllo formato
-	if (! inputDateBrowserSupport()) {
+	if (date.type !== "date") {
 		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
-		if (! yearRegex.test(date)) {
+		if (! yearRegex.test(dateVal)) {
 			showErrorMessage(id, 'Data di ' + eventName + ' non corretta. Usa il formato YYYY-MM-DD.');
 			return false;
 		}
 	}
 
-	var dateOfEvent = new Date(date);
+	var dateOfEvent = new Date(dateVal);
 
 	// Controlla se la data è inferiore al limite minimo
 	if (dateOfEvent.getTime() < dateLowerBound.getTime()) {

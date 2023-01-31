@@ -46,19 +46,6 @@ function focusOnTopmostError() {
 }
 
 /*
- * Controlla se il browser supporta <input type="date" />
- */
-function inputDateBrowserSupport() {
-	const fallbackTestElement = document.createElement('input');
-	try {
-		fallbackTestElement.type = 'date';
-	} catch (e) {
-		return false;
-	}
-	return true;
-}
-
-/*
  * Gestisce interruttore hamburger menu
  */
 

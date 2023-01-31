@@ -86,14 +86,15 @@ function validateMovieDescription() {
  */
  function validateMovieReleaseDate() {
 	var id = 'data';
-	var releaseDate = document.forms['gestione']['data'].value;
-	var dateLowerBound = new Date(document.forms['gestione']['data'].min);
-	var dateUpperBound = new Date(document.forms['gestione']['data'].max);
+	var date = document.forms['gestione'][id];
+	var releaseDate = date.value;
+	var dateLowerBound = new Date(date.min);
+	var dateUpperBound = new Date(date.max);
 
 	// Controlla che ci sia una stringa
 	if (releaseDate != null || releaseDate != "") {
 		// Non c'è supporto data, controllo formato
-		if (! inputDateBrowserSupport()) {
+		if (date.type !== "date") {
 			const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 			if (! yearRegex.test(releaseDate)) {
 				showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
