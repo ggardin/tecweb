@@ -46,7 +46,7 @@ function validatePersonName() {
  * NB: la data divisa da "/" è un formato di localizzazione.
  *     Il browser utilizza il separatore "-".
  */
- function validatePersonDate(date, eventName) {
+ function validatePersonDate(eventName) {
 	var id = 'data_' + eventName;
 	var date = document.forms['gestione'][id];
 	var dateVal = date.value;
@@ -92,13 +92,11 @@ function validatePersonName() {
 }
 
 function validatePersonDateOfBirth() {
-	var birth = document.forms['gestione']['data_nascita'].value;
-	return validatePersonDate(birth, 'nascita');
+	return validatePersonDate('nascita');
 }
 
 function validatePersonDateOfDeath() {
-	var death = document.forms['gestione']['data_morte'].value;
-	return validatePersonDate(death, 'morte');
+	return validatePersonDate('morte');
 }
 
 /*
