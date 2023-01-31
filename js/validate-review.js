@@ -51,6 +51,7 @@ function validateNewReviewText() {
 	const maxLength = element.getAttribute("maxlength");
 	const currentLength = element.value.length;
 	const reviewRegex = /^[^<>{}]*$/;
+	const reviewEmpty = /^[ ]*$/;
 
 	if (! reviewRegex.test(element.value)) {
 		showErrorMessage(id, 'La recensione inserita contiene caratteri non ammessi.');
@@ -62,6 +63,10 @@ function validateNewReviewText() {
 	}
 	else if ( currentLength > maxLength ) {
 		showErrorMessage(id, 'La recensione è troppo lunga.');
+		return false;
+	}
+	else if (reviewEmpty.test(element.value)) {
+		showErrorMessage(id, 'La recensione non può contenere solo spazi.');
 		return false;
 	}
 
