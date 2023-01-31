@@ -51,7 +51,7 @@ function validateNewReviewText() {
 	const maxLength = element.getAttribute("maxlength");
 	const currentLength = element.value.length;
 	const reviewRegex = /^[^<>{}]*$/;
-	const reviewEmpty = /^[ ]*$/;
+	const reviewEmpty = /^[\s]+$/;
 
 	if (! reviewRegex.test(element.value)) {
 		showErrorMessage(id, 'La recensione inserita contiene caratteri non ammessi.');

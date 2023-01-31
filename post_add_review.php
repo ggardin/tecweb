@@ -30,7 +30,7 @@ if (strlen($testo) < 5 || strlen($testo) > 1000) {
 if (! preg_match("/^[^<>{}]*$/", $testo)) {
 	array_push($err, "La recensione contiene caratteri non ammessi.");
 }
-if (ctype_space($testo)) {
+if (preg_match("/^[\s]+$/", $testo)) {
 	array_push($err,"La recensione non può contenere solo spazi.");
 }
 
