@@ -113,7 +113,8 @@ function validatePasswordConfirm() {
  */
 function validateUserBirthday() {
 	var id = 'data';
-	var birthday = document.forms['gestione']['data'].value;
+	var date = document.forms['gestione']['data'];
+	var birthday = date.value;
 	var today = new Date();
 
 	// Controlla che ci sia una stringa
@@ -123,7 +124,7 @@ function validateUserBirthday() {
 	}
 
 	// Non c'è supporto data, controllo formato
-	if (! inputDateBrowserSupport()) {
+	if (date.type !== "date") {
 		const yearRegex = /^([\d]{4})\-(0[1-9]|1[0-2])\-((0|1)[0-9]|2[0-9]|3[0-1])$/;
 		if (! yearRegex.test(birthday)) {
 			showErrorMessage(id, 'Data non corretta. Usa il formato YYYY-MM-DD.');
