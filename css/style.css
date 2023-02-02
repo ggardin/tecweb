@@ -494,22 +494,22 @@ INDEX
 }
 
 .product-image.search-bg {
-	background-image: url("../img/product/light_cerca.webp");
+	background-image: url("../img/product/light_cerca.png");
 }
 .product-image.movie-bg {
-	background-image: url("../img/product/light_film.webp");
+	background-image: url("../img/product/light_film.png");
 }
 .product-image.director-bg {
-	background-image: url("../img/product/light_regista.webp");
+	background-image: url("../img/product/light_regista.png");
 }
 html.dark .product-image.search-bg {
-	background-image: url("../img/product/dark_cerca.webp");
+	background-image: url("../img/product/dark_cerca.png");
 }
 html.dark .product-image.movie-bg {
-	background-image: url("../img/product/dark_film.webp");
+	background-image: url("../img/product/dark_film.png");
 }
 html.dark .product-image.director-bg {
-	background-image: url("../img/product/dark_regista.webp");
+	background-image: url("../img/product/dark_regista.png");
 }
 
 
