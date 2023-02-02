@@ -1,5 +1,6 @@
 User-agent: *
-Allow: /
+Disallow: /php/
+Disallow: /html/
 Disallow: /404.php
 Disallow: /500.php
 Disallow: /aggiungi.php
