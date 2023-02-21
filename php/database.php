@@ -369,7 +369,7 @@ class Database {
 
 		$search = [];
 
-		$q0 = "select id, nome, locandina, data_rilascio " . $base . " limit ? offset ?";
+		$q0 = "select id, nome, locandina, data_rilascio, evidenza " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
 		$t0 = "sii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
