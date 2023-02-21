@@ -1339,6 +1339,7 @@ ADS / FEATURED CONTENT
 	border-radius: var(--border-radius);
 	display: flex;
 	align-items: center;
+	flex-shrink: 0;
 	gap: 0.5em;
 	width: fit-content;
 	padding: 0.25em 0.5em;
