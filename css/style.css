@@ -69,6 +69,10 @@ CSS VARIABLES
 	--error-required: #ff4c4c;
 	--error-required-off: #ff6c6c;
 
+	--featured-color: #003d9e;
+	--featured-color-off: #03122b;
+	--featured-color-alt: #0f2a57;
+
 	--interactions-text-placeholder-color: #B6B6B6;
 	--interactions-color: #313131;
 }
@@ -1341,5 +1345,6 @@ ADS / FEATURED CONTENT
 }
 
 .featured-notice svg {
+	fill: currentColor;
 	width: 1em;
 }
