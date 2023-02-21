@@ -21,6 +21,7 @@ $titolo_originale = isset($_POST["titolo_originale"]) ? $_POST["titolo_originale
 $stato = isset($_POST["stato"]) ? $_POST["stato"] : "";
 $budget = isset($_POST["budget"]) ? $_POST["budget"] : "";
 $incassi = isset($_POST["incassi"]) ? $_POST["incassi"] : "";
+$evidenza = isset($_POST["evidenza"]) ? $_POST["evidenza"] : 1;
 $collezione = isset($_POST["collezione"]) ? $_POST["collezione"] : "";
 $locandina = isset($_POST["elimina-locandina"]) ? null : "";
 $submit = isset($_POST["submit"]) ? $_POST["submit"] : "";
@@ -90,7 +91,7 @@ if ($err) {
 try {
 	$connessione = new Database();
 	if ($submit == "aggiungi" || $submit == "modifica") {
-		$up = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione);
+		$up = $connessione->updateFilm($id, $titolo, $titolo_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione, $evidenza);
 		$res = $up[0];
 		if($submit == "aggiungi") $id = $up[1];
 		$res = $connessione->setFilmCrew($id, $crew_persona, $crew_ruolo) || $res;
