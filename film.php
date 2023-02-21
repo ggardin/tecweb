@@ -48,6 +48,8 @@ Tools::replaceAnchor($page, "title", $title);
 Tools::toHtml($film);
 Tools::replaceAnchor($page, "breadcrumb", $film["nome"]);
 Tools::replaceAnchor($page, "nome", $film["nome"]);
+if ($film["evidenza"] != 1)
+	Tools::replaceSection($page, "evidenza", "");
 if (isset($film["locandina"])) {
 	Tools::replaceAnchor($page, "immagine_webp", "pics/w500_" . $film["locandina"] . ".webp");
 	Tools::replaceAnchor($page, "immagine", "pics/w500_" . $film["locandina"] . ".jpg");
