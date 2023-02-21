@@ -165,6 +165,7 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "nome_originale", (isset($film["nome_originale"]) ? $film["nome_originale"] : ""));
 	Tools::replaceAnchor($page, "budget", (isset($film["budget"]) ? $film["budget"] : ""));
 	Tools::replaceAnchor($page, "incassi", (isset($film["incassi"]) ? $film["incassi"] : ""));
+	Tools::replaceAnchor($page, "evidenza", (isset($film["evidenza"]) && $film["evidenza"] == 1) ? "checked" : "");
 	Tools::replaceAnchor($page, "submit_value", "modifica");
 	Tools::replaceAnchor($page, "submit", "Modifica");
 } else {
@@ -182,6 +183,7 @@ if ($id != "") {
 	Tools::replaceAnchor($page, "nome_originale", "");
 	Tools::replaceAnchor($page, "budget", "");
 	Tools::replaceAnchor($page, "incassi", "");
+	Tools::replaceAnchor($page, "evidenza", "");
 	Tools::replaceAnchor($page, "submit_value", "aggiungi");
 	Tools::replaceAnchor($page, "submit", "Aggiungi");
 	Tools::replaceSection($page, "delete", "");
