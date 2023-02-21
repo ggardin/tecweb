@@ -623,6 +623,8 @@ class Database {
 			$values = "values (";
 		}
 
+		(isset($evidenza) && $evidenza == "on") ? $evidenza = 1 : $evidenza = 0;
+
 		$params = [];
 		$types = "";
 
