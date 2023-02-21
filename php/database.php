@@ -613,7 +613,7 @@ class Database {
 		if ($values) $values .= substr($v, 1);
 	}
 
-	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : array {
+	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione, $evidenza) : array {
 		if ($id != "") {
 			$query = "update film
 				set";
@@ -637,6 +637,7 @@ class Database {
 			[$budget, "budget", "i"],
 			[$incassi, "incassi", "i"],
 			[$collezione, "collezione", "i"],
+			[$evidenza, "evidenza", "i"],
 			];
 
 		$this->updateArgs($query, $values, $params, $types, $args);
