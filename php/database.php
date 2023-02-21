@@ -365,7 +365,7 @@ class Database {
 	public function searchFilm($str, $limit, $offset) : array {
 		$base = "from film
 			where nome like ?
-			order by data_rilascio desc";
+			order by evidenza desc, data_rilascio desc";
 
 		$search = [];
 
