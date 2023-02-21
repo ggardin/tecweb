@@ -1160,11 +1160,11 @@ form textarea.invalid {
 	background-color: var(--bgcolor-off);
 }
 
-.checkbox-pill.delete,
-.checkbox-pill.delete label {
+.checkbox-pill.wide,
+.checkbox-pill.wide label {
 	width: 100%;
 }
-.checkbox-pill.delete input { width: unset; }
+.checkbox-pill.wide input { width: unset; }
 
 fieldset > * {
 	margin-top: 0.25em;
