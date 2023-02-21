@@ -160,7 +160,7 @@ if (!empty($cerca[0])) {
 		if ($tipo == "film" && $c["evidenza"] == 1)
 			Tools::replaceAnchor($t, "evidenza", "featured");
 		else
-			Tools::replaceAnchor($t, "evidenza", "");
+			Tools::replaceSection($t, "evidenza", "");
 		Tools::replaceAnchor($t, "link", ($tipo . ".php?id=" . $c["id"]));
 		Tools::replaceAnchor($t, "nome", $c["nome"]);
 		if ($tipo == "film" && isset($c["data_rilascio"]))
