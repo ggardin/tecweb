@@ -1052,6 +1052,44 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
+	
+	public function getUserReviews($user_id) : array {
+		$query = "select f.nome, v.voto, v.testo, f.id
+			from valutazione as v
+				join film as f
+					on f.id = v.film
+			where v.utente = ?
+			order by v.voto desc";
+
+		$params = [$user_id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getReviewByUtente($film_id, $user_id) : array {
+		$query = "select u.username, v.voto, v.testo
+			from valutazione as v
+				join utente as u
+					on u.id = v.utente
+			where v.film = ? and v.utente = ?";
+
+		$params = [$film_id, $user_id];
+		$types = "ii";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function deleteRecensione($film_id, $user_id) : bool {
+		$query = "delete from valutazione
+			where film = ? and utente = ?";
+
+		$params = [$film_id, $user_id];
+		$types = "ii";
+
+		return $this->preparedUpdates($query, $params, $types) & $this->updateVoto($film_id);
+	}
+
 }
 
 ?>
