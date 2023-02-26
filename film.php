@@ -19,7 +19,7 @@ try {
 		$crew = $connessione->getCrewByFilmId($id);
 		$genere = $connessione->getGenereByFilmId($id);
 		$paese = $connessione->getPaeseByFilmId($id);
-		$valutazione = $connessione->getValutazioneByFilmId($id, $_SESSION["id"]);
+		$valutazione = $connessione->getValutazioneByFilmId($id);
 		$valutazioneUser = $connessione->getReviewByUtente($id, $_SESSION["id"]);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canUtenteValutare($_SESSION["id"], $id);
@@ -152,17 +152,19 @@ if (isset($_SESSION["id"]) && $can_review) {
 	Tools::replaceSection($page, "add_review", "");
 }
 
+
 if (!empty($valutazioneUser)){
 		$val = true;
 		Tools::replaceAnchor($page, "review_delete_film_id", $id);
 		Tools::toHtml($valutazioneUser);
 		foreach ($valutazioneUser as $v) {
-			Tools::replaceAnchor($page, "tuoutente", $v["username"]);
+			$user = $v["username"];
+			Tools::replaceAnchor($page, "tuoutente", $user);
 			Tools::replaceAnchor($page, "tuovoto", $v["voto"]);
 			Tools::replaceAnchor($page, "tuotesto", $v["testo"]);
 		}
 } else 
-	Tools::replaceSection($page, "recensione", ""); //non fa il replace devo guardare
+	Tools::replaceSection($page, "recensione", "");
 
 
 if (!empty($valutazione)) {
@@ -170,12 +172,24 @@ if (!empty($valutazione)) {
 	Tools::toHtml($valutazione);
 	$list = Tools::getSection($page, "valutazione");
 	$r = "";
-	foreach ($valutazione as $v) {
-			$t = $list;
-			Tools::replaceAnchor($t, "utente", $v["utente"]);
-			Tools::replaceAnchor($t, "voto", $v["voto"]);
-			Tools::replaceAnchor($t, "testo", $v["testo"]);
-			$r .= $t;
+	if(isset($_SESSION["id"])) {
+		foreach ($valutazione as $v) {
+			if ($user != $v["utente"]) {
+				$t = $list;
+				Tools::replaceAnchor($t, "utente", $v["utente"]);
+				Tools::replaceAnchor($t, "voto", $v["voto"]);
+				Tools::replaceAnchor($t, "testo", $v["testo"]);
+				$r .= $t;
+			}	
+		}
+	} else {
+		foreach ($valutazione as $v) {
+				$t = $list;
+				Tools::replaceAnchor($t, "utente", $v["utente"]);
+				Tools::replaceAnchor($t, "voto", $v["voto"]);
+				Tools::replaceAnchor($t, "testo", $v["testo"]);
+				$r .= $t;
+		}
 	}
 	Tools::replaceSection($page, "valutazione", $r);
 } else

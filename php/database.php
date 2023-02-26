@@ -313,17 +313,17 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getValutazioneByFilmId($film_id, $user_id) : array {
+	public function getValutazioneByFilmId($film_id) : array {
 		$query = "select u.username as utente, v.voto, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
 				join utente as u
 					on v.utente = u.id
-			where f.id = ? and v.utente <> ?";
+			where f.id = ?";
 
-		$params = [$film_id, $user_id];
-		$types = "ii";
+		$params = [$film_id];
+		$types = "i";
 
 		return $this->preparedSelect($query, $params, $types);
 	}
