@@ -16,8 +16,7 @@
 		<p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="user.php">Utente</a> &gt;&gt; Recensioni</p>
 	</nav>
 
-	<main id="content">
-		<!-- server_messages -->
+	<main id="content" class="review-page">
 
 		<h1>Le tue recensioni</h1>
 
@@ -26,12 +25,12 @@
 		<!-- message_end -->
 
         <!-- valutazioni_start -->
-				<ul class="reviews">
+				<ul id="your-reviews" class="reviews">
 					<!-- valutazione_start -->
 					<li class="review">
 						<dl>
                             <dt class="sr-only">Film</dt>
-                            <dd><a href="film.php?id=@@id@@">@@titolo@@</a></dd>
+                            <dd class="film"><a href="film.php?id=@@id@@">@@titolo@@</a></dd>
 							<dt class="sr-only">Voto</dt>
 							<dd class="rating">
 								@@voto@@

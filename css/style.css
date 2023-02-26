@@ -751,29 +751,46 @@ MOVIE PAGE
 REVIEWS
 ==============
 */
+#your-review{
+	list-style: none;
+}
 
-.movie-page .reviews {
+#delete-review{
+	margin-bottom: 1em;
+}
+
+#your-reviews {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.reviews {
 	display: flex;
 	flex-direction: column;
 }
 
-.movie-page .review {
+.review {
 	background-color: var(--secondaryColor);
 	padding: var(--content-padding);
 	border-radius: var(--border-radius);
 	margin-bottom: 1em;
 }
 
-.movie-page .review .rating {
+.review .rating {
 	font-size: 1.2em;
 	line-height: 1.2;
 	font-weight: 600;
 	float: right;
 }
 
-.movie-page .review .rating > span {
+.review .rating > span {
 	font-size: initial;
 	font-weight: initial;
+}
+
+.review .film {
+	line-height: 1.2;
+	margin-bottom: 1em;
 }
 
 .movie-page .review .author {
