@@ -1109,7 +1109,7 @@ ASIDE IMAGE
 	max-width: 15em;
 }
 
-#hero-image img {
+#hero-image picture {
 	position: sticky;
 	top: var(--header-height);
 }
