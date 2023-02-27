@@ -1086,7 +1086,7 @@ class Database {
 		$params = [$film_id, $user_id];
 		$types = "ii";
 
-		return $this->preparedUpdates($query, $params, $types) & $this->updateVoto($film_id);
+		return $this->preparedUpdates($query, $params, $types) && $this->updateVoto($film_id);
 	}
 
 }
