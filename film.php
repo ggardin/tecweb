@@ -20,9 +20,9 @@ try {
 		$genere = $connessione->getGenereByFilmId($id);
 		$paese = $connessione->getPaeseByFilmId($id);
 		$valutazione = $connessione->getValutazioneByFilmId($id);
-		$valutazioneUser = $connessione->getReviewByUtente($id, $_SESSION["id"]);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canUtenteValutare($_SESSION["id"], $id);
+			$valutazioneUtente = $connessione->getValutazioneFilmPerUtente($_SESSION["id"], $id);
 			$lista = $connessione->getListeSenzaFilm($_SESSION["id"], $id);
 		}
 	}
@@ -144,51 +144,40 @@ if (!empty($collezione)) {
 } else
 	Tools::replaceSection($page, "collezione", "");
 $val = false;
-if (isset($_SESSION["id"]) && $can_review) {
+$val_utente = false;
+if (isset($_SESSION["id"])) {
 	$val = true;
-	Tools::replaceAnchor($page, "review_film_id", $id);
-} else {
-	Tools::replaceSection($page, "skip_add_review", "");
-	Tools::replaceSection($page, "add_review", "");
-}
-
-
-if (!empty($valutazioneUser)){
-		$val = true;
+	if ($can_review) {
+		Tools::replaceAnchor($page, "review_film_id", $id);
+	} else {
+		Tools::replaceSection($page, "skip_add_review", "");
+		Tools::replaceSection($page, "add_review", "");
+	}
+	if (!empty($valutazioneUtente)) {
+		$val_utente = true;
+		Tools::toHtml($valutazioneUtente);
 		Tools::replaceAnchor($page, "review_delete_film_id", $id);
-		Tools::toHtml($valutazioneUser);
-		foreach ($valutazioneUser as $v) {
-			$user = $v["username"];
-			Tools::replaceAnchor($page, "tuoutente", $user);
+		foreach ($valutazioneUtente as $v) {
+			Tools::replaceAnchor($page, "tuoutente", $v["utente"]);
 			Tools::replaceAnchor($page, "tuovoto", $v["voto"]);
 			Tools::replaceAnchor($page, "tuotesto", $v["testo"]);
 		}
-} else 
-	Tools::replaceSection($page, "recensione", "");
-
-
-if (!empty($valutazione)) {
+	} else {
+		Tools::replaceSection($page, "valutazione_utente", "");
+	}
+}
+if (count($valutazione) > intval($val_utente)) {
 	$val = true;
 	Tools::toHtml($valutazione);
 	$list = Tools::getSection($page, "valutazione");
 	$r = "";
-	if(isset($_SESSION["id"])) {
-		foreach ($valutazione as $v) {
-			if ($user != $v["utente"]) {
-				$t = $list;
-				Tools::replaceAnchor($t, "utente", $v["utente"]);
-				Tools::replaceAnchor($t, "voto", $v["voto"]);
-				Tools::replaceAnchor($t, "testo", $v["testo"]);
-				$r .= $t;
-			}	
-		}
-	} else {
-		foreach ($valutazione as $v) {
-				$t = $list;
-				Tools::replaceAnchor($t, "utente", $v["utente"]);
-				Tools::replaceAnchor($t, "voto", $v["voto"]);
-				Tools::replaceAnchor($t, "testo", $v["testo"]);
-				$r .= $t;
+	foreach ($valutazione as $v) {
+		if(! isset($_SESSION["id"]) || $_SESSION["id"] != $v["utente_id"]) {
+			$t = $list;
+			Tools::replaceAnchor($t, "utente", $v["utente"]);
+			Tools::replaceAnchor($t, "voto", $v["voto"]);
+			Tools::replaceAnchor($t, "testo", $v["testo"]);
+			$r .= $t;
 		}
 	}
 	Tools::replaceSection($page, "valutazione", $r);

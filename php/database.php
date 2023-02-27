@@ -314,7 +314,7 @@ class Database {
 	}
 
 	public function getValutazioneByFilmId($film_id) : array {
-		$query = "select u.username as utente, v.voto, v.testo
+		$query = "select u.id utente_id, u.username as utente, v.voto, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
@@ -1052,8 +1052,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	
-	public function getUserReviews($user_id) : array {
+	public function getValutazioniPerUtente($user_id) : array {
 		$query = "select f.nome, v.voto, v.testo, f.id
 			from valutazione as v
 				join film as f
@@ -1067,8 +1066,8 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getReviewByUtente($film_id, $user_id) : array {
-		$query = "select u.username, v.voto, v.testo
+	public function getValutazioneFilmPerUtente($user_id, $film_id) : array {
+		$query = "select u.username as utente, v.voto, v.testo
 			from valutazione as v
 				join utente as u
 					on u.id = v.utente
@@ -1080,7 +1079,7 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function deleteRecensione($film_id, $user_id) : bool {
+	public function deleteRecensione($user_id, $film_id) : bool {
 		$query = "delete from valutazione
 			where film = ? and utente = ?";
 

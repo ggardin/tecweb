@@ -751,20 +751,14 @@ MOVIE PAGE
 REVIEWS
 ==============
 */
-#your-review{
-	list-style: none;
-}
 
 #delete-review{
 	margin-bottom: 1em;
 }
 
-#your-reviews {
+.reviews {
     list-style-type: none;
     padding-left: 0;
-}
-
-.reviews {
 	display: flex;
 	flex-direction: column;
 }
@@ -788,12 +782,7 @@ REVIEWS
 	font-weight: initial;
 }
 
-.review .film {
-	line-height: 1.2;
-	margin-bottom: 1em;
-}
-
-.movie-page .review .author {
+.review .author, .review .film {
 	line-height: 1.2;
 	margin-bottom: 1em;
 }

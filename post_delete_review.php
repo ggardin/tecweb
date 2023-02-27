@@ -17,18 +17,9 @@ if ($film_id == "") {
 	exit();
 }
 
-$err = [];
-
-
-if ($err) {
-	$_SESSION["error"] = $err;
-	header("location: film.php?id=" . $film_id);
-	exit();
-}
-
 try {
 	$connessione = new Database();
-	$res = $connessione->deleteRecensione($film_id, $user_id);
+	$res = $connessione->deleteRecensione($user_id, $film_id);
 	unset($connessione);
 } catch (Exception) {
 	unset($connessione);
@@ -42,6 +33,5 @@ else
 	$_SESSION["success"] = ["Recensione eliminata correttamente."];
 
 header("location: film.php?id=" . $film_id);
-
 
 ?>
