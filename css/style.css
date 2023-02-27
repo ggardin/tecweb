@@ -978,7 +978,8 @@ USER LISTS PAGE
 	justify-content: center;
 }
 
-.deleteElementButton {
+button[type=submit].deleteElementButton {
+	background-color: var(--error-required);
 	margin-top: auto;
 	margin-right: 0.5em;
 	margin-left: 0.5em;
@@ -986,7 +987,13 @@ USER LISTS PAGE
 	height: 3em;
 }
 
-.deleteElementButton svg {
+button[type=submit].deleteElementButton:hover,
+button[type=submit].deleteElementButton:focus {
+	background-color: var(--error-required-off);
+}
+
+
+button[type=submit].deleteElementButton svg {
 	width: 2em;
 	height: 2em;
 }
