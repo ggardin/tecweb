@@ -752,10 +752,6 @@ REVIEWS
 ==============
 */
 
-#delete-review{
-	margin-bottom: 1em;
-}
-
 .reviews {
     list-style-type: none;
     padding-left: 0;
@@ -796,6 +792,17 @@ REVIEWS
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+#delete-review #delete {
+	margin-top: 1em;
+	background-color: var(--error-required);
+}
+
+#delete-review #delete:hover,
+#delete-review #delete:focus {
+	color: var(--secondaryColor);
+	background-color: var(--error-required-off);
 }
 
 
