@@ -144,7 +144,6 @@ if (!empty($collezione)) {
 } else
 	Tools::replaceSection($page, "collezione", "");
 $val = false;
-$val_utente = false;
 if (isset($_SESSION["id"])) {
 	$val = true;
 	if ($can_review) {
@@ -154,19 +153,20 @@ if (isset($_SESSION["id"])) {
 		Tools::replaceSection($page, "add_review", "");
 	}
 	if (!empty($valutazioneUtente)) {
-		$val_utente = true;
 		Tools::toHtml($valutazioneUtente);
 		Tools::replaceAnchor($page, "review_delete_film_id", $id);
-		foreach ($valutazioneUtente as $v) {
-			Tools::replaceAnchor($page, "tuoutente", $v["utente"]);
-			Tools::replaceAnchor($page, "tuovoto", $v["voto"]);
-			Tools::replaceAnchor($page, "tuotesto", $v["testo"]);
-		}
+		Tools::replaceAnchor($page, "tuoutente", $valutazioneUtente[0]["utente"]);
+		Tools::replaceAnchor($page, "tuovoto", $valutazioneUtente[0]["voto"]);
+		Tools::replaceAnchor($page, "tuotesto", $valutazioneUtente[0]["testo"]);
 	} else {
 		Tools::replaceSection($page, "valutazione_utente", "");
 	}
+} else {
+	Tools::replaceSection($page, "skip_add_review", "");
+	Tools::replaceSection($page, "add_review", "");
+	Tools::replaceSection($page, "valutazione_utente", "");
 }
-if (count($valutazione) > intval($val_utente)) {
+if (!empty ($valutazione)) {
 	$val = true;
 	Tools::toHtml($valutazione);
 	$list = Tools::getSection($page, "valutazione");
