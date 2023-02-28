@@ -170,7 +170,7 @@ if (isset($_SESSION["id"])) {
 	Tools::replaceSection($page, "add_review", "");
 	Tools::replaceSection($page, "valutazione_utente", "");
 }
-if (count($valutazione) > intval($val_utente)) {
+if (count($valutazione) >= intval($val_utente)) {
 	$val = true;
 	Tools::toHtml($valutazione);
 	$list = Tools::getSection($page, "valutazione");
@@ -187,7 +187,7 @@ if (count($valutazione) > intval($val_utente)) {
 	Tools::replaceSection($page, "valutazione", $r);
 } else
 	Tools::replaceSection($page, "valutazioni", "");
-if (! $val)
+if (! $val || (count($valutazione) + intval($val_utente) < 1) && !(isset($_SESSION["id"]) ) )
 	Tools::replaceSection($page, "sect_valutazioni", "");
 if (isset($_SESSION["id"]) && !empty($lista)) {
 	Tools::toHtml($lista);
