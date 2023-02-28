@@ -22,6 +22,7 @@ try {
 		$valutazione = $connessione->getValutazioneByFilmId($id);
 		if (isset($_SESSION["id"])) {
 			$can_review = $connessione->canUtenteValutare($_SESSION["id"], $id);
+			$valutazioneUtente = $connessione->getValutazioneFilmPerUtente($_SESSION["id"], $id);
 			$lista = $connessione->getListeSenzaFilm($_SESSION["id"], $id);
 		}
 	}
@@ -143,24 +144,41 @@ if (!empty($collezione)) {
 } else
 	Tools::replaceSection($page, "collezione", "");
 $val = false;
-if (isset($_SESSION["id"]) && $can_review) {
+if (isset($_SESSION["id"])) {
 	$val = true;
-	Tools::replaceAnchor($page, "review_film_id", $id);
+	if ($can_review) {
+		Tools::replaceAnchor($page, "review_film_id", $id);
+	} else {
+		Tools::replaceSection($page, "skip_add_review", "");
+		Tools::replaceSection($page, "add_review", "");
+	}
+	if (!empty($valutazioneUtente)) {
+		Tools::toHtml($valutazioneUtente);
+		Tools::replaceAnchor($page, "review_delete_film_id", $id);
+		Tools::replaceAnchor($page, "tuoutente", $valutazioneUtente[0]["utente"]);
+		Tools::replaceAnchor($page, "tuovoto", $valutazioneUtente[0]["voto"]);
+		Tools::replaceAnchor($page, "tuotesto", $valutazioneUtente[0]["testo"]);
+	} else {
+		Tools::replaceSection($page, "valutazione_utente", "");
+	}
 } else {
 	Tools::replaceSection($page, "skip_add_review", "");
 	Tools::replaceSection($page, "add_review", "");
+	Tools::replaceSection($page, "valutazione_utente", "");
 }
-if (!empty($valutazione)) {
+if (!empty ($valutazione)) {
 	$val = true;
 	Tools::toHtml($valutazione);
 	$list = Tools::getSection($page, "valutazione");
 	$r = "";
 	foreach ($valutazione as $v) {
-		$t = $list;
-		Tools::replaceAnchor($t, "utente", $v["utente"]);
-		Tools::replaceAnchor($t, "voto", $v["voto"]);
-		Tools::replaceAnchor($t, "testo", $v["testo"]);
-		$r .= $t;
+		if(! isset($_SESSION["id"]) || $_SESSION["id"] != $v["utente_id"]) {
+			$t = $list;
+			Tools::replaceAnchor($t, "utente", $v["utente"]);
+			Tools::replaceAnchor($t, "voto", $v["voto"]);
+			Tools::replaceAnchor($t, "testo", $v["testo"]);
+			$r .= $t;
+		}
 	}
 	Tools::replaceSection($page, "valutazione", $r);
 } else

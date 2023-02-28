@@ -313,8 +313,8 @@ class Database {
 		return $this->preparedSelect($query, $params, $types);
 	}
 
-	public function getValutazioneByFilmId($id) : array {
-		$query = "select u.username as utente, v.voto, v.testo
+	public function getValutazioneByFilmId($film_id) : array {
+		$query = "select u.id utente_id, u.username as utente, v.voto, v.testo
 			from film as f
 				join valutazione as v
 					on f.id = v.film
@@ -322,7 +322,7 @@ class Database {
 					on v.utente = u.id
 			where f.id = ?";
 
-		$params = [$id];
+		$params = [$film_id];
 		$types = "i";
 
 		return $this->preparedSelect($query, $params, $types);
@@ -1050,6 +1050,43 @@ class Database {
 		$types = "i";
 
 		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getValutazioniPerUtente($user_id) : array {
+		$query = "select f.nome, v.voto, v.testo, f.id
+			from valutazione as v
+				join film as f
+					on f.id = v.film
+			where v.utente = ?
+			order by v.voto desc";
+
+		$params = [$user_id];
+		$types = "i";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function getValutazioneFilmPerUtente($user_id, $film_id) : array {
+		$query = "select u.username as utente, v.voto, v.testo
+			from valutazione as v
+				join utente as u
+					on u.id = v.utente
+			where v.film = ? and v.utente = ?";
+
+		$params = [$film_id, $user_id];
+		$types = "ii";
+
+		return $this->preparedSelect($query, $params, $types);
+	}
+
+	public function deleteRecensione($user_id, $film_id) : bool {
+		$query = "delete from valutazione
+			where film = ? and utente = ?";
+
+		$params = [$film_id, $user_id];
+		$types = "ii";
+
+		return $this->preparedUpdates($query, $params, $types) && $this->updateVoto($film_id);
 	}
 
 }
