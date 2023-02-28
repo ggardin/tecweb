@@ -165,6 +165,10 @@ if (isset($_SESSION["id"])) {
 	} else {
 		Tools::replaceSection($page, "valutazione_utente", "");
 	}
+} else {
+	Tools::replaceSection($page, "skip_add_review", "");
+	Tools::replaceSection($page, "add_review", "");
+	Tools::replaceSection($page, "valutazione_utente", "");
 }
 if (count($valutazione) > intval($val_utente)) {
 	$val = true;

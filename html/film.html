@@ -222,10 +222,11 @@
 				</form>
 				<!-- add_review_end -->
 
-				<!-- valutazione_utente_start -->
-				<p>La tua valutazione:</p>
+				<!-- valutazioni_start -->
 				<ul class="reviews">
+					<!-- valutazione_utente_start -->
 					<li class="review">
+						<p>La tua valutazione:</p>
 						<dl>
 							<dt class="sr-only">Voto</dt>
 							<dd class="rating">
@@ -239,18 +240,14 @@
 							<dt class="sr-only">Recensione</dt>
 							<dd class="text">@@tuotesto@@</dd>
 						</dl>
+						<form id="delete-review" method="post" action="post_delete_review.php">
+							<input type="hidden" name="film_id" value="@@review_delete_film_id@@" />
+							<!-- delete_start -->
+							<button id="delete" type="submit" name="submit" value="elimina">Elimina</button>
+							<!-- delete_end -->
+						</form>
 					</li>
-				</ul>
-				<form id="delete-review" method="post" action="post_delete_review.php">
-					<input type="hidden" name="film_id" value="@@review_delete_film_id@@" />
-					<!-- delete_start -->
-					<button id="delete" type="submit" name="submit" value="elimina">Elimina</button>
-					<!-- delete_end -->
-				</form>
-				<!-- valutazione_utente_end -->
-
-				<!-- valutazioni_start -->
-				<ul class="reviews">
+					<!-- valutazione_utente_end -->
 					<!-- valutazione_start -->
 					<li class="review">
 						<dl>
