@@ -21,7 +21,7 @@ try {
 $page = Tools::buildPage($_SERVER["SCRIPT_NAME"]);
 
 if (!empty($valutazione)) {
-	Tools::replaceAnchor($page, "message", "");
+	Tools::replaceSection($page, "message", "");
 	Tools::toHtml($valutazione);
 	$list = Tools::getSection($page, "valutazione");
 	$r = "";
