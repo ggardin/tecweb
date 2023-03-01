@@ -51,7 +51,7 @@ main::after {
 	display: block;
 }
 
-#auth_form, #gestione, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate,
+#auth_form, #valutazioni, #gestione, #page-header, #page-footer, #breadcrumb, form, .menu, .hero, #desc-generi, #desc-durate,
 .skip-to-content, #back-to-top {
 	display: none;
 }

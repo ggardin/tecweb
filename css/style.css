@@ -815,6 +815,9 @@ REVIEWS
 	background-color: var(--error-required-off);
 }
 
+#print-valutazioni{
+	display: none;
+}
 
 /*
 ==============
