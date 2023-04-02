@@ -34,7 +34,7 @@ Il progetto è stato valutato con 30 e lode, al netto del bonus per la consegna 
 
 Il sito è stato proposto al concorso [*Accattivante Accessibile 2023*](https://ilbolive.unipd.it/it/event/accattivante-accessibile-concorso-abilita), ottenendo il primo posto.
 
-Le relazioni prodotte per la consegna del progetto e la partecipazione al concorso sono pubbliche.
+Le relazioni prodotte per la consegna del progetto e la partecipazione al concorso sono consultabili liberamente (i file si trovano in `/relazione`).
 
 ### Continous Integration
 
