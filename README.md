@@ -60,9 +60,9 @@ Il sito web rispetta gli standard del [W3C](https://www.w3.org/) e del [WAI/WCAG
 
 [MIT](LICENSE)
 
-## Movie data
+## Movies data
 
-![TMDB attribution](img/tmdb.svg)
+<img alt="TMDB attribution" src="img/tmdb.svg" width="96">
 
 - All movie-related data present on this site come from TMDB. It can be used freely as long as there is an attribution, as you can see in their [FAQ](https://www.themoviedb.org/about/logos-attribution).
 - The data is a small subset of the most voted movies on their site, downloaded to a local copy with a Python script using their API.
