@@ -36,20 +36,6 @@ Il sito è stato proposto al concorso [*Accattivante Accessibile*](https://ilbol
 
 Le relazioni prodotte per la consegna del progetto e la partecipazione al concorso sono pubbliche.
 
-## Server remoto di test
-
-Disponiamo di un ambiente remoto per l'esecuzione del codice PHP. La macchina è configurata in modo da ricreare l'ambiente LAMP del Paolotti.
-Il server è ospitato su Azure. I link per l'accesso sono riportati qui sotto.
-
-Per accedere al server tramite SSH, si può definire lo shorthand in `~/.ssh/config`:
-
-```
-Host tecweb
-    HostName *.duckdns.org
-    User azureuser
-    Port 22
-```
-
 ### Continous Integration
 
 Abbiamo predisposto un container remoto per la CI, basato su Docker, ospitato su Azure e impostato per replicare il più fedelmente possibile lo stack LAMP del dipartimento. La pipeline CI è basata su GitHub Actions e prevede il deploy automatico dei branch sul server di test e una serie di controlli automatici.
@@ -74,17 +60,12 @@ Il sito web rispetta gli standard del [W3C](https://www.w3.org/) e del [WAI/WCAG
 
 [MIT](LICENSE)
 
-### Dati dei film
+## Movie data
 
 ![TMDB attribution](img/tmdb.svg)
-Tutti i dati relativi ai film presenti sono forniti da TMDB.
 
-TMDB mette a disposizione tutti i dati presenti sul loro sito (Titoli, Autori, Immagini, descrizioni etc.) mediante API.
-
-Abbiamo scaricato nel nostro database locale gli N film più votati — con relativi metadati — tramite uno script Python.
-
-Tutti i marchi e/o nomi presenti su questo sito sono protetti dalle leggi internazionali di copyright/trademark e sono di esclusiva pertinenza dei proprietari.
-
-Questo progetto è stato creato a scopo educativo/universitario: non ha scopo di lucro. Tutto il codice è disponibile gratuitamente su GitHub.
-
-Non siamo sostenuti né certificati da TMDB.
+- All movie-related data present on this site come from TMDB. It can be used freely as long as there is an attribution, as you can see in their [FAQ](https://www.themoviedb.org/about/logos-attribution).
+- The data is a small subset of the most voted movies on their site, downloaded to a local copy with a Python script using their API.
+- We are not affiliated with the TMDB or its subsidiaries.
+- We also do not own any logos, trademarks, or other intellectual property associated with featured here.
+- This project was created for educational purposes. It is NOT for profit.
