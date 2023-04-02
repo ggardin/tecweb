@@ -32,7 +32,7 @@ Il sito web deve essere basato sulle tecnologie dello stack [LAMP](https://it.wi
 
 Il progetto è stato valutato con 30 e lode, al netto del bonus per la consegna durante la prima sessione.
 
-Il sito è stato proposto al concorso [*Accattivante Accessibile*](https://ilbolive.unipd.it/it/event/accattivante-accessibile-concorso-abilita), ottenendo il XXX posto.
+Il sito è stato proposto al concorso [*Accattivante Accessibile 2023*](https://ilbolive.unipd.it/it/event/accattivante-accessibile-concorso-abilita), ottenendo il primo posto.
 
 Le relazioni prodotte per la consegna del progetto e la partecipazione al concorso sono pubbliche.
 
