@@ -19,7 +19,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v3
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.6.1
+        uses: lycheeverse/lychee-action@v1.7.0
         with:
           args: --base "https://${{ secrets.WEBSITE_TLD }}/${{ inputs.target-branch }}" --verbose --no-progress './**/*.html'
           fail: true # Fail action on broken links
