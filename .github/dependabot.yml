@@ -1,8 +1,8 @@
 # Checks for GHA updates.
 
-#version: 2
-#updates:
-#  - package-ecosystem: "github-actions"
-#    directory: "/" # Location of package manifests
-#    schedule:
-#      interval: "weekly"
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
