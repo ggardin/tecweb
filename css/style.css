@@ -30,6 +30,10 @@ CSS VARIABLES
 
 	--error-required-bg: #C200002e;
 
+	--featured-color: orange;
+	--featured-color-off: beige;
+	--featured-color-alt: #ffebd2;
+
 	--interactions-text-placeholder-color: #4D4D4D;
 	--interactions-color: #FBFBFB;
 
@@ -64,6 +68,10 @@ CSS VARIABLES
 
 	--error-required: #ff4c4c;
 	--error-required-off: #ff6c6c;
+
+	--featured-color: #003d9e;
+	--featured-color-off: #03122b;
+	--featured-color-alt: #0f2a57;
 
 	--interactions-text-placeholder-color: #B6B6B6;
 	--interactions-color: #313131;
@@ -533,6 +541,11 @@ CARDS
 	border-radius: var(--border-radius);
 }
 
+.card.featured {
+	--bgcolor-off: var(--featured-color-alt); /* outline color override */
+	background-color: var(--featured-color-off);
+}
+
 .card:hover,
 .card:focus-within {
 	transform: scale(1.04);
@@ -559,6 +572,10 @@ CARDS
 .card .details > .title {
 	text-decoration: underline;
 	font-size: 1.2em;
+}
+
+.card .details > .featured-notice {
+	margin-left: -0.5em;
 }
 
 .card .details > *:not(.title) {
@@ -671,6 +688,12 @@ MOVIE PAGE
 	display: flex;
 	flex-flow: row-reverse wrap;
 	gap: 2em;
+}
+
+.movie-page header.main-title {
+	display: flex;
+	align-items: center;
+	gap: 1em;
 }
 
 #movie-details {
@@ -1190,11 +1213,11 @@ form textarea.invalid {
 	background-color: var(--bgcolor-off);
 }
 
-.checkbox-pill.delete,
-.checkbox-pill.delete label {
+.checkbox-pill.wide,
+.checkbox-pill.wide label {
 	width: 100%;
 }
-.checkbox-pill.delete input { width: unset; }
+.checkbox-pill.wide input { width: unset; }
 
 fieldset > * {
 	margin-top: 0.25em;
@@ -1332,4 +1355,27 @@ BACK TO TOP
 #back-to-top.show {
 	opacity: 1;
 	transform: scale(1);
+}
+
+
+/*
+==============
+ADS / FEATURED CONTENT
+==============
+*/
+
+.featured-notice {
+	background-color: var(--featured-color);
+	border-radius: var(--border-radius);
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	gap: 0.5em;
+	width: fit-content;
+	padding: 0.25em 0.5em;
+}
+
+.featured-notice svg {
+	fill: currentColor;
+	width: 1em;
 }

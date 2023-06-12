@@ -84,6 +84,7 @@ create table film (
 	incassi int unsigned,
 	collezione int unsigned,
 	voto float unsigned,
+	evidenza tinyint unsigned,
 	primary key (id),
 	foreign key (collezione) references collezione(id) on delete set null,
 	foreign key (stato) references stato(id)

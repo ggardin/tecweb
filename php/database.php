@@ -365,11 +365,11 @@ class Database {
 	public function searchFilm($str, $limit, $offset) : array {
 		$base = "from film
 			where nome like ?
-			order by data_rilascio desc";
+			order by evidenza desc, data_rilascio desc";
 
 		$search = [];
 
-		$q0 = "select id, nome, locandina, data_rilascio " . $base . " limit ? offset ?";
+		$q0 = "select id, nome, locandina, data_rilascio, evidenza " . $base . " limit ? offset ?";
 		$p0 = [("%" . trim($str) . "%"), $limit, $offset];
 		$t0 = "sii";
 		$search[0] = $this->preparedSelect($q0, $p0, $t0);
@@ -613,7 +613,7 @@ class Database {
 		if ($values) $values .= substr($v, 1);
 	}
 
-	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione) : array {
+	public function updateFilm($id, $nome, $nome_originale, $durata, $locandina, $descrizione, $stato, $data_rilascio, $budget, $incassi, $collezione, $evidenza) : array {
 		if ($id != "") {
 			$query = "update film
 				set";
@@ -622,6 +622,8 @@ class Database {
 			$query = "insert into film(";
 			$values = "values (";
 		}
+
+		(isset($evidenza) && $evidenza == "on") ? $evidenza = 1 : $evidenza = 0;
 
 		$params = [];
 		$types = "";
@@ -637,6 +639,7 @@ class Database {
 			[$budget, "budget", "i"],
 			[$incassi, "incassi", "i"],
 			[$collezione, "collezione", "i"],
+			[$evidenza, "evidenza", "i"],
 			];
 
 		$this->updateArgs($query, $values, $params, $types, $args);
