@@ -35,7 +35,7 @@ jobs:
     - name: Save branch name
       run: echo "branch=${{ steps.branch-name.outputs.current_branch }}" >> $GITHUB_OUTPUT
     - name: Deploy
-      uses: burnett01/rsync-deployments@5.2.1
+      uses: burnett01/rsync-deployments@6.0.0
       with:
         switches: -avzr --exclude=".github" --exclude=".configs" --exclude=".git" --exclude ".gitignore" --exclude="docker" --exclude="db"
         path: /
